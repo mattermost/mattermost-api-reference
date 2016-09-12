@@ -21,6 +21,6 @@ deploy:
     skip_cleanup: true
     detect_encoding: true
     on:
-      repo: mattermost/api-reference
+      repo: mattermost/mattermost-api-reference
       branch: master
       python: 2.7
