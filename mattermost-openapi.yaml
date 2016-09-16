@@ -296,6 +296,9 @@ paths:
             properties:
               user_id:
                 type: string
+          examples:
+            application/json:
+              user_id: "string"
   
   /users/update_active:
     post:
@@ -374,6 +377,9 @@ paths:
             properties:
               user_id:
                 type: string
+          examples:
+            application/json:
+              user_id: "string"
   
   /users/send_password_reset:
     post:
@@ -401,6 +407,9 @@ paths:
             properties:
               email:
                 type: string
+          examples:
+            application/json:
+              email: someone@example.com
             
   /teams/create:
     post:
