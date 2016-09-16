@@ -114,16 +114,18 @@ tags:
       limit exceeded
       ```
   - name: users
-    description: Anything related to the user data model
+    description: Anything related to the user data model.
   - name: teams
-    description: Anything related to the team data model
+    description: Anything related to the team data model.
+  - name: posts
+    description: Anything related to posts, the main messaging model in Mattermost.
   - name: files
     description: |
-    ** These APIs will change significantly in Mattermost 3.5. This documentation reflects the version that will exist in Mattermost 3.5. **
+      These APIs will change significantly in Mattermost 3.5. This documentation reflects the version that will exist in Mattermost 3.5.
 
-    Anything related to files uploaded by Mattermost users
+      Anything related to files uploaded by Mattermost users.
   - name: preferences
-    description: Anything related to the current user's preferences which are used to store various settings in Mattermost
+    description: Anything related to the current user's preferences which are used to store various settings in Mattermost.
 schemes:
   - http
   - https
@@ -417,44 +419,12 @@ paths:
           examples:
             application/json:
               email: someone@example.com
-            
-  /teams/create:
-    post:
-      tags:
-        - teams
-      summary: Create a new team
-      parameters:
-        - in: body
-          name: body
-          description: Abbreviated team object that is to be created
-          required: true
-          schema:
-            type: object
-            required:
-              - name
-              - display_name
-              - type
-            properties:
-              name:
-                type: string
-                description: Unique handler for a team, will be present in the team URL
-              display_name:
-                type: string
-                description: Non-unique UI name for the team
-              type:
-                 type: string
-                 description: "`'O'` for open, `'I'` for invite only"
-      responses:
-        '200':
-          description: Team creation successful
-          schema:
-            $ref: '#/definitions/Team'
-      
+
   '/teams/{team_id}/posts/search':
     post:
       tags:
         - posts
-      summary: Search for posts.
+      summary: Search for posts
       parameters:
         - name: team_id
           in: path
@@ -482,12 +452,12 @@ paths:
           description: Search successful with 0-100 results.
           schema:
             $ref: '#/definitions/PostList'
-   
+
   '/teams/{team_id}/flagged/{offset}/{limit}':
     get:
       tags:
         - posts
-      summary: Get all flagged posts for a user.
+      summary: Get all flagged posts for a user
       parameters:
         - name: team_id
           in: path
@@ -509,12 +479,13 @@ paths:
           description: Posts retreived successfully
           schema:
             $ref: "#/definitions/PostList"
-            
+
   '/teams/{team_id}/channels/{channel_id}/posts/create':
     post:
       tags:
         - posts
-      summary: Create a post in a channel.
+      summary: Create a post
+      description: Create a post in a channel.
       parameters:
         - name: team_id
           in: path
@@ -537,12 +508,12 @@ paths:
           description: The newly created Post is returned.
           schema:
             $ref: "#/definitions/Post"
-              
+
   '/teams/{team_id}/channels/{channel_id}/posts/update':
     post:
       tags:
         - posts
-      summary: Update a post in a channel.
+      summary: Update a post
       parameters:
         - name: team_id
           in: path
@@ -565,7 +536,7 @@ paths:
           description: The updated Post is returned.
           schema:
             $ref: "#/definitions/Post"
-  
+
   '/teams/{team_id}/channels/{channel_id}/posts/page/{offset}/{limit}':
     get:
       tags:
@@ -597,12 +568,13 @@ paths:
           description: Post retreived successfully
           schema:
             $ref: "#/definitions/PostList"
-  
+
   '/teams/{team_id}/channels/{channel_id}/posts/since/{time}':
     get:
       tags:
         - posts
-      summary: Get posts for a channel starting from the time supplied.
+      summary: Get posts since a time
+      description: Get posts for a channel starting from the time supplied.
       parameters:
         - name: team_id
           in: path
@@ -624,12 +596,12 @@ paths:
           description: Post retreived successfully
           schema:
             $ref: "#/definitions/PostList"
-  
+
   '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/get':
     get:
       tags:
         - posts
-      summary: Get a post by id.
+      summary: Get a post
       parameters:
         - name: team_id
           in: path
@@ -651,12 +623,12 @@ paths:
           description: Post retreived successfully
           schema:
             $ref: "#/definitions/PostList"
-  
+
   '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/delete':
     post:
       tags:
         - posts
-      summary: Deletes a post in a channel.
+      summary: Deletes a post
       parameters:
         - name: team_id
           in: path
@@ -684,12 +656,13 @@ paths:
               id:
                 type: string
                 description: The Post ID.
-  
+
   '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/before/{offset}/{limit}':
     get:
       tags:
         - posts
-      summary: Get posts before a certian post for a channel.
+      summary: Get posts before a post
+      description: Get posts before a certian post for a channel.
       parameters:
         - name: team_id
           in: path
@@ -721,12 +694,13 @@ paths:
           description: Posts retreived successfully
           schema:
             $ref: "#/definitions/PostList"
-  
+
   '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/after/{offset}/{limit}':
     get:
       tags:
         - posts
-      summary: Get posts after a certian post for a channel.
+      summary: Get posts after a post
+      description: Get posts after a certian post for a channel.
       parameters:
         - name: team_id
           in: path
@@ -758,7 +732,8 @@ paths:
           description: Posts retreived successfully
           schema:
             $ref: "#/definitions/PostList"
-	  /teams/create:
+
+  /teams/create:
     post:
       tags:
         - teams
@@ -782,28 +757,32 @@ paths:
                 type: string
                 description: Non-unique UI name for the team
               type:
-                 type: string
-                 description: "`'O'` for open, `'I'` for invite only"
+                type: string
+                description: "`'O'` for open, `'I'` for invite only"
       responses:
         '200':
           description: Team creation successful
           schema:
-            $ref: '#/definitions/Team'  
+            $ref: '#/definitions/Team'
+
   /teams/all:
     get:
       tags:
         - teams
-      summary: Gets all teams which the current user can has access to. If the user is a System Admin, this will be all teams on the server. Otherwise, it will only be the teams of which the user is a member.
+      summary: Get all teams
+      description: Gets all teams which the current user can has access to. If the user is a System Admin, this will be all teams on the server. Otherwise, it will only be the teams of which the user is a member.
       responses:
         '200':
           description: Teams Found
           schema:
-            $ref: '#/definitions/TeamMap'  
+            $ref: '#/definitions/TeamMap'
+
   '/teams/members/{team_id}':
     get:
       tags:
         - teams
-      summary: Get all the members of the specified team.
+      summary: Get team members
+      description: Get all the members of the specified team.
       parameters:
         - name: team_id
           in: path
@@ -817,11 +796,12 @@ paths:
             type: array
             items:
               $ref: "#/definitions/TeamMember"
+
   '/teams/{team_id}/me':
     get:
       tags:
         - teams
-      summary: Gets the team object
+      summary: Get a team object
       parameters:
         - name: team_id
           in: path
@@ -833,6 +813,7 @@ paths:
           description: Team object
           schema:
             $ref: "#/definitions/Team"
+
   '/teams/{team_id}/update':
     post:
       tags:
@@ -855,11 +836,12 @@ paths:
           description: The updated team object
           schema:
             $ref: "#/definitions/Team"
+
   '/teams/{team_id}/add_user_to_team':
     post:
       tags:
         - teams
-      summary: Add a user to a team.
+      summary: Add a user to a team
       parameters:
         - name: team_id
           in: path
@@ -880,11 +862,12 @@ paths:
       responses:
         '200':
           description: User added sucessfully
+
   '/teams/{team_id}/remove_user_from_team':
     post:
       tags:
         - teams
-      summary: Remove a user from a team.
+      summary: Remove a user from a team
       parameters:
         - name: team_id
           in: path
@@ -901,16 +884,17 @@ paths:
             properties:
               user_id:
                 type: string
-                description: The user_id of the user to remove from the team.
+                description: The user ID of the user to remove from the team.
       responses:
         '200':
           description: User removed sucessfully
 
-  /teams/{team_id}/files/upload:
+  '/teams/{team_id}/files/upload':
     post:
       tags:
         - files
-      summary: Uploads a file that can later be attached to a post
+      summary: Upload a file
+      description: Uploads a file that can later be attached to a post.
       parameters:
         - name: team_id
           in: path
@@ -950,9 +934,7 @@ paths:
                 items:
                   type: string
         '400':
-          description: Type of the uploaded file doesn't match its file extension
-        '400':
-          description: Uploaded file is an image that exceeds the maximum dimensions
+          description: Type of the uploaded file doesn't match its file extension or uploaded file is an image that exceeds the maximum dimensions
         '401':
           description: User is not logged in
         '403':
@@ -966,7 +948,8 @@ paths:
     get:
       tags:
         - files
-      summary: Gets a file that has been uploaded to Mattermost
+      summary: Get a file
+      description: Gets a file that has been uploaded to Mattermost.
       parameters:
         - name: file_id
           in: path
@@ -976,8 +959,6 @@ paths:
       responses:
         '200':
           description: The requested file
-          schema:
-            type: binary
         '400':
           description: The file is owned by another user and is not attached to a post
         '403':
@@ -991,7 +972,8 @@ paths:
     get:
       tags:
         - files
-      summary: Gets a thumbnail image for an image file that has been uploaded to Mattermost
+      summary: Get an image thumbnail
+      description: Gets a thumbnail image for an image file that has been uploaded to Mattermost.
       parameters:
         - name: file_id
           in: path
@@ -1001,12 +983,8 @@ paths:
       responses:
         '200':
           description: The requested file thumbnail
-          schema:
-            type: binary
         '400':
-          description: The file is not an image or does not have a thumbnail image
-        '400':
-          description: The file is owned by another user and is not attached to a post
+          description: The file is not an image or does not have a thumbnail image or the file is owned by another user and is not attached to a post
         '403':
           description: User does not have permission to view the file
         '404':
@@ -1018,7 +996,8 @@ paths:
     get:
       tags:
         - files
-      summary: Gets a preview image for an image file that has been uploaded to Mattermost
+      summary: Get an image preview
+      description: Gets a preview image for an image file that has been uploaded to Mattermost.
       parameters:
         - name: file_id
           in: path
@@ -1028,12 +1007,8 @@ paths:
       responses:
         '200':
           description: The requested file preview
-          schema:
-            type: binary
         '400':
-          description: The file is not an image or does not have a preview image
-        '400':
-          description: The file is owned by another user and is not attached to a post
+          description: The file is not an image or does not have a preview image or the file is owned by another user and is not attached to a post
         '403':
           description: User does not have permission to view the file
         '404':
@@ -1045,7 +1020,8 @@ paths:
     get:
       tags:
         - files
-      summary: Gets the stored metadata for a file that has been uploaded to Mattermost
+      summary: Get metadata for a file
+      description: Gets the stored metadata for a file that has been uploaded to Mattermost.
       parameters:
         - name: file_id
           in: path
@@ -1068,7 +1044,8 @@ paths:
     get:
       tags:
         - files
-      summary: Gets a public link for a file that can be accessed without logging into Mattermost
+      summary: Get a public file link
+      description: Gets a public link for a file that can be accessed without logging into Mattermost.
       parameters:
         - name: file_id
           in: path
@@ -1085,24 +1062,23 @@ paths:
         '403':
           description: User does not have permission to view the file
         '501':
-          description: Public links are disabled
-        '501':
-          description: File storage is disabled
+          description: Public links are disabled or file storage is disabled
 
   /preferences/save:
     post:
       tags:
         - preferences
-      summary: Add or update a list of preferences for the current user
+      summary: Save user preferences
+      description: Add or update a list of preferences for the current user.
       parameters:
-        - in: body
-        name: body
-        description: A list of preferences to add or update for the current user
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/Preference"
+        - name: body
+          in: body
+          description: A list of preferences to add or update for the current user
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
       responses:
         '200':
           description: All of the provided preferences have been successfully saved
@@ -1117,15 +1093,17 @@ paths:
     post:
       tags:
         - preferences
-      summary: Delete a list of preferences from the current user
+      summary: Delete user preferences
+      description: Delete a list of preferences from the current user.
       parameters:
         - name: body
-        description: A list of preferences to remove from for the current user
-        required: true
-        schema:
-          type: array
-          items:
-            $ref: "#/definitions/Preference"
+          in: body
+          description: A list of preferences to remove from for the current user
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
       responses:
         '200':
           description: All of the provided preferences have been successfully deleted
@@ -1140,7 +1118,8 @@ paths:
     get:
       tags:
         - preferences
-      summary: Lists the current user's stored preferences in the given category
+      summary: List a user's preferences
+      description: Lists the current user's stored preferences in the given category.
       parameters:
         - name: category
           in: path
@@ -1161,7 +1140,8 @@ paths:
     get:
       tags:
         - preferences
-      summary: Returns a single preference for the current user with the given category and name
+      summary: Get a specific user preference
+      description: Returns a single preference for the current user with the given category and name.
       parameters:
         - name: category
           in: path
@@ -1337,7 +1317,6 @@ definitions:
         type: string
       post_id:
         description: If this file is attached to a post, the ID of that post
-        required: false
         type: string
       create_at:
         type: integer
@@ -1360,17 +1339,11 @@ definitions:
       width:
         description: If this file is an image, the width of the file
         type: integer
-      width:
-        description: If this file is an image, the width of the file
-        required: false
-        type: integer
       height:
         description: If this file is an image, the height of the file
-        required: false
         type: integer
       has_preview_image:
         description: If this file is an image, whether or not it has a preview-sized version
-        required: false
         type: boolean
 
   Preference:
