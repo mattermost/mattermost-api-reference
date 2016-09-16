@@ -117,6 +117,13 @@ tags:
     description: Anything related to the user data model
   - name: teams
     description: Anything related to the team data model
+  - name: files
+    description: |
+    ** These APIs will change significantly in Mattermost 3.5. This documentation reflects the version that will exist in Mattermost 3.5. **
+
+    Anything related to files uploaded by Mattermost users
+  - name: preferences
+    description: Anything related to the current user's preferences which are used to store various settings in Mattermost
 schemes:
   - http
   - https
@@ -898,7 +905,286 @@ paths:
       responses:
         '200':
           description: User removed sucessfully
-  
+
+  /teams/{team_id}/files/upload:
+    post:
+      tags:
+        - files
+      summary: Uploads a file that can later be attached to a post
+      parameters:
+        - name: team_id
+          in: path
+          description: The ID of one of the current user's teams
+          required: true
+          type: string
+        - name: files
+          in: formData
+          description: A file to be uploaded
+          required: true
+          type: file
+        - name: channel_id
+          in: formData
+          description: The ID of the channel that this file will be uploaded to
+          required: true
+          type: string
+        - name: client_ids
+          in: formData
+          description: A unique identifier for the file that will be returned in the response
+          required: false
+          allowEmptyValue: true
+          type: string
+      responses:
+        '200':
+          description: A list of all of the current user's preferences
+          schema:
+            type: object
+            properties:
+              file_infos:
+                description: A list of file metadata that has been stored in the database
+                type: array
+                items:
+                  $ref: '#/definitions/FileInfo'
+              client_ids:
+                description: A list of the client_ids that were provided in the request
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Type of the uploaded file doesn't match its file extension
+        '400':
+          description: Uploaded file is an image that exceeds the maximum dimensions
+        '401':
+          description: User is not logged in
+        '403':
+          description: User does not have permission to upload file to the provided team/channel
+        '413':
+          description: Uploaded file is too large
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get':
+    get:
+      tags:
+        - files
+      summary: Gets a file that has been uploaded to Mattermost
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested file
+          schema:
+            type: binary
+        '400':
+          description: The file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '404':
+          description: The file cannot be found on the file system
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_thumbnail':
+    get:
+      tags:
+        - files
+      summary: Gets a thumbnail image for an image file that has been uploaded to Mattermost
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file thumbnail to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested file thumbnail
+          schema:
+            type: binary
+        '400':
+          description: The file is not an image or does not have a thumbnail image
+        '400':
+          description: The file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '404':
+          description: The file thumbnail cannot be found on the file system
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_preview':
+    get:
+      tags:
+        - files
+      summary: Gets a preview image for an image file that has been uploaded to Mattermost
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file preview to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested file preview
+          schema:
+            type: binary
+        '400':
+          description: The file is not an image or does not have a preview image
+        '400':
+          description: The file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '404':
+          description: The file preview cannot be found on the file system
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_info':
+    get:
+      tags:
+        - files
+      summary: Gets the stored metadata for a file that has been uploaded to Mattermost
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file info to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The stored metadata for the given file
+          schema:
+            $ref: "#/definitions/FileInfo"
+        '400':
+          description: The file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_public_link':
+    get:
+      tags:
+        - files
+      summary: Gets a public link for a file that can be accessed without logging into Mattermost
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get a link for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A publicly accessible link to the given file
+          schema:
+            type: string
+        '400':
+          description: The file is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '501':
+          description: Public links are disabled
+        '501':
+          description: File storage is disabled
+
+  /preferences/save:
+    post:
+      tags:
+        - preferences
+      summary: Add or update a list of preferences for the current user
+      parameters:
+        - in: body
+        name: body
+        description: A list of preferences to add or update for the current user
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/Preference"
+      responses:
+        '200':
+          description: All of the provided preferences have been successfully saved
+        '400':
+          description: The request body is invalid
+        '401':
+          description: User is not logged in
+        '403':
+          description: One or more of the provided preferences has a user_id that doesn't match the current user
+
+  /preferences/delete:
+    post:
+      tags:
+        - preferences
+      summary: Delete a list of preferences from the current user
+      parameters:
+        - name: body
+        description: A list of preferences to remove from for the current user
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: "#/definitions/Preference"
+      responses:
+        '200':
+          description: All of the provided preferences have been successfully deleted
+        '400':
+          description: The request body is invalid
+        '401':
+          description: User is not logged in
+        '403':
+          description: One or more of the provided preferences has a user_id that doesn't match the current user
+
+  '/preferences/{category}':
+    get:
+      tags:
+        - preferences
+      summary: Lists the current user's stored preferences in the given category
+      parameters:
+        - name: category
+          in: path
+          description: The category of a group of preferences
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A list of all of the current user's preferences in the given category
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+        '401':
+          description: User is not logged in
+
+  '/preferences/{category}/{name}':
+    get:
+      tags:
+        - preferences
+      summary: Returns a single preference for the current user with the given category and name
+      parameters:
+        - name: category
+          in: path
+          description: The category of a group of preferences
+          required: true
+          type: string
+        - name: name
+          in: path
+          description: The name of a preferences
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A single preference for the current user in the current categorylist of all of the current user's preferences in the given category
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+        '401':
+          description: User is not logged in
+        '500':
+          description: No such preference exists for the current user
+
 definitions:
   User:
     type: object
@@ -1038,6 +1324,66 @@ definitions:
       user_id:
         type: string
       roles:
+        type: string
+
+  FileInfo:
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this file
+        type: string
+      user_id:
+        description: The ID of the user that uploaded this file
+        type: string
+      post_id:
+        description: If this file is attached to a post, the ID of that post
+        required: false
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      name:
+        description: The name of the file
+        type: string
+      extension:
+        description: The extension at the end of the file name
+        type: string
+      size:
+        description: The size of the file in bytes
+        type: integer
+      mime_type:
+        description: The MIME type of the file
+        type: string
+      width:
+        description: If this file is an image, the width of the file
+        type: integer
+      width:
+        description: If this file is an image, the width of the file
+        required: false
+        type: integer
+      height:
+        description: If this file is an image, the height of the file
+        required: false
+        type: integer
+      has_preview_image:
+        description: If this file is an image, whether or not it has a preview-sized version
+        required: false
+        type: boolean
+
+  Preference:
+    type: object
+    properties:
+      user_id:
+        description: The ID of the user that owns this preference
+        type: string
+      category:
+        type: string
+      name:
+        type: string
+      value:
         type: string
           
 externalDocs:
