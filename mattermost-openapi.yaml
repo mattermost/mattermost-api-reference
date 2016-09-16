@@ -213,6 +213,19 @@ paths:
               description: Access token to be included with future requests
           schema:
             $ref: '#/definitions/User'
+  
+  /users/logout:
+    post:
+      tags:
+        - users
+      summary: Logout of a user account
+      responses:
+        '200':
+          description: User logged out successfuly
+          schema:
+            properties:
+              user_id:
+                type: string
 
   '/users/profiles/{team_id}':
     get:
@@ -326,6 +339,65 @@ paths:
           description: User notification properties successfully updated
           schema:
             $ref: '#/definitions/User'
+  
+  /users/newpassword:
+    post:
+      tags:
+        - users
+      summary: Update a user's password
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - user_id
+              - current_password
+              - new_password
+            properties:
+              user_id:
+                type: string
+                description: The ID of the user to change the password for
+              current_password:
+                type: string
+                description: The user's current password
+              new_password:
+                 type: string
+                 description: The user's new password
+      responses:
+        '200':
+          description: User password updated successfully
+          schema:
+            properties:
+              user_id:
+                type: string
+  
+  /users/send_password_reset:
+    post:
+      tags:
+        - users
+      summary: Send a password reset email
+      description: Send an email to the user with a link to reset their password. User must use the email/password sign-in method.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+                description: The email of the user to send the reset link to
+      responses:
+        '200':
+          description: Password reset email sent successfully
+          schema:
+            properties:
+              email:
+                type: string
             
   /teams/create:
     post:
@@ -437,4 +509,3 @@ definitions:
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
-
