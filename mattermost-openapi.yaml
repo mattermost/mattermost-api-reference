@@ -292,6 +292,7 @@ paths:
         '200':
           description: User roles updated successful
           schema:
+            type: object
             properties:
               user_id:
                 type: string
@@ -369,6 +370,7 @@ paths:
         '200':
           description: User password updated successfully
           schema:
+            type: object
             properties:
               user_id:
                 type: string
@@ -395,6 +397,7 @@ paths:
         '200':
           description: Password reset email sent successfully
           schema:
+            type: object
             properties:
               email:
                 type: string
