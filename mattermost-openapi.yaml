@@ -442,7 +442,316 @@ paths:
           description: Team creation successful
           schema:
             $ref: '#/definitions/Team'
+      
+  '/teams/{team_id}/posts/search':
+    post:
+      tags:
+        - posts
+      summary: Search for posts.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Terms to search for
+          required: true
+          schema:
+            type: object
+            required:
+              - terms
+              - is_or_search
+            properties:
+              terms:
+                type: string
+                description: The search terms as inputed by the user.
+              is_or_search:
+                type: boolean
+                description: Set to true if an Or search should be performed vs an And search.
+      responses:
+        '200':
+          description: Search successful with 0-100 results.
+          schema:
+            $ref: '#/definitions/PostList'
+   
+  '/teams/{team_id}/flagged/{offset}/{limit}':
+    get:
+      tags:
+        - posts
+      summary: Get all flagged posts for a user.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: offset
+          in: path
+          description: The page offset, where 0 is the first page.
+          required: true
+          type: string
+        - name: limit
+          in: path
+          description: The limit of items to return per page.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Posts retreived successfully
+          schema:
+            $ref: "#/definitions/PostList"
             
+  '/teams/{team_id}/channels/{channel_id}/posts/create':
+    post:
+      tags:
+        - posts
+      summary: Create a post in a channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: The post to create
+          required: true
+          schema:
+            $ref: "#/definitions/Post"
+      responses:
+        '200':
+          description: The newly created Post is returned.
+          schema:
+            $ref: "#/definitions/Post"
+              
+  '/teams/{team_id}/channels/{channel_id}/posts/update':
+    post:
+      tags:
+        - posts
+      summary: Update a post in a channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: The post to create
+          required: true
+          schema:
+            $ref: "#/definitions/Post"
+      responses:
+        '200':
+          description: The updated Post is returned.
+          schema:
+            $ref: "#/definitions/Post"
+  
+  '/teams/{team_id}/channels/{channel_id}/posts/page/{offset}/{limit}':
+    get:
+      tags:
+        - posts
+      summary: Get posts for a channel
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: offset
+          in: path
+          description: The page offset, where 0 is the first page.
+          required: true
+          type: string
+        - name: limit
+          in: path
+          description: The limit of items to return per page.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post retreived successfully
+          schema:
+            $ref: "#/definitions/PostList"
+  
+  '/teams/{team_id}/channels/{channel_id}/posts/since/{time}':
+    get:
+      tags:
+        - posts
+      summary: Get posts for a channel starting from the time supplied.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: time
+          in: path
+          description: The liast time to query from.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post retreived successfully
+          schema:
+            $ref: "#/definitions/PostList"
+  
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/get':
+    get:
+      tags:
+        - posts
+      summary: Get a post by id.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post retreived successfully
+          schema:
+            $ref: "#/definitions/PostList"
+  
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/delete':
+    post:
+      tags:
+        - posts
+      summary: Deletes a post in a channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The post id that was successfully deleted.
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: The Post ID.
+  
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/before/{offset}/{limit}':
+    get:
+      tags:
+        - posts
+      summary: Get posts before a certian post for a channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID.
+          required: true
+          type: string
+        - name: offset
+          in: path
+          description: The page offset, where 0 is the first page.
+          required: true
+          type: string
+        - name: limit
+          in: path
+          description: The limit of items to return per page.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Posts retreived successfully
+          schema:
+            $ref: "#/definitions/PostList"
+  
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/after/{offset}/{limit}':
+    get:
+      tags:
+        - posts
+      summary: Get posts after a certian post for a channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID.
+          required: true
+          type: string
+        - name: offset
+          in: path
+          description: The page offset, where 0 is the first page.
+          required: true
+          type: string
+        - name: limit
+          in: path
+          description: The limit of items to return per page.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Posts retreived successfully
+          schema:
+            $ref: "#/definitions/PostList"
+  
 definitions:
   User:
     type: object
@@ -517,7 +826,56 @@ definitions:
         type: string
       allow_open_invite:
         type: boolean
-      
+
+  Post:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      user_id:
+        type: string
+      channel_id:
+        type: string
+      root_id:
+        type: string
+      parent_id:
+        type: string
+      original_id:
+        type: string
+      message:
+        type: string
+      type:
+        type: string
+      props:
+        type: object
+      hashtag:
+        type: string
+      filenames:
+        type: array
+        items:
+          type: string
+      pending_post_id:
+        type: string
+
+  PostList:
+    type: object
+    properties:
+      order:
+        type: array
+        items:
+            type: string
+        example: ["post_id1", "post_id12"]
+      posts:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Post'
+          
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
