@@ -117,6 +117,8 @@ tags:
     description: Anything related to the user data model.
   - name: teams
     description: Anything related to the team data model.
+  - name: channels
+    description: Anything related to the channel data model.
   - name: posts
     description: Anything related to posts, the main messaging model in Mattermost.
   - name: files
@@ -944,6 +946,150 @@ paths:
         '501':
           description: File storage is disabled
 
+  '/teams/{team_id}/channels/create':
+    post:
+      tags:
+        - channels
+      summary: Create a channel
+      description: Create a new channel for the specified team.
+      parameters:
+        - in: path
+          name: team_id
+          description: Team ID to add the channel to
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Abbreviated channel object
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+              - display_name
+              - type
+            properties:
+              team_id:
+                type: string
+                description: The team ID of the channel to create
+              name:
+                type: string
+                description: The unique handle for the channel, will be present in the channel URL
+              display_name:
+                type: string
+                description: The non-unique UI name for the channel
+              purpose:
+                type: string
+                description: A short description of the purpose of the channel
+              header:
+                type: string
+                description: Markdown-formatted text to display in the header of the channel
+              type:
+                type: string
+                description: "'O' for an open channel, 'P' for a private channel"
+      responses:
+        '200':
+          description: Channel created successfully
+          schema:
+            $ref: '#/definitions/Channel'
+        '403':
+          description: User does not belong to the team
+    
+  '/teams/{team_id}/channels/update':
+    post:
+      tags:
+        - channels
+      summary: Update a channel
+      description: Update a channel for the specified team.
+      parameters:
+        - in: path
+          name: team_id
+          description: Team ID of the channel to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: The channel object with updated fields
+          required: true
+          schema:
+            $ref: '#/definitions/Channel'
+      responses:
+        '200':
+          description: Channel updated successfully
+          schema:
+            $ref: '#/definitions/Channel'
+        '403':
+          description: User does not belong to the team
+      
+  '/teams/{team_id}/channels/':
+      get:
+        tags:
+          - channels
+        summary: Get channels for the user
+        description: Get a list of channels for a team that the logged in user is a part of.
+        parameters:
+          - name: team_id
+            in: path
+            description: Team ID of the channels to return
+            required: true
+            type: string
+        responses:
+          '200':
+            description: The list of channels
+            schema:
+              $ref: '#/definitions/ChannelList'
+          '403':
+            description: User does not belong to the team
+          '500':
+            description: Could not retrieve the user channels
+
+  '/teams/{team_id}/channels/more':
+    get:
+      tags:
+        - channels
+      summary: Get channels the user has not joined
+      description: Get a list of open channels the user does not belong to by team ID.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the channels to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The list of channels
+          schema:
+            $ref: '#/definitions/ChannelList'
+        '403':
+          description: User does not belong to the team
+        '500':
+          description: Could not retrieve the user channels
+
+  '/teams/{team_id}/channels/{channel_id}':
+    get:
+      tags:
+        - channels
+      summary: Get a channel
+      description: Get a single channel by team ID and channel ID.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID the channel belongs to
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The channel
+          schema:
+            $ref: '#/definitions/ChannelData'
+        '500':
+          description: Could not retrieve the channel, the user is not a member of the channel or the channel does not belong to the team
+
   '/files/{file_id}/get':
     get:
       tags:
@@ -1240,6 +1386,78 @@ definitions:
       allow_open_invite:
         type: boolean
 
+  Channel:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      team_id:
+        type: string
+      type:
+        type: string
+      display_name:
+        type: string
+      name:
+        type: string
+      header:
+        type: string
+      purpose:
+        type: string
+      last_post_at:
+        type: integer
+      total_msg_count:
+        type: integer
+      extra_update_at:
+        type: integer
+      creator_id:
+        type: string
+    
+  ChannelMember:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      user_id:
+        type: string
+      roles:
+        type: string
+      last_viewed_at:
+        type: integer
+      msg_count:
+        type: integer
+      mention_count:
+        type: integer
+      notify_props:
+        type: object
+      last_update_at:
+        type: integer
+  
+  ChannelList:
+    type: object
+    properties:
+      channels: 
+        type: array
+        items:
+          $ref: '#/definitions/Channel'
+      members:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/ChannelMember'
+  
+  ChannelData:
+    type: object
+    properties:
+      channel: 
+        $ref: '#/definitions/Channel'
+      member:
+        $ref: '#/definitions/ChannelMember'
+
   Post:
     type: object
     properties:
@@ -1362,3 +1580,4 @@ definitions:
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
+
