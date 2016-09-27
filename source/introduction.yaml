@@ -13,7 +13,7 @@ info:
 basePath: /api/v3
 host: your-mattermost-url.com
 tags:
-  - name: introductio
+  - name: introduction
     description: |
       Mattermost offers a RESTful Web Service API for interacting with the server. This document acts as a reference for version 3 of that API. For other documentation please see https://docs.mattermost.com.
 
