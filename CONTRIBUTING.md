@@ -1,11 +1,3 @@
-# Mattermost API Documentation
-
-This respository holds the API reference available at [https://api.mattermost.com](https://api.mattermost.com).
-
-The Mattermost API reference uses the [OpenAPI standard](https://openapis.org/) and the [ReDoc document generator](https://github.com/Rebilly/ReDoc).
-
-All documentation is available under the terms of a [Creative Commons License](http://creativecommons.org/licenses/by-nc-sa/3.0/).
-
 ## Contributing
 
 We're accepting pull requests! Specifically we're looking for documenation on routes defined [here](https://github.com/mattermost/platform/tree/master/api).
@@ -19,7 +11,3 @@ All the documentation is written in YAML and found in the [source](https://githu
 There is no strict style guide but please try to follow the example of the existing documentation.
 
 To build the full YAML, run `make build` and it will be output to `html/static/mattermost-openapi.yaml`. To check for syntax, you can copy the contents of that into http://editor.swagger.io/ or you can look into using a commandline or ESLint-based syntax checker.
-
-## Deployment
-
-Currently, deployment is handled manually and can be done by running `make build` and deploying the full `/html` directory to the hosted sited.
