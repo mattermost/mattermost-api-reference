@@ -1,0 +1,269 @@
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      username:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      nickname:
+        type: string
+      email:
+        type: string
+      email_verified:
+        type: boolean
+      password:
+        type: string
+      auth_data:
+        type: string
+      auth_service:
+        type: string
+      roles:
+        type: string
+      locale:
+        type: string
+      notify_props:
+        type: object
+      props:
+        type: object
+      last_password_update:
+        type: integer
+      last_picture_update:
+        type: integer
+      failed_attempts:
+        type: integer
+      mfa_active:
+        type: boolean
+      mfa_secret:
+        type: string
+
+  Team:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      display_name:
+        type: string
+      name:
+        type: string
+      email:
+        type: string
+      type:
+        type: string
+      allowed_domains:
+        type: string
+      invite_id:
+        type: string
+      allow_open_invite:
+        type: boolean
+
+  Channel:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      team_id:
+        type: string
+      type:
+        type: string
+      display_name:
+        type: string
+      name:
+        type: string
+      header:
+        type: string
+      purpose:
+        type: string
+      last_post_at:
+        type: integer
+      total_msg_count:
+        type: integer
+      extra_update_at:
+        type: integer
+      creator_id:
+        type: string
+
+  ChannelMember:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      user_id:
+        type: string
+      roles:
+        type: string
+      last_viewed_at:
+        type: integer
+      msg_count:
+        type: integer
+      mention_count:
+        type: integer
+      notify_props:
+        type: object
+      last_update_at:
+        type: integer
+
+  ChannelList:
+    type: object
+    properties:
+      channels: 
+        type: array
+        items:
+          $ref: '#/definitions/Channel'
+      members:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/ChannelMember'
+
+  ChannelData:
+    type: object
+    properties:
+      channel: 
+        $ref: '#/definitions/Channel'
+      member:
+        $ref: '#/definitions/ChannelMember'
+
+  Post:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      user_id:
+        type: string
+      channel_id:
+        type: string
+      root_id:
+        type: string
+      parent_id:
+        type: string
+      original_id:
+        type: string
+      message:
+        type: string
+      type:
+        type: string
+      props:
+        type: object
+      hashtag:
+        type: string
+      filenames:
+        type: array
+        items:
+          type: string
+      pending_post_id:
+        type: string
+
+  PostList:
+    type: object
+    properties:
+      order:
+        type: array
+        items:
+            type: string
+        example: ["post_id1", "post_id12"]
+      posts:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Post'
+
+  TeamMap:
+    type: object
+    description: A mapping of teamIds to teams.
+    properties:
+      team_id:
+        $ref: '#/definitions/Team'
+
+  TeamMember:
+    type: object
+    properties:
+      team_id:
+        type: string
+      user_id:
+        type: string
+      roles:
+        type: string
+
+  FileInfo:
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this file
+        type: string
+      user_id:
+        description: The ID of the user that uploaded this file
+        type: string
+      post_id:
+        description: If this file is attached to a post, the ID of that post
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      name:
+        description: The name of the file
+        type: string
+      extension:
+        description: The extension at the end of the file name
+        type: string
+      size:
+        description: The size of the file in bytes
+        type: integer
+      mime_type:
+        description: The MIME type of the file
+        type: string
+      width:
+        description: If this file is an image, the width of the file
+        type: integer
+      height:
+        description: If this file is an image, the height of the file
+        type: integer
+      has_preview_image:
+        description: If this file is an image, whether or not it has a preview-sized version
+        type: boolean
+
+  Preference:
+    type: object
+    properties:
+      user_id:
+        description: The ID of the user that owns this preference
+        type: string
+      category:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+
+externalDocs:
+  description: Find out more about Mattermost
+  url: 'https://about.mattermost.com'

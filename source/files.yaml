@@ -1,0 +1,175 @@
+  '/teams/{team_id}/files/upload':
+    post:
+      tags:
+        - files
+      summary: Upload a file
+      description: Uploads a file that can later be attached to a post.
+      parameters:
+        - name: team_id
+          in: path
+          description: The ID of one of the current user's teams
+          required: true
+          type: string
+        - name: files
+          in: formData
+          description: A file to be uploaded
+          required: true
+          type: file
+        - name: channel_id
+          in: formData
+          description: The ID of the channel that this file will be uploaded to
+          required: true
+          type: string
+        - name: client_ids
+          in: formData
+          description: A unique identifier for the file that will be returned in the response
+          required: false
+          allowEmptyValue: true
+          type: string
+      responses:
+        '200':
+          description: A list of all of the current user's preferences
+          schema:
+            type: object
+            properties:
+              file_infos:
+                description: A list of file metadata that has been stored in the database
+                type: array
+                items:
+                  $ref: '#/definitions/FileInfo'
+              client_ids:
+                description: A list of the client_ids that were provided in the request
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Type of the uploaded file doesn't match its file extension or uploaded file is an image that exceeds the maximum dimensions
+        '401':
+          description: User is not logged in
+        '403':
+          description: User does not have permission to upload file to the provided team/channel
+        '413':
+          description: Uploaded file is too large
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get':
+    get:
+      tags:
+        - files
+      summary: Get a file
+      description: Gets a file that has been uploaded to Mattermost.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested file
+        '400':
+          description: The file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '404':
+          description: The file cannot be found on the file system
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_thumbnail':
+    get:
+      tags:
+        - files
+      summary: Get an image thumbnail
+      description: Gets a thumbnail image for an image file that has been uploaded to Mattermost.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file thumbnail to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested file thumbnail
+        '400':
+          description: The file is not an image or does not have a thumbnail image or the file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '404':
+          description: The file thumbnail cannot be found on the file system
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_preview':
+    get:
+      tags:
+        - files
+      summary: Get an image preview
+      description: Gets a preview image for an image file that has been uploaded to Mattermost.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file preview to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The requested file preview
+        '400':
+          description: The file is not an image or does not have a preview image or the file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '404':
+          description: The file preview cannot be found on the file system
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_info':
+    get:
+      tags:
+        - files
+      summary: Get metadata for a file
+      description: Gets the stored metadata for a file that has been uploaded to Mattermost.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file info to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The stored metadata for the given file
+          schema:
+            $ref: "#/definitions/FileInfo"
+        '400':
+          description: The file is owned by another user and is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '501':
+          description: File storage is disabled
+
+  '/files/{file_id}/get_public_link':
+    get:
+      tags:
+        - files
+      summary: Get a public file link
+      description: Gets a public link for a file that can be accessed without logging into Mattermost.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get a link for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A publicly accessible link to the given file
+          schema:
+            type: string
+        '400':
+          description: The file is not attached to a post
+        '403':
+          description: User does not have permission to view the file
+        '501':
+          description: Public links are disabled or file storage is disabled
+

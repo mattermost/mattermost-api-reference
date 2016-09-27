@@ -3,3 +3,6 @@
 
 # VIM
 *.swp
+
+# Build
+html/static/mattermost-openapi.yaml

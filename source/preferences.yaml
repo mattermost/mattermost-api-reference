@@ -1,0 +1,101 @@
+  /preferences/save:
+    post:
+      tags:
+        - preferences
+      summary: Save user preferences
+      description: Add or update a list of preferences for the current user.
+      parameters:
+        - name: body
+          in: body
+          description: A list of preferences to add or update for the current user
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+      responses:
+        '200':
+          description: All of the provided preferences have been successfully saved
+        '400':
+          description: The request body is invalid
+        '401':
+          description: User is not logged in
+        '403':
+          description: One or more of the provided preferences has a user_id that doesn't match the current user
+
+  /preferences/delete:
+    post:
+      tags:
+        - preferences
+      summary: Delete user preferences
+      description: Delete a list of preferences from the current user.
+      parameters:
+        - name: body
+          in: body
+          description: A list of preferences to remove from for the current user
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+      responses:
+        '200':
+          description: All of the provided preferences have been successfully deleted
+        '400':
+          description: The request body is invalid
+        '401':
+          description: User is not logged in
+        '403':
+          description: One or more of the provided preferences has a user_id that doesn't match the current user
+
+  '/preferences/{category}':
+    get:
+      tags:
+        - preferences
+      summary: List a user's preferences
+      description: Lists the current user's stored preferences in the given category.
+      parameters:
+        - name: category
+          in: path
+          description: The category of a group of preferences
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A list of all of the current user's preferences in the given category
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+        '401':
+          description: User is not logged in
+
+  '/preferences/{category}/{name}':
+    get:
+      tags:
+        - preferences
+      summary: Get a specific user preference
+      description: Returns a single preference for the current user with the given category and name.
+      parameters:
+        - name: category
+          in: path
+          description: The category of a group of preferences
+          required: true
+          type: string
+        - name: name
+          in: path
+          description: The name of a preferences
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A single preference for the current user in the current categorylist of all of the current user's preferences in the given category
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+        '401':
+          description: User is not logged in
+        '500':
+          description: No such preference exists for the current user
+

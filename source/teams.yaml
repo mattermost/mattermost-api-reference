@@ -1,0 +1,156 @@
+  /teams/create:
+    post:
+      tags:
+        - teams
+      summary: Create a new team
+      parameters:
+        - in: body
+          name: body
+          description: Abbreviated team object that is to be created
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+              - display_name
+              - type
+            properties:
+              name:
+                type: string
+                description: Unique handler for a team, will be present in the team URL
+              display_name:
+                type: string
+                description: Non-unique UI name for the team
+              type:
+                type: string
+                description: "`'O'` for open, `'I'` for invite only"
+      responses:
+        '200':
+          description: Team creation successful
+          schema:
+            $ref: '#/definitions/Team'
+
+  /teams/all:
+    get:
+      tags:
+        - teams
+      summary: Get all teams
+      description: Gets all teams which the current user can has access to. If the user is a System Admin, this will be all teams on the server. Otherwise, it will only be the teams of which the user is a member.
+      responses:
+        '200':
+          description: Teams Found
+          schema:
+            $ref: '#/definitions/TeamMap'
+
+  '/teams/members/{team_id}':
+    get:
+      tags:
+        - teams
+      summary: Get team members
+      description: Get all the members of the specified team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the members to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Members retreived successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/TeamMember"
+
+  '/teams/{team_id}/me':
+    get:
+      tags:
+        - teams
+      summary: Get a team object
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the team you want to retrieve
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Team object
+          schema:
+            $ref: "#/definitions/Team"
+
+  '/teams/{team_id}/update':
+    post:
+      tags:
+        - teams
+      summary: Update a team object
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the team you want to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Team object to update with
+          required: true
+          schema:
+            $ref: '#/definitions/Team'
+      responses:
+        '200':
+          description: The updated team object
+          schema:
+            $ref: "#/definitions/Team"
+
+  '/teams/{team_id}/add_user_to_team':
+    post:
+      tags:
+        - teams
+      summary: Add a user to a team
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the team you want to add the user too
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - user_id
+            properties:
+              user_id:
+                type: string
+                description: The user_id of the user to add to the team.
+      responses:
+        '200':
+          description: User added sucessfully
+
+  '/teams/{team_id}/remove_user_from_team':
+    post:
+      tags:
+        - teams
+      summary: Remove a user from a team
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the team you want to remove the user from
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - user_id
+            properties:
+              user_id:
+                type: string
+                description: The user ID of the user to remove from the team.
+      responses:
+        '200':
+          description: User removed sucessfully
+
