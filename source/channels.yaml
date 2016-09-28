@@ -191,7 +191,7 @@
           type: string
       responses:
         '200':
-          description: The channel stats
+          description: The channel member
           schema:
             $ref: '#/definitions/ChannelMember'
         '500':

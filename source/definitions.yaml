@@ -108,7 +108,7 @@ definitions:
   ChannelStats:
     type: object
     properties:
-      id:
+      channel_id:
         type: string
       member_count:
         type: integer

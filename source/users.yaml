@@ -191,7 +191,7 @@
           type: string
         - name: channel_id
           in: path
-          description: The channel ID
+          description: The channel ID the users are not part of
           required: true
           type: string
         - name: offset
