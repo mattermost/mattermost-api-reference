@@ -105,6 +105,14 @@ definitions:
       creator_id:
         type: string
 
+  ChannelStats:
+    type: object
+    properties:
+      id:
+        type: string
+      member_count:
+        type: integer
+
   ChannelMember:
     type: object
     properties:

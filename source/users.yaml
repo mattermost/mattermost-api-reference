@@ -103,7 +103,8 @@
     get:
       tags:
         - users
-      summary: Get a list of sanitized user objects by team ID
+      summary: Get users by team ID
+      description: Get a map of sanitized user objects by team ID.
       parameters:
         - name: team_id
           in: path
@@ -114,8 +115,101 @@
         '200':
           description: Profiles retreived successfully
           schema:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/User"
+
+  '/users/profiles_by_ids':
+    post:
+      tags:
+        - users
+      summary: Get users by IDs
+      description: Get a map of sanitized user objects by a list of user IDs.
+      parameters:
+        - in: body
+          name: body
+          description: A list of user IDs to fetch
+          required: true
+          schema:
             type: array
             items:
+              type: string
+      responses:
+        '200':
+          description: Profiles retreived successfully
+          schema:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/User"
+
+  '/teams/{team_id}/channels/{channel_id}/users/{offset}/{limit}':
+    post:
+      tags:
+        - users
+      summary: Get users in a channel
+      description: Get a map of sanitized user objects that are in the specified channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+        - name: offset
+          in: path
+          description: The offset to start the page at, use 0 for the first page
+          required: true
+          type: integer
+        - name: limit
+          in: path
+          description: The limit of users to return per page
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Profiles retreived successfully
+          schema:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/User"
+
+  '/teams/{team_id}/channels/{channel_id}/users/not_in_channel/{offset}/{limit}':
+    post:
+      tags:
+        - users
+      summary: Get users not in a channel
+      description: Get a map of sanitized user objects that are on the team but not in the channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+        - name: offset
+          in: path
+          description: The offset to start the page at, use 0 for the first page
+          required: true
+          type: integer
+        - name: limit
+          in: path
+          description: The limit of users to return per page
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Profiles retreived successfully
+          schema:
+            type: object
+            additionalProperties:
               $ref: "#/definitions/User"
 
   /users/update:
