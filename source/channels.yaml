@@ -167,7 +167,7 @@
         '500':
           description: Could not retrieve the channel stats, the user is not a member of the channel or the channel does not belong to the team
 
-  '/teams/{team_id}/channels/{channel_id}/member/{user_id}':
+  '/teams/{team_id}/channels/{channel_id}/members/{user_id}':
     get:
       tags:
         - channels
