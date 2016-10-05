@@ -99,21 +99,56 @@
               user_id:
                 type: string
 
-  '/users/profiles/{team_id}':
+  '/users/{offset}/{limit}':
     get:
       tags:
         - users
-      summary: Get users by team ID
-      description: Get a map of sanitized user objects by team ID.
+      summary: Get users
+      description: Get a page of user objects organized into a map using user ID as the key.
+      parameters:
+        - name: offset
+          in: path
+          description: The offset to start the page at, use 0 for the first page
+          required: true
+          type: integer
+        - name: limit
+          in: path
+          description: The limit of users to return per page
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Users retreived successfully
+          schema:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/User"
+
+  '/teams/{team_id}/users/{offset}/{limit}':
+    get:
+      tags:
+        - users
+      summary: Get users in a team
+      description: Get a page of user objects in a team, organized into a map using user ID as the key.
       parameters:
         - name: team_id
           in: path
-          description: Team ID of the users to return
+          description: The team ID the users are in
           required: true
           type: string
+        - name: offset
+          in: path
+          description: The offset to start the page at, use 0 for the first page
+          required: true
+          type: integer
+        - name: limit
+          in: path
+          description: The limit of users to return per page
+          required: true
+          type: integer
       responses:
         '200':
-          description: Profiles retreived successfully
+          description: Users retreived successfully
           schema:
             type: object
             additionalProperties:

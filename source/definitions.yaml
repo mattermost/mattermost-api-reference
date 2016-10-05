@@ -73,6 +73,14 @@ definitions:
       allow_open_invite:
         type: boolean
 
+  TeamStats:
+    type: object
+    properties:
+      team_id:
+        type: string
+      member_count:
+        type: integer
+
   Channel:
     type: object
     properties:
