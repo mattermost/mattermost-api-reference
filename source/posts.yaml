@@ -44,14 +44,14 @@
           type: string
         - name: offset
           in: path
-          description: The page offset, where 0 is the first page.
+          description: The offset to start the page at, use 0 for the first page.
           required: true
-          type: string
+          type: integer
         - name: limit
           in: path
           description: The limit of items to return per page.
           required: true
-          type: string
+          type: integer
       responses:
         '200':
           description: Posts retreived successfully

@@ -142,3 +142,58 @@
         '500':
           description: Could not retrieve the channel, the user is not a member of the channel or the channel does not belong to the team
 
+  '/teams/{team_id}/channels/{channel_id}/stats':
+    get:
+      tags:
+        - channels
+      summary: Get a channel's stats
+      description: Get the total count for users in the channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID the channel belongs to
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The channel stats
+          schema:
+            $ref: '#/definitions/ChannelStats'
+        '500':
+          description: Could not retrieve the channel stats, the user is not a member of the channel or the channel does not belong to the team
+
+  '/teams/{team_id}/channels/{channel_id}/members/{user_id}':
+    get:
+      tags:
+        - channels
+      summary: Get a channel member
+      description: Get the channel member object for a specific user.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID the channel belongs to
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: The user ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The channel member
+          schema:
+            $ref: '#/definitions/ChannelMember'
+        '500':
+          description: Could not retrieve the channel member, the user is not a member of the channel or the channel does not belong to the team
+
