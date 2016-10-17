@@ -42,24 +42,85 @@
           schema:
             $ref: '#/definitions/TeamMap'
 
-  '/teams/members/{team_id}':
+  '/teams/{team_id}/members/{offset}/{limit}':
     get:
       tags:
         - teams
       summary: Get team members
-      description: Get all the members of the specified team.
+      description: Get a page of team member objects on the specified team.
       parameters:
         - name: team_id
           in: path
           description: Team ID of the members to return
           required: true
           type: string
+        - name: offset
+          in: path
+          description: The offset to start the page at, use 0 for the first page
+          required: true
+          type: integer
+        - name: limit
+          in: path
+          description: The limit of members to return per page
+          required: true
+          type: integer
       responses:
         '200':
           description: Members retreived successfully
           schema:
             type: array
             items:
+              $ref: "#/definitions/TeamMember"
+
+  '/teams/{team_id}/members/{user_id}':
+    get:
+      tags:
+        - teams
+      summary: Get a single team member
+      description: Get a single team member object for the specified team and user.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the member to return
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: User ID of the member to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Member retreived successfully
+          schema:
+            $ref: "#/definitions/TeamMember"
+
+  '/teams/{team_id}/members/ids':
+    post:
+      tags:
+        - teams
+      summary: Get team members by IDs
+      description: Get a map of team member objects for the specified team and user IDs.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the member to return
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: A list of user IDs
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Members retreived successfully
+          schema:
+            type: object
+            additionalProperties:
               $ref: "#/definitions/TeamMember"
 
   '/teams/{team_id}/me':
@@ -101,6 +162,24 @@
           description: The updated team object
           schema:
             $ref: "#/definitions/Team"
+
+  '/teams/{team_id}/stats':
+    get:
+      tags:
+        - teams
+      summary: Get the stats for a team
+      description: Get some statistics about the specified team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the team you want to update
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The team stats object
+          schema:
+            $ref: "#/definitions/TeamStats"
 
   '/teams/{team_id}/add_user_to_team':
     post:
