@@ -428,12 +428,12 @@
           in: query
           description: The term to match against username, full name or nickname
           required: true
-          type: integer
+          type: string
         - name: channel_id
           in: query
           description: The channel ID to autocomplete for
           required: false
-          type: integer
+          type: string
       responses:
         '200':
           description: Autocomplete users retreived successfully
