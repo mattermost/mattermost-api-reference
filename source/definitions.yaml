@@ -280,16 +280,25 @@ definitions:
       value:
         type: string
 
-  UserAutocomplete:
+  UserAutocompleteInTeam:
     type: object
     properties:
-      in:
-        description: A list of user objects inside the current context (for example, channel)
+      in_team:
+        description: A list of user objects in the team
         type: array
         items:
           $ref: '#/definitions/User'
-      out:
-        description: A list of user objects outside the current context (for example, channel)
+
+  UserAutocompleteInChannel:
+    type: object
+    properties:
+      in_channel:
+        description: A list of user objects in the channel
+        type: array
+        items:
+          $ref: '#/definitions/User'
+      out_of_channel:
+        description: A list of user objects not in the channel
         type: array
         items:
           $ref: '#/definitions/User'

@@ -416,8 +416,8 @@
     get:
       tags:
         - users
-      summary: Autocomplete users
-      description: Get a list of users on the current team, and optionally channel, by matching the term against username, full name and nickname. When a channel is specified, a list of users not in the channel is also returned.
+      summary: Autocomplete users in a team
+      description: Get a list of users on the specified team by matching the term against username, full name and nickname.
       parameters:
         - name: team_id
           in: path
@@ -429,10 +429,35 @@
           description: The term to match against username, full name or nickname
           required: true
           type: string
+      responses:
+        '200':
+          description: Autocomplete users retreived successfully
+          schema:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/UserAutocompleteInTeam"
+
+  '/teams/{team_id}/channels/{channel_id}/users/autocomplete':
+    get:
+      tags:
+        - users
+      summary: Autocomplete users in a channel
+      description: Get a list of users in the specified channel by matching the term against username, full name and nickname. Also returns a list of users matching the term that are on the team but not in the channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID the users are in
+          required: true
+          type: string
         - name: channel_id
+          in: path
+          description: The channel ID the users are in
+          required: true
+          type: string
+        - name: term
           in: query
-          description: The channel ID to autocomplete for
-          required: false
+          description: The term to match against username, full name or nickname
+          required: true
           type: string
       responses:
         '200':
@@ -440,5 +465,5 @@
           schema:
             type: object
             additionalProperties:
-              $ref: "#/definitions/UserAutocomplete"
+              $ref: "#/definitions/UserAutocompleteInChannel"
 
