@@ -412,3 +412,33 @@
             application/json:
               email: someone@example.com
 
+  '/teams/{team_id}/users/autocomplete':
+    get:
+      tags:
+        - users
+      summary: Autocomplete users
+      description: Get a list of users on the current team, and optionally channel, by matching the term against username, full name and nickname. When a channel is specified, a list of users not in the channel is also returned.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID the users are in
+          required: true
+          type: string
+        - name: term
+          in: query
+          description: The term to match against username, full name or nickname
+          required: true
+          type: integer
+        - name: channel_id
+          in: query
+          description: The channel ID to autocomplete for
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Autocomplete users retreived successfully
+          schema:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/UserAutocomplete"
+

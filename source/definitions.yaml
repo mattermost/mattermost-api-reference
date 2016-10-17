@@ -280,6 +280,20 @@ definitions:
       value:
         type: string
 
+  UserAutocomplete:
+    type: object
+    properties:
+      in:
+        description: A list of user objects inside the current context (for example, channel)
+        type: array
+        items:
+          $ref: '#/definitions/User'
+      out:
+        description: A list of user objects outside the current context (for example, channel)
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
