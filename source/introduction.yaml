@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: >-
-    This is the Mattemost API reference.
+    This is the Mattemost API reference. It is currently a work in progress and may not contain every available API route. If you have any questions or are looking for something that isn't available here, feel free to post on [our forums](https://forum.mattermost.org/) or in the Developers channel on [pre-release.mattermost.com](https://pre-release.mattermost.com) where we'd be glad to help.
   version: 3.0.0
   title: Mattermost API Reference
   termsOfService: 'https://about.mattermost.com/default-terms/'
