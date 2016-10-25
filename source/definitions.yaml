@@ -141,18 +141,6 @@ definitions:
       last_update_at:
         type: integer
 
-  ChannelList:
-    type: object
-    properties:
-      channels: 
-        type: array
-        items:
-          $ref: '#/definitions/Channel'
-      members:
-        type: object
-        additionalProperties:
-          $ref: '#/definitions/ChannelMember'
-
   ChannelData:
     type: object
     properties:
