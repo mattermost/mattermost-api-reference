@@ -1,0 +1,111 @@
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/save_reaction':
+    post:
+      tags:
+        - posts
+      summary: React to a post
+      description: Saves a reaction made by the current user to the given post. Post reactions require Mattermost 3.6 or higher.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID which must exist on the given team
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID which must exist in the given channel
+          required: true
+          type: string
+        - in: body
+          name: reaction
+          description: The user's reaction with its post_id, user_id, and emoji_name fields set
+          required: true
+          schema:
+            $ref: '#/definitions/Reaction'
+      responses:
+        '200':
+          description: The reaction was saved to the server or already existed
+          schema:
+            $ref: '#/definitions/Reaction'
+        '400':
+          description: An invalid team, channel, or post ID has been provided, the reaction has its post_id field set to another post, or the provided post_id is not in the provided channel
+        '401':
+          description: User is not logged in
+        '403':
+          description: The reaction has its user_id field set for another user
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/delete_reaction':
+    post:
+      tags:
+        - posts
+      summary: Remove a reaction from a post
+      description: Deletes a reaction made by the current user from the given post. Post reactions require Mattermost 3.6 or higher.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID which must exist on the given team
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID which must exist in the given channel
+          required: true
+          type: string
+        - in: body
+          name: reaction
+          description: The user's reaction with its post_id, user_id, and emoji_name fields set
+          required: true
+          schema:
+            $ref: '#/definitions/Reaction'
+      responses:
+        '200':
+          description: The reaction was deleted from the server or never existed
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          description: An invalid team, channel, or post ID has been provided, the reaction has its post_id field set to another post, or the provided post_id is not in the provided channel
+        '401':
+          description: User is not logged in
+        '403':
+          description: The reaction has its user_id field set for another user
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/list_reactions':
+    get:
+      tags:
+        - posts
+      summary: Lists the reactions to a post
+      description: Returns a list of reactions made by all users to a given post. Post reactions require Mattermost 3.6 or higher.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID which must exist on the given team
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID which must exist in the given channel
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A list of all reactions made to the given post
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Reaction"
+        '400':
+          description: An invalid team, channel, or post ID has been provided, the reaction has its post_id field set to another post, or the provided post_id is not in the provided channel
+        '401':
+          description: User is not logged in
