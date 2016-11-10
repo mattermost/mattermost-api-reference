@@ -167,6 +167,38 @@
         '500':
           description: Could not retrieve the channel stats, the user is not a member of the channel or the channel does not belong to the team
 
+  '/teams/{team_id}/channels/{channel_id}/add':
+    get:
+      tags:
+        - channels
+      summary: Add a user
+      description: Add a user to the channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID the channel belongs to
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - user_id
+            properties:
+              user_id:
+                type: string
+                description: The user_id of the user to add to the channel.
+      responses:
+        '200':
+          description: User added successfully
+
   '/teams/{team_id}/channels/{channel_id}/members/{user_id}':
     get:
       tags:
