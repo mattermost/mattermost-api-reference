@@ -172,7 +172,7 @@
       parameters:
         - name: team_id
           in: path
-          description: Team ID of the team you want to update
+          description: Team ID of the team you want stats for
           required: true
           type: string
       responses:

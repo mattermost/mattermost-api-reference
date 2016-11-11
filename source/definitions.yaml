@@ -78,7 +78,9 @@ definitions:
     properties:
       team_id:
         type: string
-      member_count:
+      total_member_count:
+        type: integer
+      active_member_count:
         type: integer
 
   Channel:
