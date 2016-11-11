@@ -154,6 +154,41 @@
             additionalProperties:
               $ref: "#/definitions/User"
 
+  '/users/search':
+    post:
+      tags:
+        - users
+      summary: Search users
+      description: Get a map of sanitized user objects by search parameter
+      parameters:
+        - in: body
+          name: body
+          description: Search parameter
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+              - team_id
+            properties:
+              term:
+                type: string
+              team_id:
+                type: string
+              in_channel_id:
+                 type: string
+              not_in_channel_id:
+                type: string
+              allow_inactive:
+                type: boolean
+      responses:
+        '200':
+          description: Profiles retreived successfully
+          schema:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/User"
+
   '/users/ids':
     post:
       tags:
