@@ -121,21 +121,21 @@
         '500':
           description: Could not retrieve the user channels
 
-  '/teams/{team_id}/channels/unread':
+  '/teams/{team_id}/channels/members':
     get:
       tags:
         - channels
-      summary: Get unread and mention count for channels the user is part of if there are any
-      description: Get a list of unread and mention count for the channels the user belongs to by team ID.
+      summary: Get channel members for the user
+      description: Get a list of channel members for the specified team for the logged in user.
       parameters:
         - name: team_id
           in: path
-          description: Team ID of the unread and mentions count of the channels to return
+          description: Team ID to get the channel members for
           required: true
           type: string
       responses:
         '200':
-          description: The list of member unread messages and mention counts
+          description: The list of channel members
           schema:
             type: array
             items:
@@ -143,7 +143,7 @@
         '403':
           description: User does not belong to the team
         '500':
-          description: Could not retrieve the user unread messages and mention counts
+          description: Could not retrieve the channel members
 
   '/teams/{team_id}/channels/{channel_id}':
     get:
