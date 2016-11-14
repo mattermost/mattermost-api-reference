@@ -89,7 +89,9 @@
           '200':
             description: The list of channels
             schema:
-              $ref: '#/definitions/ChannelList'
+              type: array
+              items:
+                $ref: '#/definitions/Channel'
           '403':
             description: User does not belong to the team
           '500':
@@ -111,11 +113,37 @@
         '200':
           description: The list of channels
           schema:
-            $ref: '#/definitions/ChannelList'
+            type: array
+            items:
+              $ref: '#/definitions/Channel'
         '403':
           description: User does not belong to the team
         '500':
           description: Could not retrieve the user channels
+
+  '/teams/{team_id}/channels/members':
+    get:
+      tags:
+        - channels
+      summary: Get channel members for the user
+      description: Get a list of channel members for the specified team for the logged in user.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID to get the channel members for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The list of channel members
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ChannelMember'
+        '403':
+          description: User does not belong to the team
+        '500':
+          description: Could not retrieve the channel members
 
   '/teams/{team_id}/channels/{channel_id}':
     get:
