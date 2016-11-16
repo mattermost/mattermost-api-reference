@@ -293,6 +293,28 @@ definitions:
         items:
           $ref: '#/definitions/User'
 
+  IncomingWebhook:
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this incoming webhook
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      channel_id:
+        description: The ID of a public channel or private group that receives the webhook payloads
+        type: string
+      description:
+        description: The description for this incoming webhook
+        type: string
+      display_name:
+        description: The display name for this incoming webhook
+        type: string
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
