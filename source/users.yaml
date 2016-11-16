@@ -148,7 +148,7 @@
           type: integer
       responses:
         '200':
-          description: Users retreived successfully
+          description: Users retrieved successfully
           schema:
             type: object
             additionalProperties:
@@ -159,7 +159,7 @@
       tags:
         - users
       summary: Search users
-      description: Get a map of sanitized user objects by search parameter
+      description: Get a list of user objects matching some search parameters.
       parameters:
         - in: body
           name: body
@@ -169,7 +169,6 @@
             type: object
             required:
               - term
-              - team_id
             properties:
               term:
                 type: string
