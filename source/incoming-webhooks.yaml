@@ -2,8 +2,8 @@
     get:
       tags:
         - incoming-webhooks
-      summary: Get incoming webhooks for the team
-      paramaters:
+      summary: List incoming webhooks for a team
+      parameters:
         - name: team_id
           in: path
           description: Team ID of incoming webhooks to return
@@ -15,17 +15,17 @@
           schema:
             type: array
             items:
-              $ref: '#/definitions/IncomingWebhook
+              $ref: "#/definitions/IncomingWebhook"
 
   '/teams/{team_id}/hooks/incoming/create':
     post:
       tags:
         - incoming-webhooks
-      summary: Create a incoming webhook to team
+      summary: Create an incoming webhook to a team
       parameters:
         - name: team_id
           in: path
-          description: Team ID the incoming webhook belong to
+          description: Team ID the incoming webhook will belong to
           required: true
           type: string
         - in: body
@@ -34,50 +34,50 @@
           required: true
           schema:
             type: object
-              required:
-                - channel_id
-              properties:
-                channel_id:
-                  type: string
-                  description: The ID of a public channel or private group that receives the webhook payloads
-                display_name:
+            required:
+              - channel_id
+            properties:
+              channel_id:
+                type: string
+                description: The ID of a public channel or private group that receives the webhook payloads.
+              display_name:
                   type: string
                   description: The display name for this incoming webhook
-                description:
-                  type: string
-                  description: The description for this incoming webhook
+              description:
+                type: string
+                description: The description for this incoming webhook
       responses:
         '200':
           description: Incoming webhook created successfully
           schema:
-            $ref: '#/definitions/IncomingWebhook
+            $ref: "#/definitions/IncomingWebhook"
 
   '/teams/{team_id}/hooks/incoming/delete':
     post:
       tags:
         - incoming-webhooks
-      summary: Delete a incoming webhook
+      summary: Delete an incoming webhook
       parameters:
         - name: team_id
           in: path
-          description: Team ID of the incoming webhook
+          description: Team ID the incoming webhook belongs to
           required: true
           type: string
         - in: body
           name: body
-          description: The incoming webhook id object
+          description: The incoming webhook ID
           required: true
           schema:
             type: object
-              required:
-                - id
-              properties:
-                id:
-                  type: string
-                  description: The ID of the incoming webhook to delete
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: The ID of the incoming webhook to delete
       responses:
         '200':
-          description: The incoming webhook id that was successfully deleted.
+          description: Incoming webhook deleted successfully
           schema:
             type: object
             required:
@@ -86,3 +86,4 @@
               id:
                 type: string
                 description: The incoming webhook ID
+
