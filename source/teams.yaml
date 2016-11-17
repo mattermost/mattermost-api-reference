@@ -42,6 +42,20 @@
           schema:
             $ref: '#/definitions/TeamMap'
 
+  /teams/my_members:
+    get:
+      tags:
+        - teams
+      summary: Get all the teams the user is a member of
+      description: Get all the teams the user is member along with the unread count for messages and mentions for each team
+      responses:
+        '200':
+          description: Teams Found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TeamMembersExtra'
+
   '/teams/{team_id}/members/{offset}/{limit}':
     get:
       tags:

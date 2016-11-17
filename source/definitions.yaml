@@ -219,6 +219,20 @@ definitions:
       roles:
         type: string
 
+  TeamMembersExtra:
+    type: object
+    properties:
+      team_id:
+        type: string
+      user_id:
+        type: string
+      roles:
+        type: string
+      msg_count:
+        type: integer
+      mention_count:
+        type: integer
+
   FileInfo:
     type: object
     properties:
