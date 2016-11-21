@@ -188,6 +188,24 @@
             additionalProperties:
               $ref: "#/definitions/User"
 
+  '/users/name/{username}':
+    get:
+      tags:
+        - users
+      summary: Get sanitized user object by username
+      description: Gets the sanitized User object with the given username.
+      parameters:
+        - name: username
+          in: path
+          description: The username for a specific user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User object retrieval successful
+          schema:
+            $ref: '#/definitions/User'
+
   '/users/ids':
     post:
       tags:
