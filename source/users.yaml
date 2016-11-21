@@ -192,8 +192,8 @@
     get:
       tags:
         - users
-      summary: Get user object by username
-      description: Get a map of sanitized user object by a username.
+      summary: Get sanitized user object by username
+      description: Gets the sanitized User object with the given username.
       parameters:
         - name: username
           in: path
