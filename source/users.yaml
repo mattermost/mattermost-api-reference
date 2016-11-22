@@ -464,6 +464,26 @@
             application/json:
               email: someone@example.com
 
+  '/users/autocomplete':
+    get:
+      tags:
+        - users
+      summary: Autocomplete users
+      description: Get a list of users on the system by matching the provided search term against username, full name and nickname.
+      parameters:
+        - name: term
+          in: query
+          description: The term to match against username, full name or nickname
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Autocomplete users retreived successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/User"
+
   '/teams/{team_id}/users/autocomplete':
     get:
       tags:
