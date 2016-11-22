@@ -215,7 +215,11 @@
       responses:
         '200':
           description: The channel ID
-          type: string
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
 
   '/teams/{team_id}/channels/{channel_id}/add':
     post:
