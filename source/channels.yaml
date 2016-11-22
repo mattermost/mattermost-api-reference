@@ -200,7 +200,7 @@
       tags:
         - channels
       summary: Delete a channel
-      description: Add a channel from a team.
+      description: Delete a channel from a team.
       parameters:
         - name: team_id
           in: path
