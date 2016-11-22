@@ -101,14 +101,49 @@
     get:
       tags:
         - channels
+      deprecated: true
       summary: Get channels the user has not joined
-      description: Get a list of open channels the user does not belong to by team ID.
+      description: Scheduled for deprecation in Mattermost 3.7, please use `/teams/{team_id}/channels/more/{offset}/{limit}` instead. Get a list of open channels the user does not belong to by team ID.
       parameters:
         - name: team_id
           in: path
           description: Team ID of the channels to return
           required: true
           type: string
+      responses:
+        '200':
+          description: The list of channels
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Channel'
+        '403':
+          description: User does not belong to the team
+        '500':
+          description: Could not retrieve the user channels
+
+  '/teams/{team_id}/channels/more/{offset}/{limit}':
+    get:
+      tags:
+        - channels
+      summary: Get a page of channels the user has not joined
+      description: Get a page of open channels the user does not belong to by team ID.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the channels to return
+          required: true
+          type: string
+        - name: offset
+          in: path
+          description: The offset to start the page at, use 0 for the first page
+          required: true
+          type: integer
+        - name: limit
+          in: path
+          description: The limit of channels to return per page
+          required: true
+          type: integer
       responses:
         '200':
           description: The list of channels
@@ -257,3 +292,58 @@
         '500':
           description: Could not retrieve the channel member, the user is not a member of the channel or the channel does not belong to the team
 
+  '/teams/{team_id}/channels/autocomplete':
+    get:
+      tags:
+        - channels
+      summary: Autocomplete channels in a team
+      description: Get a list of channels on the specified team by matching the term against name and display name.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID the channels are in
+          required: true
+          type: string
+        - name: term
+          in: query
+          description: The term to match against
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Autocomplete channels retreived successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Channel"
+
+  '/teams/{team_id}/channels/more/search':
+    post:
+      tags:
+        - channels
+      summary: Search for more channels
+      description: Get a list of public channel objects the current user is not in, matching some search parameters.
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID the channels are in
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Search parameter
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+            properties:
+              term:
+                type: string
+      responses:
+        '200':
+          description: Channels retreived successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Channel"
