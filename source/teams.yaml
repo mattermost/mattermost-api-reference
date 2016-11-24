@@ -38,11 +38,11 @@
       description: Gets all teams which the current user can has access to. If the user is a System Admin, this will be all teams on the server. Otherwise, it will only be the teams of which the user is a member.
       responses:
         '200':
-          description: Teams Found
+          description: Teams found
           schema:
             $ref: '#/definitions/TeamMap'
 
-  /teams/my_members:
+  /teams/members:
     get:
       tags:
         - teams
@@ -50,7 +50,7 @@
       description: Get all the teams the user is member along with the unread count for messages and mentions for each team
       responses:
         '200':
-          description: Teams Found
+          description: Teams found
           schema:
             type: array
             items:
