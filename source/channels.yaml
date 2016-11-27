@@ -73,6 +73,32 @@
         '403':
           description: User does not belong to the team
 
+  '/teams/{team_id}/channels/{channel_id}/delete':
+    post:
+      tags:
+        - channels
+      summary: Delete a channel
+      description: Delete a channel from a team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID the channel belongs to
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The channel ID
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+
   '/teams/{team_id}/channels/':
       get:
         tags:
