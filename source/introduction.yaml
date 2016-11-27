@@ -5,7 +5,7 @@ info:
 
 
     If you would like to contribute please see our GitHub repository at https://github.com/mattermost/mattermost-api-reference.
-  version: 3.0.0
+  version: 3.6.0
   title: Mattermost API Reference
   termsOfService: 'https://about.mattermost.com/default-terms/'
   contact:
