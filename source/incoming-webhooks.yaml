@@ -1,7 +1,7 @@
   '/teams/{team_id}/hooks/incoming/list':
     get:
       tags:
-        - incoming-webhooks
+        - incoming webhooks
       summary: List incoming webhooks for a team
       parameters:
         - name: team_id
@@ -20,7 +20,7 @@
   '/teams/{team_id}/hooks/incoming/create':
     post:
       tags:
-        - incoming-webhooks
+        - incoming webhooks
       summary: Create an incoming webhook to a team
       parameters:
         - name: team_id
@@ -55,7 +55,7 @@
   '/teams/{team_id}/hooks/incoming/delete':
     post:
       tags:
-        - incoming-webhooks
+        - incoming webhooks
       summary: Delete an incoming webhook
       parameters:
         - name: team_id
