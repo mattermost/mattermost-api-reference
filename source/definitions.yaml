@@ -315,6 +315,29 @@ definitions:
         description: The display name for this incoming webhook
         type: string
 
+  Reaction:
+    type: object
+    properties:
+      user_id:
+        description: The ID of the user that made this reaction
+        type: string
+      post_id:
+        description: The ID of the post to which this reaction was made
+        type: string
+      emoji_name:
+        description: The name of the emoji that was used for this reaction
+        type: string
+      create_at:
+        description: The time at which this reaction was made
+        type: integer
+
+  StatusOK:
+    type: object
+    properties:
+      status:
+        description: Will contain "ok" if the request was successful and there was nothing else to return
+        type: string
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
