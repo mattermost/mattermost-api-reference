@@ -101,7 +101,7 @@
       get:
         tags:
           - channels
-        summary: Get channel by channel name
+        summary: Get channel by name
         description: Get a single channel by team ID and channel name.
         parameters:
           - name: team_id
