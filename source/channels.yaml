@@ -97,6 +97,31 @@
           '500':
             description: Could not retrieve the user channels
 
+  '/teams/{team_id}/channels/name/{channel_name:[A-Za-z0-9_-]+}':
+      get:
+        tags:
+          - channels
+        summary: Get channel by channel name
+        description: Get a single channel by team ID and channel name.
+        parameters:
+          - name: team_id
+            in: path
+            description: Team ID of the channels to return
+            required: true
+            type: string
+          - name: channel_name
+            in: path
+            description: The channel name
+            required: true
+            type: string
+        responses:
+          '200':
+            description: The channel
+            schema:
+              $ref: '#/definitions/Channel'
+          '500':
+            description: Channel does not exist.
+
   '/teams/{team_id}/channels/more':
     get:
       tags:
