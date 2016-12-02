@@ -140,7 +140,7 @@
           schema:
             $ref: "#/definitions/Team"
 
-  '/teams/name/{team_name':
+  '/teams/name/{team_name}':
     get:
       tags:
         - teams
@@ -148,7 +148,7 @@
       parameters:
         - name: team_name
           in: path
-          description: Team Name of the team you want to retrieve
+          description: Team name of the team you want to retrieve
           required: true
           type: string
       responses:
