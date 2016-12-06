@@ -118,26 +118,152 @@ tags:
       X-Ratelimit-Remaining: 9
       X-Ratelimit-Reset: 1441983590
       ```
-      
+
       These headers are telling you your current rate limit status.
-      
+
       | Header | Description |
       | ------ | ----------- |
       | X-Ratelimit-Limit | The maximum number of requests you can make per second. |
       | X-Ratelimit-Remaining | The number of requests remaining in the current window. |
       | X-Ratelimit-Reset | The remaining UTC epoch seconds before the rate limit resets. |
-      
+
       If you exceed your rate limit for a window you will receive the following error in the body of the response:
-      
+
       ```
       HTTP/1.1 429 Too Many Requests
       Date: Tue, 10 Sep 2015 11:20:28 GMT
       X-RateLimit-Limit: 10
       X-RateLimit-Remaining: 0
       X-RateLimit-Reset: 1
-      
+
       limit exceeded
       ```
+  - name: WebSocket
+    description: |
+      In addition to the HTTP RESTful web service, Mattermost also offers a WebSocket event delivery system and some API functionality.
+
+      To connect to the WebSocket follow the standard opening handshake as [defined by the RFC specification](https://tools.ietf.org/html/rfc6455#section-1.3) to the `/api/v3/websocket` endpoint of Mattermost.
+
+      #### Authentication
+
+      The Mattermost WebSocket can be authenticated by cookie or through an authentication challenge. If you're authenticating from a browser and have logged in with the Mattermost API, your authentication cookie should already be set, this is how the Mattermost webapp authenticates with the WebSocket.
+
+      To authenticate with an authentication challenge, first connect the WebSocket and then send the following JSON over the connection:
+
+      ```
+      {
+        "seq": 1,
+        "action": "authentication_challenge",
+        "data": {
+          "token": "mattermosttokengoeshere"
+        }
+      }
+      ```
+
+      If successful, you will receive a standard OK response from the webhook:
+
+      ```
+      {
+        "status": "OK",
+        "seq_reply": 1
+      }
+      ```
+
+      Once successfully authenticated, the server will pass a `hello` WebSocket event containing server version over the connection.
+
+      #### Events
+
+      WebSocket events are primarily used to alert the client to changes in Mattermost, such as delivering new posts or alerting the client that another user is typing in a channel.
+
+      Events on the WebSocket will have the form:
+
+      ```
+      {
+        "event": "channel_viewed",
+        "data": {
+          "channel_id": "ihze299c4j87ped4wannrjdt9c"
+        },
+        "broadcast":{
+          "omit_users": null,
+          "user_id": "ay5sq51sebfh58ktrce5ijtcwy",
+          "channel_id": "",
+          "team_id": ""
+        }
+      }
+      ```
+
+      The `event` field indicates the event type, `data` contains any data relevant to the event and `broadcast` contains information about who the event was sent to. For example, the above example has `user_id` set to "ay5sq51sebfh58ktrce5ijtcwy" meaning that only the user with that ID received this event broadcast. The `omit_users` field can contain an array of user IDs that were specifically omitted from receiving the event.
+
+      The list of Mattermost WebSocket events are:
+      - typing
+      - posted
+      - post_edited
+      - post_deleted
+      - channel_deleted
+      - channel_viewed
+      - direct_added
+      - new_user
+      - leave_team
+      - user_added
+      - user_updated
+      - user_removed
+      - preference_changed
+      - ephemeral_message
+      - status_change
+      - hello
+      - webrtc
+
+      #### WebSocket API
+
+      Mattermost has some basic support for WebSocket APIs. A connected WebSocket can make requests by sending the following over the connection:
+
+      ```
+      {
+        "action": "user_typing",
+        "seq": 2,
+        "data": {
+          "channel_id": "nhze199c4j87ped4wannrjdt9c",
+          "parent_id": ""
+        }
+      }
+      ```
+
+      This is an example of making a `user_typing` request, with the purpose of alerting the server that the connected client has begun typing in a channel or thread. The `action` field indicates what is being requested, and performs a similar duty as the route in a HTTP API.
+
+      The `seq` or sequence number is set by the client and should be incremented with every use. It is used to distinguish responses to requests that come down the WebSocket. For example, a standard response to the above request would be:
+
+      ```
+      {
+        "status": "OK",
+        "seq_reply": 2
+      }
+      ```
+
+      Notice `seq_reply` is 2, matching the `seq` of the original request. Using this a client can distinguish which request the response is meant for.
+
+      If there was any information to respond with, it would be encapsulated in a `data` field.
+
+      In the case of an error, the response would be:
+
+      ```
+      {
+        "status": "FAIL",
+        "seq_reply": 2,
+        "error": {
+          "id": "some.error.id.here",
+          "message": "Some error message here"
+        }
+      }
+      ```
+
+      The list of WebSocket API actions is:
+      - user_typing
+      - get_statuses
+      - get_statuses_by_ids
+
+      To see how these actions work, please refer to either the [Golang WebSocket driver](https://github.com/mattermost/platform/blob/release-3.5/model/websocket_client.go) or our [JavaScript WebSocket driver](https://github.com/mattermost/mattermost-driver-javascript/blob/master/websocket_client.jsx).
+
+
   - name: users
     description: Anything related to the user data model.
   - name: teams
