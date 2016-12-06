@@ -172,14 +172,19 @@
             properties:
               term:
                 type: string
+                description: The search term can be the username, nickname, full name or email of the user you're looking for. In some server configurations full name and email search may be blocked by the System Administrator.
               team_id:
                 type: string
+                description: Provide a team ID if you'd like to restrict search to a single team.
               in_channel_id:
-                 type: string
+                type: string
+                description: Provide an in channel ID if you'd like to only search for users who are in a channel.
               not_in_channel_id:
                 type: string
+                description: Provide a not in channel ID if you'd like to only search for users who are not in a channel.
               allow_inactive:
                 type: boolean
+                description: Set this to `true` if you would like to include inactive users in your search.
       responses:
         '200':
           description: Profiles retreived successfully
