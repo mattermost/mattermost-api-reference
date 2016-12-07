@@ -47,14 +47,28 @@
       tags:
         - teams
       summary: Get all the teams the user is a member of
-      description: Get all the teams the user is member along with the unread count for messages and mentions for each team
+      description: Get all the teams the user is member a of
       responses:
         '200':
           description: Teams found
           schema:
             type: array
             items:
-              $ref: '#/definitions/TeamMembersExtra'
+              $ref: '#/definitions/TeamMember'
+
+  /teams/unread:
+      get:
+        tags:
+          - teams
+        summary: Get the count for unread messages and mentions in the teams the user is a member of
+        description: Get the count for unread messages and mentions in the teams the user is a member of
+        responses:
+          '200':
+            description: Teams found
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/TeamMemberUnread'
 
   '/teams/{team_id}/members/{offset}/{limit}':
     get:
