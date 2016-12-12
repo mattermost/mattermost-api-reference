@@ -140,6 +140,23 @@
           schema:
             $ref: "#/definitions/Team"
 
+  '/teams/name/{team_name}':
+    get:
+      tags:
+        - teams
+      summary: Get a team object
+      parameters:
+        - name: team_name
+          in: path
+          description: Team name of the team you want to retrieve
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Team object
+          schema:
+            $ref: "#/definitions/Team"
+
   '/teams/{team_id}/update':
     post:
       tags:
