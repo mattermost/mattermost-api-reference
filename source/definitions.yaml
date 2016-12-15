@@ -219,7 +219,7 @@ definitions:
       roles:
         type: string
 
-  TeamMemberUnread:
+  TeamUnread:
     type: object
     properties:
       team_id:
