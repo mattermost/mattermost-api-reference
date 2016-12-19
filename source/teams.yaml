@@ -38,9 +38,43 @@
       description: Gets all teams which the current user can has access to. If the user is a System Admin, this will be all teams on the server. Otherwise, it will only be the teams of which the user is a member.
       responses:
         '200':
-          description: Teams Found
+          description: Teams found
           schema:
             $ref: '#/definitions/TeamMap'
+
+  /teams/members:
+    get:
+      tags:
+        - teams
+      summary: Get all the teams the user is a member of
+      description: Get all the teams the user is member a of
+      responses:
+        '200':
+          description: Teams found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TeamMember'
+
+  /teams/unread:
+      get:
+        tags:
+          - teams
+        summary: Get the count for unread messages and mentions in the teams the user is a member of
+        description: Get the count for unread messages and mentions in the teams the user is a member of
+        parameters:
+          - name: id
+          in: query
+          description: Optional team id to be excluded from the results
+          required: true
+          type: string
+        responses:
+          '200':
+            description: Teams found
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/TeamUnread'
 
   '/teams/{team_id}/members/{offset}/{limit}':
     get:

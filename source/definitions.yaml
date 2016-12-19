@@ -219,6 +219,16 @@ definitions:
       roles:
         type: string
 
+  TeamUnread:
+    type: object
+    properties:
+      team_id:
+        type: string
+      msg_count:
+        type: integer
+      mention_count:
+        type: integer
+
   FileInfo:
     type: object
     properties:
