@@ -64,10 +64,10 @@
         description: Get the count for unread messages and mentions in the teams the user is a member of
         parameters:
           - name: id
-          in: query
-          description: Optional team id to be excluded from the results
-          required: true
-          type: string
+            in: query
+            description: Optional team id to be excluded from the results
+            required: true
+            type: string
         responses:
           '200':
             description: Teams found
