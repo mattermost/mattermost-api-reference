@@ -343,6 +343,61 @@ definitions:
         description: The time at which this reaction was made
         type: integer
 
+  Command:
+    type: object
+    properties:
+      id:
+        description: The ID of the slash command
+        type: string
+      token:
+        description: The token which is used to verify the source of the payload
+        type: string
+      create_at:
+        description: Timestamp when the command was created
+        type: integer
+      updated_at:
+        description: Timestamp when the command was last updated
+        type: integer
+      deleted_at:
+        description: Timestamp when the command was deleted, 0 if never deleted
+        type: integer
+      creator_id:
+        description: The user id for the commands creator
+        type: string
+      team_id:
+        description: The team id for which this command is configured
+        type: string
+      trigger:
+        description: The string that triggers this command
+        type: string
+      method:
+        description: Is the trigger done with HTTP Get ('G') or HTTP Post ('P')
+        type: string
+      username:
+        description: What is the username for the response post
+        type: string
+      icon_url:
+        description: The url to find the icon for this users avatar
+        type: string
+      auto_complete:
+        description: Use auto complete for this command
+        type: boolean
+      auto_complete_desc:
+        description: The description for this command shown when selecting the command
+        type: string
+      auto_complete_hint:
+        description: The hint for this command
+        type: string
+      display_name:
+        description: Display name for the command
+        type: string
+      description:
+        description: Description for this command
+        type: string
+      url:
+        description: The URL that is triggered
+        type: string
+
   StatusOK:
     type: object
     properties:
