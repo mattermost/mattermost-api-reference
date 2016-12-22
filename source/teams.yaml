@@ -134,7 +134,7 @@
       tags:
         - teams
       summary: Get team members by IDs
-      description: Get a map of team member objects for the specified team and user IDs.
+      description: Get an array of team member objects for the specified team and user IDs.
       parameters:
         - name: team_id
           in: path
@@ -153,7 +153,7 @@
         '200':
           description: Members retreived successfully
           schema:
-            type: object
+            type: array
             additionalProperties:
               $ref: "#/definitions/TeamMember"
 
