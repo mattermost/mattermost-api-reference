@@ -115,6 +115,60 @@
           schema:
             $ref: "#/definitions/Post"
 
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/pin':
+    post:
+      tags:
+        - posts
+      summary: Pin a post
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post pinned successfully
+          schema:
+            $ref: "#/definitions/Post"
+
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/unpin':
+    post:
+      tags:
+        - posts
+      summary: Unpin a post
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post unpinned successfully
+          schema:
+            $ref: "#/definitions/Post"
+
   '/teams/{team_id}/channels/{channel_id}/posts/page/{offset}/{limit}':
     get:
       tags:
