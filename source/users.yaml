@@ -211,6 +211,24 @@
           schema:
             $ref: '#/definitions/User'
 
+  '/users/email/{email}':
+    get:
+      tags:
+        - users
+      summary: Get sanitized user object by email
+      description: Gets the sanitized User object with the given email.
+      parameters:
+        - name: email
+          in: path
+          description: The email for a specific user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User object retrieval successful
+          schema:
+            $ref: '#/definitions/User'
+
   '/users/ids':
     post:
       tags:
