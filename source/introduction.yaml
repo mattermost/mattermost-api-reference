@@ -142,7 +142,7 @@ tags:
     description: |
       In addition to the HTTP RESTful web service, Mattermost also offers a WebSocket event delivery system and some API functionality.
 
-      To connect to the WebSocket follow the standard opening handshake as [defined by the RFC specification](https://tools.ietf.org/html/rfc6455#section-1.3) to the `/api/v3/websocket` endpoint of Mattermost.
+      To connect to the WebSocket follow the standard opening handshake as [defined by the RFC specification](https://tools.ietf.org/html/rfc6455#section-1.3) to the `/api/v3/users/websocket` endpoint of Mattermost.
 
       #### Authentication
 
