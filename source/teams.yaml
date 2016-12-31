@@ -284,3 +284,20 @@
         '200':
           description: User removed sucessfully
 
+  '/teams/{team_id}/commands/list_team_commands':
+    get:
+      tags:
+        - teams
+      summary: Get all slash commands for this team
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of the team you want commands for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: An array with the commands
+          schema:
+            $ref: "#/definitions/Commands"
+
