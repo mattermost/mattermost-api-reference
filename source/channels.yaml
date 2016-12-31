@@ -100,9 +100,6 @@
               prev_channel_id:
                 type: string
                 description: The channel ID of the previous channel, used when switching channels. Providing this ID will cause push notifications to clear on the channel being switched to.
-              time:
-                type: string
-                description: The Unix time, in milliseconds, that the channel was viewed at. Provide a non-zero value for this parameter to use a manual time. If this parameter is zero or not included, the server will use the current time.
 
       responses:
         '200':
