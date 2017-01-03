@@ -410,6 +410,44 @@
               additionalProperties:
                 $ref: "#/definitions/ChannelMember"
 
+  '/teams/{team_id}/channels/{channel_id}/update_member_roles':
+      post:
+        tags:
+          - channels
+        summary: Update the roles of a channel member
+        description: Update the roles of the provided user in the specified channel.
+        parameters:
+          - name: team_id
+            in: path
+            description: Team ID for the corresponding channel
+            required: true
+            type: string
+          - name: channel_id
+            in: path
+            description: The channel ID for which the member roles are being updated
+            required: true
+            type: string
+          - in: body
+            name: body
+            required: true
+            schema:
+              type: object
+              required:
+                - user_id
+                - new_roles
+              properties:
+                user_id:
+                  type: string
+                  description: User ID to apply the new roles to.
+                new_roles:
+                  type: string
+                  description: Roles to set on the user in the provided channel.
+        responses:
+          '200':
+            description: Channel memeber roles updated successfully.
+            schema:
+              $ref: '#/definitions/StatusOK'
+
   '/teams/{team_id}/channels/autocomplete':
     get:
       tags:
