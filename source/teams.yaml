@@ -299,5 +299,5 @@
         '200':
           description: An array with the commands
           schema:
-            $ref: "#/definitions/Commands"
+            $ref: "#/definitions/Command"
 
