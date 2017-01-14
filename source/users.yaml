@@ -118,7 +118,7 @@
           type: integer
       responses:
         '200':
-          description: Users retreived successfully
+          description: Users retrieved successfully
           schema:
             type: object
             additionalProperties:
@@ -187,7 +187,7 @@
                 description: Set this to `true` if you would like to include inactive users in your search.
       responses:
         '200':
-          description: Profiles retreived successfully
+          description: Profiles retrieved successfully
           schema:
             type: object
             additionalProperties:
@@ -246,7 +246,7 @@
               type: string
       responses:
         '200':
-          description: Profiles retreived successfully
+          description: Profiles retrieved successfully
           schema:
             type: object
             additionalProperties:
@@ -281,7 +281,7 @@
           type: integer
       responses:
         '200':
-          description: Profiles retreived successfully
+          description: Profiles retrieved successfully
           schema:
             type: object
             additionalProperties:
@@ -316,7 +316,7 @@
           type: integer
       responses:
         '200':
-          description: Profiles retreived successfully
+          description: Profiles retrieved successfully
           schema:
             type: object
             additionalProperties:
@@ -501,7 +501,7 @@
           type: string
       responses:
         '200':
-          description: Autocomplete users retreived successfully
+          description: Autocomplete users retrieved successfully
           schema:
             type: array
             items:
@@ -526,7 +526,7 @@
           type: string
       responses:
         '200':
-          description: Autocomplete users retreived successfully
+          description: Autocomplete users retrieved successfully
           schema:
             type: object
             additionalProperties:
@@ -556,7 +556,7 @@
           type: string
       responses:
         '200':
-          description: Autocomplete users retreived successfully
+          description: Autocomplete users retrieved successfully
           schema:
             type: object
             additionalProperties:

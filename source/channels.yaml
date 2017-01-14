@@ -404,7 +404,7 @@
                 type: string
         responses:
           '200':
-            description: Members retreived successfully
+            description: Members retrieved successfully
             schema:
               type: array
               items:
@@ -469,7 +469,7 @@
           type: string
       responses:
         '200':
-          description: Autocomplete channels retreived successfully
+          description: Autocomplete channels retrieved successfully
           schema:
             type: array
             items:
@@ -500,7 +500,7 @@
                 type: string
       responses:
         '200':
-          description: Channels retreived successfully
+          description: Channels retrieved successfully
           schema:
             type: array
             items:
