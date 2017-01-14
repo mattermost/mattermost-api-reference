@@ -154,6 +154,8 @@
           description: Members retreived successfully
           schema:
             type: array
+            items:
+              $ref: "#/definitions/TeamMember"
             additionalProperties:
               $ref: "#/definitions/TeamMember"
 

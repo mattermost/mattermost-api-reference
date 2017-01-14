@@ -407,6 +407,8 @@
             description: Members retreived successfully
             schema:
               type: array
+              items:
+                $ref: "#/definitions/ChannelMember"
               additionalProperties:
                 $ref: "#/definitions/ChannelMember"
 
