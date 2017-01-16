@@ -100,7 +100,7 @@
           type: integer
       responses:
         '200':
-          description: Members retreived successfully
+          description: Members retrieved successfully
           schema:
             type: array
             items:
@@ -125,7 +125,7 @@
           type: string
       responses:
         '200':
-          description: Member retreived successfully
+          description: Member retrieved successfully
           schema:
             $ref: "#/definitions/TeamMember"
 
@@ -151,9 +151,11 @@
               type: string
       responses:
         '200':
-          description: Members retreived successfully
+          description: Members retrieved successfully
           schema:
             type: array
+            items:
+              $ref: "#/definitions/TeamMember"
             additionalProperties:
               $ref: "#/definitions/TeamMember"
 
@@ -299,5 +301,5 @@
         '200':
           description: An array with the commands
           schema:
-            $ref: "#/definitions/Commands"
+            $ref: "#/definitions/Command"
 

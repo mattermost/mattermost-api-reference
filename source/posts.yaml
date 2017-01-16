@@ -54,7 +54,7 @@
           type: integer
       responses:
         '200':
-          description: Posts retreived successfully
+          description: Posts retrieved successfully
           schema:
             $ref: "#/definitions/PostList"
 
@@ -143,7 +143,7 @@
           type: string
       responses:
         '200':
-          description: Post retreived successfully
+          description: Post retrieved successfully
           schema:
             $ref: "#/definitions/PostList"
 
@@ -171,7 +171,7 @@
           type: string
       responses:
         '200':
-          description: Post retreived successfully
+          description: Post retrieved successfully
           schema:
             $ref: "#/definitions/PostList"
 
@@ -198,7 +198,7 @@
           type: string
       responses:
         '200':
-          description: Post retreived successfully
+          description: Post retrieved successfully
           schema:
             $ref: "#/definitions/PostList"
 
@@ -269,7 +269,7 @@
           type: string
       responses:
         '200':
-          description: Posts retreived successfully
+          description: Posts retrieved successfully
           schema:
             $ref: "#/definitions/PostList"
 
@@ -307,7 +307,7 @@
           type: string
       responses:
         '200':
-          description: Posts retreived successfully
+          description: Posts retrieved successfully
           schema:
             $ref: "#/definitions/PostList"
 
