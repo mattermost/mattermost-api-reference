@@ -311,3 +311,41 @@
           schema:
             $ref: "#/definitions/PostList"
 
+  '/teams/{team_id}/channels/{channel_id}/posts/{post_id}/copy':
+    post:
+      tags:
+        - posts
+      summary: Copy a post
+      parameters:
+        - name: team_id
+          in: path
+          description: The team ID.
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID.
+          required: true
+          type: string
+        - name: post_id
+          in: path
+          description: The post ID.
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: The target channel
+          required: true
+          schema:
+            type: object
+            required:
+              - to_channel_id
+            properties:
+              to_channel_id:
+                type: string
+                description: The ID of the target channel to copy the post
+      responses:
+        '200':
+          description: Post copied successfully
+          schema:
+            $ref: "#/definitions/Post"
