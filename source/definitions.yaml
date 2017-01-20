@@ -148,7 +148,7 @@ definitions:
   ChannelData:
     type: object
     properties:
-      channel: 
+      channel:
         $ref: '#/definitions/Channel'
       member:
         $ref: '#/definitions/ChannelMember'
@@ -404,6 +404,139 @@ definitions:
       status:
         description: Will contain "ok" if the request was successful and there was nothing else to return
         type: string
+
+  OpenGraph:
+    type: object
+    description: OpenGraph metadata of a webpage
+    properties:
+      type:
+        type: string
+      url:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      determiner:
+        type: string
+      site_name:
+        type: string
+      locale:
+        type: string
+      locales_alternate:
+        type: array
+        items:
+          type: string
+      images:
+        type: array
+        items:
+          type: object
+          description: Image object used in OpenGraph metadata of a webpage
+          properties:
+            url:
+              type: string
+            secure_url:
+              type: string
+            type:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+      videos:
+        type: array
+        items:
+          type: object
+          description: Video object used in OpenGraph metadata of a webpage
+          properties:
+            url:
+              type: string
+            secure_url:
+              type: string
+            type:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+
+      audios:
+        type: array
+        items:
+          type: object
+          description: Audio object used in OpenGraph metadata of a webpage
+          properties:
+            url:
+              type: string
+            secure_url:
+              type: string
+            type:
+              type: string
+      article:
+        type: object
+        description: Article object used in OpenGraph metadata of a webpage, if type is article
+        properties:
+          published_time:
+            type: string
+          modified_time:
+            type: string
+          expiration_time:
+            type: string
+          section:
+            type: string
+          tags:
+            type: array
+            items:
+              type: string
+          authors:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                username:
+                  type: string
+                gender:
+                  type: string
+      book:
+        type: object
+        description: Book object used in OpenGraph metadata of a webpage, if type is book
+        properties:
+          isbn:
+            type: string
+          release_date:
+            type: string
+          tags:
+            type: array
+            items:
+              type: string
+          authors:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                username:
+                  type: string
+                gender:
+                  type: string
+      profile:
+        type: object
+        properties:
+          first_name:
+            type: string
+          last_name:
+            type: string
+          username:
+            type: string
+          gender:
+            type: string
 
 externalDocs:
   description: Find out more about Mattermost

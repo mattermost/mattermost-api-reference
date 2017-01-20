@@ -311,3 +311,27 @@
           schema:
             $ref: "#/definitions/PostList"
 
+  '/get_opengraph_metadata':
+    post:
+      tags:
+        - posts
+        - opengraph
+      summary: Get OpenGraph metadata for a URL (website link)
+      parameters:
+        - in: body
+          name: body
+          description: URL to retreive OG metadata of
+          required: true
+          schema:
+            type: object
+            required:
+              - url
+            properties:
+              url:
+                type: string
+                description: URL to retreive OG metadata of.
+      responses:
+        '200':
+          description: OpenGraph metadata was successfully retireved.
+          schema:
+            $ref: '#/definitions/OpenGraph'
