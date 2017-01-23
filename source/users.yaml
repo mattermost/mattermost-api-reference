@@ -253,7 +253,7 @@
               $ref: "#/definitions/User"
 
   '/teams/{team_id}/channels/{channel_id}/users/{offset}/{limit}':
-    post:
+    get:
       tags:
         - users
       summary: Get users in a channel
