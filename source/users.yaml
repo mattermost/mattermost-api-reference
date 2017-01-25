@@ -492,7 +492,7 @@
       tags:
         - users
       summary: Reset user password
-      description: Resets the user's password. .
+      description: Resets the user's password.
       parameters:
         - in: body
           name: body
