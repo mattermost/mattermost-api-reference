@@ -487,6 +487,41 @@
             application/json:
               email: someone@example.com
 
+  /users/reset_password:
+    post:
+      tags:
+        - users
+      summary: Reset user password
+      description: Resets the user's password.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - code
+              - new_password
+            properties:
+              code:
+                type: string
+                description: The code provided from the send password reset email.
+              new_password:
+                type: string
+                description: User's new password.
+      responses:
+        '200':
+          description: Password reset successfully.
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '500':
+          description: Password reset errors.
+          examples:
+            api.user.reset_password.invalid_link.app_error:
+              description: The reset password link does not appear to be valid
+            api.user.reset_password.link_expired.app_error:
+              description: The password reset link has expired
+
   '/users/autocomplete':
     get:
       tags:
