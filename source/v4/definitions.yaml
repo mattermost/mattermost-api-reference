@@ -1,0 +1,1069 @@
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      username:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      nickname:
+        type: string
+      email:
+        type: string
+      email_verified:
+        type: boolean
+      password:
+        type: string
+      auth_data:
+        type: string
+      auth_service:
+        type: string
+      roles:
+        type: string
+      locale:
+        type: string
+      notify_props:
+        type: object
+      props:
+        type: object
+      last_password_update:
+        type: integer
+      last_picture_update:
+        type: integer
+      failed_attempts:
+        type: integer
+      mfa_active:
+        type: boolean
+      mfa_secret:
+        type: string
+
+  Team:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      display_name:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      type:
+        type: string
+      allowed_domains:
+        type: string
+      invite_id:
+        type: string
+      allow_open_invite:
+        type: boolean
+
+  TeamStats:
+    type: object
+    properties:
+      team_id:
+        type: string
+      total_member_count:
+        type: integer
+      active_member_count:
+        type: integer
+
+  Channel:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      team_id:
+        type: string
+      type:
+        type: string
+      display_name:
+        type: string
+      name:
+        type: string
+      header:
+        type: string
+      purpose:
+        type: string
+      last_post_at:
+        type: integer
+      total_msg_count:
+        type: integer
+      extra_update_at:
+        type: integer
+      creator_id:
+        type: string
+
+  ChannelStats:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      member_count:
+        type: integer
+
+  ChannelMember:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      user_id:
+        type: string
+      roles:
+        type: string
+      last_viewed_at:
+        type: integer
+      msg_count:
+        type: integer
+      mention_count:
+        type: integer
+      notify_props:
+        type: object
+      last_update_at:
+        type: integer
+
+  ChannelData:
+    type: object
+    properties:
+      channel:
+        $ref: '#/definitions/Channel'
+      member:
+        $ref: '#/definitions/ChannelMember'
+
+  Post:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      user_id:
+        type: string
+      channel_id:
+        type: string
+      root_id:
+        type: string
+      parent_id:
+        type: string
+      original_id:
+        type: string
+      message:
+        type: string
+      type:
+        type: string
+      props:
+        type: object
+      hashtag:
+        type: string
+      filenames:
+        type: array
+        items:
+          type: string
+      pending_post_id:
+        type: string
+
+  PostList:
+    type: object
+    properties:
+      order:
+        type: array
+        items:
+            type: string
+        example: ["post_id1", "post_id12"]
+      posts:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Post'
+
+  TeamMap:
+    type: object
+    description: A mapping of teamIds to teams.
+    properties:
+      team_id:
+        $ref: '#/definitions/Team'
+
+  TeamMember:
+    type: object
+    properties:
+      team_id:
+        type: string
+      user_id:
+        type: string
+      roles:
+        type: string
+
+  TeamUnread:
+    type: object
+    properties:
+      team_id:
+        type: string
+      msg_count:
+        type: integer
+      mention_count:
+        type: integer
+
+  FileInfo:
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this file
+        type: string
+      user_id:
+        description: The ID of the user that uploaded this file
+        type: string
+      post_id:
+        description: If this file is attached to a post, the ID of that post
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      name:
+        description: The name of the file
+        type: string
+      extension:
+        description: The extension at the end of the file name
+        type: string
+      size:
+        description: The size of the file in bytes
+        type: integer
+      mime_type:
+        description: The MIME type of the file
+        type: string
+      width:
+        description: If this file is an image, the width of the file
+        type: integer
+      height:
+        description: If this file is an image, the height of the file
+        type: integer
+      has_preview_image:
+        description: If this file is an image, whether or not it has a preview-sized version
+        type: boolean
+
+  Preference:
+    type: object
+    properties:
+      user_id:
+        description: The ID of the user that owns this preference
+        type: string
+      category:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+
+  UserAutocompleteInTeam:
+    type: object
+    properties:
+      in_team:
+        description: A list of user objects in the team
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
+  UserAutocompleteInChannel:
+    type: object
+    properties:
+      in_channel:
+        description: A list of user objects in the channel
+        type: array
+        items:
+          $ref: '#/definitions/User'
+      out_of_channel:
+        description: A list of user objects not in the channel
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
+  IncomingWebhook:
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this incoming webhook
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      channel_id:
+        description: The ID of a public channel or private group that receives the webhook payloads
+        type: string
+      description:
+        description: The description for this incoming webhook
+        type: string
+      display_name:
+        description: The display name for this incoming webhook
+        type: string
+
+  Reaction:
+    type: object
+    properties:
+      user_id:
+        description: The ID of the user that made this reaction
+        type: string
+      post_id:
+        description: The ID of the post to which this reaction was made
+        type: string
+      emoji_name:
+        description: The name of the emoji that was used for this reaction
+        type: string
+      create_at:
+        description: The time at which this reaction was made
+        type: integer
+
+  Command:
+    type: object
+    properties:
+      id:
+        description: The ID of the slash command
+        type: string
+      token:
+        description: The token which is used to verify the source of the payload
+        type: string
+      create_at:
+        description: Timestamp when the command was created
+        type: integer
+      updated_at:
+        description: Timestamp when the command was last updated
+        type: integer
+      deleted_at:
+        description: Timestamp when the command was deleted, 0 if never deleted
+        type: integer
+      creator_id:
+        description: The user id for the commands creator
+        type: string
+      team_id:
+        description: The team id for which this command is configured
+        type: string
+      trigger:
+        description: The string that triggers this command
+        type: string
+      method:
+        description: Is the trigger done with HTTP Get ('G') or HTTP Post ('P')
+        type: string
+      username:
+        description: What is the username for the response post
+        type: string
+      icon_url:
+        description: The url to find the icon for this users avatar
+        type: string
+      auto_complete:
+        description: Use auto complete for this command
+        type: boolean
+      auto_complete_desc:
+        description: The description for this command shown when selecting the command
+        type: string
+      auto_complete_hint:
+        description: The hint for this command
+        type: string
+      display_name:
+        description: Display name for the command
+        type: string
+      description:
+        description: Description for this command
+        type: string
+      url:
+        description: The URL that is triggered
+        type: string
+
+  StatusOK:
+    type: object
+    properties:
+      status:
+        description: Will contain "ok" if the request was successful and there was nothing else to return
+        type: string
+
+  OpenGraph:
+    type: object
+    description: OpenGraph metadata of a webpage
+    properties:
+      type:
+        type: string
+      url:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      determiner:
+        type: string
+      site_name:
+        type: string
+      locale:
+        type: string
+      locales_alternate:
+        type: array
+        items:
+          type: string
+      images:
+        type: array
+        items:
+          type: object
+          description: Image object used in OpenGraph metadata of a webpage
+          properties:
+            url:
+              type: string
+            secure_url:
+              type: string
+            type:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+      videos:
+        type: array
+        items:
+          type: object
+          description: Video object used in OpenGraph metadata of a webpage
+          properties:
+            url:
+              type: string
+            secure_url:
+              type: string
+            type:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+
+      audios:
+        type: array
+        items:
+          type: object
+          description: Audio object used in OpenGraph metadata of a webpage
+          properties:
+            url:
+              type: string
+            secure_url:
+              type: string
+            type:
+              type: string
+      article:
+        type: object
+        description: Article object used in OpenGraph metadata of a webpage, if type is article
+        properties:
+          published_time:
+            type: string
+          modified_time:
+            type: string
+          expiration_time:
+            type: string
+          section:
+            type: string
+          tags:
+            type: array
+            items:
+              type: string
+          authors:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                username:
+                  type: string
+                gender:
+                  type: string
+      book:
+        type: object
+        description: Book object used in OpenGraph metadata of a webpage, if type is book
+        properties:
+          isbn:
+            type: string
+          release_date:
+            type: string
+          tags:
+            type: array
+            items:
+              type: string
+          authors:
+            type: array
+            items:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                username:
+                  type: string
+                gender:
+                  type: string
+      profile:
+        type: object
+        properties:
+          first_name:
+            type: string
+          last_name:
+            type: string
+          username:
+            type: string
+          gender:
+            type: string
+
+  Audit:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      user_id:
+        type: string
+      action:
+        type: string
+      extra_info:
+        type: string
+      ip_address:
+        type: string
+      session_id:
+        type: string
+
+  Config:
+    type: object
+    properties:
+      ServiceSettings:
+        type: object
+        properties:
+          SiteURL:
+            type: string
+          ListenAddress:
+            type: string
+          ConnectionSecurity:
+            type: string
+          TLSCertFile:
+            type: string
+          TLSKeyFile:
+            type: string
+          UseLetsEncrypt:
+            type: boolean
+          LetsEncryptCertificateCacheFile:
+            type: string
+          Forward80To443:
+            type: boolean
+          ReadTimeout:
+            type: integer
+          WriteTimeout:
+            type: integer
+          MaximumLoginAttempts:
+            type: integer
+          SegmentDeveloperKey:
+            type: string
+          GoogleDeveloperKey:
+            type: string
+          EnableOAuthServiceProvider:
+            type: boolean
+          EnableIncomingWebhooks:
+            type: boolean
+          EnableOutgoingWebhooks:
+            type: boolean
+          EnableCommands:
+            type: boolean
+          EnableOnlyAdminIntegrations:
+            type: boolean
+          EnablePostUsernameOverride:
+            type: boolean
+          EnablePostIconOverride:
+            type: boolean
+          EnableTesting:
+            type: boolean
+          EnableDeveloper:
+            type: boolean
+          EnableSecurityFixAlert:
+            type: boolean
+          EnableInsecureOutgoingConnections:
+            type: boolean
+          EnableMultifactorAuthentication:
+            type: boolean
+          EnforceMultifactorAuthentication:
+            type: boolean
+          AllowCorsFrom:
+            type: string
+          SessionLengthWebInDays:
+            type: integer
+          SessionLengthMobileInDays:
+            type: integer
+          SessionLengthSSOInDays:
+            type: integer
+          SessionCacheInMinutes:
+            type: integer
+          WebsocketSecurePort:
+            type: integer
+          WebsocketPort:
+            type: integer
+          WebserverMode:
+            type: string
+          EnableCustomEmoji:
+            type: boolean
+          RestrictCustomEmojiCreation:
+            type: string
+      TeamSettings:
+        type: object
+        properties:
+          SiteName:
+            type: string
+          MaxUsersPerTeam:
+            type: integer
+          EnableTeamCreation:
+            type: boolean
+          EnableUserCreation:
+            type: boolean
+          EnableOpenServer:
+            type: boolean
+          RestrictCreationToDomains:
+            type: string
+          EnableCustomBrand:
+            type: boolean
+          CustomBrandText:
+            type: string
+          CustomDescriptionText:
+            type: string
+          RestrictDirectMessage:
+            type: string
+          RestrictTeamInvite:
+            type: string
+          RestrictPublicChannelManagement:
+            type: string
+          RestrictPrivateChannelManagement:
+            type: string
+          RestrictPublicChannelCreation:
+            type: string
+          RestrictPrivateChannelCreation:
+            type: string
+          RestrictPublicChannelDeletion:
+            type: string
+          RestrictPrivateChannelDeletion:
+            type: string
+          UserStatusAwayTimeout:
+            type: integer
+          MaxChannelsPerTeam:
+            type: integer
+          MaxNotificationsPerChannel:
+            type: integer
+      SqlSettings:
+        type: object
+        properties:
+          DriverName:
+            type: string
+          DataSource:
+            type: string
+          DataSourceReplicas:
+            type: array
+            items:
+              type: string
+          MaxIdleConns:
+            type: integer
+          MaxOpenConns:
+            type: integer
+          Trace:
+            type: boolean
+          AtRestEncryptKey:
+            type: string
+      LogSettings:
+        type: object
+        properties:
+          EnableConsole:
+            type: boolean
+          ConsoleLevel:
+            type: string
+          EnableFile:
+            type: boolean
+          FileLevel:
+            type: string
+          FileFormat:
+            type: string
+          FileLocation:
+            type: string
+          EnableWebhookDebugging:
+            type: boolean
+          EnableDiagnostics:
+            type: boolean
+      PasswordSettings:
+        type: object
+        properties:
+          MinimumLength:
+            type: integer
+          Lowercase:
+            type: boolean
+          Number:
+            type: boolean
+          Uppercase:
+            type: boolean
+          Symbol:
+            type: boolean
+      FileSettings:
+        type: object
+        properties:
+          MaxFileSize:
+            type: integer
+          DriverName:
+            type: string
+          Directory:
+            type: string
+          EnablePublicLink:
+            type: boolean
+          PublicLinkSalt:
+            type: string
+          ThumbnailWidth:
+            type: integer
+          ThumbnailHeight:
+            type: integer
+          PreviewWidth:
+            type: integer
+          PreviewHeight:
+            type: integer
+          ProfileWidth:
+            type: integer
+          ProfileHeight:
+            type: integer
+          InitialFont:
+            type: string
+          AmazonS3AccessKeyId:
+            type: string
+          AmazonS3SecretAccessKey:
+            type: string
+          AmazonS3Bucket:
+            type: string
+          AmazonS3Region:
+            type: string
+          AmazonS3Endpoint:
+            type: string
+          AmazonS3SSL:
+            type: boolean
+      EmailSettings:
+        type: object
+        properties:
+          EnableSignUpWithEmail:
+            type: boolean
+          EnableSignInWithEmail:
+            type: boolean
+          EnableSignInWithUsername:
+            type: boolean
+          SendEmailNotifications:
+            type: boolean
+          RequireEmailVerification:
+            type: boolean
+          FeedbackName:
+            type: string
+          FeedbackEmail:
+            type: string
+          FeedbackOrganization:
+            type: string
+          SMTPUsername:
+            type: string
+          SMTPPassword:
+            type: string
+          SMTPServer:
+            type: string
+          SMTPPort:
+            type: string
+          ConnectionSecurity:
+            type: string
+          InviteSalt:
+            type: string
+          PasswordResetSalt:
+            type: string
+          SendPushNotifications:
+            type: boolean
+          PushNotificationServer:
+            type: string
+          PushNotificationContents:
+            type: string
+          EnableEmailBatching:
+            type: boolean
+          EmailBatchingBufferSize:
+            type: integer
+          EmailBatchingInterval:
+            type: integer
+      RateLimitSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          PerSec:
+            type: integer
+          MaxBurst:
+            type: integer
+          MemoryStoreSize:
+            type: integer
+          VaryByRemoteAddr:
+            type: boolean
+          VaryByHeader:
+            type: string
+      PrivacySettings:
+        type: object
+        properties:
+          ShowEmailAddress:
+            type: boolean
+          ShowFullName:
+            type: boolean
+      SupportSettings:
+        type: object
+        properties:
+          TermsOfServiceLink:
+            type: string
+          PrivacyPolicyLink:
+            type: string
+          AboutLink:
+            type: string
+          HelpLink:
+            type: string
+          ReportAProblemLink:
+            type: string
+          SupportEmail:
+            type: string
+      GitLabSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: string
+          Id:
+            type: string
+          Scope:
+            type: string
+          AuthEndpoint:
+            type: string
+          TokenEndpoint:
+            type: string
+          UserApiEndpoint:
+            type: string
+      GoogleSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: string
+          Id:
+            type: string
+          Scope:
+            type: string
+          AuthEndpoint:
+            type: string
+          TokenEndpoint:
+            type: string
+          UserApiEndpoint:
+            type: string
+      Office365Settings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: string
+          Id:
+            type: string
+          Scope:
+            type: string
+          AuthEndpoint:
+            type: string
+          TokenEndpoint:
+            type: string
+          UserApiEndpoint:
+            type: string
+      LdapSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          LdapServer:
+            type: string
+          LdapPort:
+            type: integer
+          ConnectionSecurity:
+            type: string
+          BaseDN:
+            type: string
+          BindUsername:
+            type: string
+          BindPassword:
+            type: string
+          UserFilter:
+            type: string
+          FirstNameAttribute:
+            type: string
+          LastNameAttribute:
+            type: string
+          EmailAttribute:
+            type: string
+          UsernameAttribute:
+            type: string
+          NicknameAttribute:
+            type: string
+          IdAttribute:
+            type: string
+          PositionAttribute:
+            type: string
+          SyncIntervalMinutes:
+            type: integer
+          SkipCertificateVerification:
+            type: boolean
+          QueryTimeout:
+            type: integer
+          MaxPageSize:
+            type: integer
+          LoginFieldName:
+            type: string
+      ComplianceSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Directory:
+            type: string
+          EnableDaily:
+            type: boolean
+      LocalizationSettings:
+        type: object
+        properties:
+          DefaultServerLocale:
+            type: string
+          DefaultClientLocale:
+            type: string
+          AvailableLocales:
+            type: string
+      SamlSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Verify:
+            type: boolean
+          Encrypt:
+            type: boolean
+          IdpUrl:
+            type: string
+          IdpDescriptorUrl:
+            type: string
+          AssertionConsumerServiceURL:
+            type: string
+          IdpCertificateFile:
+            type: string
+          PublicCertificateFile:
+            type: string
+          PrivateKeyFile:
+            type: string
+          FirstNameAttribute:
+            type: string
+          LastNameAttribute:
+            type: string
+          EmailAttribute:
+            type: string
+          UsernameAttribute:
+            type: string
+          NicknameAttribute:
+            type: string
+          LocaleAttribute:
+            type: string
+          PositionAttribute:
+            type: string
+          LoginButtonText:
+            type: string
+      NativeAppSettings:
+        type: object
+        properties:
+          AppDownloadLink:
+            type: string
+          AndroidAppDownloadLink:
+            type: string
+          IosAppDownloadLink:
+            type: string
+      ClusterSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          InterNodeListenAddress:
+            type: string
+          InterNodeUrls:
+            type: array
+            items:
+              type: string
+      MetricsSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          BlockProfileRate:
+            type: integer
+          ListenAddress:
+            type: string
+      AnalyticsSettings:
+        type: object
+        properties:
+          MaxUsersForStatistics:
+            type: integer
+      WebrtcSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          GatewayWebsocketUrl:
+            type: string
+          GatewayAdminUrl:
+            type: string
+          GatewayAdminSecret:
+            type: string
+          StunURI:
+            type: string
+          TurnURI:
+            type: string
+          TurnUsername:
+            type: string
+          TurnSharedKey:
+            type: string
+
+  AppError:
+    type: object
+    properties:
+      status_code:
+        type: integer
+      id:
+        type: string
+      message:
+        type: string
+      request_id:
+        type: string
+
+externalDocs:
+  description: Find out more about Mattermost
+  url: 'https://about.mattermost.com'
