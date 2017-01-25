@@ -14,3 +14,31 @@
         '403':
           description: User is not a system admin
 
+  '/admin/audits':
+    get:
+      tags:
+        - admin
+      summary: Get audits
+      description: Gets the server audit logs
+      responses:
+        '200':
+          description: The list of audit entries
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Audit'
+        '403':
+          description: User is not a system admin
+
+  '/admin/config':
+    get:
+      tags:
+        - admin
+      summary: Get config
+      description: Gets the server config
+      responses:
+        '200':
+          description: The server config
+          schema:
+            $ref: "#/definitions/Config"
+
