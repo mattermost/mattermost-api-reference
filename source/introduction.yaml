@@ -272,12 +272,13 @@ tags:
   - name: posts
     description: Anything related to posts, the main messaging model in Mattermost.
   - name: files
-    description: |
-      These APIs will change significantly in Mattermost 3.5. This documentation reflects the version that will exist in Mattermost 3.5.
-
-      Anything related to files uploaded by Mattermost users.
+    description: Anything related to files uploaded by Mattermost users.
+  - name: admin
+    description: Anything related to system administration.
   - name: preferences
     description: Anything related to the current user's preferences which are used to store various settings in Mattermost.
+  - name: incoming webhooks
+    description: Anything related to the incoming webhook system.
 schemes:
   - http
   - https

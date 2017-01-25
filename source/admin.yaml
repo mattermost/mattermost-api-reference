@@ -1,0 +1,16 @@
+  '/admin/logs':
+    get:
+      tags:
+        - admin
+      summary: Get server logs
+      description: Gets the server logs
+      responses:
+        '200':
+          description: The list of log entries
+          schema:
+            type: array
+            items:
+              type: string
+        '403':
+          description: User is not a system admin
+
