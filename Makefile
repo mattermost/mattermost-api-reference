@@ -12,6 +12,7 @@ build:
 	@cat $(SOURCE_DIR)/channels.yaml >> $(HTML_DIR)/mattermost-openapi.yaml
 	@cat $(SOURCE_DIR)/posts.yaml >> $(HTML_DIR)/mattermost-openapi.yaml
 	@cat $(SOURCE_DIR)/files.yaml >> $(HTML_DIR)/mattermost-openapi.yaml
+	@cat $(SOURCE_DIR)/admin.yaml >> $(HTML_DIR)/mattermost-openapi.yaml
 	@cat $(SOURCE_DIR)/preferences.yaml >> $(HTML_DIR)/mattermost-openapi.yaml
 	@cat $(SOURCE_DIR)/incoming-webhooks.yaml >> $(HTML_DIR)/mattermost-openapi.yaml
 	@cat $(SOURCE_DIR)/reactions.yaml >> $(HTML_DIR)/mattermost-openapi.yaml

@@ -166,7 +166,7 @@
           type: string
         - name: time
           in: path
-          description: The liast time to query from.
+          description: The last time to query from.
           required: true
           type: string
       responses:

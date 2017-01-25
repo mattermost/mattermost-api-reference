@@ -538,6 +538,520 @@ definitions:
           gender:
             type: string
 
+  Audit:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      user_id:
+        type: string
+      action:
+        type: string
+      extra_info:
+        type: string
+      ip_address:
+        type: string
+      session_id:
+        type: string
+
+  Config:
+    type: object
+    properties:
+      ServiceSettings:
+        type: object
+        properties:
+          SiteURL:
+            type: string
+          ListenAddress:
+            type: string
+          ConnectionSecurity:
+            type: string
+          TLSCertFile:
+            type: string
+          TLSKeyFile:
+            type: string
+          UseLetsEncrypt:
+            type: boolean
+          LetsEncryptCertificateCacheFile:
+            type: string
+          Forward80To443:
+            type: boolean
+          ReadTimeout:
+            type: integer
+          WriteTimeout:
+            type: integer
+          MaximumLoginAttempts:
+            type: integer
+          SegmentDeveloperKey:
+            type: string
+          GoogleDeveloperKey:
+            type: string
+          EnableOAuthServiceProvider:
+            type: boolean
+          EnableIncomingWebhooks:
+            type: boolean
+          EnableOutgoingWebhooks:
+            type: boolean
+          EnableCommands:
+            type: boolean
+          EnableOnlyAdminIntegrations:
+            type: boolean
+          EnablePostUsernameOverride:
+            type: boolean
+          EnablePostIconOverride:
+            type: boolean
+          EnableTesting:
+            type: boolean
+          EnableDeveloper:
+            type: boolean
+          EnableSecurityFixAlert:
+            type: boolean
+          EnableInsecureOutgoingConnections:
+            type: boolean
+          EnableMultifactorAuthentication:
+            type: boolean
+          EnforceMultifactorAuthentication:
+            type: boolean
+          AllowCorsFrom:
+            type: string
+          SessionLengthWebInDays:
+            type: integer
+          SessionLengthMobileInDays:
+            type: integer
+          SessionLengthSSOInDays:
+            type: integer
+          SessionCacheInMinutes:
+            type: integer
+          WebsocketSecurePort:
+            type: integer
+          WebsocketPort:
+            type: integer
+          WebserverMode:
+            type: string
+          EnableCustomEmoji:
+            type: boolean
+          RestrictCustomEmojiCreation:
+            type: string
+      TeamSettings:
+        type: object
+        properties:
+          SiteName:
+            type: string
+          MaxUsersPerTeam:
+            type: integer
+          EnableTeamCreation:
+            type: boolean
+          EnableUserCreation:
+            type: boolean
+          EnableOpenServer:
+            type: boolean
+          RestrictCreationToDomains:
+            type: string
+          EnableCustomBrand:
+            type: boolean
+          CustomBrandText:
+            type: string
+          CustomDescriptionText:
+            type: string
+          RestrictDirectMessage:
+            type: string
+          RestrictTeamInvite:
+            type: string
+          RestrictPublicChannelManagement:
+            type: string
+          RestrictPrivateChannelManagement:
+            type: string
+          RestrictPublicChannelCreation:
+            type: string
+          RestrictPrivateChannelCreation:
+            type: string
+          RestrictPublicChannelDeletion:
+            type: string
+          RestrictPrivateChannelDeletion:
+            type: string
+          UserStatusAwayTimeout:
+            type: integer
+          MaxChannelsPerTeam:
+            type: integer
+          MaxNotificationsPerChannel:
+            type: integer
+      SqlSettings:
+        type: object
+        properties:
+          DriverName:
+            type: string
+          DataSource:
+            type: string
+          DataSourceReplicas:
+            type: array
+            items:
+              type: string
+          MaxIdleConns:
+            type: integer
+          MaxOpenConns:
+            type: integer
+          Trace:
+            type: boolean
+          AtRestEncryptKey:
+            type: string
+      LogSettings:
+        type: object
+        properties:
+          EnableConsole:
+            type: boolean
+          ConsoleLevel:
+            type: string
+          EnableFile:
+            type: boolean
+          FileLevel:
+            type: string
+          FileFormat:
+            type: string
+          FileLocation:
+            type: string
+          EnableWebhookDebugging:
+            type: boolean
+          EnableDiagnostics:
+            type: boolean
+      PasswordSettings:
+        type: object
+        properties:
+          MinimumLength:
+            type: integer
+          Lowercase:
+            type: boolean
+          Number:
+            type: boolean
+          Uppercase:
+            type: boolean
+          Symbol:
+            type: boolean
+      FileSettings:
+        type: object
+        properties:
+          MaxFileSize:
+            type: integer
+          DriverName:
+            type: string
+          Directory:
+            type: string
+          EnablePublicLink:
+            type: boolean
+          PublicLinkSalt:
+            type: string
+          ThumbnailWidth:
+            type: integer
+          ThumbnailHeight:
+            type: integer
+          PreviewWidth:
+            type: integer
+          PreviewHeight:
+            type: integer
+          ProfileWidth:
+            type: integer
+          ProfileHeight:
+            type: integer
+          InitialFont:
+            type: string
+          AmazonS3AccessKeyId:
+            type: string
+          AmazonS3SecretAccessKey:
+            type: string
+          AmazonS3Bucket:
+            type: string
+          AmazonS3Region:
+            type: string
+          AmazonS3Endpoint:
+            type: string
+          AmazonS3SSL:
+            type: boolean
+      EmailSettings:
+        type: object
+        properties:
+          EnableSignUpWithEmail:
+            type: boolean
+          EnableSignInWithEmail:
+            type: boolean
+          EnableSignInWithUsername:
+            type: boolean
+          SendEmailNotifications:
+            type: boolean
+          RequireEmailVerification:
+            type: boolean
+          FeedbackName:
+            type: string
+          FeedbackEmail:
+            type: string
+          FeedbackOrganization:
+            type: string
+          SMTPUsername:
+            type: string
+          SMTPPassword:
+            type: string
+          SMTPServer:
+            type: string
+          SMTPPort:
+            type: string
+          ConnectionSecurity:
+            type: string
+          InviteSalt:
+            type: string
+          PasswordResetSalt:
+            type: string
+          SendPushNotifications:
+            type: boolean
+          PushNotificationServer:
+            type: string
+          PushNotificationContents:
+            type: string
+          EnableEmailBatching:
+            type: boolean
+          EmailBatchingBufferSize:
+            type: integer
+          EmailBatchingInterval:
+            type: integer
+      RateLimitSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          PerSec:
+            type: integer
+          MaxBurst:
+            type: integer
+          MemoryStoreSize:
+            type: integer
+          VaryByRemoteAddr:
+            type: boolean
+          VaryByHeader:
+            type: string
+      PrivacySettings:
+        type: object
+        properties:
+          ShowEmailAddress:
+            type: boolean
+          ShowFullName:
+            type: boolean
+      SupportSettings:
+        type: object
+        properties:
+          TermsOfServiceLink:
+            type: string
+          PrivacyPolicyLink:
+            type: string
+          AboutLink:
+            type: string
+          HelpLink:
+            type: string
+          ReportAProblemLink:
+            type: string
+          SupportEmail:
+            type: string
+      GitLabSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: string
+          Id:
+            type: string
+          Scope:
+            type: string
+          AuthEndpoint:
+            type: string
+          TokenEndpoint:
+            type: string
+          UserApiEndpoint:
+            type: string
+      GoogleSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: string
+          Id:
+            type: string
+          Scope:
+            type: string
+          AuthEndpoint:
+            type: string
+          TokenEndpoint:
+            type: string
+          UserApiEndpoint:
+            type: string
+      Office365Settings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: string
+          Id:
+            type: string
+          Scope:
+            type: string
+          AuthEndpoint:
+            type: string
+          TokenEndpoint:
+            type: string
+          UserApiEndpoint:
+            type: string
+      LdapSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          LdapServer:
+            type: string
+          LdapPort:
+            type: integer
+          ConnectionSecurity:
+            type: string
+          BaseDN:
+            type: string
+          BindUsername:
+            type: string
+          BindPassword:
+            type: string
+          UserFilter:
+            type: string
+          FirstNameAttribute:
+            type: string
+          LastNameAttribute:
+            type: string
+          EmailAttribute:
+            type: string
+          UsernameAttribute:
+            type: string
+          NicknameAttribute:
+            type: string
+          IdAttribute:
+            type: string
+          PositionAttribute:
+            type: string
+          SyncIntervalMinutes:
+            type: integer
+          SkipCertificateVerification:
+            type: boolean
+          QueryTimeout:
+            type: integer
+          MaxPageSize:
+            type: integer
+          LoginFieldName:
+            type: string
+      ComplianceSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Directory:
+            type: string
+          EnableDaily:
+            type: boolean
+      LocalizationSettings:
+        type: object
+        properties:
+          DefaultServerLocale:
+            type: string
+          DefaultClientLocale:
+            type: string
+          AvailableLocales:
+            type: string
+      SamlSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Verify:
+            type: boolean
+          Encrypt:
+            type: boolean
+          IdpUrl:
+            type: string
+          IdpDescriptorUrl:
+            type: string
+          AssertionConsumerServiceURL:
+            type: string
+          IdpCertificateFile:
+            type: string
+          PublicCertificateFile:
+            type: string
+          PrivateKeyFile:
+            type: string
+          FirstNameAttribute:
+            type: string
+          LastNameAttribute:
+            type: string
+          EmailAttribute:
+            type: string
+          UsernameAttribute:
+            type: string
+          NicknameAttribute:
+            type: string
+          LocaleAttribute:
+            type: string
+          PositionAttribute:
+            type: string
+          LoginButtonText:
+            type: string
+      NativeAppSettings:
+        type: object
+        properties:
+          AppDownloadLink:
+            type: string
+          AndroidAppDownloadLink:
+            type: string
+          IosAppDownloadLink:
+            type: string
+      ClusterSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          InterNodeListenAddress:
+            type: string
+          InterNodeUrls:
+            type: array
+            items:
+              type: string
+      MetricsSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          BlockProfileRate:
+            type: integer
+          ListenAddress:
+            type: string
+      AnalyticsSettings:
+        type: object
+        properties:
+          MaxUsersForStatistics:
+            type: integer
+      WebrtcSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          GatewayWebsocketUrl:
+            type: string
+          GatewayAdminUrl:
+            type: string
+          GatewayAdminSecret:
+            type: string
+          StunURI:
+            type: string
+          TurnURI:
+            type: string
+          TurnUsername:
+            type: string
+          TurnSharedKey:
+            type: string
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
