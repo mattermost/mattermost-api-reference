@@ -93,9 +93,7 @@
           schema:
             type: object
             required:
-              - email
-              - username
-              - password
+              - id
             properties:
               id:
                 type: string

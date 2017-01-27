@@ -6,3 +6,5 @@
 
 # Build
 html/static/mattermost-openapi.yaml
+html/static/mattermost-openapi-v3.yaml
+html/static/mattermost-openapi-v4.yaml
