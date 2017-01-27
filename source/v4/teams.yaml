@@ -1,0 +1,41 @@
+  /teams:
+    post:
+      tags:
+        - teams
+      summary: Create a team
+      description: |
+        Create a new team on the system.
+        ##### Permissions
+        Must be authenticated and have the "create_team" permission.
+      parameters:
+        - in: body
+          name: body
+          description: Team that is to be created
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+              - display_name
+              - type
+            properties:
+              name:
+                type: string
+                description: Unique handler for a team, will be present in the team URL
+              display_name:
+                type: string
+                description: Non-unique UI name for the team
+              type:
+                type: string
+                description: "`'O'` for open, `'I'` for invite only"
+      responses:
+        '201':
+          description: Team creation successful
+          schema:
+            $ref: '#/definitions/Team'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
