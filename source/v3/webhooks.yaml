@@ -105,3 +105,38 @@
             type: array
             items:
               $ref: "#/definitions/OutgoingWebhook"
+
+  '/teams/{team_id}/hooks/outgoing/delete':
+    post:
+      tags:
+        - webhooks
+      summary: Delete an outgoing webhook
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID the outgoing webhook belongs to
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: The outgoing webhook ID
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: The ID of the outgoing webhook to delete
+      responses:
+        '200':
+          description: Outgoing webhook deleted successfully
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: The outgoing webhook ID
