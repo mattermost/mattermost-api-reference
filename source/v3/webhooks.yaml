@@ -87,3 +87,21 @@
                 type: string
                 description: The incoming webhook ID
 
+  '/teams/{team_id}/hooks/outgoing/list':
+    get:
+      tags:
+        - webhooks
+      summary: List outgoing webhooks for a team
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of outgoing webhooks to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The list of outgoing webhooks
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/OutgoingWebhook"

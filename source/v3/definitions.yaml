@@ -327,6 +327,45 @@ definitions:
         description: The display name for this incoming webhook
         type: string
 
+  OutgoingWebhook:
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this outgoing webhook
+        type: string
+      token:
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      creator_id:
+        type: string
+      channel_id:
+        type: string
+      team_id:
+        type: string
+      trigger_words:
+        type: array
+        items:
+          type: string
+      trigger_when:
+        type: integer
+      callback_urls:
+        type: array
+        items:
+          type: string
+      description:
+        description: The description for this outgoing webhook
+        type: string
+      display_name:
+        description: The display name for this outgoing webhook
+        type: string
+      content_type:
+        type: string
+
   Reaction:
     type: object
     properties:
