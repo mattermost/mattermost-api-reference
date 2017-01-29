@@ -21,7 +21,7 @@ build-v3:
 	@cat $(V3_DIR)/files.yaml >> $(V3_YAML)
 	@cat $(V3_DIR)/admin.yaml >> $(V3_YAML)
 	@cat $(V3_DIR)/preferences.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/incoming-webhooks.yaml >> $(V3_YAML)
+	@cat $(V3_DIR)/webhooks.yaml >> $(V3_YAML)
 	@cat $(V3_DIR)/reactions.yaml >> $(V3_YAML)
 	@cat $(V3_DIR)/definitions.yaml >> $(V3_YAML)
 
