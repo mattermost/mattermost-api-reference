@@ -277,8 +277,8 @@ tags:
     description: Anything related to system administration.
   - name: preferences
     description: Anything related to the current user's preferences which are used to store various settings in Mattermost.
-  - name: incoming webhooks
-    description: Anything related to the incoming webhook system.
+  - name: webhooks
+    description: Anything related to the webhook system.
 schemes:
   - http
   - https

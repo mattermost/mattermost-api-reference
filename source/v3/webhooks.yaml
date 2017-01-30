@@ -1,7 +1,7 @@
   '/teams/{team_id}/hooks/incoming/list':
     get:
       tags:
-        - incoming-webhooks
+        - webhooks
       summary: List incoming webhooks for a team
       parameters:
         - name: team_id
@@ -20,7 +20,7 @@
   '/teams/{team_id}/hooks/incoming/create':
     post:
       tags:
-        - incoming-webhooks
+        - webhooks
       summary: Create an incoming webhook to a team
       parameters:
         - name: team_id
@@ -55,7 +55,7 @@
   '/teams/{team_id}/hooks/incoming/delete':
     post:
       tags:
-        - incoming-webhooks
+        - webhooks
       summary: Delete an incoming webhook
       parameters:
         - name: team_id
@@ -87,3 +87,56 @@
                 type: string
                 description: The incoming webhook ID
 
+  '/teams/{team_id}/hooks/outgoing/list':
+    get:
+      tags:
+        - webhooks
+      summary: List outgoing webhooks for a team
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID of outgoing webhooks to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The list of outgoing webhooks
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/OutgoingWebhook"
+
+  '/teams/{team_id}/hooks/outgoing/delete':
+    post:
+      tags:
+        - webhooks
+      summary: Delete an outgoing webhook
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID the outgoing webhook belongs to
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: The outgoing webhook ID
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: The ID of the outgoing webhook to delete
+      responses:
+        '200':
+          description: Outgoing webhook deleted successfully
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: The outgoing webhook ID
