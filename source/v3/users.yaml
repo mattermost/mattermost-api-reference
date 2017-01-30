@@ -395,7 +395,7 @@
                 type: string
                 description: ID of the user to set active/inactive
               active:
-                type: boolean
+                type: string
                 description: Use `true` to set the user active, `false` for inactive
       responses:
         '200':
