@@ -83,7 +83,7 @@ tags:
       {{user object as json}}
       ```
       
-      Include the `Token` as part of the `Authentication` header on your future API requests with the `Bearer` method.
+      Include the `Token` as part of the `Authorization` header on your future API requests with the `Bearer` method.
       
       ```
       curl -i -H 'Authorization: Bearer hyr5dmb1mbb49c44qmx4whniso' http://localhost:8065/api/v3/users/me
