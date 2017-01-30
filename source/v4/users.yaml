@@ -45,6 +45,51 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+    get:
+      tags:
+        - users
+      summary: Get users
+      description: |
+        Get a page of a list of users. Based on query string parameters, select users from a team, channel, or select users not in a specific channel.
+        ##### Permissions
+        Requires an active session and (if specified) membership to the channel or team being selected from.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of users per page.
+          default: "60"
+          type: string
+        - name: in_team
+          in: query
+          description: The ID of the team to get users for.
+          type: string
+        - name: in_channel
+          in: query
+          description: The ID of the channel to get users for.
+          type: string
+        - name: not_in_channel
+          in: query
+          description: The ID of the channel to exclude users for. Must be used with "in_channel" query parameter.
+          type: string
+      responses:
+        '200':
+          description: User page retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   /users/{user_id}:
     get:
       tags:
