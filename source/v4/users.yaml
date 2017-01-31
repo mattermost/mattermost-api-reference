@@ -10,7 +10,7 @@
       parameters:
         - in: body
           name: body
-          description: User object that is to be created
+          description: User object to be created
           required: true
           schema:
             type: object
