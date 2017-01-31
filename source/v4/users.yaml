@@ -276,6 +276,48 @@
           schema:
             type: object
             required:
+              - current_password
+              - new_password
+            properties:
+              current_password:
+                description: The current password for the user
+                type: string
+              new_password:
+                description: The new password for the user
+                type: string
+      responses:
+        '200':
+          description: User password update successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /users/{user_id}/password:
+    put:
+      tags:
+        - users
+      summary: Update a user's password
+      description: |
+        Update a user's password. New password must meet password policy set by server configuration.
+        ##### Permissions
+        Must be logged in as the user the password is being changed for.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
               - code
               - new_password
             properties:
@@ -292,6 +334,10 @@
             $ref: '#/definitions/StatusOK'
         '400':
           $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
   /users/password/reset/send:
     post:
@@ -321,4 +367,8 @@
             $ref: '#/definitions/StatusOK'
         '400':
           $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
