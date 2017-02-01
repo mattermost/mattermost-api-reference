@@ -259,3 +259,66 @@
           $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+
+  /users/password/reset:
+    post:
+      tags:
+        - users
+      summary: Reset password
+      description: |
+        Update the password for a user using a one-use, timed recovery code tied to the user's account. Only works for non-SSO users.
+        ##### Permissions
+        No permissions required.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - code
+              - new_password
+            properties:
+              code:
+                description: The recovery code
+                type: string
+              new_password:
+                description: The new password for the user
+                type: string
+      responses:
+        '200':
+          description: User password update successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+
+  /users/password/reset/send:
+    post:
+      tags:
+        - users
+      summary: Send password reset email
+      description: |
+        Send an email containing a link for resetting the user's password. The link will contain a one-use, timed recovery code tied to the user's account. Only works for non-SSO users.
+        ##### Permissions
+        No permissions required.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                description: The email of the user
+                type: string
+      responses:
+        '200':
+          description: Email sent if account exists
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+
