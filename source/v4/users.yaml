@@ -123,3 +123,41 @@
         '401':
           $ref: '#/responses/Unauthorized'
 
+  /users/{user_id}/roles:
+    put:
+      tags:
+        - users
+      summary: Update a user's roles
+      description: |
+        Update a user's system-level roles. Valid user roles are "system_user", "system_admin" or both of them. Overwrites any previously assigned system-level roles.
+        ##### Permissions
+        Must have the `manage_roles` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Space-delimited roles to assign to the user
+          required: true
+          schema:
+            type: object
+            required:
+              - roles
+            properties:
+              roles:
+                type: string
+      responses:
+        '200':
+          description: User roles update successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
