@@ -33,6 +33,7 @@ build-v4:
 	@cat $(V4_DIR)/introduction.yaml > $(V4_YAML)
 	@cat $(V4_DIR)/users.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/teams.yaml >> $(V4_YAML)
+	@cat $(V4_DIR)/channels.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/definitions.yaml >> $(V4_YAML)
 
 	@echo Complete
