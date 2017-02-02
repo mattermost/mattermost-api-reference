@@ -122,6 +122,33 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+    delete:
+      tags:
+        - users
+      summary: Deactivate a user account.
+      description: |
+        Deactivates the user by archiving its user object.
+        ##### Permissions
+        Must be logged in as the user being deactivated or have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User deactivation successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
 
   /users/{user_id}/roles:
     put:
