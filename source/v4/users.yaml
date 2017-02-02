@@ -129,7 +129,7 @@
       description: |
         Deactivates the user by archiving its user object.
         ##### Permissions
-        Must be logged in as the user being updated or have the `edit_other_users` permission.
+        Must be logged in as the user being deactivated or have the `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
