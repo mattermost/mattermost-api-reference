@@ -305,7 +305,7 @@
       description: |
         Update a user's password. New password must meet password policy set by server configuration.
         ##### Permissions
-        Must be logged in as the user the password is being changed for.
+        Must be logged in as the user the password is being changed for or have `manage_system` permission.
       parameters:
         - name: user_id
           in: path
