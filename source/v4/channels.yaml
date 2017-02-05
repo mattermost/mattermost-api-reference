@@ -6,7 +6,7 @@
       description: |
         Create a new channel.
         ##### Permissions
-        If creating a public channel, "create_public_channel" permission is required. If creating a private channel, "create_private_channel" permission is required.
+        If creating a public channel, `create_public_channel` permission is required. If creating a private channel, `create_private_channel` permission is required.
       parameters:
         - in: body
           name: body
@@ -49,3 +49,34 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  /channels/direct:
+    post:
+      tags:
+        - channels
+      summary: Create a direct message channel
+      description: |
+        Create a new direct message channel between two users.
+        ##### Permissions
+        Must be one of the two users and have `create_direct_channel` permission. Having the `manage_system` permission voids the previous requirements.
+      parameters:
+        - in: body
+          name: body
+          description: The two user ids to be in the direct message
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '201':
+          description: Direct channel creation successful
+          schema:
+            $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
