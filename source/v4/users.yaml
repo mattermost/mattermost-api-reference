@@ -245,7 +245,7 @@
       parameters:
         - name: username
           in: path
-          description: User Name
+          description: Username
           required: true
           type: string
       responses:
