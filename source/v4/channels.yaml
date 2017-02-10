@@ -50,6 +50,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+<<<<<<< 9a727ef25d267ae3645a54421b92e540b2926d23
   /channels/direct:
     post:
       tags:
@@ -80,3 +81,97 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/channels/{channel_id}/members':
+    get:
+      tags:
+        - channels
+      summary: Get channel members
+      description: |
+        Get a page of members for a channel.
+        ##### Permissions
+        `read_channel` permission for the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel members retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ChannelMember'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/channels/{channel_id}/members/{user_id}':
+    get:
+      tags:
+        - channels
+      summary: Get channel member
+      description: |
+        Get a channel member.
+        ##### Permissions
+        `read_channel` permission for the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel member retrieval successful
+          schema:
+            $ref: '#/definitions/ChannelMember'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/users/{user_id}/teams/{team_id}/members':
+    get:
+      tags:
+        - channels
+      summary: Get channel members for user
+      description: |
+        Get all channel members on a team for a user.
+        ##### Permissions
+        Logged in as user and `view_team` permission for the channel. Having `manage_system` permission voids the previous requirements.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel members retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ChannelMember'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
