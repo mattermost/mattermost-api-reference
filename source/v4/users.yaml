@@ -90,6 +90,36 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/ids:
+    post:
+      tags:
+        - users
+      summary: Get users by ids
+      description: |
+        Get a list of users based on a provided list of user ids.
+        ##### Permissions
+        Requires an active session but no other permissions.
+      parameters:
+        - in: body
+          name: body
+          description: List of user ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: User list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
   /users/{user_id}:
     get:
       tags:
