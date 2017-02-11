@@ -87,7 +87,6 @@
         Get channel from the provided channel id string.
         ##### Permissions
         `read_channel` permission for the channel.
-        `manage_system` permission for the channel.
       parameters:
         - name: channel_id
           in: path
@@ -114,7 +113,6 @@
         Gets channel from the provided team id and channel name strings.
         ##### Permissions
         `read_channel` permission for the channel.
-        `manage_system` permission for the channel.
       parameters:
         - name: team_id
           in: path
@@ -146,7 +144,6 @@
         Gets a channel from the provided team name and channel name strings.
         ##### Permissions
         `read_channel` permission for the channel.
-        `manage_system` permission for the channel.
       parameters:
         - name: team_name
           in: path
