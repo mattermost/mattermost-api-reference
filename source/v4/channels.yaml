@@ -49,8 +49,6 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
-
-<<<<<<< 9a727ef25d267ae3645a54421b92e540b2926d23
   /channels/direct:
     post:
       tags:
@@ -80,7 +78,97 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
-
+  '/channels/{channel_id}':
+    get:
+      tags:
+        - channels
+      summary: Get a channel
+      description: |
+        Get channel from the provided channel id string.
+        ##### Permissions
+        `read_channel` permission for the channel.
+        `manage_system` permission for the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel retrieval successful
+          schema:
+            $ref: '#/definitions/Channel' 
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+  '/teams/{team_id}/channels/{channel_name}':
+    get:
+      tags:
+        - channels
+      summary: Get a channel by name.
+      description: |
+        Gets channel from the provided team id and channel name strings.
+        ##### Permissions
+        `read_channel` permission for the channel.
+        `manage_system` permission for the channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - name: channel_name
+          in: path
+          description: Channel Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel retrieval successful
+          schema:
+            $ref: '#/definitions/Channel' 
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+  '/teams/name/{team_name}/channels/{channel_name}':
+    get:
+      tags:
+        - channels
+      summary: Get a channel by name and team name.
+      description: |
+        Gets a channel from the provided team name and channel name strings.
+        ##### Permissions
+        `read_channel` permission for the channel.
+        `manage_system` permission for the channel.
+      parameters:
+        - name: team_name
+          in: path
+          description: Team Name
+          required: true
+          type: string
+        - name: channel_name
+          in: path
+          description: Channel Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel retrieval successful
+          schema:
+            $ref: '#/definitions/Channel' 
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
   '/channels/{channel_id}/members':
     get:
       tags:
