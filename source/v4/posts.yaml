@@ -1,0 +1,136 @@
+  /posts:
+    post:
+      tags:
+        - posts
+      summary: Create a post
+      description: |
+        Create a new post in a channel. To create the post as a comment on another post, provide `root_id`.
+        ##### Permissions
+        Must have `create_post` permission for the channel the post is being created in.
+      parameters:
+        - in: body
+          name: post
+          description: Post object to create
+          required: true
+          schema:
+            type: object
+            required:
+              - channel_id
+              - message
+            properties:
+              channel_id:
+                type: string
+                description: The channel ID to post in
+              message:
+                type: string
+                description: The message contents, can be formatted with Markdown
+              root_id:
+                type: string
+                description: The post ID to comment on
+              file_ids:
+                type: array
+                description: A list of file IDs to associate with the post
+                items:
+                  type: string
+      responses:
+        '201':
+          description: Post creation successful
+          schema:
+            $ref: '#/definitions/Post'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/posts/{post_id}':
+    get:
+      tags:
+        - posts
+      summary: Get a post
+      description: |
+        Get a single post.
+        ##### Permissions
+        Must have `read_channel` permission for the channel the post is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: ID of the post to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post retrieval successful
+          schema:
+            $ref: "#/definitions/Post"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/posts/{post_id}/thread':
+    get:
+      tags:
+        - posts
+      summary: Get a thread
+      description: |
+        Get a post and the rest of the posts in the same thread.
+        ##### Permissions
+        Must have `read_channel` permission for the channel the thread is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: ID of a post in the thread
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post list retrieval successful
+          schema:
+            $ref: "#/definitions/PostList"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/channels/{channel_id}/posts':
+    get:
+      tags:
+        - posts
+      summary: Get posts for a channel
+      description: |
+        Get a page of posts in a channel.
+        ##### Permissions
+        Must have `read_channel` permission for the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: The channel ID to get the posts for
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: The page to select
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of posts per page
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Post list retrieval successful
+          schema:
+            $ref: "#/definitions/PostList"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'

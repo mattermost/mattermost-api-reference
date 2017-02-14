@@ -197,6 +197,7 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+
     delete:
       tags:
         - users
