@@ -9,7 +9,7 @@
         Must have `create_post` permission for the channel the post is being created in.
       parameters:
         - in: body
-          name: body
+          name: post
           description: Post object to create
           required: true
           schema:
