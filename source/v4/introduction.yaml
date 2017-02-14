@@ -169,9 +169,9 @@ tags:
 
       ```
       {
-        "event": "channel_viewed",
+        "event": "hello",
         "data": {
-          "channel_id": "ihze299c4j87ped4wannrjdt9c"
+          "server_version": "3.6.0.1451.1c38da627ebb4e3635677db6939e9195"
         },
         "broadcast":{
           "omit_users": null,
@@ -190,7 +190,6 @@ tags:
       - post_edited
       - post_deleted
       - channel_deleted
-      - channel_viewed
       - direct_added
       - new_user
       - leave_team
