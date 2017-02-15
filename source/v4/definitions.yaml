@@ -405,6 +405,13 @@ definitions:
         description: Will contain "ok" if the request was successful and there was nothing else to return
         type: string
 
+  Ping:
+    type: object
+    properties:
+      ping:
+        description: Will contain "1" if the request was successful.
+        type: integer
+
   OpenGraph:
     type: object
     description: OpenGraph metadata of a webpage
