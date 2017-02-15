@@ -1,0 +1,16 @@
+  '/system/ping':
+    get:
+      tags:
+        - system
+      summary: Ping the Server
+      description: |
+        Receive a simple ping response.
+        ##### Permissions
+        No special permissions required.
+      responses:
+        '200':
+          description: Ping successful
+          schema:
+            $ref: "#/definitions/Ping"
+        '400':
+          $ref: '#/responses/BadRequest'
