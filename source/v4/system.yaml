@@ -11,6 +11,6 @@
         '200':
           description: Ping successful
           schema:
-            $ref: "#/definitions/Ping"
+            $ref: "#/definitions/StatusOK"
         '400':
           $ref: '#/responses/BadRequest'
