@@ -229,6 +229,34 @@ definitions:
       mention_count:
         type: integer
 
+  Session:
+    type: object
+    properties:
+      create_at:
+        type: integer
+      device_id:
+        type: string
+      expires_at:
+        type: integer
+      id:
+        type: string
+      is_oauth:
+        type: boolean
+      last_activity_at:
+        type: integer
+      props:
+        type: object
+      roles:
+        type: string
+      team_members:
+        type: array
+        items:
+          $ref: '#/definitions/TeamMember'
+      token:
+        type: string
+      user_id:
+        type: string
+
   FileInfo:
     type: object
     properties:
