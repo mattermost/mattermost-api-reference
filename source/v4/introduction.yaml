@@ -288,4 +288,12 @@ responses:
     description: Resource not found
     schema:
       $ref: '#/definitions/AppError'
+  'TooLarge':
+    description: Content too large
+    schema:
+      $ref: '#/definitions/AppError'
+  'NotImplemented':
+    description: Feature is disabled
+    schema:
+      $ref: '#/definitions/AppError'
 paths:

@@ -1,0 +1,80 @@
+  /files:
+    post:
+      tags:
+        - files
+      summary: Upload a file
+      description: |
+        Uploads a file that can later be attached to a post.
+        ##### Permissions
+        Must have `upload_file` permission.
+      parameters:
+        - name: files
+          in: formData
+          description: A file to be uploaded
+          required: true
+          type: file
+        - name: channel_id
+          in: formData
+          description: The ID of the channel that this file will be uploaded to
+          required: true
+          type: string
+        - name: client_ids
+          in: formData
+          description: A unique identifier for the file that will be returned in the response
+          required: false
+          allowEmptyValue: true
+          type: string
+      responses:
+        '200':
+          description: Corresponding lists of the provided client_ids and the metadata that has been stored in the database for each one
+          schema:
+            type: object
+            properties:
+              file_infos:
+                description: A list of file metadata that has been stored in the database
+                type: array
+                items:
+                  $ref: '#/definitions/FileInfo'
+              client_ids:
+                description: A list of the client_ids that were provided in the request
+                type: array
+                items:
+                  type: string
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '413':
+          $ref: '#/responses/TooLarge'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/files/{file_id}':
+    get:
+      tags:
+        - files
+      summary: Get a file
+      description: |
+        Gets a file that has been uploaded previously.
+        ##### Permissions
+        Must have `read_channel` permission or be uploader of the file.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get
+          required: true
+          type: string
+      responses:
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
