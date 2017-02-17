@@ -490,7 +490,7 @@
     get:
       tags:
         - users
-      summary: Get a list of sessions by User GUID.
+      summary: Get user's sessions
       description: |
         Get a list of sessions by providing the user GUID. Sensitive information will be sanitized out.
         ##### Permissions
@@ -514,14 +514,14 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
- 
+
   /users/{user_id}/sessions/revoke:
     post:
       tags:
         - users
-      summary: Get a list of sessions by User GUID.
+      summary: Revoke a user session
       description: |
-        Get a list of sessions by providing the user GUID. Sensitive information will be sanitized out.
+        Revokes a user session from the provided user id and session id strings.
         ##### Permissions
         Must be logged in as the user being updated or have the `edit_other_users` permission.
       parameters:
@@ -539,7 +539,7 @@
               - session_id
             properties:
               session_id:
-                description: The session GUID to be revoked.
+                description: The session GUID to revoke.
                 type: string
       responses:
         '200':
