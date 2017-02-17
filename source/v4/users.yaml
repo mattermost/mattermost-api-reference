@@ -543,7 +543,7 @@
                 type: string
       responses:
         '200':
-          description: User session retrieval successful
+          description: User session revoked successful
           schema:
             $ref: '#/definitions/StatusOK'
         '400':
