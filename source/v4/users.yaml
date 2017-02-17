@@ -508,6 +508,8 @@
             type: array
             items:
               $ref: '#/definitions/Session'
+        '400':
+          $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
