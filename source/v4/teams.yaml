@@ -95,7 +95,7 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
-
+          
   '/teams/{team_id}/members':
     get:
       tags:
