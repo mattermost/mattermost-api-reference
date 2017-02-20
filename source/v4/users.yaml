@@ -552,7 +552,7 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
-
+          
   /users/{user_id}/audits:
     get:
       tags:
@@ -581,3 +581,4 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
