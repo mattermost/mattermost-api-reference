@@ -100,9 +100,9 @@
     get:
       tags:
         - teams
-      summary: Get a page of a list of team members based on query string parameters - team id, page and per page.
+      summary: Get team members
       description: |
-        Get team members on the system.
+        Get a page team members list based on query string parameters - team id, page and per page.
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
       parameters:
