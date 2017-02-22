@@ -69,6 +69,35 @@
         '404':
           $ref: '#/responses/NotFound'
 
+  '/teams/name/{name}':
+    get:
+      tags:
+        - teams
+      summary: Get a team by name
+      description: |
+        Get a team based on provided name string
+        ##### Permissions
+        Must be authenticated, team type is open and have the `view_team` permission.
+      parameters:
+        - name: name
+          in: path
+          description: Team Name
+          required: true
+          type: string
+      responses:
+        '201':
+          description: Team retrieval successful
+          schema:
+            $ref: '#/definitions/Team'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
   '/users/{user_id}/teams':
     get:
       tags:
