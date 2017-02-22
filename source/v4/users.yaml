@@ -552,3 +552,40 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  /users/autocomplete/:
+    get:
+      tags:
+        - users
+      summary: Get users by term
+      description: |
+        Get a list of users for the purpose of autocompleting based on the provided term.
+        ##### Permissions
+        Requires an active session but no other permissions.
+      parameters:
+        - in_team: team_id
+          in: path
+          description: Team ID
+          required: true
+          type: string
+        - in_channel: channel_id
+          in: path
+          description: Channel ID
+          required: true
+          type: string
+        - name: username
+          in: path
+          description: Username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
