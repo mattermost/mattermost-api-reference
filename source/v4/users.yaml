@@ -609,3 +609,38 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/{user_id}/verify/email:
+    post:
+      tags:
+        - users
+      summary: Verify user email
+      description: |
+        Verify the email used by a user to sign-up their account with.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - userId
+              - hashId
+            properties:
+              userId:
+                description: The User GUID
+                type: string
+              hashId:
+                description: The hash with UserId and InviteSaltId
+                type: string
+      responses:
+        '200':
+          description: User verification successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
