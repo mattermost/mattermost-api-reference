@@ -1,0 +1,76 @@
+  /hooks/incoming:
+    post:
+      tags:
+        - webhooks
+      summary: Create an incoming webhook
+      description: |
+        Create an incoming webhook for a channel.
+        ##### Permissions
+        `manage_webhooks` for the channel the webhook is in.
+      parameters:
+        - in: body
+          name: body
+          description: Incoming webhook to be created
+          required: true
+          schema:
+            type: object
+            required:
+              - channel_id
+            properties:
+              channel_id:
+                type: string
+                description: The ID of a public channel or private group that receives the webhook payloads.
+              display_name:
+                  type: string
+                  description: The display name for this incoming webhook
+              description:
+                type: string
+                description: The description for this incoming webhook
+      responses:
+        '201':
+          description: Incoming webhook creation successful
+          schema:
+            $ref: "#/definitions/IncomingWebhook"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+    get:
+      tags:
+        - webhooks
+      summary: List incoming webhooks
+      description: |
+        Get a page of a list of incoming webhooks. Optionally filter for a specific team using query parameters.
+        ##### Permissions
+        `manage_webhooks` for the system or `manage_webhooks` for the specific team.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of hooks per page.
+          default: "60"
+          type: string
+        - name: team_id
+          in: query
+          description: The ID of the team to get hooks for.
+          type: string
+      responses:
+        '200':
+          description: Incoming webhooks retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/IncomingWebhook"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
