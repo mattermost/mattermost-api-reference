@@ -298,8 +298,8 @@
           required: true
           type: string
         - in: body
-          name: body
-          description: Space-delimited roles to assign to the user
+          name: roles
+          description: Space-delimited system roles to assign to the user
           required: true
           schema:
             type: object
