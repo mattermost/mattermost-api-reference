@@ -102,7 +102,7 @@
     get:
       tags:
         - teams
-      summary: Check if Team exists
+      summary: Check if team exists
       description: |
         Check if the team exists based on a team name.
       parameters:
