@@ -582,7 +582,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-/users/{user_id}/mfa:
+  /users/{user_id}/mfa:
     put:
       tags:
         - users
