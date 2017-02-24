@@ -37,6 +37,7 @@ build-v4:
 	@cat $(V4_DIR)/posts.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/files.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/system.yaml >> $(V4_YAML)
+	@cat $(V4_DIR)/webhooks.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/definitions.yaml >> $(V4_YAML)
 
 	@echo Complete
