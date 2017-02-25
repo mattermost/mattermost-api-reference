@@ -69,11 +69,9 @@
               $ref: '#/definitions/Preference'
       responses:
         '200':
-          description: A list of all of the current user's preferences in the given category
+          description: User preferences saved successful
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/Preference"
+            $ref: "#/definitions/StatusOK"
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -116,7 +114,7 @@
         - preferences
       summary: Get a specific user preference
       description: |
-        Returns a single preference for the current user with the given category and name.
+        Gets a single preference for the current user with the given category and name.
         ##### Permissions
         Requires an active session but no other permissions.
       parameters:
@@ -127,13 +125,13 @@
           type: string
         - name: preference_name
           in: path
-          description: The name of a preferences
+          description: The name of the preference
           required: true
           type: string        
       responses:
         '200':
           description: |
-            A single preference for the current user in the current categorylist of all of the current user's preferences in the given category
+            A single preference for the current user in the current categorylist of all of the current user's preferences in the given category.
           schema:
             $ref: "#/definitions/Preference"
         '400':
