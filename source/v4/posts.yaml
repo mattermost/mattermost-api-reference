@@ -73,15 +73,15 @@
     delete:
       tags:
         - posts
-      summary: Deletes a post
+      summary: Delete a post
       description: |
-        Deletes a single post.
+        Soft deletes a post, by marking the post as deleted in the database. Soft deleted posts will not be returned in post queries.
         ##### Permissions
-        Must be logged in as the user or have `manage_system` permission.
+        Must be logged in as the user or have `delete_others_posts` permission.
       parameters:
         - name: post_id
           in: path
-          description: ID of the post to get
+          description: ID of the post to delete
           required: true
           type: string
       responses:
