@@ -1,0 +1,142 @@
+  /preferences:
+    get:
+      tags:
+        - preferences
+      summary: Get the user's preferences
+      description: |
+        Get a list of the user's preferences.
+        ##### Permissions
+        Requires an active session but no other permissions.
+      responses:
+        '200':
+          description: User preferences retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+    put:
+      tags:
+        - preferences
+      summary: Save the user's preferences
+      description: |
+        Save a list of the user's preferences.
+        ##### Permissions
+        Requires an active session but no other permissions.
+      parameters:
+        - in: body
+          name: body
+          description: List of preference object
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Preference'
+      responses:
+        '200':
+          description: User preferences saved successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  '/preferences/delete':
+    post:
+      tags:
+        - preferences
+      summary: Delete user's preferences
+      description: |
+        Delete a list of the user's preferences.
+        ##### Permissions
+        Requires an active session but no other permissions.
+      parameters:
+        - in: body
+          name: body
+          description: List of preference object
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Preference'
+      responses:
+        '200':
+          description: A list of all of the current user's preferences in the given category
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/preferences/{category}':
+    get:
+      tags:
+        - preferences
+      summary: List a user's preferences by category
+      description: |
+        Lists the current user's stored preferences in the given category.
+        ##### Permissions
+        Requires an active session but no other permissions.
+      parameters:
+        - name: category
+          in: path
+          description: The category of a group of preferences
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A list of all of the current user's preferences in the given category
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Preference"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/preferences/{category}/name/{preference_name}':
+    get:
+      tags:
+        - preferences
+      summary: Get a specific user preference
+      description: |
+        Returns a single preference for the current user with the given category and name.
+        ##### Permissions
+        Requires an active session but no other permissions.
+      parameters:
+        - name: category
+          in: path
+          description: The category of a group of preferences
+          required: true
+          type: string
+        - name: preference_name
+          in: path
+          description: The name of a preferences
+          required: true
+          type: string        
+      responses:
+        '200':
+          description: |
+            A single preference for the current user in the current categorylist of all of the current user's preferences in the given category
+          schema:
+            $ref: "#/definitions/Preference"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'

@@ -35,6 +35,7 @@ build-v4:
 	@cat $(V4_DIR)/teams.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/channels.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/posts.yaml >> $(V4_YAML)
+	@cat $(V4_DIR)/preferences.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/files.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/system.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/webhooks.yaml >> $(V4_YAML)
