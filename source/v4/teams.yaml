@@ -40,6 +40,36 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+    '/teams':
+    get:
+      tags:
+        - teams
+      summary: Get a list of all teams.
+      description: |
+        Logged in, only shows open teams. Shows all teams with "manage_system" permission. The result is based on query string parameters - page and per_page.
+        ##### Permissions
+        Must be authenticated. "manage_system" permission is required to show all teams. 
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of teams per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Team list retrieval successful
+          schema:
+            $ref: '#/definitions/Team'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
   '/teams/{team_id}':
     get:
       tags:
