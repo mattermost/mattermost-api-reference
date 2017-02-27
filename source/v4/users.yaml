@@ -320,6 +320,33 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/{user_id}/image:
+    get:
+      tags:
+        - users
+      summary: Get user's profile image
+      description: |
+        Get a user's profile image based on user_id string parameter.
+        ##### Permissions
+        Must be logged in.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+      responses:
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
   /users/username/{username}:
     get:
       tags:
