@@ -1,4 +1,4 @@
-  /preferences:
+  /users/{user_id}/preferences:
     get:
       tags:
         - preferences
@@ -7,6 +7,12 @@
         Get a list of the user's preferences.
         ##### Permissions
         Requires an active session but no other permissions.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
       responses:
         '200':
           description: User preferences retrieval successful
@@ -18,6 +24,8 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
     put:
       tags:
         - preferences
@@ -27,6 +35,11 @@
         ##### Permissions
         Requires an active session but no other permissions.
       parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
         - in: body
           name: body
           description: List of preference object
@@ -49,7 +62,7 @@
         '404':
           $ref: '#/responses/NotFound'
 
-  '/preferences/delete':
+  '/users/{user_id}/preferences/delete':
     post:
       tags:
         - preferences
@@ -59,6 +72,11 @@
         ##### Permissions
         Requires an active session but no other permissions.
       parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
         - in: body
           name: body
           description: List of preference object
@@ -79,7 +97,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  '/preferences/{category}':
+  '/users/{user_id}/preferences/{category}':
     get:
       tags:
         - preferences
@@ -89,6 +107,11 @@
         ##### Permissions
         Requires an active session but no other permissions.
       parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
         - name: category
           in: path
           description: The category of a group of preferences
@@ -108,7 +131,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  '/preferences/{category}/name/{preference_name}':
+  '/users/{user_id}/preferences/{category}/name/{preference_name}':
     get:
       tags:
         - preferences
@@ -118,6 +141,11 @@
         ##### Permissions
         Requires an active session but no other permissions.
       parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
         - name: category
           in: path
           description: The category of a group of preferences
