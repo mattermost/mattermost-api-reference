@@ -44,9 +44,9 @@
     get:
       tags:
         - teams
-      summary: Get a list of all teams.
+      summary: Get teams.
       description: |
-        Logged in, only shows open teams. Shows all teams with "manage_system" permission. The result is based on query string parameters - page and per_page.
+        For regular users only returns open teams. Users with the "manage_system" permission will return teams regardless of type. The result is based on query string parameters - page and per_page.
         ##### Permissions
         Must be authenticated. "manage_system" permission is required to show all teams. 
       parameters:
@@ -64,7 +64,9 @@
         '200':
           description: Team list retrieval successful
           schema:
-            $ref: '#/definitions/Team'
+            type: array
+            items:
+              $ref: '#/definitions/Team'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
