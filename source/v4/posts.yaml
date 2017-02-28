@@ -96,6 +96,34 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+    '/posts/{post_id}':
+    put:
+      tags:
+        - posts
+      summary: Update a post
+      description: |
+        Update a single post.
+        ##### Permissions
+        Must have `edit_post` permission for the channel the post is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: ID of the post to update
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post updated successful
+          schema:
+            $ref: "#/definitions/Post"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+
   '/posts/{post_id}/thread':
     get:
       tags:
