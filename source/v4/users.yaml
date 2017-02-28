@@ -601,7 +601,7 @@
           schema:
             type: array
             items:
-              $ref: '#/definitions/Audits'
+              $ref: '#/definitions/Audit'
         '400':
           $ref: '#/responses/BadRequest'
         '401':

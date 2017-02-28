@@ -211,7 +211,9 @@
         '201':
           description: Team members retrieval successful
           schema:
-            $ref: '#/definitions/TeamMembers'
+            type: array
+            items:
+              $ref: '#/definitions/TeamMember'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
