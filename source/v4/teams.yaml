@@ -287,7 +287,7 @@
           description: User GUID
           required: true
           type: string
-        - name: id
+        - name: exclude_team
           in: query
           description: Optional team id to be excluded from the results
           required: true
