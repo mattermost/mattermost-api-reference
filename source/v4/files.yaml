@@ -78,3 +78,29 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
+  '/files/{file_id}/thumbnail':
+    get:
+      tags:
+        - files
+      summary: Get a file's thumbnail
+      description: |
+        Gets a file's thumbnail.
+        ##### Permissions
+        Must have `read_channel` permission or be uploader of the file.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get
+          required: true
+          type: string
+      responses:
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'  
