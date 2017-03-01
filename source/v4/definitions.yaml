@@ -85,6 +85,12 @@ definitions:
       active_member_count:
         type: integer
 
+  TeamExists:
+    type: object
+    properties:
+      exists:
+        type: boolean
+
   Channel:
     type: object
     properties:

@@ -70,6 +70,59 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+    delete:
+      tags:
+        - posts
+      summary: Delete a post
+      description: |
+        Soft deletes a post, by marking the post as deleted in the database. Soft deleted posts will not be returned in post queries.
+        ##### Permissions
+        Must be logged in as the user or have `delete_others_posts` permission.
+      parameters:
+        - name: post_id
+          in: path
+          description: ID of the post to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post deletion successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+    '/posts/{post_id}':
+    put:
+      tags:
+        - posts
+      summary: Update a post
+      description: |
+        Update a single post.
+        ##### Permissions
+        Must have `edit_post` permission for the channel the post is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: ID of the post to update
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post updated successful
+          schema:
+            $ref: "#/definitions/Post"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
 
   '/posts/{post_id}/thread':
     get:
@@ -91,6 +144,35 @@
           description: Post list retrieval successful
           schema:
             $ref: "#/definitions/PostList"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/posts/{post_id}/files/info':
+    get:
+      tags:
+        - posts
+      summary: Get file info for post
+      description: |
+        Gets a list of file information objects for the files attached to a post.
+        ##### Permissions
+        Must have `read_channel` permission for the channel the post is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: ID of the post
+          required: true
+          type: string
+      responses:
+        '200':
+          description: File info retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/FileInfo"
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -123,6 +205,49 @@
           description: The number of posts per page
           default: "60"
           type: string
+      responses:
+        '200':
+          description: Post list retrieval successful
+          schema:
+            $ref: "#/definitions/PostList"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/team/{team_id}/posts/search':
+    post:
+      tags:
+        - posts
+      summary: Search for team posts
+      description: |
+        Search posts in the team and from the provided terms string.
+        ##### Permissions
+        Must be authenticated and have the `view_team` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: The search terms and logic to use in the search.
+          required: true
+          schema:
+            type: object
+            required:
+              - terms
+              - is_or_search
+            properties:
+              terms:
+                type: string
+                description: The search terms as inputed by the user.
+              is_or_search:
+                type: boolean
+                description: Set to true if an Or search should be performed vs an And search.
       responses:
         '200':
           description: Post list retrieval successful
