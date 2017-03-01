@@ -643,7 +643,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-/users/{user_id}/verify/email:
+  /users/{user_id}/verify/email:
     post:
       tags:
         - users
@@ -722,4 +722,3 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden
-
