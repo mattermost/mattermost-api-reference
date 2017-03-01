@@ -335,7 +335,7 @@
     get:
       tags:
         - teams
-      summary: Get the count for unread messages and mentions in the teams the user is a member of
+      summary: Get team unreads for a user
       description: |
         Get the count for unread messages and mentions in the teams the user is a member of.
         ##### Permissions
@@ -353,7 +353,7 @@
           type: string
       responses:
         '200':
-          description: Teams found
+          description: Team unreads retrieval successful
           schema:
             type: array
             items:
