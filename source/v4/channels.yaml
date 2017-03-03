@@ -49,6 +49,53 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+    put:
+      tags:
+        - channels
+      summary: Update a channel
+      description: |
+        Update a channel.
+        ##### Permissions
+        If updating a public channel, `create_public_channel` permission is required. If creating a private channel, `create_private_channel` permission is required.
+      parameters:
+        - in: body
+          name: body
+          description: Channel object to be updated
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              team_id:
+                type: string
+                description: The team ID of the team to create the channel on
+              name:
+                type: string
+                description: The unique handle for the channel, will be present in the channel URL
+              display_name:
+                type: string
+                description: The non-unique UI name for the channel
+              purpose:
+                type: string
+                description: A short description of the purpose of the channel
+              header:
+                type: string
+                description: Markdown-formatted text to display in the header of the channel
+              type:
+                type: string
+                description: "'O' for a public channel, 'P' for a private channel"
+      responses:
+        '200':
+          description: Channel updated successful
+          schema:
+            $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
   /channels/direct:
     post:
