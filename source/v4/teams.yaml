@@ -75,7 +75,7 @@
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
-        $ref: '#/responses/Forbidden'
+          $ref: '#/responses/Forbidden'
 
     '/teams':
     get:
