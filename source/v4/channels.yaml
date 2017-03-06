@@ -233,6 +233,8 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
 
   '/channels/{channel_id}/members/{user_id}':
