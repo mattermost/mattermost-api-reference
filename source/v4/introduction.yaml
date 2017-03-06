@@ -265,6 +265,8 @@ tags:
     description: Anything related to files uploaded by Mattermost users.
   - name: preferences
     description: Anything related to the current user's preferences which are used to store various settings in Mattermost.
+  - name: SAML
+    description: Endpoints for configuring and interacting with SAML.
 schemes:
   - http
   - https
