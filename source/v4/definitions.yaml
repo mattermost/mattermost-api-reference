@@ -361,6 +361,51 @@ definitions:
         description: The display name for this incoming webhook
         type: string
 
+  OutgoingWebhook:
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this outgoing webhook
+        type: string
+      create_at:
+        type: integer
+      update_at:
+        type: integer
+      delete_at:
+        type: integer
+      creator_id:
+        description: The Id of the user who created the webhook
+        type: string
+      team_id:
+        description: The ID of the team that the webhook watchs
+        type: string
+      channel_id:
+        description: The ID of a public channel that the webhook watchs
+        type: string
+      description:
+        description: The description for this outgoing webhook
+        type: string
+      display_name:
+        description: The display name for this outgoing webhook
+        type: string
+      trigger_words:
+        description: List of words for the webhook to trigger on
+        type: array
+        items:
+          type: string
+      trigger_when:
+        description: When to trigger the webhook, `0` when a trigger word is present at all and `1` if the message starts with a trigger word
+        type: integer
+      callback_urls:
+        description: The URLs to POST the payloads to when the webhook is triggered
+        type: array
+        items:
+          type: string
+      content_type:
+        description: The format to POST the data in, either `application/json` or `application/x-www-form-urlencoded`
+        default: "application/x-www-form-urlencoded"
+        type: string
+
   Reaction:
     type: object
     properties:
