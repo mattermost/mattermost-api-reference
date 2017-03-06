@@ -56,7 +56,7 @@
       description: |
         Update a channel.
         ##### Permissions
-        If updating a public channel, `create_public_channel` permission is required. If creating a private channel, `create_private_channel` permission is required.
+        If updating a public channel, `manage_public_channel_members` permission is required. If creating a private channel, `manage_private_channel_members` permission is required.
       parameters:
         - in: body
           name: body
@@ -87,7 +87,7 @@
                 description: "'O' for a public channel, 'P' for a private channel"
       responses:
         '200':
-          description: Channel updated successful
+          description: Channel update successful
           schema:
             $ref: '#/definitions/Channel'
         '400':
