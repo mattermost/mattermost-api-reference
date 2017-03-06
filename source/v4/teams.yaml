@@ -122,18 +122,16 @@
           schema:
             type: object
             required:
-              - id
               - display_name
+              - description
+              - company_name
+              - allowed_domains
+              - invite_id
+              - allow_open_invite
             properties:
-              id:
-                type: string
               display_name:
                 type: string
               description:
-                type: string
-              email:
-                 type: string
-              type:
                 type: string
               company_name:
                 type: string
