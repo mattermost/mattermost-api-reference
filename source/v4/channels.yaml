@@ -199,6 +199,33 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/channels/{channel_id}/stats':
+    get:
+      tags:
+        - channels
+      summary: Get statistics for a channel.
+      description: |
+        Get statistics for a channel.
+        ##### Permissions
+        `read_channel` permission for the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel stats retrieval successful
+          schema:
+            $ref: '#/definitions/ChannelStats'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/channels/{channel_id}/members/{user_id}':
     get:
       tags:
