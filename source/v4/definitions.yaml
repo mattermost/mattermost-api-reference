@@ -1099,6 +1099,32 @@ definitions:
         description: `true` means good status
         type: boolean
 
+  Compliance:
+    type: object
+    properties:
+      id:
+        type: string
+      create_at:
+        type: integer
+      user_id:
+        type: string
+      status:
+        type: string
+      count:
+        type: integer
+      desc:
+        type: string
+      type:
+        type: string
+      start_at:
+        type: integer
+      end_at:
+        type: integer
+      keywords:
+        type: string
+      emails:
+        type: string
+
   AppError:
     type: object
     properties:
