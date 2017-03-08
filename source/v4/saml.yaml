@@ -70,7 +70,7 @@
         - SAML
       summary: Upload public certificate
       description: |
-        Upload the public certificate to be used with your SAML configuration. This will also set the filename for the PublicCertificateFile setting in your `config.json`.
+        Upload the public certificate to be used for encryption with your SAML configuration. This will also set the filename for the PublicCertificateFile setting in your `config.json`.
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
@@ -98,7 +98,7 @@
         - SAML
       summary: Remove public certificate
       description: |
-        Delete the current public certificate being used with your SAML configuration. This will also disable SAML on your system as this certificate is required for SAML.
+        Delete the current public certificate being used with your SAML configuration. This will also disable encryption for SAML on your system as this certificate is required for that.
         ##### Permissions
         Must have `manage_system` permission.
       responses:
@@ -119,7 +119,7 @@
         - SAML
       summary: Upload private key
       description: |
-        Upload the private key to be used with your SAML configuration. This will also set the filename for the PrivateKeyFile setting in your `config.json`.
+        Upload the private key to be used for encryption with your SAML configuration. This will also set the filename for the PrivateKeyFile setting in your `config.json`.
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
@@ -147,7 +147,7 @@
         - SAML
       summary: Remove private key
       description: |
-        Delete the current private key being used with your SAML configuration. This will also disable SAML on your system as this key is required for SAML.
+        Delete the current private key being used with your SAML configuration. This will also disable encryption for SAML on your system as this key is required for that.
         ##### Permissions
         Must have `manage_system` permission.
       responses:
