@@ -52,6 +52,24 @@
           $ref: '#/responses/InternalServerError'
 
   '/config':
+    get:
+      tags:
+        - system
+      summary: Get configuration
+      description: |
+        Retrieve the current server configuration
+        ##### Permissions
+        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+      responses:
+        '200':
+          description: Configuration retrieval successful
+          schema:
+            $ref: "#/definitions/Config"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+
     put:
       tags:
         - system
@@ -69,3 +87,4 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+
