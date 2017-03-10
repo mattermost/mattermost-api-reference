@@ -1086,6 +1086,19 @@ definitions:
           TurnSharedKey:
             type: string
 
+  SamlCertificateStatus:
+    type: object
+    properties:
+      idp_certificate_file:
+        description: `true` means good status
+        type: boolean
+      public_certificate_file:
+        description: `true` means good status
+        type: boolean
+      private_key_file:
+        description: `true` means good status
+        type: boolean
+
   AppError:
     type: object
     properties:
