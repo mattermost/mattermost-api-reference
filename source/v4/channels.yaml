@@ -56,7 +56,7 @@
       description: |
         Update a channel.
         ##### Permissions
-        If updating a public channel, `manage_public_channel_members` permission is required. If creating a private channel, `manage_private_channel_members` permission is required.
+        If updating a public channel, `manage_public_channel_members` permission is required. If updating a private channel, `manage_private_channel_members` permission is required.
       parameters:
         - in: body
           name: body
