@@ -112,7 +112,7 @@
         - teams
       summary: Get team public channels
       description: |
-        Get a page team public channel list based on query string parameters - team id, page and per page.
+        Get a page of public channels on a team based on query string parameters - team_id, page and per_page.
         ##### Permissions
         Must be authenticated and have the `list_team_channels` permission.
       parameters:
