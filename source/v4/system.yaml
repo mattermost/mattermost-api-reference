@@ -15,6 +15,7 @@
         '400':
           $ref: '#/responses/BadRequest'
 
+<<<<<<< HEAD
   '/database/recycle':
     post:
       tags:
@@ -50,3 +51,22 @@
           $ref: '#/responses/Forbidden'
         '500':
           $ref: '#/responses/InternalServerError'
+
+  '/config':
+    put:
+      tags:
+        - system
+      summary: Update configuration
+      description: |
+        Submit a new configuration for the server to use.
+        ##### Permissions
+        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+      responses:
+        '200':
+          description: Configuration update successful
+          schema:
+            $ref: "#/definitions/Config"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
