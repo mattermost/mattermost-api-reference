@@ -19,14 +19,14 @@
     post:
       tags:
         - system
-      summary: Recycle the database connection
+      summary: Recycle database connections
       description: |
-        Recycle the database connection
+        Recycle database connections by closing and reconnecting all connections to master and read replica databases.
         ##### Permissions
         Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
       responses:
         '200':
-          description: Database successful recycled
+          description: Database recycle successful
           schema:
             $ref: "#/definitions/StatusOK"
         '403':
