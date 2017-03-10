@@ -265,6 +265,8 @@ tags:
     description: Anything related to files uploaded by Mattermost users.
   - name: preferences
     description: Anything related to the current user's preferences which are used to store various settings in Mattermost.
+  - name: compliance
+    description: Endpoints for creating, getting and downloading compliance reports.
   - name: SAML
     description: Endpoints for configuring and interacting with SAML.
 schemes:
@@ -300,7 +302,7 @@ responses:
     schema:
       $ref: '#/definitions/AppError'
   'InternalServerError':
-    description: Internal Server Error
+    description: Something went wrong with the server
     schema:
       $ref: '#/definitions/AppError'
 paths:
