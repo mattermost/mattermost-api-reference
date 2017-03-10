@@ -299,4 +299,8 @@ responses:
     description: Feature is disabled
     schema:
       $ref: '#/definitions/AppError'
+  'InternalServerError':
+    description: Internal Server Error
+    schema:
+      $ref: '#/definitions/AppError'
 paths:

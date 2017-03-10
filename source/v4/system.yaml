@@ -31,3 +31,22 @@
             $ref: "#/definitions/StatusOK"
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/email/test':
+    post:
+      tags:
+        - system
+      summary: Send a test email
+      description: |
+        Send a test email to make sure you have your email settings configured correctly.
+        ##### Permissions
+        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+      responses:
+        '200':
+          description: Email successful sent
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
