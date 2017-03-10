@@ -88,3 +88,21 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/config/reload':
+    post:
+      tags:
+        - system
+      summary: Reload configuration
+      description: |
+        Reload the configuration file to pick up on any changes made to it.
+        ##### Permissions
+        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+      responses:
+        '200':
+          description: Configuration reload successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
