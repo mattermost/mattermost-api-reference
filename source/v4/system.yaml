@@ -15,7 +15,6 @@
         '400':
           $ref: '#/responses/BadRequest'
 
-<<<<<<< HEAD
   '/database/recycle':
     post:
       tags:
