@@ -269,6 +269,8 @@ tags:
     description: Endpoints for creating, getting and downloading compliance reports.
   - name: SAML
     description: Endpoints for configuring and interacting with SAML.
+  - name: LDAP
+    description: Endpoints for configuring and interacting with LDAP.
 schemes:
   - http
   - https
