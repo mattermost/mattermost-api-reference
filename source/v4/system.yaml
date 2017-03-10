@@ -14,3 +14,20 @@
             $ref: "#/definitions/StatusOK"
         '400':
           $ref: '#/responses/BadRequest'
+
+  '/database/recycle':
+    post:
+      tags:
+        - system
+      summary: Recycle database connections
+      description: |
+        Recycle database connections by closing and reconnecting all connections to master and read replica databases.
+        ##### Permissions
+        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+      responses:
+        '200':
+          description: Database recycle successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '403':
+          $ref: '#/responses/Forbidden'
