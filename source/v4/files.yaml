@@ -158,4 +158,35 @@
         '404':
           $ref: '#/responses/NotFound'
         '501':
-          $ref: '#/responses/NotImplemented' 
+          $ref: '#/responses/NotImplemented'
+
+  '/files/{file_id}/info':
+    get:
+      tags:
+        - files
+      summary: Get metadata for a file
+      description: |
+        Gets a file's info.
+        ##### Permissions
+        Must have `read_channel` permission or be uploader of the file.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file info to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The stored metadata for the given file
+          schema:
+            $ref: "#/definitions/FileInfo"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
