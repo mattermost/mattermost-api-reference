@@ -131,3 +131,31 @@
           $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented' 
+
+  '/files/{file_id}/link':
+    get:
+      tags:
+        - files
+      summary: Get a public file link
+      description: Gets a public link for a file that can be accessed without logging into Mattermost.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get a link for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A publicly accessible link to the given file
+          schema:
+            type: string
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented' 
