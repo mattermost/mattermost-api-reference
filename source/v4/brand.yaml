@@ -1,0 +1,46 @@
+  /brand/image:
+    get:
+      tags:
+        - brand
+      summary: Get brand image
+      description: |
+        Get the previously uploaded brand image.
+        ##### Permissions
+        No permission required.
+      responses:
+        '200':
+          description: Brand image retrieval successful
+          schema:
+            type: byte
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+    post:
+      tags:
+        - brand
+      summary: Upload brand image
+      description: |
+        Uploads a brand image.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: image
+          in: formData
+          description: The image to be uploaded
+          required: true
+          type: file
+      responses:
+        '200':
+          description: Brand image upload successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '413':
+          $ref: '#/responses/TooLarge'
+        '501':
+          $ref: '#/responses/NotImplemented'
