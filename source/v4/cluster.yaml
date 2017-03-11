@@ -1,0 +1,19 @@
+  /cluster/status:
+    get:
+      tags:
+        - cluster
+      summary: Get cluster status
+      description: |
+        Get a set of information for each node in the cluster, useful for checking the status and health of each node.
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Cluster status retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ClusterInfo'
+        '403':
+          $ref: '#/responses/Forbidden'
+
