@@ -101,6 +101,60 @@
         '404':
           $ref: '#/responses/NotFound'
 
+    put:
+      tags:
+        - teams
+      summary: Update a team
+      description: |
+        Update a team by providing the team object. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+        ##### Permissions
+        Must have the `manage_team` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Team to update
+          required: true
+          schema:
+            type: object
+            required:
+              - display_name
+              - description
+              - company_name
+              - allowed_domains
+              - invite_id
+              - allow_open_invite
+            properties:
+              display_name:
+                type: string
+              description:
+                type: string
+              company_name:
+                type: string
+              allowed_domains:
+                type: string
+              invite_id:
+                type: string
+              allow_open_invite:
+                type: string
+      responses:
+        '200':
+          description: Team update successful
+          schema:
+            $ref: '#/definitions/Team'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
   '/teams/name/{name}':
     get:
       tags:
@@ -181,7 +235,7 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
-          
+
   '/teams/{team_id}/members':
     get:
       tags:
@@ -256,6 +310,43 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+
+  '/teams/{team_id}/members/ids':
+    post:
+      tags:
+        - teams
+      summary: Get team members by ids
+      description: |
+        Get a list of team members based on a provided array of user ids.
+        ##### Permissions
+        Must have `view_team` permission for the team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: List of user ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Team members retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TeamMember'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
   '/teams/{team_id}/stats':
     get:
@@ -364,3 +455,37 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/users/{user_id}/teams/{team_id}/unread':
+    get:
+      tags:
+        - teams
+      summary: Get unreads for a team
+      description: |
+        Get the unread mention and message counts for a team for the specified user.
+        ##### Permissions
+        Must be the user or have `edit_other_users` permission and have `view_team` permission for the team.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Team unread count retrieval successful
+          schema:
+            $ref: '#/definitions/TeamUnread'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
