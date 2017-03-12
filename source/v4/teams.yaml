@@ -330,3 +330,37 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+
+  /users/{user_id}/teams/unread
+    get:
+      tags:
+        - teams
+      summary: Get team unreads for a user
+      description: |
+        Get the count for unread messages and mentions in the teams the user is a member of.
+        ##### Permissions
+        Must be logged in.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - name: exclude_team
+          in: query
+          description: Optional team id to be excluded from the results
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Team unreads retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TeamUnread'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
