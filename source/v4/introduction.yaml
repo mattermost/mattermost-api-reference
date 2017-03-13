@@ -267,6 +267,8 @@ tags:
     description: Anything related to the current user's preferences which are used to store various settings in Mattermost.
   - name: compliance
     description: Endpoints for creating, getting and downloading compliance reports.
+  - name: cluster
+    description: Endpoints for configuring and interacting with high availability clusters.
   - name: SAML
     description: Endpoints for configuring and interacting with SAML.
   - name: LDAP

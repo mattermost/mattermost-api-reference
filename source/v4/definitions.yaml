@@ -1184,6 +1184,31 @@ definitions:
       emails:
         type: string
 
+  ClusterInfo:
+    type: object
+    properties:
+      id:
+        description: The unique ID for the node
+        type: string
+      version:
+        description: The server version the node is on
+        type: string
+      config_hash:
+        description: The hash of the configuartion file the node is using
+        type: string
+      internode_url:
+        description: The URL used to communicate with those node from other nodes
+        type: string
+      hostname:
+        description: The hostname for this node
+        type: string
+      last_ping:
+        description: The time of the last ping to this node
+        type: integer
+      is_alive:
+        description: Whether or not the node is alive and well
+        type: boolean
+
   AppError:
     type: object
     properties:
