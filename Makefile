@@ -1,49 +1,62 @@
-.PHONY: build build-v3 build-v4
+.PHONY: build build-v3 build-v4 clean
 
-HTML_DIR = ./html/static
-V3_YAML = $(HTML_DIR)/mattermost-openapi-v3.yaml
-V4_YAML = $(HTML_DIR)/mattermost-openapi-v4.yaml
+V3_YAML = ./v3/html/static/mattermost-openapi-v3.yaml
+V4_YAML = ./v4/html/static/mattermost-openapi-v4.yaml
 
-SOURCE_DIR = ./source
-V3_DIR = $(SOURCE_DIR)/v3
-V4_DIR = $(SOURCE_DIR)/v4
+V3_SRC = ./v3/source
+V4_SRC = ./v4/source
 
 build: build-v3 build-v4
 
-build-v3:
+build-v3: .npminstall
 	@echo Building mattermost openapi yaml for v3
 
-	@cat $(V3_DIR)/introduction.yaml > $(V3_YAML)
-	@cat $(V3_DIR)/users.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/teams.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/channels.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/posts.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/files.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/admin.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/preferences.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/webhooks.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/reactions.yaml >> $(V3_YAML)
-	@cat $(V3_DIR)/definitions.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/introduction.yaml > $(V3_YAML)
+	@cat $(V3_SRC)/users.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/teams.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/channels.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/posts.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/files.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/admin.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/preferences.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/webhooks.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/reactions.yaml >> $(V3_YAML)
+	@cat $(V3_SRC)/definitions.yaml >> $(V3_YAML)
+
+	swagger validate $(V3_YAML)
 
 	@echo Complete
 
-build-v4:
+build-v4: .npminstall
 	@echo Building mattermost openapi yaml for v4
 
-	@cat $(V4_DIR)/introduction.yaml > $(V4_YAML)
-	@cat $(V4_DIR)/users.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/teams.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/channels.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/posts.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/preferences.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/files.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/system.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/webhooks.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/saml.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/compliance.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/ldap.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/cluster.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/brand.yaml >> $(V4_YAML)
-	@cat $(V4_DIR)/definitions.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/introduction.yaml > $(V4_YAML)
+	@cat $(V4_SRC)/users.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/teams.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/channels.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/posts.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/preferences.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/files.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/system.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/webhooks.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/saml.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/compliance.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/ldap.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/cluster.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/brand.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
+
+	swagger validate $(V4_YAML)
 
 	@echo Complete
+
+.npminstall:
+	@echo Getting dependencies using npm
+
+	npm install -g swagger-cli
+	touch $@
+
+clean:
+	@echo Cleaning
+
+	rm -f .npminstall

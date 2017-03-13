@@ -4,6 +4,7 @@
         - files
       summary: Upload a file
       description: Uploads a file that can later be attached to a post.
+      consumes: ["multipart/form-data"]
       parameters:
         - name: team_id
           in: path

@@ -12,16 +12,16 @@ All documentation is available under the terms of a [Creative Commons License](h
 
 We're accepting pull requests! Specifically we're looking for documenation on routes defined [here](https://github.com/mattermost/platform/tree/master/api).
 
-All the documentation is written in YAML and found in the [source](https://github.com/mattermost/mattermost-api-reference/tree/master/source) directory. APIv3 documentation is in the [v3 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/source/v3), and APIv4 documentation is in the [v4 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/source/v4).
+All the documentation is written in YAML and found in the [v3/source](https://github.com/mattermost/mattermost-api-reference/tree/master/v3/source) and [v4/source](https://github.com/mattermost/mattermost-api-reference/tree/master/v4/source) directories. APIv3 documentation is in the [v3 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/v3), and APIv4 documentation is in the [v4 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/v4).
 
-* When adding a new route, please add it to the correct file. For example, a channel route will go in [channels.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/source/channels.yaml).
-* To add a new tag, please do so in [introduction.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/source/introduction.yaml)
-* Definitions should be added to [definitions.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/source/definitions.yaml)
+* When adding a new route, please add it to the correct file. For example, a channel route will go in [channels.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/v4/source/channels.yaml).
+* To add a new tag, please do so in [introduction.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/v4/source/introduction.yaml)
+* Definitions should be added to [definitions.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/v4/source/definitions.yaml)
 
 There is no strict style guide but please try to follow the example of the existing documentation.
 
-To build the full YAML, run `make build` and it will be output to `html/static/mattermost-openapi.yaml`. To check for syntax, you can copy the contents of that into http://editor.swagger.io/ or you can look into using a commandline or ESLint-based syntax checker.
+To build the full YAML, run `make build` and it will be output to `html/static/mattermost-openapi.yaml`. This will also check syntax using [swagger-cli](https://github.com/BigstickCarpet/swagger-cli).
 
 ## Deployment
 
-Currently, deployment is handled manually and can be done by running `make build` and deploying the full `/html` directory to the hosted sited.
+Deployment is handled automatically by our Jenkins CLI machine. When a pull request is merged it will automatically be deployed to [https://api.mattermost.com](https://api.mattermost.com).
