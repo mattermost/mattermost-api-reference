@@ -1149,13 +1149,13 @@ definitions:
     type: object
     properties:
       idp_certificate_file:
-        description: `true` means good status
+        description: Status is good when `true`
         type: boolean
       public_certificate_file:
-        description: `true` means good status
+        description: Status is good when `true`
         type: boolean
       private_key_file:
-        description: `true` means good status
+        description: Status is good when `true`
         type: boolean
 
   Compliance:

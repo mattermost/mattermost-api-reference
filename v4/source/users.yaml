@@ -130,19 +130,17 @@
         ##### Permissions
         Requires an active session and `view_team` and `read_channel` on any teams or channels used to filter the results further.
       parameters:
-        - in_team: team_id
-          in: path
+        - name: team_id
+          in: query
           description: Team ID
-          required: true
           type: string
-        - in_channel: channel_id
-          in: path
+        - name: channel_id
+          in: query
           description: Channel ID
-          required: true
           type: string
-        - name: username
-          in: path
-          description: Username
+        - name: name
+          in: query
+          description: Username, nickname first name or last name
           required: true
           type: string
       responses:
@@ -389,12 +387,13 @@
         Set a user's profile image based on user_id string parameter.
         ##### Permissions
         Must be logged in as the user being updated or have the `edit_other_users` permission.
+      consumes: ["multipart/form-data"]
       parameters:
-        - name: files
+        - name: image
           in: formData
-          description: A file/image to be uploaded
+          description: The image to be uploaded
           required: true
-          type: image
+          type: file
         - name: user_id
           in: path
           description: User GUID
@@ -504,7 +503,7 @@
               - activate
             properties:
               activate:
-                description: `true` to activate MFA, `false` to disable
+                description: Use `true` to activate, `false` to deactivate
                 type: boolean
               code:
                 description: The code produced by your MFA client. Required if `activate` is true

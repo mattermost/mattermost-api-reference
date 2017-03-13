@@ -254,17 +254,17 @@ tags:
       To see how these actions work, please refer to either the [Golang WebSocket driver](https://github.com/mattermost/platform/blob/master/model/websocket_client.go) or our [JavaScript WebSocket driver](https://github.com/mattermost/mattermost-driver-javascript/blob/master/websocket_client.jsx).
 
   - name: users
-    description: Anything related to the user data model.
+    description: Endpoints for creating, getting and interacting with users.
   - name: teams
-    description: Anything related to the team data model.
+    description: Endpoints for creating, getting and interacting with teams.
   - name: channels
-    description: Anything related to the channel data model.
+    description: Endpoints for creating, getting and interacting with channels.
   - name: posts
-    description: Anything related to posts, the main messaging model in Mattermost.
+    description: Endpoints for creating, getting and interacting with posts.
   - name: files
-    description: Anything related to files uploaded by Mattermost users.
+    description: Endpoints for uploading and interacting with files.
   - name: preferences
-    description: Anything related to the current user's preferences which are used to store various settings in Mattermost.
+    description: Endpoints for saving and modifying user preferences.
   - name: compliance
     description: Endpoints for creating, getting and downloading compliance reports.
   - name: cluster

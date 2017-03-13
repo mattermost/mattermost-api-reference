@@ -70,6 +70,7 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
     delete:
       tags:
         - posts
@@ -96,7 +97,6 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-    '/posts/{post_id}':
     put:
       tags:
         - posts

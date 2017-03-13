@@ -11,7 +11,7 @@
         '200':
           description: Brand image retrieval successful
           schema:
-            type: byte
+            type: string
         '501':
           $ref: '#/responses/NotImplemented'
 
@@ -23,6 +23,7 @@
         Uploads a brand image.
         ##### Permissions
         Must have `manage_system` permission.
+      consumes: ["multipart/form-data"]
       parameters:
         - name: image
           in: formData

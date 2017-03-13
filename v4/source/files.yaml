@@ -7,6 +7,7 @@
         Uploads a file that can later be attached to a post.
         ##### Permissions
         Must have `upload_file` permission.
+      consumes: ["multipart/form-data"]
       parameters:
         - name: files
           in: formData

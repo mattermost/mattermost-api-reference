@@ -40,7 +40,6 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-    '/teams':
     get:
       tags:
         - teams
@@ -422,7 +421,7 @@
         '404':
           $ref: '#/responses/NotFound'
 
-  /users/{user_id}/teams/unread
+  '/users/{user_id}/teams/unread':
     get:
       tags:
         - teams
