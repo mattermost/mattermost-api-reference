@@ -194,6 +194,34 @@
         '404':
           $ref: '#/responses/NotFound'
 
+    delete:
+      tags:
+        - channels
+      summary: Delete a channel
+      description: |
+        Delete a channel based from provided channel id string.
+        ##### Permissions
+        `delete_public_channel` permission if the channel is public,
+        `delete_private_channel` permission if the channel is private,
+        or have `manage_system` permission.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channel deletion successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/teams/{team_id}/channels/{channel_name}':
     get:
       tags:
