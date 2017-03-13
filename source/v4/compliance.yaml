@@ -1,0 +1,113 @@
+  /compliance/reports:
+    post:
+      tags:
+        - compliance
+      summary: Create report
+      description: |
+        Create and save a compliance report.
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '201':
+          description: Compliance report creation successful
+          schema:
+            $ref: '#/definitions/Compliance'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+    get:
+      tags:
+        - compliance
+      summary: Get reports
+      description: |
+        Get a list of compliance reports previously created by page, selected with `page` and `per_page` query parameters.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of reports per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Compliance reports retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Compliance'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /compliance/reports/{report_id}:
+    get:
+      tags:
+        - compliance
+      summary: Get a report
+      description: |
+        Get a compliance reports previously created.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: report_id
+          in: path
+          description: Compliance report GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Compliance report retrieval successful
+          schema:
+            $ref: '#/definitions/Compliance'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /compliance/reports/{report_id}/download:
+    get:
+      tags:
+        - compliance
+      summary: Download a report
+      description: |
+        Download the full contents of a report as a file.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: report_id
+          in: path
+          description: Compliance report GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The compliance report file
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
