@@ -8,3 +8,4 @@
 *mattermost-openapi-v3.yaml
 *mattermost-openapi-v4.yaml
 .npminstall
+node_modules

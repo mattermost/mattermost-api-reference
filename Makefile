@@ -1,10 +1,10 @@
 .PHONY: build build-v3 build-v4 clean
 
-V3_YAML = ./v3/html/static/mattermost-openapi-v3.yaml
-V4_YAML = ./v4/html/static/mattermost-openapi-v4.yaml
+V3_YAML = v3/html/static/mattermost-openapi-v3.yaml
+V4_YAML = v4/html/static/mattermost-openapi-v4.yaml
 
-V3_SRC = ./v3/source
-V4_SRC = ./v4/source
+V3_SRC = v3/source
+V4_SRC = v4/source
 
 build: build-v3 build-v4
 
@@ -23,7 +23,7 @@ build-v3: .npminstall
 	@cat $(V3_SRC)/reactions.yaml >> $(V3_YAML)
 	@cat $(V3_SRC)/definitions.yaml >> $(V3_YAML)
 
-	swagger validate $(V3_YAML)
+	@node_modules/swagger-cli/bin/swagger.js validate $(V3_YAML)
 
 	@echo Complete
 
@@ -46,17 +46,18 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/brand.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
-	swagger validate $(V4_YAML)
+	@node_modules/swagger-cli/bin/swagger.js validate $(V4_YAML)
 
 	@echo Complete
 
 .npminstall:
 	@echo Getting dependencies using npm
 
-	npm install -g swagger-cli
+	npm install swagger-cli
 	touch $@
 
 clean:
 	@echo Cleaning
 
 	rm -f .npminstall
+	rm -rf node_modules
