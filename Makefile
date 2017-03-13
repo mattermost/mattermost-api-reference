@@ -43,6 +43,7 @@ build-v4:
 	@cat $(V4_DIR)/compliance.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/ldap.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/cluster.yaml >> $(V4_YAML)
+	@cat $(V4_DIR)/brand.yaml >> $(V4_YAML)
 	@cat $(V4_DIR)/definitions.yaml >> $(V4_YAML)
 
 	@echo Complete

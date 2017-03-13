@@ -269,6 +269,8 @@ tags:
     description: Endpoints for creating, getting and downloading compliance reports.
   - name: cluster
     description: Endpoints for configuring and interacting with high availability clusters.
+  - name: brand
+    description: Endpoints related to custom branding and white-labeling. See [our branding documentation](https://docs.mattermost.com/administration/branding.html) for more information.
   - name: SAML
     description: Endpoints for configuring and interacting with SAML.
   - name: LDAP
