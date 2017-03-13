@@ -316,6 +316,20 @@ definitions:
       value:
         type: string
 
+  UserAutocomplete:
+    type: object
+    properties:
+      users:
+        description: A list of users that are the main result of the query
+        type: array
+        items:
+          $ref: '#/definitions/User'
+      out_of_channel:
+        description: A special case list of users returned when autocompleting in a specific channel. Omitted when empty or not relevant
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
   UserAutocompleteInTeam:
     type: object
     properties:
