@@ -188,6 +188,8 @@ definitions:
           type: string
       pending_post_id:
         type: string
+      is_pinned:
+        type: number
 
   PostList:
     type: object

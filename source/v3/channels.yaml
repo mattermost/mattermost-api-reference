@@ -239,6 +239,26 @@
         '500':
           description: Could not retrieve the channel members
 
+  '/teams/{team_id}/channels/pinned':
+    get:
+      tags:
+        - channels
+      summary: Get a channel's pinned posts
+      description: Get a list of pinned posts for channel.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID to get the pinned posts for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The list of channel pinned posts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PostList'
+
   '/teams/{team_id}/channels/{channel_id}':
     get:
       tags:
