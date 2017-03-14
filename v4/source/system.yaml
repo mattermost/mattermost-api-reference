@@ -106,3 +106,20 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/caches/invalidate':
+    post:
+      tags:
+        - system
+      summary: Invalidate all the caches
+      description: |
+        Purge all the cache.
+        ##### Permissions
+        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+      responses:
+        '200':
+          description: Caches invalidate successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '403':
+          $ref: '#/responses/Forbidden'
