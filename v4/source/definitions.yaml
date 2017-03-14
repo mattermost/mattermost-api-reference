@@ -235,6 +235,18 @@ definitions:
       mention_count:
         type: integer
 
+  ChannelUnread:
+    type: object
+    properties:
+      team_id:
+        type: string
+      channel_id:
+        type: string
+      msg_count:
+        type: integer
+      mention_count:
+        type: integer
+
   Session:
     type: object
     properties:
