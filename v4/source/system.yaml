@@ -6,7 +6,7 @@
       description: |
         Receive a simple ping response.
         ##### Permissions
-        No special permissions required.
+        No permissions required.
       responses:
         '200':
           description: Ping successful
@@ -23,7 +23,7 @@
       description: |
         Recycle database connections by closing and reconnecting all connections to master and read replica databases.
         ##### Permissions
-        Must be authenticated and have the `manage_system` permission.
+        Must have `manage_system` permission.
       responses:
         '200':
           description: Database recycle successful
@@ -40,7 +40,7 @@
       description: |
         Send a test email to make sure you have your email settings configured correctly.
         ##### Permissions
-        Must be authenticated and have the `manage_system` permission.
+        Must have `manage_system` permission.
       responses:
         '200':
           description: Email successful sent
@@ -59,7 +59,7 @@
       description: |
         Retrieve the current server configuration
         ##### Permissions
-        Must be authenticated and have the `manage_system` permission.
+        Must have `manage_system` permission.
       responses:
         '200':
           description: Configuration retrieval successful
@@ -77,7 +77,7 @@
       description: |
         Submit a new configuration for the server to use.
         ##### Permissions
-        Must be authenticated and have the `manage_system` permission.
+        Must have `manage_system` permission.
       responses:
         '200':
           description: Configuration update successful
@@ -96,7 +96,7 @@
       description: |
         Reload the configuration file to pick up on any changes made to it.
         ##### Permissions
-        Must be authenticated and have the `manage_system` permission.
+        Must have `manage_system` permission.
       responses:
         '200':
           description: Configuration reload successful
@@ -115,7 +115,7 @@
       description: |
         Purge all the in-memory caches for the Mattermost server. This can have a temporary negative effect on performance while the caches are re-populated.
         ##### Permissions
-        Must be authenticated and have the `manage_system` permission.
+        Must have `manage_system` permission.
       responses:
         '200':
           description: Caches invalidate successful
@@ -123,3 +123,34 @@
             $ref: "#/definitions/StatusOK"
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/logs':
+    get:
+      tags:
+        - system
+      summary: Get logs
+      description: |
+        Get a page of server logs, selected with `page` and `per_page` query parameters.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of logs per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Logs retrieval successful
+          schema:
+            type: array
+            items:
+              type: string
+        '403':
+          $ref: '#/responses/Forbidden'
+
