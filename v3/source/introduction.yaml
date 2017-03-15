@@ -2,12 +2,13 @@ swagger: '2.0'
 info:
   description: |
 
-    ### API Version 4
     **In the coming months, Mattermost will be moving to API version 4. [The reference for the new API version can be found here](https://api.mattermost.com/v4/). API version 3 will be supported for at least six months after the full release of API version 4.**
+
+    ### Introduction
 
     The Mattermost Web Services API is used by Mattermost clients and third party applications to interact with the server. [JavaScript and Golang drivers, along with a Golang bot sample](https://api.mattermost.com/#tag/drivers) connecting to the APIs are also available.
 
-    This is the API reference for the [master branch](https://github.com/mattermost/platform) of the Mattermost server and will be the basis for the next version of Mattermost. For the most recent release of Mattermost see the [API reference here](https://api.mattermost.com).
+    This is the API reference for the [master](https://github.com/mattermost/platform) branch of the Mattermost server and will be the basis for the next version of Mattermost. For the most recent release of Mattermost see the [API reference here](https://api.mattermost.com).
 
     ### Changelog
 
