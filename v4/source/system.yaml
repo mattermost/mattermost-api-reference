@@ -23,7 +23,7 @@
       description: |
         Recycle database connections by closing and reconnecting all connections to master and read replica databases.
         ##### Permissions
-        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+        Must be authenticated and have the `manage_system` permission.
       responses:
         '200':
           description: Database recycle successful
@@ -40,7 +40,7 @@
       description: |
         Send a test email to make sure you have your email settings configured correctly.
         ##### Permissions
-        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+        Must be authenticated and have the `manage_system` permission.
       responses:
         '200':
           description: Email successful sent
@@ -59,7 +59,7 @@
       description: |
         Retrieve the current server configuration
         ##### Permissions
-        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+        Must be authenticated and have the `manage_system` permission.
       responses:
         '200':
           description: Configuration retrieval successful
@@ -77,7 +77,7 @@
       description: |
         Submit a new configuration for the server to use.
         ##### Permissions
-        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+        Must be authenticated and have the `manage_system` permission.
       responses:
         '200':
           description: Configuration update successful
@@ -96,7 +96,7 @@
       description: |
         Reload the configuration file to pick up on any changes made to it.
         ##### Permissions
-        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+        Must be authenticated and have the `manage_system` permission.
       responses:
         '200':
           description: Configuration reload successful
@@ -113,9 +113,9 @@
         - system
       summary: Invalidate all the caches
       description: |
-        Purge all the cache.
+        Purge all the in-memory caches for the Mattermost server. This can have a temporary negative effect on performance while the caches are re-populated.
         ##### Permissions
-        Must be authenticated and have the `PERMISSION_MANAGE_SYSTEM` permission.
+        Must be authenticated and have the `manage_system` permission.
       responses:
         '200':
           description: Caches invalidate successful
