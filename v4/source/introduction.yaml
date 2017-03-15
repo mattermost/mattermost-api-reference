@@ -3,24 +3,6 @@ info:
   description: |
     **Mattermost API version 4 is an active and in-progress project. We're looking for contributors to code server endpoints, build drivers and write documentation. If you're interested [please join our Mattermost instance](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and join the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).**
 
-    The Mattermost Web Services API is used by Mattermost clients and third party applications to interact with the server. [JavaScript and Golang drivers for](https://api.mattermost.com/#tag/drivers) connecting to the APIs are also available.
-
-    ### Support
-
-    Mattermost core committers work with the community to keep the API documentation up-to-date.
-
-    If you have questions on API routes not listed in this reference, please [join the Mattermost community server](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) to ask questions in the Developers channel, [or post questions to our Developer Discussion forum](http://forum.mattermost.org/c/dev).
-
-    [Bug reports](https://github.com/mattermost/mattermost-api-reference/issues) in the documentation or the API are also welcome, as are pull requests to fix the issues.
-
-    ### Contributing
-
-    When you have answers to API questions not addressed in our documentation we ask you to consider making a pull request to improve our reference. [Small changes](https://github.com/mattermost/mattermost-api-reference/commit/d574c0c1e95dc2228dc96663afd562f1305e3ece) and [larger changes](https://github.com/mattermost/mattermost-api-reference/commit/1ae3314f0935eebba8c885d8969dcad72f801501) are all welcome.
-
-    We also have [Help Wanted tickets](https://github.com/mattermost/mattermost-api-reference/issues) available for community members who would like to help others more easily use the APIs. We acknowledge everyone's contribution in the [release notes of our next version](https://docs.mattermost.com/administration/changelog.html#contributors).
-
-    The source code for this API reference is hosted at https://github.com/mattermost/mattermost-api-reference.
-
   version: 4.0.0
   title: Mattermost API Reference
   termsOfService: 'https://about.mattermost.com/default-terms/'
@@ -32,6 +14,25 @@ info:
 basePath: /api/v4
 host: your-mattermost-url.com
 tags:
+  - name: introduction
+    description: |
+      The Mattermost Web Services API is used by Mattermost clients and third party applications to interact with the server. [JavaScript and Golang drivers for](/#tag/drivers) connecting to the APIs are also available.
+
+      ### Support
+
+      Mattermost core committers work with the community to keep the API documentation up-to-date.
+
+      If you have questions on API routes not listed in this reference, please [join the Mattermost community server](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) to ask questions in the Developers channel, [or post questions to our Developer Discussion forum](http://forum.mattermost.org/c/dev).
+
+      [Bug reports](https://github.com/mattermost/mattermost-api-reference/issues) in the documentation or the API are also welcome, as are pull requests to fix the issues.
+
+      ### Contributing
+
+      When you have answers to API questions not addressed in our documentation we ask you to consider making a pull request to improve our reference. [Small changes](https://github.com/mattermost/mattermost-api-reference/commit/d574c0c1e95dc2228dc96663afd562f1305e3ece) and [larger changes](https://github.com/mattermost/mattermost-api-reference/commit/1ae3314f0935eebba8c885d8969dcad72f801501) are all welcome.
+
+      We also have [Help Wanted tickets](https://github.com/mattermost/mattermost-api-reference/issues) available for community members who would like to help others more easily use the APIs. We acknowledge everyone's contribution in the [release notes of our next version](https://docs.mattermost.com/administration/changelog.html#contributors).
+
+      The source code for this API reference is hosted at https://github.com/mattermost/mattermost-api-reference.
   - name: schema
     description: All API access is through HTTP(S) requests at `your-mattermost-url.com/api/v4`. All request and response bodies are `application/json`.
   - name: drivers
@@ -84,10 +85,11 @@ tags:
       #### OAuth 2.0
       
       Mattermost has the ability to act as an [OAuth 2.0](https://tools.ietf.org/html/rfc6749) service provider.
+
+      The official documentation for [using your Mattermot server as an OAuth 2.0 service provider can be found here.](https://docs.mattermost.com/developer/oauth-2-0-applications.html)
       
       For an example on how to register an OAuth 2.0 app with your Mattermost instance, please see the [Mattermost-Zapier integration documentation](https://docs.mattermost.com/integrations/zapier.html#register-zapier-as-an-oauth-2-0-application).
       
-      Additional documentation on using Mattermost as an OAuth 2.0 service provider will be added here in the future.
   - name: errors
     description: |
       All errors will return an appropriate HTTP response code along with the following JSON body:
@@ -275,10 +277,15 @@ tags:
     description: Endpoints for configuring and interacting with SAML.
   - name: LDAP
     description: Endpoints for configuring and interacting with LDAP.
+  - name: system
+    description: General endpoints for interating with the server, such as configuration and logging.
 x-tagGroups:
   - name: Introduction
     tags:
+      - introduction
       - schema
+  - name: Standard Features
+    tags:
       - drivers
       - authentication
       - errors
@@ -292,13 +299,13 @@ x-tagGroups:
       - posts
       - files
       - preferences
+      - webhooks
+      - system
       - compliance
       - cluster
       - brand
       - SAML
       - LDAP
-      - system
-      - webhooks
 schemes:
   - http
   - https
