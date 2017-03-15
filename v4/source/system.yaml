@@ -107,6 +107,36 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/audits':
+    get:
+      tags:
+        - system
+      summary: Get audits
+      description: |
+        Get a page of audits for all users on the system, selected with `page` and `per_page` query parameters.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of audits per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Audits retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Audit"
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/caches/invalidate':
     post:
       tags:
