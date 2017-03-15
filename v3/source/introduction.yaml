@@ -1,6 +1,10 @@
 swagger: '2.0'
 info:
   description: |
+
+    ### API Version 4
+    **In the coming months, Mattermost will be moving to API version 4. [The reference for the new API version can be found here](https://api.mattermost.com/v4/). API version 3 will be supported for at least six months after the full release of API version 4.**
+
     The Mattermost Web Services API is used by Mattermost clients and third party applications to interact with the server. [JavaScript and Golang drivers, along with a Golang bot sample](https://api.mattermost.com/#tag/drivers) connecting to the APIs are also available.
 
     This is the API reference for the [master branch](https://github.com/mattermost/platform) of the Mattermost server and will be the basis for the next version of Mattermost. For the most recent release of Mattermost see the [API reference here](https://api.mattermost.com).
@@ -9,6 +13,8 @@ info:
 
     The [Mattermost server changelog](https://docs.mattermost.com/administration/changelog.html) documents API changes since Mattermost server v3.2:
 
+    * [Changes to Mattermost Server 3.7 API from 3.6 API](https://docs.mattermost.com/administration/changelog.html#api-changes-from-v3-6-to-v3-7)
+    * [Changes to Mattermost Server 3.6 API from 3.5 API](https://docs.mattermost.com/administration/changelog.html#api-changes-from-v3-5-to-v3-6)
     * [Changes to Mattermost Server 3.5 API from 3.4 API](https://docs.mattermost.com/administration/changelog.html#api-changes-from-v3-4-to-v3-5)
     * [Changes to Mattermost Server 3.4 API from 3.3 API](https://docs.mattermost.com/administration/changelog.html#api-changes-from-v3-3-to-v3-4)
     * [Changes to Mattermost Server 3.3 API from 3.2 API](https://docs.mattermost.com/administration/changelog.html#api-changes-from-v3-2-to-v3-3)
