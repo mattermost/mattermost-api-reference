@@ -275,6 +275,30 @@ tags:
     description: Endpoints for configuring and interacting with SAML.
   - name: LDAP
     description: Endpoints for configuring and interacting with LDAP.
+x-tagGroups:
+  - name: Introduction
+    tags:
+      - schema
+      - drivers
+      - authentication
+      - errors
+      - rate limiting
+      - WebSocket
+  - name: Endpoints
+    tags:
+      - users
+      - teams
+      - channels
+      - posts
+      - files
+      - preferences
+      - compliance
+      - cluster
+      - brand
+      - SAML
+      - LDAP
+      - system
+      - webhooks
 schemes:
   - http
   - https
