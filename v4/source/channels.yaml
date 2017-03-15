@@ -351,7 +351,41 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  '/channels/{channel_id}/members/ids':
+    post:
+      tags:
+        - channels
+      summary: Add a user
+      description: Add a user to the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: The channel ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - user_id
+            properties:
+              user_id:
+                type: string
+                description: The user_id of the user to add to the channel.
+      responses:
+        '200':
+          description: Channel member retrieval successful
+          schema:
+            $ref: '#/definitions/ChannelMember'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+'/channels/{channel_id}/members/ids':
     post:
       tags:
         - channels
