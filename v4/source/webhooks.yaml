@@ -125,11 +125,23 @@
           schema:
             type: object
             required:
+              - hook_id
               - channel_id
+              - display_name
+              - description
             properties:
+              hook_id:
+                type: string
+                description: Outgoing webhook GUID
               channel_id:
                 type: string
                 description: The ID of a public channel or private group that receives the webhook payloads.
+              display_name:
+                  type: string
+                  description: The display name for this incoming webhook
+              description:
+                type: string
+                description: The description for this incoming webhook
       responses:
         '200':
           description: Webhook update successful
