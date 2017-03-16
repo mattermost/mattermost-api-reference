@@ -291,3 +291,32 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+
+  /hooks/outgoing/{hook_id}/regen_token:
+    post:
+      tags:
+        - webhooks
+      summary: Regenerate the token for the outgoing webhook.
+      description: |
+        Regenerate the token for the outgoing webhook.
+        ##### Permissions
+        `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      parameters:
+        - name: hook_id
+          in: path
+          description: Outgoing webhook GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Webhook token regenerate successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
