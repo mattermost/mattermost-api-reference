@@ -118,6 +118,18 @@
           description: Incoming Webhook GUID
           required: true
           type: string
+        - in: body
+          name: body
+          description: Incoming webhook to be updated
+          required: true
+          schema:
+            type: object
+            required:
+              - channel_id
+            properties:
+              channel_id:
+                type: string
+                description: The ID of a public channel or private group that receives the webhook payloads.
       responses:
         '200':
           description: Webhook update successful
