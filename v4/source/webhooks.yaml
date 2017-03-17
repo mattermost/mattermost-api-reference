@@ -240,3 +240,54 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+    put:
+      tags:
+        - webhooks
+      summary: Update an outgoing webhook
+      description: |
+        Update an outgoing webhook given the hook id.
+        ##### Permissions
+        `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      parameters:
+        - name: hook_id
+          in: path
+          description: outgoing Webhook GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Outgoing webhook to be updated
+          required: true
+          schema:
+            type: object
+            required:
+              - hook_id
+              - channel_id
+              - display_name
+              - description
+            properties:
+              hook_id:
+                type: string
+                description: Outgoing webhook GUID
+              channel_id:
+                type: string
+                description: The ID of a public channel or private group that receives the webhook payloads.
+              display_name:
+                  type: string
+                  description: The display name for this incoming webhook
+              description:
+                type: string
+                description: The description for this incoming webhook
+      responses:
+        '200':
+          description: Webhook update successful
+          schema:
+            $ref: '#/definitions/OutgoingWebhook'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
