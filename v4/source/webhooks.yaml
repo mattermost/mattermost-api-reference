@@ -132,7 +132,7 @@
             properties:
               hook_id:
                 type: string
-                description: Outgoing webhook GUID
+                description: Incoming webhook GUID
               channel_id:
                 type: string
                 description: The ID of a public channel or private group that receives the webhook payloads.
