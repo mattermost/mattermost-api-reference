@@ -458,11 +458,11 @@
           schema:
             type: object
             required:
-              - current_password
+              - code
               - new_password
             properties:
-              current_password:
-                description: The current password for the user
+              code:
+                description: The recovery code
                 type: string
               new_password:
                 description: The new password for the user
@@ -542,11 +542,11 @@
           schema:
             type: object
             required:
-              - code
+              - current_password
               - new_password
             properties:
-              code:
-                description: The recovery code
+              current_password:
+                description: The current password for the user
                 type: string
               new_password:
                 description: The new password for the user
