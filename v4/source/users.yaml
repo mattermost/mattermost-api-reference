@@ -120,6 +120,54 @@
         '401':
           $ref: '#/responses/Unauthorized'
 
+  /users/search:
+    post:
+      tags:
+        - users
+      summary: Search users
+      description: |
+        Get a list of users based on search criteria provided in the request body. Searches are typically done against username, full name, nickname and email unless otherwise configured by the server.
+        ##### Permissions
+        Requires an active session and `read_channel` and/or `view_team` permissions for any channels or teams specified in the request body.
+      parameters:
+        - in: body
+          name: body
+          description: Search criteria
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+            properties:
+              term:
+                description: The term to match against username, full name, nickname and email
+                type: string
+              team_id:
+                description: If provided, only search users on this team
+                type: string
+              in_channel_id:
+                description: If provided, only search users in this channel
+                type: string
+              not_in_channel_id:
+                description: If provided, only search users not in this channel. Must specifiy `team_id` when using this option
+                type: string
+              allow_inactive:
+                description: When `true`, include deactivated users in the results
+                type: boolean
+      responses:
+        '200':
+          description: User list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   /users/autocomplete:
     get:
       tags:
@@ -152,6 +200,8 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
   /users/{user_id}:
     get:
