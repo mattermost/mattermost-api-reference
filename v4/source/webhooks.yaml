@@ -265,6 +265,33 @@
           $ref: '#/responses/NotFound'
 
   /hooks/outgoing/{hook_id}:
+    get:
+      tags:
+        - webhooks
+      summary: Get an outgoing webhook
+      description: |
+        Get an outgoing webhook given the hook id.
+        ##### Permissions
+        `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      parameters:
+        - name: hook_id
+          in: path
+          description: Outgoing webhook GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Outgoing webhook retrieval successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
     delete:
       tags:
         - webhooks
