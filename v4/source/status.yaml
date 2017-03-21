@@ -1,0 +1,16 @@
+  /users/{user_id}/status:
+    get:
+      tags:
+        - status
+      summary: Get user status
+      description: |
+        Get user status by id from the server.
+        ##### Permissions
+        Must be authenticated.
+      responses:
+        '200':
+          description: User status retrieval successful
+          schema:
+            type: '#/definitions/Status'
+        '401':
+          $ref: '#/responses/Unauthorized'

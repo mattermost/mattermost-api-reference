@@ -1233,6 +1233,20 @@ definitions:
       request_id:
         type: string
 
+  Status:
+    type: object
+    properties:
+      user_id:
+        type: string
+      status:
+        type: string
+      manual:
+        type: boolean
+      last_activity_at:
+        type: integer
+      active_channel:
+        type: string
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
