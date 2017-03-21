@@ -34,7 +34,10 @@ tags:
 
       The source code for this API reference is hosted at https://github.com/mattermost/mattermost-api-reference.
   - name: schema
-    description: All API access is through HTTP(S) requests at `your-mattermost-url.com/api/v4`. All request and response bodies are `application/json`.
+    description: |
+      All API access is through HTTP(S) requests at `your-mattermost-url.com/api/v4`. All request and response bodies are `application/json`.
+
+      When using endpoints that require a user id, the string `me` can be used in place of the user id to indicate the action is to be taken for the logged in user.
   - name: drivers
     description: |
       The easiest way to interact with the Mattermost Web Service API is through a language specific driver. These can be found at the following links:
@@ -256,7 +259,10 @@ tags:
       To see how these actions work, please refer to either the [Golang WebSocket driver](https://github.com/mattermost/platform/blob/master/model/websocket_client.go) or our [JavaScript WebSocket driver](https://github.com/mattermost/mattermost-driver-javascript/blob/master/websocket_client.jsx).
 
   - name: users
-    description: Endpoints for creating, getting and interacting with users.
+    description: |
+      Endpoints for creating, getting and interacting with users.
+
+      When using endpoints that require a user id, the string `me` can be used in place of the user id to indicate the action is to be taken for the logged in user.
   - name: teams
     description: Endpoints for creating, getting and interacting with teams.
   - name: channels
