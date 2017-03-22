@@ -76,6 +76,10 @@
           in: query
           description: The ID of the channel to exclude users for. Must be used with "in_channel" query parameter.
           type: string
+        - name: without_team:
+          in: query
+          description: Whether or not to list users that are not on any team. This option takes precendence over `in_team`, `in_channel`, and `not_in_channel`.
+          type: boolean
       responses:
         '200':
           description: User page retrieval successful
