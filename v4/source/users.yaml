@@ -154,6 +154,9 @@
               allow_inactive:
                 description: When `true`, include deactivated users in the results
                 type: boolean
+              without_team:
+                type: boolean
+                description: Set this to `true` if you would like to search for users that are not on a team. This option takes precendence over `team_id`, `in_channel_id`, and `not_in_channel_id`.
       responses:
         '200':
           description: User list retrieval successful
