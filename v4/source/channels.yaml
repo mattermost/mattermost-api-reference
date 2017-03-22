@@ -314,7 +314,7 @@
       description: |
         Search public channels on a team based on the search term provided in the request body.
         ##### Permissions
-        Must be authenticated and have the `list_team_channels` permission.
+        Must have the `list_team_channels` permission.
       parameters:
         - name: team_id
           in: path
@@ -353,7 +353,7 @@
     get:
       tags:
         - channels
-      summary: Get a channel by name.
+      summary: Get a channel by name
       description: |
         Gets channel from the provided team id and channel name strings.
         ##### Permissions
@@ -385,7 +385,7 @@
     get:
       tags:
         - channels
-      summary: Get a channel by name and team name.
+      summary: Get a channel by name and team name
       description: |
         Gets a channel from the provided team name and channel name strings.
         ##### Permissions
