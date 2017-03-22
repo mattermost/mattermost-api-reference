@@ -80,6 +80,38 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /channels/ids:
+    post:
+      tags:
+        - channels
+      summary: Get a list of channels by ids
+      description: |
+        Get a list of channels where the logged in user is member of based on the provided channel ids.
+        ##### Permissions
+        Must have logged in.
+      parameters:
+        - in: body
+          name: body
+          description: List of channel ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: channel list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
+
   '/channels/{channel_id}':
     get:
       tags:
