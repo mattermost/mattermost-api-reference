@@ -12,5 +12,7 @@
           description: User status retrieval successful
           schema:
             type: '#/definitions/Status'
+        '400':
+          $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
