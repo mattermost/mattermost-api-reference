@@ -154,6 +154,50 @@
         '404':
           $ref: '#/responses/NotFound'
 
+  '/teams/{team_id}/patch':
+    put:
+      tags:
+        - teams
+      summary: Patch a team
+      description: |
+        Partially update a team by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+        ##### Permissions
+        Must have the `manage_team` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Team object that is to be updated
+          required: true
+          schema:
+            type: object
+            properties:
+              display_name:
+                type: string
+              description:
+                type: string
+              company_name:
+                 type: string
+              invite_id:
+                type: string
+              allow_open_invite:
+                type: boolean
+      responses:
+        '200':
+          description: team patch successful
+          schema:
+            $ref: '#/definitions/Team'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/teams/name/{name}':
     get:
       tags:
