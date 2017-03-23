@@ -186,7 +186,7 @@
         - posts
       summary: Get posts for a channel
       description: |
-        Get a page of posts in a channel.
+        Get a page of posts in a channel. Use the query parameters to modify the behaviour of this endpoint. The parameters `since`, `before` and `after` must not be used together.
         ##### Permissions
         Must have `read_channel` permission for the channel.
       parameters:
@@ -204,6 +204,18 @@
           in: query
           description: The number of posts per page
           default: "60"
+          type: string
+        - name: since
+          in: query
+          description: Provide a non-zero value in Unix time milliseconds to select posts created after that time
+          type: integer
+        - name: before
+          in: query
+          description: A post id to select the posts that came before this one
+          type: string
+        - name: after
+          in: query
+          description: A post id to select the posts that came after this one
           type: string
       responses:
         '200':
