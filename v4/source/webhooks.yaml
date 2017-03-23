@@ -283,7 +283,7 @@
         '200':
           description: Outgoing webhook retrieval successful
           schema:
-            $ref: '#/definitions/StatusOK'
+            $ref: '#/definitions/OutgoingWebhook'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
