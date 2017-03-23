@@ -1,0 +1,35 @@
+  /commands:
+    post:
+      tags:
+        - commands
+      summary: Create a command
+      description: |
+        Create a command for a team.
+        ##### Permissions
+        `manage_slash_commands` for the team the command is in.
+      parameters:
+        - in: body
+          name: body
+          description: command to be created
+          required: true
+          schema:
+            type: object
+            required:
+              - creator_id
+              - team_id
+              - method
+              - trigger
+              - url
+      responses:
+        '201':
+          description: Command creation successful
+          schema:
+            $ref: "#/definitions/Command"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
