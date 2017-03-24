@@ -22,6 +22,6 @@ There is no strict style guide but please try to follow the example of the exist
 
 To build the full YAML, run `make build` and it will be output to `html/static/mattermost-openapi.yaml`. This will also check syntax using [swagger-cli](https://github.com/BigstickCarpet/swagger-cli).
 
-## Deployment
+## Deployment 
 
 Deployment is handled automatically by our Jenkins CLI machine. When a pull request is merged it will automatically be deployed to [https://api.mattermost.com](https://api.mattermost.com).
