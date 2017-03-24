@@ -1,5 +1,5 @@
   /brand/image:
-    get:
+    get:sdgdsgdsdsh
       tags:
         - brand
       summary: Get brand image
