@@ -334,11 +334,11 @@
           description: Team GUID
           required: true
           type: string
-        - name: user_id
-          in: query
-          description: The user_id of the user to add to the team.
-          required: false
-          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TeamMember'
         - name: hash
           in: query
           description: Hash value with time, team id and and InviteSaltId
