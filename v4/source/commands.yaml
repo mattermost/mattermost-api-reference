@@ -20,6 +20,22 @@
               - method
               - trigger
               - url
+            properties:
+              creator_id:
+                type: string
+                description: User Id who you are creating the command
+              team_id:
+                type: string
+                description: Team ID to where the command should be created
+              method:
+                type: string
+                description: "`'P'` for post request, `'G'` for get request"
+              trigger:
+                type: string
+                description: Activation word to trigger the command
+              url:
+                type: string
+                description: The URL that the command will make the request
       responses:
         '201':
           description: Command creation successful
