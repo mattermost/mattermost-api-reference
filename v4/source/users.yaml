@@ -772,19 +772,16 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  /users/{user_id}/verify/email:
+  /users/email/verify:
     post:
       tags:
         - users
       summary: Verify user email
       description: |
         Verify the email used by a user to sign-up their account with.
+        ##### Permissions
+        No permissions required.
       parameters:
-        - name: user_id
-          in: path
-          description: User GUID
-          required: true
-          type: string
         - in: body
           name: body
           required: true
@@ -794,16 +791,46 @@
               - userId
               - hashId
             properties:
-              userId:
-                description: The User GUID
+              user_id:
+                description: The user GUID
                 type: string
-              hashId:
-                description: The hash with UserId and InviteSaltId
+              hash_id:
+                description: The salted hash of the user GUID
                 type: string
       responses:
         '200':
-          description: User verification successful
+          description: User email verification successful
           schema:
             $ref: '#/definitions/StatusOK'
         '400':
           $ref: '#/responses/BadRequest'
+
+  /users/email/verify/send:
+    post:
+      tags:
+        - users
+      summary: Send verification email
+      description: |
+        Send an email with a verification link to a user that has an email matching the one in the request body. This endpoint will return success even if the email does not match any users on the system.
+        ##### Permissions
+        No permissions required.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                description: Email of a user
+                type: string
+      responses:
+        '200':
+          description: Email send successful if email exists
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+
