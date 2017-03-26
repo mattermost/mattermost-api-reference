@@ -190,6 +190,54 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/channels/{channel_id}/patch':
+    put:
+      tags:
+        - channels
+      summary: Patch a channel
+      description: |
+        Partially update a channel by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+        ##### Permissions
+        If updating a public channel, `manage_public_channel_members` permission is required. If updating a private channel, `manage_private_channel_members` permission is required.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Channel object to be updated
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The unique handle for the channel, will be present in the channel URL
+              display_name:
+                type: string
+                description: The non-unique UI name for the channel
+              purpose:
+                type: string
+                description: A short description of the purpose of the channel
+              header:
+                type: string
+                description: Markdown-formatted text to display in the header of the channel
+      responses:
+        '200':
+          description: Channel patch successful
+          schema:
+            $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
   '/channels/{channel_id}/stats':
     get:
       tags:
@@ -244,7 +292,50 @@
           type: string
       responses:
         '201':
-          description: Team public channels retrieval successful
+          description: Channels retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  '/teams/{team_id}/channels/search':
+    post:
+      tags:
+        - teams
+      summary: Search channels
+      description: |
+        Search public channels on a team based on the search term provided in the request body.
+        ##### Permissions
+        Must have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Search criteria
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+            properties:
+              term:
+                description: The search term to match against the name or display name of channels
+                type: string
+      responses:
+        '201':
+          description: Channels search successful
           schema:
             type: array
             items:
@@ -262,7 +353,7 @@
     get:
       tags:
         - channels
-      summary: Get a channel by name.
+      summary: Get a channel by name
       description: |
         Gets channel from the provided team id and channel name strings.
         ##### Permissions
@@ -294,7 +385,7 @@
     get:
       tags:
         - channels
-      summary: Get a channel by name and team name.
+      summary: Get a channel by name and team name
       description: |
         Gets a channel from the provided team name and channel name strings.
         ##### Permissions
@@ -569,7 +660,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  '/users/{user_id}/teams/{team_id}/members':
+  '/users/{user_id}/teams/{team_id}/channels/members':
     get:
       tags:
         - channels
@@ -577,7 +668,7 @@
       description: |
         Get all channel members on a team for a user.
         ##### Permissions
-        Logged in as user and `view_team` permission for the channel. Having `manage_system` permission voids the previous requirements.
+        Logged in as the user and `view_team` permission for the team. Having `manage_system` permission voids the previous requirements.
       parameters:
         - name: user_id
           in: path
@@ -602,6 +693,42 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/users/{user_id}/teams/{team_id}/channels':
+    get:
+      tags:
+        - channels
+      summary: Get channels for user
+      description: |
+        Get all the channels on a team for a user.
+        ##### Permissions
+        Logged in as the user, or have `edit_other_users` permission, and `view_team` permission for the team.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Channels retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
 
   '/users/{user_id}/channels/{channel_id}/unread':
     get:
