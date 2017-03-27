@@ -1,0 +1,34 @@
+  /posts:
+    post:
+      tags:
+        - emoji
+      summary: Create a custom emoji
+      description: |
+        Create a custom emoji for the team.
+        ##### Permissions
+        Must be authenticated.
+      consumes: ["multipart/form-data"]
+      parameters:
+        - name: files
+          in: formData
+          description: A file to be uploaded
+          required: true
+          type: file
+        - name: emoji
+          in: formData
+          description: The Emoji object
+          required: true
+          type: object
+      responses:
+        '201':
+          description: Emoji creation successful
+          schema:
+            $ref: '#/definitions/Emoji'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '413':
+          $ref: '#/responses/TooLarge'

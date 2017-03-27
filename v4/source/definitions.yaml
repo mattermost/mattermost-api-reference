@@ -448,6 +448,28 @@ definitions:
         description: The time at which this reaction was made
         type: integer
 
+  Emoji:
+    type: object
+    properties:
+      id:
+        description: The ID of the emoji
+        type: string
+      creator_id:
+        description: The ID of the user that made the emoji
+        type: string
+      name:
+        description: The name of the emoji
+        type: string
+      create_at:
+        description: The time at which the emoji was made
+        type: integer
+      update_at:
+        description: The time at which the emoji was updated.
+        type: integer
+      delete_at:
+        description: The time at which the emoji was deleted.
+        type: integer
+
   Command:
     type: object
     properties:
