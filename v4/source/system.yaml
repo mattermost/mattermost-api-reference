@@ -107,6 +107,52 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/config/client':
+    get:
+      tags:
+        - system
+      summary: Get client configuration
+      description: |
+        Get a subset of the server configuration needed by the client.
+        ##### Permissions
+        No permission required.
+      parameters:
+        - name: format
+          in: query
+          required: true
+          description: Must be `old`, other formats not implemented yet
+          type: string
+      responses:
+        '200':
+          description: Configuration retrieval successful
+        '400':
+          $ref: '#/responses/BadRequest'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/license/client':
+    get:
+      tags:
+        - system
+      summary: Get client license
+      description: |
+        Get a subset of the server license needed by the client.
+        ##### Permissions
+        No permission required.
+      parameters:
+        - name: format
+          in: query
+          required: true
+          description: Must be `old`, other formats not implemented yet
+          type: string
+      responses:
+        '200':
+          description: License retrieval successful
+        '400':
+          $ref: '#/responses/BadRequest'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
   '/audits':
     get:
       tags:
