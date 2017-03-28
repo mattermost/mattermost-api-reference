@@ -291,7 +291,7 @@
           default: "60"
           type: string
       responses:
-        '201':
+        '200':
           description: Channels retrieval successful
           schema:
             type: array
