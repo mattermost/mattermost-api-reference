@@ -743,6 +743,37 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/sessions/device:
+    put:
+      tags:
+        - users
+      summary: Attach mobile device
+      description: |
+        Attach a mobile device id to the currently logged in session. This will enable push notiofications for a user, if configured by the server.
+        ##### Permissions
+        Must be authenticated.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - device_id
+            properties:
+              device_id:
+                description: Mobile device id. For Android prefix the id with `android:` and Apple with `apple:`
+                type: string
+      responses:
+        '200':
+          description: Device id attach successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
   /users/{user_id}/audits:
     get:
       tags:
