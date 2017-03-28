@@ -31,7 +31,7 @@
           required: true
           type: file
       responses:
-        '200':
+        '201':
           description: Brand image upload successful
           schema:
             $ref: '#/definitions/StatusOK'
