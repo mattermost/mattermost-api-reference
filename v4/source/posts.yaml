@@ -271,3 +271,57 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/posts/{post_id}/pin':
+    post:
+      tags:
+        - posts
+      summary: Pin a post to the channel
+      description: |
+        Pin a post to a channel it is in based from the provided post id string.
+        ##### Permissions
+        Must be authenticated and have the `read_channel` permission to the channel the post is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Pinned post successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  '/posts/{post_id}/unpin':
+    post:
+      tags:
+        - posts
+      summary: Unpin a post to the channel
+      description: |
+        Unpin a post to a channel it is in based from the provided post id string.
+        ##### Permissions
+        Must be authenticated and have the `read_channel` permission to the channel the post is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Unpinned post successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
