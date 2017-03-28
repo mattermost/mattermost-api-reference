@@ -572,7 +572,79 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
 
+  /users/{user_id}/mfa/generate:
+    post:
+      tags:
+        - users
+      summary: Generate MFA secret
+      description: |
+        Generates an multi-factor authentication secret for a user and returns it as a string and as base64 encoded QR code image.
+        ##### Permissions
+        Must be logged in as the user or have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: MFA secret generation successful
+          schema:
+            type: object
+            properties:
+              secret:
+                description: The MFA secret as a string
+                type: string
+              qr_code:
+                description: A base64 encoded QR code image
+                type: string
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /users/mfa:
+    post:
+      tags:
+        - users
+      summary: Check MFA
+      description: |
+        Check if a user has multi-factor authentication active on their account by providing a login id. Used to check whether an MFA code needs to be provided when logging in.
+        ##### Permissions
+        No permission required.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - login_id
+            properties:
+              login_id:
+                description: The email or username used to login
+                type: string
+      responses:
+        '200':
+          description: MFA check successful
+          schema:
+            type: object
+            properties:
+              mfa_required:
+                description: Value will `true` if MFA is active, `false` otherwise
+                type: boolean
+        '400':
+          $ref: '#/responses/BadRequest'
 
   /users/{user_id}/password:
     put:
