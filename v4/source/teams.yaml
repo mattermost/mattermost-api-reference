@@ -320,37 +320,6 @@
         '404':
           $ref: '#/responses/NotFound'
 
-  '/users/{user_id}/teams/members':
-    get:
-      tags:
-        - teams
-      summary: Get team members for a user
-      description: |
-        Get a list of team members for a user. Useful for getting the ids of teams the user is on and the roles they have in those teams.
-        ##### Permissions
-        Must be logged in as the user or have the `edit_other_users` permission.
-      parameters:
-        - name: user_id
-          in: path
-          description: User GUID
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Team members retrieval successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
     post:
       tags:
         - teams
@@ -390,6 +359,37 @@
           description: Team member retrieval successful
           schema:
             $ref: '#/definitions/TeamMember'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  '/users/{user_id}/teams/members':
+    get:
+      tags:
+        - teams
+      summary: Get team members for a user
+      description: |
+        Get a list of team members for a user. Useful for getting the ids of teams the user is on and the roles they have in those teams.
+        ##### Permissions
+        Must be logged in as the user or have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Team members retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TeamMember'
         '400':
           $ref: '#/responses/BadRequest'
         '401':

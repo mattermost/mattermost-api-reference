@@ -80,16 +80,21 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  /channels/ids:
+  /teams/{team_id}/channels/ids:
     post:
       tags:
         - channels
       summary: Get a list of channels by ids
       description: |
-        Get a list of channels where the logged in user is member of based on the provided channel ids.
+        Get a list of public channels on a team by id.
         ##### Permissions
-        Must have logged in.
+        `view_team` for the team the channels are on.
       parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
         - in: body
           name: body
           description: List of channel ids
@@ -100,7 +105,7 @@
               type: string
       responses:
         '200':
-          description: channel list retrieval successful
+          description: Channel list retrieval successful
           schema:
             type: array
             items:
@@ -637,8 +642,7 @@
       description: |
         Update a user's roles for a channel.
         ##### Permissions
-        `manage_public_channel_members` permission if the channel is public.
-        `manage_private_channel_members` permission if the channel is private.
+        Must have `manage_channel_roles` permission for the channel.
       parameters:
         - name: channel_id
           in: path
@@ -672,6 +676,53 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/channels/{channel_id}/members/{user_id}/notify_props':
+    put:
+      tags:
+        - channels
+      summary: Update channel notifications
+      description: |
+        Update a user's notification properties for a channel. Only the provided fields are updated.
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: notify_props
+          description: Space-delimited channel roles to assign to the user
+          required: true
+          schema:
+            type: object
+            properties:
+              desktop:
+                description: Controls when to send desktop notifications. The possible options are `default`, `all`, `mention`, `none`
+                type: string
+              mark_unread:
+                description: Controls when to mark a channel unread. The possible options are `all` and `mention`
+                type: string
+      responses:
+        '200':
+          description: Channel notification properties update successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
 
   '/channels/members/{user_id}/view':
     post:
