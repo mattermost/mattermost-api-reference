@@ -16,3 +16,24 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+
+  /users/status/ids:
+    get:
+      tags:
+        - status
+      summary: Get user statuses by id
+      description: |
+        Get a list of user statuses by id from the server.
+        ##### Permissions
+        Must be authenticated.
+      responses:
+        '200':
+          description: User statuses retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Status'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
