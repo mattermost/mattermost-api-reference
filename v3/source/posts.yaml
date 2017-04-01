@@ -35,7 +35,8 @@
     get:
       tags:
         - posts
-      summary: Get all flagged posts for a user
+      summary: Get flagged posts
+      description: Get the flagged posts for a user on a team. Posts flagged in direct messages will also be returned, as they are cross-team.
       parameters:
         - name: team_id
           in: path
