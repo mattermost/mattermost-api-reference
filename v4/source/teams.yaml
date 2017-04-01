@@ -355,8 +355,8 @@
           required: false
           type: string
       responses:
-        '200':
-          description: Team member retrieval successful
+        '201':
+          description: Team member creation successful
           schema:
             $ref: '#/definitions/TeamMember'
         '400':

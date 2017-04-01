@@ -520,8 +520,8 @@
           schema:
             $ref: '#/definitions/ChannelMember'
       responses:
-        '200':
-          description: Channel member retrieval successful
+        '201':
+          description: Channel member creation successful
           schema:
             $ref: '#/definitions/ChannelMember'
         '400':
