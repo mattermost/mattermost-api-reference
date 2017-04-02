@@ -191,6 +191,35 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+  
+  '/users/{user_id}/posts/flagged':
+    get:
+      tags:
+        - posts
+      summary: Get a list of flagged posts
+      description: |
+        Gets a list of flagged post for a user.
+        ##### Permissions
+        Must be user or have `manage_system` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: ID of the user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/PostList"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
   '/posts/{post_id}/files/info':
     get:
