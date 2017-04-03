@@ -102,7 +102,7 @@
         - posts
       summary: Update a post
       description: |
-        Update a single post.
+        Update a post. Only the fields listed below are updatable, omitted fields will be treated as blank.
         ##### Permissions
         Must have `edit_post` permission for the channel the post is in.
       parameters:
@@ -111,9 +111,31 @@
           description: ID of the post to update
           required: true
           type: string
+        - in: body
+          name: body
+          description: Post object that is to be updated
+          required: true
+          schema:
+            type: object
+            properties:
+              is_pinned:
+                description: Set to `true` to pin the post to the channel it is in
+                type: boolean
+              message:
+                description: The message text of the post
+                type: string
+              file_ids:
+                 description: The list of files attached to this post
+                 type: array
+              has_reactions:
+                description: Set to `true` if the post has reactions to it
+                type: boolean
+              props:
+                description: A general JSON property bag to attach to the post
+                type: string
       responses:
         '200':
-          description: Post updated successful
+          description: Post update successful
           schema:
             $ref: "#/definitions/Post"
         '400':
@@ -146,16 +168,23 @@
             type: object
             properties:
               is_pinned:
+                description: Set to `true` to pin the post to the channel it is in
                 type: boolean
               message:
+                description: The message text of the post
                 type: string
               file_ids:
+                 description: The list of files attached to this post
                  type: array
               has_reactions:
+                description: Set to `true` if the post has reactions to it
                 type: boolean
+              props:
+                description: A general JSON property bag to attach to the post
+                type: string
       responses:
         '200':
-          description: post patch successful
+          description: Post patch successful
           schema:
             $ref: '#/definitions/Post'
         '400':
