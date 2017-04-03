@@ -644,3 +644,38 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+
+  '/teams/{team_id}/invite/email':
+    post:
+      tags:
+        - teams
+      summary: Invite users to the team by email
+      description: |
+        Invite users to the existing team usign the user's email.
+        ##### Permissions
+        Must have `invite_to_team` permission for the team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: List of user's email
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Users invite successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
