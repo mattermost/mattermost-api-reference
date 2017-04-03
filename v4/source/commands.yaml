@@ -70,7 +70,7 @@
           default: "false"
           type: string
       responses:
-        '201':
+        '200':
           description: List Commands retrieve successful
           schema:
             type: array
