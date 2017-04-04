@@ -198,7 +198,7 @@
         - posts
       summary: Get a list of flagged posts
       description: |
-        Gets a list of flagged post for a user.
+        Get a page of flagged posts of a user provided user id string. Selects from a channel, team or all flagged posts by a user.
         ##### Permissions
         Must be user or have `manage_system` permission.
       parameters:
@@ -206,6 +206,24 @@
           in: path
           description: ID of the user
           required: true
+          type: string
+        - name: team_id
+          in: query
+          description: Team ID
+          type: string
+        - name: channel_id
+          in: query
+          description: Channel ID
+          type: string
+        - name: page
+          in: query
+          description: The page to select
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of posts per page
+          default: "60"
           type: string
       responses:
         '200':
