@@ -49,3 +49,38 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+    get:
+      tags:
+        - commands
+      summary: List commands for a team
+      description: |
+        List commands for a team.
+        ##### Permissions
+        `manage_slash_commands` if need list custom commands.
+      parameters:
+        - name: team_id
+          in: query
+          description: The team id.
+          type: string
+        - name: custom_only
+          in: query
+          description: |
+            To get only the custom commands. If set to false will get the custom
+            if the user have access plus the system commands, otherwise just the system commands.
+          default: "false"
+          type: string
+      responses:
+        '200':
+          description: List Commands retrieve successful
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Command"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
