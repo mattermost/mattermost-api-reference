@@ -153,6 +153,9 @@
               team_id:
                 description: If provided, only search users on this team
                 type: string
+              not_in_team_id:
+                description: If provided, only search users not on this team
+                type: string
               in_channel_id:
                 description: If provided, only search users in this channel
                 type: string
