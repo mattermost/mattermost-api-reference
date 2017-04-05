@@ -1,4 +1,4 @@
-  /users/{user_id}/status:
+/users/{user_id}/status:
     get:
       tags:
         - status
@@ -10,6 +10,41 @@
       responses:
         '200':
           description: User status retrieval successful
+          schema:
+            type: '#/definitions/Status'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
+    put:
+      tags:
+        - status
+      summary: Update user status
+      description: |
+        Manually set a user's status. When setting a user's status, the status will remain that value until set "online" again, which will return the status to being automatically updated based on user activity.
+        ##### Permissions
+        Must have `edit_other_users` permission for the team.
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          type: string
+        - name: body
+          in: body
+          description: Status object that is to be updated
+          required: true
+          schema:
+            type: object
+            required:
+              - status
+            properties:
+              status:
+                type: string
+                description: User status, can be `online`, `away` and `offline`
+      responses:
+        '200':
+          description: User status update successful
           schema:
             type: '#/definitions/Status'
         '400':
