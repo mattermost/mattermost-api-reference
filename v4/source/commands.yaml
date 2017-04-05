@@ -113,3 +113,35 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/commands/{command_id}':
+    put:
+      tags:
+        - commands
+      summary: Update a command
+      description: |
+        Update a single command based on command id string and Command struct.
+        ##### Permissions
+        Must have `manage_slash_commands` permission for the team the command is in.
+      parameters:
+        - in: path
+          name: command_id
+          description: ID of the command to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Command'
+      responses:
+        '200':
+          description: Command updated successful
+          schema:
+            $ref: "#/definitions/Command"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
