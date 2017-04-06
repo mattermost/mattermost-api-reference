@@ -84,3 +84,32 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+
+  '/teams/{team_id}/commands/autocomplete':
+    get:
+      tags:
+        - commands
+      summary: List autocomplete commands
+      description: |
+        List autocomplete commands in the team.
+        ##### Permissions
+        `view_team` for the team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Autocomplete commands retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Command"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
