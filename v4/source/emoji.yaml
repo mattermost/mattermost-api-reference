@@ -32,3 +32,27 @@
           $ref: '#/responses/Forbidden'
         '413':
           $ref: '#/responses/TooLarge'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+    get:
+      tags:
+        - emoji
+      summary: Get a list of custom emoji
+      description: |
+        Get a list of custom emoji for the team.
+        ##### Permissions
+        Must be authenticated.
+      responses:
+        '200':
+          description: Emoji list retrieve successful
+          schema:
+            $ref: '#/definitions/Emoji'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
