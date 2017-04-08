@@ -1269,6 +1269,42 @@ definitions:
       active_channel:
         type: string
 
+  OAuthApp:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The client id of the application
+      client_secret:
+        type: string
+        description: The client secret of the application
+      name:
+        type: string
+        description: The name of the client application
+      description:
+        type: string
+        description: A short description of the application
+      icon_url:
+        type: string
+        description: A URL to an icon to display with the application
+      callback_urls:
+        type: array
+        items:
+          type: string
+        description: A list of callback URLs for the appliation
+      homepage:
+        type: string
+        description: A link to the website of the application
+      is_trusted:
+        type: boolean
+        description: Set this to `true` to skip asking users for permission
+      create_at:
+        type: integer
+        description: The time of registration for the application
+      update_at:
+        type: integer
+        description: The last time of update for the application
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
