@@ -417,6 +417,45 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/{user_id}/active:
+    put:
+      tags:
+        - users
+      summary: Update user active status
+      description: |
+        Update user active or inactive status
+        ##### Permissions
+        User can deactivate itself.
+        User with `manage_system` permission can activate or deactivate a user.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Use `true` to set the user active, `false` for inactive
+          required: true
+          schema:
+            type: object
+            required:
+              - active
+            properties:
+              active:
+                type: boolean
+      responses:
+        '200':
+          description: User active status update successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   /users/{user_id}/image:
     get:
       tags:
