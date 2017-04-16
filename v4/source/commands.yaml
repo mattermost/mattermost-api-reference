@@ -145,3 +145,31 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+    delete:
+      tags:
+        - commands
+      summary: Delete a command
+      description: |
+        Delete a command based on command id string.
+        ##### Permissions
+        Must have `manage_slash_commands` permission for the team the command is in.
+      parameters:
+        - in: path
+          name: command_id
+          description: ID of the command to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Command deletion successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
