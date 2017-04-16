@@ -948,3 +948,71 @@
         '400':
           $ref: '#/responses/BadRequest'
 
+  /users/login/switch:
+    post:
+      tags:
+        - users
+      summary: Switch login method
+      description: |
+        Switch a user's login method from using email to OAuth2/SAML/LDAP or back to email. When switching to OAuth2/SAML, account switching is not complete until the user follows the returned link and completes any steps on the OAuth2/SAML service provider.
+
+        To switch from email to OAuth2/SAML, specify `current_service`, `new_service`, `email` and `password`.
+
+        To switch from OAuth2/SAML to email, specify `current_service`, `new_service`, `email` and `new_password`.
+
+        To switch from email to LDAP/AD, specify `current_service`, `new_service`, `email`, `password`, `ldap_ip` and `new_password` (this is the user's LDAP password).
+
+        To switch from LDAP/AD to email, specify `current_service`, `new_service`, `ldap_ip`, `password` (this is the user's LDAP password), `email`  and `new_password`.
+
+        Additionally, specify `mfa_code` when trying to switch an account on LDAP/AD or email that has MFA activated.
+
+        ##### Permissions
+        No current authentication required except when switching from OAuth2/SAML to email.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - current_service
+              - new_service
+            properties:
+              current_service:
+                description: The service the user currently uses to login
+                type: string
+              new_service:
+                description: The service the user will use to login
+                type: string
+              email:
+                description: The email of the user
+                type: string
+              password:
+                description: The password used with the current service
+                type: string
+              mfa_code:
+                description: The MFA code of the current service
+                type: string
+              ldap_id:
+                description: The LDAP/AD id of the user
+                type: string
+      responses:
+        '200':
+          description: Login method switch or request successful
+          schema:
+            type: object
+            properties:
+              follow_link:
+                description: The link for the user to follow to login or to complete the account switching when the current service is OAuth2/SAML
+                type: string
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
