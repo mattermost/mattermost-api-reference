@@ -57,7 +57,7 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-'/emoji/{emoji_id}':
+  '/emoji/{emoji_id}':
     get:
       tags:
         - emoji
@@ -111,5 +111,34 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/emoji/{emoji_id}/image':
+    get:
+      tags:
+        - emoji
+      summary: Get custom emoji image
+      description: |
+        Get custom emoji image for the team.
+        ##### Permissions
+        Must be authenticated.
+      parameters:
+        - name: emoji_id
+          in: path
+          description: Emoji GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Emoji image retrieve successful
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
         '501':
           $ref: '#/responses/NotImplemented'
