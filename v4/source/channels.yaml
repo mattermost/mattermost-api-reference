@@ -80,6 +80,36 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /channels/group:
+    post:
+      tags:
+        - channels
+      summary: Create a group message channel
+      description: |
+        Create a new group message channel to group of users.
+        ##### Permissions
+        Must have `create_group_channel` permission.
+      parameters:
+        - in: body
+          name: body
+          description: User ids to be in the group message channel
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '201':
+          description: Group channel creation successful
+          schema:
+            $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   /teams/{team_id}/channels/ids:
     post:
       tags:
