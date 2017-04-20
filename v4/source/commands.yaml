@@ -173,3 +173,34 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+
+  '/commands/{command_id}/regen_token':
+    put:
+      tags:
+        - commands
+      summary: Generate a new token
+      description: |
+        Generate a new token for the command based on command id string.
+        ##### Permissions
+        Must have `manage_slash_commands` permission for the team the command is in.
+      parameters:
+        - in: path
+          name: command_id
+          description: ID of the command to generate the new token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Token generation successful
+          schema:
+            type: object
+            properties:
+              token:
+                description: The new token
+                type: string
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
