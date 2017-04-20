@@ -285,6 +285,8 @@ tags:
     description: Endpoints for configuring and interacting with LDAP.
   - name: system
     description: General endpoints for interating with the server, such as configuration and logging.
+  - name: OAuth
+    description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
 x-tagGroups:
   - name: Introduction
     tags:

@@ -45,6 +45,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/cluster.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/brand.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/commands.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/oauth.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
 	@node_modules/swagger-cli/bin/swagger.js validate $(V4_YAML)
