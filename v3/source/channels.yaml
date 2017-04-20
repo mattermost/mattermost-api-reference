@@ -156,31 +156,6 @@
           '500':
             description: Channel does not exist.
 
-  '/teams/{team_id}/channels/more':
-    get:
-      tags:
-        - channels
-      deprecated: true
-      summary: Get channels the user has not joined
-      description: Scheduled for deprecation in Mattermost 3.7, please use `/teams/{team_id}/channels/more/{offset}/{limit}` instead. Get a list of open channels the user does not belong to by team ID.
-      parameters:
-        - name: team_id
-          in: path
-          description: Team ID of the channels to return
-          required: true
-          type: string
-      responses:
-        '200':
-          description: The list of channels
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '403':
-          description: User does not belong to the team
-        '500':
-          description: Could not retrieve the user channels
-
   '/teams/{team_id}/channels/more/{offset}/{limit}':
     get:
       tags:
