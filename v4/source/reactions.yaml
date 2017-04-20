@@ -1,3 +1,29 @@
+  /reactions:
+    post:
+      tags:
+        - reactions
+      summary: Create a reaction
+      description: |
+        Create a reaction.
+        ##### Permissions
+        Must have `read_channel` permission for the channel the post is in.
+      parameters:
+        - in: body
+          name: reaction
+          description: The user's reaction with its post_id, user_id, and emoji_name fields set
+          required: true
+          schema:
+            $ref: '#/definitions/Reaction'
+      responses:
+        '201':
+          description: Reaction creation successful
+          schema:
+            $ref: '#/definitions/Reaction'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/posts/{post_id}/reactions':
     get:
       tags:
