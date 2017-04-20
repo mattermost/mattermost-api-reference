@@ -86,7 +86,7 @@
         - channels
       summary: Create a group message channel
       description: |
-        Create a new group message channel to group of users.
+        Create a new group message channel to group of users. If the logged in user's id is not included in the list, it will be appended to the end.
         ##### Permissions
         Must have `create_group_channel` permission.
       parameters:
