@@ -230,6 +230,41 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+    post:
+      tags:
+        - system
+      summary: Add log message
+      description: |
+        Add log messages to the server logs.
+        ##### Permissions
+        Must have `manage_system` permission or if `ServiceSettings.EnableDeveloper` in the
+        config file is set to `true` then any user can use this endpoint.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - level
+              - message
+            properties:
+              level:
+                type: string
+                description: The error level, e.g. ERROR or INFO
+              message:
+                type: string
+                description: Message to send to the server logs
+      responses:
+        '200':
+          description: Logs sent successful
+          schema:
+            type: object
+            items:
+              type: string
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/webrtc/token':
     get:
       tags:
