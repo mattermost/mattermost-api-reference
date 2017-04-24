@@ -52,3 +52,31 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/users/{user_id}/posts/{post_id}/reactions/{name}':
+    delete:
+      tags:
+        - reactions
+      summary: Remove a reaction from a post
+      description: |
+        Deletes a reaction made by a user from the given post.
+        ##### Permissions
+        Must be user or have `manage_system` permission.
+      parameters:
+        - in: body
+          name: reaction
+          description: The user's reaction with its post_id, user_id, and emoji_name fields set
+          required: true
+          schema:
+            $ref: '#/definitions/Reaction'
+      responses:
+        '200':
+          description: Reaction deletion successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
