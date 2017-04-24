@@ -941,14 +941,10 @@
           schema:
             type: object
             required:
-              - userId
-              - hashId
+              - token
             properties:
-              user_id:
-                description: The user GUID
-                type: string
-              hash_id:
-                description: The salted hash of the user GUID
+              token:
+                description: The token given to validate the email
                 type: string
       responses:
         '200':
