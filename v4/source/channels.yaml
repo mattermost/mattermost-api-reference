@@ -238,6 +238,33 @@
         '404':
           $ref: '#/responses/NotFound'
 
+  '/channels/{channel_id}/restore':
+      post:
+        tags:
+          - channels
+        summary: Restore a channel
+        description: |
+          Restore channel from the provided channel id string.
+          ##### Permissions
+          `manage_team` permission for the team of channel.
+        parameters:
+          - name: channel_id
+            in: path
+            description: Channel GUID
+            required: true
+            type: string
+        responses:
+          '200':
+            description: Channel restore successful
+            schema:
+              $ref: '#/definitions/Channel'
+          '401':
+            $ref: '#/responses/Unauthorized'
+          '403':
+            $ref: '#/responses/Forbidden'
+          '404':
+            $ref: '#/responses/NotFound'
+
   '/channels/{channel_id}/stats':
     get:
       tags:
