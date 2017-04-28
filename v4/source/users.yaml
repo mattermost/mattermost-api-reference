@@ -44,6 +44,20 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            user := &model.User{
+                Username = "username",
+                Email = "email@domain.com",
+                Password = "Password1",
+            }
+
+            createdUser, response := Client.CreateUser(user)
 
     get:
       tags:
@@ -97,6 +111,22 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+
+            // page, perPage, etag
+            users := Client.GetUsers(0, 60, "")
+            users = Client.GetUsersInChannel("channelid", 0, 60, "")
+            users = Client.GetUsersNotInChannel("teamid", "channelid", 0, 60, "")
+            users = Client.GetUsersInTeam("teamid", 0, 60, "")
+            users = Client.GetUsersNotInTeam("teamid", 0, 60, "")
+            users = Client.GetUsersWithoutTeam(0, 60, "")
 
   /users/ids:
     post:

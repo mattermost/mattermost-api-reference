@@ -22,10 +22,6 @@ definitions:
         type: string
       email_verified:
         type: boolean
-      password:
-        type: string
-      auth_data:
-        type: string
       auth_service:
         type: string
       roles:
@@ -44,8 +40,6 @@ definitions:
         type: integer
       mfa_active:
         type: boolean
-      mfa_secret:
-        type: string
 
   Team:
     type: object
