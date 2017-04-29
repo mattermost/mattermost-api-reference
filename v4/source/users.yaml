@@ -58,7 +58,11 @@
             }
 
             createdUser, response := Client.CreateUser(user)
-
+        - lang: 'C#'
+          source: |
+            Client client = new Client("https://your-mattermost-url.com", "443", MyLogger());
+            
+            User newUser = client.CreateUser("email@domain.com", "username", "Password1");
     get:
       tags:
         - users
