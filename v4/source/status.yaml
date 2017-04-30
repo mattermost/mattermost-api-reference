@@ -1,4 +1,4 @@
-/users/{user_id}/status:
+  /users/{user_id}/status:
     get:
       tags:
         - status
