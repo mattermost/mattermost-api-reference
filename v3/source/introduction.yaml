@@ -216,6 +216,8 @@ tags:
       - user_updated
       - user_removed
       - preference_changed
+      - preferences_changed
+      - preferences_deleted
       - ephemeral_message
       - status_change
       - hello
