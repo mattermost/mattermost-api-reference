@@ -210,8 +210,11 @@ tags:
       - channel_created
       - channel_deleted
       - direct_added
+      - group_added
+      - added_to_team
       - new_user
       - leave_team
+      - update_team
       - user_added
       - user_updated
       - user_removed
@@ -222,6 +225,10 @@ tags:
       - status_change
       - hello
       - webrtc
+      - authentication_challenge
+      - reaction_added
+      - reaction_removed
+      - response
 
       #### WebSocket API
 
