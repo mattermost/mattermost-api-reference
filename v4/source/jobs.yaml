@@ -1,4 +1,4 @@
-  '/jobs/status/{job_id}':
+  '/jobs/{job_id}/status':
     get:
       tags:
         - jobs
@@ -25,7 +25,7 @@
         '404':
           $ref: '#/responses/NotFound'
 
-  '/jobs/statuses/{type}':
+  '/jobs/type/{type}/statuses':
     get:
       tags:
         - jobs
