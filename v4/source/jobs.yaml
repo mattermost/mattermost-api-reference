@@ -3,10 +3,10 @@
       tags:
         - jobs
       summary: Get the status of a given job.
-    description: |
-        Gets the status of a single job,
-        ##### Permissions
-        Must have `manage_system` permission.
+      description: |
+          Gets the status of a single job,
+          ##### Permissions
+          Must have `manage_system` permission.
       parameters:
         - name: job_id
           in: path
@@ -22,6 +22,8 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
 
@@ -61,3 +63,5 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
