@@ -1,0 +1,17 @@
+  /opengraph:
+    post:
+      tags:
+        - opengraph
+      summary: Get open graph metadata for url
+      description: |
+        Get Open Graph Metadata for a specif URL. Use the Open Graph protocol to get some generic metadata about a URL. Used for creating link previews.
+      __Minimum server version__: 3.1
+        ##### Permissions
+        No permission required but must be logged in.
+      responses:
+        '200':
+          description: Open Graph retrieval successful
+          schema:
+            $ref: '#/definitions/OpenGraph'
+        '501':
+          $ref: '#/responses/NotImplemented'
