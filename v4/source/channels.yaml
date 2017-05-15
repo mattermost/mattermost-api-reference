@@ -405,6 +405,8 @@
       description: |
         Get a page of deleted channels on a team based on query string parameters - team_id, page and per_page.
 
+        __Minimum server version__: 3.10
+
         ##### Permissions
         Must be authenticated and have the `manage_team` permission.
       parameters:
