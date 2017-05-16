@@ -4,9 +4,10 @@
         - jobs
       summary: Get the status of a given job.
       description: |
-          Gets the status of a single job,
-          ##### Permissions
-          Must have `manage_system` permission.
+        Gets the status of a single job.
+        __Minimum server version: 3.10__
+        ##### Permissions
+        Must have `manage_system` permission.
       parameters:
         - name: job_id
           in: path
@@ -34,6 +35,7 @@
       summary: Get the statuses of jobs of the given type.
       description: |
         Get a page of statuses of jobs of the given type. Use the query parameters to modify the behaviour of this endpoint.
+        __Minimum server version: 3.10__
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
