@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: |
-    **Mattermost API version 4 is an active and in-progress project. We're looking for contributors to code server endpoints, build drivers and write documentation. If you're interested [please join our Mattermost instance](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and join the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).**
+    **As of the 3.9 Mattermost server release, API version 4 is going through the release candidate process. Version 4 is stable enough for use and we recommend using version 4 as version 3 will eventually be deprecated.**
 
   version: 4.0.0
   title: Mattermost API Reference
