@@ -40,10 +40,14 @@ tags:
       When using endpoints that require a user id, the string `me` can be used in place of the user id to indicate the action is to be taken for the logged in user.
   - name: drivers
     description: |
-      The easiest way to interact with the Mattermost Web Service API is through a language specific driver. These can be found at the following links:
+      The easiest way to interact with the Mattermost Web Service API is through a language specific driver.
 
-      * Mattermost JavaScript Driver (not built yet)
+      #### Official Drivers
+      * [Mattermost JavaScript Driver](https://github.com/mattermost/mattermost-redux/blob/master/src/client/client4.js)
       * [Mattermost Golang Driver](https://github.com/mattermost/platform/blob/master/model/client4.go)
+
+      #### Community-built Drivers
+      * [PHP Driver](https://github.com/gnello/php-mattermost-driver) - built by [@gnello](https://github.com/gnello) and [@prixone](https://github.com/prixone)
 
   - name: authentication
     description: |
