@@ -312,6 +312,9 @@
         summary: Restore a channel
         description: |
           Restore channel from the provided channel id string.
+
+          __Minimum server version__: 3.10
+
           ##### Permissions
           `manage_team` permission for the team of channel.
         parameters:
