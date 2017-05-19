@@ -1,0 +1,69 @@
+  '/jobs/{job_id}/status':
+    get:
+      tags:
+        - jobs
+      summary: Get the status of a given job.
+      description: |
+        Gets the status of a single job.
+        __Minimum server version: 3.10__
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: job_id
+          in: path
+          description: Job GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Job status retrieval successful
+          schema:
+            $ref: '#/definitions/JobStatus'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  '/jobs/type/{type}/statuses':
+    get:
+      tags:
+        - jobs
+      summary: Get the statuses of jobs of the given type.
+      description: |
+        Get a page of statuses of jobs of the given type. Use the query parameters to modify the behaviour of this endpoint.
+        __Minimum server version: 3.10__
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: type
+          in: path
+          description: Job type
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of jobs statuses per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Job status list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/JobStatus'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
