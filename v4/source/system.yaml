@@ -305,22 +305,3 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  '/system/health':
-    get:
-      tags:
-        - system
-      summary: Check system health
-      description: |
-        Check if the system is health or unhealthy based on the configuration setting `GoRoutineHealthThreshold`.
-        __Minimum server version__: 3.10
-        ##### Permissions
-        Must have `manage_system` permission
-      responses:
-        '200':
-          description: Status of the system
-          schema:
-            type: object
-            items:
-              type: string
-        '401':
-          $ref: '#/responses/Unauthorized'
