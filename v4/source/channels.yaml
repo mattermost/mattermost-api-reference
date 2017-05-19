@@ -184,10 +184,10 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
-            input := []string{<ID OF CHANNEL1>, <ID OF CHANNEL2>, ...}
+            channelIds := []string{<ID OF CHANNEL1>, <ID OF CHANNEL2>, ...}
 
             // GetPublicChannelsByIdsForTeam
-            channels, resp := Client.GetPublicChannelsByIdsForTeam(<TEAMID>, input)
+            channels, resp := Client.GetPublicChannelsByIdsForTeam(<TEAMID>, channelIds)
 
   '/channels/{channel_id}':
     get:
@@ -388,10 +388,10 @@
               Header:      new(string),
               Purpose:     new(string),
             }
-            *patch.Name = model.NewId()
-            *patch.DisplayName = model.NewId()
-            *patch.Header = model.NewId()
-            *patch.Purpose = model.NewId()
+            *patch.Name = "<SOME_NEW_NAME>"
+            *patch.DisplayName = "<SOME_NEW_DISPLAYNAME>"
+            *patch.Header = "<SOME_NEW_HEADER>"
+            *patch.Purpose = "<SOME_NEW_PURPOSE>"
 
             // PatchChannel
             channel, resp := Client.PatchChannel(<CHANNELID>, patch)
