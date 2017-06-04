@@ -2,18 +2,21 @@
     get:
       tags:
         - system
-      summary: Ping the Server
+      summary: Check system health
       description: |
-        Receive a simple ping response.
+        Check if the system is health or unhealthy based on the configuration setting `GoRoutineHealthThreshold`.
+        __Minimum server version__: 3.10
         ##### Permissions
-        No permissions required.
+        Must have `manage_system` permission
       responses:
         '200':
-          description: Ping successful
+          description: Status of the system
           schema:
-            $ref: "#/definitions/StatusOK"
-        '400':
-          $ref: '#/responses/BadRequest'
+            type: object
+            items:
+              type: string
+        '500':
+          $ref: '#/responses/InternalServerError'
 
   '/database/recycle':
     post:
