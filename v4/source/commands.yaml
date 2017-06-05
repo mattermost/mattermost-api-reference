@@ -310,7 +310,7 @@
                 type: string
                 description: The slash command to execute
       responses:
-        '201':
+        '200':
           description: Command execution successful
           schema:
             $ref: "#/definitions/CommandResponse"
