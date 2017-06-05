@@ -15,15 +15,11 @@
           schema:
             type: object
             required:
-              - creator_id
               - team_id
               - method
               - trigger
               - url
             properties:
-              creator_id:
-                type: string
-                description: User Id who you are creating the command
               team_id:
                 type: string
                 description: Team ID to where the command should be created
@@ -58,11 +54,15 @@
             Client.Login("email@domain.com", "Password1")
 
             newCmd := &model.Command {
-              CreatorId: <USERID>,
-              TeamId:    <TEAMID>,
-              URL:       "http://nowhere.com",
-              Method:    model.COMMAND_METHOD_POST,
-              Trigger:   "trigger"
+              TeamId:       <TEAMID>,
+              URL:          "http://nowhere.com",
+              Method:       model.COMMAND_METHOD_POST,
+              Trigger:      "trigger",
+              AutoComplete: false,
+              Description:  "Description",
+              DisplayName:  "Display name",
+              IconURL:      "IconURL",
+              Username:     "Username"
             }
 
             // CreateCommand
