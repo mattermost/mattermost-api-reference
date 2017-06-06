@@ -200,6 +200,7 @@ tags:
       - post_deleted
       - channel_created
       - channel_deleted
+      - channel_updated
       - direct_added
       - group_added
       - added_to_team
