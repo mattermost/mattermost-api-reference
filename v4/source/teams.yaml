@@ -168,6 +168,12 @@
           description: Team GUID
           required: true
           type: string
+        - name: permanent
+          in: body
+          description: Permanently delete the team, to be used for complience reasons only.
+          required: false
+          default: false
+          type: boolean
       responses:
         '201':
           description: Team deletion successful
