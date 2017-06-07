@@ -4,10 +4,10 @@
         - system
       summary: Check system health
       description: |
-        Check if the system is health or unhealthy based on the configuration setting `GoRoutineHealthThreshold`.
+        Check if the server is up and healthy based on the configuration setting `GoRoutineHealthThreshold`. If `GoRoutineHealthThreshold` and the number of goroutines on the server exceeds that threshold the server is considered unhealthy. If `GoRoutineHealthThreshold` is not set or the number of goroutines is below the threshold the server is considered healthy.
         __Minimum server version__: 3.10
         ##### Permissions
-        Must have `manage_system` permission
+        Must be logged in.
       responses:
         '200':
           description: Status of the system
@@ -17,6 +17,20 @@
               type: string
         '500':
           $ref: '#/responses/InternalServerError'
+          schema:
+            type: object
+            items:
+              type: string
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetPing
+            status, err := Client.GetPing()
 
   '/database/recycle':
     post:
