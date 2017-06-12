@@ -642,7 +642,7 @@
             // SearchChannels
             channels, resp := Client.SearchChannels(<TEAMID>, search)
 
-  '/teams/{team_id}/channels/{channel_name}':
+  '/teams/{team_id}/channels/name/{channel_name}':
     get:
       tags:
         - channels
@@ -683,7 +683,7 @@
             // GetChannelByName
             channel, resp := Client.GetChannelByName(<CHANNEL NAME>, <TEAMID>, "")
 
-  '/teams/name/{team_name}/channels/{channel_name}':
+  '/teams/name/{team_name}/channels/name/{channel_name}':
     get:
       tags:
         - channels
