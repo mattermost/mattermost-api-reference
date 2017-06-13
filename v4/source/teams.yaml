@@ -169,7 +169,7 @@
           required: true
           type: string
         - name: permanent
-          in: body
+          in: query
           description: Permanently delete the team, to be used for complience reasons only.
           required: false
           default: false
