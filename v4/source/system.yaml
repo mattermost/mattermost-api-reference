@@ -147,6 +147,72 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
+  '/license':
+    post:
+      tags:
+        - system
+      summary: Upload license file
+      description: |
+        Upload a license to enable enterprise features.
+        ##### Permissions
+        Must have `manage_system` permission.
+      consumes: ["multipart/form-data"]
+      parameters:
+        - name: license
+          in: formData
+          description: The license to be uploaded
+          required: true
+          type: file
+      responses:
+        '201':
+          description: License file upload successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '413':
+          $ref: '#/responses/TooLarge'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            file, err := os.Open("<Your license file>")
+            if err != nil {
+              return err
+            }
+            defer file.Close()
+
+            data := &bytes.Buffer{}
+            if _, err := io.Copy(data, file); err != nil {
+              return err
+            }
+
+            ok, resp := Client.UploadLicenseFile(data.Bytes())
+
+    delete:
+      tags:
+        - system
+      summary: Remove license file
+      description: |
+        Remove the license file from the server. This will disable all enterprise features.
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: License removeal successful
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/license/client':
     get:
       tags:
