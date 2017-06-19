@@ -840,6 +840,9 @@
       summary: Get invite info for a team
       description: |
         Get the `name`, `display_name`, `description` and `id` for a team from the invite id.
+
+        __Minimum server version__: 4.0
+
         ##### Permissions
         No authentication required.
       parameters:
