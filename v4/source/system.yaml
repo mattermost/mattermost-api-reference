@@ -55,7 +55,7 @@
         - system
       summary: Send a test email
       description: |
-        Send a test email to make sure you have your email settings configured correctly.
+        Send a test email to make sure you have your email settings configured correctly. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
         ##### Permissions
         Must have `manage_system` permission.
       responses:

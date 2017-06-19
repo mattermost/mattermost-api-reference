@@ -4,7 +4,7 @@
         - brand
       summary: Get brand image
       description: |
-        Get the previously uploaded brand image.
+        Get the previously uploaded brand image. Returns 404 if no brand image has been uploaded.
         ##### Permissions
         No permission required.
       responses:
@@ -12,6 +12,9 @@
           description: Brand image retrieval successful
           schema:
             type: string
+        '404':
+          description: No brand image uploaded
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
       x-code-samples:
