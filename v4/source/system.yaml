@@ -331,6 +331,9 @@
         Get some analytics data about the system. This endpoint uses the old format, the `/analytics` route is reserved for the new format when it gets implemented.
 
         The returned JSON changes based on the `name` query parameter but is always key/value pairs.
+
+        __Minimum server version__: 4.0
+
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
