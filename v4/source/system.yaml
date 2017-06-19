@@ -394,3 +394,38 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
+  '/analytics/old':
+    get:
+      tags:
+        - system
+      summary: Get analytics
+      description: |
+        Get some analytics data about the system. This endpoint uses the old format, the `/analytics` route is reserved for the new format when it gets implemented.
+
+        The returned JSON changes based on the `name` query parameter but is always key/value pairs.
+
+        __Minimum server version__: 4.0
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: Possible values are "standard", "post_counts_day", "user_counts_with_posts_day" or "extra_counts"
+          default: "standard"
+          type: string
+        - name: team_id
+          in: query
+          required: false
+          description: The team ID to filter the data by
+          type: string
+      responses:
+        '200':
+          description: Analytics retrieval successful
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
