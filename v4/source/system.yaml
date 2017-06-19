@@ -154,6 +154,9 @@
       summary: Upload license file
       description: |
         Upload a license to enable enterprise features.
+
+        __Minimum server version__: 4.0
+
         ##### Permissions
         Must have `manage_system` permission.
       consumes: ["multipart/form-data"]
@@ -203,6 +206,9 @@
       summary: Remove license file
       description: |
         Remove the license file from the server. This will disable all enterprise features.
+
+        __Minimum server version__: 4.0
+
         ##### Permissions
         Must have `manage_system` permission.
       responses:
