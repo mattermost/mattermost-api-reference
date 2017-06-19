@@ -87,7 +87,7 @@
           required: true
           type: string
       responses:
-        '201':
+        '200':
           description: Team retrieval successful
           schema:
             $ref: '#/definitions/Team'
@@ -175,7 +175,7 @@
           default: false
           type: boolean
       responses:
-        '201':
+        '200':
           description: Team deletion successful
           schema:
             $ref: '#/definitions/StatusOK'
@@ -248,7 +248,7 @@
           required: true
           type: string
       responses:
-        '201':
+        '200':
           description: Team retrieval successful
           schema:
             $ref: '#/definitions/Team'
@@ -285,7 +285,7 @@
                 description: The search term to match against the name or display name of teams
                 type: string
       responses:
-        '201':
+        '200':
           description: Teams search successful
           schema:
             type: array
@@ -314,7 +314,7 @@
           required: true
           type: string
       responses:
-        '201':
+        '200':
           description: Team retrieval successful
           schema:
             $ref: '#/definitions/TeamExists'
@@ -341,7 +341,7 @@
           required: true
           type: string
       responses:
-        '201':
+        '200':
           description: Team list retrieval successful
           schema:
             $ref: '#/definitions/Team'
@@ -531,7 +531,7 @@
           required: true
           type: string
       responses:
-        '201':
+        '200':
           description: Team member retrieval successful
           schema:
             $ref: '#/definitions/TeamMember'
@@ -630,7 +630,7 @@
           required: true
           type: string
       responses:
-        '201':
+        '200':
           description: Team stats retrieval successful
           schema:
             $ref: '#/definitions/TeamStats'
@@ -832,3 +832,35 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/teams/invite/{invite_id}':
+    get:
+      tags:
+        - teams
+      summary: Get invite info for a team
+      description: |
+        Get the `name`, `display_name`, `description` and `id` for a team from the invite id.
+        ##### Permissions
+        No authentication required.
+      parameters:
+        - name: invite_id
+          in: path
+          description: Invite id for a team
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Team invite info retrieval successful
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              display_name:
+                type: string
+              description:
+                type: string
+        '400':
+          $ref: '#/responses/BadRequest'
