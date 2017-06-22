@@ -398,9 +398,9 @@
         - teams
       summary: Add user to team
       description: |
-        Add user to the team by user_id, valid hash & data, or valid invite_id.
+        Add user to the team by user_id.
         ##### Permissions
-        Must be authenticated. For adding other user, authenticated user must have the `add_user_to_team` permission.
+        Must be authenticated and team be open to add self. For adding another user, authenticated user must have the `add_user_to_team` permission.
       parameters:
         - name: team_id
           in: path
@@ -412,6 +412,30 @@
           required: true
           schema:
             $ref: '#/definitions/TeamMember'
+      responses:
+        '201':
+          description: Team member creation successful
+          schema:
+            $ref: '#/definitions/TeamMember'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
+  '/teams/members/invite':
+    post:
+      tags:
+        - teams
+      summary: Add user to team from invite
+      description: |
+        Using either an invite id or hash/data pair from an email invite link, add a user to a team.
+        ##### Permissions
+        Must be authenticated.
+      parameters:
         - name: hash
           in: query
           description: Hash value with time, team id and and InviteSaltId
