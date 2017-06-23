@@ -57,7 +57,7 @@ tags:
 
       #### Session Token
 
-      Make an HTTP POST to `your-mattermost-url.com/api/v4/users/login` with a JSON body indicating the name of the team, the user’s `login_id`, `password` and optionally the MFA `token`. The `login_id` can be an email, username or an AD/LDAP ID depending on the system's configuration.
+      Make an HTTP POST to `your-mattermost-url.com/api/v4/users/login` with a JSON body indicating the user’s `login_id`, `password` and optionally the MFA `token`. The `login_id` can be an email, username or an AD/LDAP ID depending on the system's configuration.
 
       ```
       curl -i -d '{"login_id":"someone@nowhere.com","password":"thisisabadpassword"}' http://localhost:8065/api/v4/users/login
