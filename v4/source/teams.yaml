@@ -644,7 +644,7 @@
           $ref: '#/responses/NotFound'
 
   '/teams/{team_id}/members/{user_id}/roles':
-    get:
+    put:
       tags:
         - teams
       summary: Update a team member roles
