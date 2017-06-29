@@ -65,6 +65,8 @@
       summary: Get users
       description: |
         Get a page of a list of users. Based on query string parameters, select users from a team, channel, or select users not in a specific channel.
+
+        Since server version 4.0, some basic sorting is available using the `sort` query parameter. Sorting is currently only supported when selecting users on a team.
         ##### Permissions
         Requires an active session and (if specified) membership to the channel or team being selected from.
       parameters:
@@ -98,6 +100,11 @@
           in: query
           description: Whether or not to list users that are not on any team. This option takes precendence over `in_team`, `in_channel`, and `not_in_channel`.
           type: boolean
+        - name: sort
+          in: query
+          description: |
+            Can be "", "last_activity_at" or "create_at". When left blank sorting is done by username. Must be used in conjunction with `in_team` and no other query parameters (exlcuding the paging parameters). **Minimum server version: 4.0**
+          type: string
       responses:
         '200':
           description: User page retrieval successful
