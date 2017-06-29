@@ -301,8 +301,6 @@ tags:
     description: General endpoints for interating with the server, such as configuration and logging.
   - name: OAuth
     description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
-  - name: Jobs
-    description: Endpoints related to various background jobs that can run independent of the server.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -332,7 +330,6 @@ x-tagGroups:
       - OAuth
       - SAML
       - LDAP
-      - jobs
 schemes:
   - http
   - https
