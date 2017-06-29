@@ -40,12 +40,23 @@
         - emoji
       summary: Get a list of custom emoji
       description: |
-        Get a list of custom emoji for the team.
+        Get a page of metadata for custom emoji on the system.
         ##### Permissions
         Must be authenticated.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of users per page.
+          default: "60"
+          type: string
       responses:
         '200':
-          description: Emoji list retrieve successful
+          description: Emoji list retrieval successful
           schema:
             $ref: '#/definitions/Emoji'
         '400':
@@ -63,7 +74,7 @@
         - emoji
       summary: Get a custom emoji
       description: |
-        Get a custom emoji for the team.
+        Get some metadata for a custom emoji.
         ##### Permissions
         Must be authenticated.
       parameters:
@@ -74,7 +85,7 @@
           type: string
       responses:
         '200':
-          description: Emoji retrieve successful
+          description: Emoji retrieval successful
           schema:
             $ref: '#/definitions/Emoji'
         '400':
@@ -91,9 +102,9 @@
         - emoji
       summary: Delete a custom emoji
       description: |
-        Delete a custom emoji for the team.
+        Delete a custom emoji.
         ##### Permissions
-        Must have the `manage_team` permission and the user who created the emoji or be Admin user.
+        Must have the `manage_team` or `manage_system` permissions or be the user who created the emoji.
       parameters:
         - name: emoji_id
           in: path
@@ -120,7 +131,7 @@
         - emoji
       summary: Get custom emoji image
       description: |
-        Get custom emoji image for the team.
+        Get the image for a custom emoji.
         ##### Permissions
         Must be authenticated.
       parameters:
@@ -131,7 +142,7 @@
           type: string
       responses:
         '200':
-          description: Emoji image retrieve successful
+          description: Emoji image retrieval successful
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
