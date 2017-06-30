@@ -301,6 +301,8 @@ tags:
     description: General endpoints for interating with the server, such as configuration and logging.
   - name: OAuth
     description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
+  - name: elasticsearch
+    description: Endpoints for configuring and interacting with Elasticsearch.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -330,6 +332,7 @@ x-tagGroups:
       - OAuth
       - SAML
       - LDAP
+      - elasicsearch
 schemes:
   - http
   - https
