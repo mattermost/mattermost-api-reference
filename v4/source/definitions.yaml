@@ -183,6 +183,11 @@ definitions:
       hashtag:
         type: string
       filenames:
+        description: This field will only appear on some posts created before Mattermost 3.5 and has since been deprecated.
+        type: array
+        items:
+          type: string
+      file_ids:
         type: array
         items:
           type: string
@@ -518,6 +523,75 @@ definitions:
       url:
         description: The URL that is triggered
         type: string
+
+  CommandResponse:
+    type: object
+    properties:
+      ResponseType:
+        description: The response type either in_channel or ephemeral
+        type: string
+      Text:
+        type: string
+      Username:
+        type: string
+      IconURL:
+        type: string
+      GotoLocation:
+        type: string
+      Attachments:
+        type: array
+        items:
+          $ref: '#/definitions/SlackAttachment'
+
+  SlackAttachment:
+    type: object
+    properties:
+      Id:
+        type: string
+      Fallback:
+        type: string
+      Color:
+        type: string
+      Pretext:
+        type: string
+      AuthorName:
+        type: string
+      AuthorLink:
+        type: string
+      AuthorIcon:
+        type: string
+      Title:
+        type: string
+      TitleLink:
+        type: string
+      Text:
+        type: string
+      Fields:
+        type: array
+        items:
+          $ref: '#/definitions/SlackAttachmentField'
+      ImageURL:
+        type: string
+      ThumbURL:
+        type: string
+      Footer:
+        type: string
+      FooterIcon:
+        type: string
+      Timestamp:
+        description: The timestamp of the slack attahment, either type of string or integer 
+        type: string
+
+  SlackAttachmentField:
+    type: object
+    properties:
+      Title:
+        type: string
+      Value:
+        description: The value of the attachment, set as string but capable with golang interface
+        type: string
+      Short:
+        type: boolean
 
   StatusOK:
     type: object

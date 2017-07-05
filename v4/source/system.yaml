@@ -2,18 +2,35 @@
     get:
       tags:
         - system
-      summary: Ping the Server
+      summary: Check system health
       description: |
-        Receive a simple ping response.
+        Check if the server is up and healthy based on the configuration setting `GoRoutineHealthThreshold`. If `GoRoutineHealthThreshold` and the number of goroutines on the server exceeds that threshold the server is considered unhealthy. If `GoRoutineHealthThreshold` is not set or the number of goroutines is below the threshold the server is considered healthy.
+        __Minimum server version__: 3.10
         ##### Permissions
-        No permissions required.
+        Must be logged in.
       responses:
         '200':
-          description: Ping successful
+          description: Status of the system
           schema:
-            $ref: "#/definitions/StatusOK"
-        '400':
-          $ref: '#/responses/BadRequest'
+            type: object
+            items:
+              type: string
+        '500':
+          $ref: '#/responses/InternalServerError'
+          schema:
+            type: object
+            items:
+              type: string
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetPing
+            status, err := Client.GetPing()
 
   '/database/recycle':
     post:
@@ -38,7 +55,7 @@
         - system
       summary: Send a test email
       description: |
-        Send a test email to make sure you have your email settings configured correctly.
+        Send a test email to make sure you have your email settings configured correctly. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
         ##### Permissions
         Must have `manage_system` permission.
       responses:
@@ -129,6 +146,78 @@
           $ref: '#/responses/BadRequest'
         '501':
           $ref: '#/responses/NotImplemented'
+
+  '/license':
+    post:
+      tags:
+        - system
+      summary: Upload license file
+      description: |
+        Upload a license to enable enterprise features.
+
+        __Minimum server version__: 4.0
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      consumes: ["multipart/form-data"]
+      parameters:
+        - name: license
+          in: formData
+          description: The license to be uploaded
+          required: true
+          type: file
+      responses:
+        '201':
+          description: License file upload successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '413':
+          $ref: '#/responses/TooLarge'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            file, err := os.Open("<Your license file>")
+            if err != nil {
+              return err
+            }
+            defer file.Close()
+
+            data := &bytes.Buffer{}
+            if _, err := io.Copy(data, file); err != nil {
+              return err
+            }
+
+            ok, resp := Client.UploadLicenseFile(data.Bytes())
+
+    delete:
+      tags:
+        - system
+      summary: Remove license file
+      description: |
+        Remove the license file from the server. This will disable all enterprise features.
+
+        __Minimum server version__: 4.0
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: License removeal successful
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
   '/license/client':
     get:
@@ -304,3 +393,39 @@
           $ref: '#/responses/Unauthorized'
         '501':
           $ref: '#/responses/NotImplemented'
+
+  '/analytics/old':
+    get:
+      tags:
+        - system
+      summary: Get analytics
+      description: |
+        Get some analytics data about the system. This endpoint uses the old format, the `/analytics` route is reserved for the new format when it gets implemented.
+
+        The returned JSON changes based on the `name` query parameter but is always key/value pairs.
+
+        __Minimum server version__: 4.0
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: Possible values are "standard", "post_counts_day", "user_counts_with_posts_day" or "extra_counts"
+          default: "standard"
+          type: string
+        - name: team_id
+          in: query
+          required: false
+          description: The team ID to filter the data by
+          type: string
+      responses:
+        '200':
+          description: Analytics retrieval successful
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'

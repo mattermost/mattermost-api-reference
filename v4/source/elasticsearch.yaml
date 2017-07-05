@@ -1,0 +1,20 @@
+  /elasticsearch/test:
+    post:
+      tags:
+        - elasticsearch
+      summary: Test Elasticsearch configuration
+      description: |
+        Test the current Elasticsearch configuration to see if the Elasticsearch server can be contacted successfully.
+        __Minimum server version__: 4.0
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Elasticsearch test successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        '501':
+          $ref: '#/responses/NotImplemented'
+

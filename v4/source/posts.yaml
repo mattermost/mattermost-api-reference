@@ -52,7 +52,7 @@
       description: |
         Get a single post.
         ##### Permissions
-        Must have `read_channel` permission for the channel the post is in.
+        Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
       parameters:
         - name: post_id
           in: path
@@ -202,7 +202,7 @@
       description: |
         Get a post and the rest of the posts in the same thread.
         ##### Permissions
-        Must have `read_channel` permission for the channel the thread is in.
+        Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
       parameters:
         - name: post_id
           in: path

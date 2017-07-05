@@ -49,6 +49,17 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            channel := &model.Channel{DisplayName: <YOUR CHANNEL DISPLAYNAME>, Name: <YOUR CHANNEL NAME>, Type: <CHANNEL TYPE OPEN/PRIVATE>, TeamId: <YOUR TEAM ID>}
+
+            // CreateChannel
+            rchannel, resp := Client.CreateChannel(channel)
 
   /channels/direct:
     post:
@@ -79,6 +90,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // CreateDirectChannel
+            dm, resp := Client.CreateDirectChannel(<ID OF User1>, <ID OF User2>)
 
   /channels/group:
     post:
@@ -109,6 +129,17 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userIds := []string{<ID OF User1>, <ID OF User2>, <ID OF User3> ...}
+
+            // CreateGroupChannel
+            rgc, resp := Client.CreateGroupChannel(userIds)
 
   /teams/{team_id}/channels/ids:
     post:
@@ -146,6 +177,17 @@
           $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            channelIds := []string{<ID OF CHANNEL1>, <ID OF CHANNEL2>, ...}
+
+            // GetPublicChannelsByIdsForTeam
+            channels, resp := Client.GetPublicChannelsByIdsForTeam(<TEAMID>, channelIds)
 
   '/channels/{channel_id}':
     get:
@@ -166,13 +208,22 @@
         '200':
           description: Channel retrieval successful
           schema:
-            $ref: '#/definitions/Channel' 
+            $ref: '#/definitions/Channel'
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannel
+            channel, resp := Client.GetChannel(<CHANNELID>, "")
 
     put:
       tags:
@@ -228,6 +279,17 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            channel := &model.Channel{DisplayName: <YOUR CHANNEL NEW DISPLAYNAME>, ChannelId: <CHANNELID>, TeamId: <YOUR TEAM ID>}
+
+            // UpdateChannel
+            updatedChannel, resp := Client.UpdateChannel(channel)
 
     delete:
       tags:
@@ -256,6 +318,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // DeleteChannel
+            pass, resp := Client.DeleteChannel(<CHANNELID>)
 
   '/channels/{channel_id}/patch':
     put:
@@ -304,6 +375,56 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            patch := &model.ChannelPatch{
+              Name:        new(string),
+              DisplayName: new(string),
+              Header:      new(string),
+              Purpose:     new(string),
+            }
+            *patch.Name = "<SOME_NEW_NAME>"
+            *patch.DisplayName = "<SOME_NEW_DISPLAYNAME>"
+            *patch.Header = "<SOME_NEW_HEADER>"
+            *patch.Purpose = "<SOME_NEW_PURPOSE>"
+
+            // PatchChannel
+            channel, resp := Client.PatchChannel(<CHANNELID>, patch)
+
+  '/channels/{channel_id}/restore':
+      post:
+        tags:
+          - channels
+        summary: Restore a channel
+        description: |
+          Restore channel from the provided channel id string.
+
+          __Minimum server version__: 3.10
+
+          ##### Permissions
+          `manage_team` permission for the team of channel.
+        parameters:
+          - name: channel_id
+            in: path
+            description: Channel GUID
+            required: true
+            type: string
+        responses:
+          '200':
+            description: Channel restore successful
+            schema:
+              $ref: '#/definitions/Channel'
+          '401':
+            $ref: '#/responses/Unauthorized'
+          '403':
+            $ref: '#/responses/Forbidden'
+          '404':
+            $ref: '#/responses/NotFound'
 
   '/channels/{channel_id}/stats':
     get:
@@ -331,6 +452,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannelStats
+            stats, resp := Client.GetChannelStats(<CHANNELID>)
 
   '/channels/{channel_id}/pinned':
     get:
@@ -355,6 +485,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetPinnedPosts
+            posts, resp := Client.GetPinnedPosts(<CHANNELID>, "")
 
   '/teams/{team_id}/channels':
     get:
@@ -365,6 +504,58 @@
         Get a page of public channels on a team based on query string parameters - page and per_page.
         ##### Permissions
         Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of public channels per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Channels retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+            // GetPublicChannelsForTeam
+            channels, resp := Client.GetPublicChannelsForTeam(<TEAMID>, 0, 100, "")
+
+  '/teams/{team_id}/channels/deleted':
+    get:
+      tags:
+        - teams
+      summary: Get deleted channels
+      description: |
+        Get a page of deleted channels on a team based on query string parameters - team_id, page and per_page.
+
+        __Minimum server version__: 3.10
+
+        ##### Permissions
+        Must be authenticated and have the `manage_team` permission.
       parameters:
         - name: team_id
           in: path
@@ -439,8 +630,19 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
 
-  '/teams/{team_id}/channels/{channel_name}':
+            search := &model.ChannelSearch{Term: <CHANNEL DISPLAYNAME>}
+
+            // SearchChannels
+            channels, resp := Client.SearchChannels(<TEAMID>, search)
+
+  '/teams/{team_id}/channels/name/{channel_name}':
     get:
       tags:
         - channels
@@ -464,15 +666,24 @@
         '200':
           description: Channel retrieval successful
           schema:
-            $ref: '#/definitions/Channel' 
+            $ref: '#/definitions/Channel'
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
 
-  '/teams/name/{team_name}/channels/{channel_name}':
+            // GetChannelByName
+            channel, resp := Client.GetChannelByName(<CHANNEL NAME>, <TEAMID>, "")
+
+  '/teams/name/{team_name}/channels/name/{channel_name}':
     get:
       tags:
         - channels
@@ -496,13 +707,22 @@
         '200':
           description: Channel retrieval successful
           schema:
-            $ref: '#/definitions/Channel' 
+            $ref: '#/definitions/Channel'
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannelByNameForTeamName
+            channel, resp = Client.GetChannelByNameForTeamName(<CHANNEL NAME>, <TEAM NAME>, "")
 
   '/channels/{channel_id}/members':
     get:
@@ -519,6 +739,16 @@
           description: Channel GUID
           required: true
           type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of members per page.
+          default: "60"
+          type: string
       responses:
         '200':
           description: Channel members retrieval successful
@@ -532,6 +762,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannelMembers
+            members, resp := Client.GetChannelMembers(th.BasicChannel.Id, 0, 60, "")
 
     post:
       tags:
@@ -560,6 +799,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // AddChannelMember
+            cm, resp := Client.AddChannelMember(<CHANNEL ID>, <ID OF USER TO ADD>)
 
   '/channels/{channel_id}/members/ids':
     post:
@@ -599,6 +847,17 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            usersIds := []string{<Id of User1>, <Id of User2>, ...}
+
+            // GetChannelMembersByIds
+            cm, resp := Client.GetChannelMembersByIds(<CHANNELID>, usersIds)
 
   '/channels/{channel_id}/members/{user_id}':
     get:
@@ -631,6 +890,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannelMember
+            member, resp := Client.GetChannelMember(<CHANNELID>, <USERID>, "")
 
     delete:
       tags:
@@ -663,6 +931,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // RemoveUserFromChannel
+            pass, resp := Client.RemoveUserFromChannel(<CHANNELID>, <USERID>)
 
   '/channels/{channel_id}/members/{user_id}/roles':
     put:
@@ -706,6 +983,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // UpdateChannelRoles
+            pass, resp := Client.UpdateChannelRoles(<CHANNELID>, <USERIDTOPROMOTE>, "channel_admin channel_user")
 
   '/channels/{channel_id}/members/{user_id}/notify_props':
     put:
@@ -753,6 +1039,19 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            props := map[string]string{}
+            props[model.DESKTOP_NOTIFY_PROP] = model.CHANNEL_NOTIFY_MENTION
+            props[model.MARK_UNREAD_NOTIFY_PROP] = model.CHANNEL_MARK_UNREAD_MENTION
+
+            // UpdateChannelNotifyProps
+            pass, resp := Client.UpdateChannelNotifyProps(<CHANNELID>, <USERID>, props)
 
   '/channels/members/{user_id}/view':
     post:
@@ -784,7 +1083,6 @@
               prev_channel_id:
                 type: string
                 description: The channel ID of the previous channel, used when switching channels. Providing this ID will cause push notifications to clear on the channel being switched to.
-
       responses:
         '200':
           description: Channel view successful
@@ -796,6 +1094,18 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            view := &model.ChannelView{
+              ChannelId: <CHANNELID>,
+            }
+            // ViewChannel
+            pass, resp := Client.ViewChannel(<USERID>, view)
 
   '/users/{user_id}/teams/{team_id}/channels/members':
     get:
@@ -830,6 +1140,15 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannelMembersForUser
+            members, resp := Client.GetChannelMembersForUser(<USERID>, <TEAMID>, "")
 
   '/users/{user_id}/teams/{team_id}/channels':
     get:
@@ -866,6 +1185,15 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannelsForTeamForUser
+            channels, resp := Client.GetChannelsForTeamForUser(<TEAMID>, <USERID>, "")
 
   '/users/{user_id}/channels/{channel_id}/unread':
     get:
@@ -900,4 +1228,12 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
 
+            // GetChannelUnread
+            channelUnread, resp := Client.GetChannelUnread(<CHANNELID>, <USERID>)

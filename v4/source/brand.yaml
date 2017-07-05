@@ -4,7 +4,7 @@
         - brand
       summary: Get brand image
       description: |
-        Get the previously uploaded brand image.
+        Get the previously uploaded brand image. Returns 404 if no brand image has been uploaded.
         ##### Permissions
         No permission required.
       responses:
@@ -12,8 +12,21 @@
           description: Brand image retrieval successful
           schema:
             type: string
+        '404':
+          description: No brand image uploaded
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetBrandImage
+            img, err := Client.GetBrandImage()
 
     post:
       tags:
@@ -45,3 +58,23 @@
           $ref: '#/responses/TooLarge'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            file, err := os.Open("<Your image>")
+            if err != nil {
+              return err
+            }
+            defer file.Close()
+
+            data := &bytes.Buffer{}
+            if _, err := io.Copy(data, file); err != nil {
+              return err
+            }
+
+            ok, resp := Client.UploadBrandImage(data.Bytes())

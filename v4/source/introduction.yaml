@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: |
-    **Mattermost API version 4 is an active and in-progress project. We're looking for contributors to code server endpoints, build drivers and write documentation. If you're interested [please join our Mattermost instance](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and join the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).**
+    **As of the 3.9 Mattermost server release, API version 4 is going through the release candidate process. Version 4 is stable enough for use and we recommend using version 4 as version 3 will eventually be deprecated.**
 
   version: 4.0.0
   title: Mattermost API Reference
@@ -40,10 +40,14 @@ tags:
       When using endpoints that require a user id, the string `me` can be used in place of the user id to indicate the action is to be taken for the logged in user.
   - name: drivers
     description: |
-      The easiest way to interact with the Mattermost Web Service API is through a language specific driver. These can be found at the following links:
+      The easiest way to interact with the Mattermost Web Service API is through a language specific driver.
 
-      * Mattermost JavaScript Driver (not built yet)
+      #### Official Drivers
+      * [Mattermost JavaScript Driver](https://github.com/mattermost/mattermost-redux/blob/master/src/client/client4.js)
       * [Mattermost Golang Driver](https://github.com/mattermost/platform/blob/master/model/client4.go)
+
+      #### Community-built Drivers
+      * [PHP Driver](https://github.com/gnello/php-mattermost-driver) - built by [@gnello](https://github.com/gnello) and [@prixone](https://github.com/prixone)
 
   - name: authentication
     description: |
@@ -53,7 +57,7 @@ tags:
 
       #### Session Token
 
-      Make an HTTP POST to `your-mattermost-url.com/api/v4/users/login` with a JSON body indicating the name of the team, the user’s `login_id`, `password` and optionally the MFA `token`. The `login_id` can be an email, username or an AD/LDAP ID depending on the system's configuration.
+      Make an HTTP POST to `your-mattermost-url.com/api/v4/users/login` with a JSON body indicating the user’s `login_id`, `password` and optionally the MFA `token`. The `login_id` can be an email, username or an AD/LDAP ID depending on the system's configuration.
 
       ```
       curl -i -d '{"login_id":"someone@nowhere.com","password":"thisisabadpassword"}' http://localhost:8065/api/v4/users/login
@@ -196,6 +200,8 @@ tags:
       - post_deleted
       - channel_created
       - channel_deleted
+      - channel_updated
+      - channel_viewed
       - direct_added
       - group_added
       - added_to_team
@@ -217,7 +223,6 @@ tags:
       - reaction_removed
       - response
       - emoji_added
-      - channel_viewed
 
       #### WebSocket API
 
@@ -298,6 +303,8 @@ tags:
     description: General endpoints for interating with the server, such as configuration and logging.
   - name: OAuth
     description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
+  - name: elasticsearch
+    description: Endpoints for configuring and interacting with Elasticsearch.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -327,6 +334,7 @@ x-tagGroups:
       - OAuth
       - SAML
       - LDAP
+      - elasicsearch
 schemes:
   - http
   - https
