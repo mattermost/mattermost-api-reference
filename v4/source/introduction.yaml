@@ -287,6 +287,8 @@ tags:
     description: Endpoints for uploading and interacting with files.
   - name: preferences
     description: Endpoints for saving and modifying user preferences.
+  - name: emoji
+    description: Endpoints for creating, getting and interacting with emojis.
   - name: compliance
     description: Endpoints for creating, getting and downloading compliance reports.
   - name: cluster
@@ -323,6 +325,7 @@ x-tagGroups:
       - posts
       - files
       - preferences
+      - emoji
       - webhooks
       - commands
       - system
