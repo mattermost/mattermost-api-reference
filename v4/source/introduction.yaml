@@ -201,6 +201,7 @@ tags:
       - channel_created
       - channel_deleted
       - channel_updated
+      - channel_viewed
       - direct_added
       - group_added
       - added_to_team
@@ -221,6 +222,7 @@ tags:
       - reaction_added
       - reaction_removed
       - response
+      - emoji_added
 
       #### WebSocket API
 
