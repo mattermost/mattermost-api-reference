@@ -41,6 +41,12 @@ definitions:
       mfa_active:
         type: boolean
 
+  UsersStats:
+    type: object
+    properties:
+      total_user_count:
+        type: integer
+
   Team:
     type: object
     properties:
@@ -579,7 +585,7 @@ definitions:
       FooterIcon:
         type: string
       Timestamp:
-        description: The timestamp of the slack attahment, either type of string or integer 
+        description: The timestamp of the slack attahment, either type of string or integer
         type: string
 
   SlackAttachmentField:
