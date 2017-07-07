@@ -5,7 +5,9 @@
       summary: Test Elasticsearch configuration
       description: |
         Test the current Elasticsearch configuration to see if the Elasticsearch server can be contacted successfully.
-        __Minimum server version__: 4.0
+        Optionally provide a configuration in the request body to test. If no valid configuration is present in the
+        request body the current server configuration will be tested.
+        __Minimum server version__: 4.1
         ##### Permissions
         Must have `manage_system` permission.
       responses:
@@ -13,6 +15,8 @@
           description: Elasticsearch test successful
           schema:
             $ref: '#/definitions/StatusOK'
+        '400':
+            $ref: '#/responses/BadRequest'
         '500':
           $ref: '#/responses/InternalServerError'
         '501':
