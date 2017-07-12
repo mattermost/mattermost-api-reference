@@ -1387,7 +1387,7 @@ definitions:
         description: The time at which the job was created
       start_at:
         type: integer
-        description: THe time at which the job was started
+        description: The time at which the job was started
       last_activity_at:
         type: integer
         description: The last time at which the job had activity

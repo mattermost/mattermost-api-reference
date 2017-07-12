@@ -304,7 +304,7 @@ tags:
   - name: system
     description: General endpoints for interating with the server, such as configuration and logging.
   - name: Jobs
-    description: Endpoints related to various background jobs that can be run by the server or separately by jobservers.
+    description: Endpoints related to various background jobs that can be run by the server or separately by job servers.
   - name: OAuth
     description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
   - name: elasticsearch

@@ -101,7 +101,7 @@
           $ref: '#/responses/NotFound'
 
   '/jobs/{job_id}/cancel':
-    get:
+    post:
       tags:
         - jobs
       summary: Cancel a job.
