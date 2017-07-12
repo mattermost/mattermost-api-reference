@@ -849,9 +849,12 @@
           type: string
       responses:
         '200':
-          description: File attached with the results of the import
+          description: JSON object containing a base64 encoded text file of the import logs in its `results` property.
           schema:
-            type: file
+            type: object
+            properties:
+              results:
+                type: string
         '400':
           $ref: '#/responses/BadRequest'
         '403':
