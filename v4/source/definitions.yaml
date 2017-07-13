@@ -1373,6 +1373,19 @@ definitions:
         type: integer
         description: The last time of update for the application
 
+  UserAccessToken:
+    type: object
+    properties:
+      token:
+        type: string
+        description: The token used for authentication
+      user_id:
+        type: string
+        description: The user the token authenticates for
+      description:
+        type: string
+        description: A description of the token usage
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
