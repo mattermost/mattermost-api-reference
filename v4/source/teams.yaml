@@ -344,7 +344,9 @@
         '200':
           description: Team list retrieval successful
           schema:
-            $ref: '#/definitions/Team'
+            type: array
+            items:
+              $ref: '#/definitions/Team'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
