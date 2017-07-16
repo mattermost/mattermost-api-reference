@@ -7,6 +7,7 @@
         Test the current Elasticsearch configuration to see if the Elasticsearch server can be contacted successfully.
         Optionally provide a configuration in the request body to test. If no valid configuration is present in the
         request body the current server configuration will be tested.
+
         __Minimum server version__: 4.1
         ##### Permissions
         Must have `manage_system` permission.

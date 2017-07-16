@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: |
-    **As of the 3.9 Mattermost server release, API version 4 is going through the release candidate process. Version 4 is stable enough for use and we recommend using version 4 as version 3 will eventually be deprecated.**
+    **API version 4 is stable with the Mattermost server 4.0 release. API version 3 is scheduled for depreaction on January 16th, 2018. [Details here](/#tag/APIv3-Deprecation). Looking for the APIv3 reference? It has moved [here](https://api.mattermost.com/v3).**
 
   version: 4.0.0
   title: Mattermost API Reference
@@ -48,6 +48,7 @@ tags:
 
       #### Community-built Drivers
       * [PHP Driver](https://github.com/gnello/php-mattermost-driver) - built by [@gnello](https://github.com/gnello) and [@prixone](https://github.com/prixone)
+      * [Python Driver](https://github.com/Vaelor/python-mattermost-driver) - built by [@Vaelor](https://github.com/Vaelor)
 
   - name: authentication
     description: |
@@ -274,6 +275,19 @@ tags:
 
       To see how these actions work, please refer to either the [Golang WebSocket driver](https://github.com/mattermost/platform/blob/master/model/websocket_client.go) or our [JavaScript WebSocket driver](https://github.com/mattermost/mattermost-driver-javascript/blob/master/websocket_client.jsx).
 
+  - name: APIv3 Deprecation
+    description: |
+      With the release of Mattermost server 4.0, API version 4 is stable and we strongly recommend using it over API version 3. The deprecation of API version 3 is planned for January 16th, 2018, which is six months after the stable release of v4.
+
+      All new integrations should use v4 and existing ones should begin migration over to version 4. Some suggested steps to help migrate your server and integrations are:
+
+      1. Set your server's log level to `DEBUG` and look for any requests hitting `/api/v3/` endpoints. The Mattermost webapp, desktop app, and classic mobile apps are solely using API version 4 and the new mobile apps will be completely moved over in their next release. That means that the majority of the logs you see will be from integrations that need to be migrated to v4.
+      2. For in-house or self-built integrations, begin updating them to use v4 with the help of this documentation. Most v3 endpoints have direct counterparts in v4 and should be easily migrated.
+      3. For integrations built by a third-party, visit their homepage (on GitHub, GitLab, etc.) and check if they already have a version that uses the Mattermost v4 API. If they do not, consider opening an issue asking them if support is planned.
+      4. Once you have migrated all your integrations to use v4, take another look at the server logs to make sure you don't see many v3 endpoints in use. Then, in your `config.json`, set the setting `EnableAPIv3` to `false`. In the system console this setting is under `General` -> `Configuration` -> `Allow use of API v3 endpoints`. This will disable v3 and output an error to your server logs any time one is attempted to be used. Set your server's log level back to `ERROR` and use the error logs to help track down any last uses of v3.
+
+      If you have any questions about the deprecation or about migrating from v3 to v4, feel free to [join our daily build server at pre-release.mattermost.com](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and ask questions in the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).
+
   - name: users
     description: |
       Endpoints for creating, getting and interacting with users.
@@ -312,6 +326,7 @@ x-tagGroups:
     tags:
       - introduction
       - schema
+      - APIv3 Deprecation
   - name: Standard Features
     tags:
       - drivers
@@ -337,7 +352,7 @@ x-tagGroups:
       - OAuth
       - SAML
       - LDAP
-      - elasicsearch
+      - elasticsearch
 schemes:
   - http
   - https
