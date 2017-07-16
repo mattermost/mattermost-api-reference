@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   description: |
 
-    **API version 3 is scheduled for deprecation on January 16th, 2018. We recommend using API vesrion 4 found [here](https://api.mattermost.com).**
+    **API version 3 is scheduled for deprecation on January 16th, 2018. We recommend using API version 4 found [here](https://api.mattermost.com).**
 
     ### Introduction
 
