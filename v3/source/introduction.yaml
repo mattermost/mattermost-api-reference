@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   description: |
 
-    **In the coming months, Mattermost will be moving to API version 4. [The reference for the new API version can be found here](https://api.mattermost.com/v4/). API version 3 will be supported for at least six months after API version 4 goes stable.**
+    **API version 3 is scheduled for deprecation on January 16th, 2018. We recommend using API vesrion 4 found [here](https://api.mattermost.com).**
 
     ### Introduction
 
@@ -37,7 +37,7 @@ info:
 
     The source code for this API reference is hosted at https://github.com/mattermost/mattermost-api-reference.
 
-  version: master
+  version: 3.10.0
   title: Mattermost API Reference
   termsOfService: 'https://about.mattermost.com/default-terms/'
   contact:
