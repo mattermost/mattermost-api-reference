@@ -1141,6 +1141,8 @@
           required: true
           schema:
             type: object
+            required:
+              - description
             properties:
               description:
                 description: A description of the token usage
