@@ -1164,7 +1164,7 @@
         - users
       summary: Get user access tokens
       description: |
-        Get a list of user access tokens for a user. Does not include the actual authentication tokens.
+        Get a list of user access tokens for a user. Does not include the actual authentication tokens. Use query paremeters for paging.
 
         __Minimum server version__: 4.1
 
@@ -1175,6 +1175,16 @@
           in: path
           description: User GUID
           required: true
+          type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of tokens per page.
+          default: "60"
           type: string
       responses:
         '200':
