@@ -1404,9 +1404,25 @@ definitions:
   UserAccessToken:
     type: object
     properties:
+      id:
+        type: string
+        description: Unique identifier for the token
       token:
         type: string
         description: The token used for authentication
+      user_id:
+        type: string
+        description: The user the token authenticates for
+      description:
+        type: string
+        description: A description of the token usage
+
+  UserAccessTokenSanitized:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier for the token
       user_id:
         type: string
         description: The user the token authenticates for

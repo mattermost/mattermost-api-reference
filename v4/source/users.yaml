@@ -1129,7 +1129,7 @@
         __Minimum server version__: 4.1
 
         ##### Permissions
-        Must be authenticated as the user or have `manage_system` permission.
+        Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
@@ -1162,12 +1162,12 @@
         - users
       summary: Get user access tokens
       description: |
-        Get a list of user access tokens for a user.
+        Get a list of user access tokens for a user. Does not include the actual authentication tokens.
 
         __Minimum server version__: 4.1
 
         ##### Permissions
-        Must be authenticated as the user or have `manage_system` permission.
+        Must have `read_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
@@ -1180,7 +1180,7 @@
           schema:
             type: array
             items:
-              $ref: '#/definitions/UserAccessToken'
+              $ref: '#/definitions/UserAccessTokenSanitized'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -1188,7 +1188,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  /users/{user_id}/tokens/revoke:
+  /users/tokens/revoke:
     post:
       tags:
         - users
@@ -1199,13 +1199,8 @@
         __Minimum server version__: 4.1
 
         ##### Permissions
-        Must be authenticated as the user or have `manage_system` permission.
+        Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
       parameters:
-        - name: user_id
-          in: path
-          description: User GUID
-          required: true
-          type: string
         - in: body
           name: token
           required: true
@@ -1228,4 +1223,36 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  /users/tokens/{token_id}:
+    get:
+      tags:
+        - users
+      summary: Get a user access token
+      description: |
+        Get a user access token. Does not include the actual authentication token.
+
+        __Minimum server version__: 4.1
+
+        ##### Permissions
+        Must have `read_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - name: token_id
+          in: path
+          description: User access token GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User access token retrieval successful
+          schema:
+            $ref: '#/definitions/UserAccessTokenSanitized'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
 
