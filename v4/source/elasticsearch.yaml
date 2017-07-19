@@ -23,3 +23,23 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
+  /elasticsearch/purge_indexes:
+    post:
+      tags:
+        - elasticsearch
+      summary: Purge all Elasticsearch indexes
+      description: |
+        Deletes all Elasticsearch indexes and their contents. After calling this endpoint, it is
+        necessary to schedule a new Elasticsearch indexing job to repopulate the indexes.
+        __Minimum server version__: 4.1
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Indexes purged successfully.
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        '501':
+          $ref: '#/responses/NotImplemented'
