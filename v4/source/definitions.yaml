@@ -1373,6 +1373,34 @@ definitions:
         type: integer
         description: The last time of update for the application
 
+  Job:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique id of the job
+      type:
+        type: string
+        description: The type of job
+      create_at:
+        type: integer
+        description: The time at which the job was created
+      start_at:
+        type: integer
+        description: The time at which the job was started
+      last_activity_at:
+        type: integer
+        description: The last time at which the job had activity
+      status:
+        type: string
+        description: The status of the job
+      progress:
+        type: integer
+        description: The progress (as a percentage) of the job
+      data:
+        type: object
+        description: A freeform data field containing additional information about the job
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
