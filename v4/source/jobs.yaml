@@ -7,7 +7,7 @@
         Get a page of jobs. Use the query parameters to modify the behaviour of this endpoint.
         __Minimum server version: 4.1__
         ##### Permissions
-        Must have `manage_system` permission.
+        Must have `manage_jobs` permission.
       parameters:
         - name: page
           in: query
@@ -41,7 +41,7 @@
         Create a new job.
         __Minimum server version: 4.1__
         ##### Permissions
-        Must have `manage_system` permission.
+        Must have `manage_jobs` permission.
       parameters:
         - in: body
           name: body
@@ -79,7 +79,7 @@
         Gets a single job.
         __Minimum server version: 4.1__
         ##### Permissions
-        Must have `manage_system` permission.
+        Must have `manage_jobs` permission.
       parameters:
         - name: job_id
           in: path
@@ -109,7 +109,7 @@
         Cancel a job.
         __Minimum server version: 4.1__
         ##### Permissions
-        Must have `manage_system` permission.
+        Must have `manage_jobs` permission.
       parameters:
         - name: job_id
           in: path
@@ -139,7 +139,7 @@
         Get a page of jobs of the given type. Use the query parameters to modify the behaviour of this endpoint.
         __Minimum server version: 4.1__
         ##### Permissions
-        Must have `manage_system` permission.
+        Must have `manage_jobs` permission.
       parameters:
         - name: type
           in: path
