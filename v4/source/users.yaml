@@ -1118,3 +1118,25 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
+  /users/stats:
+    get:
+      tags:
+        - users
+      summary: Get users stats
+      description: |
+        Get users stats on the system.
+        ##### Permissions
+        Requires an active session
+      responses:
+        '200':
+          description: Users stats retrieval successful
+          schema:
+            $ref: '#/definitions/UsersStats'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
