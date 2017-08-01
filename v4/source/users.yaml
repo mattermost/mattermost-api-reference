@@ -1118,3 +1118,153 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
+  /users/{user_id}/tokens:
+    post:
+      tags:
+        - users
+      summary: Create a user access token
+      description: |
+        Generate a user access token that can be used to authenticate with the Mattermost REST API.
+
+        __Minimum server version__: 4.1
+
+        ##### Permissions
+        Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: token
+          required: true
+          schema:
+            type: object
+            required:
+              - description
+            properties:
+              description:
+                description: A description of the token usage
+                type: string
+      responses:
+        '201':
+          description: User access token creation successful
+          schema:
+            $ref: '#/definitions/UserAccessToken'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+    get:
+      tags:
+        - users
+      summary: Get user access tokens
+      description: |
+        Get a list of user access tokens for a user. Does not include the actual authentication tokens. Use query paremeters for paging.
+
+        __Minimum server version__: 4.1
+
+        ##### Permissions
+        Must have `read_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of tokens per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: User access tokens retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserAccessTokenSanitized'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /users/tokens/revoke:
+    post:
+      tags:
+        - users
+      summary: Revoke a user access token
+      description: |
+        Revoke a user access token and delete any sessions using the token.
+
+        __Minimum server version__: 4.1
+
+        ##### Permissions
+        Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - in: body
+          name: token
+          required: true
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                description: The token to revoke
+                type: string
+      responses:
+        '200':
+          description: User access token revoke successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /users/tokens/{token_id}:
+    get:
+      tags:
+        - users
+      summary: Get a user access token
+      description: |
+        Get a user access token. Does not include the actual authentication token.
+
+        __Minimum server version__: 4.1
+
+        ##### Permissions
+        Must have `read_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - name: token_id
+          in: path
+          description: User access token GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User access token retrieval successful
+          schema:
+            $ref: '#/definitions/UserAccessTokenSanitized'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+

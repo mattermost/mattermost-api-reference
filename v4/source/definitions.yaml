@@ -1401,6 +1401,35 @@ definitions:
         type: object
         description: A freeform data field containing additional information about the job
 
+  UserAccessToken:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier for the token
+      token:
+        type: string
+        description: The token used for authentication
+      user_id:
+        type: string
+        description: The user the token authenticates for
+      description:
+        type: string
+        description: A description of the token usage
+
+  UserAccessTokenSanitized:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier for the token
+      user_id:
+        type: string
+        description: The user the token authenticates for
+      description:
+        type: string
+        description: A description of the token usage
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
