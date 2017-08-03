@@ -207,6 +207,26 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/Post'
 
+  PostListWithSearchMatches:
+    type: object
+    properties:
+      order:
+        type: array
+        items:
+            type: string
+        example: ["post_id1", "post_id12"]
+      posts:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Post'
+      matches:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+        example: {"post_id1": ["search match 1", "search match 2"]}
+
   TeamMap:
     type: object
     description: A mapping of teamIds to teams.
