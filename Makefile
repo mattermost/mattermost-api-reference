@@ -39,6 +39,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/files.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/jobs.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/system.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/emoji.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/webhooks.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/saml.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/compliance.yaml >> $(V4_YAML)

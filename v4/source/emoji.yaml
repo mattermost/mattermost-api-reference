@@ -16,9 +16,9 @@
           type: file
         - name: emoji
           in: formData
-          description: The Emoji object
+          description: A JSON object containing a `name` field with the name of the emoji
           required: true
-          type: object
+          type: string
       responses:
         '201':
           description: Emoji creation successful
