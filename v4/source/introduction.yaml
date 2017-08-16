@@ -90,6 +90,16 @@ tags:
 
       You should now be able to access the API as the user you logged in as.
 
+      #### Personal Access Tokens
+
+      Using [personal access tokens](https://docs.mattermost.com/developer/personal-access-tokens.html) is very similar to using a session token. The only real difference is that session tokens will expire, while personal access tokens will live until they are manually revoked by the user or an admin.
+
+      Just like session tokens, include the personal access token as part of the `Authorization` header in your requests using the `Bearer` method. Assuming our personal access token is `9xuqwrwgstrb3mzrxb83nb357a`, we could use it as shown below.
+
+      ```
+      curl -i -H 'Authorization: Bearer 9xuqwrwgstrb3mzrxb83nb357a' http://localhost:8065/api/v4/users/me
+      ```
+
       #### OAuth 2.0
 
       Mattermost has the ability to act as an [OAuth 2.0](https://tools.ietf.org/html/rfc6749) service provider.
