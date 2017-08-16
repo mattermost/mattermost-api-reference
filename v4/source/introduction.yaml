@@ -52,7 +52,7 @@ tags:
 
   - name: authentication
     description: |
-      The majority of the Mattermost API involves interacting with teams. Therefore, most API methods require authentication as a user. There are two ways to authenticate into a Mattermost system.
+      There are multiple ways to authenticate against the Mattermost API.
 
       All examples assume there is a Mattermost instance running at http://localhost:8065.
 
