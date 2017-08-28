@@ -289,6 +289,12 @@ tags:
     description: |
       With the release of Mattermost server 4.0, API version 4 is stable and we strongly recommend using it over API version 3. The deprecation of API version 3 is planned for January 16th, 2018, which is six months after the stable release of v4.
 
+      The major changes from v3 to v4 are:
+
+      - Endpoint URLs only require team IDs when necessary, for example getting a channel by ID does not require a team ID in v4
+      - Collection endpoints generally return lists and include paging as part of the query string
+      - User ID is now included in most all user endpoints to allow for admins to use these endpoints to modify other users
+
       All new integrations should use v4 and existing ones should begin migration over to version 4. Some suggested steps to help migrate your server and integrations are:
 
       1. Set your server's log level to `DEBUG` and look for any requests hitting `/api/v3/` endpoints. The Mattermost webapp, desktop app, and classic mobile apps are solely using API version 4 and the new mobile apps will be completely moved over in their next release. That means that the majority of the logs you see will be from integrations that need to be migrated to v4.
