@@ -447,7 +447,7 @@
     post:
       tags:
         - posts
-      summary: Perform an post action
+      summary: Perform a post action
       description: |
         Perform a post action, which allows users to interact with integrations through posts.
         ##### Permissions
