@@ -442,3 +442,35 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/posts/{post_id}/actions/{action_id}':
+    post:
+      tags:
+        - posts
+      summary: Perform an post action
+      description: |
+        Perform a post action, which allows users to interact with integrations through posts.
+        ##### Permissions
+        Must be authenticated and have the `read_channel` permission to the channel the post is in.
+      parameters:
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          type: string
+        - name: action_id
+          in: path
+          description: Action GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Post action successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
