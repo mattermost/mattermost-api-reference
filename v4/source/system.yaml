@@ -30,7 +30,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetPing
-            status, err := Client.GetPing()
+            status, resp := Client.GetPing()
 
   '/database/recycle':
     post:
@@ -56,8 +56,7 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
-            // DatabaseRecycle
-            flag, err := Client.DatabaseRecycle()
+            ok, resp := Client.DatabaseRecycle()
 
   '/email/test':
     post:
@@ -86,7 +85,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // TestEmail
-            flag, err := Client.TestEmail()
+            ok, resp := Client.TestEmail()
 
   '/config':
     get:
@@ -115,7 +114,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetConfig
-            config, err := Client.GetConfig()
+            config, resp := Client.GetConfig()
 
     put:
       tags:
@@ -143,12 +142,12 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetConfig
-            config, err := Client.GetConfig()
+            config, resp := Client.GetConfig()
 
             config.TeamSettings.SiteName = "MyFancyName"
 
             // UpdateConfig
-            updatedConfig, err := Client.UpdateConfig()
+            updatedConfig, resp := Client.UpdateConfig(config)
 
   '/config/reload':
     post:
@@ -177,7 +176,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // ReloadConfig
-            flag, err := Client.ReloadConfig()
+            ok, resp := Client.ReloadConfig()
 
   '/config/client':
     get:
@@ -210,7 +209,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetOldClientConfig
-            flag, err := Client.GetOldClientConfig()
+            ok, resp := Client.GetOldClientConfig()
 
   '/license':
     post:
@@ -315,7 +314,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetOldClientLicense
-            license, err := Client.GetOldClientLicense()
+            license, resp := Client.GetOldClientLicense()
 
   '/audits':
     get:
@@ -355,7 +354,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetAudits
-            audits, err := Client.GetAudits(0, 100, "")
+            audits, resp := Client.GetAudits(0, 100, "")
 
   '/caches/invalidate':
     post:
@@ -382,7 +381,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // InvalidateCaches
-            flag, err := Client.InvalidateCaches()
+            ok, resp := Client.InvalidateCaches()
 
   '/logs':
     get:
@@ -422,7 +421,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetLogs
-            logs, err := Client.GetLogs(0, 10)
+            logs, resp := Client.GetLogs(0, 10)
 
     post:
       tags:
