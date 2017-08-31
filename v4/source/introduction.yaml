@@ -64,6 +64,12 @@ tags:
       curl -i -d '{"login_id":"someone@nowhere.com","password":"thisisabadpassword"}' http://localhost:8065/api/v4/users/login
       ```
 
+      NOTE: If you're running cURL on windows, you will have to change the single quotes to double quotes, and escape the inner double quotes with backslash, like below:
+
+      ```
+      curl -i -d "{\"login_id\":\"someone@nowhere.com\",\"password\":\"thisisabadpassword\"}" http://localhost:8065/api/v4/users/login
+      ```
+
       If successful, the response will contain a `Token` header and a user object in the body.
 
       ```
