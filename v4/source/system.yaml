@@ -30,7 +30,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetPing
-            status, err := Client.GetPing()
+            status, resp := Client.GetPing()
 
   '/database/recycle':
     post:
@@ -48,6 +48,15 @@
             $ref: "#/definitions/StatusOK"
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            ok, resp := Client.DatabaseRecycle()
 
   '/email/test':
     post:
@@ -67,6 +76,16 @@
           $ref: '#/responses/Forbidden'
         '500':
           $ref: '#/responses/InternalServerError'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // TestEmail
+            ok, resp := Client.TestEmail()
 
   '/config':
     get:
@@ -86,6 +105,16 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetConfig
+            config, resp := Client.GetConfig()
 
     put:
       tags:
@@ -104,6 +133,21 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetConfig
+            config, resp := Client.GetConfig()
+
+            config.TeamSettings.SiteName = "MyFancyName"
+
+            // UpdateConfig
+            updatedConfig, resp := Client.UpdateConfig(config)
 
   '/config/reload':
     post:
@@ -123,6 +167,16 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // ReloadConfig
+            ok, resp := Client.ReloadConfig()
 
   '/config/client':
     get:
@@ -146,6 +200,16 @@
           $ref: '#/responses/BadRequest'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetOldClientConfig
+            ok, resp := Client.GetOldClientConfig()
 
   '/license':
     post:
@@ -241,6 +305,16 @@
           $ref: '#/responses/BadRequest'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetOldClientLicense
+            license, resp := Client.GetOldClientLicense()
 
   '/audits':
     get:
@@ -271,6 +345,16 @@
               $ref: "#/definitions/Audit"
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetAudits
+            audits, resp := Client.GetAudits(0, 100, "")
 
   '/caches/invalidate':
     post:
@@ -288,6 +372,16 @@
             $ref: "#/definitions/StatusOK"
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // InvalidateCaches
+            ok, resp := Client.InvalidateCaches()
 
   '/logs':
     get:
@@ -318,6 +412,16 @@
               type: string
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetLogs
+            logs, resp := Client.GetLogs(0, 10)
 
     post:
       tags:
@@ -353,6 +457,20 @@
               type: string
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            message := make(map[string]string)
+            message["level"] = "ERROR"
+            message["message"] = "this is a test"
+
+            // PostLog
+            _, resp := Client.PostLog(message)
 
   '/webrtc/token':
     get:
@@ -393,6 +511,16 @@
           $ref: '#/responses/Unauthorized'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetWebrtcToken
+            token, resp := Client.GetWebrtcToken()
 
   '/analytics/old':
     get:
