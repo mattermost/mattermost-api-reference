@@ -16,7 +16,6 @@
             type: object
             required:
               - name
-              - display_name
               - description
               - callback_urls
               - homepage
@@ -120,6 +119,94 @@
           $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
+
+  '/oauth/apps/{app_id}':
+    put:
+      tags:
+        - OAuth
+      summary: Update an OAuth app
+      description: |
+        Update an OAuth 2.0 client application based on OAuth struct.
+        ##### Permissions
+        If app creator, must have `mange_oauth` permission otherwise `manage_system_wide_oauth` permission is required.
+      parameters:
+        - name: app_id
+          in: path
+          description: Application client id
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: OAuth application to update
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+              - name
+              - display_name
+              - description
+              - callback_urls
+              - homepage
+            properties:
+              id:
+                type: string
+                description: The id of the client application
+              name:
+                type: string
+                description: The name of the client application
+              description:
+                type: string
+                description: A short description of the application
+              icon_url:
+                type: string
+                description: A URL to an icon to display with the application
+              callback_urls:
+                type: array
+                items:
+                  type: string
+                description: A list of callback URLs for the appliation
+              homepage:
+                type: string
+                description: A link to the website of the application
+              is_trusted:
+                type: boolean
+                description: Set this to `true` to skip asking users for permission. It will be set to false if value is not provided.
+      responses:
+        '200':
+          description: App update successful
+          schema:
+            $ref: '#/definitions/OAuthApp'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            appToUpdate := &model.OAuthApp{
+              Id:           <APP ID>,
+              Name:         <APP NAME>,
+              Description:  <APP DESCRIPTION>,
+              IconURL:      <URL TO APP ICON>,
+              CallbackUrls: [<CALLBACK URL1>, <CALLBACK URL2>],
+              Homepage:     <URL TO APP HOMEPAGE>,
+              IsTrusted:    <BOOLEAN>
+            }
+
+            // UpdateOAuthApp
+            updatedApp, resp := Client.UpdateOAuthApp(appToUpdate)
 
     delete:
       tags:
