@@ -120,7 +120,6 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  '/oauth/apps/{app_id}':
     put:
       tags:
         - OAuth
