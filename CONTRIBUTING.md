@@ -1,6 +1,6 @@
 ## Contributing
 
-We're accepting pull requests! Specifically we're looking for documenation on routes defined [here](https://github.com/mattermost/platform/tree/master/api).
+We're accepting pull requests! Specifically we're looking for documenation on routes defined [here](https://github.com/mattermost/mattermost-server/tree/master/api).
 
 All the documentation is written in YAML and found in the [source](https://github.com/mattermost/mattermost-api-reference/tree/master/source) directory.
 
