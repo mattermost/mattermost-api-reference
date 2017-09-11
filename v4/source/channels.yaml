@@ -1087,7 +1087,14 @@
         '200':
           description: Channel view successful
           schema:
-            $ref: '#/definitions/StatusOK'
+            type: object
+            properties:
+              status:
+                type: string
+                description: Value should be "OK" if successful
+              last_viewed_at_times:
+                type: object
+                description: A JSON object mapping channel IDs to the channel view times
         '400':
           $ref: '#/responses/BadRequest'
         '401':
