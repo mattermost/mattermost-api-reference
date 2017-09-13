@@ -9,14 +9,14 @@
         Must be authenticated.
       consumes: ["multipart/form-data"]
       parameters:
-        - name: files
+        - name: image
           in: formData
           description: A file to be uploaded
           required: true
           type: file
         - name: emoji
           in: formData
-          description: A JSON object containing a `name` field with the name of the emoji
+          description: A JSON object containing a `name` field with the name of the emoji and a `creator_id` field with the id of the authenticated user.
           required: true
           type: string
       responses:
