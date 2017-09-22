@@ -1430,6 +1430,22 @@ definitions:
         type: string
         description: A description of the token usage
 
+  DataRetentionPolicy:
+    type: object
+    properties:
+      message_deletion_enabled:
+        type: boolean
+        description: Indicates whether data retention policy deletion of messages is enabled.
+      file_deletion_enabled:
+        type: boolean
+        description: Indicates whether data retention policy deletion of file attachments is enabled.
+      message_retention_cutoff:
+        type: integer
+        description: The current server timestamp before which messages should be deleted.
+      file_retention_cutoff:
+        type: integer
+        description: The current server timestamp before which files should be deleted.
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
