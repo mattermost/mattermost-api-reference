@@ -6,6 +6,8 @@
       description: |
         Gets the current data retention policy details from the server, including what data should be purged and the cutoff times for each data type that should be purged.
         __Minimum server version__: 4.3
+        ##### Permissions
+        Requires an active session but no other permissions.
       responses:
         '200':
           description: Data retention policy details retrieved successfully.
