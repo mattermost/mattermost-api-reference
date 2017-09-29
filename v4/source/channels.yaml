@@ -1062,6 +1062,8 @@
         Perform all the actions involved in viewing a channel. This includes marking channels as read, clearing push notifications, and updating the active channel.
         ##### Permissions
         Must be logged in as user or have `edit_other_users` permission.
+
+        __Response only includes `last_viewed_at_times` in Mattermost server 4.3 and newer.__
       parameters:
         - in: path
           name: user_id
@@ -1087,7 +1089,14 @@
         '200':
           description: Channel view successful
           schema:
-            $ref: '#/definitions/StatusOK'
+            type: object
+            properties:
+              status:
+                type: string
+                description: Value should be "OK" if successful
+              last_viewed_at_times:
+                type: object
+                description: A JSON object mapping channel IDs to the channel view times
         '400':
           $ref: '#/responses/BadRequest'
         '401':
