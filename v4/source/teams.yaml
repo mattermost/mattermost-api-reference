@@ -43,7 +43,7 @@
     get:
       tags:
         - teams
-      summary: Get teams.
+      summary: Get teams
       description: |
         For regular users only returns open teams. Users with the "manage_system" permission will return teams regardless of type. The result is based on query string parameters - page and per_page.
         ##### Permissions
