@@ -1268,3 +1268,74 @@
         '404':
           $ref: '#/responses/NotFound'
 
+  /users/tokens/disable:
+    post:
+      tags:
+        - users
+      summary: Temporarily disable a user access token
+      description: |
+        Disable a user access token and delete any sessions using the token. The token can be re-enabled using `/users/tokens/enable`.
+
+        __Minimum server version__: 4.4
+
+        ##### Permissions
+        Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - in: body
+          name: token
+          required: true
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                description: The token to disable
+                type: string
+      responses:
+        '200':
+          description: User access token disable successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /users/tokens/enable:
+    post:
+      tags:
+        - users
+      summary: Enable a disabled user access token
+      description: |
+        Re-enable a user access token that has been disabled.
+
+        __Minimum server version__: 4.4
+
+        ##### Permissions
+        Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - in: body
+          name: token
+          required: true
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                description: The token to enable
+                type: string
+      responses:
+        '200':
+          description: User access token enable successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
