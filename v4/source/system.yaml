@@ -430,8 +430,9 @@
       description: |
         Add log messages to the server logs.
         ##### Permissions
-        Must have `manage_system` permission or if `ServiceSettings.EnableDeveloper` in the
-        config file is set to `true` then any user can use this endpoint.
+        Users with `manage_system` permission can log ERROR or DEBUG messages.
+        Logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` or just DEBUG messages when `false`.
+        Non-logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` and cannot log when `false`.
       parameters:
         - in: body
           name: body
@@ -444,7 +445,7 @@
             properties:
               level:
                 type: string
-                description: The error level, e.g. ERROR or INFO
+                description: The error level, ERROR or DEBUG
               message:
                 type: string
                 description: Message to send to the server logs
