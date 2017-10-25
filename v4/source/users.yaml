@@ -769,7 +769,7 @@
         - users
       summary: Update a user's password
       description: |
-        Update a user's password. New password must meet password policy set by server configuration.
+        Update a user's password. New password must meet password policy set by server configuration. Current password is required if you're updating your own password.
         ##### Permissions
         Must be logged in as the user the password is being changed for or have `manage_system` permission.
       parameters:
@@ -784,7 +784,6 @@
           schema:
             type: object
             required:
-              - current_password
               - new_password
             properties:
               current_password:
