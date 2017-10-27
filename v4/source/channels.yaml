@@ -1015,17 +1015,9 @@
           type: string
         - in: body
           name: notify_props
-          description: Space-delimited channel roles to assign to the user
           required: true
           schema:
-            type: object
-            properties:
-              desktop:
-                description: Controls when to send desktop notifications. The possible options are `default`, `all`, `mention`, `none`
-                type: string
-              mark_unread:
-                description: Controls when to mark a channel unread. The possible options are `all` and `mention`
-                type: string
+            $ref: '#/definitions/ChannelNotifyProps'
       responses:
         '200':
           description: Channel notification properties update successful

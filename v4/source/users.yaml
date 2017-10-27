@@ -35,6 +35,8 @@
                 type: string
               props:
                 type: object
+              notify_props:
+                $ref: '#/definitions/UserNotifyProps'
       responses:
         '201':
           description: User creation successful
@@ -353,7 +355,7 @@
               props:
                 type: object
               notify_props:
-                type: object
+                $ref: '#/definitions/UserNotifyProps'
       responses:
         '200':
           description: User update successful
@@ -433,7 +435,7 @@
               props:
                 type: object
               notify_props:
-                type: object
+                $ref: '#/definitions/UserNotifyProps'
       responses:
         '200':
           description: User patch successful
