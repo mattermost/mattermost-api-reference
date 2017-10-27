@@ -775,8 +775,8 @@
     post:
       tags:
         - channels
-      summary: Add a user
-      description: Add a user to the channel.
+      summary: Add user to channel
+      description: Add a user to a channel by creating a channel member object.
       parameters:
         - name: channel_id
           in: path
