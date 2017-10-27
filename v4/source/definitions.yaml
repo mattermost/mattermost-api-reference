@@ -29,7 +29,8 @@ definitions:
       locale:
         type: string
       notify_props:
-        type: object
+        description: Field only visible to self and admins
+        $ref: '#/definitions/UserNotifyProps'
       props:
         type: object
       last_password_update:
@@ -141,7 +142,8 @@ definitions:
       mention_count:
         type: integer
       notify_props:
-        type: object
+        description: Field only visible to self and admins
+        $ref: '#/definitions/ChannelNotifyProps'
       last_update_at:
         type: integer
 
@@ -1445,6 +1447,47 @@ definitions:
       file_retention_cutoff:
         type: integer
         description: The current server timestamp before which files should be deleted.
+
+  UserNotifyProps:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Set to "true" to enable email notifications, "false" to disable. Defaults to "true".
+      push:
+        type: string
+        description: Set to "all" to receive push notifications for all activity, "mention" for mentions and direct messages only, and "none" to disable. Defaults to "mention".
+      desktop:
+        type: string
+        description: Set to "all" to receive desktop notifications for all activity, "mention" for mentions and direct messages only, and "none" to disable. Defaults to "all".
+      desktop_sound:
+        type: string
+        description: Set to "true" to enable sound on desktop notifications, "false" to disable. Defaults to "true".
+      mention_keys:
+        type: string
+        description: A comma-separated list of words to count as mentions. Defaults to username and @username.
+      channel:
+        type: string
+        description: Set to "true" to enable channel-wide notifications (@channel, @all, etc.), "false" to disable. Defaults to "true".
+      first_name:
+        type: string
+        description: Set to "true" to enable mentions for first name. Defaults to "true" if a first name is set, "false" otherwise.
+
+  ChannelNotifyProps:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Set to "true" to enable email notifications, "false" to disable, or "default" to use the global user notification setting.
+      push:
+        type: string
+        description: Set to "all" to receive push notifications for all activity, "mention" for mentions and direct messages only, "none" to disable, or "default" to use the global user notification setting.
+      desktop:
+        type: string
+        description: Set to "all" to receive desktop notifications for all activity, "mention" for mentions and direct messages only, "none" to disable, or "default" to use the global user notification setting.
+      mark_unread:
+        type: string
+        description: Set to "all" to mark the channel unread for any new message, "mention" to mark unread for new mentions only. Defaults to "all".
 
 externalDocs:
   description: Find out more about Mattermost
