@@ -902,6 +902,9 @@
       summary: Revoke a user session
       description: |
         Revokes a user session from the provided user id and session id strings.
+        
+        __Minimum server version__: 4.4
+        
         ##### Permissions
         Must be logged in as the user being updated or have the `edit_other_users` permission.
       parameters:
