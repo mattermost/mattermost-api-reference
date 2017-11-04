@@ -227,6 +227,8 @@ tags:
       - update_team
       - user_added
       - user_updated
+      - user_role_updated
+      - memberrole_updated
       - user_removed
       - preference_changed
       - preferences_changed
