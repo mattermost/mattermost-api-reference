@@ -347,6 +347,8 @@ tags:
     description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
   - name: elasticsearch
     description: Endpoints for configuring and interacting with Elasticsearch.
+  - name: dataretention
+    description: Endpoints related to data retention policy.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -379,6 +381,7 @@ x-tagGroups:
       - SAML
       - LDAP
       - elasticsearch
+      - dataretention
 schemes:
   - http
   - https
