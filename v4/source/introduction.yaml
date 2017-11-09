@@ -327,28 +327,38 @@ tags:
     description: Endpoints for uploading and interacting with files.
   - name: preferences
     description: Endpoints for saving and modifying user preferences.
+  - name: status
+    description: Endpoints for getting and updating user statuses.
   - name: emoji
     description: Endpoints for creating, getting and interacting with emojis.
-  - name: compliance
-    description: Endpoints for creating, getting and downloading compliance reports.
-  - name: cluster
-    description: Endpoints for configuring and interacting with high availability clusters.
+  - name: reactions
+    description: Endpoints for creating, getting and removing emoji reactions.
+  - name: webhooks
+    description: Endpoints for creating, getting and updating webhooks.
+  - name: commands
+    description: Endpoints for creating, getting and updating slash commands.
+  - name: OpenGraph
+    description: Endpoint for getting Open Graph metadata.
+  - name: system
+    description: General endpoints for interating with the server, such as configuration and logging.
   - name: brand
     description: Endpoints related to custom branding and white-labeling. See [our branding documentation](https://docs.mattermost.com/administration/branding.html) for more information.
+  - name: OAuth
+    description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
   - name: SAML
     description: Endpoints for configuring and interacting with SAML.
   - name: LDAP
     description: Endpoints for configuring and interacting with LDAP.
-  - name: system
-    description: General endpoints for interating with the server, such as configuration and logging.
-  - name: Jobs
-    description: Endpoints related to various background jobs that can be run by the server or separately by job servers.
-  - name: OAuth
-    description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
+  - name: compliance
+    description: Endpoints for creating, getting and downloading compliance reports.
+  - name: cluster
+    description: Endpoints for configuring and interacting with high availability clusters.
   - name: elasticsearch
     description: Endpoints for configuring and interacting with Elasticsearch.
   - name: dataretention
-    description: Endpoints related to data retention policy.
+    description: Endpoint for getting data retention policy settings.
+  - name: jobs
+    description: Endpoints related to various background jobs that can be run by the server or separately by job servers.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -370,18 +380,22 @@ x-tagGroups:
       - posts
       - files
       - preferences
+      - status
       - emoji
+      - reactions
       - webhooks
       - commands
+      - OpenGraph
       - system
-      - compliance
-      - cluster
       - brand
       - OAuth
       - SAML
       - LDAP
+      - compliance
+      - cluster
       - elasticsearch
       - dataretention
+      - jobs
 schemes:
   - http
   - https
