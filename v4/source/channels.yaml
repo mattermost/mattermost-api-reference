@@ -787,7 +787,16 @@
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ChannelMember'
+            type: object
+            required:
+              - user_id
+            properties:
+              user_id:
+                type: string
+                description: The ID of user to add into the channel
+              post_root_id:
+                type: string
+                description: The ID of root post where link to add channel member originates
       responses:
         '201':
           description: Channel member creation successful
@@ -808,6 +817,9 @@
 
             // AddChannelMember
             cm, resp := Client.AddChannelMember(<CHANNEL ID>, <ID OF USER TO ADD>)
+
+            // AddChannelMemberWithRootId
+            cm, resp := Client.AddChannelMemberWithRootId(<CHANNEL ID>, <ID OF USER TO ADD>, <POST ROOT ID>)
 
   '/channels/{channel_id}/members/ids':
     post:

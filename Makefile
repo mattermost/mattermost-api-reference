@@ -23,7 +23,7 @@ build-v3: .npminstall
 	@cat $(V3_SRC)/reactions.yaml >> $(V3_YAML)
 	@cat $(V3_SRC)/definitions.yaml >> $(V3_YAML)
 
-	@node_modules/swagger-cli/bin/swagger.js validate $(V3_YAML)
+	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V3_YAML)
 
 	@echo Complete
 
@@ -52,14 +52,14 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/dataretention.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
-	@node_modules/swagger-cli/bin/swagger.js validate $(V4_YAML)
+	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V4_YAML)
 
 	@echo Complete
 
 .npminstall:
 	@echo Getting dependencies using npm
 
-	npm install swagger-cli
+	npm install swagger-cli@1.0.0
 	touch $@
 
 clean:
