@@ -32,6 +32,9 @@
                 description: A list of file IDs to associate with the post
                 items:
                   type: string
+              props:
+                description: A general JSON property bag to attach to the post
+                type: string
       responses:
         '201':
           description: Post creation successful
