@@ -36,9 +36,9 @@
     get:
       tags:
         - plugins
-      summary: List plugins
+      summary: Get plugins
       description: |
-        Get lists of inactive and active plugin manifests. Plugins must be enabled in the server's config settings.
+        Get a list of inactive and a list of active plugin manifests. Plugins must be enabled in the server's config settings.
 
         ##### Permissions
         Must have `manage_system` permission.
@@ -46,7 +46,7 @@
         __Minimum server version__: 4.4
       responses:
         '200':
-          description: Plugins retrieved successful
+          description: Plugins retrieval successful
           schema:
             type: object
             properties:
