@@ -359,6 +359,8 @@ tags:
     description: Endpoint for getting data retention policy settings.
   - name: jobs
     description: Endpoints related to various background jobs that can be run by the server or separately by job servers.
+  - name: plugins
+    description: Endpoints related to uploading and managing plugins.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -396,6 +398,7 @@ x-tagGroups:
       - elasticsearch
       - dataretention
       - jobs
+      - plugins
 schemes:
   - http
   - https
