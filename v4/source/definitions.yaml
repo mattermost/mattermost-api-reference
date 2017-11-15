@@ -1489,6 +1489,53 @@ definitions:
         type: string
         description: Set to "all" to mark the channel unread for any new message, "mention" to mark unread for new mentions only. Defaults to "all".
 
+  PluginManifest:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Globally unique identifier that represents the plugin.
+      name:
+        type: string
+        description: Name of the plugin.
+      description:
+        type: string
+        description: Description of what the plugin is and does.
+      version:
+        type: string
+        description: Version number of the plugin.
+      backend:
+        type: object
+        properties:
+          executable:
+            type: string
+            description: Path to the executable binary.
+      webapp:
+        type: object
+        properties:
+          bundle_path:
+            type: string
+            description: Path to the webapp JavaScript bundle.
+      settings_schema:
+        type: object
+        description: Settings schema used to define the System Console UI for the plugin.
+
+  PluginManifestWebapp:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Globally unique identifier that represents the plugin.
+      version:
+        type: string
+        description: Version number of the plugin.
+      webapp:
+        type: object
+        properties:
+          bundle_path:
+            type: string
+            description: Path to the webapp JavaScript bundle.
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
