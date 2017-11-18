@@ -48,7 +48,7 @@
             properties:
               status:
                 type: string
-                description: User status, can be `online`, `away` and `offline`
+                description: User status, can be `online`, `away`, `offline` and `dnd`
       responses:
         '200':
           description: User status update successful
