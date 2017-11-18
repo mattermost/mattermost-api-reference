@@ -7,11 +7,17 @@
         Get user status by id from the server.
         ##### Permissions
         Must be authenticated.
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          type: string
       responses:
         '200':
           description: User status retrieval successful
           schema:
-            type: '#/definitions/Status'
+            $ref: '#/definitions/Status'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
@@ -29,6 +35,7 @@
         - name: user_id
           in: path
           description: User ID
+          required: true
           type: string
         - name: body
           in: body
@@ -46,7 +53,7 @@
         '200':
           description: User status update successful
           schema:
-            type: '#/definitions/Status'
+            $ref: '#/definitions/Status'
         '400':
           $ref: '#/responses/BadRequest'
         '401':

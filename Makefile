@@ -32,6 +32,7 @@ build-v4: .npminstall
 
 	@cat $(V4_SRC)/introduction.yaml > $(V4_YAML)
 	@cat $(V4_SRC)/users.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/status.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/teams.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/channels.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/posts.yaml >> $(V4_YAML)
