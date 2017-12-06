@@ -492,9 +492,11 @@
         - users
       summary: Update user active status
       description: |
-        Update user active or inactive status
+        Update user active or inactive status.
+
+        __Since server version 4.6 user's using a SSO provider to login can be activated or deactivated with this endpoint. However, if their activation status in Mattermost does not reflect their status in the SSO provider, the next synchronization or login by that user will reset the activation status to that of their account in the SSO provider. Server versions 4.5 and before do not allow activation or deactivation of SSO users from this endpoint.__
         ##### Permissions
-        User can deactivate itself.
+        User can deactivate themself.
         User with `manage_system` permission can activate or deactivate a user.
       parameters:
         - name: user_id
