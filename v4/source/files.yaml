@@ -7,7 +7,10 @@
         Uploads a file that can later be attached to a post.
         ##### Permissions
         Must have `upload_file` permission.
-      consumes: ["multipart/form-data"]
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
       parameters:
         - name: files
           in: formData
@@ -51,6 +54,41 @@
           $ref: '#/responses/TooLarge'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            FileResponse := &model.FileUploadResponse{
+              FileInfos: []*model.FileInfo{},
+              ClientIds: []string{},
+            }
+
+            file, err := os.Open(<IMAGE_PATH>)
+            if err != nil {
+              fmt.Fprintf(os.Stderr, "%v\n", err)
+            }
+            defer file.Close();
+
+            buf := bytes.NewBuffer(nil)
+            io.Copy(buf, file)
+            data := buf.Bytes()
+
+
+            channelId := "<YOUR_CHANNEL_ID>"
+            filename := "<FILE_NAME>"
+
+            FileResponse, response = Client.UploadFile(data, channelId, filename)
+
+        - lang: 'Curl'
+          source: |
+            curl -F 'files=@PATH/TO/LOCAL/FILE' \
+            -F 'channel_id=CHANNEL_ID' \
+            --header 'authorization: Bearer c49adc55z3f53ck7xtp8ebq1ir'
+            https://your-mattermost-url.com/api/v4/files
+
 
   '/files/{file_id}':
     get:
