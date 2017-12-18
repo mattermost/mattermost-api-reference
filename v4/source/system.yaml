@@ -389,7 +389,7 @@
         - system
       summary: Get logs
       description: |
-        Get a page of server logs, selected with `page` and `per_page` query parameters.
+        Get a page of server logs, selected with `page` and `logs_per_page` query parameters.
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
@@ -398,10 +398,10 @@
           description: The page to select.
           default: "0"
           type: string
-        - name: per_page
+        - name: logs_per_page
           in: query
-          description: The number of logs per page.
-          default: "60"
+          description: The number of logs per page. There is a maximum limit of 10000 logs per page.
+          default: "10000"
           type: string
       responses:
         '200':
