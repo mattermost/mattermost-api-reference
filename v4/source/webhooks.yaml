@@ -26,10 +26,10 @@
               description:
                 type: string
                 description: The description for this incoming webhook
-              post_username:
+              username:
                 type: string
                 description: The username this incoming webhook will post as.
-              post_icon_url:
+              icon_url:
                 type: string
                 description: The profile picture this incoming webhook will use when posting.
       responses:
@@ -148,10 +148,10 @@
               description:
                 type: string
                 description: The description for this incoming webhook
-              post_username:
+              username:
                 type: string
                 description: The username this incoming webhook will post as.
-              post_icon_url:
+              icon_url:
                 type: string
                 description: The profile picture this incoming webhook will use when posting.
       responses:
