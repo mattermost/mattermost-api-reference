@@ -1552,6 +1552,30 @@ definitions:
             type: string
             description: Path to the webapp JavaScript bundle.
 
+  Role:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique identifier of the role.
+      name:
+        type: string
+        description: The unique name of the role, used when assigning roles to users/groups in contexts.
+      display_name:
+        type: string
+        description: The human readable name for the role.
+      description:
+        type: string
+        description: A human readable description of the role.
+      permissions:
+        type: array
+        items:
+          type: string
+        description: A list of the unique names of the permissions this role grants.
+      scheme_managed:
+        type: boolean
+        description: indicates if this role is managed by a scheme (true), or is a custom stand-alone role (false).
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
