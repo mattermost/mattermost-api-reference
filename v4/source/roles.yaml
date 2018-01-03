@@ -1,4 +1,4 @@
-  '/roles/name/{role_id}':
+  '/roles/{role_id}':
     get:
       tags:
         - roles
