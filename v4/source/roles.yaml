@@ -6,7 +6,7 @@
       description: |
         Get a role from the provided role id.
         ##### Permissions
-        Requires an active session but no other permissions..
+        Requires an active session but no other permissions.
       parameters:
         - name: role_id
           in: path
@@ -29,7 +29,6 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannel
             role, resp := Client.GetRole(<ROLEID>, "")
 
   '/roles/name/{role_name}':
@@ -63,7 +62,6 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannel
             role, resp := Client.GetRoleByName(<ROLENAME>, "")
 
   '/roles/{role_id}/patch':
