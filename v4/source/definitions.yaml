@@ -1433,6 +1433,9 @@ definitions:
       description:
         type: string
         description: A description of the token usage
+      is_active:
+        type: boolean
+        description: Indicates whether the token is active
 
   DataRetentionPolicy:
     type: object
