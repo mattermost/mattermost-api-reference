@@ -1197,7 +1197,7 @@
       description: |
         Get a list of user access tokens for a user. Does not include the actual authentication tokens. Use query paremeters for paging.
 
-        __Minimum server version__: 4.1
+        __Minimum server version__: 4.7
 
         ##### Permissions
         Must have `read_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
