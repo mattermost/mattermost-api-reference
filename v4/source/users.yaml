@@ -1370,3 +1370,38 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  /users/{user_id}/auth:
+    put:
+      tags:
+        - users
+      summary: Update a user's authentication method
+      description: |
+        Activates multi-factor authentication for the user if `activate` is true and a valid `code` is provided. If activate is false, then `code` is not required and multi-factor authentication is disabled for the user.
+        ##### Permissions
+        Must have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserAuthData'
+      responses:
+        '200':
+          description: User auth update successful
+          schema:
+            $ref: '#/definitions/UserAuthData'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
