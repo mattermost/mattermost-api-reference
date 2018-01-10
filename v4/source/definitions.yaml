@@ -341,7 +341,7 @@ definitions:
         description: The authentication service such as "email", "gitlab", or "ldap"
         type: string
       password:
-        description: The password used for the email authentication
+        description: The password used for email authentication
         type: string
 
   UserAutocomplete:
