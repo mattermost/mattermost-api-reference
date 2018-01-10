@@ -1377,7 +1377,7 @@
         - users
       summary: Update a user's authentication method
       description: |
-        Activates multi-factor authentication for the user if `activate` is true and a valid `code` is provided. If activate is false, then `code` is not required and multi-factor authentication is disabled for the user.
+        Updates a user's authentication method. This can be used to change them to/from LDAP authentication for example.
         ##### Permissions
         Must have the `edit_other_users` permission.
       parameters:
