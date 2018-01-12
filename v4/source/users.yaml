@@ -1403,9 +1403,36 @@
             type: array
             items:
               $ref: '#/definitions/UserAccessTokenSanitized'
+  /users/{user_id}/auth:
+    put:
+      tags:
+        - users
+      summary: Update a user's authentication method
+      description: |
+        Updates a user's authentication method. This can be used to change them to/from LDAP authentication for example.
+        ##### Permissions
+        Must have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserAuthData'
+      responses:
+        '200':
+          description: User auth update successful
+          schema:
+            $ref: '#/definitions/UserAuthData'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
