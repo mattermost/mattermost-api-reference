@@ -1230,7 +1230,44 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+  
+  /users/tokens:
+    get:
+      tags:
+        - users
+      summary: Get user access tokens
+      description: |
+        Get a page of user access tokens for users on the system. Does not include the actual authentication tokens. Use query parameters for paging.
 
+        __Minimum server version__: 4.7
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of tokens per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: User access tokens retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserAccessTokenSanitized'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+  
   /users/tokens/revoke:
     post:
       tags:
