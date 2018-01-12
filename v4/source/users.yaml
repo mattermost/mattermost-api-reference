@@ -1235,9 +1235,9 @@
     get:
       tags:
         - users
-      summary: Get all user access tokens for all users
+      summary: Get user access tokens
       description: |
-        Get a list of all the user access tokens for all users. Does not include the actual authentication tokens. Use query paremeters for paging.
+        Get a page of user access tokens for users on the system. Does not include the actual authentication tokens. Use query parameters for paging.
 
         __Minimum server version__: 4.7
 
