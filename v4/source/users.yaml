@@ -1408,6 +1408,38 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/tokens/search:
+    post:
+      tags:
+        - users
+      summary: Search tokens
+      description: |
+        Get a list of tokens based on search criteria provided in the request body. Searches are done against the token id, user id and username.
+        
+        __Minimum server version__: 4.7
+        
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - in: body
+          name: body
+          description: Search criteria
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+            properties:
+              term:
+                description: The search term to match against the token id, user id or username.
+                type: string
+      responses:
+        '200':
+          description: Personal access token search successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserAccessTokenSanitized'
   /users/{user_id}/auth:
     put:
       tags:
@@ -1441,4 +1473,3 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
-
