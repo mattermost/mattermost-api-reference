@@ -40,7 +40,7 @@
         - emoji
       summary: Get a list of custom emoji
       description: |
-        Get a page of metadata for custom emoji on the system.
+        Get a page of metadata for custom emoji on the system. Sort using the `sort` query parameter.
         ##### Permissions
         Must be authenticated.
       parameters:
@@ -53,6 +53,11 @@
           in: query
           description: The number of users per page.
           default: "60"
+          type: string
+        - name: sort
+          in: query
+          description: Either blank for no sorting or "name" to sort by emoji names.
+          default: ""
           type: string
       responses:
         '200':
