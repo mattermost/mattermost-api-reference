@@ -1447,6 +1447,8 @@
       summary: Update a user's authentication method
       description: |
         Updates a user's authentication method. This can be used to change them to/from LDAP authentication for example.
+        
+        __Minimum server version__: 4.6
         ##### Permissions
         Must have the `edit_other_users` permission.
       parameters:
