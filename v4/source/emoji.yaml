@@ -40,7 +40,7 @@
         - emoji
       summary: Get a list of custom emoji
       description: |
-        Get a page of metadata for custom emoji on the system. Sort using the `sort` query parameter.
+        Get a page of metadata for custom emoji on the system. Since server version 4.7, sort using the `sort` query parameter.
         ##### Permissions
         Must be authenticated.
       parameters:
@@ -56,7 +56,7 @@
           type: string
         - name: sort
           in: query
-          description: Either blank for no sorting or "name" to sort by emoji names.
+          description: Either blank for no sorting or "name" to sort by emoji names. Minimum server version for sorting is 4.7.
           default: ""
           type: string
       responses:
