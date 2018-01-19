@@ -187,7 +187,7 @@
           schema:
             type: array
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/Emoji'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
