@@ -97,8 +97,8 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
 
@@ -127,6 +127,37 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/emoji/name/{emoji_name}':
+    get:
+      tags:
+        - emoji
+      summary: Get a custom emoji by name
+      description: |
+        Get some metadata for a custom emoji using its name.
+        ##### Permissions
+        Must be authenticated.
+
+        __Minimum server version__: 4.7
+      parameters:
+        - name: emoji_name
+          in: path
+          description: Emoji name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Emoji retrieval successful
+          schema:
+            $ref: '#/definitions/Emoji'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
 
