@@ -28,6 +28,12 @@
           required: false
           allowEmptyValue: true
           type: string
+        - name: encoded_filename
+          in: formData
+          description: An optional bool string that tells the server if the filename was encoded before upload so that it can be decoded before saving
+          required: false
+          allowEmptyValue: true
+          type: string
       responses:
         '200':
           description: Corresponding lists of the provided client_ids and the metadata that has been stored in the database for each one
@@ -142,7 +148,7 @@
         '404':
           $ref: '#/responses/NotFound'
         '501':
-          $ref: '#/responses/NotImplemented'  
+          $ref: '#/responses/NotImplemented'
 
   '/files/{file_id}/preview':
     get:
@@ -169,7 +175,7 @@
         '404':
           $ref: '#/responses/NotFound'
         '501':
-          $ref: '#/responses/NotImplemented' 
+          $ref: '#/responses/NotImplemented'
 
   '/files/{file_id}/link':
     get:
