@@ -30,7 +30,7 @@
           type: string
         - name: encoded_filename
           in: formData
-          description: An optional bool string, **true**, that tells the server if the filename was encoded before upload so that it can be decoded before saving **Minimum server version: 4.7**
+          description: An optional bool string, "true", that tells the server if the filename was encoded before upload so that it can be decoded before saving Minimum server version: 4.7
           required: false
           allowEmptyValue: true
           type: string
