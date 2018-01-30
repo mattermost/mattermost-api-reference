@@ -589,7 +589,7 @@
           $ref: '#/responses/NotFound'
 
   '/teams/{team_id}/channels/autocomplete':
-    post:
+    get:
       tags:
         - channels
       summary: Autocomplete channels
@@ -609,7 +609,7 @@
           required: true
           type: string
       responses:
-        '201':
+        '200':
           description: Channels autocomplete successful
           schema:
             type: array
