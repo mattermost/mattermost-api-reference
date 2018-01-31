@@ -8,9 +8,7 @@ All documentation is available under the terms of a [Creative Commons License](h
 
 ## Contributing
 
-**Mattermost API version 4 is an active and in-progress project. We're looking for contributors to code server endpoints, build drivers and write documentation. If you're interested [please join our Mattermost instance](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and join the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).**
-
-We're accepting pull requests! Specifically we're looking for documentation on routes defined [here](https://github.com/mattermost/mattermost-server/tree/master/api).
+We're accepting pull requests! See something that could be documented better or is missing documentation? Make a PR and we'll gladly accept it.
 
 All the documentation is written in YAML and found in the [v3/source](https://github.com/mattermost/mattermost-api-reference/tree/master/v3/source) and [v4/source](https://github.com/mattermost/mattermost-api-reference/tree/master/v4/source) directories. APIv3 documentation is in the [v3 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/v3), and APIv4 documentation is in the [v4 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/v4).
 
