@@ -225,6 +225,7 @@ tags:
       - new_user
       - leave_team
       - update_team
+      - delete_team
       - user_added
       - user_updated
       - user_role_updated
