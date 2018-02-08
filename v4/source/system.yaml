@@ -124,6 +124,13 @@
         Submit a new configuration for the server to use.
         ##### Permissions
         Must have `manage_system` permission.
+      parameters:
+        - in: body
+          name: body
+          description: Mattermost configuration
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
       responses:
         '200':
           description: Configuration update successful
