@@ -376,7 +376,7 @@
             properties:
               terms:
                 type: string
-                description: The search terms as inputed by the user.
+                description: The search terms as inputed by the user. To search for posts from a user include `from:someusername`, using a user's username. To search in a specific channel include `in:somechannel`, must use the channel name (not the display name).
               is_or_search:
                 type: boolean
                 description: Set to true if an Or search should be performed vs an And search.
