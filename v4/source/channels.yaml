@@ -595,6 +595,9 @@
       summary: Autocomplete channels
       description: |
         Autocomplete public channels on a team based on the search term provided in the request URL.
+
+        __Minimum server version__: 4.7
+
         ##### Permissions
         Must have the `list_team_channels` permission.
       parameters:
