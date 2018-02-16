@@ -47,7 +47,7 @@
       description: |
         For regular users only returns open teams. Users with the "manage_system" permission will return teams regardless of type. The result is based on query string parameters - page and per_page.
         ##### Permissions
-        Must be authenticated. "manage_system" permission is required to show all teams. 
+        Must be authenticated. "manage_system" permission is required to show all teams.
       parameters:
         - name: page
           in: query
@@ -676,6 +676,9 @@
       summary: Get the team icon
       description: |
         Get the team icon of the team.
+
+        __Minimum server version__: 4.8
+
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
       parameters:
@@ -702,7 +705,10 @@
         - teams
       summary: Sets the team icon
       description: |
-        Sets the team icon for the team
+        Sets the team icon for the team.
+
+        __Minimum server version__: 4.8
+
         ##### Permissions
         Must be authenticated and have the `manage_team` permission.
       consumes: ["multipart/form-data"]
