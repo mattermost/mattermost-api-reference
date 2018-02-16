@@ -10,6 +10,9 @@
         client_ids defined in the FormData, or it can be a request with the channel_id and filename
         defined as query parameters with the contents of a single file in the body of the request.
 
+        Only multipart/form-data requests are supported by server versions up to and including 4.7.
+        Server versions 4.8 and higher support both types of requests.
+
         ##### Permissions
         Must have `upload_file` permission.
       consumes:
