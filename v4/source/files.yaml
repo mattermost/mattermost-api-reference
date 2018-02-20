@@ -5,28 +5,47 @@
       summary: Upload a file
       description: |
         Uploads a file that can later be attached to a post.
+
+        This request can either be a multipart/form-data request with a channel_id, files and optional
+        client_ids defined in the FormData, or it can be a request with the channel_id and filename
+        defined as query parameters with the contents of a single file in the body of the request.
+
+        Only multipart/form-data requests are supported by server versions up to and including 4.7.
+        Server versions 4.8 and higher support both types of requests.
+
         ##### Permissions
         Must have `upload_file` permission.
       consumes:
         - multipart/form-data
+        - '*/*'
       produces:
         - application/json
       parameters:
         - name: files
           in: formData
           description: A file to be uploaded
-          required: true
+          required: false
           type: file
         - name: channel_id
           in: formData
           description: The ID of the channel that this file will be uploaded to
-          required: true
+          required: false
           type: string
         - name: client_ids
           in: formData
           description: A unique identifier for the file that will be returned in the response
           required: false
           allowEmptyValue: true
+          type: string
+        - name: channel_id
+          in: query
+          description: The ID of the channel that this file will be uploaded to
+          required: false
+          type: string
+        - name: filename
+          in: query
+          description: The ID of the channel that this file will be uploaded to
+          required: false
           type: string
       responses:
         '200':
@@ -61,11 +80,6 @@
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
-            FileResponse := &model.FileUploadResponse{
-              FileInfos: []*model.FileInfo{},
-              ClientIds: []string{},
-            }
-
             file, err := os.Open(<IMAGE_PATH>)
             if err != nil {
               fmt.Fprintf(os.Stderr, "%v\n", err)
@@ -76,11 +90,10 @@
             io.Copy(buf, file)
             data := buf.Bytes()
 
-
             channelId := "<YOUR_CHANNEL_ID>"
             filename := "<FILE_NAME>"
 
-            FileResponse, response = Client.UploadFile(data, channelId, filename)
+            fileUploadResponse, response := Client.UploadFile(data, channelId, filename)
 
         - lang: 'Curl'
           source: |
