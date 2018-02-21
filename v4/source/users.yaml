@@ -109,11 +109,11 @@
 
             ##### `in_team`
             Can be "", "last_activity_at" or "create_at".
-            When left blank sorting is done by username.
+            When left blank, sorting is done by username.
             __Minimum server version__: 4.0
             ##### `in_channel`
             Can be "", "status".
-            When left blank sorting is done by username. `status` will sort by User's current status (Online, Away, Offline, DND), then by Username.
+            When left blank, sorting is done by username. `status` will sort by User's current status (Online, Away, DND, Offline), then by Username.
             __Minimum server version__: 4.7
           type: string
       responses:
