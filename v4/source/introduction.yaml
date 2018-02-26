@@ -243,6 +243,8 @@ tags:
       - reaction_removed
       - response
       - emoji_added
+      - license_changed
+      - config_changed
 
       #### WebSocket API
 
