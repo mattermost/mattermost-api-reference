@@ -87,6 +87,46 @@
             // TestEmail
             ok, resp := Client.TestEmail()
 
+  '/file/s3_test':
+    post:
+      tags:
+        - system
+      summary: Test AWS S3 connection
+      description: |
+        Send a test to validate if can connect to AWS S3. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
+        ##### Permissions
+        Must have `manage_system` permission.
+        __Minimum server version__: 4.8
+      responses:
+        '200':
+          description: S3 Test successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            config := model.Config{
+              FileSettings: model.FileSettings{
+                DriverName:              model.NewString(model.IMAGE_DRIVER_S3),
+                AmazonS3AccessKeyId:     <AmazonS3AccessKeyId>,
+                AmazonS3SecretAccessKey: <AmazonS3SecretAccessKey>,
+                AmazonS3Bucket:          <AmazonS3Bucket>,
+                AmazonS3Endpoint:        <AmazonS3Endpoint>
+              },
+            }
+
+            // TestS3Connection
+            ok, resp := Client.TestS3Connection(&config)
+
   '/config':
     get:
       tags:
