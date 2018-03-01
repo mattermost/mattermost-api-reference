@@ -677,7 +677,7 @@
       description: |
         Get the team icon of the team.
 
-        __Minimum server version__: 4.8
+        __Minimum server version__: 4.9
 
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
@@ -707,7 +707,7 @@
       description: |
         Sets the team icon for the team.
 
-        __Minimum server version__: 4.8
+        __Minimum server version__: 4.9
 
         ##### Permissions
         Must be authenticated and have the `manage_team` permission.
