@@ -60,7 +60,7 @@
           $ref: '#/responses/Unauthorized'
 
   /users/status/ids:
-    get:
+    post:
       tags:
         - status
       summary: Get user statuses by id
@@ -68,6 +68,14 @@
         Get a list of user statuses by id from the server.
         ##### Permissions
         Must be authenticated.
+      parameters:
+        - name: body
+          in: body
+          description: List of user ids to fetch
+          required: true
+          schema:
+            type: array
+            items: string
       responses:
         '200':
           description: User statuses retrieval successful
