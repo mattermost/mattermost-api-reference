@@ -69,13 +69,14 @@
         ##### Permissions
         Must be authenticated.
       parameters:
-        - name: body
+        - name: post
           in: body
           description: List of user ids to fetch
           required: true
           schema:
             type: array
-            items: string
+            items:
+              type: string
       responses:
         '200':
           description: User statuses retrieval successful
