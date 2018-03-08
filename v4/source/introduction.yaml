@@ -50,6 +50,8 @@ tags:
       * [PHP Driver](https://github.com/gnello/php-mattermost-driver) - built by [@gnello](https://github.com/gnello) and [@prixone](https://github.com/prixone)
       * [Python Driver](https://github.com/Vaelor/python-mattermost-driver) - built by [@Vaelor](https://github.com/Vaelor)
 
+      For other community-built drivers and API wrappers, see [our app directory](https://about.mattermost.com/community-applications/#privateApps).
+
   - name: authentication
     description: |
       There are multiple ways to authenticate against the Mattermost API.
