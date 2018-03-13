@@ -67,6 +67,13 @@
         Send a test email to make sure you have your email settings configured correctly. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
         ##### Permissions
         Must have `manage_system` permission.
+      parameters:
+        - in: body
+          name: body
+          description: Mattermost configuration
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
       responses:
         '200':
           description: Email successful sent
@@ -84,8 +91,17 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
+            config := model.Config{
+              EmailSettings: model.EmailSettings{
+                SMTPServer:    <SMTPServer>,
+                SMTPPort:      <SMTPPort>,
+                SMTPUsername:  <SMTPUsername>,
+                SMTPPassword:  <SMTPPassword>,
+              },
+            }
+
             // TestEmail
-            ok, resp := Client.TestEmail()
+            ok, resp := Client.TestEmail(&config)
 
   '/file/s3_test':
     post:
