@@ -113,6 +113,13 @@
         ##### Permissions
         Must have `manage_system` permission.
         __Minimum server version__: 4.8
+      parameters:
+        - in: body
+          name: body
+          description: Mattermost configuration
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
       responses:
         '200':
           description: S3 Test successful
