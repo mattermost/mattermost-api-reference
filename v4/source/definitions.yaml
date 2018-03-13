@@ -1351,8 +1351,6 @@ definitions:
         type: boolean
       last_activity_at:
         type: integer
-      active_channel:
-        type: string
 
   OAuthApp:
     type: object
