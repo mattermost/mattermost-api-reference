@@ -680,7 +680,7 @@
         __Minimum server version__: 4.9
 
         ##### Permissions
-        Must be authenticated and have the `view_team` permission.
+        User Must be authenticated Team must be open or the user must have the `view_team` permission.
       parameters:
         - name: team_id
           in: path
