@@ -1,3 +1,5 @@
+@Library('shared-pipelines') _
+
 def build = new org.mattermost.BuildCommands()
 
 node('slave3'){
