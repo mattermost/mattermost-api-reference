@@ -7,6 +7,7 @@ def build = new org.mattermost.BuildCommands()
 node('slave3'){
     try {
         stage('Checkout') {
+            deleteDir()
             dir('mattermost-api-reference'){
                 checkout scm
             }
