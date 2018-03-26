@@ -1,9 +1,14 @@
+#!/usr/bin/groovy
+
 @Library('shared-pipelines') _
 
 def build = new org.mattermost.BuildCommands()
 
 node('slave3'){
     try {
+        stage('Checkout') {
+            checkout scm
+        }
         stage('Build') {
             sh 'mkdir node_modules'
             sh 'make build || exit 1'
