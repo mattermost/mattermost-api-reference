@@ -5,10 +5,8 @@ def build = new org.mattermost.BuildCommands()
 node('slave3'){
     try {
         stage('Build') {
-            steps {
-                sh 'mkdir node_modules'
-                sh 'make build || exit 1'
-            }
+            sh 'mkdir node_modules'
+            sh 'make build || exit 1'
         }
         if(env.BRANCH_NAME == 'master'){
             stage('Deploy') {
