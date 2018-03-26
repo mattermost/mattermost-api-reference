@@ -7,7 +7,7 @@ def build = new org.mattermost.BuildCommands()
 node('slave3'){
     try {
         stage('Checkout') {
-            sh 'echo building branch: ${env.BRANCH_NAME}'
+            sh "echo building branch: ${env.BRANCH_NAME}"
             deleteDir()
             dir('mattermost-api-reference'){
                 checkout scm
