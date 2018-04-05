@@ -281,6 +281,29 @@
             // GetOldClientConfig
             ok, resp := Client.GetOldClientConfig()
 
+  '/config/environment':
+    get:
+      tags:
+        - system
+      summary: Get configuration made through environment variables
+      description: |
+        Retrieve a json object mirroring the server configuration where fields are set to true
+        if the corresponding config setting is set through an environment variable.
+
+        __Minimum server version__: 4.10
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Configuration retrieval successful
+          schema:
+            $ref: "#/definitions/Config"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/license':
     post:
       tags:
