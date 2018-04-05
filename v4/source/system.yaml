@@ -302,6 +302,8 @@
             $ref: "#/definitions/EnvironmentConfig"
         '400':
           $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
 
