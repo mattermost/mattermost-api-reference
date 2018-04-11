@@ -11,6 +11,11 @@
 
         __Minimum server version__: 4.10
       parameters:
+        - name: scope
+          in: query
+          description: Limit the results returned to the provided scope, either `team` or `channel`.
+          default: ""
+          type: string
         - name: page
           in: query
           description: The page to select.
