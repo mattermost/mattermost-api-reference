@@ -9,7 +9,7 @@
         ##### Permissions
         Requires an active session but no other permissions.
 
-        __Minimum server version__: 4.7
+        __Minimum server version__: 4.9
       parameters:
         - name: role_id
           in: path
@@ -45,7 +45,7 @@
         ##### Permissions
         Requires an active session but no other permissions.
 
-        __Minimum server version__: 4.7
+        __Minimum server version__: 4.9
       parameters:
         - name: role_name
           in: path
@@ -81,7 +81,7 @@
         ##### Permissions
         `manage_system` permission is required.
 
-        __Minimum server version__: 4.7
+        __Minimum server version__: 4.9
       parameters:
         - name: role_id
           in: path
@@ -125,7 +125,7 @@
           ##### Permissions
           Requires an active session but no other permissions.
 
-          __Minimum server version__: 4.7
+          __Minimum server version__: 4.9
         parameters:
           - in: body
             name: body
