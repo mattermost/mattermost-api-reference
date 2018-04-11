@@ -143,7 +143,6 @@
             required:
               - id
               - name
-              - display_name
               - description
               - callback_urls
               - homepage
