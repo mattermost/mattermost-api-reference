@@ -369,6 +369,8 @@ tags:
     description: Endpoints related to various background jobs that can be run by the server or separately by job servers.
   - name: plugins
     description: Endpoints related to uploading and managing plugins.
+  - name: roles
+    description: Endpoints for creating, getting and updating roles.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -407,6 +409,7 @@ x-tagGroups:
       - dataretention
       - jobs
       - plugins
+      - roles
 schemes:
   - http
   - https
