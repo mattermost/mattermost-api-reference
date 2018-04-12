@@ -813,7 +813,7 @@
     put:
       tags:
         - teams
-      summary: Update the `scheme_admin` / `scheme_user` properties of a team member.
+      summary: Update the scheme-derived roles of a team member.
       description: |
         Update a team member's scheme_admin/scheme_user properties. Typically this should either be `scheme_admin=false, scheme_user=true` for ordinary team member, or `scheme_admin=true, scheme_user=true` for a team admin.
 
@@ -848,7 +848,7 @@
                 type: boolean
       responses:
         '200':
-          description: Team member promoted to a Scheme Admin.
+          description: Team member's scheme-derived roles updated successfully.
           schema:
             $ref: '#/definitions/StatusOK'
         '400':
