@@ -1264,6 +1264,498 @@ definitions:
           TurnSharedKey:
             type: string
 
+  EnvironmentConfig:
+    type: object
+    properties:
+      ServiceSettings:
+        type: object
+        properties:
+          SiteURL:
+            type: boolean
+          ListenAddress:
+            type: boolean
+          ConnectionSecurity:
+            type: boolean
+          TLSCertFile:
+            type: boolean
+          TLSKeyFile:
+            type: boolean
+          UseLetsEncrypt:
+            type: boolean
+          LetsEncryptCertificateCacheFile:
+            type: boolean
+          Forward80To443:
+            type: boolean
+          ReadTimeout:
+            type: boolean
+          WriteTimeout:
+            type: boolean
+          MaximumLoginAttempts:
+            type: boolean
+          SegmentDeveloperKey:
+            type: boolean
+          GoogleDeveloperKey:
+            type: boolean
+          EnableOAuthServiceProvider:
+            type: boolean
+          EnableIncomingWebhooks:
+            type: boolean
+          EnableOutgoingWebhooks:
+            type: boolean
+          EnableCommands:
+            type: boolean
+          EnableOnlyAdminIntegrations:
+            type: boolean
+          EnablePostUsernameOverride:
+            type: boolean
+          EnablePostIconOverride:
+            type: boolean
+          EnableTesting:
+            type: boolean
+          EnableDeveloper:
+            type: boolean
+          EnableSecurityFixAlert:
+            type: boolean
+          EnableInsecureOutgoingConnections:
+            type: boolean
+          EnableMultifactorAuthentication:
+            type: boolean
+          EnforceMultifactorAuthentication:
+            type: boolean
+          AllowCorsFrom:
+            type: boolean
+          SessionLengthWebInDays:
+            type: boolean
+          SessionLengthMobileInDays:
+            type: boolean
+          SessionLengthSSOInDays:
+            type: boolean
+          SessionCacheInMinutes:
+            type: boolean
+          WebsocketSecurePort:
+            type: boolean
+          WebsocketPort:
+            type: boolean
+          WebserverMode:
+            type: boolean
+          EnableCustomEmoji:
+            type: boolean
+          RestrictCustomEmojiCreation:
+            type: boolean
+      TeamSettings:
+        type: object
+        properties:
+          SiteName:
+            type: boolean
+          MaxUsersPerTeam:
+            type: boolean
+          EnableTeamCreation:
+            type: boolean
+          EnableUserCreation:
+            type: boolean
+          EnableOpenServer:
+            type: boolean
+          RestrictCreationToDomains:
+            type: boolean
+          EnableCustomBrand:
+            type: boolean
+          CustomBrandText:
+            type: boolean
+          CustomDescriptionText:
+            type: boolean
+          RestrictDirectMessage:
+            type: boolean
+          RestrictTeamInvite:
+            type: boolean
+          RestrictPublicChannelManagement:
+            type: boolean
+          RestrictPrivateChannelManagement:
+            type: boolean
+          RestrictPublicChannelCreation:
+            type: boolean
+          RestrictPrivateChannelCreation:
+            type: boolean
+          RestrictPublicChannelDeletion:
+            type: boolean
+          RestrictPrivateChannelDeletion:
+            type: boolean
+          UserStatusAwayTimeout:
+            type: boolean
+          MaxChannelsPerTeam:
+            type: boolean
+          MaxNotificationsPerChannel:
+            type: boolean
+      SqlSettings:
+        type: object
+        properties:
+          DriverName:
+            type: boolean
+          DataSource:
+            type: boolean
+          DataSourceReplicas:
+            type: boolean
+          MaxIdleConns:
+            type: boolean
+          MaxOpenConns:
+            type: boolean
+          Trace:
+            type: boolean
+          AtRestEncryptKey:
+            type: boolean
+      LogSettings:
+        type: object
+        properties:
+          EnableConsole:
+            type: boolean
+          ConsoleLevel:
+            type: boolean
+          EnableFile:
+            type: boolean
+          FileLevel:
+            type: boolean
+          FileFormat:
+            type: boolean
+          FileLocation:
+            type: boolean
+          EnableWebhookDebugging:
+            type: boolean
+          EnableDiagnostics:
+            type: boolean
+      PasswordSettings:
+        type: object
+        properties:
+          MinimumLength:
+            type: boolean
+          Lowercase:
+            type: boolean
+          Number:
+            type: boolean
+          Uppercase:
+            type: boolean
+          Symbol:
+            type: boolean
+      FileSettings:
+        type: object
+        properties:
+          MaxFileSize:
+            type: boolean
+          DriverName:
+            type: boolean
+          Directory:
+            type: boolean
+          EnablePublicLink:
+            type: boolean
+          PublicLinkSalt:
+            type: boolean
+          ThumbnailWidth:
+            type: boolean
+          ThumbnailHeight:
+            type: boolean
+          PreviewWidth:
+            type: boolean
+          PreviewHeight:
+            type: boolean
+          ProfileWidth:
+            type: boolean
+          ProfileHeight:
+            type: boolean
+          InitialFont:
+            type: boolean
+          AmazonS3AccessKeyId:
+            type: boolean
+          AmazonS3SecretAccessKey:
+            type: boolean
+          AmazonS3Bucket:
+            type: boolean
+          AmazonS3Region:
+            type: boolean
+          AmazonS3Endpoint:
+            type: boolean
+          AmazonS3SSL:
+            type: boolean
+      EmailSettings:
+        type: object
+        properties:
+          EnableSignUpWithEmail:
+            type: boolean
+          EnableSignInWithEmail:
+            type: boolean
+          EnableSignInWithUsername:
+            type: boolean
+          SendEmailNotifications:
+            type: boolean
+          RequireEmailVerification:
+            type: boolean
+          FeedbackName:
+            type: boolean
+          FeedbackEmail:
+            type: boolean
+          FeedbackOrganization:
+            type: boolean
+          SMTPUsername:
+            type: boolean
+          SMTPPassword:
+            type: boolean
+          SMTPServer:
+            type: boolean
+          SMTPPort:
+            type: boolean
+          ConnectionSecurity:
+            type: boolean
+          InviteSalt:
+            type: boolean
+          PasswordResetSalt:
+            type: boolean
+          SendPushNotifications:
+            type: boolean
+          PushNotificationServer:
+            type: boolean
+          PushNotificationContents:
+            type: boolean
+          EnableEmailBatching:
+            type: boolean
+          EmailBatchingBufferSize:
+            type: boolean
+          EmailBatchingInterval:
+            type: boolean
+      RateLimitSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          PerSec:
+            type: boolean
+          MaxBurst:
+            type: boolean
+          MemoryStoreSize:
+            type: boolean
+          VaryByRemoteAddr:
+            type: boolean
+          VaryByHeader:
+            type: boolean
+      PrivacySettings:
+        type: object
+        properties:
+          ShowEmailAddress:
+            type: boolean
+          ShowFullName:
+            type: boolean
+      SupportSettings:
+        type: object
+        properties:
+          TermsOfServiceLink:
+            type: boolean
+          PrivacyPolicyLink:
+            type: boolean
+          AboutLink:
+            type: boolean
+          HelpLink:
+            type: boolean
+          ReportAProblemLink:
+            type: boolean
+          SupportEmail:
+            type: boolean
+      GitLabSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: boolean
+          Id:
+            type: boolean
+          Scope:
+            type: boolean
+          AuthEndpoint:
+            type: boolean
+          TokenEndpoint:
+            type: boolean
+          UserApiEndpoint:
+            type: boolean
+      GoogleSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: boolean
+          Id:
+            type: boolean
+          Scope:
+            type: boolean
+          AuthEndpoint:
+            type: boolean
+          TokenEndpoint:
+            type: boolean
+          UserApiEndpoint:
+            type: boolean
+      Office365Settings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: boolean
+          Id:
+            type: boolean
+          Scope:
+            type: boolean
+          AuthEndpoint:
+            type: boolean
+          TokenEndpoint:
+            type: boolean
+          UserApiEndpoint:
+            type: boolean
+      LdapSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          LdapServer:
+            type: boolean
+          LdapPort:
+            type: boolean
+          ConnectionSecurity:
+            type: boolean
+          BaseDN:
+            type: boolean
+          BindUsername:
+            type: boolean
+          BindPassword:
+            type: boolean
+          UserFilter:
+            type: boolean
+          FirstNameAttribute:
+            type: boolean
+          LastNameAttribute:
+            type: boolean
+          EmailAttribute:
+            type: boolean
+          UsernameAttribute:
+            type: boolean
+          NicknameAttribute:
+            type: boolean
+          IdAttribute:
+            type: boolean
+          PositionAttribute:
+            type: boolean
+          SyncIntervalMinutes:
+            type: boolean
+          SkipCertificateVerification:
+            type: boolean
+          QueryTimeout:
+            type: boolean
+          MaxPageSize:
+            type: boolean
+          LoginFieldName:
+            type: boolean
+      ComplianceSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Directory:
+            type: boolean
+          EnableDaily:
+            type: boolean
+      LocalizationSettings:
+        type: object
+        properties:
+          DefaultServerLocale:
+            type: boolean
+          DefaultClientLocale:
+            type: boolean
+          AvailableLocales:
+            type: boolean
+      SamlSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Verify:
+            type: boolean
+          Encrypt:
+            type: boolean
+          IdpUrl:
+            type: boolean
+          IdpDescriptorUrl:
+            type: boolean
+          AssertionConsumerServiceURL:
+            type: boolean
+          IdpCertificateFile:
+            type: boolean
+          PublicCertificateFile:
+            type: boolean
+          PrivateKeyFile:
+            type: boolean
+          FirstNameAttribute:
+            type: boolean
+          LastNameAttribute:
+            type: boolean
+          EmailAttribute:
+            type: boolean
+          UsernameAttribute:
+            type: boolean
+          NicknameAttribute:
+            type: boolean
+          LocaleAttribute:
+            type: boolean
+          PositionAttribute:
+            type: boolean
+          LoginButtonText:
+            type: boolean
+      NativeAppSettings:
+        type: object
+        properties:
+          AppDownloadLink:
+            type: boolean
+          AndroidAppDownloadLink:
+            type: boolean
+          IosAppDownloadLink:
+            type: boolean
+      ClusterSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          InterNodeListenAddress:
+            type: boolean
+          InterNodeUrls:
+            type: boolean
+      MetricsSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          BlockProfileRate:
+            type: boolean
+          ListenAddress:
+            type: boolean
+      AnalyticsSettings:
+        type: object
+        properties:
+          MaxUsersForStatistics:
+            type: boolean
+      WebrtcSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          GatewayWebsocketUrl:
+            type: boolean
+          GatewayAdminUrl:
+            type: boolean
+          GatewayAdminSecret:
+            type: boolean
+          StunURI:
+            type: boolean
+          TurnURI:
+            type: boolean
+          TurnUsername:
+            type: boolean
+          TurnSharedKey:
+            type: boolean
+
   SamlCertificateStatus:
     type: object
     properties:
