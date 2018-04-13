@@ -159,7 +159,9 @@
         - teams
       summary: Delete a team
       description: |
-        Delete a team softly and put in archived only.
+        Soft deletes a team, by marking the team as deleted in the database. Soft deleted teams will not be accessible in the user interface.
+        
+        Optionally use the permanent query parameter to hard delete the team for compliance reasons.
         ##### Permissions
         Must have the `manage_team` permission.
       parameters:
