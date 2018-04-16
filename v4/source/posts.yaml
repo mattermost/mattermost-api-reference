@@ -55,7 +55,7 @@
       description: |
         Create a new ephemeral post in a channel.
         ##### Permissions
-        Must have `create_post_ephemeral` permission (currently only given to system adin)
+        Must have `create_post_ephemeral` permission (currently only given to system admin)
       parameters:
         - in: body
           name: ephemeral_post
