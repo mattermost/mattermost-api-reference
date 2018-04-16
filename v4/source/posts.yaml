@@ -76,6 +76,13 @@
                   - channel_id
                   - message
                 description: Post object to create
+                properties:
+                  channel_id:
+                    type: string
+                    description: The channel ID to post in
+                  message:
+                    type: string
+                    description: The message contents, can be formatted with Markdown
       responses:
         '201':
           description: Post creation successful
