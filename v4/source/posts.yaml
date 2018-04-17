@@ -47,6 +47,54 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /posts/ephemeral:
+    post:
+      tags:
+        - posts
+      summary: Create a ephemeral post
+      description: |
+        Create a new ephemeral post in a channel.
+        ##### Permissions
+        Must have `create_post_ephemeral` permission (currently only given to system admin)
+      parameters:
+        - in: body
+          name: ephemeral_post
+          description: Ephemeral Post object to send
+          required: true
+          schema:
+            type: object
+            required:
+              - user_id
+              - post
+            properties:
+              user_id:
+                type: string
+                description: The target user id for the ephemeral post
+              post:
+                type: object
+                required:
+                  - channel_id
+                  - message
+                description: Post object to create
+                properties:
+                  channel_id:
+                    type: string
+                    description: The channel ID to post in
+                  message:
+                    type: string
+                    description: The message contents, can be formatted with Markdown
+      responses:
+        '201':
+          description: Post creation successful
+          schema:
+            $ref: '#/definitions/Post'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/posts/{post_id}':
     get:
       tags:
@@ -223,7 +271,7 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
-  
+
   '/users/{user_id}/posts/flagged':
     get:
       tags:
