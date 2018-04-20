@@ -300,16 +300,16 @@ tags:
 
   - name: APIv3 Deprecation
     description: |
-      Since Mattermost 4.0, API v4 is the preferred version to be used. API v3 is unsupported since Mattermost 4.6, released on January 16, 2018. They will be removed in Mattermost 5.0.
+      Since Mattermost 4.0, API v4 is the preferred version to use. API v3 is unsupported since Mattermost 4.6, released on January 16, 2018. All API v3 endpoints will be removed in Mattermost 5.0, to be released on June 16, 2018.
       
       We advise that any new integrations use API v4 endpoints. To migrate existing integrations from API v3 to v4, follow these steps:
 
-      1. Set your server's log level to `DEBUG` in **System Console > General > Logging > File Log Level**.
-      2. Search for requests hitting `/api/v3/` endpoints. Any requests hitting these endpoints are from integrations that should be migrated to API v4.
+      1. Set your server's log level to `DEBUG` in **System Console > General > Logging > File Log Level** to print detailed logs for API requests.
+      2. In **System Console > Logs**, search for requests hitting `/api/v3/` endpoints. Any requests hitting these endpoints are from integrations that should be migrated to API v4.
         - For in-house or self-built integrations, update them to use v4 with the help of this documentation. Most v3 endpoints have direct counterparts in v4 and should be easily migrated.
         - For third-party integrations, visit their homepage (on GitHub, GitLab, etc.). Check if they already have a version that uses the Mattermost v4 API. If they do not, consider opening an issue asking them if support is planned.
       3. Once all integrations use v4, review the server logs with log level set to `DEBUG`. Confirm no requests hit `/api/v3/` endpoints.
-      4. Set **Allow use of API v3 endpoints** to `false` in **System Console > General > Configuration**, or set `EnableAPIv3` to `false` in `config.json`. This setting disables API v3 on your server, and errors are output to your server logs anytime a v3 endpoint is used.
+      4. Set **Allow use of API v3 endpoints** to `false` in **System Console > General > Configuration**, or set `EnableAPIv3` to `false` in `config.json`. This setting disables API v3 on your server. Any time a v3 endpoint is used, an error is logged in **System Console > Logs**.
       5. Set your server's log level back to `ERROR`. Use the error logs to help track down any last uses of API v3.
 
       Below are the major changes made between v3 and v4:
