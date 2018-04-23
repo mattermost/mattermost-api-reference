@@ -300,9 +300,7 @@ tags:
 
   - name: APIv3 Deprecation
     description: |
-      Since Mattermost 4.0, API v4 is the preferred version to use. API v3 is unsupported since Mattermost 4.6, released on January 16, 2018. All API v3 endpoints will be removed in Mattermost 5.0, to be released on June 16, 2018.
-      
-      We advise that any new integrations use API v4 endpoints. To migrate existing integrations from API v3 to v4, follow these steps:
+      API v4 was released in Mattermost Server v4.0 on July 16, 2017, and is now the recommended version to use. API v3 has been deprecated since January 16th, 2018 and will be removed in Mattermost 5.0, to be released on June 16, 2018. Follow these steps to upgrade your integrations and apps to use API v4 endpoints for them to be usable in the forthcoming Mattermost 5.0 release:
 
       1. Set your server's log level to `DEBUG` in **System Console > General > Logging > File Log Level** to print detailed logs for API requests.
       2. In **System Console > Logs**, search for requests hitting `/api/v3/` endpoints. Any requests hitting these endpoints are from integrations that should be migrated to API v4.
@@ -316,7 +314,7 @@ tags:
 
       1. Endpoint URLs only require team IDs when necessary. For example, getting a channel by ID no longer requires a team ID in v4.
       2. Collection endpoints now generally return lists and include paging as part of the query string.
-      3. User ID is now included in most user endpoints. This allows admins to to modify other users through v4 endpoints.
+      3. User ID is now included in most user endpoints. This allows admins to modify other users through v4 endpoints.
 
       If you have any questions about the API v3 deprecation, or about migrating from v3 to v4, [join our daily build server at pre-release.mattermost.com](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and ask questions in the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).
 
