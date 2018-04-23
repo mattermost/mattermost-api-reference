@@ -407,7 +407,7 @@
           __Minimum server version__: 4.10
 
           ##### Permissions
-          Logged in as the user and has `manage_system` permission.
+          Must have `manage_system` permission.
         parameters:
           - name: channel_id
             in: path
