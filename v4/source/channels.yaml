@@ -1330,3 +1330,64 @@
 
             // GetChannelUnread
             channelUnread, resp := Client.GetChannelUnread(<CHANNELID>, <USERID>)
+
+'/channels/{channel_id}/schemes':
+    put:
+      tags:
+        - channels
+      summary: Set a channel's scheme
+      description: |
+        Set a channel's scheme, to wit sets the scheme_id value of a channel record.
+        
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 4.10
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Scheme GUID
+          required: true
+          schema:
+            type: object
+            required:
+              - scheme_id
+            properties:
+              scheme_id:
+                type: string
+                description: The ID of the scheme.
+      responses:
+        '200':
+          description: Update channel scheme successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+            
+            channelID := "4xp9fdt77pncbef59f4k1qe83o"
+            schemeID := "qjda3stwafbgpqjaxej3k76sga"
+            ok, resp := UpdateChannelScheme(channelID, schemeID)
+        - lang: 'curl'
+          source: |
+            curl -X PUT \
+              https://your-mattermost-url.com/api/v4/channels/4xp9fdt77pncbef59f4k1qe83o/schemes \
+              -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
+              -H 'Content-Type: application/json' \
+              -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
