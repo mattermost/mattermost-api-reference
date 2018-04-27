@@ -1331,7 +1331,7 @@
             // GetChannelUnread
             channelUnread, resp := Client.GetChannelUnread(<CHANNELID>, <USERID>)
 
-'/channels/{channel_id}/schemes':
+'/channels/{channel_id}/scheme':
     put:
       tags:
         - channels
@@ -1387,7 +1387,7 @@
         - lang: 'curl'
           source: |
             curl -X PUT \
-              https://your-mattermost-url.com/api/v4/channels/4xp9fdt77pncbef59f4k1qe83o/schemes \
+              https://your-mattermost-url.com/api/v4/channels/4xp9fdt77pncbef59f4k1qe83o/scheme \
               -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
               -H 'Content-Type: application/json' \
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
