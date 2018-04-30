@@ -82,6 +82,8 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
 
   '/schemes/{scheme_id}':
     get:
@@ -147,6 +149,8 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
 
   '/schemes/{scheme_id}/patch':
     put:
@@ -192,6 +196,8 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
 
   '/schemes/{scheme_id}/teams':
      get:
