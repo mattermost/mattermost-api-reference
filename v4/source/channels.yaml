@@ -1337,7 +1337,7 @@
         - channels
       summary: Set a channel's scheme
       description: |
-        Set a channel's scheme, to wit sets the scheme_id value of a channel record.
+        Set a channel's scheme, more specifically sets the scheme_id value of a channel record.
         
         ##### Permissions
         Must have `manage_system` permission.
