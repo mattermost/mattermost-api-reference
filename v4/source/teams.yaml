@@ -975,7 +975,7 @@
         - teams
       summary: Set a team's scheme
       description: |
-        Set a team's scheme, to wit sets the scheme_id value of a team record.
+        Set a team's scheme, more specifically sets the scheme_id value of a team record.
         
         ##### Permissions
         Must have `manage_system` permission.
