@@ -112,7 +112,7 @@ tags:
 
       Mattermost has the ability to act as an [OAuth 2.0](https://tools.ietf.org/html/rfc6749) service provider.
 
-      The official documentation for [using your Mattermot server as an OAuth 2.0 service provider can be found here.](https://docs.mattermost.com/developer/oauth-2-0-applications.html)
+      The official documentation for [using your Mattermost server as an OAuth 2.0 service provider can be found here.](https://docs.mattermost.com/developer/oauth-2-0-applications.html)
 
       For an example on how to register an OAuth 2.0 app with your Mattermost instance, please see the [Mattermost-Zapier integration documentation](https://docs.mattermost.com/integrations/zapier.html#register-zapier-as-an-oauth-2-0-application).
 
