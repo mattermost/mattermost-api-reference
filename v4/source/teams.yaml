@@ -1002,14 +1002,14 @@
         '400':
           $ref: '#/responses/BadRequest'
 
-'/teams/{team_id}/scheme':
+  '/teams/{team_id}/scheme':
     put:
       tags:
         - teams
       summary: Set a team's scheme
       description: |
         Set a team's scheme, more specifically sets the scheme_id value of a team record.
-        
+
         ##### Permissions
         Must have `manage_system` permission.
 
@@ -1019,6 +1019,7 @@
           in: path
           description: Team GUID
           required: true
+          type: string
         - in: body
           name: body
           description: Scheme GUID
@@ -1051,7 +1052,7 @@
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
-            
+
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
             schemeID := "qjda3stwafbgpqjaxej3k76sga"
 
