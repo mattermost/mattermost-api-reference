@@ -440,20 +440,10 @@
         ##### Permissions
         Must be authenticated.
       parameters:
-        - name: hash
+        - name: token
           in: query
-          description: Hash value with time, team id and and InviteSaltId
-          required: false
-          type: string
-        - name: data
-          in: query
-          description: Data with time and team id
-          required: false
-          type: string
-        - name: invite_id
-          in: query
-          description: Invite id to add user to the team
-          required: false
+          description: Token id from the invitation
+          required: true
           type: string
       responses:
         '201':
