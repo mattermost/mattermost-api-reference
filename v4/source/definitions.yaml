@@ -2068,6 +2068,43 @@ definitions:
         type: boolean
         description: indicates if this role is managed by a scheme (true), or is a custom stand-alone role (false).
 
+  Scheme:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique identifier of the scheme.
+      name:
+        type: string
+        description: The human readable name for the scheme.
+      description:
+        type: string
+        description: A human readable description of the scheme.
+      create_at:
+        type: integer
+        description: The time at which the scheme was created.
+      update_at:
+        type: integer
+        description: The time at which the scheme was last updated.
+      delete_at:
+        type: integer
+        description: The time at which the scheme was deleted.
+      scope:
+        type: string
+        description: The scope to which this scheme can be applied, either "team" or "channel".
+      default_team_admin_role:
+        type: string
+        description: The id of the default team admin role for this scheme.
+      default_team_user_role:
+        type: string
+        description: The id of the default team user role for this scheme.
+      default_channel_admin_role:
+        type: string
+        description: The id of the default channel admin role for this scheme.
+      default_channel_user_role:
+        type: string
+        description: The id of the default channel user role for this scheme.
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
