@@ -407,7 +407,7 @@
           __Minimum server version__: 4.10
 
           ##### Permissions
-          `manage_team` permission for the team of channel.
+          `manage_team` permission for the team of the channel.
         parameters:
           - name: channel_id
             in: path
@@ -448,7 +448,7 @@
           __Minimum server version__: 3.10
 
           ##### Permissions
-          `manage_team` permission for the team of channel.
+          `manage_team` permission for the team of the channel.
         parameters:
           - name: channel_id
             in: path
