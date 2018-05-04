@@ -407,7 +407,7 @@
           __Minimum server version__: 4.10
 
           ##### Permissions
-          Must have `manage_system` permission.
+          `manage_team` permission for the team of channel.
         parameters:
           - name: channel_id
             in: path
