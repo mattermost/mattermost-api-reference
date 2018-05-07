@@ -8,6 +8,11 @@
         ##### Permissions
         No permission required but user creation can be controlled by server configuration.
       parameters:
+        - name: t
+          in: query
+          description: Invitation token id
+          required: false
+          type: string
         - in: body
           name: body
           description: User object to be created

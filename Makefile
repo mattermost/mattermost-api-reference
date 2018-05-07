@@ -53,6 +53,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/dataretention.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/plugins.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/roles.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/schemes.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
 	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V4_YAML)

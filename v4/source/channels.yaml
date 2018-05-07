@@ -396,6 +396,47 @@
             // PatchChannel
             channel, resp := Client.PatchChannel(<CHANNELID>, patch)
 
+  '/channels/{channel_id}/convert':
+      post:
+        tags:
+          - channels
+        summary: Convert a channel from public to private
+        description: |
+          Convert into private channel from the provided channel id string.
+
+          __Minimum server version__: 4.10
+
+          ##### Permissions
+          `manage_team` permission for the team of the channel.
+        parameters:
+          - name: channel_id
+            in: path
+            description: Channel GUID
+            required: true
+            type: string
+        responses:
+          '200':
+            description: Channel conversion successful
+            schema:
+              $ref: '#/definitions/Channel'
+          '400':
+            $ref: '#/responses/BadRequest'
+          '401':
+            $ref: '#/responses/Unauthorized'
+          '403':
+            $ref: '#/responses/Forbidden'
+          '404':
+            $ref: '#/responses/NotFound'
+        x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // ConvertChannelToPrivate
+            convertedChannel, resp := Client.ConvertChannelToPrivate(<CHANNELID>)
+
   '/channels/{channel_id}/restore':
       post:
         tags:
@@ -407,7 +448,7 @@
           __Minimum server version__: 3.10
 
           ##### Permissions
-          `manage_team` permission for the team of channel.
+          `manage_team` permission for the team of the channel.
         parameters:
           - name: channel_id
             in: path

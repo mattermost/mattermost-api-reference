@@ -166,7 +166,7 @@
         - plugins
       summary: Get webapp plugins
       description: |
-        Deactivate a previously activated plugin. Plugins must be enabled in the server's config settings.
+        Get a list of web app plugins installed and activated on the server.
 
         ##### Permissions
         No permissions required.
