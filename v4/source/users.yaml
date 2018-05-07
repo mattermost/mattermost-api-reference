@@ -8,7 +8,7 @@
         ##### Permissions
         No permission required but user creation can be controlled by server configuration.
       parameters:
-        - name: t
+        - name: iid
           in: query
           description: Invitation token id
           required: false
