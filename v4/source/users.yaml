@@ -8,9 +8,14 @@
         ##### Permissions
         No permission required but user creation can be controlled by server configuration.
       parameters:
+        - name: t
+          in: query
+          description: Token id from an email invitation
+          required: false
+          type: string
         - name: iid
           in: query
-          description: Invitation token id
+          description: Token id from an invitation link
           required: false
           type: string
         - in: body
