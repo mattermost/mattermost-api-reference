@@ -817,7 +817,7 @@
       description: |
         Update a team member's scheme_admin/scheme_user properties. Typically this should either be `scheme_admin=false, scheme_user=true` for ordinary team member, or `scheme_admin=true, scheme_user=true` for a team admin.
 
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
 
         ##### Permissions
         Must be authenticated and have the `manage_team_roles` permission.
