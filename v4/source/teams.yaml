@@ -1003,7 +1003,7 @@
         ##### Permissions
         Must have `manage_system` permission.
 
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
       parameters:
         - name: team_id
           in: path
