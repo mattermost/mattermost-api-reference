@@ -9,7 +9,7 @@
         ##### Permissions
         Must have `manage_system` permission.
 
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
       parameters:
         - name: scope
           in: query
@@ -50,7 +50,7 @@
         ##### Permissions
         Must have `manage_system` permission.
 
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
       parameters:
         - in: body
           name: scheme
@@ -94,9 +94,9 @@
         Get a scheme from the provided scheme id.
 
         ##### Permissions
-        Requires an active session but no other permissions.
+        Must have `manage_system` permission.
 
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
       parameters:
         - name: scheme_id
           in: path
@@ -112,6 +112,8 @@
           $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
       x-code-samples:
         - lang: 'Go'
           source: |
@@ -131,7 +133,7 @@
         ##### Permissions
         Must have `manage_system` permission.
 
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
       parameters:
         - name: scheme_id
           in: path
@@ -163,7 +165,7 @@
         ##### Permissions
         `manage_system` permission is required.
 
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
       parameters:
         - name: scheme_id
           in: path
@@ -211,7 +213,7 @@
          ##### Permissions
          `manage_system` permission is required.
 
-         __Minimum server version__: 4.10
+         __Minimum server version__: 5.0
        parameters:
          - name: scheme_id
            in: path
@@ -256,7 +258,7 @@
           ##### Permissions
           `manage_system` permission is required.
 
-          __Minimum server version__: 4.10
+          __Minimum server version__: 5.0
         parameters:
           - name: scheme_id
             in: path
