@@ -1092,7 +1092,7 @@
       summary: Update the scheme-derived roles of a channel member.
       description: |
         Update a channel member's scheme_admin/scheme_user properties. Typically this should either be `scheme_admin=false, scheme_user=true` for ordinary channel member, or `scheme_admin=true, scheme_user=true` for a channel admin.
-        __Minimum server version__: 4.10
+        __Minimum server version__: 5.0
         ##### Permissions
         Must be authenticated and have the `manage_channel_roles` permission.
       parameters:
