@@ -404,6 +404,8 @@
       summary: Search for team posts
       description: |
         Search posts in the team and from the provided terms string.
+        From server version 4.2 onwards, the returned value is a PostListWithSearchMatches. In 4.1 and earlier
+        the returned value is a PostList.
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
       parameters:
@@ -432,7 +434,7 @@
         '200':
           description: Post list retrieval successful
           schema:
-            $ref: "#/definitions/PostList"
+            $ref: "#/definitions/PostListWithSearchMatches"
         '400':
           $ref: '#/responses/BadRequest'
         '401':
