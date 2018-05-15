@@ -6,10 +6,13 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       update_at:
         type: integer
+        format: int64
       delete_at:
         type: integer
+        format: int64
       username:
         type: string
       first_name:
@@ -49,10 +52,13 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       update_at:
         type: integer
+        format: int64
       delete_at:
         type: integer
+        format: int64
       display_name:
         type: string
       name:
@@ -93,10 +99,13 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       update_at:
         type: integer
+        format: int64
       delete_at:
         type: integer
+        format: int64
       team_id:
         type: string
       type:
@@ -115,6 +124,7 @@ definitions:
         type: integer
       extra_update_at:
         type: integer
+        format: int64
       creator_id:
         type: string
 
@@ -137,6 +147,7 @@ definitions:
         type: string
       last_viewed_at:
         type: integer
+        format: int64
       msg_count:
         type: integer
       mention_count:
@@ -146,6 +157,7 @@ definitions:
         $ref: '#/definitions/ChannelNotifyProps'
       last_update_at:
         type: integer
+        format: int64
 
   ChannelData:
     type: object
@@ -162,12 +174,16 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       update_at:
         type: integer
+        format: int64
       delete_at:
         type: integer
+        format: int64
       edit_at:
         type: integer
+        format: int64
       user_id:
         type: string
       channel_id:
@@ -255,16 +271,19 @@ definitions:
     properties:
       create_at:
         type: integer
+        format: int64
       device_id:
         type: string
       expires_at:
         type: integer
+        format: int64
       id:
         type: string
       is_oauth:
         type: boolean
       last_activity_at:
         type: integer
+        format: int64
       props:
         type: object
       roles:
@@ -292,10 +311,13 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       update_at:
         type: integer
+        format: int64
       delete_at:
         type: integer
+        format: int64
       name:
         description: The name of the file
         type: string
@@ -389,10 +411,13 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       update_at:
         type: integer
+        format: int64
       delete_at:
         type: integer
+        format: int64
       channel_id:
         description: The ID of a public channel or private group that receives the webhook payloads
         type: string
@@ -411,10 +436,13 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       update_at:
         type: integer
+        format: int64
       delete_at:
         type: integer
+        format: int64
       creator_id:
         description: The Id of the user who created the webhook
         type: string
@@ -463,6 +491,7 @@ definitions:
       create_at:
         description: The time at which this reaction was made
         type: integer
+        format: int64
 
   Emoji:
     type: object
@@ -479,12 +508,15 @@ definitions:
       create_at:
         description: The time at which the emoji was made
         type: integer
+        format: int64
       update_at:
         description: The time at which the emoji was updated.
         type: integer
+        format: int64
       delete_at:
         description: The time at which the emoji was deleted.
         type: integer
+        format: int64
 
   Command:
     type: object
@@ -498,12 +530,15 @@ definitions:
       create_at:
         description: Timestamp when the command was created
         type: integer
-      updated_at:
+        format: int64
+      update_at:
         description: Timestamp when the command was last updated
         type: integer
+        format: int64
       deleted_at:
         description: Timestamp when the command was deleted, 0 if never deleted
         type: integer
+        format: int64
       creator_id:
         description: The user id for the commands creator
         type: string
@@ -757,6 +792,7 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       user_id:
         type: string
       action:
@@ -1776,6 +1812,7 @@ definitions:
         type: string
       create_at:
         type: integer
+        format: int64
       user_id:
         type: string
       status:
@@ -1788,8 +1825,10 @@ definitions:
         type: string
       start_at:
         type: integer
+        format: int64
       end_at:
         type: integer
+        format: int64
       keywords:
         type: string
       emails:
@@ -1843,6 +1882,7 @@ definitions:
         type: boolean
       last_activity_at:
         type: integer
+        format: int64
 
   OAuthApp:
     type: object
@@ -1876,9 +1916,11 @@ definitions:
       create_at:
         type: integer
         description: The time of registration for the application
+        format: int64
       update_at:
         type: integer
         description: The last time of update for the application
+        format: int64
 
   Job:
     type: object
@@ -1892,12 +1934,15 @@ definitions:
       create_at:
         type: integer
         description: The time at which the job was created
+        format: int64
       start_at:
         type: integer
         description: The time at which the job was started
+        format: int64
       last_activity_at:
         type: integer
         description: The last time at which the job had activity
+        format: int64
       status:
         type: string
         description: The status of the job
@@ -2082,12 +2127,15 @@ definitions:
         description: A human readable description of the scheme.
       create_at:
         type: integer
+        format: int64
         description: The time at which the scheme was created.
       update_at:
         type: integer
+        format: int64
         description: The time at which the scheme was last updated.
       delete_at:
         type: integer
+        format: int64
         description: The time at which the scheme was deleted.
       scope:
         type: string
