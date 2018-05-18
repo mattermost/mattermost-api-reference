@@ -5,12 +5,15 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a user was created
         type: integer
         format: int64
       update_at:
+        description: The time in milliseconds a user was last updated
         type: integer
         format: int64
       delete_at:
+        description: The time in milliseconds a user was deleted
         type: integer
         format: int64
       username:
@@ -51,12 +54,15 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a team was created
         type: integer
         format: int64
       update_at:
+        description: The time in milliseconds a team was last updated
         type: integer
         format: int64
       delete_at:
+        description: The time in milliseconds a team was deleted
         type: integer
         format: int64
       display_name:
@@ -98,12 +104,15 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a channel was created
         type: integer
         format: int64
       update_at:
+        description: The time in milliseconds a channel was last updated
         type: integer
         format: int64
       delete_at:
+        description: The time in milliseconds a channel was deleted
         type: integer
         format: int64
       team_id:
@@ -119,6 +128,7 @@ definitions:
       purpose:
         type: string
       last_post_at:
+        description: The time in milliseconds of the last post of a channel
         type: integer
       total_msg_count:
         type: integer
@@ -146,6 +156,7 @@ definitions:
       roles:
         type: string
       last_viewed_at:
+        description: The time in milliseconds the channel was last viewed by the user
         type: integer
         format: int64
       msg_count:
@@ -156,6 +167,7 @@ definitions:
         description: Field only visible to self and admins
         $ref: '#/definitions/ChannelNotifyProps'
       last_update_at:
+        description: The time in milliseconds the channel member was last updated
         type: integer
         format: int64
 
@@ -173,12 +185,15 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a post was created
         type: integer
         format: int64
       update_at:
+        description: The time in milliseconds a post was last updated
         type: integer
         format: int64
       delete_at:
+        description: The time in milliseconds a post was deleted
         type: integer
         format: int64
       edit_at:
@@ -270,11 +285,13 @@ definitions:
     type: object
     properties:
       create_at:
+        description: The time in milliseconds a session was created
         type: integer
         format: int64
       device_id:
         type: string
       expires_at:
+        description: The time in milliseconds a session will expire
         type: integer
         format: int64
       id:
@@ -282,6 +299,7 @@ definitions:
       is_oauth:
         type: boolean
       last_activity_at:
+        description: The time in milliseconds of the last activity of a session
         type: integer
         format: int64
       props:
@@ -310,12 +328,15 @@ definitions:
         description: If this file is attached to a post, the ID of that post
         type: string
       create_at:
+        description: The time in milliseconds a file was created
         type: integer
         format: int64
       update_at:
+        description: The time in milliseconds a file was last updated
         type: integer
         format: int64
       delete_at:
+        description: The time in milliseconds a file was deleted
         type: integer
         format: int64
       name:
@@ -410,12 +431,15 @@ definitions:
         description: The unique identifier for this incoming webhook
         type: string
       create_at:
+        description: The time in milliseconds a incoming webhook was created
         type: integer
         format: int64
       update_at:
+        description: The time in milliseconds a incoming webhook was last updated
         type: integer
         format: int64
       delete_at:
+        description: The time in milliseconds a incoming webhook was deleted
         type: integer
         format: int64
       channel_id:
@@ -435,12 +459,15 @@ definitions:
         description: The unique identifier for this outgoing webhook
         type: string
       create_at:
+        description: The time in milliseconds a outgoing webhook was created
         type: integer
         format: int64
       update_at:
+        description: The time in milliseconds a outgoing webhook was last updated
         type: integer
         format: int64
       delete_at:
+        description: The time in milliseconds a outgoing webhook was deleted
         type: integer
         format: int64
       creator_id:
@@ -489,7 +516,7 @@ definitions:
         description: The name of the emoji that was used for this reaction
         type: string
       create_at:
-        description: The time at which this reaction was made
+        description: The time in milliseconds this reaction was made
         type: integer
         format: int64
 
@@ -506,15 +533,15 @@ definitions:
         description: The name of the emoji
         type: string
       create_at:
-        description: The time at which the emoji was made
+        description: The time in milliseconds the emoji was made
         type: integer
         format: int64
       update_at:
-        description: The time at which the emoji was updated.
+        description: The time in milliseconds the emoji was last updated
         type: integer
         format: int64
       delete_at:
-        description: The time at which the emoji was deleted.
+        description: The time in milliseconds the emoji was deleted
         type: integer
         format: int64
 
@@ -528,15 +555,14 @@ definitions:
         description: The token which is used to verify the source of the payload
         type: string
       create_at:
-        description: Timestamp when the command was created
+        description: The time in milliseconds the command was created
         type: integer
-        format: int64
       update_at:
-        description: Timestamp when the command was last updated
+        description: The time in milliseconds the command was last updated
         type: integer
         format: int64
       deleted_at:
-        description: Timestamp when the command was deleted, 0 if never deleted
+        description: The time in milliseconds the command was deleted, 0 if never deleted
         type: integer
         format: int64
       creator_id:
@@ -791,6 +817,7 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a audit was created
         type: integer
         format: int64
       user_id:
