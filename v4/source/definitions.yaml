@@ -5,10 +5,13 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a user was created
         type: integer
       update_at:
+        description: The time in milliseconds a user was last updated
         type: integer
       delete_at:
+        description: The time in milliseconds a user was deleted
         type: integer
       username:
         type: string
@@ -47,10 +50,13 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a team was created
         type: integer
       update_at:
+        description: The time in milliseconds a team was last updated
         type: integer
       delete_at:
+        description: The time in milliseconds a team was deleted
         type: integer
       display_name:
         type: string
@@ -91,10 +97,13 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a channel was created
         type: integer
       update_at:
+        description: The time in milliseconds a channel was last updated
         type: integer
       delete_at:
+        description: The time in milliseconds a channel was deleted
         type: integer
       team_id:
         type: string
@@ -109,6 +118,7 @@ definitions:
       purpose:
         type: string
       last_post_at:
+        description: The time in milliseconds of the last post of a channel
         type: integer
       total_msg_count:
         type: integer
@@ -135,6 +145,7 @@ definitions:
       roles:
         type: string
       last_viewed_at:
+        description: The time in milliseconds the channel was last viewed by the user
         type: integer
       msg_count:
         type: integer
@@ -143,6 +154,7 @@ definitions:
       notify_props:
         type: object
       last_update_at:
+        description: The time in milliseconds the channel member was last updated
         type: integer
 
   ChannelData:
@@ -159,10 +171,13 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a post was created
         type: integer
       update_at:
+        description: The time in milliseconds a post was last updated
         type: integer
       delete_at:
+        description: The time in milliseconds a post was deleted
         type: integer
       user_id:
         type: string
@@ -250,16 +265,19 @@ definitions:
     type: object
     properties:
       create_at:
+        description: The time in milliseconds a session was created
         type: integer
       device_id:
         type: string
       expires_at:
+        description: The time in milliseconds a session will expire
         type: integer
       id:
         type: string
       is_oauth:
         type: boolean
       last_activity_at:
+        description: The time in milliseconds of the last activity of a session
         type: integer
       props:
         type: object
@@ -287,10 +305,13 @@ definitions:
         description: If this file is attached to a post, the ID of that post
         type: string
       create_at:
+        description: The time in milliseconds a file was created
         type: integer
       update_at:
+        description: The time in milliseconds a file was last updated
         type: integer
       delete_at:
+        description: The time in milliseconds a file was deleted
         type: integer
       name:
         description: The name of the file
@@ -371,10 +392,13 @@ definitions:
         description: The unique identifier for this incoming webhook
         type: string
       create_at:
+        description: The time in milliseconds a incoming webhook was created
         type: integer
       update_at:
+        description: The time in milliseconds a incoming webhook was last updated
         type: integer
       delete_at:
+        description: The time in milliseconds a incoming webhook was deleted
         type: integer
       channel_id:
         description: The ID of a public channel or private group that receives the webhook payloads
@@ -393,10 +417,13 @@ definitions:
         description: The unique identifier for this outgoing webhook
         type: string
       create_at:
+        description: The time in milliseconds a outgoing webhook was created
         type: integer
       update_at:
+        description: The time in milliseconds a outgoing webhook was last updated
         type: integer
       delete_at:
+        description: The time in milliseconds a outgoing webhook was deleted
         type: integer
       creator_id:
         description: The Id of the user who created the webhook
@@ -444,7 +471,7 @@ definitions:
         description: The name of the emoji that was used for this reaction
         type: string
       create_at:
-        description: The time at which this reaction was made
+        description: The time in milliseconds this reaction was made
         type: integer
 
   Emoji:
@@ -460,13 +487,13 @@ definitions:
         description: The name of the emoji
         type: string
       create_at:
-        description: The time at which the emoji was made
+        description: The time in milliseconds the emoji was made
         type: integer
       update_at:
-        description: The time at which the emoji was updated.
+        description: The time in milliseconds the emoji was last updated
         type: integer
       delete_at:
-        description: The time at which the emoji was deleted.
+        description: The time in milliseconds the emoji was deleted
         type: integer
 
   Command:
@@ -479,13 +506,13 @@ definitions:
         description: The token which is used to verify the source of the payload
         type: string
       create_at:
-        description: Timestamp when the command was created
+        description: The time in milliseconds the command was created
         type: integer
       updated_at:
-        description: Timestamp when the command was last updated
+        description: The time in milliseconds the command was last updated
         type: integer
       deleted_at:
-        description: Timestamp when the command was deleted, 0 if never deleted
+        description: The time in milliseconds the command was deleted, 0 if never deleted
         type: integer
       creator_id:
         description: The user id for the commands creator
@@ -739,6 +766,7 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a audit was created
         type: integer
       user_id:
         type: string
@@ -1266,6 +1294,7 @@ definitions:
       id:
         type: string
       create_at:
+        description: The time in milliseconds a compliance was created
         type: integer
       user_id:
         type: string
@@ -1278,8 +1307,10 @@ definitions:
       type:
         type: string
       start_at:
+        description: The time in milliseconds a compliance was started
         type: integer
       end_at:
+        description: The time in milliseconds a compliance ended
         type: integer
       keywords:
         type: string
@@ -1333,6 +1364,7 @@ definitions:
       manual:
         type: boolean
       last_activity_at:
+        description: The time in milliseconds a status was made
         type: integer
       active_channel:
         type: string
@@ -1367,11 +1399,11 @@ definitions:
         type: boolean
         description: Set this to `true` to skip asking users for permission
       create_at:
+        description: The time in milliseconds of a registration for the application
         type: integer
-        description: The time of registration for the application
       update_at:
+        description: The last time in milliseconds of an update for the application
         type: integer
-        description: The last time of update for the application
 
   Job:
     type: object
@@ -1383,14 +1415,14 @@ definitions:
         type: string
         description: The type of job
       create_at:
+        description: The time in milliseconds the job was created
         type: integer
-        description: The time at which the job was created
       start_at:
         type: integer
-        description: The time at which the job was started
+        description: The time in milliseconds the job was started
       last_activity_at:
         type: integer
-        description: The last time at which the job had activity
+        description: The last time in milliseconds the job had activity
       status:
         type: string
         description: The status of the job
