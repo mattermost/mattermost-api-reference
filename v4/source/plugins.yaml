@@ -1,0 +1,190 @@
+  /plugins:
+    post:
+      tags:
+        - plugins
+      summary: Upload plugin
+      description: |
+        Upload a plugin compressed in a .tar.gz file. Plugins and plugin uploads must be enabled in the server's config settings.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 4.4
+      consumes: ["multipart/form-data"]
+      parameters:
+        - name: plugin
+          in: formData
+          description: The plugin image to be uploaded
+          required: true
+          type: file
+      responses:
+        '201':
+          description: Plugin upload successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '413':
+          $ref: '#/responses/TooLarge'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+    get:
+      tags:
+        - plugins
+      summary: Get plugins
+      description: |
+        Get a list of inactive and a list of active plugin manifests. Plugins must be enabled in the server's config settings.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 4.4
+      responses:
+        '200':
+          description: Plugins retrieval successful
+          schema:
+            type: object
+            properties:
+              active:
+                type: array
+                items:
+                  $ref: '#/definitions/PluginManifest'
+              inactive:
+                type: array
+                items:
+                  $ref: '#/definitions/PluginManifest'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /plugins/{plugin_id}:
+    delete:
+      tags:
+        - plugins
+      summary: Remove plugin
+      description: |
+        Remove the plugin with the provided ID from the server. All plugin files are deleted. Plugins must be enabled in the server's config settings.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 4.4
+      parameters:
+        - name: plugin_id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+            description: Plugin removed successfully
+            schema:
+              $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /plugins/{plugin_id}/activate:
+    post:
+      tags:
+        - plugins
+      summary: Activate plugin
+      description: |
+        Activate a previously uploaded plugin. Plugins must be enabled in the server's config settings.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 4.4
+      parameters:
+        - name: plugin_id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+            description: Plugin activated successfully
+            schema:
+              $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /plugins/{plugin_id}/deactivate:
+    post:
+      tags:
+        - plugins
+      summary: Deactivate plugin
+      description: |
+        Deactivate a previously activated plugin. Plugins must be enabled in the server's config settings.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 4.4
+      parameters:
+        - name: plugin_id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+            description: Plugin deactivated successfully
+            schema:
+              $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /plugins/webapp:
+    get:
+      tags:
+        - plugins
+      summary: Get webapp plugins
+      description: |
+        Get a list of web app plugins installed and activated on the server.
+
+        ##### Permissions
+        No permissions required.
+
+        __Minimum server version__: 4.4
+      responses:
+        '200':
+            description: Plugin deactivated successfully
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/PluginManifestWebapp'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+

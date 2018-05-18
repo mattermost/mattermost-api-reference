@@ -40,7 +40,7 @@
         - emoji
       summary: Get a list of custom emoji
       description: |
-        Get a page of metadata for custom emoji on the system.
+        Get a page of metadata for custom emoji on the system. Since server version 4.7, sort using the `sort` query parameter.
         ##### Permissions
         Must be authenticated.
       parameters:
@@ -53,6 +53,11 @@
           in: query
           description: The number of users per page.
           default: "60"
+          type: string
+        - name: sort
+          in: query
+          description: Either blank for no sorting or "name" to sort by emoji names. Minimum server version for sorting is 4.7.
+          default: ""
           type: string
       responses:
         '200':
@@ -92,8 +97,8 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
 
@@ -125,6 +130,37 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
+  '/emoji/name/{emoji_name}':
+    get:
+      tags:
+        - emoji
+      summary: Get a custom emoji by name
+      description: |
+        Get some metadata for a custom emoji using its name.
+        ##### Permissions
+        Must be authenticated.
+
+        __Minimum server version__: 4.7
+      parameters:
+        - name: emoji_name
+          in: path
+          description: Emoji name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Emoji retrieval successful
+          schema:
+            $ref: '#/definitions/Emoji'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
   '/emoji/{emoji_id}/image':
     get:
       tags:
@@ -151,5 +187,79 @@
           $ref: '#/responses/NotFound'
         '500':
           $ref: '#/responses/InternalServerError'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /emoji/search:
+    post:
+      tags:
+        - emoji
+      summary: Search custom emoji
+      description: |
+        Search for custom emoji by name based on search criteria provided in the request body. A maximum of 200 results are returned.
+        ##### Permissions
+        Must be authenticated.
+
+        __Minimum server version__: 4.7
+      parameters:
+        - in: body
+          name: body
+          description: Search criteria
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+            properties:
+              term:
+                description: The term to match against the emoji name.
+                type: string
+              prefix_only:
+                description: Set to only search for names starting with the search term.
+                type: string
+      responses:
+        '200':
+          description: Emoji list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Emoji'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  /emoji/autocomplete:
+    get:
+      tags:
+        - emoji
+      summary: Autocomplete custom emoji
+      description: |
+        Get a list of custom emoji with names starting with or matching the provided name. Returns a maximum of 100 results.
+        ##### Permissions
+        Must be authenticated.
+
+        __Minimum server version__: 4.7
+      parameters:
+        - name: name
+          in: query
+          description: The emoji name to search.
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Emoji list retrieval successful
+          schema:
+            $ref: '#/definitions/Emoji'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'

@@ -67,6 +67,13 @@
         Send a test email to make sure you have your email settings configured correctly. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
         ##### Permissions
         Must have `manage_system` permission.
+      parameters:
+        - in: body
+          name: body
+          description: Mattermost configuration
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
       responses:
         '200':
           description: Email successful sent
@@ -84,8 +91,64 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
+            config := model.Config{
+              EmailSettings: model.EmailSettings{
+                SMTPServer:    <SMTPServer>,
+                SMTPPort:      <SMTPPort>,
+                SMTPUsername:  <SMTPUsername>,
+                SMTPPassword:  <SMTPPassword>,
+              },
+            }
+
             // TestEmail
-            ok, resp := Client.TestEmail()
+            ok, resp := Client.TestEmail(&config)
+
+  '/file/s3_test':
+    post:
+      tags:
+        - system
+      summary: Test AWS S3 connection
+      description: |
+        Send a test to validate if can connect to AWS S3. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
+        ##### Permissions
+        Must have `manage_system` permission.
+        __Minimum server version__: 4.8
+      parameters:
+        - in: body
+          name: body
+          description: Mattermost configuration
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
+      responses:
+        '200':
+          description: S3 Test successful
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            config := model.Config{
+              FileSettings: model.FileSettings{
+                DriverName:              model.NewString(model.IMAGE_DRIVER_S3),
+                AmazonS3AccessKeyId:     <AmazonS3AccessKeyId>,
+                AmazonS3SecretAccessKey: <AmazonS3SecretAccessKey>,
+                AmazonS3Bucket:          <AmazonS3Bucket>,
+                AmazonS3Endpoint:        <AmazonS3Endpoint>
+              },
+            }
+
+            // TestS3Connection
+            ok, resp := Client.TestS3Connection(&config)
 
   '/config':
     get:
@@ -121,9 +184,16 @@
         - system
       summary: Update configuration
       description: |
-        Submit a new configuration for the server to use.
+        Submit a new configuration for the server to use. As of server version 4.8, the `PluginSettings.EnableUploads` setting cannot be modified by this endpoint.
         ##### Permissions
         Must have `manage_system` permission.
+      parameters:
+        - in: body
+          name: body
+          description: Mattermost configuration
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
       responses:
         '200':
           description: Configuration update successful
@@ -210,6 +280,32 @@
 
             // GetOldClientConfig
             ok, resp := Client.GetOldClientConfig()
+
+  '/config/environment':
+    get:
+      tags:
+        - system
+      summary: Get configuration made through environment variables
+      description: |
+        Retrieve a json object mirroring the server configuration where fields are set to true
+        if the corresponding config setting is set through an environment variable. Settings
+        that haven't been set through environment variables will be missing from the object.
+
+        __Minimum server version__: 4.10
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Configuration retrieval successful
+          schema:
+            $ref: "#/definitions/EnvironmentConfig"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
 
   '/license':
     post:
@@ -389,7 +485,7 @@
         - system
       summary: Get logs
       description: |
-        Get a page of server logs, selected with `page` and `per_page` query parameters.
+        Get a page of server logs, selected with `page` and `logs_per_page` query parameters.
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
@@ -398,10 +494,10 @@
           description: The page to select.
           default: "0"
           type: string
-        - name: per_page
+        - name: logs_per_page
           in: query
-          description: The number of logs per page.
-          default: "60"
+          description: The number of logs per page. There is a maximum limit of 10000 logs per page.
+          default: "10000"
           type: string
       responses:
         '200':
@@ -430,8 +526,9 @@
       description: |
         Add log messages to the server logs.
         ##### Permissions
-        Must have `manage_system` permission or if `ServiceSettings.EnableDeveloper` in the
-        config file is set to `true` then any user can use this endpoint.
+        Users with `manage_system` permission can log ERROR or DEBUG messages.
+        Logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` or just DEBUG messages when `false`.
+        Non-logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` and cannot log when `false`.
       parameters:
         - in: body
           name: body
@@ -444,7 +541,7 @@
             properties:
               level:
                 type: string
-                description: The error level, e.g. ERROR or INFO
+                description: The error level, ERROR or DEBUG
               message:
                 type: string
                 description: Message to send to the server logs

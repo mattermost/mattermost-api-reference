@@ -8,6 +8,16 @@
         ##### Permissions
         No permission required but user creation can be controlled by server configuration.
       parameters:
+        - name: t
+          in: query
+          description: Token id from an email invitation
+          required: false
+          type: string
+        - name: iid
+          in: query
+          description: Token id from an invitation link
+          required: false
+          type: string
         - in: body
           name: body
           description: User object to be created
@@ -35,6 +45,8 @@
                 type: string
               props:
                 type: object
+              notify_props:
+                $ref: '#/definitions/UserNotifyProps'
       responses:
         '201':
           description: User creation successful
@@ -103,7 +115,16 @@
         - name: sort
           in: query
           description: |
-            Can be "", "last_activity_at" or "create_at". When left blank sorting is done by username. Must be used in conjunction with `in_team` and no other query parameters (exlcuding the paging parameters). **Minimum server version: 4.0**
+            Sort is only available in conjunction with certain options below. The paging parameter is also always available.
+
+            ##### `in_team`
+            Can be "", "last_activity_at" or "create_at".
+            When left blank, sorting is done by username.
+            __Minimum server version__: 4.0
+            ##### `in_channel`
+            Can be "", "status".
+            When left blank, sorting is done by username. `status` will sort by User's current status (Online, Away, DND, Offline), then by Username.
+            __Minimum server version__: 4.7
           type: string
       responses:
         '200':
@@ -353,7 +374,7 @@
               props:
                 type: object
               notify_props:
-                type: object
+                $ref: '#/definitions/UserNotifyProps'
       responses:
         '200':
           description: User update successful
@@ -433,7 +454,7 @@
               props:
                 type: object
               notify_props:
-                type: object
+                $ref: '#/definitions/UserNotifyProps'
       responses:
         '200':
           description: User patch successful
@@ -490,9 +511,11 @@
         - users
       summary: Update user active status
       description: |
-        Update user active or inactive status
+        Update user active or inactive status.
+
+        __Since server version 4.6, users using a SSO provider to login can be activated or deactivated with this endpoint. However, if their activation status in Mattermost does not reflect their status in the SSO provider, the next synchronization or login by that user will reset the activation status to that of their account in the SSO provider. Server versions 4.5 and before do not allow activation or deactivation of SSO users from this endpoint.__
         ##### Permissions
-        User can deactivate itself.
+        User can deactivate themself.
         User with `manage_system` permission can activate or deactivate a user.
       parameters:
         - name: user_id
@@ -769,7 +792,7 @@
         - users
       summary: Update a user's password
       description: |
-        Update a user's password. New password must meet password policy set by server configuration.
+        Update a user's password. New password must meet password policy set by server configuration. Current password is required if you're updating your own password.
         ##### Permissions
         Must be logged in as the user the password is being changed for or have `manage_system` permission.
       parameters:
@@ -784,7 +807,6 @@
           schema:
             type: object
             required:
-              - current_password
               - new_password
             properties:
               current_password:
@@ -931,6 +953,34 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  /users/{user_id}/sessions/revoke/all:
+      post:
+        tags:
+          - users
+        summary: Revoke all active sessions for a user
+        description: |
+          Revokes all user sessions from the provided user id and session id strings.
+          ##### Permissions
+          Must be logged in as the user being updated or have the `edit_other_users` permission.
+          __Minimum server version__: 4.4
+        parameters:
+          - name: user_id
+            in: path
+            description: User GUID
+            required: true
+            type: string
+        responses:
+          '200':
+            description: User sessions revoked successfully
+            schema:
+              $ref: '#/definitions/StatusOK'
+          '400':
+            $ref: '#/responses/BadRequest'
+          '401':
+            $ref: '#/responses/Unauthorized'
+          '403':
+            $ref: '#/responses/Forbidden'
 
   /users/sessions/device:
     put:
@@ -1200,6 +1250,43 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/tokens:
+    get:
+      tags:
+        - users
+      summary: Get user access tokens
+      description: |
+        Get a page of user access tokens for users on the system. Does not include the actual authentication tokens. Use query parameters for paging.
+
+        __Minimum server version__: 4.7
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of tokens per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: User access tokens retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserAccessTokenSanitized'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   /users/tokens/revoke:
     post:
       tags:
@@ -1268,3 +1355,142 @@
         '404':
           $ref: '#/responses/NotFound'
 
+  /users/tokens/disable:
+    post:
+      tags:
+        - users
+      summary: Disable personal access token
+      description: |
+        Disable a personal access token and delete any sessions using the token. The token can be re-enabled using `/users/tokens/enable`.
+
+        __Minimum server version__: 4.4
+
+        ##### Permissions
+        Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - in: body
+          name: token
+          required: true
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                description: The token to disable
+                type: string
+      responses:
+        '200':
+          description: Personal access token disable successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /users/tokens/enable:
+    post:
+      tags:
+        - users
+      summary: Enable personal access token
+      description: |
+        Re-enable a personal access token that has been disabled.
+
+        __Minimum server version__: 4.4
+
+        ##### Permissions
+        Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      parameters:
+        - in: body
+          name: token
+          required: true
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                description: The token to enable
+                type: string
+      responses:
+        '200':
+          description: Personal access token enable successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /users/tokens/search:
+    post:
+      tags:
+        - users
+      summary: Search tokens
+      description: |
+        Get a list of tokens based on search criteria provided in the request body. Searches are done against the token id, user id and username.
+
+        __Minimum server version__: 4.7
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - in: body
+          name: body
+          description: Search criteria
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+            properties:
+              term:
+                description: The search term to match against the token id, user id or username.
+                type: string
+      responses:
+        '200':
+          description: Personal access token search successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserAccessTokenSanitized'
+  /users/{user_id}/auth:
+    put:
+      tags:
+        - users
+      summary: Update a user's authentication method
+      description: |
+        Updates a user's authentication method. This can be used to change them to/from LDAP authentication for example.
+
+        __Minimum server version__: 4.6
+        ##### Permissions
+        Must have the `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserAuthData'
+      responses:
+        '200':
+          description: User auth update successful
+          schema:
+            $ref: '#/definitions/UserAuthData'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'

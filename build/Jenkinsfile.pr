@@ -1,0 +1,9 @@
+#!/usr/bin/groovy
+
+@Library('shared-pipelines') _
+
+def b = "${sha1}"
+
+api_reference {
+    BRANCH = b
+}

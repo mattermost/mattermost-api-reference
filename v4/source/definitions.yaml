@@ -7,12 +7,15 @@ definitions:
       create_at:
         description: The time in milliseconds a user was created
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds a user was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds a user was deleted
         type: integer
+        format: int64
       username:
         type: string
       first_name:
@@ -32,7 +35,8 @@ definitions:
       locale:
         type: string
       notify_props:
-        type: object
+        description: Field only visible to self and admins
+        $ref: '#/definitions/UserNotifyProps'
       props:
         type: object
       last_password_update:
@@ -52,12 +56,15 @@ definitions:
       create_at:
         description: The time in milliseconds a team was created
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds a team was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds a team was deleted
         type: integer
+        format: int64
       display_name:
         type: string
       name:
@@ -99,12 +106,15 @@ definitions:
       create_at:
         description: The time in milliseconds a channel was created
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds a channel was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds a channel was deleted
         type: integer
+        format: int64
       team_id:
         type: string
       type:
@@ -124,6 +134,7 @@ definitions:
         type: integer
       extra_update_at:
         type: integer
+        format: int64
       creator_id:
         type: string
 
@@ -147,15 +158,18 @@ definitions:
       last_viewed_at:
         description: The time in milliseconds the channel was last viewed by the user
         type: integer
+        format: int64
       msg_count:
         type: integer
       mention_count:
         type: integer
       notify_props:
-        type: object
+        description: Field only visible to self and admins
+        $ref: '#/definitions/ChannelNotifyProps'
       last_update_at:
         description: The time in milliseconds the channel member was last updated
         type: integer
+        format: int64
 
   ChannelData:
     type: object
@@ -173,12 +187,18 @@ definitions:
       create_at:
         description: The time in milliseconds a post was created
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds a post was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds a post was deleted
         type: integer
+        format: int64
+      edit_at:
+        type: integer
+        format: int64
       user_id:
         type: string
       channel_id:
@@ -267,11 +287,13 @@ definitions:
       create_at:
         description: The time in milliseconds a session was created
         type: integer
+        format: int64
       device_id:
         type: string
       expires_at:
         description: The time in milliseconds a session will expire
         type: integer
+        format: int64
       id:
         type: string
       is_oauth:
@@ -279,6 +301,7 @@ definitions:
       last_activity_at:
         description: The time in milliseconds of the last activity of a session
         type: integer
+        format: int64
       props:
         type: object
       roles:
@@ -307,12 +330,15 @@ definitions:
       create_at:
         description: The time in milliseconds a file was created
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds a file was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds a file was deleted
         type: integer
+        format: int64
       name:
         description: The name of the file
         type: string
@@ -346,6 +372,19 @@ definitions:
       name:
         type: string
       value:
+        type: string
+
+  UserAuthData:
+    type: object
+    properties:
+      auth_data:
+        description: Service-specific authentication data
+        type: string
+      auth_service:
+        description: The authentication service such as "email", "gitlab", or "ldap"
+        type: string
+      password:
+        description: The password used for email authentication
         type: string
 
   UserAutocomplete:
@@ -394,12 +433,15 @@ definitions:
       create_at:
         description: The time in milliseconds a incoming webhook was created
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds a incoming webhook was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds a incoming webhook was deleted
         type: integer
+        format: int64
       channel_id:
         description: The ID of a public channel or private group that receives the webhook payloads
         type: string
@@ -419,12 +461,15 @@ definitions:
       create_at:
         description: The time in milliseconds a outgoing webhook was created
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds a outgoing webhook was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds a outgoing webhook was deleted
         type: integer
+        format: int64
       creator_id:
         description: The Id of the user who created the webhook
         type: string
@@ -473,6 +518,7 @@ definitions:
       create_at:
         description: The time in milliseconds this reaction was made
         type: integer
+        format: int64
 
   Emoji:
     type: object
@@ -489,12 +535,15 @@ definitions:
       create_at:
         description: The time in milliseconds the emoji was made
         type: integer
+        format: int64
       update_at:
         description: The time in milliseconds the emoji was last updated
         type: integer
+        format: int64
       delete_at:
         description: The time in milliseconds the emoji was deleted
         type: integer
+        format: int64
 
   Command:
     type: object
@@ -508,12 +557,14 @@ definitions:
       create_at:
         description: The time in milliseconds the command was created
         type: integer
-      updated_at:
+      update_at:
         description: The time in milliseconds the command was last updated
         type: integer
+        format: int64
       deleted_at:
         description: The time in milliseconds the command was deleted, 0 if never deleted
         type: integer
+        format: int64
       creator_id:
         description: The user id for the commands creator
         type: string
@@ -768,6 +819,7 @@ definitions:
       create_at:
         description: The time in milliseconds a audit was created
         type: integer
+        format: int64
       user_id:
         type: string
       action:
@@ -1275,6 +1327,498 @@ definitions:
           TurnSharedKey:
             type: string
 
+  EnvironmentConfig:
+    type: object
+    properties:
+      ServiceSettings:
+        type: object
+        properties:
+          SiteURL:
+            type: boolean
+          ListenAddress:
+            type: boolean
+          ConnectionSecurity:
+            type: boolean
+          TLSCertFile:
+            type: boolean
+          TLSKeyFile:
+            type: boolean
+          UseLetsEncrypt:
+            type: boolean
+          LetsEncryptCertificateCacheFile:
+            type: boolean
+          Forward80To443:
+            type: boolean
+          ReadTimeout:
+            type: boolean
+          WriteTimeout:
+            type: boolean
+          MaximumLoginAttempts:
+            type: boolean
+          SegmentDeveloperKey:
+            type: boolean
+          GoogleDeveloperKey:
+            type: boolean
+          EnableOAuthServiceProvider:
+            type: boolean
+          EnableIncomingWebhooks:
+            type: boolean
+          EnableOutgoingWebhooks:
+            type: boolean
+          EnableCommands:
+            type: boolean
+          EnableOnlyAdminIntegrations:
+            type: boolean
+          EnablePostUsernameOverride:
+            type: boolean
+          EnablePostIconOverride:
+            type: boolean
+          EnableTesting:
+            type: boolean
+          EnableDeveloper:
+            type: boolean
+          EnableSecurityFixAlert:
+            type: boolean
+          EnableInsecureOutgoingConnections:
+            type: boolean
+          EnableMultifactorAuthentication:
+            type: boolean
+          EnforceMultifactorAuthentication:
+            type: boolean
+          AllowCorsFrom:
+            type: boolean
+          SessionLengthWebInDays:
+            type: boolean
+          SessionLengthMobileInDays:
+            type: boolean
+          SessionLengthSSOInDays:
+            type: boolean
+          SessionCacheInMinutes:
+            type: boolean
+          WebsocketSecurePort:
+            type: boolean
+          WebsocketPort:
+            type: boolean
+          WebserverMode:
+            type: boolean
+          EnableCustomEmoji:
+            type: boolean
+          RestrictCustomEmojiCreation:
+            type: boolean
+      TeamSettings:
+        type: object
+        properties:
+          SiteName:
+            type: boolean
+          MaxUsersPerTeam:
+            type: boolean
+          EnableTeamCreation:
+            type: boolean
+          EnableUserCreation:
+            type: boolean
+          EnableOpenServer:
+            type: boolean
+          RestrictCreationToDomains:
+            type: boolean
+          EnableCustomBrand:
+            type: boolean
+          CustomBrandText:
+            type: boolean
+          CustomDescriptionText:
+            type: boolean
+          RestrictDirectMessage:
+            type: boolean
+          RestrictTeamInvite:
+            type: boolean
+          RestrictPublicChannelManagement:
+            type: boolean
+          RestrictPrivateChannelManagement:
+            type: boolean
+          RestrictPublicChannelCreation:
+            type: boolean
+          RestrictPrivateChannelCreation:
+            type: boolean
+          RestrictPublicChannelDeletion:
+            type: boolean
+          RestrictPrivateChannelDeletion:
+            type: boolean
+          UserStatusAwayTimeout:
+            type: boolean
+          MaxChannelsPerTeam:
+            type: boolean
+          MaxNotificationsPerChannel:
+            type: boolean
+      SqlSettings:
+        type: object
+        properties:
+          DriverName:
+            type: boolean
+          DataSource:
+            type: boolean
+          DataSourceReplicas:
+            type: boolean
+          MaxIdleConns:
+            type: boolean
+          MaxOpenConns:
+            type: boolean
+          Trace:
+            type: boolean
+          AtRestEncryptKey:
+            type: boolean
+      LogSettings:
+        type: object
+        properties:
+          EnableConsole:
+            type: boolean
+          ConsoleLevel:
+            type: boolean
+          EnableFile:
+            type: boolean
+          FileLevel:
+            type: boolean
+          FileFormat:
+            type: boolean
+          FileLocation:
+            type: boolean
+          EnableWebhookDebugging:
+            type: boolean
+          EnableDiagnostics:
+            type: boolean
+      PasswordSettings:
+        type: object
+        properties:
+          MinimumLength:
+            type: boolean
+          Lowercase:
+            type: boolean
+          Number:
+            type: boolean
+          Uppercase:
+            type: boolean
+          Symbol:
+            type: boolean
+      FileSettings:
+        type: object
+        properties:
+          MaxFileSize:
+            type: boolean
+          DriverName:
+            type: boolean
+          Directory:
+            type: boolean
+          EnablePublicLink:
+            type: boolean
+          PublicLinkSalt:
+            type: boolean
+          ThumbnailWidth:
+            type: boolean
+          ThumbnailHeight:
+            type: boolean
+          PreviewWidth:
+            type: boolean
+          PreviewHeight:
+            type: boolean
+          ProfileWidth:
+            type: boolean
+          ProfileHeight:
+            type: boolean
+          InitialFont:
+            type: boolean
+          AmazonS3AccessKeyId:
+            type: boolean
+          AmazonS3SecretAccessKey:
+            type: boolean
+          AmazonS3Bucket:
+            type: boolean
+          AmazonS3Region:
+            type: boolean
+          AmazonS3Endpoint:
+            type: boolean
+          AmazonS3SSL:
+            type: boolean
+      EmailSettings:
+        type: object
+        properties:
+          EnableSignUpWithEmail:
+            type: boolean
+          EnableSignInWithEmail:
+            type: boolean
+          EnableSignInWithUsername:
+            type: boolean
+          SendEmailNotifications:
+            type: boolean
+          RequireEmailVerification:
+            type: boolean
+          FeedbackName:
+            type: boolean
+          FeedbackEmail:
+            type: boolean
+          FeedbackOrganization:
+            type: boolean
+          SMTPUsername:
+            type: boolean
+          SMTPPassword:
+            type: boolean
+          SMTPServer:
+            type: boolean
+          SMTPPort:
+            type: boolean
+          ConnectionSecurity:
+            type: boolean
+          InviteSalt:
+            type: boolean
+          PasswordResetSalt:
+            type: boolean
+          SendPushNotifications:
+            type: boolean
+          PushNotificationServer:
+            type: boolean
+          PushNotificationContents:
+            type: boolean
+          EnableEmailBatching:
+            type: boolean
+          EmailBatchingBufferSize:
+            type: boolean
+          EmailBatchingInterval:
+            type: boolean
+      RateLimitSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          PerSec:
+            type: boolean
+          MaxBurst:
+            type: boolean
+          MemoryStoreSize:
+            type: boolean
+          VaryByRemoteAddr:
+            type: boolean
+          VaryByHeader:
+            type: boolean
+      PrivacySettings:
+        type: object
+        properties:
+          ShowEmailAddress:
+            type: boolean
+          ShowFullName:
+            type: boolean
+      SupportSettings:
+        type: object
+        properties:
+          TermsOfServiceLink:
+            type: boolean
+          PrivacyPolicyLink:
+            type: boolean
+          AboutLink:
+            type: boolean
+          HelpLink:
+            type: boolean
+          ReportAProblemLink:
+            type: boolean
+          SupportEmail:
+            type: boolean
+      GitLabSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: boolean
+          Id:
+            type: boolean
+          Scope:
+            type: boolean
+          AuthEndpoint:
+            type: boolean
+          TokenEndpoint:
+            type: boolean
+          UserApiEndpoint:
+            type: boolean
+      GoogleSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: boolean
+          Id:
+            type: boolean
+          Scope:
+            type: boolean
+          AuthEndpoint:
+            type: boolean
+          TokenEndpoint:
+            type: boolean
+          UserApiEndpoint:
+            type: boolean
+      Office365Settings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Secret:
+            type: boolean
+          Id:
+            type: boolean
+          Scope:
+            type: boolean
+          AuthEndpoint:
+            type: boolean
+          TokenEndpoint:
+            type: boolean
+          UserApiEndpoint:
+            type: boolean
+      LdapSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          LdapServer:
+            type: boolean
+          LdapPort:
+            type: boolean
+          ConnectionSecurity:
+            type: boolean
+          BaseDN:
+            type: boolean
+          BindUsername:
+            type: boolean
+          BindPassword:
+            type: boolean
+          UserFilter:
+            type: boolean
+          FirstNameAttribute:
+            type: boolean
+          LastNameAttribute:
+            type: boolean
+          EmailAttribute:
+            type: boolean
+          UsernameAttribute:
+            type: boolean
+          NicknameAttribute:
+            type: boolean
+          IdAttribute:
+            type: boolean
+          PositionAttribute:
+            type: boolean
+          SyncIntervalMinutes:
+            type: boolean
+          SkipCertificateVerification:
+            type: boolean
+          QueryTimeout:
+            type: boolean
+          MaxPageSize:
+            type: boolean
+          LoginFieldName:
+            type: boolean
+      ComplianceSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Directory:
+            type: boolean
+          EnableDaily:
+            type: boolean
+      LocalizationSettings:
+        type: object
+        properties:
+          DefaultServerLocale:
+            type: boolean
+          DefaultClientLocale:
+            type: boolean
+          AvailableLocales:
+            type: boolean
+      SamlSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          Verify:
+            type: boolean
+          Encrypt:
+            type: boolean
+          IdpUrl:
+            type: boolean
+          IdpDescriptorUrl:
+            type: boolean
+          AssertionConsumerServiceURL:
+            type: boolean
+          IdpCertificateFile:
+            type: boolean
+          PublicCertificateFile:
+            type: boolean
+          PrivateKeyFile:
+            type: boolean
+          FirstNameAttribute:
+            type: boolean
+          LastNameAttribute:
+            type: boolean
+          EmailAttribute:
+            type: boolean
+          UsernameAttribute:
+            type: boolean
+          NicknameAttribute:
+            type: boolean
+          LocaleAttribute:
+            type: boolean
+          PositionAttribute:
+            type: boolean
+          LoginButtonText:
+            type: boolean
+      NativeAppSettings:
+        type: object
+        properties:
+          AppDownloadLink:
+            type: boolean
+          AndroidAppDownloadLink:
+            type: boolean
+          IosAppDownloadLink:
+            type: boolean
+      ClusterSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          InterNodeListenAddress:
+            type: boolean
+          InterNodeUrls:
+            type: boolean
+      MetricsSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          BlockProfileRate:
+            type: boolean
+          ListenAddress:
+            type: boolean
+      AnalyticsSettings:
+        type: object
+        properties:
+          MaxUsersForStatistics:
+            type: boolean
+      WebrtcSettings:
+        type: object
+        properties:
+          Enable:
+            type: boolean
+          GatewayWebsocketUrl:
+            type: boolean
+          GatewayAdminUrl:
+            type: boolean
+          GatewayAdminSecret:
+            type: boolean
+          StunURI:
+            type: boolean
+          TurnURI:
+            type: boolean
+          TurnUsername:
+            type: boolean
+          TurnSharedKey:
+            type: boolean
+
   SamlCertificateStatus:
     type: object
     properties:
@@ -1294,8 +1838,8 @@ definitions:
       id:
         type: string
       create_at:
-        description: The time in milliseconds a compliance was created
         type: integer
+        format: int64
       user_id:
         type: string
       status:
@@ -1307,11 +1851,11 @@ definitions:
       type:
         type: string
       start_at:
-        description: The time in milliseconds a compliance was started
         type: integer
+        format: int64
       end_at:
-        description: The time in milliseconds a compliance ended
         type: integer
+        format: int64
       keywords:
         type: string
       emails:
@@ -1364,10 +1908,8 @@ definitions:
       manual:
         type: boolean
       last_activity_at:
-        description: The time in milliseconds a status was made
         type: integer
-      active_channel:
-        type: string
+        format: int64
 
   OAuthApp:
     type: object
@@ -1399,11 +1941,13 @@ definitions:
         type: boolean
         description: Set this to `true` to skip asking users for permission
       create_at:
-        description: The time in milliseconds of a registration for the application
         type: integer
+        description: The time of registration for the application
+        format: int64
       update_at:
-        description: The last time in milliseconds of an update for the application
         type: integer
+        description: The last time of update for the application
+        format: int64
 
   Job:
     type: object
@@ -1415,14 +1959,17 @@ definitions:
         type: string
         description: The type of job
       create_at:
-        description: The time in milliseconds the job was created
         type: integer
+        description: The time at which the job was created
+        format: int64
       start_at:
         type: integer
-        description: The time in milliseconds the job was started
+        description: The time at which the job was started
+        format: int64
       last_activity_at:
         type: integer
-        description: The last time in milliseconds the job had activity
+        description: The last time at which the job had activity
+        format: int64
       status:
         type: string
         description: The status of the job
@@ -1461,6 +2008,9 @@ definitions:
       description:
         type: string
         description: A description of the token usage
+      is_active:
+        type: boolean
+        description: Indicates whether the token is active
 
   DataRetentionPolicy:
     type: object
@@ -1477,6 +2027,158 @@ definitions:
       file_retention_cutoff:
         type: integer
         description: The current server timestamp before which files should be deleted.
+
+  UserNotifyProps:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Set to "true" to enable email notifications, "false" to disable. Defaults to "true".
+      push:
+        type: string
+        description: Set to "all" to receive push notifications for all activity, "mention" for mentions and direct messages only, and "none" to disable. Defaults to "mention".
+      desktop:
+        type: string
+        description: Set to "all" to receive desktop notifications for all activity, "mention" for mentions and direct messages only, and "none" to disable. Defaults to "all".
+      desktop_sound:
+        type: string
+        description: Set to "true" to enable sound on desktop notifications, "false" to disable. Defaults to "true".
+      mention_keys:
+        type: string
+        description: A comma-separated list of words to count as mentions. Defaults to username and @username.
+      channel:
+        type: string
+        description: Set to "true" to enable channel-wide notifications (@channel, @all, etc.), "false" to disable. Defaults to "true".
+      first_name:
+        type: string
+        description: Set to "true" to enable mentions for first name. Defaults to "true" if a first name is set, "false" otherwise.
+
+  ChannelNotifyProps:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Set to "true" to enable email notifications, "false" to disable, or "default" to use the global user notification setting.
+      push:
+        type: string
+        description: Set to "all" to receive push notifications for all activity, "mention" for mentions and direct messages only, "none" to disable, or "default" to use the global user notification setting.
+      desktop:
+        type: string
+        description: Set to "all" to receive desktop notifications for all activity, "mention" for mentions and direct messages only, "none" to disable, or "default" to use the global user notification setting.
+      mark_unread:
+        type: string
+        description: Set to "all" to mark the channel unread for any new message, "mention" to mark unread for new mentions only. Defaults to "all".
+
+  PluginManifest:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Globally unique identifier that represents the plugin.
+      name:
+        type: string
+        description: Name of the plugin.
+      description:
+        type: string
+        description: Description of what the plugin is and does.
+      version:
+        type: string
+        description: Version number of the plugin.
+      backend:
+        type: object
+        properties:
+          executable:
+            type: string
+            description: Path to the executable binary.
+      webapp:
+        type: object
+        properties:
+          bundle_path:
+            type: string
+            description: Path to the webapp JavaScript bundle.
+      settings_schema:
+        type: object
+        description: Settings schema used to define the System Console UI for the plugin.
+
+  PluginManifestWebapp:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Globally unique identifier that represents the plugin.
+      version:
+        type: string
+        description: Version number of the plugin.
+      webapp:
+        type: object
+        properties:
+          bundle_path:
+            type: string
+            description: Path to the webapp JavaScript bundle.
+
+  Role:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique identifier of the role.
+      name:
+        type: string
+        description: The unique name of the role, used when assigning roles to users/groups in contexts.
+      display_name:
+        type: string
+        description: The human readable name for the role.
+      description:
+        type: string
+        description: A human readable description of the role.
+      permissions:
+        type: array
+        items:
+          type: string
+        description: A list of the unique names of the permissions this role grants.
+      scheme_managed:
+        type: boolean
+        description: indicates if this role is managed by a scheme (true), or is a custom stand-alone role (false).
+
+  Scheme:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique identifier of the scheme.
+      name:
+        type: string
+        description: The human readable name for the scheme.
+      description:
+        type: string
+        description: A human readable description of the scheme.
+      create_at:
+        type: integer
+        format: int64
+        description: The time at which the scheme was created.
+      update_at:
+        type: integer
+        format: int64
+        description: The time at which the scheme was last updated.
+      delete_at:
+        type: integer
+        format: int64
+        description: The time at which the scheme was deleted.
+      scope:
+        type: string
+        description: The scope to which this scheme can be applied, either "team" or "channel".
+      default_team_admin_role:
+        type: string
+        description: The id of the default team admin role for this scheme.
+      default_team_user_role:
+        type: string
+        description: The id of the default team user role for this scheme.
+      default_channel_admin_role:
+        type: string
+        description: The id of the default channel admin role for this scheme.
+      default_channel_user_role:
+        type: string
+        description: The id of the default channel user role for this scheme.
 
 externalDocs:
   description: Find out more about Mattermost

@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: |
-    ### API version 4 is stable with the Mattermost server 4.0 release. API version 3 is scheduled for deprecation on January 16th, 2018. [Details here](/#tag/APIv3-Deprecation). Looking for the APIv3 reference? It has moved [here](https://api.mattermost.com/v3).
+    ### API v4 is stable with the Mattermost server 4.0 release. API v3 was deprecated on January 16th, 2018, and scheduled for removal in Mattermost v5.0. [Details here](/#tag/APIv3-Deprecation). Looking for the API v3 reference? It has moved [here](https://api.mattermost.com/v3).
 
   version: 4.0.0
   title: Mattermost API Reference
@@ -49,6 +49,8 @@ tags:
       #### Community-built Drivers
       * [PHP Driver](https://github.com/gnello/php-mattermost-driver) - built by [@gnello](https://github.com/gnello) and [@prixone](https://github.com/prixone)
       * [Python Driver](https://github.com/Vaelor/python-mattermost-driver) - built by [@Vaelor](https://github.com/Vaelor)
+
+      For other community-built drivers and API wrappers, see [our app directory](https://about.mattermost.com/community-applications/#privateApps).
 
   - name: authentication
     description: |
@@ -110,7 +112,7 @@ tags:
 
       Mattermost has the ability to act as an [OAuth 2.0](https://tools.ietf.org/html/rfc6749) service provider.
 
-      The official documentation for [using your Mattermot server as an OAuth 2.0 service provider can be found here.](https://docs.mattermost.com/developer/oauth-2-0-applications.html)
+      The official documentation for [using your Mattermost server as an OAuth 2.0 service provider can be found here.](https://docs.mattermost.com/developer/oauth-2-0-applications.html)
 
       For an example on how to register an OAuth 2.0 app with your Mattermost instance, please see the [Mattermost-Zapier integration documentation](https://docs.mattermost.com/integrations/zapier.html#register-zapier-as-an-oauth-2-0-application).
 
@@ -225,8 +227,11 @@ tags:
       - new_user
       - leave_team
       - update_team
+      - delete_team
       - user_added
       - user_updated
+      - user_role_updated
+      - memberrole_updated
       - user_removed
       - preference_changed
       - preferences_changed
@@ -240,6 +245,8 @@ tags:
       - reaction_removed
       - response
       - emoji_added
+      - license_changed
+      - config_changed
 
       #### WebSocket API
 
@@ -293,22 +300,23 @@ tags:
 
   - name: APIv3 Deprecation
     description: |
-      With the release of Mattermost server 4.0, API version 4 is stable and we strongly recommend using it over API version 3. The deprecation of API version 3 is planned for January 16th, 2018, which is six months after the stable release of v4.
+      Since Mattermost 4.6 released on January 16, 2018, API v3 has no longer been supported and it will be removed in Mattermost Server v5.0 on June 16, 2018. Follow these simple steps to migrate your integrations and apps to API v4. Otherwise your integrations may break once Mattermost 5.0 is released.
 
-      The major changes from v3 to v4 are:
+      1. Set your server's log level to `DEBUG` in **System Console > General > Logging > File Log Level** to print detailed logs for API requests.
+      2. In **System Console > Logs**, search for requests hitting `/api/v3/` endpoints. Any requests hitting these endpoints are from integrations that should be migrated to API v4.
+        - For in-house or self-built integrations, update them to use v4 with the help of `this API reference <https://api.mattermost.com>`_. Most v3 endpoints have direct counterparts in v4 and should be migrated easily.
+        - For third-party integrations, visit their homepage (on GitHub, GitLab, etc.). Check if they already have a version that uses the Mattermost v4 API. If they do not, consider opening an issue asking them if support is planned.
+      3. Once all integrations have been migrated to API v4, review the server logs with log level set to `DEBUG`. Confirm no requests hit `/api/v3/` endpoints.
+      4. Set **Allow use of API v3 endpoints** to `false` in **System Console > General > Configuration**, or set `EnableAPIv3` to `false` in `config.json`. This setting disables API v3 on your server. Any time a v3 endpoint is used, an error is logged in **System Console > Logs**.
+      5. Set your server's log level back to `ERROR`. Use the error logs to help track down any remaining uses of API v3.
 
-      - Endpoint URLs only require team IDs when necessary, for example getting a channel by ID does not require a team ID in v4
-      - Collection endpoints now generally return lists and include paging as part of the query string
-      - User ID is now included in most user endpoints to allow for admins to use these endpoints to modify other users
+      Below are the major changes made between v3 and v4:
 
-      All new integrations should use v4 and existing ones should begin migration over to version 4. Some suggested steps to help migrate your server and integrations are:
+      1. Endpoint URLs only require team IDs when necessary. For example, getting a channel by ID no longer requires a team ID in v4.
+      2. Collection endpoints now generally return lists and include paging as part of the query string.
+      3. User ID is now included in most user endpoints. This allows admins to modify other users through v4 endpoints.
 
-      1. Set your server's log level to `DEBUG` and look for any requests hitting `/api/v3/` endpoints. The Mattermost webapp, desktop app, and classic mobile apps are solely using API version 4 and the new mobile apps will be completely moved over in their next release. That means that the majority of the logs you see will be from integrations that need to be migrated to v4.
-      2. For in-house or self-built integrations, begin updating them to use v4 with the help of this documentation. Most v3 endpoints have direct counterparts in v4 and should be easily migrated.
-      3. For integrations built by a third-party, visit their homepage (on GitHub, GitLab, etc.) and check if they already have a version that uses the Mattermost v4 API. If they do not, consider opening an issue asking them if support is planned.
-      4. Once you have migrated all your integrations to use v4, take another look at the server logs to make sure you don't see many v3 endpoints in use. Then, in your `config.json`, set the setting `EnableAPIv3` to `false`. In the system console this setting is under `General` -> `Configuration` -> `Allow use of API v3 endpoints`. This will disable v3 and output an error to your server logs any time one is attempted to be used. Set your server's log level back to `ERROR` and use the error logs to help track down any last uses of v3.
-
-      If you have any questions about the deprecation or about migrating from v3 to v4, feel free to [join our daily build server at pre-release.mattermost.com](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and ask questions in the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).
+      If you have any questions about the API v3 deprecation, or about migrating from v3 to v4, [join our daily build server at pre-release.mattermost.com](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and ask questions in the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).
 
   - name: users
     description: |
@@ -325,26 +333,44 @@ tags:
     description: Endpoints for uploading and interacting with files.
   - name: preferences
     description: Endpoints for saving and modifying user preferences.
+  - name: status
+    description: Endpoints for getting and updating user statuses.
   - name: emoji
     description: Endpoints for creating, getting and interacting with emojis.
-  - name: compliance
-    description: Endpoints for creating, getting and downloading compliance reports.
-  - name: cluster
-    description: Endpoints for configuring and interacting with high availability clusters.
+  - name: reactions
+    description: Endpoints for creating, getting and removing emoji reactions.
+  - name: webhooks
+    description: Endpoints for creating, getting and updating webhooks.
+  - name: commands
+    description: Endpoints for creating, getting and updating slash commands.
+  - name: OpenGraph
+    description: Endpoint for getting Open Graph metadata.
+  - name: system
+    description: General endpoints for interating with the server, such as configuration and logging.
   - name: brand
     description: Endpoints related to custom branding and white-labeling. See [our branding documentation](https://docs.mattermost.com/administration/branding.html) for more information.
+  - name: OAuth
+    description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
   - name: SAML
     description: Endpoints for configuring and interacting with SAML.
   - name: LDAP
     description: Endpoints for configuring and interacting with LDAP.
-  - name: system
-    description: General endpoints for interating with the server, such as configuration and logging.
-  - name: Jobs
-    description: Endpoints related to various background jobs that can be run by the server or separately by job servers.
-  - name: OAuth
-    description: Endpoints for configuring and interacting with Mattermost as an OAuth 2.0 service provider.
+  - name: compliance
+    description: Endpoints for creating, getting and downloading compliance reports.
+  - name: cluster
+    description: Endpoints for configuring and interacting with high availability clusters.
   - name: elasticsearch
     description: Endpoints for configuring and interacting with Elasticsearch.
+  - name: dataretention
+    description: Endpoint for getting data retention policy settings.
+  - name: jobs
+    description: Endpoints related to various background jobs that can be run by the server or separately by job servers.
+  - name: plugins
+    description: Endpoints related to uploading and managing plugins.
+  - name: roles
+    description: Endpoints for creating, getting and updating roles.
+  - name: schemes
+    description: Endpoints for creating, getting and updating and deleting schemes.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -366,17 +392,25 @@ x-tagGroups:
       - posts
       - files
       - preferences
+      - status
       - emoji
+      - reactions
       - webhooks
       - commands
+      - OpenGraph
       - system
-      - compliance
-      - cluster
       - brand
       - OAuth
       - SAML
       - LDAP
+      - compliance
+      - cluster
       - elasticsearch
+      - dataretention
+      - jobs
+      - plugins
+      - roles
+      - schemes
 schemes:
   - http
   - https

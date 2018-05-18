@@ -23,7 +23,7 @@ build-v3: .npminstall
 	@cat $(V3_SRC)/reactions.yaml >> $(V3_YAML)
 	@cat $(V3_SRC)/definitions.yaml >> $(V3_YAML)
 
-	@node_modules/swagger-cli/bin/swagger.js validate $(V3_YAML)
+	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V3_YAML)
 
 	@echo Complete
 
@@ -32,6 +32,7 @@ build-v4: .npminstall
 
 	@cat $(V4_SRC)/introduction.yaml > $(V4_YAML)
 	@cat $(V4_SRC)/users.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/status.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/teams.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/channels.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/posts.yaml >> $(V4_YAML)
@@ -49,16 +50,20 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/commands.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/oauth.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/elasticsearch.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/dataretention.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/plugins.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/roles.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/schemes.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
-	@node_modules/swagger-cli/bin/swagger.js validate $(V4_YAML)
+	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V4_YAML)
 
 	@echo Complete
 
 .npminstall:
 	@echo Getting dependencies using npm
 
-	npm install swagger-cli
+	npm install swagger-cli@1.0.0
 	touch $@
 
 clean:
