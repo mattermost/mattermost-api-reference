@@ -132,9 +132,6 @@ definitions:
         type: integer
       total_msg_count:
         type: integer
-      extra_update_at:
-        type: integer
-        format: int64
       creator_id:
         type: string
 
