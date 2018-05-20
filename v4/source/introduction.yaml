@@ -300,7 +300,7 @@ tags:
 
   - name: APIv3 Deprecation
     description: |
-      Since Mattermost 4.6 released on January 16, 2018, API v3 has no longer been supported and it will be removed in Mattermost Server v5.0 on June 16, 2018. Follow these simple steps to migrate your integrations and apps to API v4. Otherwise your integrations may break once Mattermost 5.0 is released.
+      Since Mattermost 4.6 released on January 16, 2018, API v3 has no longer been supported and it will be removed in Mattermost Server v5.0 on June 16, 2018. Follow these simple steps to migrate your integrations and apps to API v4. Otherwise your integrations may break once you upgrade to Mattermost 5.0
 
       1. Set your server's log level to `DEBUG` in **System Console > General > Logging > File Log Level** to print detailed logs for API requests.
       2. In **System Console > Logs**, search for requests hitting `/api/v3/` endpoints. Any requests hitting these endpoints are from integrations that should be migrated to API v4.
