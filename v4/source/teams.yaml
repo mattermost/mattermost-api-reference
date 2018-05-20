@@ -161,7 +161,7 @@
       description: |
         Soft deletes a team, by marking the team as deleted in the database. Soft deleted teams will not be accessible in the user interface.
         
-        Optionally use the permanent query parameter to hard delete the team for compliance reasons.
+        Optionally use the permanent query parameter to hard delete the team for compliance reasons. To use this paramater, your System Admin must first set `EnableAPITeamDeletion` to `true` in the Mattermost `config.json` file.
         ##### Permissions
         Must have the `manage_team` permission.
       parameters:
