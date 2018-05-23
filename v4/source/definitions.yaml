@@ -133,7 +133,7 @@ definitions:
       total_msg_count:
         type: integer
       extra_update_at:
-        description: Removed in Mattermost 5.0 release
+        description: Deprecated in Mattermost 5.0 release
         type: integer
         format: int64
       creator_id:
