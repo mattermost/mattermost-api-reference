@@ -407,7 +407,7 @@
           __Minimum server version__: 4.10
 
           ##### Permissions
-          `manage_team` permission for the team of the channel.
+          `convert_public_channel` permission for the team of the channel.
         parameters:
           - name: channel_id
             in: path
