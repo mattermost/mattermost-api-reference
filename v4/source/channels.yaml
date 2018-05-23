@@ -1331,7 +1331,7 @@
             // GetChannelUnread
             channelUnread, resp := Client.GetChannelUnread(<CHANNELID>, <USERID>)
 
-'/channels/{channel_id}/scheme':
+  '/channels/{channel_id}/scheme':
     put:
       tags:
         - channels
