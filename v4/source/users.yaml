@@ -326,6 +326,32 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  /users/stats:
+    get:
+      tags:
+        - users
+      summary: Get total count of users in the system
+      description: |
+        Get a total count of users in the system.
+      parameters:
+        - in: path
+          description: User GUID
+          required: true
+          type: strin
+      responses:
+        '200':
+          description: User stats retrieval successful
+          schema:
+            $ref: '#/definitions/UsersStats'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
   /users/{user_id}:
     get:
       tags:

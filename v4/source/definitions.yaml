@@ -50,6 +50,12 @@ definitions:
       timezone:
         $ref: '#/definitions/Timezone'
 
+  UsersStats:
+    type: object
+    properties:
+      total_users_count:
+        type: integer
+
   Team:
     type: object
     properties:
