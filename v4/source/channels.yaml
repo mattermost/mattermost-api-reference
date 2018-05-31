@@ -1085,6 +1085,55 @@
             // UpdateChannelRoles
             pass, resp := Client.UpdateChannelRoles(<CHANNELID>, <USERIDTOPROMOTE>, "channel_admin channel_user")
 
+  '/channels/{channel_id}/members/{user_id}/schemeRoles':
+    put:
+      tags:
+        - channels
+      summary: Update the scheme-derived roles of a channel member.
+      description: |
+        Update a channel member's scheme_admin/scheme_user properties. Typically this should either be `scheme_admin=false, scheme_user=true` for ordinary channel member, or `scheme_admin=true, scheme_user=true` for a channel admin.
+        __Minimum server version__: 5.0
+        ##### Permissions
+        Must be authenticated and have the `manage_channel_roles` permission.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Scheme properties.
+          required: true
+          schema:
+            type: object
+            required:
+              - scheme_admin
+              - scheme_user
+            properties:
+              scheme_admin:
+                type: boolean
+              scheme_user:
+                type: boolean
+      responses:
+        '200':
+          description: Channel member's scheme-derived roles updated successfully.
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
   '/channels/{channel_id}/members/{user_id}/notify_props':
     put:
       tags:
