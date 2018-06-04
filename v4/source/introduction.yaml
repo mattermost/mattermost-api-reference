@@ -3,6 +3,8 @@ info:
   description: |
     ### API v4 is stable with the Mattermost server 4.0 release. API v3 was deprecated on January 16th, 2018, and scheduled for removal in Mattermost v5.0. [Details here](/#tag/APIv3-Deprecation). Looking for the API v3 reference? It has moved [here](https://api.mattermost.com/v3).
 
+    There is also a work-in-progress [Postman API reference](https://documenter.getpostman.com/view/4508214/RW8FERUn).
+
   version: 4.0.0
   title: Mattermost API Reference
   termsOfService: 'https://about.mattermost.com/default-terms/'
