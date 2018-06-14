@@ -12,9 +12,7 @@
         '200':
           description: Status of the system
           schema:
-            type: object
-            items:
-              type: string
+            $ref: "#/definitions/StatusOK"
         '500':
           $ref: '#/responses/InternalServerError'
           schema:
