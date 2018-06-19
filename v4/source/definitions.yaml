@@ -242,6 +242,27 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/Post'
 
+  PostListWithSearchMatches:
+    type: object
+    properties:
+      order:
+        type: array
+        items:
+            type: string
+        example: ["post_id1", "post_id12"]
+      posts:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Post'
+      matches:
+        description: A mapping of post IDs to a list of matched terms within the post. This field will only be populated on servers running version 5.1 or greater with Elasticsearch enabled.
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: string
+        example: {"post_id1": ["search match 1", "search match 2"]}
+
   TeamMap:
     type: object
     description: A mapping of teamIds to teams.
