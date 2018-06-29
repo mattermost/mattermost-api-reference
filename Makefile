@@ -1,31 +1,10 @@
-.PHONY: build build-v3 build-v4 clean
+.PHONY: build build-v4 clean
 
-V3_YAML = v3/html/static/mattermost-openapi-v3.yaml
 V4_YAML = v4/html/static/mattermost-openapi-v4.yaml
 
-V3_SRC = v3/source
 V4_SRC = v4/source
 
-build: build-v3 build-v4
-
-build-v3: .npminstall
-	@echo Building mattermost openapi yaml for v3
-
-	@cat $(V3_SRC)/introduction.yaml > $(V3_YAML)
-	@cat $(V3_SRC)/users.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/teams.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/channels.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/posts.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/files.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/admin.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/preferences.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/webhooks.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/reactions.yaml >> $(V3_YAML)
-	@cat $(V3_SRC)/definitions.yaml >> $(V3_YAML)
-
-	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V3_YAML)
-
-	@echo Complete
+build: build-v4
 
 build-v4: .npminstall
 	@echo Building mattermost openapi yaml for v4

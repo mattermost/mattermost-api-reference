@@ -10,7 +10,7 @@ All documentation is available under the terms of a [Creative Commons License](h
 
 We're accepting pull requests! See something that could be documented better or is missing documentation? Make a PR and we'll gladly accept it.
 
-All the documentation is written in YAML and found in the [v3/source](https://github.com/mattermost/mattermost-api-reference/tree/master/v3/source) and [v4/source](https://github.com/mattermost/mattermost-api-reference/tree/master/v4/source) directories. APIv3 documentation is in the [v3 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/v3), and APIv4 documentation is in the [v4 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/v4).
+All the documentation is written in YAML and found in the [v4/source](https://github.com/mattermost/mattermost-api-reference/tree/master/v4/source) directories. APIv4 documentation is in the [v4 directory](https://github.com/mattermost/mattermost-api-reference/tree/master/v4).
 
 * When adding a new route, please add it to the correct file. For example, a channel route will go in [channels.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/v4/source/channels.yaml).
 * To add a new tag, please do so in [introduction.yaml](https://github.com/mattermost/mattermost-api-reference/blob/master/v4/source/introduction.yaml)
