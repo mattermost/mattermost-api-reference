@@ -296,7 +296,7 @@
         - channels
       summary: Delete a channel
       description: |
-        Soft deletes a channel, by marking the channel as deleted in the database. Soft deleted channels will not be accessible in the user interface.
+        Soft deletes a channel, by marking the channel as deleted in the database. Soft deleted channels will not be accessible in the user interface. Direct and group message channels may not be deleted.
         ##### Permissions
         `delete_public_channel` permission if the channel is public,
         `delete_private_channel` permission if the channel is private,
