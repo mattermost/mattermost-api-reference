@@ -392,7 +392,7 @@
         - users
       summary: Deactivate a user account.
       description: |
-        Deactivates the user by archiving its user object.
+        Deactivates the user and revokes all its sessions by archiving its user object.
         ##### Permissions
         Must be logged in as the user being deactivated or have the `edit_other_users` permission.
       parameters:
