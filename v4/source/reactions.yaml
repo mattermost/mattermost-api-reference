@@ -53,7 +53,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  '/users/{user_id}/posts/{post_id}/reactions/{name}':
+  '/users/{user_id}/posts/{post_id}/reactions/{emoji_name}':
     delete:
       tags:
         - reactions
@@ -63,12 +63,21 @@
         ##### Permissions
         Must be user or have `manage_system` permission.
       parameters:
-        - in: body
-          name: reaction
-          description: The user's reaction with its post_id, user_id, and emoji_name fields set
+        - name: user_id
+          in: path
+          description: ID of the user
           required: true
-          schema:
-            $ref: '#/definitions/Reaction'
+          type: string
+        - name: post_id
+          in: path
+          description: ID of the post
+          required: true
+          type: string
+        - name: emoji_name
+          in: path
+          description: emoji name
+          required: true
+          type: string
       responses:
         '200':
           description: Reaction deletion successful
