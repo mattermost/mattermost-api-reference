@@ -213,40 +213,46 @@ tags:
       The `event` field indicates the event type, `data` contains any data relevant to the event and `broadcast` contains information about who the event was sent to. For example, the above example has `user_id` set to "ay5sq51sebfh58ktrce5ijtcwy" meaning that only the user with that ID received this event broadcast. The `omit_users` field can contain an array of user IDs that were specifically omitted from receiving the event.
 
       The list of Mattermost WebSocket events are:
-      - typing
-      - posted
-      - post_edited
-      - post_deleted
+      - added_to_team
+      - authentication_challenge
+      - channel_converted
       - channel_created
       - channel_deleted
+      - channel_member_updated
       - channel_updated
       - channel_viewed
-      - direct_added
-      - group_added
-      - added_to_team
-      - new_user
-      - leave_team
-      - update_team
+      - config_changed
       - delete_team
-      - user_added
-      - user_updated
-      - user_role_updated
+      - direct_added
+      - emoji_added
+      - ephemeral_message
+      - group_added
+      - hello
+      - leave_team
+      - license_changed
       - memberrole_updated
-      - user_removed
+      - new_user
+      - plugin_disabled
+      - plugin_enabled
+      - plugin_statuses_changed
+      - post_deleted
+      - post_edited
+      - posted
       - preference_changed
       - preferences_changed
       - preferences_deleted
-      - ephemeral_message
-      - status_change
-      - hello
-      - webrtc
-      - authentication_challenge
       - reaction_added
       - reaction_removed
       - response
-      - emoji_added
-      - license_changed
-      - config_changed
+      - role_updated
+      - status_change
+      - typing
+      - update_team
+      - user_added
+      - user_removed
+      - user_role_updated
+      - user_updated
+      - webrtc
 
       #### WebSocket API
 
