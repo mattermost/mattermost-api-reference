@@ -47,6 +47,8 @@ definitions:
         type: integer
       mfa_active:
         type: boolean
+      timezone:
+        $ref: '#/definitions/Timezone'
 
   Team:
     type: object
@@ -171,6 +173,14 @@ definitions:
         description: The time in milliseconds the channel member was last updated
         type: integer
         format: int64
+
+  ChannelTimezone:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      member_count:
+        type: integer
 
   ChannelData:
     type: object
@@ -2074,6 +2084,19 @@ definitions:
       first_name:
         type: string
         description: Set to "true" to enable mentions for first name. Defaults to "true" if a first name is set, "false" otherwise.
+
+  Timezone:
+    type: object
+    properties:
+      useAutomaticTimezone:
+        type: string
+        description: Set to "true" to use the browser/system timezone, "false"to set manually. Defaults to "true".
+      manualTimezone:
+        type: string
+        description: Value when setting manually the timezone, i.e. "Europe/Berlin".
+      automaticTimezone:
+        type: string
+        description: This value is set automatically when the "useAutomaticTimezone" is set to "true".
 
   ChannelNotifyProps:
     type: object
