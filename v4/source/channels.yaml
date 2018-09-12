@@ -999,7 +999,7 @@
       description: |
         Delete a channel member, effectively removing them from a channel.
 
-        Since server version 5.3, channel member can only be deleted either from public or private channel.
+        In Mattermost Server v5.3 and later, channel members can only be deleted from public or private channels.
         ##### Permissions
         `manage_public_channel_members` permission if the channel is public.
         `manage_private_channel_members` permission if the channel is private.
