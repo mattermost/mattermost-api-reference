@@ -998,6 +998,8 @@
       summary: Remove user from channel
       description: |
         Delete a channel member, effectively removing them from a channel.
+
+        In server version 5.3 and later, channel members can only be deleted from public or private channels.
         ##### Permissions
         `manage_public_channel_members` permission if the channel is public.
         `manage_private_channel_members` permission if the channel is private.
