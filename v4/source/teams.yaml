@@ -415,7 +415,12 @@
           name: body
           required: true
           schema:
-            $ref: '#/definitions/TeamMember'
+            type: object
+            properties:
+              team_id:
+                type: string
+              user_id:
+                type: string
       responses:
         '201':
           description: Team member creation successful
