@@ -1494,3 +1494,49 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+
+  /users/{user_id}/service_terms:
+    post:
+      tags:
+        - users
+      summary: Records user action when they accept or decline custom service terms
+      description: |
+        Records user action when they accept or decline custom service terms. Records the action in audot.
+        Update's user's last accepted service terms ID if they accepted it.
+
+        __Minimum server version__: 5.4
+        ##### Permissions
+        Must be logged in as the user being acted on.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Service terms details
+          required: true
+          schema:
+            type: object
+            required:
+            - serviceTermsId
+            - accepted
+            properties:
+              serviceTermsId:
+                description: Service terms ID on which the user is acting on
+                type: string
+              accepted:
+                description: true or false, indicates whether the user accepted or rejected the service terms.
+                type: string
+      responses:
+        '200':
+          description: Service terms action recorded successfully
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
