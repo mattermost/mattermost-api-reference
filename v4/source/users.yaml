@@ -1508,16 +1508,27 @@
         ##### Permissions
         Must be logged in as the user being acted on.
       parameters:
-        - name: serviceTermsId
-          in: body
-          description: Service terms ID on which the user is acting on
+        - name: user_id
+          in: path
+          description: User GUID
           required: true
           type: string
-        - name: accepted
-          in: body
-          description: `true` or `false`, indicates whether the user accepted or rejected the service terms.
+        - in: body
+          name: body
+          description: Service terms details
           required: true
-          type: string
+          schema:
+            type: object
+            required:
+            - serviceTermsId
+            - accepted
+            properties:
+              serviceTermsId:
+                description: Service terms ID on which the user is acting on
+                type: string
+              accepted:
+                description: true or false, indicates whether the user accepted or rejected the service terms.
+                type: string
       responses:
         '200':
           description: Service terms action recorded successfully
