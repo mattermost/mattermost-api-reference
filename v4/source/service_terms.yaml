@@ -1,0 +1,18 @@
+  /service_terms:
+    get:
+      tags:
+      - service terms
+      summary: Get latest service terms
+      description: |
+        Get latest service terms from the server
+        ##### Permissions
+        Must be authenticated.
+      responses:
+        '200':
+          description: Service terms fetched successfully
+          schema:
+            $ref: '#/definitions/ServiceTerms'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'

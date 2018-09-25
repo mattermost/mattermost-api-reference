@@ -679,7 +679,7 @@ definitions:
       FooterIcon:
         type: string
       Timestamp:
-        description: The timestamp of the slack attahment, either type of string or integer 
+        description: The timestamp of the slack attahment, either type of string or integer
         type: string
 
   SlackAttachmentField:
@@ -2201,6 +2201,23 @@ definitions:
       default_channel_user_role:
         type: string
         description: The id of the default channel user role for this scheme.
+
+  ServiceTerms:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The unique identifier of the service terms.
+      create_at:
+        type: integer
+        format: int64
+        description: The time at which the service terms was created.
+      user_id:
+        type: string
+        description: The unique identifier of the user who created these service terms.
+      Text:
+        type: string
+        description: The text of service terms. Supports markdown.
 
 externalDocs:
   description: Find out more about Mattermost
