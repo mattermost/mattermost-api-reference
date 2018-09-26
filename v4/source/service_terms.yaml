@@ -16,3 +16,20 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+    post:
+      tags:
+      - service terms
+      summary: Creates a new service term
+      description: |
+        Creates a new service term
+        ##### Permissions
+        Must be authenticated.
+      responses:
+        '200':
+          description: Service terms fetched successfully
+          schema:
+            $ref: '#/definitions/ServiceTerms'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
