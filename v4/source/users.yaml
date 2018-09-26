@@ -988,7 +988,7 @@
         - users
       summary: Attach mobile device
       description: |
-        Attach a mobile device id to the currently logged in session. This will enable push notiofications for a user, if configured by the server.
+        Attach a mobile device id to the currently logged in session. This will enable push notifications for a user, if configured by the server.
         ##### Permissions
         Must be authenticated.
       parameters:
