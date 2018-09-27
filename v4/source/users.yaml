@@ -1495,7 +1495,8 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  /users/{user_id}/service_terms:
+
+  /users/{user_id}/terms_of_service:
     post:
       tags:
         - users
