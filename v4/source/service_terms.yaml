@@ -1,7 +1,7 @@
-  /service_terms:
+  /terms_of_service:
     get:
       tags:
-      - service terms
+      - terms of service
       summary: Get latest service terms
       description: |
         Get latest service terms from the server
