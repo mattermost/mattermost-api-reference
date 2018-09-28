@@ -1500,10 +1500,10 @@
     post:
       tags:
         - users
-      summary: Records user action when they accept or decline custom service terms
+      summary: Records user action when they accept or decline custom terms of service
       description: |
-        Records user action when they accept or decline custom service terms. Records the action in audot.
-        Update's user's last accepted service terms ID if they accepted it.
+        Records user action when they accept or decline custom terms of service. Records the action in audot.
+        Update's user's last accepted terms of service ID if they accepted it.
 
         __Minimum server version__: 5.4
         ##### Permissions
@@ -1516,7 +1516,7 @@
           type: string
         - in: body
           name: body
-          description: Service terms details
+          description: terms of service details
           required: true
           schema:
             type: object
@@ -1525,14 +1525,14 @@
             - accepted
             properties:
               serviceTermsId:
-                description: Service terms ID on which the user is acting on
+                description: terms of service ID on which the user is acting on
                 type: string
               accepted:
-                description: true or false, indicates whether the user accepted or rejected the service terms.
+                description: true or false, indicates whether the user accepted or rejected the terms of service.
                 type: string
       responses:
         '200':
-          description: Service terms action recorded successfully
+          description: Terms of service action recorded successfully
           schema:
             $ref: '#/definitions/StatusOK'
         '400':

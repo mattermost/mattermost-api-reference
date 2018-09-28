@@ -2207,17 +2207,17 @@ definitions:
     properties:
       id:
         type: string
-        description: The unique identifier of the service terms.
+        description: The unique identifier of the terms of service.
       create_at:
         type: integer
         format: int64
-        description: The time at which the service terms was created.
+        description: The time at which the terms of service was created.
       user_id:
         type: string
-        description: The unique identifier of the user who created these service terms.
+        description: The unique identifier of the user who created these terms of service.
       Text:
         type: string
-        description: The text of service terms. Supports markdown.
+        description: The text of terms of service. Supports markdown.
 
 externalDocs:
   description: Find out more about Mattermost

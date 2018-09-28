@@ -2,14 +2,14 @@
     get:
       tags:
       - terms of service
-      summary: Get latest service terms
+      summary: Get latest terms of service
       description: |
-        Get latest service terms from the server
+        Get latest terms of service from the server
         ##### Permissions
         Must be authenticated.
       responses:
         '200':
-          description: Service terms fetched successfully
+          description: Terms of service fetched successfully
           schema:
             $ref: '#/definitions/TermsOfService'
         '400':
@@ -19,14 +19,14 @@
     post:
       tags:
       - terms of service
-      summary: Creates a new service term
+      summary: Creates a new terms of service
       description: |
-        Creates a new service term
+        Creates new terms of service
         ##### Permissions
         Must be authenticated.
       responses:
         '200':
-          description: Service terms fetched successfully
+          description: terms of service fetched successfully
           schema:
             $ref: '#/definitions/TermsOfService'
         '400':
