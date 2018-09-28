@@ -230,7 +230,7 @@
         - channels
       summary: Update a channel
       description: |
-        Update a channel. The fields that can be updated are listed as paramters. Omitted fields will be treated as blanks.
+        Update a channel. The fields that can be updated are listed as parameters. Omitted fields will be treated as blanks.
         ##### Permissions
         If updating a public channel, `manage_public_channel_members` permission is required. If updating a private channel, `manage_private_channel_members` permission is required.
       parameters:
