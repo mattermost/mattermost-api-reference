@@ -1502,7 +1502,7 @@
         - users
       summary: Records user action when they accept or decline custom terms of service
       description: |
-        Records user action when they accept or decline custom terms of service. Records the action in audot.
+        Records user action when they accept or decline custom terms of service. Records the action in audit.
         Update's user's last accepted terms of service ID if they accepted it.
 
         __Minimum server version__: 5.4

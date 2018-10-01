@@ -2217,7 +2217,7 @@ definitions:
         description: The unique identifier of the user who created these terms of service.
       Text:
         type: string
-        description: The text of terms of service. Supports markdown.
+        description: The text of terms of service. Supports Markdown.
 
 externalDocs:
   description: Find out more about Mattermost
