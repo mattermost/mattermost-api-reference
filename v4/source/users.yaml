@@ -256,6 +256,10 @@
               without_team:
                 type: boolean
                 description: Set this to `true` if you would like to search for users that are not on a team. This option takes precendence over `team_id`, `in_channel_id`, and `not_in_channel_id`.
+              limit:
+                description: The maximum number of users to return in the results
+                type: integer
+                default: 100
       responses:
         '200':
           description: User list retrieval successful
@@ -293,6 +297,11 @@
           description: Username, nickname first name or last name
           required: true
           type: string
+        - name: limit
+          in: query
+          description: The maximum number of users to return in each subresult
+          type: integer
+          default: 100
       responses:
         '200':
           description: User autocomplete successful
