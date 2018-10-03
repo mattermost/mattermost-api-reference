@@ -783,6 +783,12 @@
           description: Channel Name
           required: true
           type: string
+        - name: include_deleted
+          in: query
+          description: Defines if deleted channels should be returned or not
+          type: string
+          enum: [true, false]
+          default: "false"
       responses:
         '200':
           description: Channel retrieval successful
