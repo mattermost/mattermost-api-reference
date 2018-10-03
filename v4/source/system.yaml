@@ -371,7 +371,7 @@
         Must have `manage_system` permission.
       responses:
         '200':
-          description: License removeal successful
+          description: License removal successful
         '401':
           $ref: '#/responses/Unauthorized'
         '403':
