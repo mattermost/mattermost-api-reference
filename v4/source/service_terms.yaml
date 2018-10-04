@@ -5,6 +5,8 @@
       summary: Get latest terms of service
       description: |
         Get latest terms of service from the server
+
+        __Minimum server version__: 5.4
         ##### Permissions
         Must be authenticated.
       responses:
@@ -22,8 +24,10 @@
       summary: Creates a new terms of service
       description: |
         Creates new terms of service
+
+        __Minimum server version__: 5.4
         ##### Permissions
-        Must be authenticated.
+        Must have `manage_system` permission.
       responses:
         '200':
           description: terms of service fetched successfully

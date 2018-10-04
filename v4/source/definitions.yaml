@@ -2215,7 +2215,7 @@ definitions:
       user_id:
         type: string
         description: The unique identifier of the user who created these terms of service.
-      Text:
+      text:
         type: string
         description: The text of terms of service. Supports Markdown.
 
