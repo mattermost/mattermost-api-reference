@@ -1494,3 +1494,50 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+
+
+  /users/{user_id}/terms_of_service:
+    post:
+      tags:
+        - users
+      summary: Records user action when they accept or decline custom terms of service
+      description: |
+        Records user action when they accept or decline custom terms of service. Records the action in audit table.
+        Updates user's last accepted terms of service ID if they accepted it.
+
+        __Minimum server version__: 5.4
+        ##### Permissions
+        Must be logged in as the user being acted on.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: terms of service details
+          required: true
+          schema:
+            type: object
+            required:
+            - serviceTermsId
+            - accepted
+            properties:
+              serviceTermsId:
+                description: terms of service ID on which the user is acting on
+                type: string
+              accepted:
+                description: true or false, indicates whether the user accepted or rejected the terms of service.
+                type: string
+      responses:
+        '200':
+          description: Terms of service action recorded successfully
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
