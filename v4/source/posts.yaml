@@ -428,6 +428,21 @@
               is_or_search:
                 type: boolean
                 description: Set to true if an Or search should be performed vs an And search.
+              time_zone_offset:
+                type: integer
+                default: 0
+                description: Offset from UTC of user timezone for date searches.
+              include_deleted_channels:
+                type: boolean
+                description: Set to true if deleted channels should be included in the search. (archived channels)
+              page:
+                type: integer
+                default: 0
+                description: The page to select. (Only works with Elasticsearch)
+              per_page:
+                type: integer
+                default: 60
+                description: The number of posts per page. (Only works with Elasticsearch)
       responses:
         '200':
           description: Post list retrieval successful

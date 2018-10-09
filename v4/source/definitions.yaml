@@ -679,7 +679,7 @@ definitions:
       FooterIcon:
         type: string
       Timestamp:
-        description: The timestamp of the slack attahment, either type of string or integer
+        description: The timestamp of the slack attachment, either type of string or integer
         type: string
 
   SlackAttachmentField:
