@@ -48,7 +48,7 @@
           required: false
           type: string
       responses:
-        '200':
+        '201':
           description: Corresponding lists of the provided client_ids and the metadata that has been stored in the database for each one
           schema:
             type: object
