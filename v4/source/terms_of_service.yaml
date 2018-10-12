@@ -28,6 +28,22 @@
         __Minimum server version__: 5.4
         ##### Permissions
         Must have `manage_system` permission.
+      parameters:
+      - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+            - text
+            - mandatory
+            properties:
+              text:
+                description: Markdown-formatted text of terms of service.
+                type: string
+              mandatory:
+                description: Whether or not users are required to accept these terms of service.
+                type: boolean
       responses:
         '200':
           description: terms of service fetched successfully

@@ -2218,6 +2218,9 @@ definitions:
       text:
         type: string
         description: The text of terms of service. Supports Markdown.
+      mandatory:
+        type: boolean
+        description: Whether or not users are required to accept these terms of service.
 
   UserTermsOfService:
     type: object
