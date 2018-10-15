@@ -278,7 +278,7 @@ definitions:
         description: The ID of the team this member belongs to.
         type: string
       user_id:
-        description: The ID of the user this membership relates to.
+        description: The ID of the user this member relates to.
         type: string
       roles:
         description: The complete list of roles assigned to this team member, as a space-separated list of role names, including any roles granted implicitly through permissions schemes.
