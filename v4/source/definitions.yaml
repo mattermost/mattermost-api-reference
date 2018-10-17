@@ -174,14 +174,6 @@ definitions:
         type: integer
         format: int64
 
-  ChannelTimezone:
-    type: object
-    properties:
-      channel_id:
-        type: string
-      member_count:
-        type: integer
-
   ChannelData:
     type: object
     properties:

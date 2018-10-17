@@ -196,6 +196,9 @@
       summary: Get timezones in a channel
       description: |
         Get a list of timezones for the users who are in this channel.
+
+        __Minimum server version__: 5.6
+
         ##### Permissions
         Must have the `read_channel` permission.
       parameters:
@@ -208,7 +211,9 @@
         '200':
           description: Timezone retrieval successful
           schema:
-            $ref: '#/definitions/Timezone'
+            type: array
+            items:
+              type: string
         '400':
           $ref: '#/responses/BadRequest'
         '401':
