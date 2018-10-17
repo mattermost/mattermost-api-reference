@@ -1344,25 +1344,6 @@ definitions:
         properties:
           MaxUsersForStatistics:
             type: integer
-      WebrtcSettings:
-        type: object
-        properties:
-          Enable:
-            type: boolean
-          GatewayWebsocketUrl:
-            type: string
-          GatewayAdminUrl:
-            type: string
-          GatewayAdminSecret:
-            type: string
-          StunURI:
-            type: string
-          TurnURI:
-            type: string
-          TurnUsername:
-            type: string
-          TurnSharedKey:
-            type: string
 
   EnvironmentConfig:
     type: object
@@ -1835,25 +1816,6 @@ definitions:
         type: object
         properties:
           MaxUsersForStatistics:
-            type: boolean
-      WebrtcSettings:
-        type: object
-        properties:
-          Enable:
-            type: boolean
-          GatewayWebsocketUrl:
-            type: boolean
-          GatewayAdminUrl:
-            type: boolean
-          GatewayAdminSecret:
-            type: boolean
-          StunURI:
-            type: boolean
-          TurnURI:
-            type: boolean
-          TurnUsername:
-            type: boolean
-          TurnSharedKey:
             type: boolean
 
   SamlCertificateStatus:
