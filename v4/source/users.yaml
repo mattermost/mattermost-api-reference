@@ -256,6 +256,13 @@
               without_team:
                 type: boolean
                 description: Set this to `true` if you would like to search for users that are not on a team. This option takes precendence over `team_id`, `in_channel_id`, and `not_in_channel_id`.
+              limit:
+                description: |
+                    The maximum number of users to return in the results
+
+                    __Available as of server version 5.6. Defaults to `100` if not provided or on an earlier server version.__
+                type: integer
+                default: 100
       responses:
         '200':
           description: User list retrieval successful
@@ -293,6 +300,14 @@
           description: Username, nickname first name or last name
           required: true
           type: string
+        - name: limit
+          in: query
+          description: |
+              The maximum number of users to return in each subresult
+
+              __Available as of server version 5.6. Defaults to `100` if not provided or on an earlier server version.__
+          type: integer
+          default: 100
       responses:
         '200':
           description: User autocomplete successful
@@ -515,7 +530,7 @@
 
         __Since server version 4.6, users using a SSO provider to login can be activated or deactivated with this endpoint. However, if their activation status in Mattermost does not reflect their status in the SSO provider, the next synchronization or login by that user will reset the activation status to that of their account in the SSO provider. Server versions 4.5 and before do not allow activation or deactivation of SSO users from this endpoint.__
         ##### Permissions
-        User can deactivate themself.
+        User can deactivate themselves.
         User with `manage_system` permission can activate or deactivate a user.
       parameters:
         - name: user_id
@@ -1214,7 +1229,7 @@
         - users
       summary: Get user access tokens
       description: |
-        Get a list of user access tokens for a user. Does not include the actual authentication tokens. Use query paremeters for paging.
+        Get a list of user access tokens for a user. Does not include the actual authentication tokens. Use query parameters for paging.
 
         __Minimum server version__: 4.1
 
