@@ -67,7 +67,7 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  /plugins/{plugin_id}:
+  /plugin/{plugin_id}:
     delete:
       tags:
         - plugins
@@ -98,13 +98,13 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  /plugins/{plugin_id}/activate:
+  /plugin/{plugin_id}/enable:
     post:
       tags:
         - plugins
-      summary: Activate plugin
+      summary: Enable plugin
       description: |
-        Activate a previously uploaded plugin. Plugins must be enabled in the server's config settings.
+        Enable a previously uploaded plugin. Plugins must be enabled in the server's config settings.
 
         ##### Permissions
         Must have `manage_system` permission.
@@ -117,7 +117,7 @@
           type: string
       responses:
         '200':
-            description: Plugin activated successfully
+            description: Plugin enabled successfully
             schema:
               $ref: '#/definitions/StatusOK'
         '400':
@@ -129,13 +129,13 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  /plugins/{plugin_id}/deactivate:
+  /plugin/{plugin_id}/disable:
     post:
       tags:
         - plugins
-      summary: Deactivate plugin
+      summary: Disable plugin
       description: |
-        Deactivate a previously activated plugin. Plugins must be enabled in the server's config settings.
+        Disable a previously enabled plugin. Plugins must be enabled in the server's config settings.
 
         ##### Permissions
         Must have `manage_system` permission.
@@ -148,7 +148,7 @@
           type: string
       responses:
         '200':
-            description: Plugin deactivated successfully
+            description: Plugin disabled successfully
             schema:
               $ref: '#/definitions/StatusOK'
         '400':
@@ -187,4 +187,3 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
-
