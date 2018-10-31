@@ -567,56 +567,6 @@
             // PostLog
             _, resp := Client.PostLog(message)
 
-  '/webrtc/token':
-    get:
-      tags:
-        - system
-      summary: Get WebRTC token
-      description: |
-        Get a valid WebRTC token, STUN and TURN server URLs along with TURN credentials to use with the Mattermost WebRTC service. See https://docs.mattermost.com/administration/config-settings.html#webrtc-beta for WebRTC configutation settings. The token returned is for the current user's session.
-        ##### Permissions
-        Must be authenticated.
-      responses:
-        '200':
-          description: WebRTC Token retrieval successful
-          schema:
-            type: object
-            properties:
-              token:
-                description: The WebRTC token
-                type: string
-              gateway_url:
-                description: The URL to the gateway server
-                type: string
-              stun_uri:
-                description: The URI to the STUN server
-                type: string
-              turn_uri:
-                description: The URI to the TURN server
-                type: string
-              turn_password:
-                description: The password to use with the TURN server
-                type: string
-              turn_username:
-                description: The username to use with the TURN server
-                type: string
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '501':
-          $ref: '#/responses/NotImplemented'
-      x-code-samples:
-        - lang: 'Go'
-          source: |
-            import "github.com/mattermost/mattermost-serverf/model"
-
-            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
-            Client.Login("email@domain.com", "Password1")
-
-            // GetWebrtcToken
-            token, resp := Client.GetWebrtcToken()
-
   '/analytics/old':
     get:
       tags:
