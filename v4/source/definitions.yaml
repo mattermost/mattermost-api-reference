@@ -2082,7 +2082,7 @@ definitions:
     properties:
       useAutomaticTimezone:
         type: string
-        description: Set to "true" to use the browser/system timezone, "false"to set manually. Defaults to "true".
+        description: Set to "true" to use the browser/system timezone, "false" to set manually. Defaults to "true".
       manualTimezone:
         type: string
         description: Value when setting manually the timezone, i.e. "Europe/Berlin".
