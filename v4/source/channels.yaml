@@ -189,6 +189,47 @@
             // GetPublicChannelsByIdsForTeam
             channels, resp := Client.GetPublicChannelsByIdsForTeam(<TEAMID>, channelIds)
 
+  /channels/{channel_id}/timezones:
+    get:
+      tags:
+        - channels
+      summary: Get timezones in a channel
+      description: |
+        Get a list of timezones for the users who are in this channel.
+
+        __Minimum server version__: 5.6
+
+        ##### Permissions
+        Must have the `read_channel` permission.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Timezone retrieval successful
+          schema:
+            type: array
+            items:
+              type: string
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetChannelStats
+            stats, resp := Client.GetChannelTimezones(<CHANNELID>)
+
   '/channels/{channel_id}':
     get:
       tags:
@@ -1440,7 +1481,7 @@
       summary: Set a channel's scheme
       description: |
         Set a channel's scheme, more specifically sets the scheme_id value of a channel record.
-        
+
         ##### Permissions
         Must have `manage_system` permission.
 
@@ -1482,7 +1523,7 @@
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
-            
+
             channelID := "4xp9fdt77pncbef59f4k1qe83o"
             schemeID := "qjda3stwafbgpqjaxej3k76sga"
             ok, resp := UpdateChannelScheme(channelID, schemeID)
