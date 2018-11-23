@@ -2221,7 +2221,7 @@ definitions:
         type: string
         description: The unique identifier of the terms of service the action was performed on.
       create_at:
-        description: The time in milliseconds the user performed action on this terms of service.
+        description: The time in milliseconds that this action was performed.
         type: integer
         format: int64
 
