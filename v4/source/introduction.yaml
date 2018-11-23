@@ -252,7 +252,6 @@ tags:
       - user_removed
       - user_role_updated
       - user_updated
-      - webrtc
 
       #### WebSocket API
 

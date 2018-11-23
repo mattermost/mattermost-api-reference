@@ -47,6 +47,8 @@ definitions:
         type: integer
       mfa_active:
         type: boolean
+      timezone:
+        $ref: '#/definitions/Timezone'
 
   Team:
     type: object
@@ -275,10 +277,25 @@ definitions:
     type: object
     properties:
       team_id:
+        description: The ID of the team this member belongs to.
         type: string
       user_id:
+        description: The ID of the user this member relates to.
         type: string
       roles:
+        description: The complete list of roles assigned to this team member, as a space-separated list of role names, including any roles granted implicitly through permissions schemes.
+        type: string
+      delete_at:
+        description: The time in milliseconds that this team member was deleted.
+        type: integer
+      scheme_user:
+        description: Whether this team member holds the default user role defined by the team's permissions scheme.
+        type: boolean
+      scheme_admin:
+        description: Whether this team member holds the default admin role defined by the team's permissions scheme.
+        type: boolean
+      explicit_roles:
+        description: The list of roles explicitly assigned to this team member, as a space separated list of role names. This list does *not* include any roles granted implicitly through permissions schemes.
         type: string
 
   TeamUnread:
@@ -1329,25 +1346,6 @@ definitions:
         properties:
           MaxUsersForStatistics:
             type: integer
-      WebrtcSettings:
-        type: object
-        properties:
-          Enable:
-            type: boolean
-          GatewayWebsocketUrl:
-            type: string
-          GatewayAdminUrl:
-            type: string
-          GatewayAdminSecret:
-            type: string
-          StunURI:
-            type: string
-          TurnURI:
-            type: string
-          TurnUsername:
-            type: string
-          TurnSharedKey:
-            type: string
 
   EnvironmentConfig:
     type: object
@@ -1821,25 +1819,6 @@ definitions:
         properties:
           MaxUsersForStatistics:
             type: boolean
-      WebrtcSettings:
-        type: object
-        properties:
-          Enable:
-            type: boolean
-          GatewayWebsocketUrl:
-            type: boolean
-          GatewayAdminUrl:
-            type: boolean
-          GatewayAdminSecret:
-            type: boolean
-          StunURI:
-            type: boolean
-          TurnURI:
-            type: boolean
-          TurnUsername:
-            type: boolean
-          TurnSharedKey:
-            type: boolean
 
   SamlCertificateStatus:
     type: object
@@ -2074,6 +2053,19 @@ definitions:
       first_name:
         type: string
         description: Set to "true" to enable mentions for first name. Defaults to "true" if a first name is set, "false" otherwise.
+
+  Timezone:
+    type: object
+    properties:
+      useAutomaticTimezone:
+        type: string
+        description: Set to "true" to use the browser/system timezone, "false" to set manually. Defaults to "true".
+      manualTimezone:
+        type: string
+        description: Value when setting manually the timezone, i.e. "Europe/Berlin".
+      automaticTimezone:
+        type: string
+        description: This value is set automatically when the "useAutomaticTimezone" is set to "true".
 
   ChannelNotifyProps:
     type: object

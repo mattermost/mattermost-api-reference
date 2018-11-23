@@ -78,3 +78,35 @@
             }
 
             ok, resp := Client.UploadBrandImage(data.Bytes())
+
+    delete:
+      tags:
+        - brand
+      summary: Delete current brand image
+      description: |
+        Deletes the previously uploaded brand image. Returns 404 if no brand image has been uploaded.
+        ##### Permissions
+        Must have `manage_system` permission.
+        __Minimum server version: 5.6__
+      responses:
+        '200':
+          description: Brand image succesfully deleted
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          description: No brand image uploaded
+          $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // Delete brand image
+            resp := Client.DeleteBrandImage()
