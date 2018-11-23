@@ -1515,6 +1515,7 @@
     post:
       tags:
         - users
+        - terms of service
       summary: Records user action when they accept or decline custom terms of service
       description: |
         Records user action when they accept or decline custom terms of service. Records the action in audit table.
@@ -1556,3 +1557,33 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+    get:
+      tags:
+      - users
+      - terms of service
+      summary: Fetches user's latest terms of service action if the latest action was for acceptance.
+      description: |
+        Fetches user's latest terms of service action if the latest action was for acceptance.
+
+        __Minimum server version__: 5.6
+        ##### Permissions
+        Must be logged in as the user being acted on.
+      parameters:
+      - name: user_id
+        in: path
+        description: User GUID
+        required: true
+        type: string
+      responses:
+        '200':
+          description: User's accepted terms of service action
+          schema:
+            $ref: '#/definitions/UserTermsOfService'
+        '404':
+          description: User hasn't performed an action or the latest action was a rejection.
+          schema:
+            $ref: '#/definitions/AppError'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
