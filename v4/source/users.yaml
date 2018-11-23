@@ -1561,9 +1561,9 @@
       tags:
       - users
       - terms of service
-      summary: Fetches user's latest terms of service action if the latest action for for acceptance.
+      summary: Fetches user's latest terms of service action if the latest action was for acceptance.
       description: |
-        Fetches user's latest terms of service action if the latest action for for acceptance.
+        Fetches user's latest terms of service action if the latest action was for acceptance.
 
         __Minimum server version__: 5.6
         ##### Permissions
