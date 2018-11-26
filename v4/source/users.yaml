@@ -42,7 +42,7 @@
                 description: Service-specific authentication data, such as email address.
                 type: string
               auth_service:
-                description: The authentication service such as "email", "gitlab", or "ldap".
+                description: The authentication service, one of "email", "gitlab", "ldap", "saml", "office365", "google", and "".
                 type: string
               password:
                 description: The password used for email authentication.
