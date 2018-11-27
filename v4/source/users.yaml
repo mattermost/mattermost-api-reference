@@ -4,7 +4,7 @@
         - users
       summary: Create a user
       description: |
-        Create a new user on the system.
+        Create a new user on the system. Password is required for email login. For other authentication types such as LDAP or SAML, auth_data and auth_service fields are required.
         ##### Permissions
         No permission required but user creation can be controlled by server configuration.
       parameters:
@@ -27,7 +27,6 @@
             required:
               - email
               - username
-              - password
             properties:
               email:
                 type: string
@@ -39,7 +38,14 @@
                 type: string
               nickname:
                 type: string
+              auth_data:
+                description: Service-specific authentication data, such as email address.
+                type: string
+              auth_service:
+                description: The authentication service, one of "email", "gitlab", "ldap", "saml", "office365", "google", and "".
+                type: string
               password:
+                description: The password used for email authentication.
                 type: string
               locale:
                 type: string
@@ -1535,6 +1541,7 @@
             type: array
             items:
               $ref: '#/definitions/UserAccessTokenSanitized'
+
   /users/{user_id}/auth:
     put:
       tags:
