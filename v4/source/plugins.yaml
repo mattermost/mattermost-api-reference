@@ -17,6 +17,11 @@
           description: The plugin image to be uploaded
           required: true
           type: file
+        - name: force
+          in: formData
+          description: "Set to 'true' to overwrite a previously installed plugin with the same ID, if any"
+          required: false
+          type: string
       responses:
         '201':
           description: Plugin upload successful
