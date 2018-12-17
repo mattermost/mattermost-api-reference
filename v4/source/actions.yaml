@@ -22,7 +22,7 @@
                 type: string
                 description: Trigger ID provided by other action
               url:
-                type: object
+                type: string
                 description: The URL to send the submitted dialog payload to
               dialog:
                 type: object
@@ -81,7 +81,7 @@
               - team_id
             properties:
               url:
-                type: object
+                type: string
                 description: The URL to send the submitted dialog payload to
               channel_id:
                 type: string
