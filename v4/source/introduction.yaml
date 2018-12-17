@@ -252,6 +252,7 @@ tags:
       - user_removed
       - user_role_updated
       - user_updated
+      - dialog_opened
 
       #### WebSocket API
 
@@ -376,6 +377,8 @@ tags:
     description: Endpoints for creating, getting and updating roles.
   - name: schemes
     description: Endpoints for creating, getting and updating and deleting schemes.
+  - name: integration_actions
+    description: Endpoints for interactive actions for use by integrations.
 x-tagGroups:
   - name: Introduction
     tags:
