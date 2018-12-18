@@ -971,7 +971,7 @@
       description: |
         Get a user object by providing a user email. Sensitive information will be sanitized out.
         ##### Permissions
-        Requires an active session but no other permissions.
+        Requires an active session and for the current session to be able to view another user's email based on the server's privacy settings.
       parameters:
         - name: email
           in: path
@@ -987,6 +987,8 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
 
