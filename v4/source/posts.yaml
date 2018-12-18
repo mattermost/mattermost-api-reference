@@ -169,6 +169,10 @@
           schema:
             type: object
             properties:
+              id:
+                description: ID of the post to update
+                required: true
+                type: string
               is_pinned:
                 description: Set to `true` to pin the post to the channel it is in
                 type: boolean
