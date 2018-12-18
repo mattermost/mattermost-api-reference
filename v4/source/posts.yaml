@@ -168,6 +168,8 @@
           required: true
           schema:
             type: object
+            required:
+              - id
             properties:
               id:
                 description: ID of the post to update
