@@ -237,6 +237,14 @@ definitions:
           type: string
       pending_post_id:
         type: string
+      metadata:
+        description: |
+          Additional information used to display the post. This field is only used to send information from the server
+          to the client, and the server will ignore it if it receives it from a client.
+
+          This field will only be returned by servers running Mattermost 5.6 or higher with the experimental
+          EnablePostMetadata setting enabled.
+        $ref: '#/definitions/PostMetadata'
 
   PostList:
     type: object
@@ -271,6 +279,63 @@ definitions:
           items:
             type: string
         example: {"post_id1": ["search match 1", "search match 2"]}
+
+  PostMetadata:
+    type: object
+    description: Additional information used to display a post.
+    properties:
+      embeds:
+        type: array
+        description: |
+          Information about content embedded in the post including OpenGraph previews, image link previews, and
+          message attachments. This field will be null if the post does not contain embedded content.
+        items:
+          type: object
+          properties:
+            type:
+              type: string
+              description: The type of content that is embedded in this point.
+              enum: ["image", "message_attachment", "opengraph"]
+            url:
+              type: string
+              description: The URL of the embedded content, if one exists.
+            data:
+              type: object
+              description: |
+                Any additional information about the embedded content. Only used at this time to store OpenGraph metadata.
+                This field will be null for non-OpenGraph embeds.
+      emojis:
+        type: array
+        description: |
+          The custom emojis that appear in this point or have been used in reactions to this post. This field will be
+          null if the post does not contain custom emojis.
+        items:
+          $ref: '#/definitions/Emoji'
+      files:
+        type: array
+        description: |
+          The FileInfo objects for any files attached to the post. This field will be null if the post does not have
+          any file attachments.
+        items:
+          $ref: '#/definitions/FileInfo'
+      images:
+        type: object
+        description: |
+          An object mapping the URL of an external image to an object containing the dimensions of that image. This
+          field will be null if the post or its embedded content does not reference any external images.
+        items:
+          type: object
+          properties:
+            height:
+              type: integer
+            width:
+              type: integer
+      reactions:
+        type: array
+        description: |
+          Any reactions made to this point. This field will be null if no reactions have been made to this post.
+        items:
+          $ref: '#/definitions/Reaction'
 
   TeamMap:
     type: object
