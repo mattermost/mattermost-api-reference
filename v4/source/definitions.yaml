@@ -2296,6 +2296,12 @@ definitions:
         type: integer
         format: int64
 
+  PostIdToReactionsMap:
+    type: object
+    additionalProperties:
+      type: array
+      items:
+        $ref: '#/definitions/Reaction'
 
 externalDocs:
   description: Find out more about Mattermost

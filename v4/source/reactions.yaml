@@ -89,3 +89,33 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/posts/ids/reactions':
+    post:
+      tags:
+        - reactions
+      summary: Bulk get the reaction for posts
+      description: |
+        Get a list of reactions made by all users to a given post.
+        ##### Permissions
+        Must have `read_channel` permission for the channel the post is in.
+      parameters:
+        - in: body
+          name: postIds
+          description: Array of post IDs
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Reactions retrieval successful
+          schema:
+            $ref: "#/definitions/PostIdToReactionsMap"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
