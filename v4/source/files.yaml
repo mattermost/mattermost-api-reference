@@ -44,7 +44,7 @@
           type: string
         - name: filename
           in: query
-          description: The ID of the channel that this file will be uploaded to
+          description: The name of file to be uploaded
           required: false
           type: string
       responses:
