@@ -29,7 +29,7 @@
                 description: The post ID to comment on
               file_ids:
                 type: array
-                description: A list of file IDs to associate with the post
+                description: A list of file IDs to associate with the post. Note that uploads are limited to 5 files maximum. Please use additional posts for more files.
                 items:
                   type: string
               props:
