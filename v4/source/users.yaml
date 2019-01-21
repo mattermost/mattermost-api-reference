@@ -1406,15 +1406,15 @@
         Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
       parameters:
         - in: body
-          name: token
+          name: token_id
           required: true
           schema:
             type: object
             required:
-              - token
+              - token_id
             properties:
-              token:
-                description: The token to revoke
+              token_id:
+                description: The user access token GUID to revoke
                 type: string
       responses:
         '200':
@@ -1474,15 +1474,15 @@
         Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
       parameters:
         - in: body
-          name: token
+          name: token_id
           required: true
           schema:
             type: object
             required:
-              - token
+              - token_id
             properties:
-              token:
-                description: The token to disable
+              token_id:
+                description: The personal access token GUID to disable
                 type: string
       responses:
         '200':
@@ -1510,15 +1510,15 @@
         Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
       parameters:
         - in: body
-          name: token
+          name: token_id
           required: true
           schema:
             type: object
             required:
-              - token
+              - token_id
             properties:
-              token:
-                description: The token to enable
+              token_id:
+                description: The personal access token GUID to enable
                 type: string
       responses:
         '200':
