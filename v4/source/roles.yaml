@@ -157,4 +157,4 @@
 
               roleNames := []string{<NAME OF ROLE1>, <NAME OF ROLE2>, ...}
 
-              roles, resp := Client.GetRolesByName(roleNames)
+              roles, resp := Client.GetRolesByNames(roleNames)
