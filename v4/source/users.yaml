@@ -379,7 +379,7 @@
         - users
       summary: Update a user
       description: |
-        Update a user by providing the user object. The fields that can be updated are defined in the request body, all other provided fields will be ignored. Please note props are not reuired, but will be set to default values if not included.
+        Update a user by providing the user object. The fields that can be updated are defined in the request body, all other provided fields will be ignored. Please note props are not required, but will be set to default values if not included.
         ##### Permissions
         Must be logged in as the user being updated or have the `edit_other_users` permission.
       parameters:
