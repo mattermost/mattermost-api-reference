@@ -34,7 +34,7 @@
                   type: string
               props:
                 description: A general JSON property bag to attach to the post
-                type: string
+                type: object
       responses:
         '201':
           description: Post creation successful
