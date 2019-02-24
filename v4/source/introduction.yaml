@@ -379,6 +379,8 @@ tags:
     description: Endpoints for creating, getting and updating and deleting schemes.
   - name: integration_actions
     description: Endpoints for interactive actions for use by integrations.
+  - name: terms of service
+    description: Endpoints for getting and updating custom terms of service.
 x-tagGroups:
   - name: Introduction
     tags:
@@ -419,6 +421,8 @@ x-tagGroups:
       - plugins
       - roles
       - schemes
+      - integration_actions
+      - terms of service
 schemes:
   - http
   - https
