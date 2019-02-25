@@ -45,7 +45,11 @@
             type: object
             required:
               - status
+              - user_id
             properties:
+              user_id:
+                type: string
+                description: User ID
               status:
                 type: string
                 description: User status, can be `online`, `away`, `offline` and `dnd`
