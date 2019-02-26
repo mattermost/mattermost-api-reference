@@ -1,7 +1,7 @@
   /opengraph:
     post:
       tags:
-        - opengraph
+        - OpenGraph
       summary: Get open graph metadata for url
       description: |
         Get Open Graph Metadata for a specif URL. Use the Open Graph protocol to get some generic metadata about a URL. Used for creating link previews.
