@@ -200,7 +200,10 @@
         '200':
           description: A publicly accessible link to the given file
           schema:
-            type: string
+            type: object
+            properties:
+              link:
+                type: string
         '400':
           $ref: '#/responses/BadRequest'
         '401':
