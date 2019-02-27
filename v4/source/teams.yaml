@@ -121,6 +121,7 @@
           schema:
             type: object
             required:
+              - id
               - display_name
               - description
               - company_name
@@ -128,6 +129,8 @@
               - invite_id
               - allow_open_invite
             properties:
+              id:
+                type: string
               display_name:
                 type: string
               description:
