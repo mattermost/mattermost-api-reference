@@ -2169,12 +2169,35 @@ definitions:
       version:
         type: string
         description: Version number of the plugin.
+      min_server_version:
+        type: string
+        description: |
+          The minimum Mattermost server version required for the plugin.
+
+          Available as server version 5.6.
       backend:
         type: object
+        description: Deprecated in Mattermost 5.2 release.
         properties:
           executable:
             type: string
             description: Path to the executable binary.
+      server:
+        type: object
+        properties:
+          executables:
+            type: object
+            description: Paths to executable binaries, specifying multiple entry points for different platforms when bundled together in a single plugin.
+            properties:
+              linux-amd64:
+                type: string
+              darwin-amd64:
+                type: string
+              windows-amd64:
+                type: string
+          executable:
+            type: string
+            description: Path to the executable binary. 
       webapp:
         type: object
         properties:
