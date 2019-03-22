@@ -49,6 +49,13 @@ definitions:
         type: boolean
       timezone:
         $ref: '#/definitions/Timezone'
+      terms_of_service_id:
+        description: ID of accepted terms of service, if any. This field is not present if empty.
+        type: string
+      terms_of_service_create_at:
+        description: The time in milliseconds the user accepted the terms of service
+        type: integer
+        format: int64
 
   UsersStats:
     type: object
@@ -2197,7 +2204,7 @@ definitions:
                 type: string
           executable:
             type: string
-            description: Path to the executable binary. 
+            description: Path to the executable binary.
       webapp:
         type: object
         properties:
