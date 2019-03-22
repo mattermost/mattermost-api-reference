@@ -1609,7 +1609,6 @@
         - terms of service
       summary: Records user action when they accept or decline custom terms of service
       description: |
-        Will be depricated in v6.0
         Records user action when they accept or decline custom terms of service. Records the action in audit table.
         Updates user's last accepted terms of service ID if they accepted it.
 
