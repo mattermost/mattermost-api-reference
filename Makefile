@@ -24,6 +24,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/saml.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/compliance.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/ldap.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/groups.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/cluster.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/brand.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/commands.yaml >> $(V4_YAML)
