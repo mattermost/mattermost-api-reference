@@ -1654,7 +1654,7 @@
       - terms of service
       summary: Fetches user's latest terms of service action if the latest action was for acceptance.
       description: |
-        Will be depricated in v6.0
+        Will be deprecated in v6.0
         Fetches user's latest terms of service action if the latest action was for acceptance.
 
         __Minimum server version__: 5.6
