@@ -9,7 +9,7 @@
         ##### Permissions
         Must have `manage_system` permission.
 
-        __Minimum server version__: 5.10
+        __Minimum server version__: 5.11
       parameters:
         - name: channel_id
           in: path
@@ -51,7 +51,7 @@
         ##### Permissions
         Must have `manage_system` permission.
 
-        __Minimum server version__: 5.10
+        __Minimum server version__: 5.11
       parameters:
         - name: team_id
           in: path
