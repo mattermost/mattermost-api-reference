@@ -2326,6 +2326,33 @@ definitions:
       items:
         $ref: '#/definitions/Reaction'
 
+  Group:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      display_name:
+        type: string
+      description:
+        type: string
+      source:
+        type: string
+      remote_id:
+        type: string
+      create_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      has_syncables:
+        type: boolean
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
