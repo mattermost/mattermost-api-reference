@@ -72,7 +72,7 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  /plugin/{plugin_id}:
+  /plugins/{plugin_id}:
     delete:
       tags:
         - plugins
@@ -103,7 +103,7 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  /plugin/{plugin_id}/enable:
+  /plugins/{plugin_id}/enable:
     post:
       tags:
         - plugins
@@ -134,7 +134,7 @@
         '501':
           $ref: '#/responses/NotImplemented'
 
-  /plugin/{plugin_id}/disable:
+  /plugins/{plugin_id}/disable:
     post:
       tags:
         - plugins
