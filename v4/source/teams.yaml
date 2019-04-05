@@ -971,6 +971,27 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/teams/invites/email':
+    delete:
+      tags:
+        - teams
+      summary: Invalidate active email invitations
+      description: |
+        Invalidate active email invitations that have not been accepted by the user.
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Email invites successfully revoked
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/teams/{team_id}/import':
     post:
       tags:
