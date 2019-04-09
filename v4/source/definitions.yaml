@@ -1092,8 +1092,6 @@ definitions:
             type: boolean
           FileLevel:
             type: string
-          FileFormat:
-            type: string
           FileLocation:
             type: string
           EnableWebhookDebugging:
@@ -1566,8 +1564,6 @@ definitions:
           EnableFile:
             type: boolean
           FileLevel:
-            type: boolean
-          FileFormat:
             type: boolean
           FileLocation:
             type: boolean
