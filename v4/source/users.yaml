@@ -379,7 +379,7 @@
         - users
       summary: Update a user
       description: |
-        Update a user by providing the user object. The fields that can be updated are defined in the request body, all other provided fields will be ignored. Any fields not included in the request body will be set to null or reverted to default values. 
+        Update a user by providing the user object. The fields that can be updated are defined in the request body, all other provided fields will be ignored. Any fields not included in the request body will be set to null or reverted to default values.
         ##### Permissions
         Must be logged in as the user being updated or have the `edit_other_users` permission.
       parameters:
@@ -1654,6 +1654,7 @@
       - terms of service
       summary: Fetches user's latest terms of service action if the latest action was for acceptance.
       description: |
+        Will be deprecated in v6.0
         Fetches user's latest terms of service action if the latest action was for acceptance.
 
         __Minimum server version__: 5.6
