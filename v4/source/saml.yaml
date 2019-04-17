@@ -21,7 +21,7 @@
         - SAML
       summary: Upload IDP certificate
       description: |
-        Upload the IDP certificate to be used with your SAML configuration. This will also set the filename for the IdpCertificateFile setting in your `config.json`.
+        Upload the IDP certificate to be used with your SAML configuration. The server will pick a hard-coded filename for the IdpCertificateFile setting in your `config.json`.
         ##### Permissions
         Must have `manage_system` permission.
       consumes: ["multipart/form-data"]
@@ -71,7 +71,7 @@
         - SAML
       summary: Upload public certificate
       description: |
-        Upload the public certificate to be used for encryption with your SAML configuration. This will also set the filename for the PublicCertificateFile setting in your `config.json`.
+        Upload the public certificate to be used for encryption with your SAML configuration. The server will pick a hard-coded filename for the PublicCertificateFile setting in your `config.json`.
         ##### Permissions
         Must have `manage_system` permission.
       consumes: ["multipart/form-data"]
@@ -121,7 +121,7 @@
         - SAML
       summary: Upload private key
       description: |
-        Upload the private key to be used for encryption with your SAML configuration. This will also set the filename for the PrivateKeyFile setting in your `config.json`.
+        Upload the private key to be used for encryption with your SAML configuration. The server will pick a hard-coded filename for the PrivateKeyFile setting in your `config.json`.
         ##### Permissions
         Must have `manage_system` permission.
       consumes: ["multipart/form-data"]
