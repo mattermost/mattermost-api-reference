@@ -114,6 +114,10 @@
           in: query
           description: The ID of the channel to exclude users for. Must be used with "in_channel" query parameter.
           type: string
+        - name: group_constrained
+          in: query
+          description: When used with `not_in_channel` or `not_in_team`, returns only the users that are allowed to join the channel or team based on its group constrains.
+          type: boolean
         - name: without_team
           in: query
           description: Whether or not to list users that are not on any team. This option takes precendence over `in_team`, `in_channel`, and `not_in_channel`.
@@ -256,6 +260,9 @@
               not_in_channel_id:
                 description: If provided, only search users not in this channel. Must specifiy `team_id` when using this option
                 type: string
+              group_constrained:
+                description: When used with `not_in_channel_id` or `not_in_team_id`, returns only the users that are allowed to join the channel or team based on its group constrains.
+                type: boolean
               allow_inactive:
                 description: When `true`, include deactivated users in the results
                 type: boolean
