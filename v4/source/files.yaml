@@ -79,8 +79,9 @@
             import "github.com/mattermost/mattermost-server/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
 
-            file, err := os.Open(<IMAGE_PATH>)
+            file, err := os.Open("file.png")
             if err != nil {
               fmt.Fprintf(os.Stderr, "%v\n", err)
             }
@@ -90,10 +91,10 @@
             io.Copy(buf, file)
             data := buf.Bytes()
 
-            channelId := "<YOUR_CHANNEL_ID>"
-            filename := "<FILE_NAME>"
+            channelID := "4xp9fdt77pncbef59f4k1qe83o"
+            filename := "file.png"
 
-            fileUploadResponse, response := Client.UploadFile(data, channelId, filename)
+            fileUploadResponse, response := Client.UploadFile(data, channelID, filename)
 
         - lang: 'Curl'
           source: |
@@ -129,7 +130,17 @@
           $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
 
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            fileID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            data, resp := Client.GetFile(fileID)
   '/files/{file_id}/thumbnail':
     get:
       tags:
@@ -155,7 +166,18 @@
         '404':
           $ref: '#/responses/NotFound'
         '501':
-          $ref: '#/responses/NotImplemented'  
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            fileID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            data, resp := Client.GetFileThumbnail(fileID)
 
   '/files/{file_id}/preview':
     get:
@@ -182,7 +204,18 @@
         '404':
           $ref: '#/responses/NotFound'
         '501':
-          $ref: '#/responses/NotImplemented' 
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            fileID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            data, resp := Client.GetFilePreview(fileID)
 
   '/files/{file_id}/link':
     get:
@@ -214,6 +247,17 @@
           $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            fileID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            data, resp := Client.GetFileLink(fileID)
 
   '/files/{file_id}/info':
     get:
@@ -245,3 +289,14 @@
           $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            fileID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            info, resp := Client.GetFileInfo(fileID)
