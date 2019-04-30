@@ -37,7 +37,30 @@
           $ref: '#/responses/TooLarge'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import (
+              "bytes"
+              "io/ioutil"
+              "log"
 
+              "github.com/mattermost/platform/model"
+            )
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            tarData, err := ioutil.ReadFile("plugin.tar.gz")
+            if err != nil {
+              log.Fatal("error while reading file")
+            }
+
+            // Not forced
+            manifest, resp := Client.UploadPlugin(bytes.NewReader(tarData))
+
+            // Forced
+            manifest, resp := Client.UploadPluginForced(bytes.NewReader(tarData))
     get:
       tags:
         - plugins
@@ -71,6 +94,15 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginsResp, resp := Client.GetPlugins()
 
   /plugins/{plugin_id}:
     delete:
@@ -102,6 +134,17 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginID := "com.mattermost.demo-plugin"
+
+            ok, resp = Client.RemovePlugin(pluginID)
 
   /plugins/{plugin_id}/enable:
     post:
@@ -133,6 +176,17 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginID := "com.mattermost.demo-plugin"
+
+            ok, resp = Client.EnablePlugin(pluginID)
 
   /plugins/{plugin_id}/disable:
     post:
@@ -164,6 +218,17 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginID := "com.mattermost.demo-plugin"
+
+            ok, resp = Client.DisablePlugin(pluginID)
 
   /plugins/webapp:
     get:
@@ -192,3 +257,11 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/platform/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            manifests, resp := Client.GetWebappPlugins()
