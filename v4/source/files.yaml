@@ -189,7 +189,10 @@
       tags:
         - files
       summary: Get a public file link
-      description: Gets a public link for a file that can be accessed without logging into Mattermost.
+      description: |
+        Gets a public link for a file that can be accessed without logging into Mattermost.
+        ##### Permissions
+        Must have `read_channel` permission or be uploader of the file.
       parameters:
         - name: file_id
           in: path
