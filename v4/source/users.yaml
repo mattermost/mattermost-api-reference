@@ -333,6 +333,8 @@
       summary: Get total count of users in the system
       description: |
         Get a total count of users in the system.
+        ##### Permissions
+        Must be authenticated.
       responses:
         '200':
           description: User stats retrieval successful
