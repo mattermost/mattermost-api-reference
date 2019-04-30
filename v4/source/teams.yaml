@@ -312,6 +312,8 @@
       summary: Check if team exists
       description: |
         Check if the team exists based on a team name.
+        ##### Permissions
+        Must be authenticated.
       parameters:
         - name: name
           in: path
