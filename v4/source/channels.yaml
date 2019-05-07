@@ -143,6 +143,51 @@
             // CreateGroupChannel
             rgc, resp := Client.CreateGroupChannel(userIds)
 
+  /channels/search_group:
+    post:
+      tags:
+        - channels
+      summary: Search Group Channels
+      description: |
+        Get a list of group channels for a user which members' usernames match the search term
+
+        __Minimum server version__: 5.12
+      parameters:
+        - in: body
+          name: body
+          description: Search criteria
+          required: true
+          schema:
+            type: object
+            required:
+              - term
+            properties:
+              term:
+                description: The search term to match against the members' usernames of the group channels
+                type: string
+      responses:
+        '200':
+          description: Channels search successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Channel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            search := &model.ChannelSearch{Term: <MEMBER USERNAME>}
+
+            // SearchGroupChannels
+            channels, resp := Client.SearchGroupChannels(search)
+
   /teams/{team_id}/channels/ids:
     post:
       tags:
