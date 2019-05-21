@@ -79,6 +79,8 @@
             type: array
             items:
               type: string
+            minItems: 2
+            maxItems: 2
       responses:
         '201':
           description: Direct channel creation successful
