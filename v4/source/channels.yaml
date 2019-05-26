@@ -37,7 +37,7 @@
                 description: Markdown-formatted text to display in the header of the channel
               type:
                 type: string
-                description: "'O' for a public channel, 'P' for a private channel"
+                description: "'O' for a public channel, 'P' for a private channel, 'D' for a direct channel"
       responses:
         '201':
           description: Channel creation successful
