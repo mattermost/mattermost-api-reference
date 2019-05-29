@@ -214,23 +214,193 @@ tags:
 
       The list of Mattermost WebSocket events are:
       - added_to_team
+        ```
+        {
+          one: {
+            id: t('combined_system_message.added_to_team.one'),
+            defaultMessage: '{firstUser} **added to the team** by {actor}.',
+          },
+          one_you: {
+            id: t('combined_system_message.added_to_team.one_you'),
+            defaultMessage: 'You were **added to the team** by {actor}.',
+          },
+          two: {
+            id: t('combined_system_message.added_to_team.two'),
+            defaultMessage: '{firstUser} and {secondUser} **added to the team** by {actor}.',
+          },
+          many_expanded: {
+            id: t('combined_system_message.added_to_team.many_expanded'),
+            defaultMessage: '{users} and {lastUser} were **added to the team** by {actor}.',
+          }
+        ```
       - authentication_challenge
+        ```
+        {
+          token: <token-id>
+        }
+        ```
       - channel_converted
+        ```
+        
+        ```
       - channel_created
+        ```
+        {
+          'broadcast': {
+            'omit_users': None,
+            'channel_id': '<channel_id>',
+            'team_id': '<team_id>',
+            'user_id': '<user_id>'
+          },
+          'data': {
+            'channel_id': '<channel_id>',
+            'team_id': '<team_id>'
+          },
+          'event': 'channel_created',
+          'seq': 9
+        }
+        ```
       - channel_deleted
+        ```
+        {
+          'event': 'WebsocketEvents.CHANNEL_DELETED',
+          'data': {
+            'channel_id': '<channel_id>'
+           },
+           'broadcast': {
+             'omit_users': 'null',
+             'user_id': '',
+             'channel_id': '',
+             'team_id': '<team_id>'},
+             'seq': '<seq_id>'
+
+          ```
       - channel_member_updated
       - channel_updated
+         ```
+         {
+           'event': 'WebsocketEvents.CHANNEL_UPDATED',
+           'data': {
+             'channel': {
+               'id': '<channel_id>',
+               'create_at': '<timestamp>',
+               'update_at': '<timestamp>',
+               'delete_at': '<timestamp>',
+               'team_id': '<team_id>',
+               'type': 'O',
+               'display_name':'<channel_id>',
+               'name': '<channel_name>',
+               'header': 'header',
+               'purpose': '',
+               'last_post_at': '<timestamp>',
+               'total_msg_count': '<total_msg_count>',
+               'extra_update_at': '<timestamp>',
+               'creator_id': '<basic_user_id>'
+             },
+           'broadcast': {
+             'omit_users': null,
+             'user_id': '',
+             'channel_id': '<channel_id>',
+             'team_id': '<team_id>'
+           },
+             'seq': '<seq_num>'
+           }
+         ```
       - channel_viewed
+        ```
+        {
+          'desc': '<desc_id>'
+        }
+        ```
       - config_changed
+        ```
+        {
+          'info': '<info_id>'
+        }
+        ```
       - delete_team
+        ```
+        {
+          'teamname': '<team_name>',
+          'teamid': '<team_id>',
+          'state': '<success/error>'
+        }
+        ```
       - direct_added
+        ```
+        {
+          'channel_id': '<channel_id>'
+        }
+        ```
       - emoji_added
+        ```
+        {
+          'event': 'WebsocketEvents.EMOJI_ADDED',
+          'data': {
+            'emoji': {
+              'id': '<id>',
+              'create_at': '<timestamp>',
+              'update_at': '<timestamp>',
+              'delete_at': '<timestamp>',
+              'creator_id': '<creator_id>',
+              'name': 'name'
+            }
+          },
+          'broadcast': {
+            'omit_users': null,
+            'user_id': '',
+            'channel_id': '',
+            'team_id': ''
+          },
+          'seq': 'sequence_id'
+        }
+        ```
       - ephemeral_message
+        ```
+        {
+          'message': '<message>'
+        }
+        ```
       - group_added
       - hello
+        ```
+        {
+          'message': '<message>'
+        }
+        ```
       - leave_team
+        ```
+        'one': {
+          'id': '<id>',
+          'defaultMessage': '{firstUser} **left the team**.',
+        },
+        'one_you': {
+            'id': t('combined_system_message.left_team.one_you'),
+            'defaultMessage': 'You **left the team**.',
+        },
+        'two': {
+            'id': t('combined_system_message.left_team.two'),
+            'defaultMessage': '{firstUser} and {secondUser} **left the team**.',
+        },
+        'many_expanded': {
+            'id': t('combined_system_message.left_team.many_expanded'),
+            'defaultMessage': '{users} and {lastUser} **left the team**.',
+        },
+        ```
       - license_changed
+        ```
+        {
+          'type': 'GeneralTypes.CLIENT_LICENSE_RECEIVED',
+          'data': 'msg.data.license'
+        }
+        ```
       - memberrole_updated
+        ```
+        {
+          'type': 'TeamTypes.RECEIVED_MY_TEAM_MEMBER',
+          'data': 'msg.data.member',
+        }
+        ```
       - new_user
       - plugin_disabled
       - plugin_enabled
