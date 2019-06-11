@@ -216,22 +216,19 @@ tags:
       - added_to_team
         ```
         {
-          one: {
-            id: t('combined_system_message.added_to_team.one'),
-            defaultMessage: '{firstUser} **added to the team** by {actor}.',
+          event: '<event_string>',
+          data: {
+            team_id: '<team_id>',
+            user_id: '<user_id>'
           },
-          one_you: {
-            id: t('combined_system_message.added_to_team.one_you'),
-            defaultMessage: 'You were **added to the team** by {actor}.',
+          broadcast: {
+            omit_users: null,
+            user_id: '<user_id>',
+            channel_id: '<channel_id>',
+            team_id: '<team_id>'
           },
-          two: {
-            id: t('combined_system_message.added_to_team.two'),
-            defaultMessage: '{firstUser} and {secondUser} **added to the team** by {actor}.',
-          },
-          many_expanded: {
-            id: t('combined_system_message.added_to_team.many_expanded'),
-            defaultMessage: '{users} and {lastUser} were **added to the team** by {actor}.',
-          }
+          seq: '<seq_id>'
+        }
         ```
       - authentication_challenge
         ```
@@ -263,7 +260,7 @@ tags:
       - channel_deleted
         ```
         {
-          'event': 'WebsocketEvents.CHANNEL_DELETED',
+          'event': '<event_string>',
           'data': {
             'channel_id': '<channel_id>'
            },
@@ -279,7 +276,7 @@ tags:
       - channel_updated
          ```
          {
-           'event': 'WebsocketEvents.CHANNEL_UPDATED',
+           'event': '<event_string>',
            'data': {
              'channel': {
                'id': '<channel_id>',
@@ -335,7 +332,7 @@ tags:
       - emoji_added
         ```
         {
-          'event': 'WebsocketEvents.EMOJI_ADDED',
+          'event': '<event_string>',
           'data': {
             'emoji': {
               'id': '<id>',
@@ -370,22 +367,20 @@ tags:
         ```
       - leave_team
         ```
-        'one': {
-          'id': '<id>',
-          'defaultMessage': '{firstUser} **left the team**.',
-        },
-        'one_you': {
-            'id': t('combined_system_message.left_team.one_you'),
-            'defaultMessage': 'You **left the team**.',
-        },
-        'two': {
-            'id': t('combined_system_message.left_team.two'),
-            'defaultMessage': '{firstUser} and {secondUser} **left the team**.',
-        },
-        'many_expanded': {
-            'id': t('combined_system_message.left_team.many_expanded'),
-            'defaultMessage': '{users} and {lastUser} **left the team**.',
-        },
+        {
+          event: <event_string>.LEAVE_TEAM,
+          data: {
+            team_id: '<team_id>',
+            user_id: '<user_id>'
+          },
+          broadcast: {
+            omit_users: null,
+            user_id: '<user_id>',
+            channel_id: '<channel_id>',
+            team_id: '<team_id>'
+          },
+            seq: '<seq_no>'
+        }
         ```
       - license_changed
         ```
