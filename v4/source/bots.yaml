@@ -1,1 +1,110 @@
+  /bots:
+    post:
+      tags:
+        - bots
+      summary: Create a bot
+      description: |
+        Create a new bot account on the system. Username is required.
+        ##### Permissions
+        Must have `create_bot` permission.
+        __Minimum server version__: 5.10
+  /bots/{bot_user_id}:
+    put:
+      tags:
+        - bots
+      summary: Patch a bot
+
+      description: |
+        Partially update a bot by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored. Bot ID is required.        
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
+
+  // TODO
+	patchedUser := model.UserFromBot(bot)
+	user.Id = patchedUser.Id
+	user.Username = patchedUser.Username
+	user.Email = patchedUser.Email
+	user.FirstName = patchedUser.FirstName
+
+
+  /bots/{bot_user_id}:
+    get:
+      tags:
+        - bots
+      summary: Get a bot
+      description: |
+        Get a bot specified by its bot id.
+        ##### Permissions
+        Must have `read_bots` permission for bots you are managing, and `read_others_bots` permission for bots others are managing.
+        __Minimum server version__: 5.10
+
+    // TODO
+    --> includeDeleted := r.URL.Query().Get("include_deleted") == "true"
+
+  /bots:
+    get:
+      tags:
+        - bots
+      summary: Get bots
+      description: |
+        Get a page of a list of bots.
+        ##### Permissions
+        Must have `read_bots` permission for bots you are managing, and `read_others_bots` permission for bots others are managing.
+        __Minimum server version__: 5.10
+
+    // TODO
+    --> 	includeDeleted := r.URL.Query().Get("include_deleted") == "true"
+    --> 	onlyOrphaned := r.URL.Query().Get("only_orphaned") == "true"
+
+		Page:           c.Params.Page,
+		PerPage:        c.Params.PerPage,
+		OwnerId:        OwnerId,
+		IncludeDeleted: includeDeleted,
+		OnlyOrphaned:   onlyOrphaned,
+
+
+  /bots/{bot_user_id}/disable:
+    post:
+      tags:
+        - bots
+      summary: Disable a bot
+      description: |
+        Disable a bot. Bot id is required.
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
+
+    // TODO
+		options := &model.BotGetOptions{
+			OwnerId:        userId,
+			IncludeDeleted: false,
+			OnlyOrphaned:   false,
+			Page:           0,
+			PerPage:        perPage,
+
+
+
+  /bots/{bot_user_id}/enable:
+    post:
+      tags:
+        - bots
+      summary: Enable a bot
+      description: |
+        Enable a bot. Bot id is required.
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
+
+
+  /bots/{bot_user_id}/assign/{user_id}:
+    post:
+      tags:
+        - bots
+      summary: Assign a bot to a user
+      description: |
+        Assign a bot to a specified user. Bot id and the user id you are assigning the bot to are required.
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
 
