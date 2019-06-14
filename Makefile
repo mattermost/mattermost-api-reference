@@ -28,6 +28,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/cluster.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/brand.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/commands.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/bots.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/oauth.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/elasticsearch.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/dataretention.yaml >> $(V4_YAML)
@@ -37,6 +38,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/opengraph.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/reactions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/actions.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/service_terms.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
 	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V4_YAML)
