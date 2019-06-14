@@ -349,6 +349,8 @@ tags:
     description: Endpoints for creating, getting and updating webhooks.
   - name: commands
     description: Endpoints for creating, getting and updating slash commands.
+  - name: bots
+    description: Endpoints for creating, getting and updating bots.
   - name: OpenGraph
     description: Endpoint for getting Open Graph metadata.
   - name: system
