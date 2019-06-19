@@ -2356,6 +2356,36 @@ definitions:
       has_syncables:
         type: boolean
 
+  Bot:
+    description: A bot account
+    type: object
+    properties:
+      user_id:
+        description: UserId corresponds to the associated user entry.
+        type: string
+      create_at:
+        description: The time in milliseconds a bot was created
+        type: integer
+        format: int64
+      update_at:
+        description: The time in milliseconds a bot was last updated
+        type: integer
+        format: int64
+      delete_at:
+        description: The time in milliseconds a bot was deleted
+        type: integer
+        format: int64
+      username:
+        type: string
+      display_name:
+        type: string
+      description:
+        type: string
+      owner_id:
+        description: The user id of the user that currently owns this bot.
+        type: string
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
+
