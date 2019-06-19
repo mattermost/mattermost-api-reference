@@ -196,6 +196,46 @@
         '401':
           $ref: '#/responses/Unauthorized'
 
+  /users/group_channels:
+    post:
+      tags:
+        - users
+      summary: Get users by group channels ids
+      description: |
+        Get an object containing a key per group channel id in the
+        query and its value as a list of users members of that group
+        channel.
+
+        The user must be a member of the group ids in the query, or
+        they will be omitted from the response.
+        ##### Permissions
+        Requires an active session but no other permissions.
+
+        __Minimum server version__: 5.14
+      parameters:
+        - in: body
+          name: body
+          description: List of group channel ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: User list retrieval successful
+          schema:
+            type: object
+            properties:
+              "<CHANNEL_ID>":
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+
   /users/usernames:
     post:
       tags:

@@ -143,7 +143,7 @@
             // CreateGroupChannel
             rgc, resp := Client.CreateGroupChannel(userIds)
 
-  /channels/search_group:
+  /group/search:
     post:
       tags:
         - channels
@@ -151,7 +151,7 @@
       description: |
         Get a list of group channels for a user which members' usernames match the search term
 
-        __Minimum server version__: 5.12
+        __Minimum server version__: 5.14
       parameters:
         - in: body
           name: body
