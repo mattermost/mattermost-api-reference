@@ -2361,7 +2361,7 @@ definitions:
     type: object
     properties:
       user_id:
-        description: UserId corresponds to the associated user entry.
+        description: The user id of the associated user entry.
         type: string
       create_at:
         description: The time in milliseconds a bot was created
