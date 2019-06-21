@@ -149,7 +149,7 @@
         - channels
       summary: Search Group Channels
       description: |
-        Get a list of group channels for a user which members' usernames match the search term
+        Get a list of group channels for a user which members' usernames match the search term.
 
         __Minimum server version__: 5.14
       parameters:
