@@ -1,0 +1,242 @@
+  /bots:
+    post:
+      tags:
+        - bots
+      summary: Create a bot
+      description: |
+        Create a new bot account on the system. Username is required.
+        ##### Permissions
+        Must have `create_bot` permission.
+        __Minimum server version__: 5.10
+      parameters:
+        - in: body
+          name: body
+          description: Bot to be created
+          required: true
+          schema:
+            type: object
+            required:
+              - username
+            properties:
+              username:
+                type: string
+              display_name:
+                type: string
+              description:
+                type: string
+      responses:
+        '201':
+          description: Bot creation successful
+          schema:
+            $ref: '#/definitions/Bot'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+    get:
+      tags:
+        - bots
+      summary: Get bots
+      description: |
+        Get a page of a list of bots.
+        ##### Permissions
+        Must have `read_bots` permission for bots you are managing, and `read_others_bots` permission for bots others are managing.
+        __Minimum server version__: 5.10
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of users per page. There is a maximum limit of 200 users per page.
+          default: "60"
+          type: string
+        - name: include_deleted
+          in: query
+          description: If deleted bots should be returned.
+          type: boolean
+        - name: only_orphaned
+          in: query
+          description: When true, only orphaned bots will be returned. A bot is consitered orphaned if it's owner has been deactivated.
+          type: boolean
+      responses:
+        '200':
+          description: Bot page retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Bot'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /bots/{bot_user_id}:
+    put:
+      tags:
+        - bots
+      summary: Patch a bot
+      description: |
+        Partially update a bot by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Bot to be created
+          required: true
+          schema:
+            type: object
+            required:
+              - username
+            properties:
+              username:
+                type: string
+              display_name:
+                type: string
+              description:
+                type: string
+      responses:
+        '200':
+          description: Bot patch successful
+          schema:
+            $ref: '#/definitions/Bot'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+    get:
+      tags:
+        - bots
+      summary: Get a bot
+      description: |
+        Get a bot specified by its bot id.
+        ##### Permissions
+        Must have `read_bots` permission for bots you are managing, and `read_others_bots` permission for bots others are managing.
+        __Minimum server version__: 5.10
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+        - name: include_deleted
+          type: boolean
+          in: query
+          description: If deleted bots should be returned.
+      responses:
+        '200':
+          description: Bot successfully retrieved.
+          schema:
+            $ref: '#/definitions/Bot'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+  /bots/{bot_user_id}/disable:
+    post:
+      tags:
+        - bots
+      summary: Disable a bot
+      description: |
+        Disable a bot.
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Bot successfully disabled.
+          schema:
+            $ref: '#/definitions/Bot'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+
+  /bots/{bot_user_id}/enable:
+    post:
+      tags:
+        - bots
+      summary: Enable a bot
+      description: |
+        Enable a bot.
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Bot successfully enabled.
+          schema:
+            $ref: '#/definitions/Bot'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
+
+  /bots/{bot_user_id}/assign/{user_id}:
+    post:
+      tags:
+        - bots
+      summary: Assign a bot to a user
+      description: |
+        Assign a bot to a specified user.
+        ##### Permissions
+        Must have `manage_bots` permission. 
+        __Minimum server version__: 5.10
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: The user ID to assign the bot to.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Bot successfully assigned.
+          schema:
+            $ref: '#/definitions/Bot'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
