@@ -216,7 +216,7 @@ tags:
       - added_to_team
         ```
         {
-          event: '<event_string>',
+          event: 'added_to_team',
           data: {
             team_id: '<team_id>',
             user_id: '<user_id>'
@@ -235,10 +235,6 @@ tags:
         {
           token: <token-id>
         }
-        ```
-      - channel_converted
-        ```
-        
         ```
       - channel_created
         ```
@@ -260,7 +256,7 @@ tags:
       - channel_deleted
         ```
         {
-          'event': '<event_string>',
+          'event': 'channel_deleted',
           'data': {
             'channel_id': '<channel_id>'
            },
@@ -272,11 +268,10 @@ tags:
              'seq': '<seq_id>'
 
           ```
-      - channel_member_updated
       - channel_updated
          ```
          {
-           'event': '<event_string>',
+           'event': 'channel_updated',
            'data': {
              'channel': {
                'id': '<channel_id>',
@@ -332,7 +327,7 @@ tags:
       - emoji_added
         ```
         {
-          'event': '<event_string>',
+          'event': 'emoji_added',
           'data': {
             'emoji': {
               'id': '<id>',
