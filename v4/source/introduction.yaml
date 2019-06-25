@@ -250,7 +250,7 @@ tags:
             'team_id': '<team_id>'
           },
           'event': 'channel_created',
-          'seq': 9
+          'seq': '<seq_id>'
         }
         ```
       - channel_deleted
@@ -295,7 +295,7 @@ tags:
              'channel_id': '<channel_id>',
              'team_id': '<team_id>'
            },
-             'seq': '<seq_num>'
+             'seq': '<seq_id>'
            }
          ```
       - channel_viewed
@@ -344,7 +344,7 @@ tags:
             'channel_id': '',
             'team_id': ''
           },
-          'seq': 'sequence_id'
+          'seq': '<seq_id>'
         }
         ```
       - ephemeral_message
@@ -374,7 +374,7 @@ tags:
             channel_id: '<channel_id>',
             team_id: '<team_id>'
           },
-            seq: '<seq_no>'
+            seq: '<seq_id>'
         }
         ```
       - license_changed
