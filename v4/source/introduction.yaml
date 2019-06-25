@@ -239,18 +239,18 @@ tags:
       - channel_created
         ```
         {
+          'event': 'channel_created',
+          'seq'  : '<seq_id>',
+          'data' : {
+            'channel_id': '<channel_id>',
+            'team_id'   : '<team_id>'
+          },
           'broadcast': {
             'omit_users': None,
             'channel_id': '<channel_id>',
             'team_id': '<team_id>',
             'user_id': '<user_id>'
-          },
-          'data': {
-            'channel_id': '<channel_id>',
-            'team_id': '<team_id>'
-          },
-          'event': 'channel_created',
-          'seq': '<seq_id>'
+          }
         }
         ```
       - channel_deleted
@@ -260,12 +260,12 @@ tags:
           'data': {
             'channel_id': '<channel_id>'
            },
-           'broadcast': {
-             'omit_users': 'null',
-             'user_id': '',
-             'channel_id': '',
-             'team_id': '<team_id>'},
-             'seq': '<seq_id>'
+          'broadcast': {
+            'omit_users': 'null',
+            'user_id': '<user_id>',
+            'channel_id': '<channel_id>',
+            'team_id': '<team_id>'},
+            'seq': '<seq_id>'
 
           ```
       - channel_updated
@@ -363,7 +363,7 @@ tags:
       - leave_team
         ```
         {
-          event: <event_string>.LEAVE_TEAM,
+          event: 'leave_team',
           data: {
             team_id: '<team_id>',
             user_id: '<user_id>'
