@@ -303,10 +303,6 @@
         - lang: 'Go'
           source: |
             import (
-              "bytes"
-              "io/ioutil"
-              "log"
-
               "github.com/mattermost/platform/model"
             )
 
