@@ -104,6 +104,58 @@
 
             pluginsResp, resp := Client.GetPlugins()
 
+  /plugins/install_from_url:
+    post:
+      tags:
+        - plugins
+      summary: Install plugin from url
+      description: |
+        Supply a url to a compressed in a .tar.gz file. Plugins must be enabled in the server's config settings.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.14
+      parameters:
+        - name: plugin_download_url
+          in: query
+          description: Url used to download the plugin
+          required: true
+          type: string
+        - name: force
+          in: query
+          description: "Set to 'true' to overwrite a previously installed plugin with the same ID, if any"
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Plugin install successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import (
+              "github.com/mattermost/platform/model"
+            )
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            url := "https://mysite.com/my-plugin.tar.gz"
+
+            // Not forced
+            manifest, resp := Client.InstallPluginFromUrl(url, false)
+
+            // Forced
+            manifest, resp := Client.InstallPluginFromUrl(url, true)
+
   /plugins/{plugin_id}:
     delete:
       tags:
@@ -265,54 +317,3 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
             manifests, resp := Client.GetWebappPlugins()
-  /plugins/install_from_url:
-    post:
-      tags:
-        - plugins
-      summary: Install plugin from url
-      description: |
-        Supply a url to a compressed in a .tar.gz file. Plugins must be enabled in the server's config settings.
-
-        ##### Permissions
-        Must have `manage_system` permission.
-
-        __Minimum server version__: 5.14
-      parameters:
-        - name: plugin_download_url
-          in: query
-          description: Url used to download the plugin
-          required: true
-          type: string
-        - name: force
-          in: query
-          description: "Set to 'true' to overwrite a previously installed plugin with the same ID, if any"
-          required: false
-          type: string
-      responses:
-        '201':
-          description: Plugin install successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-      x-code-samples:
-        - lang: 'Go'
-          source: |
-            import (
-              "github.com/mattermost/platform/model"
-            )
-
-            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
-            Client.Login("email@domain.com", "Password1")
-
-            url := "https://mysite.com/my-plugin.tar.gz"
-
-            // Not forced
-            manifest, resp := Client.InstallPluginFromUrl(url, false)
-
-            // Forced
-            manifest, resp := Client.InstallPluginFromUrl(url, true)
