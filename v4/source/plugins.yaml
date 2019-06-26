@@ -4,7 +4,7 @@
         - plugins
       summary: Upload plugin
       description: |
-        Upload a plugin compressed in a .tar.gz file. Plugins and plugin uploads must be enabled in the server's config settings.
+        Upload a plugin that is contained within a compressed .tar.gz file. Plugins and plugin uploads must be enabled in the server's config settings.
 
         ##### Permissions
         Must have `manage_system` permission.
@@ -110,7 +110,7 @@
         - plugins
       summary: Install plugin from url
       description: |
-        Supply a url to a compressed in a .tar.gz file. Plugins must be enabled in the server's config settings.
+        Supply a URL to a plugin compressed in a .tar.gz file. Plugins must be enabled in the server's config settings.
 
         ##### Permissions
         Must have `manage_system` permission.
@@ -119,7 +119,7 @@
       parameters:
         - name: plugin_download_url
           in: query
-          description: Url used to download the plugin
+          description: URL used to download the plugin
           required: true
           type: string
         - name: force
