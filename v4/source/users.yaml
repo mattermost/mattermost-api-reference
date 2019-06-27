@@ -184,6 +184,10 @@
             type: array
             items:
               type: string
+        - name: since
+          in: query
+          description: Only return users that have been modified since the given Unix timestamp (in milliseconds).
+          type: integer
       responses:
         '200':
           description: User list retrieval successful
