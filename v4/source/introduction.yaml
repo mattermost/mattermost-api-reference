@@ -231,11 +231,6 @@ tags:
         }
         ```
       - authentication_challenge
-        ```
-        {
-          token: <token-id>
-        }
-        ```
       - channel_created
         ```
         {
@@ -301,13 +296,30 @@ tags:
       - channel_viewed
         ```
         {
-          'desc': '<desc_id>'
+          'event': 'channel_viewed',
+          'data': {
+            'channel_id': '<channel_id>'
+          },
+          'broadcast': {
+            'omit_users': null,
+            'user_id': '<user_id>',
+            'channel_id': '<channel_id>',
+            'team_id': '<team_id>'
+          },
+          'seq': '<seq_id>'
         }
         ```
       - config_changed
         ```
         {
-          'info': '<info_id>'
+          'info': '<info_id>',
+          'event': 'config_changed',
+          'data': {
+            'config': {
+              'EnableCustomEmoji': '<true/false>',
+              'EnableLinkPreviews': '<true/false>'
+            }
+          }
         }
         ```
       - delete_team
@@ -321,7 +333,17 @@ tags:
       - direct_added
         ```
         {
-          'channel_id': '<channel_id>'
+          'event': '<direct_added>',
+          'data': {
+            'teammate_id': '<teammate_id>'
+          },
+          'broadcast': {
+             'omit_users': null,
+             'user_id': '<user_id>',
+             'channel_id': '<channel.id>',
+             'team_id': '<team_id>'},
+             'seq': '<seq_id>'
+          }
         }
         ```
       - emoji_added
