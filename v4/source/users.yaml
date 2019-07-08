@@ -186,7 +186,10 @@
               type: string
         - name: since
           in: query
-          description: Only return users that have been modified since the given Unix timestamp (in milliseconds).
+          description: |
+            Only return users that have been modified since the given Unix timestamp (in milliseconds).
+
+            __Minimum server version__: 5.14
           type: integer
       responses:
         '200':
