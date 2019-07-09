@@ -20,7 +20,7 @@ There is no strict style guide but please try to follow the example of the exist
 
 To build the full YAML, run `make build` and it will be output to `html/static/mattermost-openapi.yaml`. This will also check syntax using [swagger-cli](https://github.com/BigstickCarpet/swagger-cli).
 
-To test locally, run `make run` and navigate to `http://127.0.0.1:8080`.
+To test locally, run `make build`, `make run` and navigate to `http://127.0.0.1:8080`.
 
 ## Deployment
 
