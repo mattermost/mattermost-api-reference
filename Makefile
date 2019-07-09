@@ -54,7 +54,7 @@ build-v4: .npminstall
 run:
 	@echo Starting redoc server
 
-	@node_modules/redoc-cli/index.js serve v4/html/static/mattermost-openapi-v4.yaml
+	npx redoc-cli serve v4/html/static/mattermost-openapi-v4.yaml
 
 clean:
 	@echo Cleaning
