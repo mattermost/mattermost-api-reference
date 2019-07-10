@@ -178,7 +178,6 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-
   /bots/{bot_user_id}/enable:
     post:
       tags:
@@ -206,7 +205,6 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
-
 
   /bots/{bot_user_id}/assign/{user_id}:
     post:
@@ -240,3 +238,148 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  /bots/{bot_user_id}/icon:
+    get:
+      tags:
+        - bots
+      summary: Get bot's LHS icon
+      description: |
+        Get a bot's LHS icon image based on bot_user_id string parameter.
+        ##### Permissions
+        Must be logged in.
+        __Minimum server version__: 5.14
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Bot's LHS icon image
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            botUserID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            data, resp := Client.GetBotIconImage(botUserID)
+    post:
+      tags:
+        - bots
+      summary: Set bot's LHS icon image
+      description: |
+        Set a bot's LHS icon image based on bot_user_id string parameter. Icon image must be SVG format, all other formats are rejected.
+        ##### Permissions
+        Must have `manage_bots` permission.
+        __Minimum server version__: 5.14
+      consumes: ["multipart/form-data"]
+      parameters:
+        - name: image
+          in: formData
+          description: SVG icon image to be uploaded
+          required: true
+          type: file
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: SVG icon image set successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '413':
+          $ref: '#/responses/TooLarge'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import (
+              "io/ioutil"
+              "log"
+
+              "github.com/mattermost/mattermost-server/model"
+            )
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            data, err := ioutil.ReadFile("icon_image.svg")
+            if err != nil {
+              log.Fatal(err)
+            }
+
+            botUserID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            ok, resp := Client.SetBotIconImage(botUserID, data)
+    delete:
+      tags:
+        - bots
+      summary: Delete bot's LHS icon image
+      description: |
+        Delete bot's LHS icon image based on bot_user_id string parameter.
+        ##### Permissions
+        Must have `manage_bots` permission.
+        __Minimum server version__: 5.14
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Icon image deletion successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '500':
+          $ref: '#/responses/InternalServerError'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            botUserID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            ok, resp := Client.DeleteBotIconImage(botUserID)

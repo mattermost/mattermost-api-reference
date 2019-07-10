@@ -401,6 +401,7 @@ x-tagGroups:
   - name: Endpoints
     tags:
       - users
+      - bots
       - teams
       - channels
       - posts
