@@ -439,12 +439,12 @@
           type: string
         - name: limit_before
           in: query
-          description: Number of posts before the last unread posts
+          description: Number of posts before the last unread posts. Maximum is 200 posts if limit is set greater than that.
           default: "60"
           type: string
         - name: limit_after
           in: query
-          description: Number of posts after and including the last unread post
+          description: Number of posts after and including the last unread post. Maximum is 200 posts if limit is set greater than that.
           default: "60"
           type: string
       responses:
