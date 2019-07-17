@@ -423,7 +423,7 @@
         - posts
       summary: Get posts around last unread
       description: |
-        Get posts around last unread post by a user in a channel. Use the query parameters `limit_before` and `limit_after` to modify the number of posts returned from this endpoint.
+        Get the oldest unread post in the channel for the given user as well as the posts around it.
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission, and must have `read_channel` permission for the channel.
       parameters:
