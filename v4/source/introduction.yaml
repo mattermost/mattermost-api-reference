@@ -14,7 +14,7 @@ info:
 basePath: /api/v4
 host: your-mattermost-url.com
 tags:
-  - name: introduction
+  - name: Web Services API
     description: |
       The Mattermost Web Services API is used by Mattermost clients and third party applications to interact with the server. [JavaScript and Golang drivers for](/#tag/drivers) connecting to the APIs are also available.
 
