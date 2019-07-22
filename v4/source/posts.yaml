@@ -426,6 +426,7 @@
         Get the oldest unread post in the channel for the given user as well as the posts around it.
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission, and must have `read_channel` permission for the channel.
+        __Minimum server version__: 5.14
       parameters:
         - name: user_id
           in: path
