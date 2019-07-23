@@ -217,6 +217,7 @@ tags:
         ```
         {
           'event': 'added_to_team',
+          'seq': '<seq_id>'
           'data': {
             'team_id': '<team_id>',
             'user_id': '<user_id>'
@@ -226,8 +227,7 @@ tags:
             'user_id': '<user_id>',
             'channel_id': '<channel_id>',
             'team_id': '<team_id>'
-          },
-          'seq': '<seq_id>'
+          }
         }
         ```
       - authentication_challenge
@@ -252,6 +252,7 @@ tags:
         ```
         {
           'event': 'channel_deleted',
+          'seq': '<seq_id>'
           'data': {
             'channel_id': '<channel_id>'
            },
@@ -259,14 +260,15 @@ tags:
             'omit_users': null,
             'user_id': '<user_id>',
             'channel_id': '<channel_id>',
-            'team_id': '<team_id>'},
-            'seq': '<seq_id>'
+            'team_id': '<team_id>'
+          },
 
           ```
       - channel_updated
          ```
          {
            'event': 'channel_updated',
+           'seq': '<seq_id>'
            'data': {
              'channel': {
                'id': '<channel_id>',
@@ -290,13 +292,13 @@ tags:
              'channel_id': '<channel_id>',
              'team_id': '<team_id>'
            },
-             'seq': '<seq_id>'
-           }
+         }
          ```
       - channel_viewed
         ```
         {
           'event': 'channel_viewed',
+          'seq': '<seq_id>'
           'data': {
             'channel_id': '<channel_id>'
           },
@@ -305,8 +307,7 @@ tags:
             'user_id': '<user_id>',
             'channel_id': '<channel_id>',
             'team_id': '<team_id>'
-          },
-          'seq': '<seq_id>'
+          }
         }
         ```
       - config_changed
@@ -334,6 +335,7 @@ tags:
         ```
         {
           'event': '<direct_added>',
+          'seq': '<seq_id>'
           'data': {
             'teammate_id': '<teammate_id>'
           },
@@ -341,8 +343,7 @@ tags:
              'omit_users': null,
              'user_id': '<user_id>',
              'channel_id': '<channel.id>',
-             'team_id': '<team_id>'},
-             'seq': '<seq_id>'
+             'team_id': '<team_id>'
           }
         }
         ```
@@ -350,6 +351,7 @@ tags:
         ```
         {
           'event': 'emoji_added',
+          'seq': '<seq_id>'
           'data': {
             'emoji': {
               'id': '<id>',
@@ -365,8 +367,7 @@ tags:
             'user_id': '',
             'channel_id': '',
             'team_id': ''
-          },
-          'seq': '<seq_id>'
+          }
         }
         ```
       - ephemeral_message
@@ -386,6 +387,7 @@ tags:
         ```
         {
           'event': 'leave_team',
+          'seq': '<seq_id>'
           'data': {
             'team_id': '<team_id>',
             'user_id': '<user_id>'
@@ -395,8 +397,7 @@ tags:
             'user_id': '<user_id>',
             'channel_id': '<channel_id>',
             'team_id': '<team_id>'
-          },
-            'seq': '<seq_id>'
+          }
         }
         ```
       - license_changed
