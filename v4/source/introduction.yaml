@@ -313,7 +313,6 @@ tags:
       - config_changed
         ```
         {
-          'info': '<info_id>',
           'event': 'config_changed',
           'data': {
             'config': {
