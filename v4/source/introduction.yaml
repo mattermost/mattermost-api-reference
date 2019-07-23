@@ -216,18 +216,18 @@ tags:
       - added_to_team
         ```
         {
-          event: 'added_to_team',
-          data: {
-            team_id: '<team_id>',
-            user_id: '<user_id>'
+          'event': 'added_to_team',
+          'data': {
+            'team_id': '<team_id>',
+            'user_id': '<user_id>'
           },
-          broadcast: {
-            omit_users: null,
-            user_id: '<user_id>',
-            channel_id: '<channel_id>',
-            team_id: '<team_id>'
+          'broadcast': {
+            'omit_users': null,
+            'user_id': '<user_id>',
+            'channel_id': '<channel_id>',
+            'team_id': '<team_id>'
           },
-          seq: '<seq_id>'
+          'seq': '<seq_id>'
         }
         ```
       - authentication_challenge
@@ -385,18 +385,18 @@ tags:
       - leave_team
         ```
         {
-          event: 'leave_team',
-          data: {
-            team_id: '<team_id>',
-            user_id: '<user_id>'
+          'event': 'leave_team',
+          'data': {
+            'team_id': '<team_id>',
+            'user_id': '<user_id>'
           },
-          broadcast: {
-            omit_users: null,
-            user_id: '<user_id>',
-            channel_id: '<channel_id>',
-            team_id: '<team_id>'
+          'broadcast': {
+            'omit_users': null,
+            'user_id': '<user_id>',
+            'channel_id': '<channel_id>',
+            'team_id': '<team_id>'
           },
-            seq: '<seq_id>'
+            'seq': '<seq_id>'
         }
         ```
       - license_changed
