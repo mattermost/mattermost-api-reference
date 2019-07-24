@@ -370,18 +370,8 @@ tags:
         }
         ```
       - ephemeral_message
-        ```
-        {
-          'message': '<message>'
-        }
-        ```
       - group_added
       - hello
-        ```
-        {
-          'message': '<message>'
-        }
-        ```
       - leave_team
         ```
         {
@@ -402,15 +392,12 @@ tags:
       - license_changed
         ```
         {
-          'type': 'GeneralTypes.CLIENT_LICENSE_RECEIVED',
-          'data': 'msg.data.license'
-        }
-        ```
-      - memberrole_updated
-        ```
-        {
-          'type': 'TeamTypes.RECEIVED_MY_TEAM_MEMBER',
-          'data': 'msg.data.member',
+          'type': 'LICENSE_CHANGED',
+          'data': {
+            'license': {
+              'IsLicensed': '<true/false>'
+            }
+          }
         }
         ```
       - new_user
@@ -425,7 +412,8 @@ tags:
       - preferences_deleted
       - reaction_added
       - reaction_removed
-      - response
+      - r
+        esponse
       - role_updated
       - status_change
       - typing
