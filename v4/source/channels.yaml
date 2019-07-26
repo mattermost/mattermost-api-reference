@@ -803,9 +803,9 @@
       description: |
         Search public channels on a team based on the search term provided in the request body.
         ##### Permissions
-        If the user has the `list_team_channels` permission, the search will be performed within all the team's public channels.
+        Must have the `list_team_channels` permission.
 
-        Without the permission, the search will be performed within the channels that the user is a member of.
+        In server version 5.16 and later, a user without the `list_team_channels` permission will be able to use this endpoint, with the search results limited to the channels that the user is a member of.
       parameters:
         - name: team_id
           in: path
