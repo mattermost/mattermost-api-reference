@@ -804,6 +804,8 @@
         Search public channels on a team based on the search term provided in the request body.
         ##### Permissions
         Must have the `list_team_channels` permission.
+
+        In server version 5.16 and later, a user without the `list_team_channels` permission will be able to use this endpoint, with the search results limited to the channels that the user is a member of.
       parameters:
         - name: team_id
           in: path
