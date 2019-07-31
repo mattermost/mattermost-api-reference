@@ -268,7 +268,7 @@ tags:
          ```
          {
            'event': 'channel_updated',
-           'seq': '<seq_id>'
+           'seq': <seq_id>
            'data': {
              'channel': {
                'id': '<channel_id>',
@@ -288,7 +288,7 @@ tags:
              },
            'broadcast': {
              'omit_users': null,
-             'user_id': '',
+             'user_id': '<user_id>',
              'channel_id': '<channel_id>',
              'team_id': '<team_id>'
            },
@@ -298,7 +298,7 @@ tags:
         ```
         {
           'event': 'channel_viewed',
-          'seq': '<seq_id>'
+          'seq': <seq_id>
           'data': {
             'channel_id': '<channel_id>'
           },
@@ -334,7 +334,7 @@ tags:
         ```
         {
           'event': '<direct_added>',
-          'seq': '<seq_id>'
+          'seq': <seq_id>
           'data': {
             'teammate_id': '<teammate_id>'
           },
@@ -350,7 +350,7 @@ tags:
         ```
         {
           'event': 'emoji_added',
-          'seq': '<seq_id>',
+          'seq': <seq_id>,
           'data': {
             'emoji': {
               'id': '<id>',
@@ -376,7 +376,7 @@ tags:
         ```
         {
           'event': 'leave_team',
-          'seq': '<seq_id>',
+          'seq': <seq_id>,
           'data': {
             'team_id': '<team_id>',
             'user_id': '<user_id>'
