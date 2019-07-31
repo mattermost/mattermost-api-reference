@@ -217,7 +217,7 @@ tags:
         ```
         {
           'event': 'added_to_team',
-          'seq': <seq_id>
+          'seq': <seq_id>,
           'data': {
             'team_id': '<team_id>',
             'user_id': '<user_id>'
@@ -235,7 +235,7 @@ tags:
         ```
         {
           'event': 'channel_created',
-          'seq'  : '<seq_id>',
+          'seq'  : <seq_id>,
           'data' : {
             'channel_id': '<channel_id>',
             'team_id'   : '<team_id>'
@@ -252,7 +252,7 @@ tags:
         ```
         {
           'event': 'channel_deleted',
-          'seq': '<seq_id>'
+          'seq': <seq_id>,
           'data': {
             'channel_id': '<channel_id>'
            },
@@ -268,7 +268,7 @@ tags:
          ```
          {
            'event': 'channel_updated',
-           'seq': <seq_id>
+           'seq': <seq_id>,
            'data': {
              'channel': {
                'id': '<channel_id>',
@@ -298,7 +298,7 @@ tags:
         ```
         {
           'event': 'channel_viewed',
-          'seq': <seq_id>
+          'seq': <seq_id>,
           'data': {
             'channel_id': '<channel_id>'
           },
