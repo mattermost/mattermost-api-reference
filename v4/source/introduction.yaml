@@ -404,8 +404,7 @@ tags:
       - preferences_deleted
       - reaction_added
       - reaction_removed
-      - r
-        esponse
+      - response
       - role_updated
       - status_change
       - typing
