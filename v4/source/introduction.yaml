@@ -322,14 +322,6 @@ tags:
           }
         }
         ```
-      - delete_team
-        ```
-        {
-          'teamname': '<team_name>',
-          'teamid': '<team_id>',
-          'state': '<success/error>'
-        }
-        ```
       - direct_added
         ```
         {
