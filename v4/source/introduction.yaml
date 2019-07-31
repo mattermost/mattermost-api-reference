@@ -284,7 +284,7 @@ tags:
                'last_post_at': '<timestamp>',
                'total_msg_count': '<total_msg_count>',
                'extra_update_at': '<timestamp>',
-               'creator_id': '<basic_user_id>'
+               'creator_id': '<user_id>'
              },
            'broadcast': {
              'omit_users': null,
@@ -349,7 +349,7 @@ tags:
               'create_at': '<timestamp>',
               'update_at': '<timestamp>',
               'delete_at': '<timestamp>',
-              'creator_id': '<creator_id>',
+              'creator_id': '<user_id>',
               'name': 'name'
             }
           },
