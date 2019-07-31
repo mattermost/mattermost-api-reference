@@ -376,7 +376,7 @@ tags:
         ```
         {
           'event': 'leave_team',
-          'seq': '<seq_id>'
+          'seq': '<seq_id>',
           'data': {
             'team_id': '<team_id>',
             'user_id': '<user_id>'
