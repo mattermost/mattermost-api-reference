@@ -195,9 +195,6 @@
               message:
                 description: The message text of the post
                 type: string
-              file_ids:
-                 description: The list of files attached to this post
-                 type: array
               has_reactions:
                 description: Set to `true` if the post has reactions to it
                 type: boolean
