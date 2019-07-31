@@ -490,6 +490,8 @@ tags:
       Endpoints for creating, getting and interacting with users.
 
       When using endpoints that require a user id, the string `me` can be used in place of the user id to indicate the action is to be taken for the logged in user.
+  - name: bots
+    description: Endpoints for creating, getting and updating bot users.
   - name: teams
     description: Endpoints for creating, getting and interacting with teams.
   - name: channels
@@ -545,7 +547,7 @@ tags:
   - name: terms of service
     description: Endpoints for getting and updating custom terms of service.
 x-tagGroups:
-  - name: Introduction
+  - name: Overview
     tags:
       - introduction
       - schema
@@ -560,6 +562,7 @@ x-tagGroups:
   - name: Endpoints
     tags:
       - users
+      - bots
       - teams
       - channels
       - posts
