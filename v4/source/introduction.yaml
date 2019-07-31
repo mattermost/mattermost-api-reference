@@ -350,7 +350,7 @@ tags:
         ```
         {
           'event': 'emoji_added',
-          'seq': '<seq_id>'
+          'seq': '<seq_id>',
           'data': {
             'emoji': {
               'id': '<id>',
