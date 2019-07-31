@@ -326,7 +326,7 @@ tags:
         ```
         {
           'event': '<direct_added>',
-          'seq': <seq_id>
+          'seq': <seq_id>,
           'data': {
             'teammate_id': '<teammate_id>'
           },
