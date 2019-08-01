@@ -216,6 +216,33 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/posts/{post_id}/set-unread':
+    post:
+      tags:
+        - posts
+      summary: Mark channel as not read.
+      description: |
+        Mark a channel as being unread from a given post.
+        ##### Permissions
+        Must have the `read_channel` permission.
+      parameters:
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Post marked as unread successfully
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+
   '/posts/{post_id}/patch':
     put:
       tags:
