@@ -224,7 +224,8 @@
       description: |
         Mark a channel as being unread from a given post.
         ##### Permissions
-        Must have the `read_channel` permission.
+        Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
+
       parameters:
         - name: post_id
           in: path
