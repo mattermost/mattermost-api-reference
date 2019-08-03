@@ -414,6 +414,49 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/users/{user_id}/channels/{channel_id}/posts/unread':
+    get:
+      tags:
+        - posts
+      summary: Get posts around last unread
+      description: |
+        Get the oldest unread post in the channel for the given user as well as the posts around it.
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission, and must have `read_channel` permission for the channel.
+        __Minimum server version__: 5.14
+      parameters:
+        - name: user_id
+          in: path
+          description: ID of the user
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: The channel ID to get the posts for
+          required: true
+          type: string
+        - name: limit_before
+          in: query
+          description: Number of posts before the last unread posts. Maximum is 200 posts if limit is set greater than that.
+          default: "60"
+          type: string
+        - name: limit_after
+          in: query
+          description: Number of posts after and including the last unread post. Maximum is 200 posts if limit is set greater than that.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: Post list retrieval successful
+          schema:
+            $ref: "#/definitions/PostList"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+
   '/teams/{team_id}/posts/search':
     post:
       tags:
