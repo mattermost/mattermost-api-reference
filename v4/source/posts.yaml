@@ -233,8 +233,10 @@
           required: true
           type: string
       responses:
-        '204':
+        '200':
           description: Post marked as unread successfully
+          schema:
+            $ref: "#/definitions/ChannelUnread"
         '400':
           $ref: '#/responses/BadRequest'
         '401':
