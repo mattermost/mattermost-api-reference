@@ -216,17 +216,23 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  '/posts/{post_id}/set-unread':
+  '/user/{user_id}/posts/{post_id}/set_unread':
     post:
       tags:
         - posts
-      summary: Mark channel as not read.
+      summary: Mark as unread from the post.
       description: |
         Mark a channel as being unread from a given post.
         ##### Permissions
         Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
+        Currently `user_id` should be the same one logged in.
 
       parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
         - name: post_id
           in: path
           description: Post GUID
