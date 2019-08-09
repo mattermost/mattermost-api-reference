@@ -227,7 +227,7 @@
         Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
         Must have `edit_user` permission if the user is not the one marking the post for himself.
 
-        __Minimum server version__: 5.14
+        __Minimum server version__: 5.16
       parameters:
         - name: user_id
           in: path
