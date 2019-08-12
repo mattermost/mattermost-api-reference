@@ -220,12 +220,12 @@
     post:
       tags:
         - posts
-      summary: Mark as unread from the post.
+      summary: Mark as unread from a post.
       description: |
         Mark a channel as being unread from a given post.
         ##### Permissions
         Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
-        Must have `edit_user` permission if the user is not the one marking the post for himself.
+        Must have `edit_other_users` permission if the user is not the one marking the post for himself.
 
         __Minimum server version__: 5.16
       parameters:
@@ -243,7 +243,7 @@
         '200':
           description: Post marked as unread successfully
           schema:
-            $ref: "#/definitions/ChannelUnread"
+            $ref: "#/definitions/ChannelUnreadAt"
         '400':
           $ref: '#/responses/BadRequest'
         '401':
