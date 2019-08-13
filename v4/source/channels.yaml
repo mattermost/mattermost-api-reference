@@ -1583,3 +1583,57 @@
               -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
               -H 'Content-Type: application/json' \
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
+
+  '/channels/{channel_id}/members_minus_group_members':
+    get:
+      tags:
+        - channels
+      summary: Channel members minus group members.
+      description: |
+        Get the set of users who are members of the channel minus the set of users who are members of the given groups.
+        Each user object contains an array of group objects representing the group memberships for that user.
+        Each user object contains the boolean fields `scheme_guest`, `scheme_user`, and `scheme_admin` representing the roles that user has for the given channel.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.14
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+        - name: group_ids
+          in: query
+          description: A comma-separated list of group ids.
+          required: true
+          default: ""
+          type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of users per page.
+          default: "0"
+          type: string
+      responses:
+        '200':
+          description: Successfully returns users specified by the pagination, and the total_count.
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'curl'
+          source: |
+            curl -X GET \
+              'http://your-mattermost-url.com/api/v4/channels/3wyp678obid8pggjmhmhwpah1r/members_minus_group_members?group_ids=eoezijg8zffgjmch8icy5bjd1e,ugaw6wjc3tfxpcr1eq5u5k8dhe&page=0&per_page=100' \
+              -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
+              -H 'Content-Type: application/json' \
+              -H 'X-Requested-With: XMLHttpRequest'
