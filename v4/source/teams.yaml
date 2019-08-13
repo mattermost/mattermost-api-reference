@@ -1552,7 +1552,7 @@
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
 
   '/teams/{team_id}/members_minus_group_members':
-    put:
+    get:
       tags:
         - teams
       summary: Team members minus group members.
@@ -1590,8 +1590,6 @@
       responses:
         '200':
           description: Successfully returns users specified by the pagination, and the total_count.
-          schema:
-            $ref: '#/definitions/StatusOK'
         '400':
           $ref: '#/responses/BadRequest'
         '401':
