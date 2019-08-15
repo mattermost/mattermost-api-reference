@@ -184,6 +184,13 @@
             type: array
             items:
               type: string
+        - name: since
+          in: query
+          description: |
+            Only return users that have been modified since the given Unix timestamp (in milliseconds).
+
+            __Minimum server version__: 5.14
+          type: integer
       responses:
         '200':
           description: User list retrieval successful
@@ -2250,3 +2257,35 @@
             userID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             userTermsOfService, resp := Client.GetUserTermsOfService(userID, "")
+
+  /users/sessions/revoke/all:
+    post:
+      tags:
+        - users
+      summary: Revoke all sessions from all users.
+      description: |
+        For any session currently on the server (including admin) it will be revoked.
+        Clients will be notified to log out users.
+
+        __Minimum server version__: 5.14
+
+        ##### Permissions
+        
+        Must have `manage_system` permission.
+
+      responses:
+        '200':
+          description: Sessions successfully revoked.
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            response, err := Client.RevokeSessionsFromAllUsers()

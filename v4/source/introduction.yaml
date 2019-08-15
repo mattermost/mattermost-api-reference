@@ -386,7 +386,7 @@ tags:
   - name: terms of service
     description: Endpoints for getting and updating custom terms of service.
 x-tagGroups:
-  - name: Introduction
+  - name: Overview
     tags:
       - introduction
       - schema
@@ -401,6 +401,7 @@ x-tagGroups:
   - name: Endpoints
     tags:
       - users
+      - bots
       - teams
       - channels
       - posts

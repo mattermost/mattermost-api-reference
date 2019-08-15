@@ -265,6 +265,12 @@ definitions:
         type: object
         additionalProperties:
           $ref: '#/definitions/Post'
+      next_post_id:
+        type: string
+        description: The ID of next post. Not omitted when empty or not relevant.
+      prev_post_id:
+        type: string
+        description: The ID of previous post. Not omitted when empty or not relevant.
 
   PostListWithSearchMatches:
     type: object
