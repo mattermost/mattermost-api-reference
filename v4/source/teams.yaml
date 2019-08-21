@@ -72,6 +72,10 @@
           description: The number of teams per page.
           default: "60"
           type: string
+        - name: include_total_count
+          in: query
+          type: boolean
+          default: false
       responses:
         '200':
           description: Team list retrieval successful
