@@ -101,6 +101,53 @@
             // TestEmail
             ok, resp := Client.TestEmail(&config)
 
+  '/site_url/test':
+    post:
+      tags:
+        - system
+      summary: Checks the validity of a Site URL
+      description: |
+        Sends a Ping request to the mattermost server using the specified Site URL.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - site_url
+            properties:
+              site_url:
+                type: string
+                description: The Site URL to test
+      responses:
+        '200':
+          description: Site URL is valid
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          description: Site URL is not valid
+          schema:
+            $ref: "#/definitions/AppError"
+        '403':
+          $ref: '#/responses/Forbidden'
+        '500':
+          $ref: '#/responses/InternalServerError'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            siteURL := "https://your-new-mattermost-url.com"
+
+            // TestSiteURL
+            ok, resp := Client.TestSiteURL(siteUrl)
+
   '/file/s3_test':
     post:
       tags:
