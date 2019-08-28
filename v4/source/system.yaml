@@ -130,7 +130,7 @@
         '400':
           description: Site URL is not valid
           schema:
-            $ref: "#/definitions/AppError"
+            $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
         '500':
