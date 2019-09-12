@@ -108,8 +108,11 @@
       summary: Checks the validity of a Site URL
       description: |
         Sends a Ping request to the mattermost server using the specified Site URL.
+
         ##### Permissions
         Must have `manage_system` permission.
+
+        __Minimum server version__: 5.16
       parameters:
         - in: body
           name: body
@@ -128,9 +131,7 @@
           schema:
             $ref: "#/definitions/StatusOK"
         '400':
-          description: Site URL is not valid
-          schema:
-            $ref: '#/responses/BadRequest'
+          $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
         '500':
