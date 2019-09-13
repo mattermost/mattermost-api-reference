@@ -404,6 +404,25 @@ definitions:
       mention_count:
         type: integer
 
+  ChannelUnreadAt:
+    type: object
+    properties:
+      team_id:
+        description: The ID of the team the channel belongs to.
+        type: string
+      channel_id:
+        description: The ID of the channel the user has access to..
+        type: string
+      msg_count:
+        description: No. of messages the user has already read.
+        type: integer
+      mention_count:
+        description: No. of mentions the user has within the unread posts of the channel.
+        type: integer
+      last_viewed_at:
+        description: time in milliseconds when the user last viewed the channel.
+        type: integer
+
   Session:
     type: object
     properties:
