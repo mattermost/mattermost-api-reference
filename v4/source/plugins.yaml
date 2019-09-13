@@ -45,7 +45,7 @@
               "io/ioutil"
               "log"
 
-              "github.com/mattermost/platform/model"
+              "github.com/mattermost/mattermost-server/model"
             )
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -97,7 +97,7 @@
       x-code-samples:
         - lang: 'Go'
           source: |
-            import "github.com/mattermost/platform/model"
+            import "github.com/mattermost/mattermost-server/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -142,7 +142,7 @@
         - lang: 'Go'
           source: |
             import (
-              "github.com/mattermost/platform/model"
+              "github.com/mattermost/mattermost-server/model"
             )
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -189,7 +189,7 @@
       x-code-samples:
         - lang: 'Go'
           source: |
-            import "github.com/mattermost/platform/model"
+            import "github.com/mattermost/mattermost-server/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -231,7 +231,7 @@
       x-code-samples:
         - lang: 'Go'
           source: |
-            import "github.com/mattermost/platform/model"
+            import "github.com/mattermost/mattermost-server/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -273,7 +273,7 @@
       x-code-samples:
         - lang: 'Go'
           source: |
-            import "github.com/mattermost/platform/model"
+            import "github.com/mattermost/mattermost-server/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -312,7 +312,7 @@
       x-code-samples:
         - lang: 'Go'
           source: |
-            import "github.com/mattermost/platform/model"
+            import "github.com/mattermost/mattermost-server/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
