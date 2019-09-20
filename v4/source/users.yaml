@@ -566,9 +566,9 @@
             nickname := "testNickname"
             locale := "en"
             position := "testPosition"
-            props = model.StringMap{}
+            props := model.StringMap{}
             props["testPropKey"] = "testPropValue"
-            notifyProps = model.StringMap{}
+            notifyProps := model.StringMap{}
             notifyProps["comment"] = "somethingrandom"
 
             user, resp := Client.UpdateUser(&model.User{
@@ -685,13 +685,13 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             patch := &model.UserPatch{}
-            patch.Email = "test@domain.com"
-            patch.Username = "testUsername"
-            patch.FirstName = "testFirstname"
-            patch.LastName = "testLastname"
-            patch.Nickname = "testNickname"
-            patch.Locale = "en"
-            patch.Position = "testPosition"
+            patch.Email = model.NewString("test@domain.com")
+            patch.Username = model.NewString("testUsername")
+            patch.FirstName = model.NewString("testFirstname")
+            patch.LastName = model.NewString("testLastname")
+            patch.Nickname = model.NewString("testNickname")
+            patch.Locale = model.NewString("en")
+            patch.Position = model.NewString("testPosition")
             patch.Props = model.StringMap{}
             patch.Props["testPropKey"] = "testPropValue"
             patch.NotifyProps = model.StringMap{}
