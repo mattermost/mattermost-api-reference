@@ -237,6 +237,7 @@ tags:
       - plugin_statuses_changed
       - post_deleted
       - post_edited
+      - post_unread
       - posted
       - preference_changed
       - preferences_changed
