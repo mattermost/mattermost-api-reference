@@ -1174,9 +1174,9 @@
         - users
       summary: Demote a user to a guest
       description: |
-        Convert a regular user into a guest. This is will convert the user
-        into a guest for the whole system which includes any team and channel
-        membership.
+        Convert a regular user into a guest. This will convert the user into a
+        guest for the whole system while retaining their existing team and
+        channel memberships.
 
         __Minimum server version__: 5.16
 
@@ -1222,9 +1222,9 @@
         - users
       summary: Promote a guest to user
       description: |
-        Convert a guest into a regular user. This is will convert the guest
-        into a user for the whole system which includes any team and channel
-        membership and joining automatically to the default channels.
+        Convert a guest into a regular user. This will convert the guest into a
+        user for the whole system while retaining any team and channel
+        memberships and automatically joining them to the default channels.
 
         __Minimum server version__: 5.16
 
