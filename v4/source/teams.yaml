@@ -1351,6 +1351,72 @@
 
             ok, resp := Client.InviteUsersToTeam(teamID, []string{"test@domain.com", "test2@domain.com"})
 
+  '/teams/{team_id}/invite-guests/email':
+    post:
+      tags:
+        - teams
+      summary: Invite guests to the team by email
+      description: |
+        Invite guests to existing team channels usign the user's email.
+
+        __Minimum server version__: 5.16
+
+        ##### Permissions
+        Must have `invite_guest` permission for the team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Guests invite information
+          required: true
+          schema:
+            type: object
+            required:
+              - emails
+              - channels
+            properties:
+              emails:
+                type: array
+                items:
+                  type: string
+                description: List of emails
+              channels:
+                type: array
+                items:
+                  type: string
+                description: List of channel ids
+              message:
+                type: string
+                description: Message to include in the invite
+      responses:
+        '200':
+          description: Guests invite successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+            channel1ID := "wu6wyxm9spgwtjaycjrcihnqtr"
+            channel2ID := "ymzsgjw1tprniqtzyb7g3cmuuc"
+
+            ok, resp := Client.InviteGuestsToTeam(teamID, []string{"test@domain.com", "test2@domain.com"}, []string{channel1ID, channel2ID}, "Please join to our mattermost team to keep working in the project")
+
   '/teams/invites/email':
     delete:
       tags:

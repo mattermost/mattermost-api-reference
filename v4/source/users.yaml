@@ -1167,6 +1167,102 @@
             userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
 
             mfaSecret, resp = Client.GenerateMfaSecret(userID)
+
+  /users/{user_id}/demote:
+    post:
+      tags:
+        - users
+      summary: Demote a user to a guest
+      description: |
+        Convert a regular user into a guest. This will convert the user into a
+        guest for the whole system while retaining their existing team and
+        channel memberships.
+
+        __Minimum server version__: 5.16
+
+        ##### Permissions
+        Must be logged in as the user or have the `demote_to_guest` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User successfully demoted
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
+
+            ok, resp = Client.demoteUserToGuest(userID)
+
+
+  /users/{user_id}/promote:
+    post:
+      tags:
+        - users
+      summary: Promote a guest to user
+      description: |
+        Convert a guest into a regular user. This will convert the guest into a
+        user for the whole system while retaining any team and channel
+        memberships and automatically joining them to the default channels.
+
+        __Minimum server version__: 5.16
+
+        ##### Permissions
+        Must be logged in as the user or have the `promote_guest` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Guest successfully promoted
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
+
+            ok, resp = Client.PromoteGuestToUser(userID)
+
   /users/mfa:
     post:
       tags:
