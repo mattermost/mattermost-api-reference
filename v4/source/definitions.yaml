@@ -2381,6 +2381,45 @@ definitions:
       has_syncables:
         type: boolean
 
+  GroupSyncableTeam:
+    type: object
+    properties:
+      team_id:
+        type: string
+      group_id:
+        type: string
+      auto_add:
+        type: boolean
+      create_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64
+
+  GroupSyncableChannel:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      group_id:
+        type: string
+      auto_add:
+        type: boolean
+      create_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64 
+
+
   Bot:
     description: A bot account
     type: object
