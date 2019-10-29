@@ -6,9 +6,6 @@
       description: |
         Retrieve the list of groups.
 
-        ##### Permissions
-        Must have `manage_system` permission.
-
         __Minimum server version__: 5.11
       parameters:
         - name: page
@@ -20,6 +17,22 @@
           in: query
           description: The number of groups per page.
           default: "60"
+          type: string
+        - name: q
+          in: query
+          description: string to query groups by display name or name
+          type: string
+        - name: include_member_count
+          in: query
+          description: boolean which adds the `member_count` attribute to each group JSON object
+          type: boolean
+        - name: not_associated_to_team
+          in: query
+          description: string to exclude groups that are already linked to a given team via a `GroupTeams` table record
+          type: string
+        - name: not_associated_to_channel
+          in: query
+          description: string to exclude channels that are already linked to a given team via a `GroupChannels` table record
           type: string
       responses:
         '200':
