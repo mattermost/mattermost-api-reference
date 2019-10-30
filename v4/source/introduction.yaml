@@ -178,7 +178,7 @@ tags:
       }
       ```
 
-      If successful, you will receive a standard OK response from the webhook:
+      If successful, you will receive a standard OK response over the WebSocket connection:
 
       ```
       {
