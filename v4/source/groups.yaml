@@ -1,3 +1,576 @@
+  '/groups':
+    get:
+      tags:
+        - groups
+      summary: Get groups
+      description: |
+        Retrieve the list of groups.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of groups per page.
+          default: "60"
+          type: string
+        - name: q
+          in: query
+          description: string to query groups by display name or name
+          type: string
+        - name: include_member_count
+          in: query
+          description: boolean which adds the `member_count` attribute to each group JSON object
+          type: boolean
+        - name: not_associated_to_team
+          in: query
+          description: string to exclude groups that are already linked to a given team via a `GroupTeams` table record
+          type: string
+        - name: not_associated_to_channel
+          in: query
+          description: string to exclude channels that are already linked to a given team via a `GroupChannels` table record
+          type: string
+      responses:
+        '200':
+          description: Group list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/groups/{group_id}':
+    get:
+      tags:
+        - groups
+      summary: Get a group
+      description: |
+        Get group from the provided group id string
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Group retrieval successful
+          schema:
+            $ref: '#/definitions/Group'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/groups/{group_id}/patch':
+    put:
+      tags:
+        - groups
+      summary: Patch a group
+      description: |
+        Partially update a group by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Group object that is to be updated
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              display_name:
+                type: string
+              description:
+                 type: string
+
+      responses:
+        '200':
+          description: Group patch successful
+          schema:
+            $ref: '#/definitions/Group'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'       
+
+  '/groups/{group_id}/teams/{team_id}/link':
+    post:
+      tags:
+        - groups
+      summary: Link a team to a group
+      description: |
+        Link a team to a group
+        ##### Permissions
+        Must have `manage_team` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+
+      responses:
+        '201':
+          description: Team successfully linked to group
+          schema:
+            $ref: '#/definitions/GroupSyncableTeam'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+    delete:
+      tags:
+        - groups
+      summary: Delete a link from a team to a group
+      description: |
+        Delete a link from a team to a group
+        ##### Permissions
+        Must have `manage_team` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+
+      responses:
+        '200':
+          description: Successfully deleted link between team and group
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/groups/{group_id}/channels/{channel_id}/link':
+    post:
+      tags:
+        - groups
+      summary: Link a channel to a group
+      description: |
+        Link a channel to a group
+        ##### Permissions
+        If the channel is private, you must have `manage_private_channel_members` permission.
+        Otherwise, you must have the `manage_public_channel_members` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+
+      responses:
+        '201':
+          description: Channel successfully linked to group
+          schema:
+            $ref: '#/definitions/GroupSyncableChannel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+    delete:
+      tags:
+        - groups
+      summary: Delete a link from a channel to a group
+      description: |
+        Delete a link from a channel to a group
+        ##### Permissions
+        If the channel is private, you must have `manage_private_channel_members` permission.
+        Otherwise, you must have the `manage_public_channel_members` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+
+      responses:
+        '200':
+          description: Successfully deleted link between channel and group
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+
+  '/groups/{group_id}/teams/{team_id}':
+    get:
+      tags:
+        - groups
+      summary: Get GroupSyncable from Team ID
+      description: |
+        Get the GroupSyncable object with group_id and team_id from params
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+
+      responses:
+        '200':
+          description: GroupSyncable object retrieval successful
+          schema:
+            $ref: '#/definitions/GroupSyncableTeam'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  
+  '/groups/{group_id}/channels/{channel_id}':
+    get:
+      tags:
+        - groups
+      summary: Get GroupSyncable from channel ID
+      description: |
+        Get the GroupSyncable object with group_id and channel_id from params
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+
+      responses:
+        '200':
+          description: GroupSyncable object retrieval successful
+          schema:
+            $ref: '#/definitions/GroupSyncableChannel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+        '500':
+          $ref: '#/responses/InternalServerError'
+
+  '/groups/{group_id}/teams':
+    get:
+      tags:
+        - groups
+      summary: Get group teams
+      description: |
+        Retrieve the list of teams associated to the group
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+
+      responses:
+        '200':
+          description: Teams list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GroupSyncableTeams'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+        '500':
+          $ref: '#/responses/InternalServerError'
+  
+  '/groups/{group_id}/channels':
+    get:
+      tags:
+        - groups
+      summary: Get group channels
+      description: |
+        Retrieve the list of channels associated to the group
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+
+      responses:
+        '200':
+          description: Channel list retrieval successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GroupSyncableChannels'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+        '500':
+          $ref: '#/responses/InternalServerError'
+
+  '/groups/{group_id}/teams/{team_id}/patch':
+    put:
+      tags:
+        - groups
+      summary: Patch a GroupSyncable associated to Team
+      description: |
+        Partially update a GroupSyncable by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: GroupSyncable object that is to be updated
+          required: true
+          schema:
+            type: object
+            properties:
+              auto_add:
+                type: boolean
+
+      responses:
+        '200':
+          description: GroupSyncable patch successful
+          schema:
+            $ref: '#/definitions/GroupSyncableTeam'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'   
+
+  '/groups/{group_id}/channels/{channel_id}/patch':
+    put:
+      tags:
+        - groups
+      summary: Patch a GroupSyncable associated to Channel
+      description: |
+        Partially update a GroupSyncable by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: GroupSyncable object that is to be updated
+          required: true
+          schema:
+            type: object
+            properties:
+              auto_add:
+                type: boolean
+
+      responses:
+        '200':
+          description: GroupSyncable patch successful
+          schema:
+            $ref: '#/definitions/GroupSyncableChannel'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'   
+
+  '/groups/{group_id}/members':
+    get:
+      tags:
+        - groups
+      summary: Get group users
+      description: |
+        Retrieve the list of users associated with a given group.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of groups per page.
+          default: "60"
+          type: string
+      responses:
+        '200':
+          description: User list retrieval successful
+          schema:
+            type: object
+            properties:
+              members:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+              total_member_count:
+                type: integer
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+        '500':
+          $ref: '#/responses/InternalServerError'
+
+
   '/channels/{channel_id}/groups':
     get:
       tags:
@@ -39,6 +612,10 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+        '500':
+          $ref: '#/responses/InternalServerError'
 
   '/teams/{team_id}/groups':
     get:
@@ -81,3 +658,7 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+        '500':
+          $ref: '#/responses/InternalServerError'
