@@ -185,9 +185,7 @@
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-            description: Plugin not installed
-            schema:
-                $ref: '#/responses/NotFound'
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
       x-code-samples:
