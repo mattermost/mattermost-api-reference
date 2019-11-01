@@ -49,6 +49,13 @@ definitions:
         type: boolean
       timezone:
         $ref: '#/definitions/Timezone'
+      terms_of_service_id:
+        description: ID of accepted terms of service, if any. This field is not present if empty.
+        type: string
+      terms_of_service_create_at:
+        description: The time in milliseconds the user accepted the terms of service
+        type: integer
+        format: int64
 
   UsersStats:
     type: object
@@ -258,6 +265,12 @@ definitions:
         type: object
         additionalProperties:
           $ref: '#/definitions/Post'
+      next_post_id:
+        type: string
+        description: The ID of next post. Not omitted when empty or not relevant.
+      prev_post_id:
+        type: string
+        description: The ID of previous post. Not omitted when empty or not relevant.
 
   PostListWithSearchMatches:
     type: object
@@ -295,7 +308,7 @@ definitions:
             type:
               type: string
               description: The type of content that is embedded in this point.
-              enum: ["image", "message_attachment", "opengraph"]
+              enum: ["image", "message_attachment", "opengraph", "link"]
             url:
               type: string
               description: The URL of the embedded content, if one exists.
@@ -389,6 +402,25 @@ definitions:
       msg_count:
         type: integer
       mention_count:
+        type: integer
+
+  ChannelUnreadAt:
+    type: object
+    properties:
+      team_id:
+        description: The ID of the team the channel belongs to.
+        type: string
+      channel_id:
+        description: The ID of the channel the user has access to..
+        type: string
+      msg_count:
+        description: No. of messages the user has already read.
+        type: integer
+      mention_count:
+        description: No. of mentions the user has within the unread posts of the channel.
+        type: integer
+      last_viewed_at:
+        description: time in milliseconds when the user last viewed the channel.
         type: integer
 
   Session:
@@ -1092,8 +1124,6 @@ definitions:
             type: boolean
           FileLevel:
             type: string
-          FileFormat:
-            type: string
           FileLocation:
             type: string
           EnableWebhookDebugging:
@@ -1566,8 +1596,6 @@ definitions:
           EnableFile:
             type: boolean
           FileLevel:
-            type: boolean
-          FileFormat:
             type: boolean
           FileLocation:
             type: boolean
@@ -2169,9 +2197,32 @@ definitions:
       version:
         type: string
         description: Version number of the plugin.
+      min_server_version:
+        type: string
+        description: |
+          The minimum Mattermost server version required for the plugin.
+
+          Available as server version 5.6.
       backend:
         type: object
+        description: Deprecated in Mattermost 5.2 release.
         properties:
+          executable:
+            type: string
+            description: Path to the executable binary.
+      server:
+        type: object
+        properties:
+          executables:
+            type: object
+            description: Paths to executable binaries, specifying multiple entry points for different platforms when bundled together in a single plugin.
+            properties:
+              linux-amd64:
+                type: string
+              darwin-amd64:
+                type: string
+              windows-amd64:
+                type: string
           executable:
             type: string
             description: Path to the executable binary.
@@ -2302,6 +2353,154 @@ definitions:
       type: array
       items:
         $ref: '#/definitions/Reaction'
+
+  Group:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      display_name:
+        type: string
+      description:
+        type: string
+      source:
+        type: string
+      remote_id:
+        type: string
+      create_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      has_syncables:
+        type: boolean
+
+  GroupSyncableTeam:
+    type: object
+    properties:
+      team_id:
+        type: string
+      group_id:
+        type: string
+      auto_add:
+        type: boolean
+      create_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64
+
+  GroupSyncableChannel:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      group_id:
+        type: string
+      auto_add:
+        type: boolean
+      create_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64
+
+
+  GroupSyncableTeams:
+    type: object
+    properties:
+      team_id:
+        type: string
+      team_display_name:
+        type: string
+      team_type:
+        type: string
+      group_id:
+        type: string
+      auto_add:
+        type: boolean
+      create_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64
+
+  GroupSyncableChannels:
+    type: object
+    properties:
+      channel_id:
+        type: string
+      channel_display_name:
+        type: string
+      channel_type:
+        type: string
+      team_id:
+        type: string
+      team_display_name:
+        type: string
+      team_type:
+        type: string
+      group_id:
+        type: string
+      auto_add:
+        type: boolean
+      create_at:
+        type: integer
+        format: int64
+      delete_at:
+        type: integer
+        format: int64
+      update_at:
+        type: integer
+        format: int64 
+
+
+  Bot:
+    description: A bot account
+    type: object
+    properties:
+      user_id:
+        description: The user id of the associated user entry.
+        type: string
+      create_at:
+        description: The time in milliseconds a bot was created
+        type: integer
+        format: int64
+      update_at:
+        description: The time in milliseconds a bot was last updated
+        type: integer
+        format: int64
+      delete_at:
+        description: The time in milliseconds a bot was deleted
+        type: integer
+        format: int64
+      username:
+        type: string
+      display_name:
+        type: string
+      description:
+        type: string
+      owner_id:
+        description: The user id of the user that currently owns this bot.
+        type: string
 
 externalDocs:
   description: Find out more about Mattermost

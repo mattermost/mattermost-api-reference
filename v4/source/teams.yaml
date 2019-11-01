@@ -39,6 +39,19 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            newTeam, err := Client.CreateTeam(&model.Team{
+              Name:        "teamName",
+              DisplayName: "TeamDisplayName",
+              Type:        "O",
+            })
 
     get:
       tags:
@@ -59,6 +72,10 @@
           description: The number of teams per page.
           default: "60"
           type: string
+        - name: include_total_count
+          in: query
+          type: boolean
+          default: false
       responses:
         '200':
           description: Team list retrieval successful
@@ -70,6 +87,15 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teams, resp := Client.GetAllTeams("", 0, 100)
 
   '/teams/{team_id}':
     get:
@@ -99,6 +125,17 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            t, err := Client.GetTeam(teamID, "")
 
     put:
       tags:
@@ -121,6 +158,7 @@
           schema:
             type: object
             required:
+              - id
               - display_name
               - description
               - company_name
@@ -128,6 +166,8 @@
               - invite_id
               - allow_open_invite
             properties:
+              id:
+                type: string
               display_name:
                 type: string
               description:
@@ -153,6 +193,26 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+            inviteID := "qjda3stwafbgpqjaxej3k76sga"
+
+            uteam, resp := Client.UpdateTeam(&model.Team{
+              Id:              teamID,
+              DisplayName:     "displayName",
+              Description:     "description",
+              CompanyName:     "companyName",
+              AllowedDomains:  "allowedDomains",
+              InviteId:        inviteID,
+              AllowOpenInvite: false,
+            })
 
     delete:
       tags:
@@ -189,6 +249,21 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            // Non-permanent deletion
+            ok, resp := Client.SoftDeleteTeam(&model.Team{Id: teamID})
+
+            // Permanent deletion
+            ok, resp := Client.PermanentDeleteTeam(&model.Team{Id: teamID})
 
   '/teams/{team_id}/patch':
     put:
@@ -233,6 +308,23 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            patch := &model.TeamPatch{}
+            patch.DisplayName = model.NewString("Other name")
+            patch.Description = model.NewString("Other description")
+            patch.CompanyName = model.NewString("Other company name")
+            patch.AllowOpenInvite = model.NewBool(true)
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            team, resp := Client.PatchTeam(teamID, patch)
 
   '/teams/name/{name}':
     get:
@@ -262,6 +354,15 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            team, resp := Client.GetTeamByName("teamName", "")
 
   '/teams/search':
     post:
@@ -301,6 +402,15 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teams, resp := Client.SearchTeams(&model.TeamSearch{Term: "searchTerm"})
 
   '/teams/name/{name}/exists':
     get:
@@ -309,6 +419,8 @@
       summary: Check if team exists
       description: |
         Check if the team exists based on a team name.
+        ##### Permissions
+        Must be authenticated.
       parameters:
         - name: name
           in: path
@@ -326,6 +438,15 @@
           $ref: '#/responses/Unauthorized'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            exists, resp := Client.TeamExists("teamName", "")
 
   '/users/{user_id}/teams':
     get:
@@ -355,6 +476,17 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            teams, resp := Client.GetTeamsForUser(userID, "")
 
   '/teams/{team_id}/members':
     get:
@@ -396,7 +528,17 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
 
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            members, resp := Client.GetTeamMembers(teamID, 0, 100, "")
     post:
       tags:
         - teams
@@ -434,6 +576,18 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+            userID := "qjda3stwafbgpqjaxej3k76sga"
+
+            teamMember, resp := Client.AddTeamMember(teamID, userID)
 
   '/teams/members/invite':
     post:
@@ -463,6 +617,17 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            tokenID := "qjda3stwafbgpqjaxej3k76sga"
+
+            tm, resp = Client.AddTeamMemberFromInvite(tokenID, "")
 
   '/teams/{team_id}/members/batch':
     post:
@@ -501,6 +666,20 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "IJyUQLwh1CO9ahbzaQwWwc0ZnV"
+
+            userID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+            userID2 := "NqCSr5HMDZjrWS74IEmedvlOYf"
+
+            tm, resp := Client.AddTeamMembers(teamID, []string{userID, userID2})
 
   '/users/{user_id}/teams/members':
     get:
@@ -532,6 +711,17 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            teamMembers, resp = Client.GetTeamMembersForUser(userID, "")
 
   '/teams/{team_id}/members/{user_id}':
     get:
@@ -566,6 +756,18 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+            userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+
+            teamMember, resp = Client.GetTeamMember(teamID, userID, "")
 
     delete:
       tags:
@@ -599,6 +801,18 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+            userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+
+            ok, resp = Client.RemoveTeamMember(teamID, userID)
 
   '/teams/{team_id}/members/ids':
     post:
@@ -636,6 +850,20 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := zWEyrTZ7GZ22aBSfoX60iWryTY
+
+            userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+            userID2 := "UAFalLvtKwNKABAnmwR7uGB5md"
+
+            tm, resp := Client.GetTeamMembersByIds(teamID, []string{userID, userID2})
 
   '/teams/{team_id}/stats':
     get:
@@ -665,6 +893,57 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            stats, resp := Client.GetTeamStats(teamID, "")
+
+  '/teams/{team_id}/regenerate_invite_id':
+    post:
+      tags:
+        - teams
+      summary: Regenerate the Invite ID from a Team
+      description: |
+        Regenerates the invite ID used in invite links of a team
+        ##### Permissions
+        Must be authenticated and have the `manage_team` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Team Invite ID regenerated
+          schema:
+            $ref: '#/definitions/Team'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            team, resp := Client.RegenerateTeamInviteId(teamID)
 
   '/teams/{team_id}/image':
     get:
@@ -697,6 +976,17 @@
           $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            icon, resp = Client.GetTeamIcon(teamID, "")
     post:
       tags:
         - teams
@@ -735,7 +1025,27 @@
           $ref: '#/responses/InternalServerError'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import (
+              "io/ioutil"
+              "log"
 
+              "github.com/mattermost/mattermost-server/model"
+            )
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            data, err := ioutil.ReadFile("icon.png")
+            if err != nil {
+              log.Fatal(err)
+            }
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            ok, resp := Client.SetTeamIcon(teamID, data)
     delete:
       tags:
         - teams
@@ -768,6 +1078,17 @@
           $ref: '#/responses/InternalServerError'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            ok, resp = Client.RemoveTeamIcon(teamID)
 
   '/teams/{team_id}/members/{user_id}/roles':
     put:
@@ -813,6 +1134,18 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+            userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+
+            ok, resp := Client.UpdateTeamMemberRoles(teamID, userID, "team_user team_admin")
 
   '/teams/{team_id}/members/{user_id}/schemeRoles':
     put:
@@ -864,6 +1197,21 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+            userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+
+            ok, resp := Client.UpdateTeamMemberSchemeRoles(teamID, userID, &model.SchemeRoles{
+              SchemeAdmin: true,
+              SchemeUser:  true,
+            })
 
   '/users/{user_id}/teams/unread':
     get:
@@ -898,6 +1246,18 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            teams, resp := Client.GetTeamsUnreadForUser(userID, teamID)
 
   '/users/{user_id}/teams/{team_id}/unread':
     get:
@@ -932,6 +1292,18 @@
           $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            teamUnread, resp := Client.GetTeamUnread(userID, teamID)
 
   '/teams/{team_id}/invite/email':
     post:
@@ -967,6 +1339,113 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            ok, resp := Client.InviteUsersToTeam(teamID, []string{"test@domain.com", "test2@domain.com"})
+
+  '/teams/{team_id}/invite-guests/email':
+    post:
+      tags:
+        - teams
+      summary: Invite guests to the team by email
+      description: |
+        Invite guests to existing team channels usign the user's email.
+
+        __Minimum server version__: 5.16
+
+        ##### Permissions
+        Must have `invite_guest` permission for the team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Guests invite information
+          required: true
+          schema:
+            type: object
+            required:
+              - emails
+              - channels
+            properties:
+              emails:
+                type: array
+                items:
+                  type: string
+                description: List of emails
+              channels:
+                type: array
+                items:
+                  type: string
+                description: List of channel ids
+              message:
+                type: string
+                description: Message to include in the invite
+      responses:
+        '200':
+          description: Guests invite successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+            channel1ID := "wu6wyxm9spgwtjaycjrcihnqtr"
+            channel2ID := "ymzsgjw1tprniqtzyb7g3cmuuc"
+
+            ok, resp := Client.InviteGuestsToTeam(teamID, []string{"test@domain.com", "test2@domain.com"}, []string{channel1ID, channel2ID}, "Please join to our mattermost team to keep working in the project")
+
+  '/teams/invites/email':
+    delete:
+      tags:
+        - teams
+      summary: Invalidate active email invitations
+      description: |
+        Invalidate active email invitations that have not been accepted by the user.
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Email invites successfully revoked
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            ok, resp := Client.InvalidateEmailInvites()
 
   '/teams/{team_id}/import':
     post:
@@ -1012,7 +1491,28 @@
           $ref: '#/responses/BadRequest'
         '403':
           $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import (
+              "encoding/binary"
+              "io/ioutil"
+              "log"
 
+              "github.com/mattermost/mattermost-server/model"
+            )
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            data, err = ioutil.ReadFile("to_import.zip")
+            if err != nil && len(data) == 0 {
+              log.Fatal("Error while reading file.")
+            }
+
+            teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            fileResp, resp := Client.ImportTeam(data, binary.Size(data), "slack", "to_import.zip", teamID)
   '/teams/invite/{invite_id}':
     get:
       tags:
@@ -1047,6 +1547,16 @@
                 type: string
         '400':
           $ref: '#/responses/BadRequest'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            inviteID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
+            team, resp = Client.GetTeamInviteInfo(inviteID)
 
   '/teams/{team_id}/scheme':
     put:
@@ -1110,3 +1620,56 @@
               -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
               -H 'Content-Type: application/json' \
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
+
+  '/teams/{team_id}/members_minus_group_members':
+    get:
+      tags:
+        - teams
+      summary: Team members minus group members.
+      description: |
+        Get the set of users who are members of the team minus the set of users who are members of the given groups.
+        Each user object contains an array of group objects representing the group memberships for that user.
+        Each user object contains the boolean fields `scheme_guest`, `scheme_user`, and `scheme_admin` representing the roles that user has for the given team.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.14
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          type: string
+        - name: group_ids
+          in: query
+          description: A comma-separated list of group ids.
+          required: true
+          default: ""
+          type: string
+        - name: page
+          in: query
+          description: The page to select.
+          default: "0"
+          type: string
+        - name: per_page
+          in: query
+          description: The number of users per page.
+          default: "0"
+          type: string
+      responses:
+        '200':
+          description: Successfully returns users specified by the pagination, and the total_count.
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'curl'
+          source: |
+            curl 'http://your-mattermost-url.com/api/v4/teams/fcnst115y3y7xmzzp5uq34u8ce/members_minus_group_members?group_ids=eoezijg8zffgjmch8icy5bjd1e,ugaw6wjc3tfxpcr1eq5u5k8dhe&page=0&per_page=100' \
+                -H 'Authorization: Bearer mq8rrfxpdfyafbnw3qfmhwkx6c' \
+                -H 'Content-Type: application/json' \
+                -H 'X-Requested-With: XMLHttpRequest'

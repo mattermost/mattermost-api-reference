@@ -4,7 +4,7 @@
         - plugins
       summary: Upload plugin
       description: |
-        Upload a plugin compressed in a .tar.gz file. Plugins and plugin uploads must be enabled in the server's config settings.
+        Upload a plugin that is contained within a compressed .tar.gz file. Plugins and plugin uploads must be enabled in the server's config settings.
 
         ##### Permissions
         Must have `manage_system` permission.
@@ -37,7 +37,30 @@
           $ref: '#/responses/TooLarge'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import (
+              "bytes"
+              "io/ioutil"
+              "log"
 
+              "github.com/mattermost/mattermost-server/model"
+            )
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            tarData, err := ioutil.ReadFile("plugin.tar.gz")
+            if err != nil {
+              log.Fatal("error while reading file")
+            }
+
+            // Not forced
+            manifest, resp := Client.UploadPlugin(bytes.NewReader(tarData))
+
+            // Forced
+            manifest, resp := Client.UploadPluginForced(bytes.NewReader(tarData))
     get:
       tags:
         - plugins
@@ -71,8 +94,69 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
 
-  /plugin/{plugin_id}:
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginsResp, resp := Client.GetPlugins()
+
+  /plugins/install_from_url:
+    post:
+      tags:
+        - plugins
+      summary: Install plugin from url
+      description: |
+        Supply a URL to a plugin compressed in a .tar.gz file. Plugins must be enabled in the server's config settings.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.14
+      parameters:
+        - name: plugin_download_url
+          in: query
+          description: URL used to download the plugin
+          required: true
+          type: string
+        - name: force
+          in: query
+          description: "Set to 'true' to overwrite a previously installed plugin with the same ID, if any"
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Plugin install successful
+          schema:
+            $ref: '#/definitions/StatusOK'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import (
+              "github.com/mattermost/mattermost-server/model"
+            )
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            url := "https://mysite.com/my-plugin.tar.gz"
+
+            // Not forced
+            manifest, resp := Client.InstallPluginFromUrl(url, false)
+
+            // Forced
+            manifest, resp := Client.InstallPluginFromUrl(url, true)
+
+  /plugins/{plugin_id}:
     delete:
       tags:
         - plugins
@@ -106,8 +190,19 @@
                 $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
 
-  /plugin/{plugin_id}/enable:
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginID := "com.mattermost.demo-plugin"
+
+            ok, resp = Client.RemovePlugin(pluginID)
+
+  /plugins/{plugin_id}/enable:
     post:
       tags:
         - plugins
@@ -137,8 +232,19 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
 
-  /plugin/{plugin_id}/disable:
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginID := "com.mattermost.demo-plugin"
+
+            ok, resp = Client.EnablePlugin(pluginID)
+
+  /plugins/{plugin_id}/disable:
     post:
       tags:
         - plugins
@@ -168,6 +274,17 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            pluginID := "com.mattermost.demo-plugin"
+
+            ok, resp = Client.DisablePlugin(pluginID)
 
   /plugins/webapp:
     get:
@@ -196,3 +313,11 @@
           $ref: '#/responses/Forbidden'
         '501':
           $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            manifests, resp := Client.GetWebappPlugins()
