@@ -683,8 +683,6 @@
 
         __Minimum server version__: 3.10
 
-        ##### Permissions
-        Must be authenticated and have the `manage_team` permission.
       parameters:
         - name: team_id
           in: path
