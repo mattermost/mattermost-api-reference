@@ -178,10 +178,10 @@
                 description: Exclude default channels from the results by setting this parameter to true.
               page:
                 type: string
-                description: The page number to return, if paginated. If this parameter is not present with the 'per_page' parameter then the results will be returned un-paged.
+                description: The page number to return, if paginated. If this parameter is not present with the `per_page` parameter then the results will be returned un-paged.
               per_page:
                 type: string
-                description: The number of entries to return per page, if paginated. If this parameter is not present with the 'page' parameter then the results will be returned un-paged.
+                description: The number of entries to return per page, if paginated. If this parameter is not present with the `page` parameter then the results will be returned un-paged.
       responses:
         '200':
           description: Paginated channel response. (Note that the non-paginated response—returned if the request body does not contain both `page` and `per_page` fields—is a simple array of channels.)
