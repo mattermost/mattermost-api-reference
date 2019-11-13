@@ -15,10 +15,6 @@
             $ref: "#/definitions/StatusOK"
         '500':
           $ref: '#/responses/InternalServerError'
-          schema:
-            type: object
-            items:
-              type: string
       x-code-samples:
         - lang: 'Go'
           source: |
