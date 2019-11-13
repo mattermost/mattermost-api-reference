@@ -13,7 +13,6 @@
           schema:
             type: string
         '404':
-          description: No brand image uploaded
           $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
@@ -98,7 +97,6 @@
         '403':
           $ref: '#/responses/Forbidden'
         '404':
-          description: No brand image uploaded
           $ref: '#/responses/NotFound'
       x-code-samples:
         - lang: 'Go'
