@@ -1396,9 +1396,9 @@
     get:
       tags:
         - channels
-      summary: Get channel members for user
+      summary: Get channel memberships and roles for a user
       description: |
-        Get all channel members on a team for a user.
+        Get all channel memberships and associated membership roles (i.e. `channel_user`, `channel_admin`) for a user on a specific team.
         ##### Permissions
         Logged in as the user and `view_team` permission for the team. Having `manage_system` permission voids the previous requirements.
       parameters:
