@@ -4,7 +4,13 @@
         - groups
       summary: Get groups
       description: |
-        Retrieve the list of groups.
+        Retrieve a list of all groups not associated to a particular channel or team.  
+        
+        `not_associated_to_team` **OR** `not_associated_to_channel` is required.  
+
+        If you use `not_associated_to_team`, you must be a team admin for that particular team (permission to manage that team).  
+        
+        If you use `not_associated_to_channel`, you must be a channel admin for that particular channel (permission to manage that channel).    
 
         __Minimum server version__: 5.11
       parameters:
@@ -20,20 +26,22 @@
           type: string
         - name: q
           in: query
-          description: string to query groups by display name or name
+          description: String to pattern match the `name` and `display_name` field. Will return all groups whose `name` and `display_name` field match any of the text.
           type: string
         - name: include_member_count
           in: query
-          description: boolean which adds the `member_count` attribute to each group JSON object
+          description: Boolean which adds the `member_count` attribute to each group JSON object
           type: boolean
         - name: not_associated_to_team
           in: query
-          description: string to exclude groups that are already linked to a given team via a `GroupTeams` table record
+          description: Team GUID which is used to return all the groups not associated to this team
           type: string
+          required: true
         - name: not_associated_to_channel
           in: query
-          description: string to exclude channels that are already linked to a given team via a `GroupChannels` table record
+          description: Group GUID which is used to return all the groups not associated to this channel
           type: string
+          required: true
       responses:
         '200':
           description: Group list retrieval successful
