@@ -646,3 +646,96 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+
+  '/busy/set':
+    post:
+      tags:
+        - system
+      summary: Set the server busy (high load) flag
+      description: |
+        Marks the server as currently having high load which disables non-critical services such as search, statuses and typing notifications.
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: secs
+          in: query
+          required: false
+          description: Number of seconds until server is automatically marked as not busy.
+          default: "3600"
+          type: string
+      responses:
+        '200':
+          description: Server busy flag set successfully
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            ok, resp := Client.SetServerBusy(300)
+
+  '/busy/clear':
+    post:
+      tags:
+        - system
+      summary: Clears the server busy (high load) flag
+      description: |
+        Marks the server as not having high load which re-enables non-critical services such as search, statuses and typing notifications.
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Server busy flag cleared successfully
+          schema:
+            $ref: "#/definitions/StatusOK"
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            ok, resp := Client.ClearServerBusy()
+
+  '/busy/expires':
+    get:
+      tags:
+        - system
+      summary: Get server busy expiry time.
+      description: |
+        Gets the timestamp corresponding to when the server busy flag will be automatically cleared. 
+        ##### Permissions
+        Must have `manage_system` permission.
+      responses:
+        '200':
+          description: Server busy expires timestamp retrieved successfully
+          schema:
+            type: object
+            properties: 
+              expires:
+                description: timestamp - number of seconds since Jan 1, 1970 UTC.
+                type: integer
+                format: int64
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // expires is a time.Time
+            expires, resp := Client.GetServerBusyExpires()
