@@ -654,6 +654,9 @@
       summary: Set the server busy (high load) flag
       description: |
         Marks the server as currently having high load which disables non-critical services such as search, statuses and typing notifications.
+
+        __Minimum server version__: 5.20
+
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
@@ -681,12 +684,21 @@
             Client.Login("email@domain.com", "Password1")
 
             ok, resp := Client.SetServerBusy(300)
+        - lang: 'curl'
+          source: |
+            curl -X POST \
+              'http://your-mattermost-url.com/api/v4/svrbusy?secs=3600' \
+              -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
+
     get:
       tags:
         - system
       summary: Get server busy expiry time.
       description: |
         Gets the timestamp corresponding to when the server busy flag will be automatically cleared. 
+
+        __Minimum server version__: 5.20
+
         ##### Permissions
         Must have `manage_system` permission.
       responses:
@@ -706,6 +718,12 @@
 
             // expires is a time.Time
             expires, resp := Client.GetServerBusyExpires()
+        - lang: 'curl'
+          source: |
+            curl -X GET \
+              'http://your-mattermost-url.com/api/v4/svrbusy' \
+              -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
+              -H 'Content-Type: application/json'
 
   '/busy/clear':
     post:
@@ -714,6 +732,9 @@
       summary: Clears the server busy (high load) flag
       description: |
         Marks the server as not having high load which re-enables non-critical services such as search, statuses and typing notifications.
+
+        __Minimum server version__: 5.20
+
         ##### Permissions
         Must have `manage_system` permission.
       responses:
@@ -732,4 +753,9 @@
             Client.Login("email@domain.com", "Password1")
 
             ok, resp := Client.ClearServerBusy()
+        - lang: 'curl'
+          source: |
+            curl -X POST \
+              'http://your-mattermost-url.com/api/v4/svrbusy/clear' \
+              -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
 
