@@ -2502,7 +2502,7 @@ definitions:
         description: The user id of the user that currently owns this bot.
         type: string
 
-  SvrBusy:
+  Server_Busy:
     type: object
     properties: 
       busy:
