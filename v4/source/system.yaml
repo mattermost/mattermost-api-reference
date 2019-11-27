@@ -647,7 +647,7 @@
         '403':
           $ref: '#/responses/Forbidden'
 
-  '/svrbusy':
+  '/server_busy':
     post:
       tags:
         - system
@@ -660,7 +660,7 @@
         ##### Permissions
         Must have `manage_system` permission.
       parameters:
-        - name: secs
+        - name: seconds
           in: query
           required: false
           description: Number of seconds until server is automatically marked as not busy.
@@ -687,7 +687,7 @@
         - lang: 'curl'
           source: |
             curl -X POST \
-              'http://your-mattermost-url.com/api/v4/svrbusy?secs=3600' \
+              'http://your-mattermost-url.com/api/v4/server_busy?seconds=3600' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
 
     get:
@@ -705,7 +705,7 @@
         '200':
           description: Server busy expires timestamp retrieved successfully
           schema:
-            $ref: '#/definitions/SvrBusy'
+            $ref: '#/definitions/Server_Busy'
         '403':
           $ref: '#/responses/Forbidden'
       x-code-samples:
@@ -721,11 +721,11 @@
         - lang: 'curl'
           source: |
             curl -X GET \
-              'http://your-mattermost-url.com/api/v4/svrbusy' \
+              'http://your-mattermost-url.com/api/v4/server_busy' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
               -H 'Content-Type: application/json'
 
-  '/busy/clear':
+  '/server_busy/clear':
     post:
       tags:
         - system
@@ -756,6 +756,6 @@
         - lang: 'curl'
           source: |
             curl -X POST \
-              'http://your-mattermost-url.com/api/v4/svrbusy/clear' \
+              'http://your-mattermost-url.com/api/v4/server_busy/clear' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
 
