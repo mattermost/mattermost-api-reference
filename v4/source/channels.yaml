@@ -410,9 +410,6 @@
               header:
                 type: string
                 description: Markdown-formatted text to display in the header of the channel
-              type:
-                type: string
-                description: "'O' for a public channel, 'P' for a private channel"
       responses:
         '200':
           description: Channel update successful
@@ -543,12 +540,70 @@
             // PatchChannel
             channel, resp := Client.PatchChannel(<CHANNELID>, patch)
 
+  '/channels/{channel_id}/privacy':
+      put:
+        tags:
+          - channels
+        summary: Update channel's privacy
+        description: |
+          Updates channel's privacy allowing changing a channel from Public to Private and back.
+
+          __Minimum server version__: 5.16
+
+          ##### Permissions
+          `manage_team` permission for the team of the channel.
+        parameters:
+          - name: channel_id
+            in: path
+            description: Channel GUID
+            required: true
+            type: string
+          - name: body
+            in: body
+            required: true
+            schema:
+              type: object
+              required:
+                - privacy
+              properties:
+                privacy:
+                  type: string
+                  description: "Channel privacy setting: 'O' for a public channel, 'P' for a private channel"
+        responses:
+          '200':
+            description: Channel conversion successful
+            schema:
+              $ref: '#/definitions/Channel'
+          '400':
+            $ref: '#/responses/BadRequest'
+          '401':
+            $ref: '#/responses/Unauthorized'
+          '403':
+            $ref: '#/responses/Forbidden'
+          '404':
+            $ref: '#/responses/NotFound'
+        x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // Update channel's privacy to Public
+            updatedChannel, resp := Client.UpdateChannelPrivacy(<CHANNELID>, model.CHANNEL_OPEN)
+
+            // Update channel's privacy to Private
+            updatedChannel, resp := Client.UpdateChannelPrivacy(<CHANNELID>, model.CHANNEL_PRIVATE)
+
+
   '/channels/{channel_id}/convert':
       post:
         tags:
           - channels
         summary: Convert a channel from public to private
         description: |
+          Will be deprecated in 6.0
+
           Convert into private channel from the provided channel id string.
 
           __Minimum server version__: 4.10
