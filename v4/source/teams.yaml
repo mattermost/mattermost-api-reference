@@ -659,7 +659,7 @@
           type: string
         - name: graceful
           in: query
-          description: 'Instead of aborting the operation if a user cannot be added, return an object in form of `{"added_members": [], "errors":{"user_id":"error"}}`'
+          description: 'Instead of aborting the operation if a user cannot be added, return an arrray that will contain both the success and added members and the ones with error, in form of `[{"member": {...}, "user_id", "...", "error": {...}}]`'
           required: false
           type: boolean
         - in: body
@@ -668,7 +668,7 @@
           schema:
             type: array
             items:
-                $ref: '#/definitions/TeamMember'
+              $ref: '#/definitions/TeamMember'
 
       responses:
         '201':
