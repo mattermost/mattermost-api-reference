@@ -228,6 +228,8 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
       x-code-samples:
@@ -270,6 +272,8 @@
           $ref: '#/responses/Unauthorized'
         '403':
           $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
         '501':
           $ref: '#/responses/NotImplemented'
       x-code-samples:
