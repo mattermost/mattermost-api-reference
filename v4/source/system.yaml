@@ -725,8 +725,7 @@
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
               -H 'Content-Type: application/json'
 
-  '/server_busy/clear':
-    post:
+    delete:
       tags:
         - system
       summary: Clears the server busy (high load) flag
@@ -755,7 +754,7 @@
             ok, resp := Client.ClearServerBusy()
         - lang: 'curl'
           source: |
-            curl -X POST \
-              'http://your-mattermost-url.com/api/v4/server_busy/clear' \
+            curl -X DELETE \
+              'http://your-mattermost-url.com/api/v4/server_busy' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
 
