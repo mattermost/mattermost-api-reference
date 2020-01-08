@@ -155,6 +155,46 @@
             listCommands, resp := Client.ListAutocompleteCommands(<TEAMID>)
 
   '/commands/{command_id}':
+    get:
+      tags:
+        - commands
+      summary: Get a command
+      description: |
+        Get a command definition based on command id string.
+        ##### Permissions
+        Must have `manage_slash_commands` permission for the team the command is in.
+
+        __Minimum server version__: 5.20
+      parameters:
+        - in: path
+          name: command_id
+          description: ID of the command to get
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Command get successful
+          schema:
+            $ref: "#/definitions/Command"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetCommand
+            cmd, resp := Client.GetCommand(<COMMANDID>)
+
     put:
       tags:
         - commands
