@@ -349,6 +349,48 @@
         '403':
           $ref: '#/responses/Forbidden'
 
+  '/config/patch':
+    put:
+      tags:
+        - system
+      summary: Patch configuration
+      description: |
+        Submit configuration to patch. As of server version 4.8, the `PluginSettings.EnableUploads` setting cannot be modified by this endpoint.
+        ##### Permissions
+        Must have `manage_system` permission.
+        __Minimum server version__: 5.20
+      parameters:
+        - in: body
+          name: body
+          description: Mattermost configuration
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
+      responses:
+        '200':
+          description: Configuration update successful
+          schema:
+            $ref: "#/definitions/Config"
+        '400':
+          $ref: '#/responses/BadRequest'
+        '403':
+          $ref: '#/responses/Forbidden'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // GetConfig
+            config, resp := Client.GetConfig()
+
+            config.TeamSettings.SiteName = "MyFancyName"
+
+            // UpdateConfig
+            updatedConfig, resp := Client.PatchConfig(config)
+
   '/license':
     post:
       tags:
