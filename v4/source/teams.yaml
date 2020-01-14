@@ -657,6 +657,11 @@
           description: Team GUID
           required: true
           type: string
+        - name: graceful
+          in: query
+          description: 'Instead of aborting the operation if a user cannot be added, return an arrray that will contain both the success and added members and the ones with error, in form of `[{"member": {...}, "user_id", "...", "error": {...}}]`'
+          required: false
+          type: boolean
         - in: body
           name: body
           required: true
@@ -664,6 +669,7 @@
             type: array
             items:
               $ref: '#/definitions/TeamMember'
+
       responses:
         '201':
           description: Team members created successfully.
