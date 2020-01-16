@@ -180,8 +180,6 @@
           $ref: '#/responses/BadRequest'
         '401':
           $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
         '404':
           $ref: '#/responses/NotFound'
       x-code-samples:
