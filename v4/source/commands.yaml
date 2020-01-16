@@ -164,7 +164,7 @@
         ##### Permissions
         Must have `manage_slash_commands` permission for the team the command is in.
 
-        __Minimum server version__: 5.20
+        __Minimum server version__: 5.22
       parameters:
         - in: path
           name: command_id
@@ -292,7 +292,7 @@
         ##### Permissions
         Must have `manage_slash_commands` permission for the team the command is currently in and the destination team.
 
-        __Minimum server version__: 5.20
+        __Minimum server version__: 5.22
       parameters:
         - in: path
           name: command_id
