@@ -166,14 +166,9 @@
 
         __Minimum server version__: 5.20
       parameters:
-        - name: command_id
-          in: path
+        - in: path
+          name: command_id
           description: ID of the command to get
-          required: true
-          type: string
-        - name: team_id
-          in: query
-          description: ID of team the command belongs to.
           required: true
           type: string
       responses:
@@ -198,7 +193,7 @@
             Client.Login("email@domain.com", "Password1")
 
             // GetCommand
-            cmd, resp := Client.GetCommand(<COMMANDID>,<TEAMID>)
+            cmd, resp := Client.GetCommand(<COMMANDID>)
 
     put:
       tags:
