@@ -43,7 +43,7 @@ tags:
       The easiest way to interact with the Mattermost Web Service API is through a language specific driver.
 
       #### Official Drivers
-      * [Mattermost JavaScript Driver](https://github.com/mattermost/mattermost-redux/blob/master/src/client/client4.js)
+      * [Mattermost JavaScript Driver](https://github.com/mattermost/mattermost-redux/blob/master/src/client/client4.ts)
       * [Mattermost Golang Driver](https://github.com/mattermost/mattermost-server/blob/master/model/client4.go)
 
       #### Community-built Drivers
