@@ -323,3 +323,131 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
             manifests, resp := Client.GetWebappPlugins()
+
+  /plugins/marketplace:
+    post:
+      tags:
+        - plugins
+      summary: Installs a marketplace plugin
+      description: |
+        Installs a plugin listed in the marketplace server.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.16
+      parameters:
+        - name: body
+          in: body
+          description: Plugin data to install.
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+              - version
+            properties:
+              id:
+                type: string
+                description: The plugin ID to install.
+              version:
+                type: string
+                description: The version of plugin to install.
+      responses:
+        '200':
+            description: Plugin installed successfully
+            schema:
+              $ref: '#/definitions/PluginManifest'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            plugin := &model.InstallMarketplacePluginRequest{
+              Id: "antivirus",
+              Version: "0.1.2",
+            }
+
+            ok, resp = Client.InstallMarketplacePlugin(plugin)
+    get:
+      tags:
+        - plugins
+      summary: Gets all the marketplace plugins
+      description: |
+        Gets all plugins from the marketplace server and plugins that are installed locally
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.16
+      parameters:
+        - name: page
+          in: query
+          description: Page number to be fetched. (not yet implemented)
+          required: false
+          type: integer
+        - name: per_page
+          in: query
+          description: Number of item per page. (not yet implemented)
+          required: false
+          type: integer
+        - name: filter
+          in: query
+          description: Set to filter plugins by ID, name, or description
+          required: false
+          type: string
+        - name: server_version
+          in: query
+          description: Set to filter minimum plugin server version. (not yet implemented)
+          required: false
+          type: string
+        - name: local_only
+          in: query
+          description: Set true to only retrive local plugins only
+          required: false
+          type: boolean
+      responses:
+        '200':
+            description: Plugins retrieval successful
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/MarketplacePlugin'
+        '400':
+          $ref: '#/responses/BadRequest'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        '403':
+          $ref: '#/responses/Forbidden'
+        '501':
+          $ref: '#/responses/NotImplemented'
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            filter := &model.MarketplacePluginFilter{
+              Page: "antivirus",
+              PerPage: "0.1.2",
+              Filter: "antivirus",
+              ServerVersion: "0.1.2",
+              LocalOnly: "antivirus",
+            }
+
+            ok, resp = Client.GetMarketplacePlugins(filter)

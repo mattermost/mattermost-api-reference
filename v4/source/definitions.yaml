@@ -2236,6 +2236,36 @@ definitions:
         type: object
         description: Settings schema used to define the System Console UI for the plugin.
 
+  MarketplacePlugin:
+    type: object
+    properties:
+      homepage_url:
+        type: string
+        description: "URL that leads to the homepage ot the plugin."
+      icon_data:
+        type: string
+        description: "Base64 that represents icon of the plugin."
+      download_url:
+        type: string
+        description: URL to download the plugin.
+      release_notes_url:
+        type: string
+        description: URL that leads to the release notes of the plugin.
+      labels:
+        type: array
+        items:
+          type: string
+        description: A list of the plugin labels.
+      signature:
+        type: string
+        description: "Signature of the plugin"
+      manifest:
+        description: Manifest of the plugin
+        $ref: '#/definitions/PluginManifest'
+      installed_version:
+        type: string
+        description: Version number of the plugin.
+
   PluginManifestWebapp:
     type: object
     properties:
