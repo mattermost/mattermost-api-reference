@@ -339,7 +339,7 @@
       parameters:
         - name: body
           in: body
-          description: Plugin data to install.
+          description: The metadata identifying the plugin to install.
           required: true
           schema:
             type: object
@@ -349,10 +349,10 @@
             properties:
               id:
                 type: string
-                description: The plugin ID to install.
+                description: The ID of the plugin to install.
               version:
                 type: string
-                description: The version of plugin to install.
+                description: The version of the plugin to install.
       responses:
         '200':
             description: Plugin installed successfully
@@ -387,7 +387,7 @@
         - plugins
       summary: Gets all the marketplace plugins
       description: |
-        Gets all plugins from the marketplace server and plugins that are installed locally
+        Gets all plugins from the marketplace server, merging data from locally installed plugins as well as prepackaged plugins shipped with the server.
 
         ##### Permissions
         Must have `manage_system` permission.
@@ -406,7 +406,7 @@
           type: integer
         - name: filter
           in: query
-          description: Set to filter plugins by ID, name, or description
+          description: Set to filter plugins by ID, name, or description.
           required: false
           type: string
         - name: server_version
@@ -416,7 +416,7 @@
           type: string
         - name: local_only
           in: query
-          description: Set true to only retrive local plugins only
+          description: Set true to only retrieve local plugins.
           required: false
           type: boolean
       responses:
@@ -443,11 +443,11 @@
             Client.Login("email@domain.com", "Password1")
 
             filter := &model.MarketplacePluginFilter{
-              Page: "antivirus",
-              PerPage: "0.1.2",
+              Page: 1,
+              PerPage: 10,
               Filter: "antivirus",
               ServerVersion: "0.1.2",
-              LocalOnly: "antivirus",
+              LocalOnly: true,
             }
 
             ok, resp = Client.GetMarketplacePlugins(filter)

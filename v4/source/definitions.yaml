@@ -2241,10 +2241,10 @@ definitions:
     properties:
       homepage_url:
         type: string
-        description: "URL that leads to the homepage ot the plugin."
+        description: URL that leads to the homepage of the plugin.
       icon_data:
         type: string
-        description: "Base64 that represents icon of the plugin."
+        description: Base64 encoding of a plugin icon SVG.
       download_url:
         type: string
         description: URL to download the plugin.
@@ -2258,13 +2258,13 @@ definitions:
         description: A list of the plugin labels.
       signature:
         type: string
-        description: "Signature of the plugin"
+        description: Signature of the plugin
       manifest:
         description: Manifest of the plugin
         $ref: '#/definitions/PluginManifest'
       installed_version:
         type: string
-        description: Version number of the plugin.
+        description: Version number of the already installed plugin, if any.
 
   PluginManifestWebapp:
     type: object
