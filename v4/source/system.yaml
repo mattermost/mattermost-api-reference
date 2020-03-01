@@ -1,22 +1,32 @@
-  '/system/ping':
+  /system/ping:
     get:
       tags:
         - system
       summary: Check system health
-      description: |
-        Check if the server is up and healthy based on the configuration setting `GoRoutineHealthThreshold`. If `GoRoutineHealthThreshold` and the number of goroutines on the server exceeds that threshold the server is considered unhealthy. If `GoRoutineHealthThreshold` is not set or the number of goroutines is below the threshold the server is considered healthy.
+      description: >
+        Check if the server is up and healthy based on the configuration setting
+        `GoRoutineHealthThreshold`. If `GoRoutineHealthThreshold` and the number
+        of goroutines on the server exceeds that threshold the server is
+        considered unhealthy. If `GoRoutineHealthThreshold` is not set or the
+        number of goroutines is below the threshold the server is considered
+        healthy.
+
         __Minimum server version__: 3.10
+
         ##### Permissions
+
         Must be logged in.
       responses:
-        '200':
+        "200":
           description: Status of the system
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '500':
-          $ref: '#/responses/InternalServerError'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -25,25 +35,29 @@
 
             // GetPing
             status, resp := Client.GetPing()
-
-  '/database/recycle':
+  /database/recycle:
     post:
       tags:
         - system
       summary: Recycle database connections
-      description: |
-        Recycle database connections by closing and reconnecting all connections to master and read replica databases.
+      description: >
+        Recycle database connections by closing and reconnecting all connections
+        to master and read replica databases.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Database recycle successful
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -51,34 +65,40 @@
             Client.Login("email@domain.com", "Password1")
 
             ok, resp := Client.DatabaseRecycle()
-
-  '/email/test':
+  /email/test:
     post:
       tags:
         - system
       summary: Send a test email
-      description: |
-        Send a test email to make sure you have your email settings configured correctly. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
+      description: >
+        Send a test email to make sure you have your email settings configured
+        correctly. Optionally provide a configuration in the request body to
+        test. If no valid configuration is present in the request body the
+        current server configuration will be tested.
+
         ##### Permissions
+
         Must have `manage_system` permission.
-      parameters:
-        - in: body
-          name: body
-          description: Mattermost configuration
-          required: true
-          schema:
-            $ref: "#/definitions/Config"
+      requestBody:
+        description: Mattermost configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Config"
       responses:
-        '200':
+        "200":
           description: Email successful sent
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '403':
-          $ref: '#/responses/Forbidden'
-        '500':
-          $ref: '#/responses/InternalServerError'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -96,44 +116,49 @@
 
             // TestEmail
             ok, resp := Client.TestEmail(&config)
-
-  '/site_url/test':
+  /site_url/test:
     post:
       tags:
         - system
       summary: Checks the validity of a Site URL
-      description: |
-        Sends a Ping request to the mattermost server using the specified Site URL.
+      description: >
+        Sends a Ping request to the mattermost server using the specified Site
+        URL.
+
 
         ##### Permissions
+
         Must have `manage_system` permission.
 
+
         __Minimum server version__: 5.16
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            type: object
-            required:
-              - site_url
-            properties:
-              site_url:
-                type: string
-                description: The Site URL to test
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - site_url
+              properties:
+                site_url:
+                  type: string
+                  description: The Site URL to test
+        required: true
       responses:
-        '200':
+        "200":
           description: Site URL is valid
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '500':
-          $ref: '#/responses/InternalServerError'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -144,35 +169,42 @@
 
             // TestSiteURL
             ok, resp := Client.TestSiteURL(siteUrl)
-
-  '/file/s3_test':
+  /file/s3_test:
     post:
       tags:
         - system
       summary: Test AWS S3 connection
-      description: |
-        Send a test to validate if can connect to AWS S3. Optionally provide a configuration in the request body to test. If no valid configuration is present in the request body the current server configuration will be tested.
+      description: >
+        Send a test to validate if can connect to AWS S3. Optionally provide a
+        configuration in the request body to test. If no valid configuration is
+        present in the request body the current server configuration will be
+        tested.
+
         ##### Permissions
+
         Must have `manage_system` permission.
+
         __Minimum server version__: 4.8
-      parameters:
-        - in: body
-          name: body
-          description: Mattermost configuration
-          required: true
-          schema:
-            $ref: "#/definitions/Config"
+      requestBody:
+        description: Mattermost configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Config"
       responses:
-        '200':
+        "200":
           description: S3 Test successful
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '403':
-          $ref: '#/responses/Forbidden'
-        '500':
-          $ref: '#/responses/InternalServerError'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -191,8 +223,7 @@
 
             // TestS3Connection
             ok, resp := Client.TestS3Connection(&config)
-
-  '/config':
+  /config:
     get:
       tags:
         - system
@@ -202,16 +233,18 @@
         ##### Permissions
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Configuration retrieval successful
-          schema:
-            $ref: "#/definitions/Config"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Config"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -220,33 +253,38 @@
 
             // GetConfig
             config, resp := Client.GetConfig()
-
     put:
       tags:
         - system
       summary: Update configuration
-      description: |
-        Submit a new configuration for the server to use. As of server version 4.8, the `PluginSettings.EnableUploads` setting cannot be modified by this endpoint.
+      description: >
+        Submit a new configuration for the server to use. As of server version
+        4.8, the `PluginSettings.EnableUploads` setting cannot be modified by
+        this endpoint.
+
         ##### Permissions
+
         Must have `manage_system` permission.
-      parameters:
-        - in: body
-          name: body
-          description: Mattermost configuration
-          required: true
-          schema:
-            $ref: "#/definitions/Config"
+      requestBody:
+        description: Mattermost configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Config"
       responses:
-        '200':
+        "200":
           description: Configuration update successful
-          schema:
-            $ref: "#/definitions/Config"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Config"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -260,8 +298,7 @@
 
             // UpdateConfig
             updatedConfig, resp := Client.UpdateConfig(config)
-
-  '/config/reload':
+  /config/reload:
     post:
       tags:
         - system
@@ -271,16 +308,18 @@
         ##### Permissions
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Configuration reload successful
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -289,8 +328,7 @@
 
             // ReloadConfig
             ok, resp := Client.ReloadConfig()
-
-  '/config/client':
+  /config/client:
     get:
       tags:
         - system
@@ -304,16 +342,17 @@
           in: query
           required: true
           description: Must be `old`, other formats not implemented yet
-          type: string
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: Configuration retrieval successful
-        '400':
-          $ref: '#/responses/BadRequest'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -322,61 +361,74 @@
 
             // GetOldClientConfig
             ok, resp := Client.GetOldClientConfig()
-
-  '/config/environment':
+  /config/environment:
     get:
       tags:
         - system
       summary: Get configuration made through environment variables
-      description: |
-        Retrieve a json object mirroring the server configuration where fields are set to true
+      description: >
+        Retrieve a json object mirroring the server configuration where fields
+        are set to true
+
         if the corresponding config setting is set through an environment variable. Settings
+
         that haven't been set through environment variables will be missing from the object.
+
 
         __Minimum server version__: 4.10
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Configuration retrieval successful
-          schema:
-            $ref: "#/definitions/EnvironmentConfig"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  '/config/patch':
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/EnvironmentConfig"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /config/patch:
     put:
       tags:
         - system
       summary: Patch configuration
-      description: |
-        Submit configuration to patch. As of server version 4.8, the `PluginSettings.EnableUploads` setting cannot be modified by this endpoint.
+      description: >
+        Submit configuration to patch. As of server version 4.8, the
+        `PluginSettings.EnableUploads` setting cannot be modified by this
+        endpoint.
+
         ##### Permissions
+
         Must have `manage_system` permission.
+
         __Minimum server version__: 5.20
-      parameters:
-        - in: body
-          name: body
-          description: Mattermost configuration
-          required: true
-          schema:
-            $ref: "#/definitions/Config"
+      requestBody:
+        description: Mattermost configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Config"
       responses:
-        '200':
+        "200":
           description: Configuration update successful
-          schema:
-            $ref: "#/definitions/Config"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Config"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -390,8 +442,7 @@
 
             // UpdateConfig
             updatedConfig, resp := Client.PatchConfig(config)
-
-  '/license':
+  /license:
     post:
       tags:
         - system
@@ -403,28 +454,35 @@
 
         ##### Permissions
         Must have `manage_system` permission.
-      consumes: ["multipart/form-data"]
-      parameters:
-        - name: license
-          in: formData
-          description: The license to be uploaded
-          required: true
-          type: file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                license:
+                  description: The license to be uploaded
+                  type: string
+                  format: binary
+              required:
+                - license
       responses:
-        '201':
+        "201":
           description: License file upload successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '413':
-          $ref: '#/responses/TooLarge'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "413":
+          $ref: "#/components/responses/TooLarge"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -443,50 +501,55 @@
             }
 
             ok, resp := Client.UploadLicenseFile(data.Bytes())
-
     delete:
       tags:
         - system
       summary: Remove license file
-      description: |
-        Remove the license file from the server. This will disable all enterprise features.
+      description: >
+        Remove the license file from the server. This will disable all
+        enterprise features.
+
 
         __Minimum server version__: 4.0
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: License removal successful
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  '/license/client':
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /license/client:
     get:
       tags:
         - system
       summary: Get client license
-      description: |
+      description: >
         Get a subset of the server license needed by the client.
+
         ##### Permissions
+
         No permission required but having the `manage_system` permission returns more information.
       parameters:
         - name: format
           in: query
           required: true
           description: Must be `old`, other formats not implemented yet
-          type: string
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: License retrieval successful
-        '400':
-          $ref: '#/responses/BadRequest'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -495,38 +558,44 @@
 
             // GetOldClientLicense
             license, resp := Client.GetOldClientLicense()
-
-  '/audits':
+  /audits:
     get:
       tags:
         - system
       summary: Get audits
-      description: |
-        Get a page of audits for all users on the system, selected with `page` and `per_page` query parameters.
+      description: >
+        Get a page of audits for all users on the system, selected with `page`
+        and `per_page` query parameters.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       parameters:
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: string
+            default: "0"
         - name: per_page
           in: query
           description: The number of audits per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Audits retrieval successful
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/Audit"
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+            default: "60"
+      responses:
+        "200":
+          description: Audits retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Audit"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -535,25 +604,30 @@
 
             // GetAudits
             audits, resp := Client.GetAudits(0, 100, "")
-
-  '/caches/invalidate':
+  /caches/invalidate:
     post:
       tags:
         - system
       summary: Invalidate all the caches
-      description: |
-        Purge all the in-memory caches for the Mattermost server. This can have a temporary negative effect on performance while the caches are re-populated.
+      description: >
+        Purge all the in-memory caches for the Mattermost server. This can have
+        a temporary negative effect on performance while the caches are
+        re-populated.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Caches invalidate successful
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -562,38 +636,45 @@
 
             // InvalidateCaches
             ok, resp := Client.InvalidateCaches()
-
-  '/logs':
+  /logs:
     get:
       tags:
         - system
       summary: Get logs
-      description: |
-        Get a page of server logs, selected with `page` and `logs_per_page` query parameters.
+      description: >
+        Get a page of server logs, selected with `page` and `logs_per_page`
+        query parameters.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       parameters:
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: string
+            default: "0"
         - name: logs_per_page
           in: query
-          description: The number of logs per page. There is a maximum limit of 10000 logs per page.
-          default: "10000"
-          type: string
-      responses:
-        '200':
-          description: Logs retrieval successful
+          description: The number of logs per page. There is a maximum limit of 10000 logs
+            per page.
           schema:
-            type: array
-            items:
-              type: string
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+            default: "10000"
+      responses:
+        "200":
+          description: Logs retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  type: string
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -602,44 +683,49 @@
 
             // GetLogs
             logs, resp := Client.GetLogs(0, 10)
-
     post:
       tags:
         - system
       summary: Add log message
-      description: |
+      description: >
         Add log messages to the server logs.
+
         ##### Permissions
+
         Users with `manage_system` permission can log ERROR or DEBUG messages.
+
         Logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` or just DEBUG messages when `false`.
+
         Non-logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` and cannot log when `false`.
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            type: object
-            required:
-              - level
-              - message
-            properties:
-              level:
-                type: string
-                description: The error level, ERROR or DEBUG
-              message:
-                type: string
-                description: Message to send to the server logs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - level
+                - message
+              properties:
+                level:
+                  type: string
+                  description: The error level, ERROR or DEBUG
+                message:
+                  type: string
+                  description: Message to send to the server logs
+        required: true
       responses:
-        '200':
+        "200":
           description: Logs sent successful
-          schema:
-            type: object
-            items:
-              type: string
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                type: object
+                items:
+                  type: string
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -652,73 +738,87 @@
 
             // PostLog
             _, resp := Client.PostLog(message)
-
-  '/analytics/old':
+  /analytics/old:
     get:
       tags:
         - system
       summary: Get analytics
-      description: |
-        Get some analytics data about the system. This endpoint uses the old format, the `/analytics` route is reserved for the new format when it gets implemented.
+      description: >
+        Get some analytics data about the system. This endpoint uses the old
+        format, the `/analytics` route is reserved for the new format when it
+        gets implemented.
+
 
         The returned JSON changes based on the `name` query parameter but is always key/value pairs.
 
+
         __Minimum server version__: 4.0
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
       parameters:
         - name: name
           in: query
           required: false
-          description: Possible values are "standard", "post_counts_day", "user_counts_with_posts_day" or "extra_counts"
-          default: "standard"
-          type: string
+          description: Possible values are "standard", "post_counts_day",
+            "user_counts_with_posts_day" or "extra_counts"
+          schema:
+            type: string
+            default: standard
         - name: team_id
           in: query
           required: false
           description: The team ID to filter the data by
-          type: string
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: Analytics retrieval successful
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  '/server_busy':
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /server_busy:
     post:
       tags:
         - system
       summary: Set the server busy (high load) flag
-      description: |
-        Marks the server as currently having high load which disables non-critical services such as search, statuses and typing notifications.
+      description: >
+        Marks the server as currently having high load which disables
+        non-critical services such as search, statuses and typing notifications.
+
 
         __Minimum server version__: 5.20
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
       parameters:
         - name: seconds
           in: query
           required: false
           description: Number of seconds until server is automatically marked as not busy.
-          default: "3600"
-          type: string
-      responses:
-        '200':
-          description: Server busy flag set successfully
           schema:
-            $ref: "#/definitions/StatusOK"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+            default: "3600"
+      responses:
+        "200":
+          description: Server busy flag set successfully
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -726,32 +826,37 @@
             Client.Login("email@domain.com", "Password1")
 
             ok, resp := Client.SetServerBusy(300)
-        - lang: 'curl'
+        - lang: curl
           source: |
             curl -X POST \
               'http://your-mattermost-url.com/api/v4/server_busy?seconds=3600' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
-
     get:
       tags:
         - system
       summary: Get server busy expiry time.
-      description: |
-        Gets the timestamp corresponding to when the server busy flag will be automatically cleared. 
+      description: >
+        Gets the timestamp corresponding to when the server busy flag will be
+        automatically cleared. 
+
 
         __Minimum server version__: 5.20
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Server busy expires timestamp retrieved successfully
-          schema:
-            $ref: '#/definitions/Server_Busy'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Server_Busy"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -760,33 +865,38 @@
 
             // expires is a time.Time
             expires, resp := Client.GetServerBusyExpires()
-        - lang: 'curl'
+        - lang: curl
           source: |
             curl -X GET \
               'http://your-mattermost-url.com/api/v4/server_busy' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
               -H 'Content-Type: application/json'
-
     delete:
       tags:
         - system
       summary: Clears the server busy (high load) flag
-      description: |
-        Marks the server as not having high load which re-enables non-critical services such as search, statuses and typing notifications.
+      description: >
+        Marks the server as not having high load which re-enables non-critical
+        services such as search, statuses and typing notifications.
+
 
         __Minimum server version__: 5.20
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Server busy flag cleared successfully
-          schema:
-            $ref: "#/definitions/StatusOK"
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -794,9 +904,8 @@
             Client.Login("email@domain.com", "Password1")
 
             ok, resp := Client.ClearServerBusy()
-        - lang: 'curl'
+        - lang: curl
           source: |
             curl -X DELETE \
               'http://your-mattermost-url.com/api/v4/server_busy' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
-

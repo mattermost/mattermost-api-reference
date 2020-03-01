@@ -8,178 +8,229 @@
         ##### Permissions
         No permission required.
       responses:
-        '200':
+        "200":
           description: SAML metadata retrieval successful
-          schema:
-            type: string
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            "*/*":
+              schema:
+                type: string
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /saml/certificate/idp:
     post:
       tags:
         - SAML
       summary: Upload IDP certificate
-      description: |
-        Upload the IDP certificate to be used with your SAML configuration. The server will pick a hard-coded filename for the IdpCertificateFile setting in your `config.json`.
-        ##### Permissions
-        Must have `manage_system` permission.
-      consumes: ["multipart/form-data"]
-      parameters:
-        - name: certificate
-          in: formData
-          description: The IDP certificate file
-          required: true
-          type: file
-      responses:
-        '200':
-          description: SAML certificate upload successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
+      description: >
+        Upload the IDP certificate to be used with your SAML configuration. The
+        server will pick a hard-coded filename for the IdpCertificateFile
+        setting in your `config.json`.
 
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                certificate:
+                  description: The IDP certificate file
+                  type: string
+                  format: binary
+              required:
+                - certificate
+      responses:
+        "200":
+          description: SAML certificate upload successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
     delete:
       tags:
         - SAML
       summary: Remove IDP certificate
-      description: |
-        Delete the current IDP certificate being used with your SAML configuration. This will also disable SAML on your system as this certificate is required for SAML.
+      description: >
+        Delete the current IDP certificate being used with your SAML
+        configuration. This will also disable SAML on your system as this
+        certificate is required for SAML.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: SAML certificate delete successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /saml/certificate/public:
     post:
       tags:
         - SAML
       summary: Upload public certificate
-      description: |
-        Upload the public certificate to be used for encryption with your SAML configuration. The server will pick a hard-coded filename for the PublicCertificateFile setting in your `config.json`.
-        ##### Permissions
-        Must have `manage_system` permission.
-      consumes: ["multipart/form-data"]
-      parameters:
-        - name: certificate
-          in: formData
-          description: The public certificate file
-          required: true
-          type: file
-      responses:
-        '200':
-          description: SAML certificate upload successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
+      description: >
+        Upload the public certificate to be used for encryption with your SAML
+        configuration. The server will pick a hard-coded filename for the
+        PublicCertificateFile setting in your `config.json`.
 
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                certificate:
+                  description: The public certificate file
+                  type: string
+                  format: binary
+              required:
+                - certificate
+      responses:
+        "200":
+          description: SAML certificate upload successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
     delete:
       tags:
         - SAML
       summary: Remove public certificate
-      description: |
-        Delete the current public certificate being used with your SAML configuration. This will also disable encryption for SAML on your system as this certificate is required for that.
+      description: >
+        Delete the current public certificate being used with your SAML
+        configuration. This will also disable encryption for SAML on your system
+        as this certificate is required for that.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: SAML certificate delete successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /saml/certificate/private:
     post:
       tags:
         - SAML
       summary: Upload private key
-      description: |
-        Upload the private key to be used for encryption with your SAML configuration. The server will pick a hard-coded filename for the PrivateKeyFile setting in your `config.json`.
-        ##### Permissions
-        Must have `manage_system` permission.
-      consumes: ["multipart/form-data"]
-      parameters:
-        - name: certificate
-          in: formData
-          description: The private key file
-          required: true
-          type: file
-      responses:
-        '200':
-          description: SAML certificate upload successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
+      description: >
+        Upload the private key to be used for encryption with your SAML
+        configuration. The server will pick a hard-coded filename for the
+        PrivateKeyFile setting in your `config.json`.
 
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                certificate:
+                  description: The private key file
+                  type: string
+                  format: binary
+              required:
+                - certificate
+      responses:
+        "200":
+          description: SAML certificate upload successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
     delete:
       tags:
         - SAML
       summary: Remove private key
-      description: |
-        Delete the current private key being used with your SAML configuration. This will also disable encryption for SAML on your system as this key is required for that.
+      description: >
+        Delete the current private key being used with your SAML configuration.
+        This will also disable encryption for SAML on your system as this key is
+        required for that.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: SAML certificate delete successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /saml/certificate/status:
     get:
       tags:
         - SAML
       summary: Get certificate status
-      description: |
-        Get the status of the uploaded certificates and keys in use by your SAML configuration.
+      description: >
+        Get the status of the uploaded certificates and keys in use by your SAML
+        configuration.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: SAML certificate status retrieval successful
-          schema:
-            $ref: '#/definitions/SamlCertificateStatus'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/SamlCertificateStatus"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

@@ -3,34 +3,42 @@
       tags:
         - LDAP
       summary: Sync with LDAP
-      description: |
-        Synchronize any user attribute changes in the configured AD/LDAP server with Mattermost.
+      description: >
+        Synchronize any user attribute changes in the configured AD/LDAP server
+        with Mattermost.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: LDAP sync successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /ldap/test:
     post:
       tags:
         - LDAP
       summary: Test LDAP configuration
-      description: |
-        Test the current AD/LDAP configuration to see if the AD/LDAP server can be contacted successfully.
+      description: >
+        Test the current AD/LDAP configuration to see if the AD/LDAP server can
+        be contacted successfully.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: LDAP test successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

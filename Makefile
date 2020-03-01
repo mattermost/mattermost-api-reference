@@ -47,7 +47,7 @@ build-v4: .npminstall
 .npminstall:
 	@echo Getting dependencies using npm
 
-	npm install swagger-cli@1.0.0
+	npm install swagger-cli
 	npm install redoc-cli
 	touch $@
 

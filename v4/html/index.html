@@ -16,10 +16,16 @@
         margin: 0;
         padding: 0;
       }
+      label[type="tag"] {
+        text-transform:  uppercase;
+      }
+      h1{
+        text-transform: capitalize;
+      }
     </style>
   </head>
   <body>
-    <redoc lazy-rendering suppress-warnings spec-url='./static/mattermost-openapi-v4.yaml'></redoc>
+    <redoc lazy-rendering suppress-warnings no-auto-auth  spec-url='./static/mattermost-openapi-v4.yaml'></redoc>
     <script src="./static/redoc.min.js"> </script>
   </body>
 </html>

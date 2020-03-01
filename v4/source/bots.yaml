@@ -8,149 +8,176 @@
         ##### Permissions
         Must have `create_bot` permission.
         __Minimum server version__: 5.10
-      parameters:
-        - in: body
-          name: body
+      requestBody:
           description: Bot to be created
           required: true
-          schema:
-            type: object
-            required:
-              - username
-            properties:
-              username:
-                type: string
-              display_name:
-                type: string
-              description:
-                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - username
+                properties:
+                  username:
+                    type: string
+                  display_name:
+                    type: string
+                  description:
+                    type: string
       responses:
-        '201':
+        "201":
           description: Bot creation successful
-          schema:
-            $ref: '#/definitions/Bot'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Bot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
     get:
       tags:
         - bots
       summary: Get bots
-      description: |
+      description: >
         Get a page of a list of bots.
+
         ##### Permissions
+
         Must have `read_bots` permission for bots you are managing, and `read_others_bots` permission for bots others are managing.
+
         __Minimum server version__: 5.10
       parameters:
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: string
+            default: "0"
         - name: per_page
           in: query
-          description: The number of users per page. There is a maximum limit of 200 users per page.
-          default: "60"
-          type: string
+          description: The number of users per page. There is a maximum limit of 200 users
+            per page.
+          schema:
+            type: string
+            default: "60"
         - name: include_deleted
           in: query
           description: If deleted bots should be returned.
-          type: boolean
+          schema:
+            type: boolean
         - name: only_orphaned
           in: query
-          description: When true, only orphaned bots will be returned. A bot is consitered orphaned if it's owner has been deactivated.
-          type: boolean
-      responses:
-        '200':
-          description: Bot page retrieval successful
+          description: When true, only orphaned bots will be returned. A bot is consitered
+            orphaned if it's owner has been deactivated.
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Bot'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  /bots/{bot_user_id}:
+            type: boolean
+      responses:
+        "200":
+          description: Bot page retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Bot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/bots/{bot_user_id}":
     put:
       tags:
         - bots
       summary: Patch a bot
-      description: |
-        Partially update a bot by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+      description: >
+        Partially update a bot by providing only the fields you want to update.
+        Omitted fields will not be updated. The fields that can be updated are
+        defined in the request body, all other provided fields will be ignored.
+
         ##### Permissions
+
         Must have `manage_bots` permission. 
+
         __Minimum server version__: 5.10
       parameters:
         - name: bot_user_id
           in: path
           description: Bot user ID
           required: true
-          type: string
-        - in: body
-          name: body
+          schema:
+            type: string
+      requestBody:
           description: Bot to be created
           required: true
-          schema:
-            type: object
-            required:
-              - username
-            properties:
-              username:
-                type: string
-              display_name:
-                type: string
-              description:
-                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - username
+                properties:
+                  username:
+                    type: string
+                  display_name:
+                    type: string
+                  description:
+                    type: string
       responses:
-        '200':
+        "200":
           description: Bot patch successful
-          schema:
-            $ref: '#/definitions/Bot'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Bot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
     get:
       tags:
         - bots
       summary: Get a bot
-      description: |
+      description: >
         Get a bot specified by its bot id.
+
         ##### Permissions
+
         Must have `read_bots` permission for bots you are managing, and `read_others_bots` permission for bots others are managing.
+
         __Minimum server version__: 5.10
       parameters:
         - name: bot_user_id
           in: path
           description: Bot user ID
           required: true
-          type: string
+          schema:
+            type: string
         - name: include_deleted
-          type: boolean
           in: query
           description: If deleted bots should be returned.
-      responses:
-        '200':
-          description: Bot successfully retrieved.
           schema:
-            $ref: '#/definitions/Bot'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  /bots/{bot_user_id}/disable:
+            type: boolean
+      responses:
+        "200":
+          description: Bot successfully retrieved.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Bot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/bots/{bot_user_id}/disable":
     post:
       tags:
         - bots
@@ -165,20 +192,22 @@
           in: path
           description: Bot user ID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Bot successfully disabled.
           schema:
-            $ref: '#/definitions/Bot'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  /bots/{bot_user_id}/enable:
+            type: string
+      responses:
+        "200":
+          description: Bot successfully disabled.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Bot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/bots/{bot_user_id}/enable":
     post:
       tags:
         - bots
@@ -193,20 +222,22 @@
           in: path
           description: Bot user ID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Bot successfully enabled.
           schema:
-            $ref: '#/definitions/Bot'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  /bots/{bot_user_id}/assign/{user_id}:
+            type: string
+      responses:
+        "200":
+          description: Bot successfully enabled.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Bot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/bots/{bot_user_id}/assign/{user_id}":
     post:
       tags:
         - bots
@@ -221,25 +252,28 @@
           in: path
           description: Bot user ID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: The user ID to assign the bot to.
           required: true
-          type: string
-      responses:
-        '200':
-          description: Bot successfully assigned.
           schema:
-            $ref: '#/definitions/Bot'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  /bots/{bot_user_id}/icon:
+            type: string
+      responses:
+        "200":
+          description: Bot successfully assigned.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Bot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/bots/{bot_user_id}/icon":
     get:
       tags:
         - bots
@@ -254,24 +288,25 @@
           in: path
           description: Bot user ID
           required: true
-          type: string
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: Bot's LHS icon image
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -285,42 +320,55 @@
       tags:
         - bots
       summary: Set bot's LHS icon image
-      description: |
-        Set a bot's LHS icon image based on bot_user_id string parameter. Icon image must be SVG format, all other formats are rejected.
+      description: >
+        Set a bot's LHS icon image based on bot_user_id string parameter. Icon
+        image must be SVG format, all other formats are rejected.
+
         ##### Permissions
+
         Must have `manage_bots` permission.
+
         __Minimum server version__: 5.14
-      consumes: ["multipart/form-data"]
       parameters:
-        - name: image
-          in: formData
-          description: SVG icon image to be uploaded
-          required: true
-          type: file
         - name: bot_user_id
           in: path
           description: Bot user ID
           required: true
-          type: string
-      responses:
-        '200':
-          description: SVG icon image set successful
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '413':
-          $ref: '#/responses/TooLarge'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  description: SVG icon image to be uploaded
+                  type: string
+                  format: binary
+              required:
+                - image
+      responses:
+        "200":
+          description: SVG icon image set successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "413":
+          $ref: "#/components/responses/TooLarge"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import (
               "io/ioutil"
@@ -354,26 +402,29 @@
           in: path
           description: Bot user ID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Icon image deletion successful
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: string
+      responses:
+        "200":
+          description: Icon image deletion successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
