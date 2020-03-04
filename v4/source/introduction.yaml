@@ -356,7 +356,7 @@ tags:
   - name: OpenGraph
     description: Endpoint for getting Open Graph metadata.
   - name: system
-    description: General endpoints for interating with the server, such as configuration and logging.
+    description: General endpoints for interacting with the server, such as configuration and logging.
   - name: brand
     description: Endpoints related to custom branding and white-labeling. See [our branding documentation](https://docs.mattermost.com/administration/branding.html) for more information.
   - name: OAuth
