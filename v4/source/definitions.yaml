@@ -341,9 +341,8 @@ components:
           type: array
           description: >
             Information about content embedded in the post including OpenGraph
-            previews, image link previews, and
-
-            message attachments. This field will be null if the post does not contain embedded content.
+            previews, image link previews, and message attachments. 
+            This field will be null if the post does not contain embedded content.
           items:
             type: object
             properties:
@@ -369,27 +368,22 @@ components:
           type: array
           description: >
             The custom emojis that appear in this point or have been used in
-            reactions to this post. This field will be
-
-            null if the post does not contain custom emojis.
+            reactions to this post. This field will be null if the post does not contain custom emojis.
           items:
             $ref: "#/components/schemas/Emoji"
         files:
           type: array
           description: >
             The FileInfo objects for any files attached to the post. This field
-            will be null if the post does not have
-
-            any file attachments.
+            will be null if the post does not have any file attachments.
           items:
             $ref: "#/components/schemas/FileInfo"
         images:
           type: object
           description: >
             An object mapping the URL of an external image to an object
-            containing the dimensions of that image. This
-
-            field will be null if the post or its embedded content does not reference any external images.
+            containing the dimensions of that image. This field will be
+            null if the post or its embedded content does not reference any external images.
           items:
             type: object
             properties:
@@ -846,8 +840,7 @@ components:
         FooterIcon:
           type: string
         Timestamp:
-          description: The timestamp of the slack attachment, either type of string or
-            integer
+          description: The timestamp of the slack attachment, either type of string or integer
           type: string
     SlackAttachmentField:
       type: object
@@ -855,8 +848,7 @@ components:
         Title:
           type: string
         Value:
-          description: The value of the attachment, set as string but capable with golang
-            interface
+          description: The value of the attachment, set as string but capable with golang interface
           type: string
         Short:
           type: boolean
@@ -864,8 +856,7 @@ components:
       type: object
       properties:
         status:
-          description: Will contain "ok" if the request was successful and there was
-            nothing else to return
+          description: Will contain "ok" if the request was successful and there was nothing else to return
           type: string
     OpenGraph:
       type: object
@@ -2167,7 +2158,7 @@ components:
       type: object
       properties:
         email:
-          type: string
+          type: boolean
           description: Set to "true" to enable email notifications, "false" to disable.
             Defaults to "true".
         push:
@@ -2181,7 +2172,7 @@ components:
             "mention" for mentions and direct messages only, and "none" to
             disable. Defaults to "all".
         desktop_sound:
-          type: string
+          type: boolean
           description: Set to "true" to enable sound on desktop notifications, "false" to
             disable. Defaults to "true".
         mention_keys:
@@ -2189,18 +2180,18 @@ components:
           description: A comma-separated list of words to count as mentions. Defaults to
             username and @username.
         channel:
-          type: string
+          type: boolean
           description: Set to "true" to enable channel-wide notifications (@channel, @all,
             etc.), "false" to disable. Defaults to "true".
         first_name:
-          type: string
+          type: boolean
           description: Set to "true" to enable mentions for first name. Defaults to "true"
             if a first name is set, "false" otherwise.
     Timezone:
       type: object
       properties:
         useAutomaticTimezone:
-          type: string
+          type: boolean
           description: Set to "true" to use the browser/system timezone, "false" to set
             manually. Defaults to "true".
         manualTimezone:
@@ -2214,7 +2205,7 @@ components:
       type: object
       properties:
         email:
-          type: string
+          type: boolean
           description: Set to "true" to enable email notifications, "false" to disable, or
             "default" to use the global user notification setting.
         push:

@@ -21,7 +21,7 @@
         "200":
           description: Role retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Role"
         "401":
@@ -59,7 +59,7 @@
         "200":
           description: Role retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Role"
         "401":
@@ -115,7 +115,7 @@
         "200":
           description: Role patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Role"
         "400":
@@ -151,7 +151,7 @@
         "200":
           description: Role list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

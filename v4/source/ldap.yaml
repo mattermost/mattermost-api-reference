@@ -14,7 +14,7 @@
         "200":
           description: LDAP sync successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "501":
@@ -35,7 +35,7 @@
         "200":
           description: LDAP test successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "500":

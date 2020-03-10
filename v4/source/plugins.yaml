@@ -35,7 +35,7 @@
         "201":
           description: Plugin upload successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -99,7 +99,7 @@
         "200":
           description: Plugins retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -162,7 +162,7 @@
         "201":
           description: Plugin install successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -214,7 +214,7 @@
         "200":
           description: Plugin removed successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -264,7 +264,7 @@
         "200":
           description: Plugin enabled successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -314,7 +314,7 @@
         "200":
           description: Plugin disabled successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -354,7 +354,7 @@
         "200":
           description: Plugin deactivated successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

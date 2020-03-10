@@ -20,7 +20,7 @@
         "200":
           description: User preferences retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -61,7 +61,7 @@
         "200":
           description: User preferences saved successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -103,7 +103,7 @@
         "200":
           description: User preferences saved successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -140,7 +140,7 @@
         "200":
           description: A list of all of the current user's preferences in the given category
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -188,7 +188,7 @@
             A single preference for the current user in the current categorylist
             of all of the current user's preferences in the given category.
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Preference"
         "400":

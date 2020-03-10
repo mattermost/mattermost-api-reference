@@ -65,7 +65,7 @@
         "201":
           description: User creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/User"
         "400":
@@ -105,15 +105,15 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page. There is a maximum limit of 200 users
             per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: in_team
           in: query
           description: The ID of the team to get users for.
@@ -178,7 +178,7 @@
         "200":
           description: User page retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -247,7 +247,7 @@
         "200":
           description: User list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -285,7 +285,7 @@
         "200":
           description: User list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -319,7 +319,7 @@
         "200":
           description: User list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -405,7 +405,7 @@
         "200":
           description: User list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -484,7 +484,7 @@
         "200":
           description: User autocomplete successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserAutocomplete"
         "400":
@@ -525,7 +525,7 @@
         "200":
           description: User stats retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/UsersStats"
         "400":
@@ -565,7 +565,7 @@
         "200":
           description: User retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/User"
         "400":
@@ -639,7 +639,7 @@
         "200":
           description: User update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/User"
         "400":
@@ -703,7 +703,7 @@
         "200":
           description: User deactivation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -775,7 +775,7 @@
         "200":
           description: User patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/User"
         "400":
@@ -844,7 +844,7 @@
         "200":
           description: User roles update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -904,7 +904,7 @@
         "200":
           description: User active status update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -997,7 +997,7 @@
         "200":
           description: Profile image set successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1055,7 +1055,7 @@
         "200":
           description: Profile image reset successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1153,7 +1153,7 @@
         "200":
           description: User retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/User"
         "400":
@@ -1205,7 +1205,7 @@
         "200":
           description: User password update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1266,7 +1266,7 @@
         "200":
           description: User MFA update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1312,7 +1312,7 @@
         "200":
           description: MFA secret generation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -1368,7 +1368,7 @@
         "200":
           description: User successfully demoted
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1417,7 +1417,7 @@
         "200":
           description: Guest successfully promoted
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1470,7 +1470,7 @@
         "200":
           description: MFA check successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -1528,7 +1528,7 @@
         "200":
           description: User password update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1585,7 +1585,7 @@
         "200":
           description: Email sent if account exists
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1627,7 +1627,7 @@
         "200":
           description: User retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/User"
         "400":
@@ -1672,7 +1672,7 @@
         "200":
           description: User session retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -1728,7 +1728,7 @@
         "200":
           description: User session revoked successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1774,7 +1774,7 @@
         "200":
           description: User sessions revoked successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1823,7 +1823,7 @@
         "200":
           description: Device id attach successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1861,7 +1861,7 @@
         "200":
           description: User audits retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -1908,7 +1908,7 @@
         "200":
           description: User email verification successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1952,7 +1952,7 @@
         "200":
           description: Email send successful if email exists
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -2029,7 +2029,7 @@
         "200":
           description: Login method switch or request successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -2110,7 +2110,7 @@
         "201":
           description: User access token creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserAccessToken"
         "400":
@@ -2160,19 +2160,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of tokens per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: User access tokens retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -2216,19 +2216,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of tokens per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: User access tokens retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -2279,7 +2279,7 @@
         "200":
           description: User access token revoke successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -2326,7 +2326,7 @@
         "200":
           description: User access token retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserAccessTokenSanitized"
         "400":
@@ -2380,7 +2380,7 @@
         "200":
           description: Personal access token disable successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -2431,7 +2431,7 @@
         "200":
           description: Personal access token enable successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -2485,7 +2485,7 @@
         "200":
           description: Personal access token search successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -2537,7 +2537,7 @@
         "200":
           description: User auth update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserAuthData"
         "400":
@@ -2611,7 +2611,7 @@
         "200":
           description: Terms of service action recorded successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -2665,7 +2665,7 @@
         "200":
           description: User's accepted terms of service action
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserTermsOfService"
         "400":
@@ -2675,7 +2675,7 @@
         "404":
           description: User hasn't performed an action or the latest action was a rejection.
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/AppError"
       x-code-samples:

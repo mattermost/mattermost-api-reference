@@ -32,7 +32,7 @@
         "201":
           description: Team creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Team"
         "400":
@@ -71,14 +71,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of teams per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: include_total_count
           in: query
           schema:
@@ -88,7 +88,7 @@
         "200":
           description: Team list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -126,7 +126,7 @@
         "200":
           description: Team retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Team"
         "400":
@@ -201,7 +201,7 @@
         "200":
           description: Team update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Team"
         "400":
@@ -266,7 +266,7 @@
         "200":
           description: Team deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -334,7 +334,7 @@
         "200":
           description: team patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Team"
         "400":
@@ -382,7 +382,7 @@
         "200":
           description: Team retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Team"
         "400":
@@ -442,7 +442,7 @@
             response—returned if the request body does not contain both `page`
             and `per_page` fields—is a simple array of teams.)
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -495,7 +495,7 @@
         "200":
           description: Team retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/TeamExists"
         "400":
@@ -535,7 +535,7 @@
         "200":
           description: Team list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -580,19 +580,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Team members retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -648,7 +648,7 @@
         "201":
           description: Team member creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/TeamMember"
         "400":
@@ -694,7 +694,7 @@
         "201":
           description: Team member creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/TeamMember"
         "400":
@@ -755,7 +755,7 @@
         "201":
           description: Team members created successfully.
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -805,7 +805,7 @@
         "200":
           description: Team members retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -855,7 +855,7 @@
         "200":
           description: Team member retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/TeamMember"
         "400":
@@ -906,7 +906,7 @@
         "200":
           description: Team member deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -958,7 +958,7 @@
         "200":
           description: Team members retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -1009,7 +1009,7 @@
         "200":
           description: Team stats retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/TeamStats"
         "400":
@@ -1051,7 +1051,7 @@
         "200":
           description: Team Invite ID regenerated
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Team"
         "400":
@@ -1153,7 +1153,7 @@
         "200":
           description: Team icon successfully set
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1209,7 +1209,7 @@
         "200":
           description: Team icon successfully remove
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1275,7 +1275,7 @@
         "200":
           description: Team member roles update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1353,7 +1353,7 @@
         "200":
           description: Team member's scheme-derived roles updated successfully.
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1413,7 +1413,7 @@
         "200":
           description: Team unreads retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -1465,7 +1465,7 @@
         "200":
           description: Team unread count retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/TeamUnread"
         "400":
@@ -1517,7 +1517,7 @@
         "200":
           description: Users invite successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1588,7 +1588,7 @@
         "200":
           description: Guests invite successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1632,7 +1632,7 @@
         "200":
           description: Email invites successfully revoked
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1695,7 +1695,7 @@
           description: JSON object containing a base64 encoded text file of the import logs
             in its `results` property.
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -1760,7 +1760,7 @@
         "200":
           description: Team invite info retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -1824,7 +1824,7 @@
         "200":
           description: Update team scheme successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -1892,14 +1892,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
       responses:
         "200":
           description: Successfully returns users specified by the pagination, and the

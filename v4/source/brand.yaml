@@ -14,7 +14,7 @@
         "200":
           description: Brand image retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: string
         "404":
@@ -55,7 +55,7 @@
         "201":
           description: Brand image upload successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -105,7 +105,7 @@
         "200":
           description: Brand image succesfully deleted
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "401":

@@ -21,7 +21,7 @@
         "200":
           description: Elasticsearch test successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -50,7 +50,7 @@
         "200":
           description: Indexes purged successfully.
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "500":

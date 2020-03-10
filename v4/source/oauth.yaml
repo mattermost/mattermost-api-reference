@@ -47,7 +47,7 @@
         "201":
           description: App registration successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OAuthApp"
         "400":
@@ -73,19 +73,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of apps per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: OAuthApp list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -120,7 +120,7 @@
         "200":
           description: App retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OAuthApp"
         "400":
@@ -192,7 +192,7 @@
         "200":
           description: App update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OAuthApp"
         "400":
@@ -246,7 +246,7 @@
         "200":
           description: App deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -282,7 +282,7 @@
         "200":
           description: Secret regeneration successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OAuthApp"
         "400":
@@ -318,7 +318,7 @@
         "200":
           description: App retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OAuthApp"
         "400":
@@ -352,19 +352,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of apps per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: OAuthApp list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

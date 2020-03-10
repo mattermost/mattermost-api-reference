@@ -866,14 +866,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of public channels per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Channels retrieval successful
@@ -925,14 +925,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of public channels per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Channels retrieval successful
@@ -1254,11 +1254,8 @@
           in: query
           description: Defines if deleted channels should be returned or not
           schema:
-            type: string
-            enum:
-              - true
-              - false
-            default: "false"
+            type: boolean
+            default: false
       responses:
         "200":
           description: Channel retrieval successful
@@ -1305,14 +1302,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of members per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Channel members retrieval successful
@@ -2071,14 +2068,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
       responses:
         "200":
           description: Successfully returns users specified by the pagination, and the

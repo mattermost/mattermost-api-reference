@@ -26,19 +26,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of schemes per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Scheme list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -84,7 +84,7 @@
         "201":
           description: Scheme creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Scheme"
         "400":
@@ -118,7 +118,7 @@
         "200":
           description: Scheme retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Scheme"
         "401":
@@ -157,7 +157,7 @@
         "200":
           description: Scheme deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -211,7 +211,7 @@
         "200":
           description: Scheme patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Scheme"
         "400":
@@ -253,19 +253,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of teams per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Team list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -307,19 +307,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of channels per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Channel list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

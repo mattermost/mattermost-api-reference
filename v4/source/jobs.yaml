@@ -17,19 +17,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of jobs per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Job list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -70,7 +70,7 @@
         "201":
           description: Job creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Job"
         "400":
@@ -100,7 +100,7 @@
         "200":
           description: Job retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Job"
         "400":
@@ -132,7 +132,7 @@
         "200":
           description: Job canceled successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -168,19 +168,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of jobs per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Job list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

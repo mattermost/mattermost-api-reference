@@ -17,7 +17,7 @@
         "200":
           description: Data retention policy details retrieved successfully.
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/DataRetentionPolicy"
         "500":

@@ -36,7 +36,7 @@
         "201":
           description: Command creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Command"
         "400":
@@ -96,7 +96,7 @@
         "200":
           description: List Commands retrieve successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -145,7 +145,7 @@
         "200":
           description: Autocomplete commands retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -191,7 +191,7 @@
         "200":
           description: Command get successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Command"
         "400":
@@ -237,7 +237,7 @@
         "200":
           description: Command updated successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Command"
         "400":
@@ -285,7 +285,7 @@
         "200":
           description: Command deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -341,7 +341,7 @@
         "200":
           description: Command move successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -384,7 +384,7 @@
         "200":
           description: Token generation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -439,7 +439,7 @@
         "200":
           description: Command execution successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/CommandResponse"
         "400":

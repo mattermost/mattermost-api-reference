@@ -258,7 +258,7 @@
         "200":
           description: A publicly accessible link to the given file
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -305,7 +305,7 @@
         "200":
           description: The stored metadata for the given file
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/FileInfo"
         "400":

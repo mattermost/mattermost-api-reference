@@ -11,7 +11,7 @@
         "201":
           description: Compliance report creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Compliance"
         "400":
@@ -38,19 +38,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of reports per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Compliance reports retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -83,7 +83,7 @@
         "200":
           description: Compliance report retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Compliance"
         "400":

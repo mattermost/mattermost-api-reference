@@ -11,7 +11,7 @@
         "200":
           description: SAML metadata retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: string
         "501":
@@ -45,7 +45,7 @@
         "200":
           description: SAML certificate upload successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -72,7 +72,7 @@
         "200":
           description: SAML certificate delete successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "401":
@@ -110,7 +110,7 @@
         "200":
           description: SAML certificate upload successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -137,7 +137,7 @@
         "200":
           description: SAML certificate delete successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "401":
@@ -175,7 +175,7 @@
         "200":
           description: SAML certificate upload successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -202,7 +202,7 @@
         "200":
           description: SAML certificate delete successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "401":
@@ -227,7 +227,7 @@
         "200":
           description: SAML certificate status retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/SamlCertificateStatus"
         "403":

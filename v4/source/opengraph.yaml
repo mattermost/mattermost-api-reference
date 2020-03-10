@@ -30,7 +30,7 @@
         "200":
           description: Open Graph retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OpenGraph"
         "501":

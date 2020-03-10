@@ -65,7 +65,7 @@
         "200":
           description: Dialog open successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -120,7 +120,7 @@
         "200":
           description: Dialog submission successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":

@@ -29,7 +29,7 @@
         "201":
           description: Emoji creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Emoji"
         "400":
@@ -58,14 +58,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: sort
           in: query
           description: Either blank for no sorting or "name" to sort by emoji names.
@@ -77,7 +77,7 @@
         "200":
           description: Emoji list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Emoji"
         "400":
@@ -108,7 +108,7 @@
         "200":
           description: Emoji retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Emoji"
         "400":
@@ -140,7 +140,7 @@
         "200":
           description: Emoji delete successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Emoji"
         "400":
@@ -173,7 +173,7 @@
         "200":
           description: Emoji retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Emoji"
         "400":
@@ -248,7 +248,7 @@
         "200":
           description: Emoji list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -287,7 +287,7 @@
         "200":
           description: Emoji list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Emoji"
         "400":

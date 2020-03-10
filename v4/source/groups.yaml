@@ -23,14 +23,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of groups per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: q
           in: query
           description: String to pattern match the `name` and `display_name` field. Will
@@ -62,7 +62,7 @@
         "200":
           description: Group list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -98,7 +98,7 @@
         "200":
           description: Group retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Group"
         "400":
@@ -152,7 +152,7 @@
         "200":
           description: Group patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Group"
         "400":
@@ -191,7 +191,7 @@
         "201":
           description: Team successfully linked to group
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/GroupSyncableTeam"
         "400":
@@ -229,7 +229,7 @@
         "200":
           description: Successfully deleted link between team and group
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -273,7 +273,7 @@
         "201":
           description: Channel successfully linked to group
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/GroupSyncableChannel"
         "400":
@@ -316,7 +316,7 @@
         "200":
           description: Successfully deleted link between channel and group
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -355,7 +355,7 @@
         "200":
           description: GroupSyncable object retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/GroupSyncableTeam"
         "400":
@@ -396,7 +396,7 @@
         "200":
           description: GroupSyncable object retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/GroupSyncableChannel"
         "400":
@@ -431,7 +431,7 @@
         "200":
           description: Teams list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -468,7 +468,7 @@
         "200":
           description: Channel list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -529,7 +529,7 @@
         "200":
           description: GroupSyncable patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/GroupSyncableTeam"
         "400":
@@ -585,7 +585,7 @@
         "200":
           description: GroupSyncable patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/GroupSyncableChannel"
         "400":
@@ -619,19 +619,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of groups per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: User list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 properties:
@@ -674,19 +674,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of groups per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Group list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -724,19 +724,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of groups per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Group list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

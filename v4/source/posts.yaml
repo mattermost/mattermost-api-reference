@@ -51,7 +51,7 @@
         "201":
           description: Post creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Post"
         "400":
@@ -102,7 +102,7 @@
         "201":
           description: Post creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Post"
         "400":
@@ -148,7 +148,7 @@
         "200":
           description: Post retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Post"
         "400":
@@ -179,7 +179,7 @@
         "200":
           description: Post deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -235,7 +235,7 @@
         "200":
           description: Post update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Post"
         "400":
@@ -277,7 +277,7 @@
         "200":
           description: Post marked as unread successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/ChannelUnreadAt"
         "400":
@@ -337,7 +337,7 @@
         "200":
           description: Post patch successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Post"
         "400":
@@ -368,7 +368,7 @@
         "200":
           description: Post list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/PostList"
         "400":
@@ -410,19 +410,19 @@
           in: query
           description: The page to select
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of posts per page
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Post list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -456,7 +456,7 @@
         "200":
           description: File info retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -491,14 +491,14 @@
           in: query
           description: The page to select
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of posts per page
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: since
           in: query
           description: Provide a non-zero value in Unix time milliseconds to select posts
@@ -519,7 +519,7 @@
         "200":
           description: Post list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/PostList"
         "400":
@@ -560,20 +560,20 @@
           description: Number of posts before the last unread posts. Maximum is 200 posts
             if limit is set greater than that.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: limit_after
           in: query
           description: Number of posts after and including the last unread post. Maximum is
             200 posts if limit is set greater than that.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Post list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/PostList"
         "400":
@@ -640,7 +640,7 @@
         "200":
           description: Post list retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/PostListWithSearchMatches"
         "400":
@@ -671,7 +671,7 @@
         "200":
           description: Pinned post successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -703,7 +703,7 @@
         "200":
           description: Unpinned post successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -741,7 +741,7 @@
         "200":
           description: Post action successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":

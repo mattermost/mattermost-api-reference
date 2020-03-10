@@ -19,7 +19,7 @@
         "201":
           description: Reaction creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Reaction"
         "400":
@@ -46,7 +46,7 @@
         "200":
           description: List reactions retrieve successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -89,7 +89,7 @@
         "200":
           description: Reaction deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -122,7 +122,7 @@
         "200":
           description: Reactions retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/PostIdToReactionsMap"
         "400":

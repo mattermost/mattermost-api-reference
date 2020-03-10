@@ -38,7 +38,7 @@
         "201":
           description: Incoming webhook creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/IncomingWebhook"
         "400":
@@ -63,14 +63,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of hooks per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: team_id
           in: query
           description: The ID of the team to get hooks for.
@@ -80,7 +80,7 @@
         "200":
           description: Incoming webhooks retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -113,7 +113,7 @@
         "200":
           description: Webhook retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/IncomingWebhook"
         "400":
@@ -178,7 +178,7 @@
         "200":
           description: Webhook update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/IncomingWebhook"
         "400":
@@ -248,7 +248,7 @@
         "201":
           description: Outgoing webhook creation successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OutgoingWebhook"
         "400":
@@ -275,14 +275,14 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of hooks per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
         - name: team_id
           in: query
           description: The ID of the team to get hooks for.
@@ -297,7 +297,7 @@
         "200":
           description: Outgoing webhooks retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -332,7 +332,7 @@
         "200":
           description: Outgoing webhook retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OutgoingWebhook"
         "400":
@@ -364,7 +364,7 @@
         "200":
           description: Webhook deletion successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -422,7 +422,7 @@
         "200":
           description: Webhook update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/OutgoingWebhook"
         "400":
@@ -455,7 +455,7 @@
         "200":
           description: Webhook token regenerate successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":

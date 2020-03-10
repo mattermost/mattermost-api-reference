@@ -18,7 +18,7 @@
         "200":
           description: User status retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Status"
         "400":
@@ -65,7 +65,7 @@
         "200":
           description: User status update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Status"
         "400":
@@ -94,7 +94,7 @@
         "200":
           description: User statuses retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

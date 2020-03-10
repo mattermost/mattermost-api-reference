@@ -20,7 +20,7 @@
         "200":
           description: Status of the system
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "500":
@@ -51,7 +51,7 @@
         "200":
           description: Database recycle successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "403":
@@ -90,7 +90,7 @@
         "200":
           description: Email successful sent
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "403":
@@ -148,7 +148,7 @@
         "200":
           description: Site URL is valid
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -196,7 +196,7 @@
         "200":
           description: S3 Test successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "403":
@@ -236,7 +236,7 @@
         "200":
           description: Configuration retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Config"
         "400":
@@ -276,7 +276,7 @@
         "200":
           description: Configuration update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Config"
         "400":
@@ -311,7 +311,7 @@
         "200":
           description: Configuration reload successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -385,7 +385,7 @@
         "200":
           description: Configuration retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/EnvironmentConfig"
         "400":
@@ -420,7 +420,7 @@
         "200":
           description: Configuration update successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Config"
         "400":
@@ -470,7 +470,7 @@
         "201":
           description: License file upload successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -575,19 +575,19 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of audits per page.
           schema:
-            type: string
-            default: "60"
+            type: integer
+            default: 60
       responses:
         "200":
           description: Audits retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -621,7 +621,7 @@
         "200":
           description: Caches invalidate successful
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "403":
@@ -653,8 +653,8 @@
           in: query
           description: The page to select.
           schema:
-            type: string
-            default: "0"
+            type: integer
+            default: 0
         - name: logs_per_page
           in: query
           description: The number of logs per page. There is a maximum limit of 10000 logs
@@ -666,7 +666,7 @@
         "200":
           description: Logs retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -717,7 +717,7 @@
         "200":
           description: Logs sent successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: object
                 items:
@@ -810,7 +810,7 @@
         "200":
           description: Server busy flag set successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "400":
@@ -850,7 +850,7 @@
         "200":
           description: Server busy expires timestamp retrieved successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Server_Busy"
         "403":
@@ -890,7 +890,7 @@
         "200":
           description: Server busy flag cleared successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
         "403":
