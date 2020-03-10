@@ -2260,7 +2260,7 @@ definitions:
         type: string
         description: Base64 encoded signature of the plugin.
       manifest:
-        description: Manifest of the plugin
+        description: Manifest of the plugin.
         $ref: '#/definitions/PluginManifest'
       installed_version:
         type: string
