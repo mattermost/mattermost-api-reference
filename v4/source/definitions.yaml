@@ -2258,7 +2258,7 @@ definitions:
         description: A list of the plugin labels.
       signature:
         type: string
-        description: Signature of the plugin
+        description: Base64 encoded signature of the plugin.
       manifest:
         description: Manifest of the plugin
         $ref: '#/definitions/PluginManifest'
