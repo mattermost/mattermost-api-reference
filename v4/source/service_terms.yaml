@@ -1,7 +1,7 @@
   /terms_of_service:
     get:
       tags:
-      - terms of service
+        - terms of service
       summary: Get latest terms of service
       description: |
         Get latest terms of service from the server
@@ -10,17 +10,19 @@
         ##### Permissions
         Must be authenticated.
       responses:
-        '200':
+        "200":
           description: Terms of service fetched successfully
-          schema:
-            $ref: '#/definitions/TermsOfService'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TermsOfService"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
     post:
       tags:
-      - terms of service
+        - terms of service
       summary: Creates a new terms of service
       description: |
         Creates new terms of service
@@ -29,11 +31,13 @@
         ##### Permissions
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: terms of service fetched successfully
-          schema:
-            $ref: '#/definitions/TermsOfService'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TermsOfService"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"

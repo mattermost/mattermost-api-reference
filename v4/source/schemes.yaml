@@ -1,45 +1,54 @@
-  '/schemes':
+  /schemes:
     get:
       tags:
         - schemes
       summary: Get the schemes.
-      description: |
-        Get a page of schemes. Use the query parameters to modify the behaviour of this endpoint.
+      description: >
+        Get a page of schemes. Use the query parameters to modify the behaviour
+        of this endpoint.
+
 
         ##### Permissions
+
         Must have `manage_system` permission.
+
 
         __Minimum server version__: 5.0
       parameters:
         - name: scope
           in: query
-          description: Limit the results returned to the provided scope, either `team` or `channel`.
-          default: ""
-          type: string
+          description: Limit the results returned to the provided scope, either `team` or
+            `channel`.
+          schema:
+            type: string
+            default: ""
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of schemes per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Scheme list retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Scheme'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Scheme list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Scheme"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
     post:
       tags:
         - schemes
@@ -51,41 +60,42 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.0
-      parameters:
-        - in: body
-          name: scheme
-          description: Scheme object to create
-          required: true
-          schema:
-            type: object
-            required:
-              - name
-              - scope
-            properties:
-              name:
-                type: string
-                description: The name of the scheme
-              description:
-                type: string
-                description: The description of the scheme
-              scope:
-                type: string
-                description: The scope of the scheme ("team" or "channel")
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - scope
+              properties:
+                name:
+                  type: string
+                  description: The name of the scheme
+                description:
+                  type: string
+                  description: The description of the scheme
+                scope:
+                  type: string
+                  description: The scope of the scheme ("team" or "channel")
+        description: Scheme object to create
+        required: true
       responses:
-        '201':
+        "201":
           description: Scheme creation successful
-          schema:
-            $ref: '#/definitions/Scheme'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
-  '/schemes/{scheme_id}':
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Scheme"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/schemes/{scheme_id}":
     get:
       tags:
         - schemes
@@ -102,27 +112,29 @@
           in: path
           description: Scheme GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Scheme retrieval successful
           schema:
-            $ref: '#/definitions/Scheme'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: string
+      responses:
+        "200":
+          description: Scheme retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Scheme"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
             scheme, resp := Client.GetScheme(<SCHEMEID>, "")
-
     delete:
       tags:
         - schemes
@@ -139,31 +151,39 @@
           in: path
           description: ID of the scheme to delete
           required: true
-          type: string
-      responses:
-        '200':
-          description: Scheme deletion successful
           schema:
-            $ref: "#/definitions/StatusOK"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
-  '/schemes/{scheme_id}/patch':
+            type: string
+      responses:
+        "200":
+          description: Scheme deletion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/schemes/{scheme_id}/patch":
     put:
       tags:
         - schemes
       summary: Patch a scheme
-      description: |
-        Partially update a scheme by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+      description: >
+        Partially update a scheme by providing only the fields you want to
+        update. Omitted fields will not be updated. The fields that can be
+        updated are defined in the request body, all other provided fields will
+        be ignored.
+
 
         ##### Permissions
+
         `manage_system` permission is required.
+
 
         __Minimum server version__: 5.0
       parameters:
@@ -171,122 +191,144 @@
           in: path
           description: Scheme GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Scheme object to be updated
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The human readable name of the scheme
+                description:
+                  type: string
+                  description: The description of the scheme
+        description: Scheme object to be updated
+        required: true
+      responses:
+        "200":
+          description: Scheme patch successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Scheme"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/schemes/{scheme_id}/teams":
+    get:
+      tags:
+        - schemes
+      summary: Get a page of teams which use this scheme.
+      description: >
+        Get a page of teams which use this scheme. The provided Scheme ID should
+        be for a Team-scoped Scheme.
+
+        Use the query parameters to modify the behaviour of this endpoint.
+
+
+        ##### Permissions
+
+        `manage_system` permission is required.
+
+
+        __Minimum server version__: 5.0
+      parameters:
+        - name: scheme_id
+          in: path
+          description: Scheme GUID
           required: true
           schema:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The human readable name of the scheme
-              description:
-                type: string
-                description: The description of the scheme
-      responses:
-        '200':
-          description: Scheme patch successful
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
           schema:
-            $ref: '#/definitions/Scheme'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of teams per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Team list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/schemes/{scheme_id}/channels":
+    get:
+      tags:
+        - schemes
+      summary: Get a page of channels which use this scheme.
+      description: >
+        Get a page of channels which use this scheme. The provided Scheme ID
+        should be for a Channel-scoped Scheme.
 
-  '/schemes/{scheme_id}/teams':
-     get:
-       tags:
-         - schemes
-       summary: Get a page of teams which use this scheme.
-       description: |
-         Get a page of teams which use this scheme. The provided Scheme ID should be for a Team-scoped Scheme.
-         Use the query parameters to modify the behaviour of this endpoint.
+        Use the query parameters to modify the behaviour of this endpoint.
 
-         ##### Permissions
-         `manage_system` permission is required.
 
-         __Minimum server version__: 5.0
-       parameters:
-         - name: scheme_id
-           in: path
-           description: Scheme GUID
-           required: true
-           type: string
-         - name: page
-           in: query
-           description: The page to select.
-           default: "0"
-           type: string
-         - name: per_page
-           in: query
-           description: The number of teams per page.
-           default: "60"
-           type: string
-       responses:
-         '200':
-           description: Team list retrieval successful
-           schema:
-             type: array
-             items:
-               $ref: '#/definitions/Team'
-         '400':
-           $ref: '#/responses/BadRequest'
-         '401':
-           $ref: '#/responses/Unauthorized'
-         '403':
-           $ref: '#/responses/Forbidden'
-         '404':
-           $ref: '#/responses/NotFound'
+        ##### Permissions
 
-  '/schemes/{scheme_id}/channels':
-      get:
-        tags:
-          - schemes
-        summary: Get a page of channels which use this scheme.
-        description: |
-          Get a page of channels which use this scheme. The provided Scheme ID should be for a Channel-scoped Scheme.
-          Use the query parameters to modify the behaviour of this endpoint.
+        `manage_system` permission is required.
 
-          ##### Permissions
-          `manage_system` permission is required.
 
-          __Minimum server version__: 5.0
-        parameters:
-          - name: scheme_id
-            in: path
-            description: Scheme GUID
-            required: true
+        __Minimum server version__: 5.0
+      parameters:
+        - name: scheme_id
+          in: path
+          description: Scheme GUID
+          required: true
+          schema:
             type: string
-          - name: page
-            in: query
-            description: The page to select.
-            default: "0"
-            type: string
-          - name: per_page
-            in: query
-            description: The number of channels per page.
-            default: "60"
-            type: string
-        responses:
-          '200':
-            description: Channel list retrieval successful
-            schema:
-              type: array
-              items:
-                $ref: '#/definitions/Channel'
-          '400':
-            $ref: '#/responses/BadRequest'
-          '401':
-            $ref: '#/responses/Unauthorized'
-          '403':
-            $ref: '#/responses/Forbidden'
-          '404':
-            $ref: '#/responses/NotFound'
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of channels per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Channel list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"

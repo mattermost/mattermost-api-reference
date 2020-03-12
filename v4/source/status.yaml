@@ -1,4 +1,4 @@
-  /users/{user_id}/status:
+  "/users/{user_id}/status":
     get:
       tags:
         - status
@@ -12,57 +12,66 @@
           in: path
           description: User ID
           required: true
-          type: string
-      responses:
-        '200':
-          description: User status retrieval successful
           schema:
-            $ref: '#/definitions/Status'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-
+            type: string
+      responses:
+        "200":
+          description: User status retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
     put:
       tags:
         - status
       summary: Update user status
-      description: |
-        Manually set a user's status. When setting a user's status, the status will remain that value until set "online" again, which will return the status to being automatically updated based on user activity.
+      description: >
+        Manually set a user's status. When setting a user's status, the status
+        will remain that value until set "online" again, which will return the
+        status to being automatically updated based on user activity.
+
         ##### Permissions
+
         Must have `edit_other_users` permission for the team.
       parameters:
         - name: user_id
           in: path
           description: User ID
           required: true
-          type: string
-        - name: body
-          in: body
-          description: Status object that is to be updated
-          required: true
           schema:
-            type: object
-            required:
-              - status
-              - user_id
-            properties:
-              user_id:
-                type: string
-                description: User ID
-              status:
-                type: string
-                description: User status, can be `online`, `away`, `offline` and `dnd`
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+                - user_id
+              properties:
+                user_id:
+                  type: string
+                  description: User ID
+                status:
+                  type: string
+                  description: User status, can be `online`, `away`, `offline` and `dnd`
+        description: Status object that is to be updated
+        required: true
       responses:
-        '200':
+        "200":
           description: User status update successful
-          schema:
-            $ref: '#/definitions/Status'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /users/status/ids:
     post:
       tags:
@@ -72,23 +81,25 @@
         Get a list of user statuses by id from the server.
         ##### Permissions
         Must be authenticated.
-      parameters:
-        - name: post
-          in: body
-          description: List of user ids to fetch
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: List of user ids to fetch
+        required: true
       responses:
-        '200':
+        "200":
           description: User statuses retrieval successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Status'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Status"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"

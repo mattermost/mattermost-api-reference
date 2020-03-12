@@ -8,55 +8,62 @@
         ##### Permissions
         Must have `manage_system` permission.
       responses:
-        '201':
+        "201":
           description: Compliance report creation successful
-          schema:
-            $ref: '#/definitions/Compliance'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Compliance"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
     get:
       tags:
         - compliance
       summary: Get reports
-      description: |
-        Get a list of compliance reports previously created by page, selected with `page` and `per_page` query parameters.
+      description: >
+        Get a list of compliance reports previously created by page, selected
+        with `page` and `per_page` query parameters.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       parameters:
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of reports per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Compliance reports retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Compliance'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
-  /compliance/reports/{report_id}:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Compliance reports retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Compliance"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/compliance/reports/{report_id}":
     get:
       tags:
         - compliance
@@ -70,22 +77,24 @@
           in: path
           description: Compliance report GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Compliance report retrieval successful
           schema:
-            $ref: '#/definitions/Compliance'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
-  /compliance/reports/{report_id}/download:
+            type: string
+      responses:
+        "200":
+          description: Compliance report retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Compliance"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/compliance/reports/{report_id}/download":
     get:
       tags:
         - compliance
@@ -99,15 +108,16 @@
           in: path
           description: Compliance report GUID
           required: true
-          type: string
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: The compliance report file
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

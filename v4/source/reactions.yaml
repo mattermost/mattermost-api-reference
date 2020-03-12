@@ -7,24 +7,26 @@
         Create a reaction.
         ##### Permissions
         Must have `read_channel` permission for the channel the post is in.
-      parameters:
-        - in: body
-          name: reaction
-          description: The user's reaction with its post_id, user_id, and emoji_name fields set
-          required: true
-          schema:
-            $ref: '#/definitions/Reaction'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Reaction"
+        description: The user's reaction with its post_id, user_id, and emoji_name fields
+          set
+        required: true
       responses:
-        '201':
+        "201":
           description: Reaction creation successful
-          schema:
-            $ref: '#/definitions/Reaction'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  '/posts/{post_id}/reactions':
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reaction"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/posts/{post_id}/reactions":
     get:
       tags:
         - reactions
@@ -38,22 +40,24 @@
           in: path
           description: ID of a post
           required: true
-          type: string
-      responses:
-        '200':
-          description: List reactions retrieve successful
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/Reaction"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  '/users/{user_id}/posts/{post_id}/reactions/{emoji_name}':
+            type: string
+      responses:
+        "200":
+          description: List reactions retrieve successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reaction"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/users/{user_id}/posts/{post_id}/reactions/{emoji_name}":
     delete:
       tags:
         - reactions
@@ -67,30 +71,34 @@
           in: path
           description: ID of the user
           required: true
-          type: string
+          schema:
+            type: string
         - name: post_id
           in: path
           description: ID of the post
           required: true
-          type: string
+          schema:
+            type: string
         - name: emoji_name
           in: path
           description: emoji name
           required: true
-          type: string
-      responses:
-        '200':
-          description: Reaction deletion successful
           schema:
-            $ref: "#/definitions/StatusOK"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  '/posts/ids/reactions':
+            type: string
+      responses:
+        "200":
+          description: Reaction deletion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /posts/ids/reactions:
     post:
       tags:
         - reactions
@@ -101,23 +109,25 @@
         Must have `read_channel` permission for the channel the post is in.
 
         __Minimum server version__: 5.8
-      parameters:
-        - in: body
-          name: postIds
-          description: Array of post IDs
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: Array of post IDs
+        required: true
       responses:
-        '200':
+        "200":
           description: Reactions retrieval successful
-          schema:
-            $ref: "#/definitions/PostIdToReactionsMap"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostIdToReactionsMap"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
