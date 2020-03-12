@@ -147,7 +147,7 @@
             schema:
               type: object
               required:
-                - hook_id
+                - id
                 - channel_id
                 - display_name
                 - description
@@ -398,7 +398,7 @@
             schema:
               type: object
               required:
-                - hook_id
+                - id
                 - channel_id
                 - display_name
                 - description
