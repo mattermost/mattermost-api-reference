@@ -2277,6 +2277,34 @@ components:
         settings_schema:
           type: object
           description: Settings schema used to define the System Console UI for the plugin.
+    MarketplacePlugin:
+      type: object
+      properties:
+        homepage_url:
+          type: string
+          description: URL that leads to the homepage of the plugin.
+        icon_data:
+          type: string
+          description: Base64 encoding of a plugin icon SVG.
+        download_url:
+          type: string
+          description: URL to download the plugin.
+        release_notes_url:
+          type: string
+          description: URL that leads to the release notes of the plugin.
+        labels:
+          type: array
+          items:
+            type: string
+          description: A list of the plugin labels.
+        signature:
+          type: string
+          description: Base64 encoded signature of the plugin.
+        manifest:
+          $ref: "#/components/schemas/PluginManifest"
+        installed_version:
+          type: string
+          description: Version number of the already installed plugin, if any.
     PluginManifestWebapp:
       type: object
       properties:
