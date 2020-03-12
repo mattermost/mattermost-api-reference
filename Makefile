@@ -54,7 +54,7 @@ build-v4: .npminstall
 run:
 	@echo Starting redoc server
 
-	npx serve -- -r v4/html
+	npx --ignore-existing serve -r v4/html
 
 clean:
 	@echo Cleaning
