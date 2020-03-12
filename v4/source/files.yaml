@@ -3,108 +3,125 @@
       tags:
         - files
       summary: Upload a file
-      description: |
+      description: >
         Uploads a file that can later be attached to a post.
 
+
         This request can either be a multipart/form-data request with a channel_id, files and optional
+
         client_ids defined in the FormData, or it can be a request with the channel_id and filename
+
         defined as query parameters with the contents of a single file in the body of the request.
 
+
         Only multipart/form-data requests are supported by server versions up to and including 4.7.
+
         Server versions 4.8 and higher support both types of requests.
 
+
         ##### Permissions
+
         Must have `upload_file` permission.
-      consumes:
-        - multipart/form-data
-        - '*/*'
-      produces:
-        - application/json
       parameters:
-        - name: files
-          in: formData
-          description: A file to be uploaded
-          required: false
-          type: file
-        - name: channel_id
-          in: formData
-          description: The ID of the channel that this file will be uploaded to
-          required: false
-          type: string
-        - name: client_ids
-          in: formData
-          description: A unique identifier for the file that will be returned in the response
-          required: false
-          allowEmptyValue: true
-          type: string
         - name: channel_id
           in: query
           description: The ID of the channel that this file will be uploaded to
           required: false
-          type: string
+          schema:
+            type: string
         - name: filename
           in: query
           description: The name of the file to be uploaded
           required: false
-          type: string
-      responses:
-        '201':
-          description: Corresponding lists of the provided client_ids and the metadata that has been stored in the database for each one
           schema:
-            type: object
-            properties:
-              file_infos:
-                description: A list of file metadata that has been stored in the database
-                type: array
-                items:
-                  $ref: '#/definitions/FileInfo'
-              client_ids:
-                description: A list of the client_ids that were provided in the request
-                type: array
-                items:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  description: A file to be uploaded
                   type: string
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '413':
-          $ref: '#/responses/TooLarge'
-        '501':
-          $ref: '#/responses/NotImplemented'
+                  format: binary
+                channel_id:
+                  description: The ID of the channel that this file will be uploaded to
+                  type: string
+                client_ids:
+                  description: A unique identifier for the file that will be returned in
+                    the response
+                  type: string
+      responses:
+        "201":
+          description: Corresponding lists of the provided client_ids and the metadata that
+            has been stored in the database for each one
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  file_infos:
+                    description: A list of file metadata that has been stored in the
+                      database
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/FileInfo"
+                  client_ids:
+                    description: A list of the client_ids that were provided in the request
+                    type: array
+                    items:
+                      type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "413":
+          $ref: "#/components/responses/TooLarge"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             file, err := os.Open("file.png")
+
             if err != nil {
               fmt.Fprintf(os.Stderr, "%v\n", err)
             }
+
             defer file.Close();
 
+
             buf := bytes.NewBuffer(nil)
+
             io.Copy(buf, file)
+
             data := buf.Bytes()
 
+
             channelID := "4xp9fdt77pncbef59f4k1qe83o"
+
             filename := "file.png"
 
-            fileUploadResponse, response := Client.UploadFile(data, channelID, filename)
 
-        - lang: 'Curl'
+            fileUploadResponse, response := Client.UploadFile(data, channelID, filename)
+        - lang: Curl
           source: |
             curl -F 'files=@PATH/TO/LOCAL/FILE' \
             -F 'channel_id=CHANNEL_ID' \
             --header 'authorization: Bearer c49adc55z3f53ck7xtp8ebq1ir'
             https://your-mattermost-url.com/api/v4/files
-
-
-  '/files/{file_id}':
+  "/files/{file_id}":
     get:
       tags:
         - files
@@ -118,20 +135,21 @@
           in: path
           description: The ID of the file to get
           required: true
-          type: string
+          schema:
+            type: string
       responses:
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -141,7 +159,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFile(fileID)
-  '/files/{file_id}/thumbnail':
+  "/files/{file_id}/thumbnail":
     get:
       tags:
         - files
@@ -155,20 +173,21 @@
           in: path
           description: The ID of the file to get
           required: true
-          type: string
+          schema:
+            type: string
       responses:
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -178,8 +197,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFileThumbnail(fileID)
-
-  '/files/{file_id}/preview':
+  "/files/{file_id}/preview":
     get:
       tags:
         - files
@@ -193,20 +211,21 @@
           in: path
           description: The ID of the file to get
           required: true
-          type: string
+          schema:
+            type: string
       responses:
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -216,42 +235,47 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFilePreview(fileID)
-
-  '/files/{file_id}/link':
+  "/files/{file_id}/link":
     get:
       tags:
         - files
       summary: Get a public file link
-      description: |
-        Gets a public link for a file that can be accessed without logging into Mattermost.
+      description: >
+        Gets a public link for a file that can be accessed without logging into
+        Mattermost.
+
         ##### Permissions
+
         Must have `read_channel` permission or be uploader of the file.
       parameters:
         - name: file_id
           in: path
           description: The ID of the file to get a link for
           required: true
-          type: string
-      responses:
-        '200':
-          description: A publicly accessible link to the given file
           schema:
-            type: object
-            properties:
-              link:
-                type: string
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: string
+      responses:
+        "200":
+          description: A publicly accessible link to the given file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  link:
+                    type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -261,8 +285,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFileLink(fileID)
-
-  '/files/{file_id}/info':
+  "/files/{file_id}/info":
     get:
       tags:
         - files
@@ -276,24 +299,27 @@
           in: path
           description: The ID of the file info to get
           required: true
-          type: string
-      responses:
-        '200':
-          description: The stored metadata for the given file
           schema:
-            $ref: "#/definitions/FileInfo"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: string
+      responses:
+        "200":
+          description: The stored metadata for the given file
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileInfo"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 

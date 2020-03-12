@@ -3,43 +3,57 @@
       tags:
         - elasticsearch
       summary: Test Elasticsearch configuration
-      description: |
-        Test the current Elasticsearch configuration to see if the Elasticsearch server can be contacted successfully.
+      description: >
+        Test the current Elasticsearch configuration to see if the Elasticsearch
+        server can be contacted successfully.
+
         Optionally provide a configuration in the request body to test. If no valid configuration is present in the
+
         request body the current server configuration will be tested.
 
+
         __Minimum server version__: 4.1
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Elasticsearch test successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-            $ref: '#/responses/BadRequest'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
-
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /elasticsearch/purge_indexes:
     post:
       tags:
         - elasticsearch
       summary: Purge all Elasticsearch indexes
-      description: |
-        Deletes all Elasticsearch indexes and their contents. After calling this endpoint, it is
+      description: >
+        Deletes all Elasticsearch indexes and their contents. After calling this
+        endpoint, it is
+
         necessary to schedule a new Elasticsearch indexing job to repopulate the indexes.
+
         __Minimum server version__: 4.1
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Indexes purged successfully.
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

@@ -3,97 +3,111 @@
       tags:
         - channels
       summary: Create a channel
-      description: |
+      description: >
         Create a new channel.
+
         ##### Permissions
+
         If creating a public channel, `create_public_channel` permission is required. If creating a private channel, `create_private_channel` permission is required.
-      parameters:
-        - in: body
-          name: body
-          description: Channel object to be created
-          required: true
-          schema:
-            type: object
-            required:
-              - name
-              - display_name
-              - type
-              - team_id
-            properties:
-              team_id:
-                type: string
-                description: The team ID of the team to create the channel on
-              name:
-                type: string
-                description: The unique handle for the channel, will be present in the channel URL
-              display_name:
-                type: string
-                description: The non-unique UI name for the channel
-              purpose:
-                type: string
-                description: A short description of the purpose of the channel
-              header:
-                type: string
-                description: Markdown-formatted text to display in the header of the channel
-              type:
-                type: string
-                description: "'O' for a public channel, 'P' for a private channel"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - display_name
+                - type
+                - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: The team ID of the team to create the channel on
+                name:
+                  type: string
+                  description: The unique handle for the channel, will be present in the
+                    channel URL
+                display_name:
+                  type: string
+                  description: The non-unique UI name for the channel
+                purpose:
+                  type: string
+                  description: A short description of the purpose of the channel
+                header:
+                  type: string
+                  description: Markdown-formatted text to display in the header of the
+                    channel
+                type:
+                  type: string
+                  description: "'O' for a public channel, 'P' for a private channel"
+        description: Channel object to be created
+        required: true
       responses:
-        '201':
+        "201":
           description: Channel creation successful
-          schema:
-            $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
+
 
             channel := &model.Channel{DisplayName: <YOUR CHANNEL DISPLAYNAME>, Name: <YOUR CHANNEL NAME>, Type: <CHANNEL TYPE OPEN/PRIVATE>, TeamId: <YOUR TEAM ID>}
 
-            // CreateChannel
-            rchannel, resp := Client.CreateChannel(channel)
 
+            // CreateChannel
+
+            rchannel, resp := Client.CreateChannel(channel)
   /channels/direct:
     post:
       tags:
         - channels
       summary: Create a direct message channel
-      description: |
+      description: >
         Create a new direct message channel between two users.
+
         ##### Permissions
+
         Must be one of the two users and have `create_direct_channel` permission. Having the `manage_system` permission voids the previous requirements.
-      parameters:
-        - in: body
-          name: body
-          description: The two user ids to be in the direct message
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-            minItems: 2
-            maxItems: 2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+              minItems: 2
+              maxItems: 2
+        description: The two user ids to be in the direct message
+        required: true
       responses:
-        '201':
+        "201":
           description: Direct channel creation successful
-          schema:
-            $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -101,38 +115,42 @@
 
             // CreateDirectChannel
             dm, resp := Client.CreateDirectChannel(<ID OF User1>, <ID OF User2>)
-
   /channels/group:
     post:
       tags:
         - channels
       summary: Create a group message channel
-      description: |
-        Create a new group message channel to group of users. If the logged in user's id is not included in the list, it will be appended to the end.
+      description: >
+        Create a new group message channel to group of users. If the logged in
+        user's id is not included in the list, it will be appended to the end.
+
         ##### Permissions
+
         Must have `create_group_channel` permission.
-      parameters:
-        - in: body
-          name: body
-          description: User ids to be in the group message channel
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: User ids to be in the group message channel
+        required: true
       responses:
-        '201':
+        "201":
           description: Group channel creation successful
-          schema:
-            $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -142,101 +160,121 @@
 
             // CreateGroupChannel
             rgc, resp := Client.CreateGroupChannel(userIds)
-
   /channels/search:
     post:
       tags:
         - channels
       summary: Search all private and open type channels across all teams
-      description: |
-        Returns all private and open type channels where 'term' matches on the name, display name, or purpose of
+      description: >
+        Returns all private and open type channels where 'term' matches on the
+        name, display name, or purpose of
+
         the channel.
 
+
         Configured 'default' channels (ex Town Square and Off-Topic) can be excluded from the results
+
         with the `exclude_default_channels` boolean parameter.
 
+
         Channels that are associated (via GroupChannel records) to a given group can be excluded from the results
+
         with the `not_associated_to_group` parameter and a group id string.
-      parameters:
-        - in: body
-          name: body
-          description: The search terms and logic to use in the search.
-          required: true
-          schema:
-            type: object
-            required:
-              - term
-            properties:
-              term:
-                type: string
-                description: The string to search in the channel name, display name, and purpose.
-              not_associated_to_group:
-                type: string
-                description: A group id to exclude channels that are associated to that group via GroupChannel records.
-              exclude_default_channels:
-                type: boolean
-                description: Exclude default channels from the results by setting this parameter to true.
-              page:
-                type: string
-                description: The page number to return, if paginated. If this parameter is not present with the `per_page` parameter then the results will be returned un-paged.
-              per_page:
-                type: string
-                description: The number of entries to return per page, if paginated. If this parameter is not present with the `page` parameter then the results will be returned un-paged.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - term
+              properties:
+                term:
+                  type: string
+                  description: The string to search in the channel name, display name, and
+                    purpose.
+                not_associated_to_group:
+                  type: string
+                  description: A group id to exclude channels that are associated to that
+                    group via GroupChannel records.
+                exclude_default_channels:
+                  type: boolean
+                  description: Exclude default channels from the results by setting this
+                    parameter to true.
+                page:
+                  type: string
+                  description: The page number to return, if paginated. If this parameter
+                    is not present with the `per_page` parameter then the
+                    results will be returned un-paged.
+                per_page:
+                  type: string
+                  description: The number of entries to return per page, if paginated. If
+                    this parameter is not present with the `page` parameter then
+                    the results will be returned un-paged.
+        description: The search terms and logic to use in the search.
+        required: true
       responses:
-        '200':
-          description: Paginated channel response. (Note that the non-paginated response—returned if the request body does not contain both `page` and `per_page` fields—is a simple array of channels.)
-          schema:
-            type: object
-            properties:
-              channels:
-                type: array
-                description: The channels that matched the query.
-                items:
-                  $ref: '#/definitions/Channel'
-              total_count:
-                type: number
-                description: The total number of results, regardless of page and per_page requested.
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '400':
-          $ref: '#/responses/BadRequest'
-
-
+        "200":
+          description: Paginated channel response. (Note that the non-paginated
+            response—returned if the request body does not contain both `page`
+            and `per_page` fields—is a simple array of channels.)
+          content:
+            "*/*":
+              schema:
+                type: object
+                properties:
+                  channels:
+                    type: array
+                    description: The channels that matched the query.
+                    items:
+                      $ref: "#/components/schemas/Channel"
+                  total_count:
+                    type: number
+                    description: The total number of results, regardless of page and
+                      per_page requested.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /group/search:
     post:
       tags:
         - channels
       summary: Search Group Channels
-      description: |
-        Get a list of group channels for a user which members' usernames match the search term.
+      description: >
+        Get a list of group channels for a user which members' usernames match
+        the search term.
+
 
         __Minimum server version__: 5.14
-      parameters:
-        - in: body
-          name: body
-          description: Search criteria
-          required: true
-          schema:
-            type: object
-            required:
-              - term
-            properties:
-              term:
-                description: The search term to match against the members' usernames of the group channels
-                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - term
+              properties:
+                term:
+                  description: The search term to match against the members' usernames of
+                    the group channels
+                  type: string
+        description: Search criteria
+        required: true
       responses:
-        '200':
+        "200":
           description: Channels search successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -246,8 +284,7 @@
 
             // SearchGroupChannels
             channels, resp := Client.SearchGroupChannels(search)
-
-  /teams/{team_id}/channels/ids:
+  "/teams/{team_id}/channels/ids":
     post:
       tags:
         - channels
@@ -261,41 +298,49 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: List of channel ids
-          required: true
           schema:
-            type: array
-            items:
-              type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: List of channel ids
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel list retrieval successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
+
 
             channelIds := []string{<ID OF CHANNEL1>, <ID OF CHANNEL2>, ...}
 
-            // GetPublicChannelsByIdsForTeam
-            channels, resp := Client.GetPublicChannelsByIdsForTeam(<TEAMID>, channelIds)
 
-  /channels/{channel_id}/timezones:
+            // GetPublicChannelsByIdsForTeam
+
+            channels, resp := Client.GetPublicChannelsByIdsForTeam(<TEAMID>, channelIds)
+  "/channels/{channel_id}/timezones":
     get:
       tags:
         - channels
@@ -312,22 +357,25 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Timezone retrieval successful
           schema:
-            type: array
-            items:
-              type: string
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Timezone retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -335,8 +383,7 @@
 
             // GetChannelStats
             stats, resp := Client.GetChannelTimezones(<CHANNELID>)
-
-  '/channels/{channel_id}':
+  "/channels/{channel_id}":
     get:
       tags:
         - channels
@@ -350,20 +397,23 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channel retrieval successful
           schema:
-            $ref: '#/definitions/Channel'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Channel retrieval successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -371,99 +421,120 @@
 
             // GetChannel
             channel, resp := Client.GetChannel(<CHANNELID>, "")
-
     put:
       tags:
         - channels
       summary: Update a channel
-      description: |
-        Update a channel. The fields that can be updated are listed as parameters. Omitted fields will be treated as blanks.
+      description: >
+        Update a channel. The fields that can be updated are listed as
+        parameters. Omitted fields will be treated as blanks.
+
         ##### Permissions
+
         If updating a public channel, `manage_public_channel_members` permission is required. If updating a private channel, `manage_private_channel_members` permission is required.
       parameters:
         - name: channel_id
           in: path
           description: Channel GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Channel object to be updated
-          required: true
           schema:
-            type: object
-            required:
-              - id
-            properties:
-              id:
-                type: string
-                description: The channel's id, not updatable
-              name:
-                type: string
-                description: The unique handle for the channel, will be present in the channel URL
-              display_name:
-                type: string
-                description: The non-unique UI name for the channel
-              purpose:
-                type: string
-                description: A short description of the purpose of the channel
-              header:
-                type: string
-                description: Markdown-formatted text to display in the header of the channel
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: The channel's id, not updatable
+                name:
+                  type: string
+                  description: The unique handle for the channel, will be present in the
+                    channel URL
+                display_name:
+                  type: string
+                  description: The non-unique UI name for the channel
+                purpose:
+                  type: string
+                  description: A short description of the purpose of the channel
+                header:
+                  type: string
+                  description: Markdown-formatted text to display in the header of the
+                    channel
+        description: Channel object to be updated
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel update successful
-          schema:
-            $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
+
 
             channel := &model.Channel{DisplayName: <YOUR CHANNEL NEW DISPLAYNAME>, ChannelId: <CHANNELID>, TeamId: <YOUR TEAM ID>}
 
-            // UpdateChannel
-            updatedChannel, resp := Client.UpdateChannel(channel)
 
+            // UpdateChannel
+
+            updatedChannel, resp := Client.UpdateChannel(channel)
     delete:
       tags:
         - channels
       summary: Delete a channel
-      description: |
-        Soft deletes a channel, by marking the channel as deleted in the database. Soft deleted channels will not be accessible in the user interface. Direct and group message channels cannot be deleted.
+      description: >
+        Soft deletes a channel, by marking the channel as deleted in the
+        database. Soft deleted channels will not be accessible in the user
+        interface. Direct and group message channels cannot be deleted.
+
         ##### Permissions
+
         `delete_public_channel` permission if the channel is public,
+
         `delete_private_channel` permission if the channel is private,
+
         or have `manage_system` permission.
       parameters:
         - name: channel_id
           in: path
           description: Channel GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channel deletion successful
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Channel deletion successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -471,56 +542,66 @@
 
             // DeleteChannel
             pass, resp := Client.DeleteChannel(<CHANNELID>)
-
-  '/channels/{channel_id}/patch':
+  "/channels/{channel_id}/patch":
     put:
       tags:
         - channels
       summary: Patch a channel
-      description: |
-        Partially update a channel by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+      description: >
+        Partially update a channel by providing only the fields you want to
+        update. Omitted fields will not be updated. The fields that can be
+        updated are defined in the request body, all other provided fields will
+        be ignored.
+
         ##### Permissions
+
         If updating a public channel, `manage_public_channel_members` permission is required. If updating a private channel, `manage_private_channel_members` permission is required.
       parameters:
         - name: channel_id
           in: path
           description: Channel GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Channel object to be updated
-          required: true
           schema:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The unique handle for the channel, will be present in the channel URL
-              display_name:
-                type: string
-                description: The non-unique UI name for the channel
-              purpose:
-                type: string
-                description: A short description of the purpose of the channel
-              header:
-                type: string
-                description: Markdown-formatted text to display in the header of the channel
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The unique handle for the channel, will be present in the
+                    channel URL
+                display_name:
+                  type: string
+                  description: The non-unique UI name for the channel
+                purpose:
+                  type: string
+                  description: A short description of the purpose of the channel
+                header:
+                  type: string
+                  description: Markdown-formatted text to display in the header of the
+                    channel
+        description: Channel object to be updated
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel patch successful
-          schema:
-            $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -539,28 +620,32 @@
 
             // PatchChannel
             channel, resp := Client.PatchChannel(<CHANNELID>, patch)
+  "/channels/{channel_id}/privacy":
+    put:
+      tags:
+        - channels
+      summary: Update channel's privacy
+      description: >
+        Updates channel's privacy allowing changing a channel from Public to
+        Private and back.
 
-  '/channels/{channel_id}/privacy':
-      put:
-        tags:
-          - channels
-        summary: Update channel's privacy
-        description: |
-          Updates channel's privacy allowing changing a channel from Public to Private and back.
 
-          __Minimum server version__: 5.16
+        __Minimum server version__: 5.16
 
-          ##### Permissions
-          `manage_team` permission for the team of the channel.
-        parameters:
-          - name: channel_id
-            in: path
-            description: Channel GUID
-            required: true
+
+        ##### Permissions
+
+        `manage_team` permission for the team of the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          schema:
             type: string
-          - name: body
-            in: body
-            required: true
+      requestBody:
+        content:
+          application/json:
             schema:
               type: object
               required:
@@ -568,108 +653,124 @@
               properties:
                 privacy:
                   type: string
-                  description: "Channel privacy setting: 'O' for a public channel, 'P' for a private channel"
-        responses:
-          '200':
-            description: Channel conversion successful
-            schema:
-              $ref: '#/definitions/Channel'
-          '400':
-            $ref: '#/responses/BadRequest'
-          '401':
-            $ref: '#/responses/Unauthorized'
-          '403':
-            $ref: '#/responses/Forbidden'
-          '404':
-            $ref: '#/responses/NotFound'
-        x-code-samples:
-        - lang: 'Go'
-          source: |
+                  description: "Channel privacy setting: 'O' for a public channel, 'P' for
+                    a private channel"
+        required: true
+      responses:
+        "200":
+          description: Channel conversion successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
+
 
             // Update channel's privacy to Public
+
             updatedChannel, resp := Client.UpdateChannelPrivacy(<CHANNELID>, model.CHANNEL_OPEN)
 
+
             // Update channel's privacy to Private
+
             updatedChannel, resp := Client.UpdateChannelPrivacy(<CHANNELID>, model.CHANNEL_PRIVATE)
+  "/channels/{channel_id}/convert":
+    post:
+      tags:
+        - channels
+      summary: Convert a channel from public to private
+      description: |
+        Will be deprecated in 6.0
 
+        Convert into private channel from the provided channel id string.
 
-  '/channels/{channel_id}/convert':
-      post:
-        tags:
-          - channels
-        summary: Convert a channel from public to private
-        description: |
-          Will be deprecated in 6.0
+        __Minimum server version__: 4.10
 
-          Convert into private channel from the provided channel id string.
-
-          __Minimum server version__: 4.10
-
-          ##### Permissions
-          `manage_team` permission for the team of the channel.
-        parameters:
-          - name: channel_id
-            in: path
-            description: Channel GUID
-            required: true
+        ##### Permissions
+        `manage_team` permission for the team of the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          schema:
             type: string
-        responses:
-          '200':
-            description: Channel conversion successful
-            schema:
-              $ref: '#/definitions/Channel'
-          '400':
-            $ref: '#/responses/BadRequest'
-          '401':
-            $ref: '#/responses/Unauthorized'
-          '403':
-            $ref: '#/responses/Forbidden'
-          '404':
-            $ref: '#/responses/NotFound'
-        x-code-samples:
-        - lang: 'Go'
-          source: |
+      responses:
+        "200":
+          description: Channel conversion successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             // ConvertChannelToPrivate
+
             convertedChannel, resp := Client.ConvertChannelToPrivate(<CHANNELID>)
+  "/channels/{channel_id}/restore":
+    post:
+      tags:
+        - channels
+      summary: Restore a channel
+      description: |
+        Restore channel from the provided channel id string.
 
-  '/channels/{channel_id}/restore':
-      post:
-        tags:
-          - channels
-        summary: Restore a channel
-        description: |
-          Restore channel from the provided channel id string.
+        __Minimum server version__: 3.10
 
-          __Minimum server version__: 3.10
-
-          ##### Permissions
-          `manage_team` permission for the team of the channel.
-        parameters:
-          - name: channel_id
-            in: path
-            description: Channel GUID
-            required: true
+        ##### Permissions
+        `manage_team` permission for the team of the channel.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          schema:
             type: string
-        responses:
-          '200':
-            description: Channel restore successful
-            schema:
-              $ref: '#/definitions/Channel'
-          '401':
-            $ref: '#/responses/Unauthorized'
-          '403':
-            $ref: '#/responses/Forbidden'
-          '404':
-            $ref: '#/responses/NotFound'
-
-  '/channels/{channel_id}/stats':
+      responses:
+        "200":
+          description: Channel restore successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/channels/{channel_id}/stats":
     get:
       tags:
         - channels
@@ -683,20 +784,23 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channel statistics retrieval successful
           schema:
-            $ref: '#/definitions/ChannelStats'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Channel statistics retrieval successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelStats"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -704,8 +808,7 @@
 
             // GetChannelStats
             stats, resp := Client.GetChannelStats(<CHANNELID>)
-
-  '/channels/{channel_id}/pinned':
+  "/channels/{channel_id}/pinned":
     get:
       tags:
         - channels
@@ -716,20 +819,23 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: The list of channel pinned posts
           schema:
-            $ref: '#/definitions/PostList'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: The list of channel pinned posts
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PostList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -737,185 +843,218 @@
 
             // GetPinnedPosts
             posts, resp := Client.GetPinnedPosts(<CHANNELID>, "")
-
-  '/teams/{team_id}/channels':
+  "/teams/{team_id}/channels":
     get:
       tags:
         - channels
       summary: Get public channels
-      description: |
-        Get a page of public channels on a team based on query string parameters - page and per_page.
+      description: >
+        Get a page of public channels on a team based on query string parameters
+        - page and per_page.
+
         ##### Permissions
+
         Must be authenticated and have the `list_team_channels` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of public channels per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Channels retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Channels retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
-            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
-            Client.Login("email@domain.com", "Password1")
-            // GetPublicChannelsForTeam
-            channels, resp := Client.GetPublicChannelsForTeam(<TEAMID>, 0, 100, "")
 
-  '/teams/{team_id}/channels/deleted':
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            // GetPublicChannelsForTeam
+
+            channels, resp := Client.GetPublicChannelsForTeam(<TEAMID>, 0, 100, "")
+  "/teams/{team_id}/channels/deleted":
     get:
       tags:
         - channels
       summary: Get deleted channels
-      description: |
-        Get a page of deleted channels on a team based on query string parameters - team_id, page and per_page.
+      description: >
+        Get a page of deleted channels on a team based on query string
+        parameters - team_id, page and per_page.
+
 
         __Minimum server version__: 3.10
-
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of public channels per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Channels retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  '/teams/{team_id}/channels/autocomplete':
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Channels retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/teams/{team_id}/channels/autocomplete":
     get:
       tags:
         - channels
       summary: Autocomplete channels
-      description: |
-        Autocomplete public channels on a team based on the search term provided in the request URL.
+      description: >
+        Autocomplete public channels on a team based on the search term provided
+        in the request URL.
+
 
         __Minimum server version__: 4.7
 
+
         ##### Permissions
+
         Must have the `list_team_channels` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: query
           description: Name or display name
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channels autocomplete successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  '/teams/{team_id}/channels/search_autocomplete':
+            type: string
+      responses:
+        "200":
+          description: Channels autocomplete successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/teams/{team_id}/channels/search_autocomplete":
     get:
       tags:
         - channels
       summary: Autocomplete channels for search
-      description: |
-        Autocomplete your channels on a team based on the search term provided in the request URL.
+      description: >
+        Autocomplete your channels on a team based on the search term provided
+        in the request URL.
+
 
         __Minimum server version__: 5.4
 
+
         ##### Permissions
+
         Must have the `list_team_channels` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: name
           in: query
           description: Name or display name
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channels autocomplete successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  '/teams/{team_id}/channels/search':
+            type: string
+      responses:
+        "200":
+          description: Channels autocomplete successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/teams/{team_id}/channels/search":
     post:
       tags:
         - channels
       summary: Search channels
-      description: |
-        Search public channels on a team based on the search term provided in the request body.
+      description: >
+        Search public channels on a team based on the search term provided in
+        the request body.
+
         ##### Permissions
+
         Must have the `list_team_channels` permission.
+
 
         In server version 5.16 and later, a user without the `list_team_channels` permission will be able to use this endpoint, with the search results limited to the channels that the user is a member of.
       parameters:
@@ -923,36 +1062,41 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Search criteria
-          required: true
           schema:
-            type: object
-            required:
-              - term
-            properties:
-              term:
-                description: The search term to match against the name or display name of channels
-                type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - term
+              properties:
+                term:
+                  description: The search term to match against the name or display name of
+                    channels
+                  type: string
+        description: Search criteria
+        required: true
       responses:
-        '201':
+        "201":
           description: Channels search successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -962,19 +1106,23 @@
 
             // SearchChannels
             channels, resp := Client.SearchChannels(<TEAMID>, search)
-
-  '/teams/{team_id}/channels/search_archived':
+  "/teams/{team_id}/channels/search_archived":
     post:
       tags:
         - channels
       summary: Search archived channels
-      description: |
-        Search archived channels on a team based on the search term provided in the request body.
+      description: >
+        Search archived channels on a team based on the search term provided in
+        the request body.
+
 
         __Minimum server version__: 5.18
 
+
         ##### Permissions
+
         Must have the `list_team_channels` permission.
+
 
         In server version 5.18 and later, a user without the `list_team_channels` permission will be able to use this endpoint, with the search results limited to the channels that the user is a member of.
       parameters:
@@ -982,36 +1130,41 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Search criteria
-          required: true
           schema:
-            type: object
-            required:
-              - term
-            properties:
-              term:
-                description: The search term to match against the name or display name of archived channels
-                type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - term
+              properties:
+                term:
+                  description: The search term to match against the name or display name of
+                    archived channels
+                  type: string
+        description: Search criteria
+        required: true
       responses:
-        '201':
+        "201":
           description: Channels search successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -1021,8 +1174,7 @@
 
             // SearchChannels
             channels, resp := Client.SearchArchivedChannels(<TEAMID>, search)
-
-  '/teams/{team_id}/channels/name/{channel_name}':
+  "/teams/{team_id}/channels/name/{channel_name}":
     get:
       tags:
         - channels
@@ -1036,40 +1188,47 @@
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: channel_name
           in: path
           description: Channel Name
           required: true
-          type: string
+          schema:
+            type: string
         - name: include_deleted
           in: query
           description: Defines if deleted channels should be returned or not
-          type: string
-          enum: [true, false]
-          default: "false"
-      responses:
-        '200':
-          description: Channel retrieval successful
           schema:
-            $ref: '#/definitions/Channel'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Channel retrieval successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannelByName
-            channel, resp := Client.GetChannelByName(<CHANNEL NAME>, <TEAMID>, "")
 
-  '/teams/name/{team_name}/channels/name/{channel_name}':
+            // GetChannelByName
+
+            channel, resp := Client.GetChannelByName(<CHANNEL NAME>, <TEAMID>, "")
+  "/teams/name/{team_name}/channels/name/{channel_name}":
     get:
       tags:
         - channels
@@ -1083,40 +1242,47 @@
           in: path
           description: Team Name
           required: true
-          type: string
+          schema:
+            type: string
         - name: channel_name
           in: path
           description: Channel Name
           required: true
-          type: string
+          schema:
+            type: string
         - name: include_deleted
           in: query
           description: Defines if deleted channels should be returned or not
-          type: string
-          enum: [true, false]
-          default: "false"
-      responses:
-        '200':
-          description: Channel retrieval successful
           schema:
-            $ref: '#/definitions/Channel'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Channel retrieval successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannelByNameForTeamName
-            channel, resp = Client.GetChannelByNameForTeamName(<CHANNEL NAME>, <TEAM NAME>, "")
 
-  '/channels/{channel_id}/members':
+            // GetChannelByNameForTeamName
+
+            channel, resp = Client.GetChannelByNameForTeamName(<CHANNEL NAME>, <TEAM NAME>, "")
+  "/channels/{channel_id}/members":
     get:
       tags:
         - channels
@@ -1130,40 +1296,48 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of members per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Channel members retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ChannelMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Channel members retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChannelMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannelMembers
-            members, resp := Client.GetChannelMembers(th.BasicChannel.Id, 0, 60, "")
 
+            // GetChannelMembers
+
+            members, resp := Client.GetChannelMembers(th.BasicChannel.Id, 0, 60, "")
     post:
       tags:
         - channels
@@ -1174,46 +1348,56 @@
           in: path
           description: The channel ID
           required: true
-          type: string
-        - in: body
-          name: body
-          required: true
           schema:
-            type: object
-            required:
-              - user_id
-            properties:
-              user_id:
-                type: string
-                description: The ID of user to add into the channel
-              post_root_id:
-                type: string
-                description: The ID of root post where link to add channel member originates
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: string
+                  description: The ID of user to add into the channel
+                post_root_id:
+                  type: string
+                  description: The ID of root post where link to add channel member
+                    originates
+        required: true
       responses:
-        '201':
+        "201":
           description: Channel member creation successful
-          schema:
-            $ref: '#/definitions/ChannelMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             // AddChannelMember
+
             cm, resp := Client.AddChannelMember(<CHANNEL ID>, <ID OF USER TO ADD>)
 
-            // AddChannelMemberWithRootId
-            cm, resp := Client.AddChannelMemberWithRootId(<CHANNEL ID>, <ID OF USER TO ADD>, <POST ROOT ID>)
 
-  '/channels/{channel_id}/members/ids':
+            // AddChannelMemberWithRootId
+
+            cm, resp := Client.AddChannelMemberWithRootId(<CHANNEL ID>, <ID OF USER TO ADD>, <POST ROOT ID>)
+  "/channels/{channel_id}/members/ids":
     post:
       tags:
         - channels
@@ -1227,32 +1411,36 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
-        - in: body
-          name: user_ids
-          description: List of user ids
-          required: true
           schema:
-            type: array
-            items:
-              type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: List of user ids
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel member list retrieval successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ChannelMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChannelMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -1262,8 +1450,7 @@
 
             // GetChannelMembersByIds
             cm, resp := Client.GetChannelMembersByIds(<CHANNELID>, usersIds)
-
-  '/channels/{channel_id}/members/{user_id}':
+  "/channels/{channel_id}/members/{user_id}":
     get:
       tags:
         - channels
@@ -1277,25 +1464,29 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channel member retrieval successful
           schema:
-            $ref: '#/definitions/ChannelMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Channel member retrieval successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -1303,42 +1494,49 @@
 
             // GetChannelMember
             member, resp := Client.GetChannelMember(<CHANNELID>, <USERID>, "")
-
     delete:
       tags:
         - channels
       summary: Remove user from channel
-      description: |
+      description: >
         Delete a channel member, effectively removing them from a channel.
 
+
         In server version 5.3 and later, channel members can only be deleted from public or private channels.
+
         ##### Permissions
+
         `manage_public_channel_members` permission if the channel is public.
+
         `manage_private_channel_members` permission if the channel is private.
       parameters:
         - name: channel_id
           in: path
           description: Channel GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channel member deletion successful
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Channel member deletion successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -1346,8 +1544,7 @@
 
             // RemoveUserFromChannel
             pass, resp := Client.RemoveUserFromChannel(<CHANNELID>, <USERID>)
-
-  '/channels/{channel_id}/members/{user_id}/roles':
+  "/channels/{channel_id}/members/{user_id}/roles":
     put:
       tags:
         - channels
@@ -1361,154 +1558,191 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-        - in: body
-          name: roles
-          description: Space-delimited channel roles to assign to the user
-          required: true
           schema:
-            type: object
-            required:
-              - roles
-            properties:
-              roles:
-                type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roles
+              properties:
+                roles:
+                  type: string
+        description: Space-delimited channel roles to assign to the user
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel roles update successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            // UpdateChannelRoles
-            pass, resp := Client.UpdateChannelRoles(<CHANNELID>, <USERIDTOPROMOTE>, "channel_admin channel_user")
 
-  '/channels/{channel_id}/members/{user_id}/schemeRoles':
+            // UpdateChannelRoles
+
+            pass, resp := Client.UpdateChannelRoles(<CHANNELID>, <USERIDTOPROMOTE>, "channel_admin channel_user")
+  "/channels/{channel_id}/members/{user_id}/schemeRoles":
     put:
       tags:
         - channels
       summary: Update the scheme-derived roles of a channel member.
-      description: |
-        Update a channel member's scheme_admin/scheme_user properties. Typically this should either be `scheme_admin=false, scheme_user=true` for ordinary channel member, or `scheme_admin=true, scheme_user=true` for a channel admin.
+      description: >
+        Update a channel member's scheme_admin/scheme_user properties. Typically
+        this should either be `scheme_admin=false, scheme_user=true` for
+        ordinary channel member, or `scheme_admin=true, scheme_user=true` for a
+        channel admin.
+
         __Minimum server version__: 5.0
+
         ##### Permissions
+
         Must be authenticated and have the `manage_channel_roles` permission.
       parameters:
         - name: channel_id
           in: path
           description: Channel GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Scheme properties.
-          required: true
           schema:
-            type: object
-            required:
-              - scheme_admin
-              - scheme_user
-            properties:
-              scheme_admin:
-                type: boolean
-              scheme_user:
-                type: boolean
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scheme_admin
+                - scheme_user
+              properties:
+                scheme_admin:
+                  type: boolean
+                scheme_user:
+                  type: boolean
+        description: Scheme properties.
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel member's scheme-derived roles updated successfully.
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  '/channels/{channel_id}/members/{user_id}/notify_props':
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/channels/{channel_id}/members/{user_id}/notify_props":
     put:
       tags:
         - channels
       summary: Update channel notifications
-      description: |
-        Update a user's notification properties for a channel. Only the provided fields are updated.
+      description: >
+        Update a user's notification properties for a channel. Only the provided
+        fields are updated.
+
         ##### Permissions
+
         Must be logged in as the user or have `edit_other_users` permission.
       parameters:
         - name: channel_id
           in: path
           description: Channel GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-        - in: body
-          name: notify_props
-          required: true
           schema:
-            $ref: '#/definitions/ChannelNotifyProps'
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChannelNotifyProps"
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel notification properties update successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             props := map[string]string{}
+
             props[model.DESKTOP_NOTIFY_PROP] = model.CHANNEL_NOTIFY_MENTION
+
             props[model.MARK_UNREAD_NOTIFY_PROP] = model.CHANNEL_MARK_UNREAD_MENTION
 
-            // UpdateChannelNotifyProps
-            pass, resp := Client.UpdateChannelNotifyProps(<CHANNELID>, <USERID>, props)
 
-  '/channels/members/{user_id}/view':
+            // UpdateChannelNotifyProps
+
+            pass, resp := Client.UpdateChannelNotifyProps(<CHANNELID>, <USERID>, props)
+  "/channels/members/{user_id}/view":
     post:
       tags:
         - channels
       summary: View channel
-      description: |
-        Perform all the actions involved in viewing a channel. This includes marking channels as read, clearing push notifications, and updating the active channel.
+      description: >
+        Perform all the actions involved in viewing a channel. This includes
+        marking channels as read, clearing push notifications, and updating the
+        active channel.
+
         ##### Permissions
+
         Must be logged in as user or have `edit_other_users` permission.
+
 
         __Response only includes `last_viewed_at_times` in Mattermost server 4.3 and newer.__
       parameters:
@@ -1516,42 +1750,49 @@
           name: user_id
           description: User ID to perform the view action for
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Paremeters affecting how and which channels to view
-          required: true
           schema:
-            type: object
-            required:
-              - channel_id
-            properties:
-              channel_id:
-                type: string
-                description: The channel ID that is being viewed. Use a blank string to indicate that all channels have lost focus.
-              prev_channel_id:
-                type: string
-                description: The channel ID of the previous channel, used when switching channels. Providing this ID will cause push notifications to clear on the channel being switched to.
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel ID that is being viewed. Use a blank string to
+                    indicate that all channels have lost focus.
+                prev_channel_id:
+                  type: string
+                  description: The channel ID of the previous channel, used when switching
+                    channels. Providing this ID will cause push notifications to
+                    clear on the channel being switched to.
+        description: Paremeters affecting how and which channels to view
+        required: true
       responses:
-        '200':
+        "200":
           description: Channel view successful
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: Value should be "OK" if successful
-              last_viewed_at_times:
+          content:
+            "*/*":
+              schema:
                 type: object
-                description: A JSON object mapping channel IDs to the channel view times
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+                properties:
+                  status:
+                    type: string
+                    description: Value should be "OK" if successful
+                  last_viewed_at_times:
+                    type: object
+                    description: A JSON object mapping channel IDs to the channel view times
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -1562,148 +1803,179 @@
             }
             // ViewChannel
             pass, resp := Client.ViewChannel(<USERID>, view)
-
-  '/users/{user_id}/teams/{team_id}/channels/members':
+  "/users/{user_id}/teams/{team_id}/channels/members":
     get:
       tags:
         - channels
       summary: Get channel memberships and roles for a user
-      description: |
-        Get all channel memberships and associated membership roles (i.e. `channel_user`, `channel_admin`) for a user on a specific team.
+      description: >
+        Get all channel memberships and associated membership roles (i.e.
+        `channel_user`, `channel_admin`) for a user on a specific team.
+
         ##### Permissions
+
         Logged in as the user and `view_team` permission for the team. Having `manage_system` permission voids the previous requirements.
       parameters:
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channel members retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ChannelMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Channel members retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChannelMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannelMembersForUser
-            members, resp := Client.GetChannelMembersForUser(<USERID>, <TEAMID>, "")
 
-  '/users/{user_id}/teams/{team_id}/channels':
+            // GetChannelMembersForUser
+
+            members, resp := Client.GetChannelMembersForUser(<USERID>, <TEAMID>, "")
+  "/users/{user_id}/teams/{team_id}/channels":
     get:
       tags:
         - channels
       summary: Get channels for user
-      description: |
+      description: >
         Get all the channels on a team for a user.
+
         ##### Permissions
+
         Logged in as the user, or have `edit_other_users` permission, and `view_team` permission for the team.
       parameters:
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channels retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Channel'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Channels retrieval successful
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannelsForTeamForUser
-            channels, resp := Client.GetChannelsForTeamForUser(<TEAMID>, <USERID>, "")
 
-  '/users/{user_id}/channels/{channel_id}/unread':
+            // GetChannelsForTeamForUser
+
+            channels, resp := Client.GetChannelsForTeamForUser(<TEAMID>, <USERID>, "")
+  "/users/{user_id}/channels/{channel_id}/unread":
     get:
       tags:
         - channels
       summary: Get unread messages
-      description: |
+      description: >
         Get the total unread messages and mentions for a channel for a user.
+
         ##### Permissions
+
         Must be logged in as user and have the `read_channel` permission, or have `edit_other_usrs` permission.
       parameters:
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: channel_id
           in: path
           description: Channel GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Channel unreads retrieval successful
           schema:
-            $ref: '#/definitions/ChannelUnread'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Channel unreads retrieval successful
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelUnread"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            // GetChannelUnread
-            channelUnread, resp := Client.GetChannelUnread(<CHANNELID>, <USERID>)
 
-  '/channels/{channel_id}/scheme':
+            // GetChannelUnread
+
+            channelUnread, resp := Client.GetChannelUnread(<CHANNELID>, <USERID>)
+  "/channels/{channel_id}/scheme":
     put:
       tags:
         - channels
       summary: Set a channel's scheme
-      description: |
-        Set a channel's scheme, more specifically sets the scheme_id value of a channel record.
+      description: >
+        Set a channel's scheme, more specifically sets the scheme_id value of a
+        channel record.
+
 
         ##### Permissions
+
         Must have `manage_system` permission.
+
 
         __Minimum server version__: 4.10
       parameters:
@@ -1711,34 +1983,38 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Scheme GUID
-          required: true
           schema:
-            type: object
-            required:
-              - scheme_id
-            properties:
-              scheme_id:
-                type: string
-                description: The ID of the scheme.
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scheme_id
+              properties:
+                scheme_id:
+                  type: string
+                  description: The ID of the scheme.
+        description: Scheme GUID
+        required: true
       responses:
-        '200':
+        "200":
           description: Update channel scheme successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -1747,26 +2023,31 @@
             channelID := "4xp9fdt77pncbef59f4k1qe83o"
             schemeID := "qjda3stwafbgpqjaxej3k76sga"
             ok, resp := UpdateChannelScheme(channelID, schemeID)
-        - lang: 'curl'
-          source: |
+        - lang: curl
+          source: >
             curl -X PUT \
               https://your-mattermost-url.com/api/v4/channels/4xp9fdt77pncbef59f4k1qe83o/scheme \
               -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
               -H 'Content-Type: application/json' \
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
-
-  '/channels/{channel_id}/members_minus_group_members':
+  "/channels/{channel_id}/members_minus_group_members":
     get:
       tags:
         - channels
       summary: Channel members minus group members.
-      description: |
-        Get the set of users who are members of the channel minus the set of users who are members of the given groups.
+      description: >
+        Get the set of users who are members of the channel minus the set of
+        users who are members of the given groups.
+
         Each user object contains an array of group objects representing the group memberships for that user.
+
         Each user object contains the boolean fields `scheme_guest`, `scheme_user`, and `scheme_admin` representing the roles that user has for the given channel.
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
+
 
         __Minimum server version__: 5.14
       parameters:
@@ -1774,35 +2055,40 @@
           in: path
           description: Channel GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: group_ids
           in: query
           description: A comma-separated list of group ids.
           required: true
-          default: ""
-          type: string
+          schema:
+            type: string
+            default: ""
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
       responses:
-        '200':
-          description: Successfully returns users specified by the pagination, and the total_count.
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+        "200":
+          description: Successfully returns users specified by the pagination, and the
+            total_count.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'curl'
-          source: |
+        - lang: curl
+          source: >
             curl -X GET \
               'http://your-mattermost-url.com/api/v4/channels/3wyp678obid8pggjmhmhwpah1r/members_minus_group_members?group_ids=eoezijg8zffgjmch8icy5bjd1e,ugaw6wjc3tfxpcr1eq5u5k8dhe&page=0&per_page=100' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \

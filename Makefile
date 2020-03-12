@@ -47,14 +47,14 @@ build-v4: .npminstall
 .npminstall:
 	@echo Getting dependencies using npm
 
-	npm install swagger-cli@1.0.0
+	npm install swagger-cli
 	npm install redoc-cli
 	touch $@
 
 run:
 	@echo Starting redoc server
 
-	npx redoc-cli serve v4/html/static/mattermost-openapi-v4.yaml
+	npx --ignore-existing serve v4/html
 
 clean:
 	@echo Cleaning

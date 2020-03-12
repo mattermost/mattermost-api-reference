@@ -1,4 +1,4 @@
-  '/roles/{role_id}':
+  "/roles/{role_id}":
     get:
       tags:
         - roles
@@ -15,26 +15,28 @@
           in: path
           description: Role GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Role retrieval successful
           schema:
-            $ref: '#/definitions/Role'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Role retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Role"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
             role, resp := Client.GetRole(<ROLEID>, "")
-
-  '/roles/name/{role_name}':
+  "/roles/name/{role_name}":
     get:
       tags:
         - roles
@@ -51,35 +53,42 @@
           in: path
           description: Role Name
           required: true
-          type: string
-      responses:
-        '200':
-          description: Role retrieval successful
           schema:
-            $ref: '#/definitions/Role'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Role retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Role"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
             role, resp := Client.GetRoleByName(<ROLENAME>, "")
-
-  '/roles/{role_id}/patch':
+  "/roles/{role_id}/patch":
     put:
       tags:
         - roles
       summary: Patch a role
-      description: |
-        Partially update a role by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+      description: >
+        Partially update a role by providing only the fields you want to update.
+        Omitted fields will not be updated. The fields that can be updated are
+        defined in the request body, all other provided fields will be ignored.
+
 
         ##### Permissions
+
         `manage_system` permission is required.
+
 
         __Minimum server version__: 4.9
       parameters:
@@ -87,74 +96,79 @@
           in: path
           description: Role GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Role object to be updated
-          required: true
           schema:
-            type: object
-            properties:
-              permissions:
-                type: array
-                items:
-                  type: string
-                description: The permissions the role should grant.
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permissions:
+                  type: array
+                  items:
+                    type: string
+                  description: The permissions the role should grant.
+        description: Role object to be updated
+        required: true
       responses:
-        '200':
+        "200":
           description: Role patch successful
-          schema:
-            $ref: '#/definitions/Role'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Role"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /roles/names:
-      post:
-        tags:
-          - roles
-        summary: Get a list of roles by name
-        description: |
-          Get a list of roles from their names.
+    post:
+      tags:
+        - roles
+      summary: Get a list of roles by name
+      description: |
+        Get a list of roles from their names.
 
-          ##### Permissions
-          Requires an active session but no other permissions.
+        ##### Permissions
+        Requires an active session but no other permissions.
 
-          __Minimum server version__: 4.9
-        parameters:
-          - in: body
-            name: body
-            description: List of role names
-            required: true
+        __Minimum server version__: 4.9
+      requestBody:
+        content:
+          application/json:
             schema:
               type: array
               items:
                 type: string
-        responses:
-          '200':
-            description: Role list retrieval successful
-            schema:
-              type: array
-              items:
-                $ref: '#/definitions/Role'
-          '400':
-            $ref: '#/responses/BadRequest'
-          '401':
-            $ref: '#/responses/Unauthorized'
-          '404':
-            $ref: '#/responses/NotFound'
-        x-code-samples:
-          - lang: 'Go'
-            source: |
-              import "github.com/mattermost/mattermost-server/model"
-              Client := model.NewAPIv4Client("https://your-mattermost-url.com")
-              Client.Login("email@domain.com", "Password1")
+        description: List of role names
+        required: true
+      responses:
+        "200":
+          description: Role list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Role"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
 
-              roleNames := []string{<NAME OF ROLE1>, <NAME OF ROLE2>, ...}
+            roleNames := []string{<NAME OF ROLE1>, <NAME OF ROLE2>, ...}
 
-              roles, resp := Client.GetRolesByNames(roleNames)
+            roles, resp := Client.GetRolesByNames(roleNames)

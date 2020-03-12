@@ -3,17 +3,24 @@
       tags:
         - dataretention
       summary: Get the data retention policy details.
-      description: |
-        Gets the current data retention policy details from the server, including what data should be purged and the cutoff times for each data type that should be purged.
+      description: >
+        Gets the current data retention policy details from the server,
+        including what data should be purged and the cutoff times for each data
+        type that should be purged.
+
         __Minimum server version__: 4.3
+
         ##### Permissions
+
         Requires an active session but no other permissions.
       responses:
-        '200':
+        "200":
           description: Data retention policy details retrieved successfully.
-          schema:
-            $ref: '#/definitions/DataRetentionPolicy'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataRetentionPolicy"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

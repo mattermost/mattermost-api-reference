@@ -1,76 +1,85 @@
-  '/jobs':
+  /jobs:
     get:
       tags:
         - jobs
       summary: Get the jobs.
-      description: |
-        Get a page of jobs. Use the query parameters to modify the behaviour of this endpoint.
+      description: >
+        Get a page of jobs. Use the query parameters to modify the behaviour of
+        this endpoint.
+
         __Minimum server version: 4.1__
+
         ##### Permissions
+
         Must have `manage_jobs` permission.
       parameters:
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of jobs per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Job list retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Job'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Job list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Job"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
     post:
       tags:
-      - jobs
+        - jobs
       summary: Create a new job.
       description: |
         Create a new job.
         __Minimum server version: 4.1__
         ##### Permissions
         Must have `manage_jobs` permission.
-      parameters:
-        - in: body
-          name: body
-          description: Job object to be created
-          required: true
-          schema:
-            type: object
-            required:
-              - type
-            properties:
-              type:
-                type: string
-                description: The type of job to create
-              data:
-                type: object
-                description: An object containing any additional data required for this job type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type
+              properties:
+                type:
+                  type: string
+                  description: The type of job to create
+                data:
+                  type: object
+                  description: An object containing any additional data required for this
+                    job type
+        description: Job object to be created
+        required: true
       responses:
-        '201':
+        "201":
           description: Job creation successful
-          schema:
-            $ref: '#/definitions/Job'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-
-  '/jobs/{job_id}':
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/jobs/{job_id}":
     get:
       tags:
         - jobs
@@ -85,22 +94,24 @@
           in: path
           description: Job GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Job retrieval successful
           schema:
-            $ref: '#/definitions/Job'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  '/jobs/{job_id}/cancel':
+            type: string
+      responses:
+        "200":
+          description: Job retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/jobs/{job_id}/cancel":
     post:
       tags:
         - jobs
@@ -115,57 +126,68 @@
           in: path
           description: Job GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Job canceled successfully
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-
-  '/jobs/type/{type}':
+            type: string
+      responses:
+        "200":
+          description: Job canceled successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/jobs/type/{type}":
     get:
       tags:
         - jobs
       summary: Get the jobs of the given type.
-      description: |
-        Get a page of jobs of the given type. Use the query parameters to modify the behaviour of this endpoint.
+      description: >
+        Get a page of jobs of the given type. Use the query parameters to modify
+        the behaviour of this endpoint.
+
         __Minimum server version: 4.1__
+
         ##### Permissions
+
         Must have `manage_jobs` permission.
       parameters:
         - name: type
           in: path
           description: Job type
           required: true
-          type: string
+          schema:
+            type: string
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of jobs per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Job list retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Job'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Job list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Job"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"

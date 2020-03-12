@@ -3,21 +3,26 @@
       tags:
         - brand
       summary: Get brand image
-      description: |
-        Get the previously uploaded brand image. Returns 404 if no brand image has been uploaded.
+      description: >
+        Get the previously uploaded brand image. Returns 404 if no brand image
+        has been uploaded.
+
         ##### Permissions
+
         No permission required.
       responses:
-        '200':
+        "200":
           description: Brand image retrieval successful
-          schema:
-            type: string
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -26,7 +31,6 @@
 
             // GetBrandImage
             img, err := Client.GetBrandImage()
-
     post:
       tags:
         - brand
@@ -35,30 +39,37 @@
         Uploads a brand image.
         ##### Permissions
         Must have `manage_system` permission.
-      consumes: ["multipart/form-data"]
-      parameters:
-        - name: image
-          in: formData
-          description: The image to be uploaded
-          required: true
-          type: file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  description: The image to be uploaded
+                  type: string
+                  format: binary
+              required:
+                - image
       responses:
-        '201':
+        "201":
           description: Brand image upload successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '413':
-          $ref: '#/responses/TooLarge'
-        '501':
-          $ref: '#/responses/NotImplemented'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "413":
+          $ref: "#/components/responses/TooLarge"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -77,29 +88,34 @@
             }
 
             ok, resp := Client.UploadBrandImage(data.Bytes())
-
     delete:
       tags:
         - brand
       summary: Delete current brand image
-      description: |
-        Deletes the previously uploaded brand image. Returns 404 if no brand image has been uploaded.
+      description: >
+        Deletes the previously uploaded brand image. Returns 404 if no brand
+        image has been uploaded.
+
         ##### Permissions
+
         Must have `manage_system` permission.
+
         __Minimum server version: 5.6__
       responses:
-        '200':
+        "200":
           description: Brand image succesfully deleted
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 

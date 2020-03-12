@@ -7,40 +7,42 @@
         Create a new team on the system.
         ##### Permissions
         Must be authenticated and have the `create_team` permission.
-      parameters:
-        - in: body
-          name: body
-          description: Team that is to be created
-          required: true
-          schema:
-            type: object
-            required:
-              - name
-              - display_name
-              - type
-            properties:
-              name:
-                type: string
-                description: Unique handler for a team, will be present in the team URL
-              display_name:
-                type: string
-                description: Non-unique UI name for the team
-              type:
-                type: string
-                description: "`'O'` for open, `'I'` for invite only"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - display_name
+                - type
+              properties:
+                name:
+                  type: string
+                  description: Unique handler for a team, will be present in the team URL
+                display_name:
+                  type: string
+                  description: Non-unique UI name for the team
+                type:
+                  type: string
+                  description: "`'O'` for open, `'I'` for invite only"
+        description: Team that is to be created
+        required: true
       responses:
-        '201':
+        "201":
           description: Team creation successful
-          schema:
-            $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -52,43 +54,51 @@
               DisplayName: "TeamDisplayName",
               Type:        "O",
             })
-
     get:
       tags:
         - teams
       summary: Get teams
-      description: |
-        For regular users only returns open teams. Users with the "manage_system" permission will return teams regardless of type. The result is based on query string parameters - page and per_page.
+      description: >
+        For regular users only returns open teams. Users with the
+        "manage_system" permission will return teams regardless of type. The
+        result is based on query string parameters - page and per_page.
+
         ##### Permissions
+
         Must be authenticated. "manage_system" permission is required to show all teams.
       parameters:
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of teams per page.
-          default: "60"
-          type: string
+          schema:
+            type: integer
+            default: 60
         - name: include_total_count
           in: query
-          type: boolean
-          default: false
-      responses:
-        '200':
-          description: Team list retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Team list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -96,8 +106,7 @@
             Client.Login("email@domain.com", "Password1")
 
             teams, resp := Client.GetAllTeams("", 0, 100)
-
-  '/teams/{team_id}':
+  "/teams/{team_id}":
     get:
       tags:
         - teams
@@ -111,22 +120,25 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team retrieval successful
           schema:
-            $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -136,65 +148,72 @@
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
 
             t, err := Client.GetTeam(teamID, "")
-
     put:
       tags:
         - teams
       summary: Update a team
-      description: |
-        Update a team by providing the team object. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+      description: >
+        Update a team by providing the team object. The fields that can be
+        updated are defined in the request body, all other provided fields will
+        be ignored.
+
         ##### Permissions
+
         Must have the `manage_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Team to update
-          required: true
           schema:
-            type: object
-            required:
-              - id
-              - display_name
-              - description
-              - company_name
-              - allowed_domains
-              - invite_id
-              - allow_open_invite
-            properties:
-              id:
-                type: string
-              display_name:
-                type: string
-              description:
-                type: string
-              company_name:
-                type: string
-              allowed_domains:
-                type: string
-              invite_id:
-                type: string
-              allow_open_invite:
-                type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - display_name
+                - description
+                - company_name
+                - allowed_domains
+                - invite_id
+                - allow_open_invite
+              properties:
+                id:
+                  type: string
+                display_name:
+                  type: string
+                description:
+                  type: string
+                company_name:
+                  type: string
+                allowed_domains:
+                  type: string
+                invite_id:
+                  type: string
+                allow_open_invite:
+                  type: string
+        description: Team to update
+        required: true
       responses:
-        '200':
+        "200":
           description: Team update successful
-          schema:
-            $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -213,44 +232,53 @@
               InviteId:        inviteID,
               AllowOpenInvite: false,
             })
-
     delete:
       tags:
         - teams
       summary: Delete a team
-      description: |
-        Soft deletes a team, by marking the team as deleted in the database. Soft deleted teams will not be accessible in the user interface.
+      description: >
+        Soft deletes a team, by marking the team as deleted in the database.
+        Soft deleted teams will not be accessible in the user interface.
+
 
         Optionally use the permanent query parameter to hard delete the team for compliance reasons. As of server version 5.0, to use this feature `ServiceSettings.EnableAPITeamDeletion` must be set to `true` in the server's configuration.
+
         ##### Permissions
+
         Must have the `manage_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: permanent
           in: query
-          description: Permanently delete the team, to be used for compliance reasons only. As of server version 5.0, `ServiceSettings.EnableAPITeamDeletion` must be set to `true` in the server's configuration.
+          description: Permanently delete the team, to be used for compliance reasons only.
+            As of server version 5.0, `ServiceSettings.EnableAPITeamDeletion`
+            must be set to `true` in the server's configuration.
           required: false
-          default: false
-          type: boolean
-      responses:
-        '200':
-          description: Team deletion successful
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Team deletion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -264,52 +292,59 @@
 
             // Permanent deletion
             ok, resp := Client.PermanentDeleteTeam(&model.Team{Id: teamID})
-
-  '/teams/{team_id}/patch':
+  "/teams/{team_id}/patch":
     put:
       tags:
         - teams
       summary: Patch a team
-      description: |
-        Partially update a team by providing only the fields you want to update. Omitted fields will not be updated. The fields that can be updated are defined in the request body, all other provided fields will be ignored.
+      description: >
+        Partially update a team by providing only the fields you want to update.
+        Omitted fields will not be updated. The fields that can be updated are
+        defined in the request body, all other provided fields will be ignored.
+
         ##### Permissions
+
         Must have the `manage_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Team object that is to be updated
-          required: true
           schema:
-            type: object
-            properties:
-              display_name:
-                type: string
-              description:
-                type: string
-              company_name:
-                 type: string
-              invite_id:
-                type: string
-              allow_open_invite:
-                type: boolean
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                display_name:
+                  type: string
+                description:
+                  type: string
+                company_name:
+                  type: string
+                invite_id:
+                  type: string
+                allow_open_invite:
+                  type: boolean
+        description: Team object that is to be updated
+        required: true
       responses:
-        '200':
+        "200":
           description: team patch successful
-          schema:
-            $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -325,37 +360,41 @@
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
 
             team, resp := Client.PatchTeam(teamID, patch)
-
-  '/teams/name/{name}':
+  "/teams/name/{name}":
     get:
       tags:
         - teams
       summary: Get a team by name
-      description: |
+      description: >
         Get a team based on provided name string
+
         ##### Permissions
+
         Must be authenticated, team type is open and have the `view_team` permission.
       parameters:
         - name: name
           in: path
           description: Team Name
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team retrieval successful
           schema:
-            $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -363,8 +402,7 @@
             Client.Login("email@domain.com", "Password1")
 
             team, resp := Client.GetTeamByName("teamName", "")
-
-  '/teams/search':
+  /teams/search:
     post:
       tags:
         - teams
@@ -374,58 +412,70 @@
         ##### Permissions
         Logged in user only shows open teams
         Logged in user with "manage_system" permission shows all teams
-      parameters:
-        - in: body
-          name: body
-          description: Search criteria
-          required: true
-          schema:
-            type: object
-            required:
-              - term
-            properties:
-              term:
-                description: The search term to match against the name or display name of teams
-                type: string
-              page:
-                type: string
-                description: The page number to return, if paginated. If this parameter is not present with the `per_page` parameter then the results will be returned un-paged.
-              per_page:
-                type: string
-                description: The number of entries to return per page, if paginated. If this parameter is not present with the `page` parameter then the results will be returned un-paged.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - term
+              properties:
+                term:
+                  description: The search term to match against the name or display name of
+                    teams
+                  type: string
+                page:
+                  type: string
+                  description: The page number to return, if paginated. If this parameter
+                    is not present with the `per_page` parameter then the
+                    results will be returned un-paged.
+                per_page:
+                  type: string
+                  description: The number of entries to return per page, if paginated. If
+                    this parameter is not present with the `page` parameter then
+                    the results will be returned un-paged.
+        description: Search criteria
+        required: true
       responses:
-        '200':
-          description: Paginated teams response. (Note that the non-paginated response—returned if the request body does not contain both `page` and `per_page` fields—is a simple array of teams.)
-          schema:
-            type: object
-            properties:
-              teams:
-                type: array
-                description: The teams that matched the query.
-                items:
-                  $ref: '#/definitions/Team'
-              total_count:
-                type: number
-                description: The total number of results, regardless of page and per_page requested.
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+        "200":
+          description: Paginated teams response. (Note that the non-paginated
+            response—returned if the request body does not contain both `page`
+            and `per_page` fields—is a simple array of teams.)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    description: The teams that matched the query.
+                    items:
+                      $ref: "#/components/schemas/Team"
+                  total_count:
+                    type: number
+                    description: The total number of results, regardless of page and
+                      per_page requested.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
-            teams, resp := Client.SearchTeams(&model.TeamSearch{Term: "searchTerm"})
 
-  '/teams/name/{name}/exists':
+            teams, resp := Client.SearchTeams(&model.TeamSearch{Term: "searchTerm"})
+  "/teams/name/{name}/exists":
     get:
       tags:
         - teams
@@ -439,20 +489,23 @@
           in: path
           description: Team Name
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team retrieval successful
           schema:
-            $ref: '#/definitions/TeamExists'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamExists"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -460,37 +513,41 @@
             Client.Login("email@domain.com", "Password1")
 
             exists, resp := Client.TeamExists("teamName", "")
-
-  '/users/{user_id}/teams':
+  "/users/{user_id}/teams":
     get:
       tags:
         - teams
       summary: Get a user's teams
-      description: |
+      description: >
         Get a list of teams that a user is on.
+
         ##### Permissions
+
         Must be authenticated as the user or have the `manage_system` permission.
       parameters:
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team list retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Team list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -500,49 +557,56 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             teams, resp := Client.GetTeamsForUser(userID, "")
-
-  '/teams/{team_id}/members':
+  "/teams/{team_id}/members":
     get:
       tags:
         - teams
       summary: Get team members
-      description: |
-        Get a page team members list based on query string parameters - team id, page and per page.
+      description: >
+        Get a page team members list based on query string parameters - team id,
+        page and per page.
+
         ##### Permissions
+
         Must be authenticated and have the `view_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page.
-          default: "60"
-          type: string
-      responses:
-        '200':
-          description: Team members retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Team members retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -556,41 +620,47 @@
       tags:
         - teams
       summary: Add user to team
-      description: |
+      description: >
         Add user to the team by user_id.
+
         ##### Permissions
+
         Must be authenticated and team be open to add self. For adding another user, authenticated user must have the `add_user_to_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          required: true
           schema:
-            type: object
-            properties:
-              team_id:
-                type: string
-              user_id:
-                type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_id:
+                  type: string
+                user_id:
+                  type: string
+        required: true
       responses:
-        '201':
+        "201":
           description: Team member creation successful
-          schema:
-            $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -601,37 +671,42 @@
             userID := "qjda3stwafbgpqjaxej3k76sga"
 
             teamMember, resp := Client.AddTeamMember(teamID, userID)
-
-  '/teams/members/invite':
+  /teams/members/invite:
     post:
       tags:
         - teams
       summary: Add user to team from invite
-      description: |
-        Using either an invite id or hash/data pair from an email invite link, add a user to a team.
+      description: >
+        Using either an invite id or hash/data pair from an email invite link,
+        add a user to a team.
+
         ##### Permissions
+
         Must be authenticated.
       parameters:
         - name: token
           in: query
           description: Token id from the invitation
           required: true
-          type: string
-      responses:
-        '201':
-          description: Team member creation successful
           schema:
-            $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "201":
+          description: Team member creation successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -641,52 +716,60 @@
             tokenID := "qjda3stwafbgpqjaxej3k76sga"
 
             tm, resp = Client.AddTeamMemberFromInvite(tokenID, "")
-
-  '/teams/{team_id}/members/batch':
+  "/teams/{team_id}/members/batch":
     post:
       tags:
         - teams
       summary: Add multiple users to team
-      description: |
+      description: >
         Add a number of users to the team by user_id.
+
         ##### Permissions
+
         Must be authenticated. Authenticated user must have the `add_user_to_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: graceful
           in: query
-          description: 'Instead of aborting the operation if a user cannot be added, return an arrray that will contain both the success and added members and the ones with error, in form of `[{"member": {...}, "user_id", "...", "error": {...}}]`'
+          description: 'Instead of aborting the operation if a user cannot be added, return
+            an arrray that will contain both the success and added members and
+            the ones with error, in form of `[{"member": {...}, "user_id",
+            "...", "error": {...}}]`'
           required: false
-          type: boolean
-        - in: body
-          name: body
-          required: true
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/TeamMember'
-
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/TeamMember"
+        required: true
       responses:
-        '201':
+        "201":
           description: Team members created successfully.
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -699,39 +782,44 @@
             userID2 := "NqCSr5HMDZjrWS74IEmedvlOYf"
 
             tm, resp := Client.AddTeamMembers(teamID, []string{userID, userID2})
-
-  '/users/{user_id}/teams/members':
+  "/users/{user_id}/teams/members":
     get:
       tags:
         - teams
       summary: Get team members for a user
-      description: |
-        Get a list of team members for a user. Useful for getting the ids of teams the user is on and the roles they have in those teams.
+      description: >
+        Get a list of team members for a user. Useful for getting the ids of
+        teams the user is on and the roles they have in those teams.
+
         ##### Permissions
+
         Must be logged in as the user or have the `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team members retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team members retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -741,8 +829,7 @@
             userID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             teamMembers, resp = Client.GetTeamMembersForUser(userID, "")
-
-  '/teams/{team_id}/members/{user_id}':
+  "/teams/{team_id}/members/{user_id}":
     get:
       tags:
         - teams
@@ -756,27 +843,31 @@
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team member retrieval successful
           schema:
-            $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team member retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -787,41 +878,47 @@
             userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
 
             teamMember, resp = Client.GetTeamMember(teamID, userID, "")
-
     delete:
       tags:
         - teams
       summary: Remove user from team
-      description: |
-        Delete the team member object for a user, effectively removing them from a team.
+      description: >
+        Delete the team member object for a user, effectively removing them from
+        a team.
+
         ##### Permissions
+
         Must be logged in as the user or have the `remove_user_from_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team member deletion successful
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team member deletion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -832,8 +929,7 @@
             userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
 
             ok, resp = Client.RemoveTeamMember(teamID, userID)
-
-  '/teams/{team_id}/members/ids':
+  "/teams/{team_id}/members/ids":
     post:
       tags:
         - teams
@@ -847,44 +943,53 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: List of user ids
-          required: true
           schema:
-            type: array
-            items:
-              type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: List of user ids
+        required: true
       responses:
-        '200':
+        "200":
           description: Team members retrieval successful
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/TeamMember'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamMember"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
+
 
             teamID := zWEyrTZ7GZ22aBSfoX60iWryTY
 
+
             userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+
             userID2 := "UAFalLvtKwNKABAnmwR7uGB5md"
 
-            tm, resp := Client.GetTeamMembersByIds(teamID, []string{userID, userID2})
 
-  '/teams/{team_id}/stats':
+            tm, resp := Client.GetTeamMembersByIds(teamID, []string{userID, userID2})
+  "/teams/{team_id}/stats":
     get:
       tags:
         - teams
@@ -898,22 +1003,25 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team stats retrieval successful
           schema:
-            $ref: '#/definitions/TeamStats'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team stats retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamStats"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -923,8 +1031,7 @@
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             stats, resp := Client.GetTeamStats(teamID, "")
-
-  '/teams/{team_id}/regenerate_invite_id':
+  "/teams/{team_id}/regenerate_invite_id":
     post:
       tags:
         - teams
@@ -938,22 +1045,25 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team Invite ID regenerated
           schema:
-            $ref: '#/definitions/Team'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team Invite ID regenerated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -963,40 +1073,43 @@
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             team, resp := Client.RegenerateTeamInviteId(teamID)
-
-  '/teams/{team_id}/image':
+  "/teams/{team_id}/image":
     get:
       tags:
         - teams
       summary: Get the team icon
-      description: |
+      description: >
         Get the team icon of the team.
+
 
         __Minimum server version__: 4.9
 
+
         ##### Permissions
+
         User must be authenticated. In addition, team must be open or the user must have the `view_team` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: Team icon retrieval successful
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-        '501':
-          $ref: '#/responses/NotImplemented'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -1017,35 +1130,44 @@
 
         ##### Permissions
         Must be authenticated and have the `manage_team` permission.
-      consumes: ["multipart/form-data"]
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-        - name: image
-          in: formData
-          description: The image to be uploaded
-          required: true
-          type: file
-      responses:
-        '200':
-          description: Team icon successfully set
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  description: The image to be uploaded
+                  type: string
+                  format: binary
+              required:
+                - image
+      responses:
+        "200":
+          description: Team icon successfully set
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import (
               "io/ioutil"
@@ -1081,24 +1203,27 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team icon successfully remove
           schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '500':
-          $ref: '#/responses/InternalServerError'
-        '501':
-          $ref: '#/responses/NotImplemented'
+            type: string
+      responses:
+        "200":
+          description: Team icon successfully remove
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -1108,165 +1233,199 @@
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             ok, resp = Client.RemoveTeamIcon(teamID)
-
-  '/teams/{team_id}/members/{user_id}/roles':
+  "/teams/{team_id}/members/{user_id}/roles":
     put:
       tags:
         - teams
       summary: Update a team member roles
-      description: |
-        Update a team member roles. Valid team roles are "team_user", "team_admin" or both of them. Overwrites any previously assigned team roles.
+      description: >
+        Update a team member roles. Valid team roles are "team_user",
+        "team_admin" or both of them. Overwrites any previously assigned team
+        roles.
+
         ##### Permissions
+
         Must be authenticated and have the `manage_team_roles` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Space-delimited team roles to assign to the user
-          required: true
           schema:
-            type: object
-            required:
-              - roles
-            properties:
-              roles:
-                type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roles
+              properties:
+                roles:
+                  type: string
+        description: Space-delimited team roles to assign to the user
+        required: true
       responses:
-        '200':
+        "200":
           description: Team member roles update successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
             userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
 
-            ok, resp := Client.UpdateTeamMemberRoles(teamID, userID, "team_user team_admin")
 
-  '/teams/{team_id}/members/{user_id}/schemeRoles':
+            ok, resp := Client.UpdateTeamMemberRoles(teamID, userID, "team_user team_admin")
+  "/teams/{team_id}/members/{user_id}/schemeRoles":
     put:
       tags:
         - teams
       summary: Update the scheme-derived roles of a team member.
-      description: |
-        Update a team member's scheme_admin/scheme_user properties. Typically this should either be `scheme_admin=false, scheme_user=true` for ordinary team member, or `scheme_admin=true, scheme_user=true` for a team admin.
+      description: >
+        Update a team member's scheme_admin/scheme_user properties. Typically
+        this should either be `scheme_admin=false, scheme_user=true` for
+        ordinary team member, or `scheme_admin=true, scheme_user=true` for a
+        team admin.
+
 
         __Minimum server version__: 5.0
 
+
         ##### Permissions
+
         Must be authenticated and have the `manage_team_roles` permission.
       parameters:
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Scheme properties.
-          required: true
           schema:
-            type: object
-            required:
-              - scheme_admin
-              - scheme_user
-            properties:
-              scheme_admin:
-                type: boolean
-              scheme_user:
-                type: boolean
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scheme_admin
+                - scheme_user
+              properties:
+                scheme_admin:
+                  type: boolean
+                scheme_user:
+                  type: boolean
+        description: Scheme properties.
+        required: true
       responses:
-        '200':
+        "200":
           description: Team member's scheme-derived roles updated successfully.
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
             userID := "NqCSr5HMDZjrWS74IEmedvlOYf"
+
 
             ok, resp := Client.UpdateTeamMemberSchemeRoles(teamID, userID, &model.SchemeRoles{
               SchemeAdmin: true,
               SchemeUser:  true,
             })
-
-  '/users/{user_id}/teams/unread':
+  "/users/{user_id}/teams/unread":
     get:
       tags:
         - teams
       summary: Get team unreads for a user
-      description: |
-        Get the count for unread messages and mentions in the teams the user is a member of.
+      description: >
+        Get the count for unread messages and mentions in the teams the user is
+        a member of.
+
         ##### Permissions
+
         Must be logged in.
       parameters:
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: exclude_team
           in: query
           description: Optional team id to be excluded from the results
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team unreads retrieval successful
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/TeamUnread'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      responses:
+        "200":
+          description: Team unreads retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamUnread"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -1277,42 +1436,48 @@
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             teams, resp := Client.GetTeamsUnreadForUser(userID, teamID)
-
-  '/users/{user_id}/teams/{team_id}/unread':
+  "/users/{user_id}/teams/{team_id}/unread":
     get:
       tags:
         - teams
       summary: Get unreads for a team
-      description: |
-        Get the unread mention and message counts for a team for the specified user.
+      description: >
+        Get the unread mention and message counts for a team for the specified
+        user.
+
         ##### Permissions
+
         Must be the user or have `edit_other_users` permission and have `view_team` permission for the team.
       parameters:
         - name: user_id
           in: path
           description: User GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team unread count retrieval successful
           schema:
-            $ref: '#/definitions/TeamUnread'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '404':
-          $ref: '#/responses/NotFound'
+            type: string
+      responses:
+        "200":
+          description: Team unread count retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamUnread"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -1323,8 +1488,7 @@
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             teamUnread, resp := Client.GetTeamUnread(userID, teamID)
-
-  '/teams/{team_id}/invite/email':
+  "/teams/{team_id}/invite/email":
     post:
       tags:
         - teams
@@ -1338,39 +1502,46 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: List of user's email
-          required: true
           schema:
-            type: array
-            items:
-              type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: List of user's email
+        required: true
       responses:
-        '200':
+        "200":
           description: Users invite successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
+
 
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
-            ok, resp := Client.InviteUsersToTeam(teamID, []string{"test@domain.com", "test2@domain.com"})
 
-  '/teams/{team_id}/invite-guests/email':
+            ok, resp := Client.InviteUsersToTeam(teamID, []string{"test@domain.com", "test2@domain.com"})
+  "/teams/{team_id}/invite-guests/email":
     post:
       tags:
         - teams
@@ -1387,77 +1558,91 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Guests invite information
-          required: true
           schema:
-            type: object
-            required:
-              - emails
-              - channels
-            properties:
-              emails:
-                type: array
-                items:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - emails
+                - channels
+              properties:
+                emails:
+                  type: array
+                  items:
+                    type: string
+                  description: List of emails
+                channels:
+                  type: array
+                  items:
+                    type: string
+                  description: List of channel ids
+                message:
                   type: string
-                description: List of emails
-              channels:
-                type: array
-                items:
-                  type: string
-                description: List of channel ids
-              message:
-                type: string
-                description: Message to include in the invite
+                  description: Message to include in the invite
+        description: Guests invite information
+        required: true
       responses:
-        '200':
+        "200":
           description: Guests invite successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import "github.com/mattermost/mattermost-server/model"
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
+
             channel1ID := "wu6wyxm9spgwtjaycjrcihnqtr"
+
             channel2ID := "ymzsgjw1tprniqtzyb7g3cmuuc"
 
-            ok, resp := Client.InviteGuestsToTeam(teamID, []string{"test@domain.com", "test2@domain.com"}, []string{channel1ID, channel2ID}, "Please join to our mattermost team to keep working in the project")
 
-  '/teams/invites/email':
+            ok, resp := Client.InviteGuestsToTeam(teamID, []string{"test@domain.com", "test2@domain.com"}, []string{channel1ID, channel2ID}, "Please join to our mattermost team to keep working in the project")
+  /teams/invites/email:
     delete:
       tags:
         - teams
       summary: Invalidate active email invitations
-      description: |
-        Invalidate active email invitations that have not been accepted by the user.
+      description: >
+        Invalidate active email invitations that have not been accepted by the
+        user.
+
         ##### Permissions
+
         Must have `manage_system` permission.
       responses:
-        '200':
+        "200":
           description: Email invites successfully revoked
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -1465,54 +1650,64 @@
             Client.Login("email@domain.com", "Password1")
 
             ok, resp := Client.InvalidateEmailInvites()
-
-  '/teams/{team_id}/import':
+  "/teams/{team_id}/import":
     post:
       tags:
         - teams
       summary: Import a Team from other application
-      description: |
-        Import a team into a existing team. Import users, channels, posts, hooks.
+      description: >
+        Import a team into a existing team. Import users, channels, posts,
+        hooks.
+
         ##### Permissions
+
         Must have `permission_import_team` permission.
-      consumes: ["multipart/form-data"]
       parameters:
-        - name: file
-          in: formData
-          description: A file to be uploaded in zip format.
-          required: true
-          type: file
-        - name: filesize
-          in: formData
-          description: The size of the zip file to be imported.
-          required: true
-          type: integer
-        - name: importFrom
-          in: formData
-          description: String that defines from which application the team was exported to be imported into Mattermost.
-          required: true
-          allowEmptyValue: false
-          type: string
         - name: team_id
           in: path
           description: Team GUID
           required: true
-          type: string
-      responses:
-        '200':
-          description: JSON object containing a base64 encoded text file of the import logs in its `results` property.
           schema:
-            type: object
-            properties:
-              results:
-                type: string
-        '400':
-          $ref: '#/responses/BadRequest'
-        '403':
-          $ref: '#/responses/Forbidden'
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  description: A file to be uploaded in zip format.
+                  type: string
+                  format: binary
+                filesize:
+                  description: The size of the zip file to be imported.
+                  type: integer
+                importFrom:
+                  description: String that defines from which application the team was
+                    exported to be imported into Mattermost.
+                  type: string
+              required:
+                - file
+                - filesize
+                - importFrom
+      responses:
+        "200":
+          description: JSON object containing a base64 encoded text file of the import logs
+            in its `results` property.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'Go'
-          source: |
+        - lang: Go
+          source: >
             import (
               "encoding/binary"
               "io/ioutil"
@@ -1521,53 +1716,66 @@
               "github.com/mattermost/mattermost-server/model"
             )
 
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
             Client.Login("email@domain.com", "Password1")
 
+
             data, err = ioutil.ReadFile("to_import.zip")
+
             if err != nil && len(data) == 0 {
               log.Fatal("Error while reading file.")
             }
 
+
             teamID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
+
             fileResp, resp := Client.ImportTeam(data, binary.Size(data), "slack", "to_import.zip", teamID)
-  '/teams/invite/{invite_id}':
+  "/teams/invite/{invite_id}":
     get:
       tags:
         - teams
       summary: Get invite info for a team
-      description: |
-        Get the `name`, `display_name`, `description` and `id` for a team from the invite id.
+      description: >
+        Get the `name`, `display_name`, `description` and `id` for a team from
+        the invite id.
+
 
         __Minimum server version__: 4.0
 
+
         ##### Permissions
+
         No authentication required.
       parameters:
         - name: invite_id
           in: path
           description: Invite id for a team
           required: true
-          type: string
-      responses:
-        '200':
-          description: Team invite info retrieval successful
           schema:
-            type: object
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              display_name:
-                type: string
-              description:
-                type: string
-        '400':
-          $ref: '#/responses/BadRequest'
+            type: string
+      responses:
+        "200":
+          description: Team invite info retrieval successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  display_name:
+                    type: string
+                  description:
+                    type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -1576,17 +1784,20 @@
             inviteID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             team, resp = Client.GetTeamInviteInfo(inviteID)
-
-  '/teams/{team_id}/scheme':
+  "/teams/{team_id}/scheme":
     put:
       tags:
         - teams
       summary: Set a team's scheme
-      description: |
-        Set a team's scheme, more specifically sets the scheme_id value of a team record.
+      description: >
+        Set a team's scheme, more specifically sets the scheme_id value of a
+        team record.
+
 
         ##### Permissions
+
         Must have `manage_system` permission.
+
 
         __Minimum server version__: 5.0
       parameters:
@@ -1594,34 +1805,38 @@
           in: path
           description: Team GUID
           required: true
-          type: string
-        - in: body
-          name: body
-          description: Scheme GUID
-          required: true
           schema:
-            type: object
-            required:
-              - scheme_id
-            properties:
-              scheme_id:
-                type: string
-                description: The ID of the scheme.
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scheme_id
+              properties:
+                scheme_id:
+                  type: string
+                  description: The ID of the scheme.
+        description: Scheme GUID
+        required: true
       responses:
-        '200':
+        "200":
           description: Update team scheme successful
-          schema:
-            $ref: '#/definitions/StatusOK'
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
-        '501':
-          $ref: '#/responses/NotImplemented'
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
       x-code-samples:
-        - lang: 'Go'
+        - lang: Go
           source: |
             import "github.com/mattermost/mattermost-server/model"
 
@@ -1632,26 +1847,31 @@
             schemeID := "qjda3stwafbgpqjaxej3k76sga"
 
             ok, resp := UpdateTeamScheme(teamID, schemeID)
-        - lang: 'curl'
-          source: |
+        - lang: curl
+          source: >
             curl -X PUT \
               https://your-mattermost-url.com/api/v4/teams/4xp9fdt77pncbef59f4k1qe83o/scheme \
               -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
               -H 'Content-Type: application/json' \
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
-
-  '/teams/{team_id}/members_minus_group_members':
+  "/teams/{team_id}/members_minus_group_members":
     get:
       tags:
         - teams
       summary: Team members minus group members.
-      description: |
-        Get the set of users who are members of the team minus the set of users who are members of the given groups.
+      description: >
+        Get the set of users who are members of the team minus the set of users
+        who are members of the given groups.
+
         Each user object contains an array of group objects representing the group memberships for that user.
+
         Each user object contains the boolean fields `scheme_guest`, `scheme_user`, and `scheme_admin` representing the roles that user has for the given team.
 
+
         ##### Permissions
+
         Must have `manage_system` permission.
+
 
         __Minimum server version__: 5.14
       parameters:
@@ -1659,36 +1879,43 @@
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: group_ids
           in: query
           description: A comma-separated list of group ids.
           required: true
-          default: ""
-          type: string
+          schema:
+            type: string
+            default: ""
         - name: page
           in: query
           description: The page to select.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
         - name: per_page
           in: query
           description: The number of users per page.
-          default: "0"
-          type: string
+          schema:
+            type: integer
+            default: 0
       responses:
-        '200':
-          description: Successfully returns users specified by the pagination, and the total_count.
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+        "200":
+          description: Successfully returns users specified by the pagination, and the
+            total_count.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
-        - lang: 'curl'
-          source: |
-            curl 'http://your-mattermost-url.com/api/v4/teams/fcnst115y3y7xmzzp5uq34u8ce/members_minus_group_members?group_ids=eoezijg8zffgjmch8icy5bjd1e,ugaw6wjc3tfxpcr1eq5u5k8dhe&page=0&per_page=100' \
+        - lang: curl
+          source: >
+            curl
+            'http://your-mattermost-url.com/api/v4/teams/fcnst115y3y7xmzzp5uq34u8ce/members_minus_group_members?group_ids=eoezijg8zffgjmch8icy5bjd1e,ugaw6wjc3tfxpcr1eq5u5k8dhe&page=0&per_page=100'
+            \
                 -H 'Authorization: Bearer mq8rrfxpdfyafbnw3qfmhwkx6c' \
                 -H 'Content-Type: application/json' \
                 -H 'X-Requested-With: XMLHttpRequest'
