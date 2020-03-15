@@ -42,3 +42,110 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  /ldap/groups:
+    get:
+      tags:
+        - ldap
+      summary: Returns a list of LDAP groups
+      description: >
+        ##### Permissions
+
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: q
+          in: query
+          description: Search term
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of users per page. There is a maximum limit of 200 users
+            per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: LDAP group page retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LDAPGroupsPaged"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /ldap/groups/{remote_id}/link:
+    post:
+      tags:
+        - ldap
+      summary: Link a LDAP group
+      description: >
+        ##### Permissions
+
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: remote_id
+          in: path
+          description: Group GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: LDAP group successfully linked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+    delete:
+      tags:
+        - groups
+      summary: Delete a link for LDAP group
+      description: >
+        ##### Permissions
+
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.11
+      parameters:
+        - name: remote_id
+          in: path
+          description: Group GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully deleted ldap group link
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
