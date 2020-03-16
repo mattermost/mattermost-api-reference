@@ -1,4 +1,26 @@
   /channels:
+    get:
+      tags:
+        - channels
+      summary: Get a list of all channels
+      description: |
+        ##### Permissions
+        `manage_system`
+      responses:
+        "200":
+          description: Channel list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
     post:
       tags:
         - channels
