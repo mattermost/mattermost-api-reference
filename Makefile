@@ -40,21 +40,20 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/bots.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
-	@node_modules/swagger-cli/bin/swagger-cli.js validate $(V4_YAML)
-
+	@node_modules/.bin/swagger-cli validate $(V4_YAML)
+	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs bundle ./v4/html/static/mattermost-openapi-v4.yaml -o ./v4/html/index.html --options.noAutoAuth  --options.suppressWarnings  --cdn
 	@echo Complete
 
 .npminstall:
 	@echo Getting dependencies using npm
 
-	npm install swagger-cli
-	npm install redoc-cli
+	npm install
 	touch $@
 
 run:
 	@echo Starting redoc server
 
-	npx --ignore-existing serve v4/html
+	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs serve ./v4/html/static/mattermost-openapi-v4.yaml --options.noAutoAuth  --options.suppressWarnings  --ssr
 
 clean:
 	@echo Cleaning
