@@ -5,6 +5,7 @@
 *.swp
 
 # Build
+v4/html/index.html
 *mattermost-openapi-v3.yaml
 *mattermost-openapi-v4.yaml
 .npminstall
