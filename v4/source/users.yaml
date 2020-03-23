@@ -86,6 +86,28 @@
             }
 
             createdUser, response := Client.CreateUser(user)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->createUser([
+                "username" => "username",
+                "email" => "email@domain.com",
+                "password" => "Password1"
+            ]);
     get:
       tags:
         - users
@@ -214,6 +236,30 @@
             users = Client.GetUsersNotInTeam("teamid", 0, 60, "")
 
             users = Client.GetUsersWithoutTeam(0, 60, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUsers([
+                "page" => 0,
+                "per_page" => 60,
+                "in_team" => "teamid",
+                "in_channel" => "channelid",
+                //...
+            ]);
   /users/ids:
     post:
       tags:
@@ -340,6 +386,28 @@
 
 
             users, resp := Client.GetUsersByUsernames([]string{"username1", "username2"})
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUsersByUsernames([
+                "username1",
+                "username2",
+                //...
+            ]);
   /users/search:
     post:
       tags:
@@ -440,6 +508,29 @@
               Limit:          100,
               Role:           "admin",
             })
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->searchUsers([
+                "term" => "searchTerm",
+                "team_id" => "teamid",
+                "limit" => 10,
+                //...
+            ]);
   /users/autocomplete:
     get:
       tags:
@@ -512,6 +603,29 @@
 
 
             users, resp := Client.AutocompleteUsersInChannel(teamID, channelID, username, 100, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                 ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->autocompleteUsers([
+                "team_id" => "teamid",
+                "channel_id" => "channelid",
+                "name" => "testUsername",
+                "limit" => 10,
+            ]);
   /users/stats:
     get:
       tags:
@@ -545,6 +659,24 @@
             Client.Login("email@domain.com", "Password1")
 
             stats, resp := Client.GetTotalUsersStats("")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                 ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getTotalCountOfUsersInTheSystem();
   "/users/{user_id}":
     get:
       tags:
@@ -585,6 +717,24 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             user, resp := Client.GetUser(userID, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUser("userid");
     put:
       tags:
         - users
@@ -681,6 +831,31 @@
               Props:       props,
               NotifyProps: notifyProps,
             })
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->updateUser("userid", [
+                "email" => "test@domain.com",
+                "username" => "testUsername",
+                "firstName" => "testFirstname",
+                "lastName" => "testLastname",
+                "nickname" => "testNickname",
+                //...
+            ]);
     delete:
       tags:
         - users
@@ -725,6 +900,24 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             ok, resp := Client.DeleteUser(userID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->deactivateUserAccount("userid");
   "/users/{user_id}/patch":
     put:
       tags:
@@ -808,6 +1001,31 @@
             patch.NotifyProps["comment"] = "somethingrandom"
 
             user, resp := Client.PatchUser(userID, patch)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->patchUser("userid", [
+                "email" => "test@domain.com",
+                "username" => "testUsername",
+                "firstName" => "testFirstname",
+                "lastName" => "testLastname",
+                "nickname" => "testNickname",
+                //...
+            ]);
   "/users/{user_id}/roles":
     put:
       tags:
@@ -865,6 +1083,26 @@
             roles := "team_user team_admin"
 
             ok, resp = Client.UpdateUserRoles(userID, roles)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->updateUserRoles("userid", [
+                "roles" => "team_user team_admin",
+            ]);
   "/users/{user_id}/active":
     put:
       tags:
@@ -924,6 +1162,26 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             ok, resp := Client.UpdateUserActive(userID, true)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->updateUserActive("userid", [
+                "active" => true,
+            ]);
   "/users/{user_id}/image":
     get:
       tags:
@@ -964,6 +1222,24 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetProfileImage(userID, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUserProfileImage("userid");
     post:
       tags:
         - users
@@ -1031,6 +1307,26 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             ok, resp := Client.SetProfileImage(userID, data)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->setUserProfileImage("userid", [
+                "image" => readfile("profile_pic.png"),
+            ]);
     delete:
       tags:
         - users
@@ -1085,6 +1381,24 @@
             // Deleting user's profile image consists on resetting it to default one
 
             ok, resp := Client.SetDefaultProfileImage(userID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->deleteUserProfileImage("userid");
   "/users/{user_id}/image/default":
     get:
       tags:
@@ -1130,6 +1444,24 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             ok, resp := Client.SetDefaultProfileImage(userID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->returnUserDefaultProfileImage("userid");
   "/users/username/{username}":
     get:
       tags:
@@ -1173,6 +1505,24 @@
             userID := "4xp9fdt77pncbef59f4k1qe83o"
 
             user, resp := Client.GetUserByUsername(userID, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUserByUsername("username");
   /users/password/reset:
     post:
       tags:
@@ -1226,6 +1576,27 @@
             newPassword := "awesomePassword"
 
             success, resp = Client.ResetPassword(code, newPassword)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->resetPassword([
+                "code" => "thecode",
+                "newPassword" => "awesomePassword",
+            ]);
   "/users/{user_id}/mfa":
     put:
       tags:
@@ -1289,6 +1660,27 @@
             code := "4xp9fdt77pncbef59f4k1qe83o"
 
             ok, resp := Client.UpdateUserMfa(userID, code, true)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->updateUserMfa("userid", [
+                "activate" => true,
+                "code" => "thecode",
+            ]);
   "/users/{user_id}/mfa/generate":
     post:
       tags:
@@ -1343,6 +1735,24 @@
             userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
 
             mfaSecret, resp = Client.GenerateMfaSecret(userID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->generateMfaSecret("userid");
   "/users/{user_id}/demote":
     post:
       tags:
@@ -1392,6 +1802,24 @@
             userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
 
             ok, resp = Client.demoteUserToGuest(userID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->demoteUserToGuest("userid");
   "/users/{user_id}/promote":
     post:
       tags:
@@ -1441,6 +1869,24 @@
             userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
 
             ok, resp = Client.PromoteGuestToUser(userID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->promoteGuestToUser("userid");
   /users/mfa:
     post:
       tags:
@@ -1489,6 +1935,26 @@
             loginID := "test@domain.com"
 
             required, resp := Client.CheckUserMfa(loginID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->checkMfa([
+                "login_id" => "test@domain.com",
+            ]);
   "/users/{user_id}/password":
     put:
       tags:
@@ -1556,6 +2022,27 @@
 
 
             ok, resp := Client.UpdateUserPassword(userID, currentPassword, newPassword)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->updateUserPassword("userid", [
+                "current_password" => "badPassword",
+                "new_password" => "awesomePassword",
+            ]);
   /users/password/reset/send:
     post:
       tags:
@@ -1604,6 +2091,26 @@
             email := "test@domain.com"
 
             pass, resp := Client.SendVerificationEmail(email)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->sendPasswordResetEmail([
+                "email" => "test@domain.com",
+            ]);
   "/users/email/{email}":
     get:
       tags:
@@ -1649,6 +2156,24 @@
             email := "test@domain.com"
 
             user, resp := Client.GetUserByEmail(email, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUserByEmail("test@domain.com");
   "/users/{user_id}/sessions":
     get:
       tags:
@@ -1694,6 +2219,24 @@
             userID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             sessions, resp := Client.GetSessions(userID, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUserSessions("userid");
   "/users/{user_id}/sessions/revoke":
     post:
       tags:
@@ -1749,6 +2292,26 @@
             sessionID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             ok, resp = Client.RevokeSession(userID, sessionID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->revokeUserSession("userid", [
+                "session_id" => "sessionid",
+            ]);
   "/users/{user_id}/sessions/revoke/all":
     post:
       tags:
@@ -1794,6 +2357,24 @@
             userID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             ok, resp := Client.RevokeAllSessions(userID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->revokeAllUserSessions("userid");
   /users/sessions/device:
     put:
       tags:
@@ -1841,6 +2422,26 @@
             deviceID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             pass, resp := Client.AttachDeviceId(deviceID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->attachMobileDevice([
+                "device_id" => "deviceid",
+            ]);
   "/users/{user_id}/audits":
     get:
       tags:
@@ -1883,6 +2484,24 @@
             userID := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             audits, resp := Client.GetUserAudits(userID, 0, 100, "")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getUserAudits("userid");
   /users/email/verify:
     post:
       tags:
@@ -1923,6 +2542,26 @@
             token := "zWEyrTZ7GZ22aBSfoX60iWryTY"
 
             ok, resp := Client.VerifyUserEmail(token)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->verifyUserEmail([
+                "token" => "tokenstring",
+            ]);
   /users/email/verify/send:
     post:
       tags:
@@ -1967,6 +2606,26 @@
             email := "test@domain.com"
 
             pass, resp := Client.SendVerificationEmail(email)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->sendVerificationEmail([
+                "email" => "test@domain.com",
+            ]);
   /users/login/switch:
     post:
       tags:
@@ -2071,6 +2730,29 @@
               MfaCode:        mfaCode,
               LdapLoginId:    ldapLoginID,
             })
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->switchLoginMethod([
+                "current_service" => "email",
+                "new_service" => "gitlab",
+                "email" => "test@domain.com",
+                //...
+            ]);
   "/users/{user_id}/tokens":
     post:
       tags:
@@ -2134,6 +2816,26 @@
 
 
             userAccessToken, resp := Client.CreateUserAccessToken(userID, "test token")
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->createToken("userid", [
+                "description" => "test token",
+            ]);
     get:
       tags:
         - users
@@ -2194,6 +2896,27 @@
             userID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             tokens, resp := Client.GetUserAccessTokensForUser(userID, 0, 100)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getTokens("userid", [
+                "page" => 0,
+                "per_page" => 100,
+            ]);
   /users/tokens:
     get:
       tags:
@@ -2299,6 +3022,26 @@
             tokenID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             ok, resp := Client.RevokeUserAccessToken(tokenID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->revokeToken([
+                "token_id" => "badToken",
+            ]);
   "/users/tokens/{token_id}":
     get:
       tags:
@@ -2348,6 +3091,24 @@
             tokenID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             token, resp := Client.GetUserAccessToken(tokenID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->getToken("tokenid");
   /users/tokens/disable:
     post:
       tags:
@@ -2400,6 +3161,26 @@
             tokenID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             ok, resp := Client.DisableUserAccessToken(tokenID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->disablePersonalAccessToken([
+                "token_id" => "badToken"
+            ]);
   /users/tokens/enable:
     post:
       tags:
@@ -2451,6 +3232,26 @@
             tokenID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             ok, resp := Client.EnableUserAccessToken(tokenID)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->enablePersonalAccessToken([
+                "token_id" => "awesomeToken"
+            ]);
   /users/tokens/search:
     post:
       tags:
@@ -2505,6 +3306,26 @@
 
 
             userAccessTokens, resp = Client.SearchUserAccessTokens(&model.UserAccessTokenSearch{Term: tokenID})
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->searchTokens([
+                "term" => "partialtokenid"
+            ]);
   "/users/{user_id}/auth":
     put:
       tags:
@@ -2564,6 +3385,27 @@
             userAuth.Password = user.Password
 
             user, resp := Client.UpdateUserAuth(userID, userAuth)
+        - lang: PHP
+          source: |
+            require 'vendor/autoload.php';
+
+            use \Gnello\Mattermost\Driver;
+
+            $container = new \Pimple\Container([
+                "driver" => [
+                    "url" => "https://your-mattermost-url.com",
+                    "login_id" => "email@domain.com",
+                    "password" => "Password1",
+                  ]
+            ]);
+
+            $driver = new Driver($container);
+            $driver->authenticate();
+
+            $result = $driver->getUserModel()->updateUserAuthenticationMethod("userid", [
+                "auth_service" => "gitlab",
+                //...
+            ]);
   "/users/{user_id}/terms_of_service":
     post:
       tags:
