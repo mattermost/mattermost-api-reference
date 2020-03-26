@@ -1387,7 +1387,7 @@
             $driver->authenticate();
 
             $result = $driver->getUserModel()->setUserProfileImage("userid", [
-                "image" => readfile("profile_pic.png"),
+                "image" => fopen("profile_pic.png", 'rb'),
             ]);
     delete:
       tags:
