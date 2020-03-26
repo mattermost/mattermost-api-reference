@@ -1,18 +1,11 @@
-version: 2.1
-
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0
-
-executors:
-  default:
-    working_directory: ~/mattermost-api-reference
-    docker:
-      - image: circleci/node:11.3.0
+  aws-s3: circleci/aws-s3@1.0.15
 
 jobs:
   build:
-    executor:
-      name: default
+    working_directory: ~/mattermost-api-reference
+    docker:
+      - image: circleci/node:11.3.0
     steps:
       - checkout
       - run: mkdir -p node_modules
@@ -63,7 +56,7 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  build_and_deploy:
     jobs:
       - build
       - deploy:
