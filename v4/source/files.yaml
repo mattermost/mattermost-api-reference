@@ -329,3 +329,35 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             info, resp := Client.GetFileInfo(fileID)
+  "/files/{file_id}/public":
+    get:
+      tags:
+        - files
+      summary: Get a public file
+      description: |
+        ##### Permissions
+        No permissions required.
+      parameters:
+        - name: file_id
+          in: path
+          description: The ID of the file to get
+          required: true
+          schema:
+            type: string
+        - name: h
+          in: query
+          description: File hash
+          required: true
+          schema:
+            type: string
+      responses:
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

@@ -16,6 +16,24 @@
                 type: string
         "501":
           $ref: "#/components/responses/NotImplemented"
+  /saml/metadatafromidp:
+    post:
+      tags:
+        - SAML
+      summary: Get metadata from Identity Provider
+      description: |
+        Get SAML metadata from the Identity Provider. SAML must be configured properly.
+        ##### Permissions
+        No permission required.
+      responses:
+        "200":
+          description: SAML metadata retrieval successful
+          content:
+            application/json:
+              schema:
+                type: string
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /saml/certificate/idp:
     post:
       tags:

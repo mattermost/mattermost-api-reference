@@ -2305,6 +2305,86 @@ components:
         installed_version:
           type: string
           description: Version number of the already installed plugin, if any.
+    PushNotification:
+      type: object
+      properties:
+        ack_id:
+          type: string
+        platform:
+          type: string
+        server_id:
+          type: string
+        device_id:
+          type: string
+        post_id:
+          type: string
+        category:
+          type: string
+        sound:
+          type: string
+        message:
+          type: string
+        badge:
+          type: number
+        cont_ava:
+          type: number
+        team_id:
+          type: string
+        channel_id:
+          type: string
+        root_id:
+          type: string
+        channel_name:
+          type: string
+        type:
+          type: string
+        sender_id:
+          type: string
+        sender_name:
+          type: string
+        override_username:
+          type: string
+        override_icon_url:
+          type: string
+        from_webhook:
+          type: string
+        version:
+          type: string
+        is_id_loaded:
+          type: boolean
+    PluginStatus:
+      type: object
+      properties:
+        plugin_id:
+          type: string
+          description: Globally unique identifier that represents the plugin.
+        name:
+          type: string
+          description: Name of the plugin.
+        description:
+          type: string
+          description: Description of what the plugin is and does.
+        version:
+          type: string
+          description: Version number of the plugin.
+        cluster_id:  
+          type: string      
+          description: ID of the cluster in which plugin is running
+        plugin_path:
+          type: string      
+          description: Path to the plugin on the server
+        state:
+          type: number
+          description: State of the plugin
+          enum:
+            - NotRunning          
+            - Starting            
+            - Running             
+            - FailedToStart       
+            - FailedToStayRunning 
+            - Stopping            
+
+
     PluginManifestWebapp:
       type: object
       properties:
@@ -2534,6 +2614,64 @@ components:
         update_at:
           type: integer
           format: int64
+    ChannelModeration:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          $ref: "#/components/schemas/ChannelModeratedRoles"
+    ChannelModeratedRoles:
+      type: object
+      properties:
+        guests:
+          $ref: "#/components/schemas/ChannelModeratedRole"
+        members:
+          $ref: "#/components/schemas/ChannelModeratedRole"
+    ChannelModeratedRole:
+      type: object
+      properties:
+        value:
+          type: boolean
+        enabled:
+          type: boolean
+    ChannelModeratedRolesPatch:
+      type: object
+      properties:
+        guests:
+          type: boolean
+        members:
+          type: boolean
+    ChannelModerationPatch:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          $ref: "#/components/schemas/ChannelModeratedRolesPatch"
+    LDAPGroupsPaged:
+      description: A paged list of LDAP groups
+      type: object
+      properties:
+        count:
+          type: number
+          description: Total number of groups
+        groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/LDAPGroup"
+    LDAPGroup:
+      description: A LDAP group
+      type: object
+      properties:
+        has_syncables:
+          type: boolean
+        mattermost_group_id:
+          type: string
+        primary_key:
+          type: string
+        name:
+          type: string
     Bot:
       description: A bot account
       type: object
