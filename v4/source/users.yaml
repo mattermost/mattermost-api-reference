@@ -1,3 +1,65 @@
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: Login to Mattermost server
+      description: >
+        ##### Permissions
+
+        No permission required
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                login_id:
+                  type: string
+                token:
+                  type: string
+                device_id:
+                  type: string
+                ldap_only:
+                  type: boolean
+                password:
+                  description: The password used for email authentication.
+                  type: string
+        description: User authentication object 
+        required: true
+      responses:
+        "201":
+          description: User login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /users/logout:
+    post:
+      tags:
+        - users
+      summary: Logout from the Mattermost server
+      description: >
+        ##### Permissions
+
+        An active session is required
+      responses:
+        "201":
+          description: User logout successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
   /users:
     post:
       tags:

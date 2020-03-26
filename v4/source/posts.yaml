@@ -244,7 +244,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/user/{user_id}/posts/{post_id}/set_unread":
+  "/users/{user_id}/posts/{post_id}/set_unread":
     post:
       tags:
         - posts

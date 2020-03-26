@@ -124,6 +124,38 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - webhooks
+      summary: Delete an incoming webhook
+      description: >
+        Delete an incoming webhook given the hook id.
+
+        ##### Permissions
+
+        `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      parameters:
+        - name: hook_id
+          in: path
+          description: Incoming webhook GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Webhook deletion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
     put:
       tags:
         - webhooks

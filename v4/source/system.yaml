@@ -1,3 +1,25 @@
+  /system/timezones:
+    get:
+      tags:
+        - system
+      summary: Retrieve a list of supported timezones
+      description: >
+        __Minimum server version__: 3.10
+
+        ##### Permissions
+
+        Must be logged in.
+      responses:
+        "200":
+          description: List of timezones retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /system/ping:
     get:
       tags:
@@ -909,3 +931,76 @@
             curl -X DELETE \
               'http://your-mattermost-url.com/api/v4/server_busy' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
+  /notifications/ack:
+    post:
+      tags:
+        - root
+      summary: Acknowledge receiving of a notification
+      description: >
+        __Minimum server version__: 3.10
+
+        ##### Permissions
+
+        Must be logged in.
+      responses:
+        "200":
+          description: Status of the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PushNotification"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /redirect_location:
+    get:
+      tags:
+        - system
+      summary: Get redirect location
+      description: >
+        __Minimum server version__: 3.10
+
+        ##### Permissions
+
+        Must be logged in.
+      parameters:
+        - name: url
+          in: query
+          required: true
+          description: Url to check
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Got redirect location
+          content:
+            image/*:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /image:
+    get:
+      tags:
+        - system
+      summary: Get an image by url
+      description: >
+        Fetches an image via Mattermost image proxy.
+
+        __Minimum server version__: 3.10
+
+        ##### Permissions
+
+        Must be logged in.
+      responses:
+        "200":
+          description: Image found
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+        "404":
+          $ref: "#/components/responses/NotFound"
