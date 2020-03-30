@@ -26,7 +26,7 @@
                 password:
                   description: The password used for email authentication.
                   type: string
-        description: User authentication object 
+        description: User authentication object
         required: true
       responses:
         "201":
@@ -165,11 +165,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->createUser([
+            $resp = $driver->getUserModel->createUser([
                 "username" => "username",
                 "email" => "email@domain.com",
                 "password" => "Password1"
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+                $createdUser = json_decode($resp->getBody());
+            }
     get:
       tags:
         - users
@@ -315,13 +319,51 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUsers([
+            //get users
+            $resp = $driver->getUserModel()->getUsers([
                 "page" => 0,
                 "per_page" => 60,
-                "in_team" => "teamid",
-                "in_channel" => "channelid",
-                //...
             ]);
+
+            //get users in channel
+            $resp = $driver->getUserModel()->getUsers([
+                "in_channel" => "channelid",
+                "page" => 0,
+                "per_page" => 60,
+            ]);
+
+            //get users not in channel
+            $resp = $driver->getUserModel()->getUsers([
+                "in_team" => "teamid",
+                "not_in_channel" => "channelid",
+                "page" => 0,
+                "per_page" => 60,
+            ]);
+
+            //get users in team
+            $resp = $driver->getUserModel()->getUsers([
+                "in_team" => "teamid",
+                "page" => 0,
+                "per_page" => 60,
+            ]);
+
+            //get users not in team
+            $resp = $driver->getUserModel()->getUsers([
+                "not_in_team" => "teamid",
+                "page" => 0,
+                "per_page" => 60,
+            ]);
+
+            //get users without team
+            $resp = $driver->getUserModel()->getUsers([
+                "without_team" => true,
+                "page" => 0,
+                "per_page" => 60,
+            ]);
+
+            if ($resp->getStatusCode() == 200) {
+                $users = json_decode($resp->getBody());
+            }
   /users/ids:
     post:
       tags:
@@ -465,11 +507,14 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUsersByUsernames([
+            $resp = $driver->getUserModel()->getUsersByUsernames([
                 "username1",
                 "username2",
-                //...
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+                $users = json_decode($resp->getBody());
+            }
   /users/search:
     post:
       tags:
@@ -587,12 +632,25 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->searchUsers([
+            $teamID = "4xp9fdt77pncbef59f4k1qe83o";
+            $teamID2 = "JhMjDX9rAlCdBf0l9oyq4eGhxw";
+            $channelID = "Ej3SKOHlWIKAblkUTK5Xvkj2cm";
+            $channelID2 = "dWdfrUSdjJ7kyBvyBCgCav67Kz";
+
+            $resp = $driver->getUserModel->searchUsers([
                 "term" => "searchTerm",
-                "team_id" => "teamid",
-                "limit" => 10,
-                //...
+                "team_id" => $teamID,
+                "not_in_team_id" => $teamID2,
+                "in_channel_id" => $channelID,
+                "not_in_channel_id" => $channelID2,
+                "allow_inactive" => true,
+                "without_team" => true,
+                "limit" => 100,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+                $users = json_decode($resp->getBody());
+            }
   /users/autocomplete:
     get:
       tags:
@@ -682,12 +740,20 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->autocompleteUsers([
-                "team_id" => "teamid",
-                "channel_id" => "channelid",
-                "name" => "testUsername",
-                "limit" => 10,
+            $teamID = "4xp9fdt77pncbef59f4k1qe83o";
+            $channelID = "Ej3SKOHlWIKAblkUTK5Xvkj2cm";
+            $username = "testUsername";
+
+            $resp = $driver->getUserModel->autocompleteUsers([
+                "team_id" => $teamID,
+                "channel_id" => $channelID,
+                "name" => $username,
+                "limit" => 100,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+                $users = json_decode($resp->getBody());
+            }
   /users/stats:
     get:
       tags:
@@ -738,7 +804,11 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getTotalCountOfUsersInTheSystem();
+            $resp = $driver->getUserModel->getTotalCountOfUsersInTheSystem();
+
+            if ($resp->getStatusCode() == 200) {
+                $stats = json_decode($resp->getBody())->total_users_count;
+            }
   "/users/{user_id}":
     get:
       tags:
@@ -796,7 +866,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUser("userid");
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+
+            $resp = $driver->getUserModel()->getUser($userID);
+
+            if ($resp->getStatusCode() == 200) {
+                $user = json_decode($resp->getBody());
+            }
     put:
       tags:
         - users
@@ -910,14 +986,34 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->updateUser("userid", [
-                "email" => "test@domain.com",
-                "username" => "testUsername",
-                "firstName" => "testFirstname",
-                "lastName" => "testLastname",
-                "nickname" => "testNickname",
-                //...
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+            $email = "test@domain.com";
+            $username = "testUsername";
+            $firstName = "testFirstname";
+            $lastName = "testLastname";
+            $nickname = "testNickname";
+            $locale = "en";
+            $position = "testPosition";
+            $props = [];
+            $props["testPropKey"] = "testPropValue";
+            $notifyProps = [];
+            $notifyProps["comment"] = "somethingrandom";
+
+            $resp = $driver->getUserModel->updateUser($userID, [
+                email => $email,
+                username => $username,
+                first_name => $firstName,
+                last_name => $lastName,
+                nickname => $nickname,
+                locale => $locale,
+                position => $position,
+                props => $props,
+                notify_props => $notifyProps,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+                $user = json_decode($resp->getBody());
+            }
     delete:
       tags:
         - users
@@ -979,7 +1075,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->deactivateUserAccount("userid");
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+
+            $resp = $driver->getUserModel->deactivateUserAccount($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   "/users/{user_id}/patch":
     put:
       tags:
@@ -1080,14 +1182,34 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->patchUser("userid", [
-                "email" => "test@domain.com",
-                "username" => "testUsername",
-                "firstName" => "testFirstname",
-                "lastName" => "testLastname",
-                "nickname" => "testNickname",
-                //...
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+            $email = "test@domain.com";
+            $username = "testUsername";
+            $firstName = "testFirstname";
+            $lastName = "testLastname";
+            $nickname = "testNickname";
+            $locale = "en";
+            $position = "testPosition";
+            $props = [];
+            $props["testPropKey"] = "testPropValue";
+            $notifyProps = [];
+            $notifyProps["comment"] = "somethingrandom";
+
+            $resp = $driver->getUserModel->patchUser($userID, [
+              email => $email,
+              username => $username,
+              first_name => $firstName,
+              last_name => $lastName,
+              nickname => $nickname,
+              locale => $locale,
+              position => $position,
+              props => $props,
+              notify_props => $notifyProps,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $user = json_decode($resp->getBody());
+            }
   "/users/{user_id}/roles":
     put:
       tags:
@@ -1162,9 +1284,16 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->updateUserRoles("userid", [
-                "roles" => "team_user team_admin",
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+            $roles = "team_user team_admin";
+
+            $resp = $driver->getUserModel->updateUserRoles($userID, [
+                "roles" => $roles,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   "/users/{user_id}/active":
     put:
       tags:
@@ -1241,9 +1370,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->updateUserActive("userid", [
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+
+            $resp = $driver->getUserModel->updateUserActive($userID, [
                 "active" => true,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   "/users/{user_id}/image":
     get:
       tags:
@@ -1301,7 +1436,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUserProfileImage("userid");
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+
+            $resp = $driver->getUserModel()->getUserProfileImage($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $data = json_decode($resp->getBody());
+            }
     post:
       tags:
         - users
@@ -1386,9 +1527,24 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->setUserProfileImage("userid", [
-                "image" => fopen("profile_pic.png", 'rb'),
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+            $resource = fopen("profile_pic.png", 'rb');
+
+            if ($resource === false) {
+              throw new \Exeption("Failure.");
+            }
+
+            $data = new \GuzzleHttp\Psr7\Stream($resource);
+
+            $resp = $driver->getUserModel->setUserProfileImage($userID, [
+                "image" => $data,
             ]);
+
+            fclose($resource);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody()->status;
+            }
     delete:
       tags:
         - users
@@ -1460,7 +1616,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->deleteUserProfileImage("userid");
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+
+            $resp = $driver->getUserModel->deleteUserProfileImage($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody()->status;
+            }
   "/users/{user_id}/image/default":
     get:
       tags:
@@ -1523,7 +1685,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->returnUserDefaultProfileImage("userid");
+            $userID = "4xp9fdt77pncbef59f4k1qe83o";
+
+            $resp = $driver->getUserModel->returnUserDefaultProfileImage($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody();
+            }
   "/users/username/{username}":
     get:
       tags:
@@ -1584,7 +1752,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUserByUsername("username");
+            $username = "username";
+
+            $resp = $driver->getUserModel()->getUserByUsername($username);
+
+            if ($resp->getStatusCode() == 200) {
+               $user = json_decode($resp->getBody());
+            }
   /users/password/reset:
     post:
       tags:
@@ -1655,10 +1829,17 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->resetPassword([
-                "code" => "thecode",
-                "newPassword" => "awesomePassword",
+            $code = "4xp9fdt77pncbef59f4k1qe83o";
+            $newPassword = "awesomePassword";
+
+            $resp = $driver->getUserModel->resetPassword([
+                "code" => $code,
+                "newPassword" => $newPassword,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $success = json_decode($resp->getBody())->status;
+            }
   "/users/{user_id}/mfa":
     put:
       tags:
@@ -1739,10 +1920,17 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->updateUserMfa("userid", [
+            $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
+            $code = "4xp9fdt77pncbef59f4k1qe83o";
+
+            $resp = $driver->getUserModel->updateUserMfa($userID, [
                 "activate" => true,
-                "code" => "thecode",
+                "code" => $code,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody()->status;
+            }
   "/users/{user_id}/mfa/generate":
     post:
       tags:
@@ -1814,7 +2002,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->generateMfaSecret("userid");
+            $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
+
+            $resp = $driver->getUserModel->generateMfaSecret($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $mfaSecret = json_decode($resp->getBody());
+            }
   "/users/{user_id}/demote":
     post:
       tags:
@@ -1881,7 +2075,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->demoteUserToGuest("userid");
+            $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
+
+            $resp = $driver->getUserModel->demoteUserToGuest($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody()->status;
+            }
   "/users/{user_id}/promote":
     post:
       tags:
@@ -1948,7 +2148,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->promoteGuestToUser("userid");
+            $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
+
+            $resp = $driver->getUserModel->promoteGuestToUser($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody()->status;
+            }
   /users/mfa:
     post:
       tags:
@@ -2008,15 +2214,21 @@
                     "url" => "https://your-mattermost-url.com",
                     "login_id" => "email@domain.com",
                     "password" => "Password1",
-                  ]
+                ]
             ]);
 
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->checkMfa([
-                "login_id" => "test@domain.com",
+            $loginID = "test@domain.com";
+
+            $resp = $driver->getUserModel->checkMfa([
+                "login_id" => $loginID,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $required = json_decode($resp->getBody())->mfa_required;
+            }
   "/users/{user_id}/password":
     put:
       tags:
@@ -2101,10 +2313,18 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->updateUserPassword("userid", [
-                "current_password" => "badPassword",
-                "new_password" => "awesomePassword",
+            $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
+            $currentPassword = "badPassword";
+            $newPassword = "awesomePassword";
+
+            $resp = $driver->getUserModel->updateUserPassword($userID, [
+                "current_password" => $currentPassword,
+                "new_password" => $newPassword,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   /users/password/reset/send:
     post:
       tags:
@@ -2170,9 +2390,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->sendPasswordResetEmail([
-                "email" => "test@domain.com",
+            $email = "test@domain.com";
+
+            $resp = $driver->getUserModel->sendPasswordResetEmail([
+                "email" => $email,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $pass = json_decode($resp->getBody())->status;
+            }
   "/users/email/{email}":
     get:
       tags:
@@ -2235,7 +2461,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUserByEmail("test@domain.com");
+            $email = "test@domain.com";
+
+            $resp = $driver->getUserModel()->getUserByEmail($email);
+
+            if ($resp->getStatusCode() == 200) {
+               $user = json_decode($resp->getBody());
+            }
   "/users/{user_id}/sessions":
     get:
       tags:
@@ -2298,7 +2530,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUserSessions("userid");
+            $userID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
+
+            $resp = $driver->getUserModel()->getUserSessions($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $sessions = json_decode($resp->getBody());
+            }
   "/users/{user_id}/sessions/revoke":
     post:
       tags:
@@ -2371,9 +2609,16 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->revokeUserSession("userid", [
-                "session_id" => "sessionid",
+            $userID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
+            $sessionID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->revokeUserSession($userID, [
+                "session_id" => $sessionID,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   "/users/{user_id}/sessions/revoke/all":
     post:
       tags:
@@ -2436,7 +2681,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->revokeAllUserSessions("userid");
+            $userID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
+
+            $resp = $driver->getUserModel->revokeAllUserSessions($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   /users/sessions/device:
     put:
       tags:
@@ -2501,9 +2752,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->attachMobileDevice([
-                "device_id" => "deviceid",
+            $deviceID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
+
+            $resp = $driver->getUserModel->attachMobileDevice([
+                "device_id" => $deviceID,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $pass = json_decode($resp->getBody())->status;
+            }
   "/users/{user_id}/audits":
     get:
       tags:
@@ -2563,7 +2820,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getUserAudits("userid");
+            $userID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
+
+            $resp = $driver->getUserModel()->getUserAudits($userID);
+
+            if ($resp->getStatusCode() == 200) {
+               $audits = json_decode($resp->getBody());
+            }
   /users/email/verify:
     post:
       tags:
@@ -2621,9 +2884,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->verifyUserEmail([
-                "token" => "tokenstring",
+            $token = "zWEyrTZ7GZ22aBSfoX60iWryTY";
+
+            $resp = $driver->getUserModel->verifyUserEmail([
+                "token" => $token,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   /users/email/verify/send:
     post:
       tags:
@@ -2685,9 +2954,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->sendVerificationEmail([
-                "email" => "test@domain.com",
+            $email = "test@domain.com";
+
+            $resp = $driver->getUserModel->sendVerificationEmail([
+                "email" => $email,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $pass = json_decode($resp->getBody())->status;
+            }
   /users/login/switch:
     post:
       tags:
@@ -2809,12 +3084,25 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->switchLoginMethod([
-                "current_service" => "email",
-                "new_service" => "gitlab",
-                "email" => "test@domain.com",
-                //...
+            $currentService = "email";
+            $newService = "gitlab";
+            $email = "test@domain.com";
+            $password = "awesomePassword";
+            $mfaCode = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+            $ldapLoginID = "RdDjEDlkWgt7ndjyVLwWGvnX8c";
+
+            $resp = $driver->getUserModel->switchLoginMethod([
+                "current_service" => $currentService,
+                "new_service" => $newService,
+                "email" => $email,
+                "password" => $password,
+                "mfa_code" => $mfaCode,
+                "ldap_id" => $ldapLoginID,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $link = json_decode($resp->getBody())->follow_link;
+            }
   "/users/{user_id}/tokens":
     post:
       tags:
@@ -2895,9 +3183,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->createToken("userid", [
+            $userID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->createToken($userID, [
                 "description" => "test token",
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $userAccessToken = json_decode($resp->getBody());
+            }
     get:
       tags:
         - users
@@ -2975,10 +3269,16 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getTokens("userid", [
+            $userID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->getTokens($userID, [
                 "page" => 0,
                 "per_page" => 100,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $tokens = json_decode($resp->getBody());
+            }
   /users/tokens:
     get:
       tags:
@@ -3101,9 +3401,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->revokeToken([
-                "token_id" => "badToken",
+            $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->revokeToken([
+                "token_id" => $tokenID,
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   "/users/tokens/{token_id}":
     get:
       tags:
@@ -3170,7 +3476,13 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->getToken("tokenid");
+            $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->getToken($tokenID);
+
+            if ($resp->getStatusCode() == 200) {
+               $token = json_decode($resp->getBody());
+            }
   /users/tokens/disable:
     post:
       tags:
@@ -3240,9 +3552,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->disablePersonalAccessToken([
-                "token_id" => "badToken"
+            $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->disablePersonalAccessToken([
+                "token_id" => $tokenID
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   /users/tokens/enable:
     post:
       tags:
@@ -3311,9 +3629,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->enablePersonalAccessToken([
-                "token_id" => "awesomeToken"
+            $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->enablePersonalAccessToken([
+                "token_id" => $tokenID
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $ok = json_decode($resp->getBody())->status;
+            }
   /users/tokens/search:
     post:
       tags:
@@ -3385,9 +3709,15 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->searchTokens([
-                "term" => "partialtokenid"
+            $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+
+            $resp = $driver->getUserModel->searchTokens([
+                "term" => $tokenID
             ]);
+
+            if ($resp->getStatusCode() == 200) {
+               $userAccessTokens = json_decode($resp->getBody());
+            }
   "/users/{user_id}/auth":
     put:
       tags:
@@ -3464,10 +3794,25 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $result = $driver->getUserModel()->updateUserAuthenticationMethod("userid", [
-                "auth_service" => "gitlab",
-                //...
-            ]);
+            $userID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
+            $resp = $driver->getUserModel()->getUser($userID);
+
+            if ($resp->getStatusCode() == 200) {
+                $user = json_decode($resp->getBody());
+            } else {
+                throw new \Exception("User not found.");
+            }
+
+            $userAuth = [];
+            $userAuth["auth_data"] = $user->auth_data;
+            $userAuth["auth_service"] = $user->auth_service;
+            $userAuth["password"] = $user->password;
+
+            $resp = $driver->getUserModel->updateUserAuthenticationMethod($userID, $userAuth);
+
+            if ($resp->getStatusCode() == 200) {
+               $user = json_decode($resp->getBody());
+            }
   "/users/{user_id}/terms_of_service":
     post:
       tags:
