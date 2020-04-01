@@ -165,7 +165,7 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $resp = $driver->getUserModel->createUser([
+            $resp = $driver->getUserModel()->createUser([
                 "username" => "username",
                 "email" => "email@domain.com",
                 "password" => "Password1"
@@ -637,7 +637,7 @@
             $channelID = "Ej3SKOHlWIKAblkUTK5Xvkj2cm";
             $channelID2 = "dWdfrUSdjJ7kyBvyBCgCav67Kz";
 
-            $resp = $driver->getUserModel->searchUsers([
+            $resp = $driver->getUserModel()->searchUsers([
                 "term" => "searchTerm",
                 "team_id" => $teamID,
                 "not_in_team_id" => $teamID2,
@@ -744,7 +744,7 @@
             $channelID = "Ej3SKOHlWIKAblkUTK5Xvkj2cm";
             $username = "testUsername";
 
-            $resp = $driver->getUserModel->autocompleteUsers([
+            $resp = $driver->getUserModel()->autocompleteUsers([
                 "team_id" => $teamID,
                 "channel_id" => $channelID,
                 "name" => $username,
@@ -804,7 +804,7 @@
             $driver = new Driver($container);
             $driver->authenticate();
 
-            $resp = $driver->getUserModel->getTotalCountOfUsersInTheSystem();
+            $resp = $driver->getUserModel()->getTotalCountOfUsersInTheSystem();
 
             if ($resp->getStatusCode() == 200) {
                 $stats = json_decode($resp->getBody())->total_users_count;
@@ -999,7 +999,7 @@
             $notifyProps = [];
             $notifyProps["comment"] = "somethingrandom";
 
-            $resp = $driver->getUserModel->updateUser($userID, [
+            $resp = $driver->getUserModel()->updateUser($userID, [
                 email => $email,
                 username => $username,
                 first_name => $firstName,
@@ -1077,7 +1077,7 @@
 
             $userID = "4xp9fdt77pncbef59f4k1qe83o";
 
-            $resp = $driver->getUserModel->deactivateUserAccount($userID);
+            $resp = $driver->getUserModel()->deactivateUserAccount($userID);
 
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
@@ -1195,7 +1195,7 @@
             $notifyProps = [];
             $notifyProps["comment"] = "somethingrandom";
 
-            $resp = $driver->getUserModel->patchUser($userID, [
+            $resp = $driver->getUserModel()->patchUser($userID, [
               email => $email,
               username => $username,
               first_name => $firstName,
@@ -1287,7 +1287,7 @@
             $userID = "4xp9fdt77pncbef59f4k1qe83o";
             $roles = "team_user team_admin";
 
-            $resp = $driver->getUserModel->updateUserRoles($userID, [
+            $resp = $driver->getUserModel()->updateUserRoles($userID, [
                 "roles" => $roles,
             ]);
 
@@ -1372,7 +1372,7 @@
 
             $userID = "4xp9fdt77pncbef59f4k1qe83o";
 
-            $resp = $driver->getUserModel->updateUserActive($userID, [
+            $resp = $driver->getUserModel()->updateUserActive($userID, [
                 "active" => true,
             ]);
 
@@ -1536,7 +1536,7 @@
 
             $data = new \GuzzleHttp\Psr7\Stream($resource);
 
-            $resp = $driver->getUserModel->setUserProfileImage($userID, [
+            $resp = $driver->getUserModel()->setUserProfileImage($userID, [
                 "image" => $data,
             ]);
 
@@ -1618,7 +1618,7 @@
 
             $userID = "4xp9fdt77pncbef59f4k1qe83o";
 
-            $resp = $driver->getUserModel->deleteUserProfileImage($userID);
+            $resp = $driver->getUserModel()->deleteUserProfileImage($userID);
 
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
@@ -1687,7 +1687,7 @@
 
             $userID = "4xp9fdt77pncbef59f4k1qe83o";
 
-            $resp = $driver->getUserModel->returnUserDefaultProfileImage($userID);
+            $resp = $driver->getUserModel()->returnUserDefaultProfileImage($userID);
 
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody();
@@ -1832,7 +1832,7 @@
             $code = "4xp9fdt77pncbef59f4k1qe83o";
             $newPassword = "awesomePassword";
 
-            $resp = $driver->getUserModel->resetPassword([
+            $resp = $driver->getUserModel()->resetPassword([
                 "code" => $code,
                 "newPassword" => $newPassword,
             ]);
@@ -1923,7 +1923,7 @@
             $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
             $code = "4xp9fdt77pncbef59f4k1qe83o";
 
-            $resp = $driver->getUserModel->updateUserMfa($userID, [
+            $resp = $driver->getUserModel()->updateUserMfa($userID, [
                 "activate" => true,
                 "code" => $code,
             ]);
@@ -2004,7 +2004,7 @@
 
             $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
 
-            $resp = $driver->getUserModel->generateMfaSecret($userID);
+            $resp = $driver->getUserModel()->generateMfaSecret($userID);
 
             if ($resp->getStatusCode() == 200) {
                $mfaSecret = json_decode($resp->getBody());
@@ -2077,7 +2077,7 @@
 
             $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
 
-            $resp = $driver->getUserModel->demoteUserToGuest($userID);
+            $resp = $driver->getUserModel()->demoteUserToGuest($userID);
 
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
@@ -2150,7 +2150,7 @@
 
             $userID = "BbaYBYDV5IDOZFiJGBSzkw1k5u";
 
-            $resp = $driver->getUserModel->promoteGuestToUser($userID);
+            $resp = $driver->getUserModel()->promoteGuestToUser($userID);
 
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
@@ -2222,7 +2222,7 @@
 
             $loginID = "test@domain.com";
 
-            $resp = $driver->getUserModel->checkMfa([
+            $resp = $driver->getUserModel()->checkMfa([
                 "login_id" => $loginID,
             ]);
 
@@ -2317,7 +2317,7 @@
             $currentPassword = "badPassword";
             $newPassword = "awesomePassword";
 
-            $resp = $driver->getUserModel->updateUserPassword($userID, [
+            $resp = $driver->getUserModel()->updateUserPassword($userID, [
                 "current_password" => $currentPassword,
                 "new_password" => $newPassword,
             ]);
@@ -2392,7 +2392,7 @@
 
             $email = "test@domain.com";
 
-            $resp = $driver->getUserModel->sendPasswordResetEmail([
+            $resp = $driver->getUserModel()->sendPasswordResetEmail([
                 "email" => $email,
             ]);
 
@@ -2612,7 +2612,7 @@
             $userID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
             $sessionID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->revokeUserSession($userID, [
+            $resp = $driver->getUserModel()->revokeUserSession($userID, [
                 "session_id" => $sessionID,
             ]);
 
@@ -2683,7 +2683,7 @@
 
             $userID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
 
-            $resp = $driver->getUserModel->revokeAllUserSessions($userID);
+            $resp = $driver->getUserModel()->revokeAllUserSessions($userID);
 
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
@@ -2754,7 +2754,7 @@
 
             $deviceID = "zWEyrTZ7GZ22aBSfoX60iWryTY";
 
-            $resp = $driver->getUserModel->attachMobileDevice([
+            $resp = $driver->getUserModel()->attachMobileDevice([
                 "device_id" => $deviceID,
             ]);
 
@@ -2886,7 +2886,7 @@
 
             $token = "zWEyrTZ7GZ22aBSfoX60iWryTY";
 
-            $resp = $driver->getUserModel->verifyUserEmail([
+            $resp = $driver->getUserModel()->verifyUserEmail([
                 "token" => $token,
             ]);
 
@@ -2956,7 +2956,7 @@
 
             $email = "test@domain.com";
 
-            $resp = $driver->getUserModel->sendVerificationEmail([
+            $resp = $driver->getUserModel()->sendVerificationEmail([
                 "email" => $email,
             ]);
 
@@ -3091,7 +3091,7 @@
             $mfaCode = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
             $ldapLoginID = "RdDjEDlkWgt7ndjyVLwWGvnX8c";
 
-            $resp = $driver->getUserModel->switchLoginMethod([
+            $resp = $driver->getUserModel()->switchLoginMethod([
                 "current_service" => $currentService,
                 "new_service" => $newService,
                 "email" => $email,
@@ -3185,7 +3185,7 @@
 
             $userID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->createToken($userID, [
+            $resp = $driver->getUserModel()->createToken($userID, [
                 "description" => "test token",
             ]);
 
@@ -3271,7 +3271,7 @@
 
             $userID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->getTokens($userID, [
+            $resp = $driver->getUserModel()->getTokens($userID, [
                 "page" => 0,
                 "per_page" => 100,
             ]);
@@ -3403,7 +3403,7 @@
 
             $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->revokeToken([
+            $resp = $driver->getUserModel()->revokeToken([
                 "token_id" => $tokenID,
             ]);
 
@@ -3478,7 +3478,7 @@
 
             $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->getToken($tokenID);
+            $resp = $driver->getUserModel()->getToken($tokenID);
 
             if ($resp->getStatusCode() == 200) {
                $token = json_decode($resp->getBody());
@@ -3554,7 +3554,7 @@
 
             $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->disablePersonalAccessToken([
+            $resp = $driver->getUserModel()->disablePersonalAccessToken([
                 "token_id" => $tokenID
             ]);
 
@@ -3631,7 +3631,7 @@
 
             $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->enablePersonalAccessToken([
+            $resp = $driver->getUserModel()->enablePersonalAccessToken([
                 "token_id" => $tokenID
             ]);
 
@@ -3711,7 +3711,7 @@
 
             $tokenID = "adWv1qPZmHdtxk7Lmqh6RtxWxS";
 
-            $resp = $driver->getUserModel->searchTokens([
+            $resp = $driver->getUserModel()->searchTokens([
                 "term" => $tokenID
             ]);
 
@@ -3808,7 +3808,7 @@
             $userAuth["auth_service"] = $user->auth_service;
             $userAuth["password"] = $user->password;
 
-            $resp = $driver->getUserModel->updateUserAuthenticationMethod($userID, $userAuth);
+            $resp = $driver->getUserModel()->updateUserAuthenticationMethod($userID, $userAuth);
 
             if ($resp->getStatusCode() == 200) {
                $user = json_decode($resp->getBody());
