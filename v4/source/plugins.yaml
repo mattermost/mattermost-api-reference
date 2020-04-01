@@ -375,6 +375,43 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
             manifests, resp := Client.GetWebappPlugins()
+  /plugins/statuses:
+    get:
+      tags:
+        - plugins
+      summary: Get plugins status
+      description: |
+        Returns the status for plugins installed anywhere in the cluster
+
+        ##### Permissions
+        No permissions required.
+
+        __Minimum server version__: 4.4
+      responses:
+        "200":
+          description: Plugin status retreived successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PluginStatus"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            manifests, resp := Client.GetPluginStatuses()
   /plugins/marketplace:
     post:
       tags:
@@ -408,7 +445,7 @@
         "200":
           description: Plugin installed successfully
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/PluginManifest"
         "400":
@@ -486,7 +523,7 @@
         "200":
           description: Plugins retrieval successful
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:

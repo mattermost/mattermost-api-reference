@@ -56,14 +56,6 @@ jobs:
           to: "s3://api.mattermost.com/v4/static/"
           arguments: --acl public-read --cache-control "no-cache"
       - aws-s3/copy:
-          from: ~/mattermost-api-reference/v4/html/static/redoc.min.js
-          to: "s3://api.mattermost.com/static/"
-          arguments: --acl public-read --cache-control "no-cache"
-      - aws-s3/copy:
-          from: ~/mattermost-api-reference/v4/html/static/redoc.min.js
-          to: "s3://api.mattermost.com/v4/static/"
-          arguments: --acl public-read --cache-control "no-cache"
-      - aws-s3/copy:
           from: ~/mattermost-api-reference/v4/html/static/favicon.ico
           to: "s3://api.mattermost.com/v4/static/"
           arguments: --acl public-read --cache-control "no-cache"
