@@ -341,7 +341,7 @@ components:
           type: array
           description: >
             Information about content embedded in the post including OpenGraph
-            previews, image link previews, and message attachments. 
+            previews, image link previews, and message attachments.
             This field will be null if the post does not contain embedded content.
           items:
             type: object
@@ -2367,22 +2367,22 @@ components:
         version:
           type: string
           description: Version number of the plugin.
-        cluster_id:  
-          type: string      
+        cluster_id:
+          type: string
           description: ID of the cluster in which plugin is running
         plugin_path:
-          type: string      
+          type: string
           description: Path to the plugin on the server
         state:
           type: number
           description: State of the plugin
           enum:
-            - NotRunning          
-            - Starting            
-            - Running             
-            - FailedToStart       
-            - FailedToStayRunning 
-            - Stopping            
+            - NotRunning
+            - Starting
+            - Running
+            - FailedToStart
+            - FailedToStayRunning
+            - Stopping
 
 
     PluginManifestWebapp:
@@ -2710,6 +2710,21 @@ components:
           description: timestamp - number of seconds since Jan 1, 1970 UTC.
           type: integer
           format: int64
+    GroupWithSchemeAdmin:
+      description: group augmented with scheme admin information
+      type: object
+      properties:
+        group:
+          $ref: "#/components/schemas/Group"
+        scheme_admin:
+          type: boolean
+    GroupsAssociatedToChannels:
+      description: a map of channel ids to the set of group sthat constrain the channel in a team
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: "#/components/schemas/GroupWithSchemeAdmin"
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'

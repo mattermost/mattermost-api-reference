@@ -5,16 +5,16 @@
       summary: Get groups
       description: >
         Retrieve a list of all groups not associated to a particular channel or
-        team.  
+        team.
 
 
-        `not_associated_to_team` **OR** `not_associated_to_channel` is required.  
+        `not_associated_to_team` **OR** `not_associated_to_channel` is required.
 
 
-        If you use `not_associated_to_team`, you must be a team admin for that particular team (permission to manage that team).  
+        If you use `not_associated_to_team`, you must be a team admin for that particular team (permission to manage that team).
 
 
-        If you use `not_associated_to_channel`, you must be a channel admin for that particular channel (permission to manage that channel).    
+        If you use `not_associated_to_channel`, you must be a channel admin for that particular channel (permission to manage that channel).
 
 
         __Minimum server version__: 5.11
@@ -682,6 +682,12 @@
           schema:
             type: integer
             default: 60
+        - name: filter_allow_reference
+          in: query
+          description: Boolean which filters in the group entries with the `allow_reference` attribute set.
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Group list retrieval successful
@@ -709,9 +715,6 @@
       description: |
         Retrieve the list of groups associated with a given team.
 
-        ##### Permissions
-        Must have `manage_system` permission.
-
         __Minimum server version__: 5.11
       parameters:
         - name: team_id
@@ -732,6 +735,12 @@
           schema:
             type: integer
             default: 60
+        - name: filter_allow_reference
+          in: query
+          description: Boolean which filters in the group entries with the `allow_reference` attribute set.
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Group list retrieval successful
@@ -751,3 +760,56 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  "/teams/{team_id}/groups_by_channels":
+      get:
+        tags:
+          - groups
+        summary: Get team groups
+        description: |
+          Retrieve the set of groups associated with the channels in the given team grouped by channel.
+
+          __Minimum server version__: 5.11
+        parameters:
+          - name: team_id
+            in: path
+            description: Team GUID
+            required: true
+            schema:
+              type: string
+          - name: page
+            in: query
+            description: The page to select.
+            schema:
+              type: integer
+              default: 0
+          - name: per_page
+            in: query
+            description: The number of groups per page.
+            schema:
+              type: integer
+              default: 60
+          - name: filter_allow_reference
+            in: query
+            description: Boolean which filters in the group entries with the `allow_reference` attribute set.
+            schema:
+              type: boolean
+              default: false
+        responses:
+          "200":
+            description: Group list retrieval successful
+            content:
+              application/json:
+                schema:
+                  type: object
+                  items:
+                    $ref: "#/components/schemas/GroupsAssociatedToChannels"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+          "501":
+            $ref: "#/components/responses/NotImplemented"
