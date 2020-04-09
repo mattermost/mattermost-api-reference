@@ -2719,7 +2719,7 @@ components:
         scheme_admin:
           type: boolean
     GroupsAssociatedToChannels:
-      description: a map of channel ids to the set of group sthat constrain the channel in a team
+      description: a map of channel id(s) to the set of groups that constrain the corresponding channel in a team
       type: object
       additionalProperties:
         type: array

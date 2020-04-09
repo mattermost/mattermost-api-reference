@@ -684,7 +684,7 @@
             default: 60
         - name: filter_allow_reference
           in: query
-          description: Boolean which filters in the group entries with the `allow_reference` attribute set.
+          description: Boolean which filters the group entries with the `allow_reference` attribute set.
           schema:
             type: boolean
             default: false
