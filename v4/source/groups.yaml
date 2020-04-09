@@ -764,7 +764,7 @@
       get:
         tags:
           - groups
-        summary: Get team groups
+        summary: Get team groups by channels
         description: |
           Retrieve the set of groups associated with the channels in the given team grouped by channel.
 
