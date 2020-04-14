@@ -2649,6 +2649,19 @@ components:
           type: string
         roles:
           $ref: "#/components/schemas/ChannelModeratedRolesPatch"
+    ChannelMemberCountByGroup:
+      description: An object describing group member information in a channel
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: ID of the group
+        channel_member_count:
+          type: number
+          description: Total number of group members in the channel
+        channel_member_timezones_count:
+          type: number
+          description: Total number of unique timezones for the group members in the channel
     LDAPGroupsPaged:
       description: A paged list of LDAP groups
       type: object
