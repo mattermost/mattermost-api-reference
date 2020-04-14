@@ -360,6 +360,50 @@
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
 
             team, resp := Client.PatchTeam(teamID, patch)
+  "/teams/{team_id}/privacy":
+    post:
+      tags:
+        - teams
+      summary: Modify team privacy
+      description: >
+        Modifies a team's privacy setting to "public" or "private". Public teams are open to users joining.
+        Private teams must be joined via an invitation.
+
+        ##### Permissions
+
+        Must have the `manage_team` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: privacy
+          in: path
+          description: Privacy ("public" or "private")
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: team privacy updated successfully
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+            resp := Client.UpdateTeamPrivacy(teamID, "public")
   "/teams/name/{name}":
     get:
       tags:
