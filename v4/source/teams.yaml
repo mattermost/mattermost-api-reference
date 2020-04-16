@@ -360,6 +360,49 @@
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
 
             team, resp := Client.PatchTeam(teamID, patch)
+  "/teams/{team_id}/restore":
+    post:
+      tags:
+        - teams
+      summary: Restore a team
+      description: |
+        Restore a team that was previously soft deleted.
+
+        __Minimum server version__: 5.24
+
+        ##### Permissions
+        Must have the `manage_team` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Team restore successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+
+            team, resp := Client.RestoreTeam(teamID)
   "/teams/name/{name}":
     get:
       tags:
