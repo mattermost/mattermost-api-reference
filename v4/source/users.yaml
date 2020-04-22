@@ -784,9 +784,7 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
-            userID := "4xp9fdt77pncbef59f4k1qe83o"
-
-            userIds, resp := Client.GetKnownUsers(userID)
+            userIds, resp := Client.GetKnownUsers()
 
   /users/stats:
     get:
