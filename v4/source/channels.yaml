@@ -2235,7 +2235,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/teams/{team_id}/channels/categories":
+  "/users/{user_id}/teams/{team_id}/channels/categories":
     get:
       tags:
         - channels
@@ -2248,6 +2248,12 @@
         - name: team_id
           in: path
           description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
           required: true
           schema:
             type: string
@@ -2283,9 +2289,163 @@
           required: true
           schema:
             type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Category creation successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/users/{user_id}/teams/{team_id}/channels/categories/order":
+    get:
+      tags:
+        - channels
+      summary: Get user's sidebar category order
+      description: >
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OrderedSidebarCategories"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update user's sidebar category order
+      description: >
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category creation successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/users/{user_id}/teams/{team_id}/channels/categories/{category_id}":
+    get:
+      tags:
+        - channels
+      summary: Get sidebar category
+      description: >
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update sidebar category
+      description: >
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category update successful
           content:
             application/json:
               schema:
