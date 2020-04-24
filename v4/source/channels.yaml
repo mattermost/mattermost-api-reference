@@ -2310,6 +2310,42 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update user's sidebar categories
+      description: >
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category update successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
   "/users/{user_id}/teams/{team_id}/channels/categories/order":
     get:
       tags:
