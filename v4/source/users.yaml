@@ -758,9 +758,9 @@
     get:
       tags:
         - users
-      summary: Get user ids of known users
+      summary: Get user IDs of known users
       description: |
-        Get the list of user ids of users with any direct relationship with a
+        Get the list of user IDs of users with any direct relationship with a
         user. That means any user sharing any channel, including direct and
         group channels.
         ##### Permissions
@@ -769,7 +769,7 @@
         __Minimum server version__: 5.23
       responses:
         "200":
-          description: Known users ids retrieval successful
+          description: Known users' IDs retrieval successful
           content:
             application/json:
               schema:
