@@ -2867,6 +2867,8 @@
       description: |
         Verify the email used by a user without a token.
 
+        __Minimum server version__: 5.25
+
         ##### Permissions
 
         Must have `manage_system` permission.
