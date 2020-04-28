@@ -2116,6 +2116,49 @@
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
               -H 'Content-Type: application/json' \
               -H 'X-Requested-With: XMLHttpRequest'
+  "/channels/{channel_id}/member_counts_by_group":
+    get:
+      tags:
+        - channels
+      summary: Channel members counts for each group that has atleast one member in the channel
+      description: >
+        Returns a set of ChannelMemberCountByGroup objects which contain a `group_id`, `channel_member_count` and a `channel_member_timezones_count`.
+
+        ##### Permissions
+
+        Must have `read_channel` permission for the given channel.
+
+        __Minimum server version__: 5.24
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          schema:
+            type: string
+        - name: include_timezones
+          in: query
+          description: Defines if member timezone counts should be returned or not
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Successfully returns member counts by group for the given channel.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: curl
+          source: >
+            curl -X GET \
+              'http://your-mattermost-url.com/api/v4/channels/3wyp678obid8pggjmhmhwpah1r/member_counts_by_group?include_timezones=true' \
+              -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
+              -H 'Content-Type: application/json' \
+              -H 'X-Requested-With: XMLHttpRequest'
   "/channels/{channel_id}/moderations":
     get:
       tags:
@@ -2176,7 +2219,7 @@
           required: true
           schema:
             type: string
-            
+
       responses:
         "200":
           description: "Retreived successfully"

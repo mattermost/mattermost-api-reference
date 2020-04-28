@@ -360,6 +360,115 @@
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
 
             team, resp := Client.PatchTeam(teamID, patch)
+  "/teams/{team_id}/privacy":
+    put:
+      tags:
+        - teams
+      summary: Update teams's privacy
+      description: >
+        Updates team's privacy allowing changing a team from Public (open) to
+        Private (invitation only) and back.
+
+
+        __Minimum server version__: 5.24
+
+
+        ##### Permissions
+
+        `manage_team` permission for the team of the team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - privacy
+              properties:
+                privacy:
+                  type: string
+                  description: "Team privacy setting: 'O' for a public (open) team, 'I' for
+                    a private (invitation only) team"
+        required: true
+      responses:
+        "200":
+          description: Team conversion successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+
+            // Update team's privacy to Public
+
+            updatedTeam, resp := Client.UpdateTeamPrivacy(<TEAMID>, model.TEAM_OPEN)
+
+
+            // Update team's privacy to Private
+
+            updatedTeam, resp := Client.UpdateTeamPrivacy(<TEAMID>, model.TEAM_INVITE)
+  "/teams/{team_id}/restore":
+    post:
+      tags:
+        - teams
+      summary: Restore a team
+      description: |
+        Restore a team that was previously soft deleted.
+
+        __Minimum server version__: 5.24
+
+        ##### Permissions
+        Must have the `manage_team` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Team restore successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+            team, resp := Client.RestoreTeam(teamID)
   "/teams/name/{name}":
     get:
       tags:
