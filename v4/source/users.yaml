@@ -2827,6 +2827,48 @@
             if ($resp->getStatusCode() == 200) {
                $audits = json_decode($resp->getBody());
             }
+  "/users/{user_id}/verify":
+    post:
+      tags:
+        - users
+      summary: Verify user email by id
+      description: |
+        Verify the email used by a user without a token.
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User email verification successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u
+
+            user, resp := Client.VerifyUser(userID)
   /users/email/verify:
     post:
       tags:
