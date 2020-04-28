@@ -792,6 +792,58 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  "/channels/{channel_id}/move":
+    post:
+      tags:
+        - channels
+      summary: Move a channel
+      description: |
+        Move a channel to another team.
+
+        __Minimum server version__: 5.25
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          schema:
+            type: string
+        - name: removeDeactivatedMembers
+          in: query
+          description: Whether to remove deactivated users from the team or not.
+          required: false
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - team_id
+              properties:
+                team_id:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: Channel move successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
   "/channels/{channel_id}/stats":
     get:
       tags:
