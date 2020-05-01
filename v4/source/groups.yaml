@@ -813,3 +813,37 @@
             $ref: "#/components/responses/InternalServerError"
           "501":
             $ref: "#/components/responses/NotImplemented"
+  "/groups/users/ids":
+    post:
+      tags:
+        - groups
+      summary: Get groups by users
+      description: |
+        Retrieve the list of groups associated to users for a provided array of user ids.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.24
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: List of user ids
+        required: true
+      responses:
+        "200":
+          description: Groups by user list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GroupsByUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
