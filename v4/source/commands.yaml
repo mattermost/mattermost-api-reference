@@ -50,7 +50,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -112,7 +112,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -159,7 +159,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -203,7 +203,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -249,7 +249,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -299,7 +299,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -355,7 +355,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -400,7 +400,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
