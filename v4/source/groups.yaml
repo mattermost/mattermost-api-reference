@@ -62,7 +62,8 @@
           in: query
           description: >
             Only return groupss that have been modified since the given Unix
-            timestamp (in milliseconds).
+            timestamp (in milliseconds). All modified groups, including deleted
+            and created groups, will be returned.
 
             __Minimum server version__: 5.24
           schema:
