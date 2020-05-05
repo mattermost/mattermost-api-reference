@@ -61,7 +61,7 @@
         - name: since
           in: query
           description: >
-            Only return groupss that have been modified since the given Unix
+            Only return groups that have been modified since the given Unix
             timestamp (in milliseconds). All modified groups, including deleted
             and created groups, will be returned.
 
