@@ -767,7 +767,10 @@
         summary: Get team groups by channels
         description: |
           Retrieve the set of groups associated with the channels in the given team grouped by channel.
-
+          
+          ##### Permissions
+          Must have `manage_system` permission or can access only for current user
+          
           __Minimum server version__: 5.11
         parameters:
           - name: team_id
