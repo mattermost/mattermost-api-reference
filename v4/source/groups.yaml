@@ -777,7 +777,10 @@
         summary: Get team groups by channels
         description: |
           Retrieve the set of groups associated with the channels in the given team grouped by channel.
-
+          
+          ##### Permissions
+          Must have `manage_system` permission or can access only for current user
+          
           __Minimum server version__: 5.11
         parameters:
           - name: team_id
@@ -823,3 +826,32 @@
             $ref: "#/components/responses/InternalServerError"
           "501":
             $ref: "#/components/responses/NotImplemented"
+  "/users/{user_id}/groups":
+    get:
+      tags:
+        - groups
+      summary: Get groups for a userId
+      description: |
+        Retrieve the list of groups associated to the user
+
+        __Minimum server version__: 5.24
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Group list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
