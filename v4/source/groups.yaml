@@ -58,6 +58,16 @@
           required: true
           schema:
             type: string
+        - name: since
+          in: query
+          description: >
+            Only return groups that have been modified since the given Unix
+            timestamp (in milliseconds). All modified groups, including deleted
+            and created groups, will be returned.
+
+            __Minimum server version__: 5.24
+          schema:
+            type: integer
       responses:
         "200":
           description: Group list retrieval successful
