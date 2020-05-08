@@ -2863,7 +2863,7 @@
     post:
       tags:
         - users
-      summary: Verify user email by id
+      summary: Verify user email by ID
       description: |
         Verify the email used by a user without a token.
 
