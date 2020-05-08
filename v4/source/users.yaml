@@ -2867,7 +2867,7 @@
       description: |
         Verify the email used by a user without a token.
 
-        __Minimum server version__: 5.25
+        __Minimum server version__: 5.24
 
         ##### Permissions
 
