@@ -2859,7 +2859,7 @@
             if ($resp->getStatusCode() == 200) {
                $audits = json_decode($resp->getBody());
             }
-  "/users/{user_id}/verify":
+  "/users/{user_id}/email/verify/member":
     post:
       tags:
         - users
@@ -2902,7 +2902,7 @@
 
             userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u
 
-            user, resp := Client.VerifyUser(userID)
+            user, resp := Client.VerifyUserEmailWithoutToken(userID)
   /users/email/verify:
     post:
       tags:
