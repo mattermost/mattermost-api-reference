@@ -188,10 +188,12 @@
       responses:
         '200':
           description: Commands' autocomplete data retrieval successful
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/AutocompleteSuggestion"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AutocompleteSuggestion"
         '400':
           $ref: '#/responses/BadRequest'
         '401':
