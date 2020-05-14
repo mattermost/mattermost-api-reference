@@ -180,13 +180,15 @@
           in: path
           description: Team GUID
           required: true
-          type: string
+          schema:
+            type: string
         - name: user_input
           in: query
           description: String inputted by the user.
-          type: string
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           description: Commands' autocomplete data retrieval successful
           content:
             application/json:
@@ -194,12 +196,12 @@
                 type: array
                 items:
                   $ref: "#/components/schemas/AutocompleteSuggestion"
-        '400':
-          $ref: '#/responses/BadRequest'
-        '401':
-          $ref: '#/responses/Unauthorized'
-        '403':
-          $ref: '#/responses/Forbidden'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
         - lang: 'Go'
           source: |
