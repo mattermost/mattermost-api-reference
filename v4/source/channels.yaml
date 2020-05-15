@@ -800,7 +800,7 @@
       description: |
         Move a channel to another team.
 
-        __Minimum server version__: 5.25
+        __Minimum server version__: 5.24
 
         ##### Permissions
 
