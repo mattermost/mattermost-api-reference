@@ -1032,15 +1032,15 @@
             $notifyProps["comment"] = "somethingrandom";
 
             $resp = $driver->getUserModel()->updateUser($userID, [
-                email => $email,
-                username => $username,
-                first_name => $firstName,
-                last_name => $lastName,
-                nickname => $nickname,
-                locale => $locale,
-                position => $position,
-                props => $props,
-                notify_props => $notifyProps,
+                "email" => $email,
+                "username" => $username,
+                "first_name" => $firstName,
+                "last_name" => $lastName,
+                "nickname" => $nickname,
+                "locale" => $locale,
+                "position" => $position,
+                "props" => $props,
+                "notify_props" => $notifyProps,
             ]);
 
             if ($resp->getStatusCode() == 200) {
@@ -1228,15 +1228,15 @@
             $notifyProps["comment"] = "somethingrandom";
 
             $resp = $driver->getUserModel()->patchUser($userID, [
-              email => $email,
-              username => $username,
-              first_name => $firstName,
-              last_name => $lastName,
-              nickname => $nickname,
-              locale => $locale,
-              position => $position,
-              props => $props,
-              notify_props => $notifyProps,
+              "email" => $email,
+              "username" => $username,
+              "first_name" => $firstName,
+              "last_name" => $lastName,
+              "nickname" => $nickname,
+              "locale" => $locale,
+              "position" => $position,
+              "props" => $props,
+              "notify_props" => $notifyProps,
             ]);
 
             if ($resp->getStatusCode() == 200) {
