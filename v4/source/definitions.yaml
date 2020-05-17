@@ -802,7 +802,7 @@ components:
           description: Description of the suggested command
           type: string
         IconData:
-          description: Icon data in base64 format
+          description: Base64 encoded svg image
           type: string
     CommandResponse:
       type: object
