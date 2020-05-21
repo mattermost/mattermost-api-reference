@@ -175,8 +175,6 @@
         List commands' autocomplete data for the team.
         ##### Permissions
         `view_team` for the team.
-
-
         __Minimum server version__: 5.24
       parameters:
         - name: team_id
