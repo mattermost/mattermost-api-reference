@@ -4054,7 +4054,7 @@
       tags:
         - users
       summary: Publish a user typing websocket event.
-      description: |
+      description: >
         Notify users in the given channel via websocket that the given user is typing.
 
         __Minimum server version__: 5.26
@@ -4063,22 +4063,20 @@
 
         Must have `manage_system` permission to publish for any user other than oneself.
 
-      parameters:
-        - in: body
-          name: body
-          description: User object to be created
-          required: true
-          schema:
-            type: object
-            required:
-              - channel_id
-            properties:
-              channel_id:
-                description: The id of the channel to which to direct the typing event.
-                type: string
-              parent_id:
-                description: The optional id of the root post of the thread to which the user is replying. If unset, the typing event is directed at the entire channel.
-                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  description: The id of the channel to which to direct the typing event.
+                  type: string
+                parent_id:
+                  description: The optional id of the root post of the thread to which the user is replying. If unset, the typing event is directed at the entire channel.
+                  type: string
       responses:
         '200':
           description: User typing websocket event accepted for publishing.
@@ -4096,4 +4094,7 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
-            ok, response := Client.PublishUserTyping(userID, TypingRequest{ChannelId: "channel_id", ParentId: "post_id"})
+            ok, response := Client.PublishUserTyping(userID, TypingRequest{
+                ChannelId: "channel_id", 
+                ParentId: "post_id",
+            })
