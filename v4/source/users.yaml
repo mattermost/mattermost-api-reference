@@ -4083,11 +4083,11 @@
         '200':
           description: User typing websocket event accepted for publishing.
         '400':
-          $ref: '#/responses/BadRequest'
+          $ref: "#/components/responses/BadRequest"
         '401':
-          $ref: '#/responses/Unauthorized'
+          $ref: "#/components/responses/Unauthorized"
         '403':
-          $ref: '#/responses/Forbidden'
+          $ref: "#/components/responses/Forbidden"
       x-code-samples:
         - lang: 'Go'
           source: |
