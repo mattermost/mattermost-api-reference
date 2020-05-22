@@ -1022,7 +1022,6 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      parameters:
       responses:
         "200":
           description: Warn metrics retrieval was successful.
@@ -1036,7 +1035,8 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-    /warn_metrics/ack/{warn_metric_id:[A-Za-z-_]+}":
+
+  /warn_metrics/ack/{warn_metric_id}:
     post:
       tags:
         - system
@@ -1059,19 +1059,16 @@
           schema:
             type: string
       requestBody:
-        description:
+        description: payload that contains the ack flag
         required: true
         content:
           application/json:
             schema:
               type: object
-              required:
-                - forceAck
               properties:
-                trigger_id:
-                  type: bool
-                  description: Flag that determines if the ack for the metric warning should be
-                  directly stored (without trying to send email first) or not.
+                forceAck:
+                  type: boolean
+                  description: Flag which determines if the ack for the metric warning should bedirectly stored (without trying to send email first) or not
       responses:
         "200":
           description: The acknowledgement of the warning for the metric has been successful.
