@@ -1012,9 +1012,12 @@
       description: >
         Get the status of a set of metrics (enabled or disabled) from the Systems table.
 
-        The returned JSON contains the metrics that we need to warn the admin on with regard to their status (we return the ones whose status is "true", which means that they are in a "warnable" state - e.g. a threshold has been crossed or some other condition has been fulfilled).
+        The returned JSON contains the metrics that we need to warn the admin on with regard
+        to their status (we return the ones whose status is "true", which means that they are
+        in a "warnable" state - e.g. a threshold has been crossed or some other condition has
+        been fulfilled).
 
-        __Minimum server version__: 5.25
+        __Minimum server version__: 5.26
 
         ##### Permissions
 
@@ -1039,12 +1042,15 @@
         - system
       summary: Acknowledge a warning of a metric status
       description: |
-        Acknowldge a warning for the warn_metric_id metric crossing a threshold (or some siliar condition being fulfilled) - attempts to send an ack email to acknowledge@mattermost.com and set the "ack" status for the warn metric with "warn_metric_id" id.
+        Acknowldge a warning for the warn_metric_id metric crossing a threshold (or some
+        similar condition being fulfilled) - attempts to send an ack email to
+        acknowledge@mattermost.com and set the "ack" status for the warn metric with "warn_metric_id" id.
+
+        __Minimum server version__: 5.26
 
         ##### Permissions
-        Must have `manage_system` permission.
 
-        __Minimum server version__: 5.25
+        Must have `manage_system` permission.
       parameters:
         - name: warn_metric_id
           in: path
@@ -1064,7 +1070,8 @@
               properties:
                 trigger_id:
                   type: bool
-                  description: Flag that determines is the ack for the metric warning should be directly stored (without trying to send email first) or not.
+                  description: Flag that determines if the ack for the metric warning should be
+                  directly stored (without trying to send email first) or not.
       responses:
         "200":
           description: The acknowledgement of the warning for the metric has been successful.
