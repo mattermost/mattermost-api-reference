@@ -580,6 +580,51 @@
 
             // GetOldClientLicense
             license, resp := Client.GetOldClientLicense()
+  /trial-license:
+    post:
+      tags:
+        - system
+      summary: Request and install a trial license for your server
+      description: >
+        Request and install a trial license for your server
+
+        __Minimum server version__: 5.25
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      requestBody:
+        description: License request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - users
+              properties:
+                users:
+                  type: integer
+                  description: Number of users requested (20% extra is going to be added)
+      responses:
+        "200":
+          description: Trial license obtained and installed
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // RequestTrialLicense
+            resp := Client.RequestTrialLicense()
   /audits:
     get:
       tags:
