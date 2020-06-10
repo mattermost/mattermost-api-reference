@@ -149,3 +149,45 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+  /ldap/migrateid:
+    post:
+      tags:
+        - LDAP
+      summary: Migrate Id LDAP
+      description: >
+        Migrate LDAP IdAttribute to new value.
+  
+        ##### Permissions
+  
+        Must have `manage_system` permission.
+  
+        __Minimum server version__: 5.26
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - toAttribute
+              properties:
+                toAttribute:
+                  description: New IdAttribute value
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: Migration successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
