@@ -474,8 +474,9 @@
       summary: Get posts for a channel
       description: >
         Get a page of posts in a channel. Use the query parameters to modify the
-        behaviour of this endpoint. The parameters `since`, `before` and `after`
-        must not be used together.
+        behaviour of this endpoint. The parameter `since` must not be used with any of
+        `before`, `after`, `page`, and `per_page` parameters. If `since` is used, it will
+        always return all posts since that time limited till 1000.
 
         ##### Permissions
 

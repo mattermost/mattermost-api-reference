@@ -605,6 +605,7 @@ x-tagGroups:
       - compliance
       - cluster
       - elasticsearch
+      - bleve
       - dataretention
       - jobs
       - plugins

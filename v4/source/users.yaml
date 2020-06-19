@@ -224,6 +224,11 @@
             "in_channel" query parameter.
           schema:
             type: string
+        - name: in_group
+          in: query
+          description: "The ID of the group to get users for. Must have `manage_system` permission."
+          schema:
+            type: string
         - name: group_constrained
           in: query
           description: When used with `not_in_channel` or `not_in_team`, returns only the
@@ -552,6 +557,10 @@
                 not_in_channel_id:
                   description: If provided, only search users not in this channel. Must
                     specifiy `team_id` when using this option
+                  type: string
+                in_group_id:
+                  description: If provided, only search users in this group. Must
+                    have `manage_system` permission.
                   type: string
                 group_constrained:
                   description: When used with `not_in_channel_id` or `not_in_team_id`,
@@ -1032,15 +1041,15 @@
             $notifyProps["comment"] = "somethingrandom";
 
             $resp = $driver->getUserModel()->updateUser($userID, [
-                email => $email,
-                username => $username,
-                first_name => $firstName,
-                last_name => $lastName,
-                nickname => $nickname,
-                locale => $locale,
-                position => $position,
-                props => $props,
-                notify_props => $notifyProps,
+                "email" => $email,
+                "username" => $username,
+                "first_name" => $firstName,
+                "last_name" => $lastName,
+                "nickname" => $nickname,
+                "locale" => $locale,
+                "position" => $position,
+                "props" => $props,
+                "notify_props" => $notifyProps,
             ]);
 
             if ($resp->getStatusCode() == 200) {
@@ -1228,15 +1237,15 @@
             $notifyProps["comment"] = "somethingrandom";
 
             $resp = $driver->getUserModel()->patchUser($userID, [
-              email => $email,
-              username => $username,
-              first_name => $firstName,
-              last_name => $lastName,
-              nickname => $nickname,
-              locale => $locale,
-              position => $position,
-              props => $props,
-              notify_props => $notifyProps,
+              "email" => $email,
+              "username" => $username,
+              "first_name" => $firstName,
+              "last_name" => $lastName,
+              "nickname" => $nickname,
+              "locale" => $locale,
+              "position" => $position,
+              "props" => $props,
+              "notify_props" => $notifyProps,
             ]);
 
             if ($resp->getStatusCode() == 200) {
@@ -2895,7 +2904,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -4031,7 +4040,6 @@
 
         ##### Permissions
 
-
         Must have `manage_system` permission.
       responses:
         "200":
@@ -4049,3 +4057,53 @@
             Client.Login("email@domain.com", "Password1")
 
             response, err := Client.RevokeSessionsFromAllUsers()
+
+  /users/{user_id}/typing:
+    post:
+      tags:
+        - users
+      summary: Publish a user typing websocket event.
+      description: >
+        Notify users in the given channel via websocket that the given user is typing.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must have `manage_system` permission to publish for any user other than oneself.
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  description: The id of the channel to which to direct the typing event.
+                  type: string
+                parent_id:
+                  description: The optional id of the root post of the thread to which the user is replying. If unset, the typing event is directed at the entire channel.
+                  type: string
+      responses:
+        '200':
+          description: User typing websocket event accepted for publishing.
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        '401':
+          $ref: "#/components/responses/Unauthorized"
+        '403':
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            ok, response := Client.PublishUserTyping(userID, TypingRequest{
+                ChannelId: "channel_id",
+                ParentId: "post_id",
+            })

@@ -786,6 +786,24 @@ components:
         url:
           description: The URL that is triggered
           type: string
+    AutocompleteSuggestion:
+      type: object
+      properties:
+        Complete:
+          description: Completed suggestion 
+          type: string
+        Suggestion:
+          description: Predicted text user might want to input
+          type: string
+        Hint:
+          description: Hint about suggested input
+          type: string
+        Description: 
+          description: Description of the suggested command
+          type: string
+        IconData:
+          description: Base64 encoded svg image
+          type: string
     CommandResponse:
       type: object
       properties:

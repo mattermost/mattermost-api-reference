@@ -661,6 +661,47 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  "/groups/{group_id}/stats":
+    get:
+      tags:
+        - groups
+      summary: Get group stats
+      description: |
+        Retrieve the stats of a given group.
+
+        ##### Permissions
+        Must have `manage_system` permission.
+
+        __Minimum server version__: 5.26
+      parameters:
+        - name: group_id
+          in: path
+          description: Group GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Group stats retrieval successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  group_id:
+                    type: string
+                  total_member_count:
+                    type: integer
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   "/channels/{channel_id}/groups":
     get:
       tags:
@@ -777,10 +818,10 @@
         summary: Get team groups by channels
         description: |
           Retrieve the set of groups associated with the channels in the given team grouped by channel.
-          
+
           ##### Permissions
           Must have `manage_system` permission or can access only for current user
-          
+
           __Minimum server version__: 5.11
         parameters:
           - name: team_id
