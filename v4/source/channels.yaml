@@ -2287,6 +2287,11 @@
         - channels
       summary: Get user's sidebar categories
       description: >
+      Get a list of sidebar categories that will appear in the user's sidebar
+      on the given team, including a list of channel IDs in each category.
+      
+      __Minimum server version__: 5.26
+      
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
@@ -2325,6 +2330,10 @@
         - channels
       summary: Create user's sidebar category
       description: >
+      Create a custom sidebar category for the user on the given team.
+      
+      __Minimum server version__: 5.26
+
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
@@ -2341,6 +2350,12 @@
           required: true
           schema:
             type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+          required: true
       responses:
         "200":
           description: Category creation successful
@@ -2361,6 +2376,11 @@
         - channels
       summary: Update user's sidebar categories
       description: >
+      Update any number of sidebar categories for the user on the given team. This
+      can be used to reorder the channels in these categories.
+      
+      __Minimum server version__: 5.26
+      
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
@@ -2377,6 +2397,14 @@
           required: true
           schema:
             type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/SidebarCategory"
+          required: true
       responses:
         "200":
           description: Category update successful
@@ -2398,6 +2426,11 @@
         - channels
       summary: Get user's sidebar category order
       description: >
+      Returns the order of the sidebar categories for a user on the given team as
+      an array of IDs.
+      
+      __Minimum server version__: 5.26
+
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
@@ -2416,13 +2449,13 @@
             type: string
       responses:
         "200":
-          description: Category retrieval successful
+          description: Order retrieval successful
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/OrderedSidebarCategories"
+                  type: string
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -2436,6 +2469,11 @@
         - channels
       summary: Update user's sidebar category order
       description: >
+      Updates the order of the sidebar categories for a user on the given team.
+      The provided array must include the IDs of all categories on the team.
+      
+      __Minimum server version__: 5.26
+
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
@@ -2452,13 +2490,23 @@
           required: true
           schema:
             type: string
-      responses:
-        "200":
-          description: Category creation successful
+      requestBody:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SidebarCategory"
+                type: array
+                items:
+                  type: string
+          required: true
+      responses:
+        "200":
+          description: Order update successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -2473,6 +2521,10 @@
         - channels
       summary: Get sidebar category
       description: >
+      Returns a single sidebar category for the user on the given team.
+      
+      __Minimum server version__: 5.26
+
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
@@ -2515,6 +2567,10 @@
         - channels
       summary: Update sidebar category
       description: >
+      Updates a single sidebar category for the user on the given team.
+      
+      __Minimum server version__: 5.26
+
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
@@ -2537,6 +2593,12 @@
           required: true
           schema:
             type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+          required: true
       responses:
         "200":
           description: Category update successful
@@ -2557,6 +2619,11 @@
         - channels
       summary: Delete sidebar category
       description: >
+      Deletes a single sidebar category for the user on the given team. Only
+      custom categories can be deleted.
+      
+      __Minimum server version__: 5.26
+
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.

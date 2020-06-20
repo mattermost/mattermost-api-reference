@@ -2720,10 +2720,10 @@ components:
         type: 
           type: string
           enum:
-            - C
-            - U
-            - D
-            - F
+            - channels
+            - custom
+            - direct_messages
+            - favorites
     SidebarCategoryWithChannels:
       description: User's sidebar category with it's channels
       type: object
@@ -2739,10 +2739,10 @@ components:
         type: 
           type: string
           enum:
-            - C
-            - U
-            - D
-            - F
+            - channels
+            - custom
+            - direct_messages
+            - favorites
         channel_ids:
           type: array
           items:
