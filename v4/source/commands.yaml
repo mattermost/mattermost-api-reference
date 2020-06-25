@@ -275,7 +275,7 @@
 
             // ListAutocompleteCommands
             listCommands, resp := Client.GetDynamicAutocompleteSuggestions(<url>, <parsed>, <toBeParsed>, <teamId>)
-"/commands/{command_id}":
+  "/commands/{command_id}":
     get:
       tags:
         - commands
