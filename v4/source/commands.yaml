@@ -216,7 +216,67 @@
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
             userInput := "/jira"
             listCommands, resp := Client.ListCommandAutocompleteSuggestions(userInput, teamID)
-  "/commands/{command_id}":
+  "/teams/{team_id}/commands/dynamic_autocomplete_suggestions":
+    get:
+      tags:
+        - commands
+      summary: List command's dynamic arguments' autocomplete suggestions
+      description: |
+        List command's dynamic arguments' autocomplete suggestions for a team.
+        ##### Permissions
+        `view_team` for the team.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: query
+          description: dynamic arguments encoded url.
+          required: true
+          schema:
+            type: string
+        - name: parsed
+          in: query
+          description: String inputted by the user which is already parsed.
+          required: true
+          schema:
+            type: string
+        - name: toBeParsed
+          in: query
+          description: String inputted by the user which is not yet parsed.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Command's dynamic argument suggestions retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AutocompleteListItem"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // ListAutocompleteCommands
+            listCommands, resp := Client.GetDynamicAutocompleteSuggestions(<url>, <parsed>, <toBeParsed>, <teamId>)
+
+"/commands/{command_id}":
     get:
       tags:
         - commands

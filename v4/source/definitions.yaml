@@ -804,6 +804,18 @@ components:
         IconData:
           description: Base64 encoded svg image
           type: string
+    AutocompleteListItem:
+      type: object
+      properties:
+        Item: 
+          description: Predicted suggestion for a static list and dynamic arguments
+          type: string
+        Hint:
+          description: Hint about suggested input
+          type: string
+        HelpText:
+          description: A help text or a description of the suggested input
+          type: string
     CommandResponse:
       type: object
       properties:
