@@ -756,7 +756,7 @@
                   type: object
                 notify_props:
                   $ref: "#/components/schemas/UserNotifyProps"
-        description: User object that is to be updated
+        description: Data to be used in the user creation
         required: true
       responses:
         "200":
