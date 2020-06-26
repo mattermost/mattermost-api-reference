@@ -2196,6 +2196,51 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
             }
+  "/users/{user_id}/convert_to_bot":
+    post:
+      tags:
+        - bots
+        - users
+      summary: Convert a user into a bot
+      description: |
+        Convert a user into a bot.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User successfully converted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            userId := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
+
+            bot, resp := Client.ConvertUserToBot(userId)
   /users/mfa:
     post:
       tags:
