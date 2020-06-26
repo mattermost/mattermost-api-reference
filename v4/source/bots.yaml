@@ -726,7 +726,7 @@
             type: string
         - name: set_system_admin
           in: query
-          description: Whether to give the user to system admin role.
+          description: Whether to give the user the system admin role.
           schema:
             type: boolean
             default: false
