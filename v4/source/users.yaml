@@ -226,7 +226,7 @@
             type: string
         - name: in_group
           in: query
-          description: "The ID of the group to get users for. Must have `manage_system` permission."
+          description: The ID of the group to get users for. Must have `manage_system` permission.
           schema:
             type: string
         - name: group_constrained
@@ -243,6 +243,23 @@
             `not_in_channel`.
           schema:
             type: boolean
+        - name: active
+          in: query
+          description: Whether or not to list only users that are active. This option
+            cannot be used along with the `inactive` option.
+          schema:
+            type: boolean
+        - name: inactive
+          in: query
+          description: Whether or not to list only users that are deactivated. This option
+            cannot be used along with the `active` option.
+          schema:
+            type: boolean
+        - name: role
+          in: query
+          description: Returns users that have this role.
+          schema:
+            type: string
         - name: sort
           in: query
           description: >
