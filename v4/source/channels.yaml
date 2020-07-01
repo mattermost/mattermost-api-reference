@@ -6,6 +6,28 @@
       description: |
         ##### Permissions
         `manage_system`
+      parameters:
+      - name: not_associated_to_group
+        in: query
+        description: Group GUID
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: exclude_default_channels
+        in: query
+        description: Whether to exclude default channels (ex Town Square, Off-Topic) from the results.
+        schema:
+          type: boolean
+          default: false
       responses:
         "200":
           description: Channel list retrieval successful
@@ -822,6 +844,9 @@
               properties:
                 team_id:
                   type: string
+                force:
+                  description: "Remove members those are not member of target team before moving the channel."
+                  type: boolean
         required: true
       responses:
         "200":
