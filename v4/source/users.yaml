@@ -4204,7 +4204,7 @@
                 ChannelId: "channel_id",
                 ParentId: "post_id",
             })
-  /migrate_auth/ldap:
+  /users/migrate_auth/ldap:
     post:
       tags:
         - users
@@ -4261,7 +4261,7 @@
   
             ok, response := Client.MigrateAuthToLdap(fromAuthService, matchField, force)
 
-  /migrate_auth/saml:
+  /users/migrate_auth/saml:
       post:
         tags:
           - users
