@@ -914,7 +914,7 @@
       parameters:
         - name: user_id
           in: path
-          description: User GUID
+          description: User GUID. This can also be "me" which will point to the current user.
           required: true
           schema:
             type: string
