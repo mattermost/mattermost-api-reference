@@ -118,7 +118,7 @@
       summary: Download the results of a job.
       description: |
         Download the result of a single job.
-        __Minimum server version: 4.1__
+        __Minimum server version: 5.28__
         ##### Permissions
         Must have `manage_jobs` permission.
       parameters:
