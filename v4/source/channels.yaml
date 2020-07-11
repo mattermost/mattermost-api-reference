@@ -281,6 +281,14 @@
 
 
                     __Minimum server version__: 5.26
+
+                deleted:
+                  type: boolean
+                  description: >
+                    Filters results to only return deleted / archived channels
+
+
+                    __Minimum server version__: 5.26
                 page:
                   type: string
                   description: The page number to return, if paginated. If this parameter
