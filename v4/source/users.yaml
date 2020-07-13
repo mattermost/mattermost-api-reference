@@ -226,7 +226,7 @@
             type: string
         - name: in_group
           in: query
-          description: "The ID of the group to get users for. Must have `manage_system` permission."
+          description: The ID of the group to get users for. Must have `manage_system` permission.
           schema:
             type: string
         - name: group_constrained
@@ -243,6 +243,23 @@
             `not_in_channel`.
           schema:
             type: boolean
+        - name: active
+          in: query
+          description: Whether or not to list only users that are active. This option
+            cannot be used along with the `inactive` option.
+          schema:
+            type: boolean
+        - name: inactive
+          in: query
+          description: Whether or not to list only users that are deactivated. This option
+            cannot be used along with the `active` option.
+          schema:
+            type: boolean
+        - name: role
+          in: query
+          description: Returns users that have this role.
+          schema:
+            type: string
         - name: sort
           in: query
           description: >
@@ -369,6 +386,41 @@
             if ($resp->getStatusCode() == 200) {
                 $users = json_decode($resp->getBody());
             }
+    delete:
+      tags:
+        - users
+      summary: Permanent delete all users
+      description: >
+        Permanently deletes all users and all their related information, including posts.
+
+
+        __Minimum server version__: 5.26.0
+
+
+        __Local mode only__: This endpoint is only available through [local mode](https://docs.mattermost.com/administration/mmctl-cli-tool.html#local-mode).
+      responses:
+        "200":
+          description: Delete request was successful
+      x-code-samples:
+        - lang: Go
+          source: |
+            import (
+                "net"
+                "net/http"
+
+                "github.com/mattermost/mattermost-server/v5/model"
+            )
+
+            tr := &http.Transport{
+                Dial: func(network, addr string) (net.Conn, error) {
+                    return net.Dial("unix", socketPath)
+                },
+            }
+
+            Client := model.NewAPIv4Client("http://_")
+            Client.HttpClient = &http.Client{Transport: tr}
+
+            ok, resp := Client.PermanentDeleteAllUsers()
   /users/ids:
     post:
       tags:
@@ -862,7 +914,7 @@
       parameters:
         - name: user_id
           in: path
-          description: User GUID
+          description: User GUID. This can also be "me" which will point to the current user.
           required: true
           schema:
             type: string
