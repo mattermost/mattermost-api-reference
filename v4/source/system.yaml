@@ -510,6 +510,47 @@
 
             // Migrate Config
             ok, resp := Client.MigrateConfig("path/to/config.json", "postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable&connect_timeout=10")
+  /config/subpath:
+    put:
+      tags:
+        - system
+      summary: Update configuration subpath
+      description: |
+        Update the hard-coded production client asset paths to take into account Mattermost running on a subpath.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+        Must have `manage_system` permission
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - path
+              properties:
+                path:
+                  type: string
+        description: Subpath value, defaults to value in SiteURL if provided empty
+        required: true
+      responses:
+        "200":
+          description: Subpath correctly updated
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // Update Config Subpath
+            ok, resp := Client.UpdateConfigSubpath("/new-subpath")
   /license:
     post:
       tags:
