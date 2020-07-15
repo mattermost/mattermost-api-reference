@@ -2044,8 +2044,8 @@
           in: query
           description: Filters the deleted channels by this time in epoch format. Does not have any effect if include_deleted is set to false.
           schema:
-            type: int
-            default: false
+            type: integer
+            default: 0
       responses:
         "200":
           description: Channels retrieval successful
