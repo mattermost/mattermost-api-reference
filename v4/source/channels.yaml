@@ -2034,6 +2034,12 @@
           required: true
           schema:
             type: string
+        - name: include_deleted
+          in: query
+          description: Defines if deleted channels should be returned or not
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Channels retrieval successful
@@ -2064,6 +2070,71 @@
             // GetChannelsForTeamForUser
 
             channels, resp := Client.GetChannelsForTeamForUser(<TEAMID>, <USERID>, "")
+  "/users/{user_id}/teams/{team_id}/channels/deleted":
+    get:
+      tags:
+        - channels
+      summary: Get deleted channels for user
+      description: >
+        Get all the deleted channels on a team for a user.
+
+        ##### Permissions
+
+        Logged in as the user, or have `edit_other_users` permission, and `view_team` permission for the team.
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: last_delete_at
+          in: query
+          description: Specifies the last deleted time in epoch miliseconds after which to return the channels.
+          schema:
+            type: boolean
+            default: false
+          required: true
+      responses:
+        "200":
+          description: Channels retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "time"
+
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+
+            // GetDeletedChannelsForTeamForUser
+
+            lastDeleteAt := time.Now().Add(-time.Hour).Unix() * 1000
+
+            channels, resp := Client.GetDeletedChannelsForTeamForUser(<TEAMID>, <USERID>, int(lastDeleteAt))
   "/users/{user_id}/channels/{channel_id}/unread":
     get:
       tags:
@@ -2488,7 +2559,7 @@
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/SidebarCategory"
           required: true
       responses:
