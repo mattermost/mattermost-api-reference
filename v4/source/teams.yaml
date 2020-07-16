@@ -1145,6 +1145,7 @@
 
             $resp = $driver->getTeamModel()->addUser($teamID, [
               "user_id" => $userID,
+              "team_id" => $teamID,
             ]);
 
             if ($resp->getStatusCode() == 200) {
