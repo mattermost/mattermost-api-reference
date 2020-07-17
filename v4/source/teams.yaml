@@ -763,7 +763,8 @@
         - teams
       summary: Search teams
       description: |
-        Search teams based on search term provided in the request body.
+        Search teams based on search term and options provided in the request body.
+
         ##### Permissions
         Logged in user only shows open teams
         Logged in user with "manage_system" permission shows all teams
@@ -789,6 +790,36 @@
                   description: The number of entries to return per page, if paginated. If
                     this parameter is not present with the `page` parameter then
                     the results will be returned un-paged.
+                allow_open_invite:
+                  type: boolean
+                  description: >
+                    Filters results to teams where `allow_open_invite` is set to true.
+
+                    __Minimum server version__: 5.26
+                exclude_allow_open_invite:
+                  type: boolean
+                  description: >
+                    Filters results to teams where `allow_open_invite` is not set to true.
+
+                    __Minimum server version__: 5.26
+                group_constrained:
+                  type: boolean
+                  description: >
+                    Filters results to teams where `group_constrained` is set to true.
+
+                    __Minimum server version__: 5.26
+                exclude_group_constrained:
+                  type: boolean
+                  description: >
+                    Filters results to teams where `group_constrained` is not set to true.
+
+                    __Minimum server version__: 5.26
+                include_group_constrained:
+                  type: boolean
+                  description: >
+                    Includes teams where `group_constrained` is set to true, works with any other filters applied.
+
+                    __Minimum server version__: 5.26
         description: Search criteria
         required: true
       responses:
