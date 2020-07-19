@@ -773,8 +773,6 @@
           application/json:
             schema:
               type: object
-              required:
-                - term
               properties:
                 term:
                   description: The search term to match against the name or display name of
