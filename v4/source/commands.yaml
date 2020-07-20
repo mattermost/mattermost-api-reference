@@ -50,7 +50,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -112,7 +112,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -159,13 +159,63 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
             // ListAutocompleteCommands
             listCommands, resp := Client.ListAutocompleteCommands(<TEAMID>)
+  '/teams/{team_id}/commands/autocomplete_suggestions':
+    get:
+      tags:
+        - commands
+      summary: List commands' autocomplete data
+      description: |
+        List commands' autocomplete data for the team.
+        ##### Permissions
+        `view_team` for the team.
+        __Minimum server version__: 5.24
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_input
+          in: query
+          description: String inputted by the user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Commands' autocomplete data retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AutocompleteSuggestion"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            // ListCommandAutocompleteSuggestions
+            teamID := "4xp9fdt77pncbef59f4k1qe83o"
+            userInput := "/jira"
+            listCommands, resp := Client.ListCommandAutocompleteSuggestions(userInput, teamID)
   "/commands/{command_id}":
     get:
       tags:
@@ -203,7 +253,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -249,7 +299,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -299,7 +349,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -355,7 +405,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -400,7 +450,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")

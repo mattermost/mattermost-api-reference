@@ -341,7 +341,7 @@ components:
           type: array
           description: >
             Information about content embedded in the post including OpenGraph
-            previews, image link previews, and message attachments. 
+            previews, image link previews, and message attachments.
             This field will be null if the post does not contain embedded content.
           items:
             type: object
@@ -785,6 +785,24 @@ components:
           type: string
         url:
           description: The URL that is triggered
+          type: string
+    AutocompleteSuggestion:
+      type: object
+      properties:
+        Complete:
+          description: Completed suggestion 
+          type: string
+        Suggestion:
+          description: Predicted text user might want to input
+          type: string
+        Hint:
+          description: Hint about suggested input
+          type: string
+        Description: 
+          description: Description of the suggested command
+          type: string
+        IconData:
+          description: Base64 encoded svg image
           type: string
     CommandResponse:
       type: object
@@ -2367,22 +2385,22 @@ components:
         version:
           type: string
           description: Version number of the plugin.
-        cluster_id:  
-          type: string      
+        cluster_id:
+          type: string
           description: ID of the cluster in which plugin is running
         plugin_path:
-          type: string      
+          type: string
           description: Path to the plugin on the server
         state:
           type: number
           description: State of the plugin
           enum:
-            - NotRunning          
-            - Starting            
-            - Running             
-            - FailedToStart       
-            - FailedToStayRunning 
-            - Stopping            
+            - NotRunning
+            - Starting
+            - Running
+            - FailedToStart
+            - FailedToStayRunning
+            - Stopping
 
 
     PluginManifestWebapp:
@@ -2649,6 +2667,19 @@ components:
           type: string
         roles:
           $ref: "#/components/schemas/ChannelModeratedRolesPatch"
+    ChannelMemberCountByGroup:
+      description: An object describing group member information in a channel
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: ID of the group
+        channel_member_count:
+          type: number
+          description: Total number of group members in the channel
+        channel_member_timezones_count:
+          type: number
+          description: Total number of unique timezones for the group members in the channel
     LDAPGroupsPaged:
       description: A paged list of LDAP groups
       type: object
@@ -2672,6 +2703,62 @@ components:
           type: string
         name:
           type: string
+
+
+    SidebarCategory:      
+      description: User's sidebar category
+      type: object
+      properties:
+        id: 
+          type: string
+        user_id: 
+          type: string
+        team_id: 
+          type: string
+        display_name: 
+          type: string
+        type: 
+          type: string
+          enum:
+            - channels
+            - custom
+            - direct_messages
+            - favorites
+    SidebarCategoryWithChannels:
+      description: User's sidebar category with it's channels
+      type: object
+      properties:
+        id: 
+          type: string
+        user_id: 
+          type: string
+        team_id: 
+          type: string
+        display_name: 
+          type: string
+        type: 
+          type: string
+          enum:
+            - channels
+            - custom
+            - direct_messages
+            - favorites
+        channel_ids:
+          type: array
+          items:
+            type: string
+    OrderedSidebarCategories:
+      description: List of user's categories with their channels
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        categories:    
+          type: array
+          items:
+            $ref: "#/components/schemas/SidebarCategoryWithChannels"
     Bot:
       description: A bot account
       type: object
@@ -2710,6 +2797,21 @@ components:
           description: timestamp - number of seconds since Jan 1, 1970 UTC.
           type: integer
           format: int64
+    GroupWithSchemeAdmin:
+      description: group augmented with scheme admin information
+      type: object
+      properties:
+        group:
+          $ref: "#/components/schemas/Group"
+        scheme_admin:
+          type: boolean
+    GroupsAssociatedToChannels:
+      description: a map of channel id(s) to the set of groups that constrain the corresponding channel in a team
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: "#/components/schemas/GroupWithSchemeAdmin"
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'

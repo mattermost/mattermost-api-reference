@@ -1,0 +1,27 @@
+  /bleve/purge_indexes:
+    post:
+      tags:
+        - bleve
+      summary: Purge all Bleve indexes
+      description: >
+        Deletes all Bleve indexes and their contents. After calling this
+        endpoint, it is
+
+        necessary to schedule a new Bleve indexing job to repopulate the indexes.
+
+        __Minimum server version__: 5.24
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      responses:
+        "200":
+          description: Indexes purged successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

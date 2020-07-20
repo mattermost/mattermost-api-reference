@@ -495,7 +495,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -585,7 +585,7 @@
               "io/ioutil"
               "log"
 
-              "github.com/mattermost/mattermost-server/model"
+              "github.com/mattermost/mattermost-server/v5/model"
             )
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
@@ -672,7 +672,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
@@ -704,3 +704,86 @@
               if ($resp->getStatusCode() == 200) {
                   $ok = json_decode($resp->getBody())->status;
               }
+  "/bots/{bot_user_id}/convert_to_user":
+    post:
+      tags:
+        - bots
+        - users
+      summary: Convert a bot into a user
+      description: |
+        Convert a bot into a user.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: bot_user_id
+          in: path
+          description: Bot user ID
+          required: true
+          schema:
+            type: string
+        - name: set_system_admin
+          in: query
+          description: Whether to give the user the system admin role.
+          schema:
+            type: boolean
+            default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                nickname:
+                  type: string
+                locale:
+                  type: string
+                position:
+                  type: string
+                props:
+                  type: object
+                notify_props:
+                  $ref: "#/components/schemas/UserNotifyProps"
+        description: Data to be used in the user creation
+        required: true
+      responses:
+        "200":
+          description: Bot successfully converted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            userId := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
+            patch := &model.UserPatch{}
+            patch.Email = model.NewString("test@domain.com")
+            patch.Username = model.NewString("testUsername")
+            patch.Password = model.NewString("password")
+
+            user, resp := Client.ConvertBotToUser(userId, userPatch, false)

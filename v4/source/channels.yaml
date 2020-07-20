@@ -6,6 +6,28 @@
       description: |
         ##### Permissions
         `manage_system`
+      parameters:
+      - name: not_associated_to_group
+        in: query
+        description: Group GUID
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: exclude_default_channels
+        in: query
+        description: Whether to exclude default channels (ex Town Square, Off-Topic) from the results.
+        schema:
+          type: boolean
+          default: false
       responses:
         "200":
           description: Channel list retrieval successful
@@ -80,7 +102,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -131,7 +153,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -174,7 +196,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -298,7 +320,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -349,7 +371,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -399,7 +421,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -437,7 +459,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -506,7 +528,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -558,7 +580,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -625,7 +647,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -696,7 +718,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -750,7 +772,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -792,6 +814,55 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  "/channels/{channel_id}/move":
+    post:
+      tags:
+        - channels
+      summary: Move a channel
+      description: |
+        Move a channel to another team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - team_id
+              properties:
+                team_id:
+                  type: string
+                force:
+                  description: "Remove members those are not member of target team before moving the channel."
+                  type: boolean
+        required: true
+      responses:
+        "200":
+          description: Channel move successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
   "/channels/{channel_id}/stats":
     get:
       tags:
@@ -824,7 +895,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -859,7 +930,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -916,7 +987,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -925,6 +996,67 @@
             // GetPublicChannelsForTeam
 
             channels, resp := Client.GetPublicChannelsForTeam(<TEAMID>, 0, 100, "")
+  "/teams/{team_id}/channels/private":
+    get:
+      tags:
+        - channels
+      summary: Get private channels
+      description: |
+        Get a page of private channels on a team based on query string
+        parameters - team_id, page and per_page.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of private channels per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Channels retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            // GetPrivateChannelsForTeam
+
+            channels, resp := Client.GetPrivateChannelsForTeam(<TEAMID>, 0, 100, "")
   "/teams/{team_id}/channels/deleted":
     get:
       tags:
@@ -1120,7 +1252,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -1188,7 +1320,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -1240,7 +1372,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1294,7 +1426,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1350,7 +1482,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1404,7 +1536,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1464,7 +1596,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -1510,7 +1642,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -1560,7 +1692,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -1616,7 +1748,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1734,7 +1866,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1816,7 +1948,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -1868,7 +2000,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1922,7 +2054,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -1974,7 +2106,7 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
@@ -2038,7 +2170,7 @@
       x-code-samples:
         - lang: Go
           source: |
-            import "github.com/mattermost/mattermost-server/model"
+            import "github.com/mattermost/mattermost-server/v5/model"
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("email@domain.com", "Password1")
 
@@ -2116,6 +2248,49 @@
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
               -H 'Content-Type: application/json' \
               -H 'X-Requested-With: XMLHttpRequest'
+  "/channels/{channel_id}/member_counts_by_group":
+    get:
+      tags:
+        - channels
+      summary: Channel members counts for each group that has atleast one member in the channel
+      description: >
+        Returns a set of ChannelMemberCountByGroup objects which contain a `group_id`, `channel_member_count` and a `channel_member_timezones_count`.
+
+        ##### Permissions
+
+        Must have `read_channel` permission for the given channel.
+
+        __Minimum server version__: 5.24
+      parameters:
+        - name: channel_id
+          in: path
+          description: Channel GUID
+          required: true
+          schema:
+            type: string
+        - name: include_timezones
+          in: query
+          description: Defines if member timezone counts should be returned or not
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Successfully returns member counts by group for the given channel.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: curl
+          source: >
+            curl -X GET \
+              'http://your-mattermost-url.com/api/v4/channels/3wyp678obid8pggjmhmhwpah1r/member_counts_by_group?include_timezones=true' \
+              -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
+              -H 'Content-Type: application/json' \
+              -H 'X-Requested-With: XMLHttpRequest'
   "/channels/{channel_id}/moderations":
     get:
       tags:
@@ -2176,7 +2351,7 @@
           required: true
           schema:
             type: string
-            
+
       responses:
         "200":
           description: "Retreived successfully"
@@ -2192,3 +2367,383 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+  "/users/{user_id}/teams/{team_id}/channels/categories":
+    get:
+      tags:
+        - channels
+      summary: Get user's sidebar categories
+      description: >
+        Get a list of sidebar categories that will appear in the user's sidebar
+        on the given team, including a list of channel IDs in each category.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OrderedSidebarCategories"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags:
+        - channels
+      summary: Create user's sidebar category
+      description: >
+        Create a custom sidebar category for the user on the given team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+          required: true
+      responses:
+        "200":
+          description: Category creation successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update user's sidebar categories
+      description: >
+        Update any number of sidebar categories for the user on the given team. This
+        can be used to reorder the channels in these categories.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/SidebarCategory"
+          required: true
+      responses:
+        "200":
+          description: Category update successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/users/{user_id}/teams/{team_id}/channels/categories/order":
+    get:
+      tags:
+        - channels
+      summary: Get user's sidebar category order
+      description: >
+        Returns the order of the sidebar categories for a user on the given team as
+        an array of IDs.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Order retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update user's sidebar category order
+      description: >
+        Updates the order of the sidebar categories for a user on the given team.
+        The provided array must include the IDs of all categories on the team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+          required: true
+      responses:
+        "200":
+          description: Order update successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/users/{user_id}/teams/{team_id}/channels/categories/{category_id}":
+    get:
+      tags:
+        - channels
+      summary: Get sidebar category
+      description: >
+        Returns a single sidebar category for the user on the given team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: category_id
+          in: path
+          description: Category GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update sidebar category
+      description: >
+        Updates a single sidebar category for the user on the given team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: category_id
+          in: path
+          description: Category GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+          required: true
+      responses:
+        "200":
+          description: Category update successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - channels
+      summary: Delete sidebar category
+      description: >
+        Deletes a single sidebar category for the user on the given team. Only
+        custom categories can be deleted.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: category_id
+          in: path
+          description: Category GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category delete successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
