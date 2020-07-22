@@ -791,33 +791,15 @@
                 allow_open_invite:
                   type: boolean
                   description: >
-                    Filters results to teams where `allow_open_invite` is set to true.
+                    Filters results to teams where `allow_open_invite` is set to true or false.
 
-                    __Minimum server version__: 5.26
-                exclude_allow_open_invite:
-                  type: boolean
-                  description: >
-                    Filters results to teams where `allow_open_invite` is not set to true.
-
-                    __Minimum server version__: 5.26
+                    __Minimum server version__: 5.28
                 group_constrained:
                   type: boolean
                   description: >
-                    Filters results to teams where `group_constrained` is set to true.
+                    Filters results to teams where `group_constrained` is set to true or false.
 
-                    __Minimum server version__: 5.26
-                exclude_group_constrained:
-                  type: boolean
-                  description: >
-                    Filters results to teams where `group_constrained` is not set to true.
-
-                    __Minimum server version__: 5.26
-                include_group_constrained:
-                  type: boolean
-                  description: >
-                    Includes teams where `group_constrained` is set to true, works with any other filters applied.
-
-                    __Minimum server version__: 5.26
+                    __Minimum server version__: 5.28
         description: Search criteria
         required: true
       responses:
