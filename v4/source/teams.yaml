@@ -800,6 +800,13 @@
                     Filters results to teams where `group_constrained` is set to true or false.
 
                     __Minimum server version__: 5.28
+
+                include_group_constrained:
+                  type: boolean
+                  description: >
+                    Includes teams where `group_constrained` is set to true, returns the union of results when combined with any other filter options.
+
+                    __Minimum server version__: 5.28
         description: Search criteria
         required: true
       responses:
