@@ -1130,13 +1130,6 @@
                 "github.com/mattermost/mattermost-server/v5/model"
             )
 
-            tr := &http.Transport{
-                Dial: func(network, addr string) (net.Conn, error) {
-                    return net.Dial("unix", socketPath)
-                },
-            }
-
-            Client := model.NewAPIv4Client("http://_")
-            Client.HttpClient = &http.Client{Transport: tr}
+            Client := model.NewAPIv4SocketClient(socketPath)
 
             ok, resp := Client.CheckIntegrity()
