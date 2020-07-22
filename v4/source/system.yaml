@@ -1159,7 +1159,7 @@
               properties:
                 forceAck:
                   type: boolean
-                  description: Flag which determines if the ack for the metric warning should bedirectly stored (without trying to send email first) or not
+                  description: Flag which determines if the ack for the metric warning should be directly stored (without trying to send email first) or not
       responses:
         "200":
           description: The acknowledgement of the warning for the metric has been successful.
