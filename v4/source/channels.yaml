@@ -244,6 +244,51 @@
                   type: boolean
                   description: Exclude default channels from the results by setting this
                     parameter to true.
+                team_ids:
+                  type: array
+                  description: >
+                    Filters results to channels belonging to the given team ids
+
+
+                    __Minimum server version__: 5.26
+                group_constrained:
+                  type: boolean
+                  description: >
+                    Filters results to only return channels constrained to a group
+
+
+                    __Minimum server version__: 5.26
+                exclude_group_constrained:
+                  type: boolean
+                  description: >
+                    Filters results to exclude channels constrained to a group
+
+
+                    __Minimum server version__: 5.26
+                public:
+                  type: boolean
+                  description: >
+                    Filters results to only return Public / Open channels, can be used in conjunction
+                    with `private` to return both `public` and `private` channels
+
+
+                    __Minimum server version__: 5.26
+                private:
+                  type: boolean
+                  description: >
+                    Filters results to only return Private channels, can be used in conjunction
+                    with `public` to return both `private` and `public` channels
+
+
+                    __Minimum server version__: 5.26
+
+                deleted:
+                  type: boolean
+                  description: >
+                    Filters results to only return deleted / archived channels
+
+
+                    __Minimum server version__: 5.26
                 page:
                   type: string
                   description: The page number to return, if paginated. If this parameter
@@ -2488,7 +2533,7 @@
             application/json:
               schema:
                 type: array
-                items: 
+                items:
                   $ref: "#/components/schemas/SidebarCategory"
           required: true
       responses:
