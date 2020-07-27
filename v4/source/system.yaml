@@ -1095,6 +1095,91 @@
                 format: binary
         "404":
           $ref: "#/components/responses/NotFound"
+
+      api.BaseRoutes.ApiRoot.Handle("/restart", api.ApiSessionRequired(restart)).Methods("POST")
+
+  /upgrade_to_enterprise:
+    post:
+      tags:
+        - system
+      summary: Executes an inplace upgrade from Team Edition to Enterprise Edition
+      description: >
+        It downloads the Mattermost Enterprise Edition of your current version
+        and replace your current version with it. After the upgrade you need to
+        restart the Mattermost server.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      responses:
+        "202":
+          description: Upgrade started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PushNotification"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/ToManyRequests"
+
+  /upgrade_to_enterprise/status:
+    get:
+      tags:
+        - system
+      summary: Get the current status for the implace upgrade from Team Edition to Enterprise Edition
+      description: >
+        It returns the percentage of completion of the current upgrade or the
+        error if, there is any.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      responses:
+        "200":
+          description: Upgrade status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  percentage:
+                    type: integer
+                    description: Current percentage of the upgrade
+                  error:
+                    type: string
+                    description: Error happend during the upgrade
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /restart:
+    post:
+      tags:
+        - system
+      summary: Restart the system after an upgrade from Team Edition to Enterprise Edition
+      description: >
+        It restart the current running mattermost instance to execute the new
+        Enterprise binary.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      responses:
+        "200":
+          description: Restart started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
   /warn_metrics/status:
     get:
       tags:
