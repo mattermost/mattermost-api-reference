@@ -111,6 +111,32 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
+  "/jobs/{job_id}/download":
+    get:
+      tags:
+        - jobs
+      summary: Download the results of a job.
+      description: |
+        Download the result of a single job.
+        __Minimum server version: 5.28__
+        ##### Permissions
+        Must have `manage_jobs` permission.
+      parameters:
+        - name: job_id
+          in: path
+          description: Job GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
   "/jobs/{job_id}/cancel":
     post:
       tags:

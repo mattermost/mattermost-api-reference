@@ -763,7 +763,8 @@
         - teams
       summary: Search teams
       description: |
-        Search teams based on search term provided in the request body.
+        Search teams based on search term and options provided in the request body.
+
         ##### Permissions
         Logged in user only shows open teams
         Logged in user with "manage_system" permission shows all teams
@@ -772,8 +773,6 @@
           application/json:
             schema:
               type: object
-              required:
-                - term
               properties:
                 term:
                   description: The search term to match against the name or display name of
@@ -789,6 +788,23 @@
                   description: The number of entries to return per page, if paginated. If
                     this parameter is not present with the `page` parameter then
                     the results will be returned un-paged.
+                allow_open_invite:
+                  type: boolean
+                  description: >
+                    Filters results to teams where `allow_open_invite` is set to true or false,
+                    excludes group constrained channels if this filter option is passed.
+
+                    If this filter option is not passed then the query will remain unchanged.
+
+                    __Minimum server version__: 5.28
+                group_constrained:
+                  type: boolean
+                  description: >
+                    Filters results to teams where `group_constrained` is set to true or false, returns the union of results when used with `allow_open_invite`
+
+                    If the filter option is not passed then the query will remain unchanged.
+
+                    __Minimum server version__: 5.28
         description: Search criteria
         required: true
       responses:
