@@ -1108,7 +1108,7 @@
         and replace your current version with it. After the upgrade you need to
         restart the Mattermost server.
 
-        __Minimum server version__: 5.26
+        __Minimum server version__: 5.27
 
         ##### Permissions
 
@@ -1134,7 +1134,7 @@
         It returns the percentage of completion of the current upgrade or the
         error if, there is any.
 
-        __Minimum server version__: 5.26
+        __Minimum server version__: 5.27
 
         ##### Permissions
 
@@ -1165,7 +1165,7 @@
         It restart the current running mattermost instance to execute the new
         Enterprise binary.
 
-        __Minimum server version__: 5.26
+        __Minimum server version__: 5.27
 
         ##### Permissions
 
