@@ -537,10 +537,11 @@
     get:
       tags:
         - posts
-      summary: Get posts around last unread
+      summary: Get posts around oldest unread
       description: >
         Get the oldest unread post in the channel for the given user as well as
         the posts around it.
+        The returned list is sorted in descending order (most recent post first).
 
         ##### Permissions
 
@@ -562,18 +563,22 @@
             type: string
         - name: limit_before
           in: query
-          description: Number of posts before the last unread posts. Maximum is 200 posts
+          description: Number of posts before the oldest unread posts. Maximum is 200 posts
             if limit is set greater than that.
           schema:
             type: integer
             default: 60
+            maximum: 200
+            minimum: 0
         - name: limit_after
           in: query
-          description: Number of posts after and including the last unread post. Maximum is
+          description: Number of posts after and including the oldest unread post. Maximum is
             200 posts if limit is set greater than that.
           schema:
             type: integer
             default: 60
+            maximum: 200
+            minimum: 1
       responses:
         "200":
           description: Post list retrieval successful

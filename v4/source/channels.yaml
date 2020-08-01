@@ -2079,6 +2079,18 @@
           required: true
           schema:
             type: string
+        - name: include_deleted
+          in: query
+          description: Defines if deleted channels should be returned or not
+          schema:
+            type: boolean
+            default: false
+        - name: last_delete_at
+          in: query
+          description: Filters the deleted channels by this time in epoch format. Does not have any effect if include_deleted is set to false.
+          schema:
+            type: integer
+            default: 0
       responses:
         "200":
           description: Channels retrieval successful

@@ -1258,3 +1258,41 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+  /integrity:
+    post:
+      tags:
+        - system
+      summary: Perform a database integrity check
+      description: >
+        Performs a database integrity check.
+
+
+        __Note__: This check may temporarily harm system performance.
+
+
+        __Minimum server version__: 5.28.0
+
+
+        __Local mode only__: This endpoint is only available through [local mode](https://docs.mattermost.com/administration/mmctl-cli-tool.html#local-mode).
+      responses:
+        "200":
+          description: Integrity check successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IntegrityCheckResult"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import (
+                "net"
+                "net/http"
+
+                "github.com/mattermost/mattermost-server/v5/model"
+            )
+
+            Client := model.NewAPIv4SocketClient(socketPath)
+
+            ok, resp := Client.CheckIntegrity()
