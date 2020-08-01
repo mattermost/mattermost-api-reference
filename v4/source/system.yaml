@@ -1096,8 +1096,6 @@
         "404":
           $ref: "#/components/responses/NotFound"
 
-      api.BaseRoutes.ApiRoot.Handle("/restart", api.ApiSessionRequired(restart)).Methods("POST")
-
   /upgrade_to_enterprise:
     post:
       tags:
