@@ -2359,7 +2359,7 @@
         Must have `manage_system` permission.
 
 
-        __Minimum server version__: 5.14
+        __Minimum server version__: 5.22
       parameters:
         - name: channel_id
           in: path
@@ -2386,14 +2386,14 @@
     put:
       tags:
         - channels
-      summary: Get information about channel's moderation.
+      summary: Update a channel's moderation settings.
       description: >
         ##### Permissions
 
         Must have `manage_system` permission.
 
 
-        __Minimum server version__: 5.14
+        __Minimum server version__: 5.22
       requestBody:
         required: true
         content:
@@ -2411,7 +2411,7 @@
 
       responses:
         "200":
-          description: "Retreived successfully"
+          description: "Patched successfully"
           content:
             application/json:
               schema:
