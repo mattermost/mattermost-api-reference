@@ -1226,6 +1226,9 @@
         Deactivates the user and revokes all its sessions by archiving its user
         object.
 
+
+        As of server version 5.28, optionally use the `permanent=true` query parameter to hard delete the user for compliance reasons. To use this feature `ServiceSettings.EnableAPITeamDeletion` must be set to `true` in the server's configuration.
+
         ##### Permissions
 
         Must be logged in as the user being deactivated or have the `edit_other_users` permission.
