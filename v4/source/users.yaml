@@ -284,6 +284,42 @@
             __Minimum server version__: 4.7
           schema:
             type: string
+        - name: roles
+          in: query
+          description: >
+            Comma separated string used to filter users based on any of the specified system roles
+
+
+            Example: `?roles=system_admin,system_user` will return users that are either system admins or system users
+
+
+            __Minimum server version__: 5.26
+          schema:
+            type: string
+        - name: channel_roles
+          in: query
+          description: >
+            Comma separated string used to filter users based on any of the specified channel roles, can only be used in conjunction with `in_channel`
+
+
+            Example: `?in_channel=4eb6axxw7fg3je5iyasnfudc5y&channel_roles=channel_user` will return users that are only channel users and not admins or guests
+
+
+            __Minimum server version__: 5.26
+          schema:
+            type: string
+        - name: team_roles
+          in: query
+          description: >
+            Comma separated string used to filter users based on any of the specified team roles, can only be used in conjunction with `in_team`
+
+
+            Example: `?in_team=4eb6axxw7fg3je5iyasnfudc5y&team_roles=team_user` will return users that are only team users and not admins or guests
+
+
+            __Minimum server version__: 5.26
+          schema:
+            type: string
       responses:
         "200":
           description: User page retrieval successful
@@ -902,6 +938,81 @@
             if ($resp->getStatusCode() == 200) {
                 $stats = json_decode($resp->getBody())->total_users_count;
             }
+  /users/stats/filtered:
+    get:
+      tags:
+        - users
+      summary: Get total count of users in the system matching the specified filters
+      description: |
+        Get a count of users in the system matching the specified filters.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+        Must have `manage_system` permission.
+      parameters:
+        - name: in_team
+          in: query
+          description: The ID of the team to get user stats for.
+          schema:
+            type: string
+        - name: in_channel
+          in: query
+          description: The ID of the channel to get user stats for.
+          schema:
+            type: string
+        - name: include_deleted
+          in: query
+          description: If deleted accounts should be included in the count.
+          schema:
+            type: boolean
+        - name: include_bots
+          in: query
+          description: If bot accounts should be included in the count.
+          schema:
+            type: boolean
+        - name: roles
+          in: query
+          description: >
+            Comma separated string used to filter users based on any of the specified system roles
+
+
+            Example: `?roles=system_admin,system_user` will include users that are either system admins or system users
+          schema:
+            type: string
+        - name: channel_roles
+          in: query
+          description: >
+            Comma separated string used to filter users based on any of the specified channel roles, can only be used in conjunction with `in_channel`
+
+
+            Example: `?in_channel=4eb6axxw7fg3je5iyasnfudc5y&channel_roles=channel_user` will include users that are only channel users and not admins or guests
+          schema:
+            type: string
+        - name: team_roles
+          in: query
+          description: >
+            Comma separated string used to filter users based on any of the specified team roles, can only be used in conjunction with `in_team`
+
+
+            Example: `?in_team=4eb6axxw7fg3je5iyasnfudc5y&team_roles=team_user` will include users that are only team users and not admins or guests
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Filtered User stats retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersStats"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
   "/users/{user_id}":
     get:
       tags:
@@ -914,7 +1025,7 @@
       parameters:
         - name: user_id
           in: path
-          description: User GUID
+          description: User GUID. This can also be "me" which will point to the current user.
           required: true
           schema:
             type: string
@@ -4155,7 +4266,7 @@
 
             response, err := Client.RevokeSessionsFromAllUsers()
 
-  /users/{user_id}/typing:
+  "/users/{user_id}/typing":
     post:
       tags:
         - users
@@ -4169,6 +4280,13 @@
 
         Must have `manage_system` permission to publish for any user other than oneself.
 
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:

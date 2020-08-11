@@ -244,6 +244,51 @@
                   type: boolean
                   description: Exclude default channels from the results by setting this
                     parameter to true.
+                team_ids:
+                  type: array
+                  description: >
+                    Filters results to channels belonging to the given team ids
+
+
+                    __Minimum server version__: 5.26
+                group_constrained:
+                  type: boolean
+                  description: >
+                    Filters results to only return channels constrained to a group
+
+
+                    __Minimum server version__: 5.26
+                exclude_group_constrained:
+                  type: boolean
+                  description: >
+                    Filters results to exclude channels constrained to a group
+
+
+                    __Minimum server version__: 5.26
+                public:
+                  type: boolean
+                  description: >
+                    Filters results to only return Public / Open channels, can be used in conjunction
+                    with `private` to return both `public` and `private` channels
+
+
+                    __Minimum server version__: 5.26
+                private:
+                  type: boolean
+                  description: >
+                    Filters results to only return Private channels, can be used in conjunction
+                    with `public` to return both `private` and `public` channels
+
+
+                    __Minimum server version__: 5.26
+
+                deleted:
+                  type: boolean
+                  description: >
+                    Filters results to only return deleted / archived channels
+
+
+                    __Minimum server version__: 5.26
                 page:
                   type: string
                   description: The page number to return, if paginated. If this parameter
@@ -2034,6 +2079,18 @@
           required: true
           schema:
             type: string
+        - name: include_deleted
+          in: query
+          description: Defines if deleted channels should be returned or not
+          schema:
+            type: boolean
+            default: false
+        - name: last_delete_at
+          in: query
+          description: Filters the deleted channels by this time in epoch format. Does not have any effect if include_deleted is set to false.
+          schema:
+            type: integer
+            default: 0
       responses:
         "200":
           description: Channels retrieval successful
@@ -2302,7 +2359,7 @@
         Must have `manage_system` permission.
 
 
-        __Minimum server version__: 5.14
+        __Minimum server version__: 5.22
       parameters:
         - name: channel_id
           in: path
@@ -2329,14 +2386,14 @@
     put:
       tags:
         - channels
-      summary: Get information about channel's moderation.
+      summary: Update a channel's moderation settings.
       description: >
         ##### Permissions
 
         Must have `manage_system` permission.
 
 
-        __Minimum server version__: 5.14
+        __Minimum server version__: 5.22
       requestBody:
         required: true
         content:
@@ -2354,7 +2411,7 @@
 
       responses:
         "200":
-          description: "Retreived successfully"
+          description: "Patched successfully"
           content:
             application/json:
               schema:
@@ -2367,3 +2424,383 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+  "/users/{user_id}/teams/{team_id}/channels/categories":
+    get:
+      tags:
+        - channels
+      summary: Get user's sidebar categories
+      description: >
+        Get a list of sidebar categories that will appear in the user's sidebar
+        on the given team, including a list of channel IDs in each category.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OrderedSidebarCategories"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags:
+        - channels
+      summary: Create user's sidebar category
+      description: >
+        Create a custom sidebar category for the user on the given team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+          required: true
+      responses:
+        "200":
+          description: Category creation successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update user's sidebar categories
+      description: >
+        Update any number of sidebar categories for the user on the given team. This
+        can be used to reorder the channels in these categories.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SidebarCategory"
+          required: true
+      responses:
+        "200":
+          description: Category update successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/users/{user_id}/teams/{team_id}/channels/categories/order":
+    get:
+      tags:
+        - channels
+      summary: Get user's sidebar category order
+      description: >
+        Returns the order of the sidebar categories for a user on the given team as
+        an array of IDs.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Order retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update user's sidebar category order
+      description: >
+        Updates the order of the sidebar categories for a user on the given team.
+        The provided array must include the IDs of all categories on the team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+          required: true
+      responses:
+        "200":
+          description: Order update successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/users/{user_id}/teams/{team_id}/channels/categories/{category_id}":
+    get:
+      tags:
+        - channels
+      summary: Get sidebar category
+      description: >
+        Returns a single sidebar category for the user on the given team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: category_id
+          in: path
+          description: Category GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category retrieval successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - channels
+      summary: Update sidebar category
+      description: >
+        Updates a single sidebar category for the user on the given team.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: category_id
+          in: path
+          description: Category GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+          required: true
+      responses:
+        "200":
+          description: Category update successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - channels
+      summary: Delete sidebar category
+      description: >
+        Deletes a single sidebar category for the user on the given team. Only
+        custom categories can be deleted.
+
+        __Minimum server version__: 5.26
+
+        ##### Permissions
+
+        Must be authenticated and have the `list_team_channels` permission.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: category_id
+          in: path
+          description: Category GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Category delete successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SidebarCategory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"

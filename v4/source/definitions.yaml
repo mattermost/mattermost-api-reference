@@ -2703,6 +2703,62 @@ components:
           type: string
         name:
           type: string
+
+
+    SidebarCategory:      
+      description: User's sidebar category
+      type: object
+      properties:
+        id: 
+          type: string
+        user_id: 
+          type: string
+        team_id: 
+          type: string
+        display_name: 
+          type: string
+        type: 
+          type: string
+          enum:
+            - channels
+            - custom
+            - direct_messages
+            - favorites
+    SidebarCategoryWithChannels:
+      description: User's sidebar category with it's channels
+      type: object
+      properties:
+        id: 
+          type: string
+        user_id: 
+          type: string
+        team_id: 
+          type: string
+        display_name: 
+          type: string
+        type: 
+          type: string
+          enum:
+            - channels
+            - custom
+            - direct_messages
+            - favorites
+        channel_ids:
+          type: array
+          items:
+            type: string
+    OrderedSidebarCategories:
+      description: List of user's categories with their channels
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        categories:    
+          type: array
+          items:
+            $ref: "#/components/schemas/SidebarCategoryWithChannels"
     Bot:
       description: A bot account
       type: object
@@ -2756,6 +2812,48 @@ components:
         type: array
         items:
           $ref: "#/components/schemas/GroupWithSchemeAdmin"
+
+    OrphanedRecord:
+      description: an object containing information about an orphaned record.
+      type: object
+      properties:
+        parent_id:
+          type: string
+          description: the id of the parent relation (table) entry.
+        child_id:
+          type: string
+          description: the id of the child relation (table) entry.
+    RelationalIntegrityCheckData:
+      description: an object containing the results of a relational integrity check.
+      type: object
+      properties:
+        parent_name:
+          type: string
+          description: the name of the parent relation (table).
+        child_name:
+          type: string
+          description: the name of the child relation (table).
+        parent_id_attr:
+          type: string
+          description: the name of the attribute (column) containing the parent id.
+        child_id_attr:
+          type: string
+          description: the name of the attribute (column) containing the child id.
+        records:
+          description: the list of orphaned records found.
+          type: array
+          items:
+            $ref: "#/components/schemas/OrphanedRecord"
+    IntegrityCheckResult:
+      description: an object with the result of the integrity check.
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/RelationalIntegrityCheckData"
+        err:
+          type: string
+          description: a string value set in case of error.
+
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
