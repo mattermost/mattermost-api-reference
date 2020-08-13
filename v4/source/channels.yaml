@@ -791,7 +791,7 @@
         __Minimum server version__: 4.10
 
         ##### Permissions
-        `manage_team` permission for the team of the channel.
+        Must have `manage_team` and `create_private_channel` permissions for the team of the channel.
       parameters:
         - name: channel_id
           in: path
