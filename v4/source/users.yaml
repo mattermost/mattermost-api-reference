@@ -1227,7 +1227,7 @@
         object.
 
 
-        As of server version 5.28, optionally use the `permanent=true` query parameter to hard delete the user for compliance reasons. To use this feature `ServiceSettings.EnableAPIUserDeletion` must be set to `true` in the server's configuration.
+        As of server version 5.28, optionally use the `permanent=true` query parameter to permanently delete the user for compliance reasons. To use this feature `ServiceSettings.EnableAPIUserDeletion` must be set to `true` in the server's configuration.
 
         ##### Permissions
 
