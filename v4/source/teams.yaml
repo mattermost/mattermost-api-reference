@@ -2392,7 +2392,9 @@
         - teams
       summary: Invite users to the team by email
       description: |
-        Invite users to the existing team usign the user's email.
+        Invite users to the existing team using the user's email.
+
+        The number of emails that can be sent is rate limited to 20 per hour with a burst of 20 emails. If the rate limit exceeds, the error message contains details on when to retry and when the timer will be reset.
         ##### Permissions
         Must have `invite_to_team` permission for the team.
       parameters:
@@ -2424,6 +2426,8 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "413":
+          $ref: "#/components/responses/TooLarge"
       x-code-samples:
         - lang: Go
           source: >
@@ -2474,6 +2478,8 @@
       description: |
         Invite guests to existing team channels usign the user's email.
 
+        The number of emails that can be sent is rate limited to 20 per hour with a burst of 20 emails. If the rate limit exceeds, the error message contains details on when to retry and when the timer will be reset.
+
         __Minimum server version__: 5.16
 
         ##### Permissions
@@ -2522,6 +2528,8 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+        "413":
+          $ref: "#/components/responses/TooLarge"
       x-code-samples:
         - lang: Go
           source: >
