@@ -41,8 +41,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/AppError"
-    ToManyRequests:
-      description: To many requests
+    TooManyRequests:
+      description: Too many requests
       content:
         application/json:
           schema:

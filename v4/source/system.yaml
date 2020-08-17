@@ -1121,16 +1121,16 @@
         "403":
           $ref: "#/components/responses/Forbidden"
         "429":
-          $ref: "#/components/responses/ToManyRequests"
+          $ref: "#/components/responses/TooManyRequests"
 
   /upgrade_to_enterprise/status:
     get:
       tags:
         - system
-      summary: Get the current status for the implace upgrade from Team Edition to Enterprise Edition
+      summary: Get the current status for the inplace upgrade from Team Edition to Enterprise Edition
       description: >
         It returns the percentage of completion of the current upgrade or the
-        error if, there is any.
+        error if there is any.
 
         __Minimum server version__: 5.27
 
@@ -1150,7 +1150,7 @@
                     description: Current percentage of the upgrade
                   error:
                     type: string
-                    description: Error happend during the upgrade
+                    description: Error happened during the upgrade
         "403":
           $ref: "#/components/responses/Forbidden"
 
@@ -1160,7 +1160,7 @@
         - system
       summary: Restart the system after an upgrade from Team Edition to Enterprise Edition
       description: >
-        It restart the current running mattermost instance to execute the new
+        It restarts the current running mattermost instance to execute the new
         Enterprise binary.
 
         __Minimum server version__: 5.27
