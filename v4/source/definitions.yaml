@@ -752,7 +752,7 @@ components:
           description: The time in milliseconds the command was last updated
           type: integer
           format: int64
-        deleted_at:
+        delete_at:
           description: The time in milliseconds the command was deleted, 0 if never deleted
           type: integer
           format: int64
