@@ -2860,6 +2860,12 @@ components:
         id:
           description: The unique identifier for the upload.
           type: string
+        type:
+          description: The type of the upload.
+          type: string
+          enum:
+            - attachment
+            - import
         create_at:
           description: The time the upload was created in milliseconds.
           type: integer
