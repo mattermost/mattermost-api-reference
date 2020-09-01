@@ -45,6 +45,9 @@
         - users
       summary: Auto-Login to Mattermost server using CWS token
       description: >
+        CWS stands for Customer Web Server which is the cloud service used to
+        manage cloud instances.
+
         ##### Permissions
 
         A Cloud license is required
