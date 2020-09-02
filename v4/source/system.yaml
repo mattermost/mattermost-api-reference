@@ -74,7 +74,7 @@
         - name: clientVersion
           in: query
           description: Version of the client (desktop/mobile/web) that issues the request
-          required: false
+          required: true
           schema:
             type: string
         - name: locale
