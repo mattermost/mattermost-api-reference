@@ -724,7 +724,9 @@
 
         ##### Permissions
 
-        `manage_team` permission for the team of the channel.
+        `manage_team` permission for the channels team on version < 5.28.
+        `convert_public_channel_to_private` permission for the channel if updating privacy to 'P' on version >= 5.28.
+        `convert_private_channel_to_public` permission for the channel if updating privacy to 'O' on version >= 5.28.
       parameters:
         - name: channel_id
           in: path
@@ -791,7 +793,8 @@
         __Minimum server version__: 4.10
 
         ##### Permissions
-        `manage_team` permission for the team of the channel.
+        `manage_team` permission for the channels team on version < 5.28.
+        `convert_public_channel_to_private` permission for the channel on version >= 5.28.
       parameters:
         - name: channel_id
           in: path
