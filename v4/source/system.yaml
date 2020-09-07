@@ -982,8 +982,8 @@
         - name: name
           in: query
           required: false
-          description: Possible values are "standard", "post_counts_day",
-            "user_counts_with_posts_day" or "extra_counts"
+          description: Possible values are "standard", "bot_post_counts_day",
+            "post_counts_day", "user_counts_with_posts_day" or "extra_counts"
           schema:
             type: string
             default: standard

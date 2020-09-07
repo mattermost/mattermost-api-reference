@@ -39,6 +39,39 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
+  /users/login/cws:
+    post:
+      tags:
+        - users
+      summary: Auto-Login to Mattermost server using CWS token
+      description: >
+        CWS stands for Customer Web Server which is the cloud service used to
+        manage cloud instances.
+
+        ##### Permissions
+
+        A Cloud license is required
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login_id:
+                  type: string
+                cws_token:
+                  type: string
+        description: User authentication object
+        required: true
+      responses:
+        "302":
+          description: Login successful, it'll redirect to login page to perform the autologin
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
   /users/logout:
     post:
       tags:
@@ -4322,3 +4355,116 @@
                 ChannelId: "channel_id",
                 ParentId: "post_id",
             })
+  /users/migrate_auth/ldap:
+    post:
+      tags:
+        - users
+        - migrate
+        - authentication
+        - LDAP
+      summary: Migrate user accounts authentication type to LDAP.
+      description: >
+        Migrates accounts from one authentication provider to another.
+        For example, you can upgrade your authentication provider from email to LDAP.
+  
+        __Minimum server version__: 5.28
+  
+        ##### Permissions
+  
+        Must have `manage_system` permission.
+  
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - from
+                  - match_field
+                  - force
+                properties:
+                  from:
+                    description: The current authentication type for the matched users.
+                    type: string
+                  match_field:
+                    description: Foreign user field name to match.
+                    type: string
+                  force:
+                    type: boolean
+      responses:
+        '200':
+          description: Successfully migrated authentication type to LDAP.
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        '401':
+          $ref: "#/components/responses/Unauthorized"
+        '403':
+          $ref: "#/components/responses/Forbidden"
+        '501':
+          $ref: "#/components/responses/NotImplemented"
+      x-code-samples:
+        - lang: 'Go'
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+  
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("sysadmin@domain.com", "Password1")
+  
+            ok, response := Client.MigrateAuthToLdap(fromAuthService, matchField, force)
+
+  /users/migrate_auth/saml:
+      post:
+        tags:
+          - users
+          - migrate
+          - authentication
+          - SAML
+        summary: Migrate user accounts authentication type to SAML.
+        description: >
+          Migrates accounts from one authentication provider to another.
+          For example, you can upgrade your authentication provider from email to SAML.
+    
+          __Minimum server version__: 5.28
+    
+          ##### Permissions
+    
+          Must have `manage_system` permission.
+    
+        requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  required:
+                    - from
+                    - matches
+                    - auto
+                  properties:
+                    from:
+                      description: The current authentication type for the matched users.
+                      type: string
+                    matches:
+                      description: Users map.
+                      type: object
+                    auto:
+                      type: boolean
+        responses:
+          '200':
+            description: Successfully migrated authentication type to LDAP.
+          '400':
+            $ref: "#/components/responses/BadRequest"
+          '401':
+            $ref: "#/components/responses/Unauthorized"
+          '403':
+            $ref: "#/components/responses/Forbidden"
+          '501':
+            $ref: "#/components/responses/NotImplemented"
+        x-code-samples:
+          - lang: 'Go'
+            source: |
+              import "github.com/mattermost/mattermost-server/v5/model"
+    
+              Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+              Client.Login("sysadmin@domain.com", "Password1")
+    
+              ok, response := Client.MigrateAuthToSaml(fromAuthService, usersMap, auto)
