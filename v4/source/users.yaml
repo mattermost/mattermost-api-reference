@@ -39,6 +39,39 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
+  /users/login/cws:
+    post:
+      tags:
+        - users
+      summary: Auto-Login to Mattermost server using CWS token
+      description: >
+        CWS stands for Customer Web Server which is the cloud service used to
+        manage cloud instances.
+
+        ##### Permissions
+
+        A Cloud license is required
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login_id:
+                  type: string
+                cws_token:
+                  type: string
+        description: User authentication object
+        required: true
+      responses:
+        "302":
+          description: Login successful, it'll redirect to login page to perform the autologin
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
   /users/logout:
     post:
       tags:
