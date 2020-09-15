@@ -518,6 +518,8 @@ tags:
     description: Endpoints for creating, getting and interacting with posts.
   - name: files
     description: Endpoints for uploading and interacting with files.
+  - name: uploads
+    description: Endpoints for creating and performing file uploads.
   - name: preferences
     description: Endpoints for saving and modifying user preferences.
   - name: status
@@ -589,6 +591,7 @@ x-tagGroups:
       - channels
       - posts
       - files
+      - uploads
       - preferences
       - status
       - emoji
