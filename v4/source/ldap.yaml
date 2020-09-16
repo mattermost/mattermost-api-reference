@@ -191,3 +191,127 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  /ldap/certificate/public:
+    post:
+      tags:
+        - LDAP
+      summary: Upload public certificate
+      description: >
+        Upload the public certificate to be used for TLS verification. The server will pick a hard-coded filename for the
+        PublicCertificateFile setting in your `config.json`.
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                certificate:
+                  description: The public certificate file
+                  type: string
+                  format: binary
+              required:
+                - certificate
+      responses:
+        "200":
+          description: LDAP certificate upload successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+    delete:
+      tags:
+        - LDAP
+      summary: Remove public certificate
+      description: >
+        Delete the current public certificate being used for TLS verification.
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      responses:
+        "200":
+          description: LDAP certificate delete successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  /ldap/certificate/private:
+    post:
+      tags:
+        - LDAP
+      summary: Upload private key
+      description: >
+        Upload the private key to be used for TLS verification. The server will pick a hard-coded filename for the
+        PrivateKeyFile setting in your `config.json`.
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                certificate:
+                  description: The private key file
+                  type: string
+                  format: binary
+              required:
+                - certificate
+      responses:
+        "200":
+          description: LDAP certificate upload successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+    delete:
+      tags:
+        - LDAP
+      summary: Remove private key
+      description: >
+        Delete the current private key being used with your TLS verification.
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      responses:
+        "200":
+          description: LDAP certificate delete successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

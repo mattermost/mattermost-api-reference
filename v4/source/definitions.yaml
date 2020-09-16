@@ -2859,6 +2859,40 @@ components:
         err:
           type: string
           description: a string value set in case of error.
+    UploadSession:
+      description: an object containing information used to keep track of a file upload.
+      type: object
+      properties:
+        id:
+          description: The unique identifier for the upload.
+          type: string
+        type:
+          description: The type of the upload.
+          type: string
+          enum:
+            - attachment
+            - import
+        create_at:
+          description: The time the upload was created in milliseconds.
+          type: integer
+          format: int64
+        user_id:
+          description: The ID of the user performing the upload.
+          type: string
+        channel_id:
+          description: The ID of the channel to upload to.
+          type: string
+        filename:
+          description: The name of the file to upload.
+          type: string
+        file_size:
+          description: The size of the file to upload in bytes.
+          type: integer
+          format: int64
+        file_offset:
+          description: The amount of data uploaded in bytes.
+          type: integer
+          format: int64
     Notice:
       type: object
       properties:

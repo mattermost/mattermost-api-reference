@@ -4355,6 +4355,57 @@
                 ChannelId: "channel_id",
                 ParentId: "post_id",
             })
+
+  "/users/{user_id}/uploads":
+    get:
+      tags:
+        - users
+      summary: Get uploads for a user
+      description: |
+        Gets all the upload sessions belonging to a user.  
+
+        __Minimum server version__: 5.28
+
+        ##### Permissions
+        Must be logged in as the user who created the upload sessions.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User's uploads retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UploadSession"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            uss, response := Client.GetUploadsForUser("fc6suoon9pbbpmhrb9c967paxe")
+        - lang: Curl
+          source: |
+            curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/uploads' \ 
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+
   /users/migrate_auth/ldap:
     post:
       tags:
