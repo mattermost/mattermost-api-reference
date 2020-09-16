@@ -125,6 +125,10 @@
         Starts or resumes a file upload.  
         To resume an existing (incomplete) upload, data should be sent starting from the offset specified in the upload session object.
 
+        The request body can be in one of two formats:
+        - Binary file content streamed in request's body
+        - multipart/form-data
+
         ##### Permissions
         Must be logged in as the user who created the upload session.
       parameters:
@@ -179,5 +183,10 @@
             info, err := Client.UploadData(us, file)
         - lang: Curl
           source: |
+            # Binary file content in request's body
             curl -X POST 'http://localhost:8065/api/v4/uploads/qyxbzmprrjbdpdaprsxm98m6qe' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' --data-binary @file.png
+
+            # multipart/form-data upload
+            curl 'http://localhost:8065/api/v4/uploads/qyxbzmprrjbdpdaprsxm98m6qe' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' -F data=@file.png
