@@ -1216,9 +1216,9 @@
         - system
       summary: Acknowledge a warning of a metric status
       description: |
-        Acknowldge a warning for the warn_metric_id metric crossing a threshold (or some
+        Acknowledge a warning for the warn_metric_id metric crossing a threshold (or some
         similar condition being fulfilled) - attempts to send an ack email to
-        acknowledge@mattermost.com and set the "ack" status for the warn metric with "warn_metric_id" id.
+        acknowledge@mattermost.com and sets the "ack" status for all the warn metrics in the system.
 
         __Minimum server version__: 5.26
 
@@ -1246,6 +1246,40 @@
       responses:
         "200":
           description: The acknowledgement of the warning for the metric has been successful.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /warn_metrics/trial-license-ack/{warn_metric_id}:
+    post:
+      tags:
+        - system
+      summary: Request trial license and acknowledge a warning of a metric status
+      description: |
+        Request a trial license and acknowledge a warning for the warn_metric_id metric crossing a threshold (or some
+        similar condition being fulfilled) - sets the "ack" status for all the warn metrics in the system.
+
+        __Minimum server version__: 5.28
+
+        ##### Permissions
+
+        Must have `manage_system` permission.
+      parameters:
+        - name: warn_metric_id
+          in: path
+          description: Warn Metric Id.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The trial license request and the subsequent acknowledgement of the warning for the metric have been successful.
           content:
             application/json:
               schema:
