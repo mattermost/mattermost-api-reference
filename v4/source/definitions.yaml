@@ -2893,7 +2893,36 @@ components:
           description: The amount of data uploaded in bytes.
           type: integer
           format: int64
-
+    Notice:
+      type: object
+      properties:
+        id:
+          description: Notice ID
+          type: string
+        sysAdminOnly:
+          description: Does this notice apply only to sysadmins
+          type: boolean
+        teamAdminOnly:
+          description: Does this notice apply only to team admins
+          type: boolean
+        action:
+          description: "Optional action to perform on action button click. (defaults to closing the notice)"
+          type: string
+        actionParam:
+          description: "Optional action parameter. \nExample: {\"action\": \"url\", actionParam: \"/console/some-page\"}"
+          type: string
+        actionText:
+          description: Optional override for the action button text (defaults to OK)
+          type: string
+        description:
+          description: "Notice content. Use {{Mattermost}} instead of plain text to support white-labeling. Text supports Markdown."
+          type: string
+        image:
+          description: URL of image to display
+          type: string
+        title:
+          description: "Notice title. Use {{Mattermost}} instead of plain text to support white-labeling. Text supports Markdown."
+          type: string
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
