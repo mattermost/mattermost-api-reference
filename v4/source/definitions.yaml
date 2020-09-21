@@ -2896,6 +2896,15 @@ components:
     Notice:
       type: object
       properties:
+        id:
+          description: Notice ID
+          type: string
+        sysAdminOnly:
+          description: Does this notice apply only to sysadmins
+          type: boolean
+        teamAdminOnly:
+          description: Does this notice apply only to team admins
+          type: boolean
         action:
           description: "Optional action to perform on action button click. (defaults to closing the notice)"
           type: string
