@@ -2526,6 +2526,38 @@ components:
         type: array
         items:
           $ref: "#/components/schemas/Reaction"
+    Product:
+      type: object
+      properties:
+        id: 
+          type: string
+        name: 
+          type: string
+        description: 
+          type: string
+        price_per_seat:
+          type: string
+        add_ons:   
+          type: array
+          items:
+            $ref: "#/components/schemas/AddOn"
+    AddOn:
+      type: object
+      properties:
+        id: 
+          type: string
+        name: 
+          type: string
+        display_name: 
+          type: string
+        price_per_seat:
+          type: string
+    PaymentSetupIntent:
+      type: object
+      properties:
+        id:
+          type: string
+          client_secret: string
     Group:
       type: object
       properties:
