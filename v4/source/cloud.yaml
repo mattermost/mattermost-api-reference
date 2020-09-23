@@ -4,7 +4,6 @@
         - cloud
       summary: Get cloud products
       description: >
-        
       Retrieve a list of all products that are offered for Mattermost Cloud.
 
       ##### Permissions
