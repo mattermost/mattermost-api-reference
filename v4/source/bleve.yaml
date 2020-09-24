@@ -13,7 +13,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_experimental` permission.
       responses:
         "200":
           description: Indexes purged successfully.
