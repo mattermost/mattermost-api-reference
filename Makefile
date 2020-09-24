@@ -41,6 +41,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/reactions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/actions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/bots.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/cloud.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
 	@node_modules/.bin/swagger-cli validate $(V4_YAML)

@@ -607,6 +607,7 @@ x-tagGroups:
       - groups
       - compliance
       - cluster
+      - cloud
       - elasticsearch
       - bleve
       - dataretention

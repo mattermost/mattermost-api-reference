@@ -1,0 +1,97 @@
+  /cloud/products:
+    get:
+      tags:
+        - cloud
+      summary: Get cloud products
+      description: >
+        Retrieve a list of all products that are offered for Mattermost Cloud.
+
+        ##### Permissions 
+        
+        Must have `manage_system` permission and be licensed for Cloud. 
+        
+        __Minimum server version__: 5.28
+        __Note:__ This is intended for internal use and is subject to change.
+      responses:
+        "200":
+          description: Cloud products returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  /cloud/payment:
+    post:
+      tags:
+        - cloud
+      summary: Create a customer setup payment intent
+      description: |
+        Creates a customer setup payment intent for the given Mattermost cloud installation.
+
+        ##### Permissions
+        
+        Must have `manage_system` permission and be licensed for Cloud. 
+        
+        __Minimum server version__: 5.28
+        __Note:__: This is intended for internal use and is subject to change.
+
+      responses:
+        "201":
+          description: Payment setup intented created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentSetupIntent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  /cloud/payment/confirm:
+    post:
+      tags:
+        - cloud
+      summary: Completes the payment setup intent
+      description: >
+        Confirms the payment setup intent initiated when posting to `/cloud/payment`.
+
+        ##### Permissions
+
+        Must have `manage_system` permission and be licensed for Cloud. 
+
+        __Minimum server version__: 5.28
+
+        __Note:__ This is intended for internal use and is subject to change.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                stripe_setup_intent_id:
+                  type: string
+              required:
+                - certificate
+      responses:
+        "200":
+          description: Payment setup intent confirmed successfully
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
