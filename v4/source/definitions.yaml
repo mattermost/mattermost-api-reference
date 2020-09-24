@@ -2557,7 +2557,8 @@ components:
       properties:
         id:
           type: string
-          client_secret: string
+        client_secret:
+          type: string
     Group:
       type: object
       properties:

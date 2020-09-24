@@ -4,14 +4,14 @@
         - cloud
       summary: Get cloud products
       description: >
-      Retrieve a list of all products that are offered for Mattermost Cloud.
+        Retrieve a list of all products that are offered for Mattermost Cloud.
 
-      ##### Permissions
-
-      Must have `manage_system` permission and be licensed for Cloud. 
-
-      __Minimum server version__: 5.28
-     responses:
+        ##### Permissions 
+        
+        Must have `manage_system` permission and be licensed for Cloud. 
+        
+        __Minimum server version__: 5.28
+      responses:
         "200":
           description: Cloud products returned successfully
           content:
@@ -28,7 +28,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
- /cloud/payment:
+  /cloud/payment:
     post:
       tags:
         - cloud
@@ -37,8 +37,9 @@
         Creates a customer setup payment intent for the given Mattermost cloud installation.
 
         ##### Permissions
+        
         Must have `manage_system` permission and be licensed for Cloud. 
-
+        
         __Minimum server version__: 5.28
       responses:
         "201":
