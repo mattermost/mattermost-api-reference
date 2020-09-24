@@ -2591,7 +2591,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       responses:
         "200":
           description: Email invites successfully revoked

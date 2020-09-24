@@ -46,7 +46,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       requestBody:
         content:
           multipart/form-data:
@@ -85,7 +85,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       responses:
         "200":
           description: SAML certificate delete successful
@@ -111,7 +111,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       requestBody:
         content:
           multipart/form-data:
@@ -150,7 +150,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       responses:
         "200":
           description: SAML certificate delete successful
@@ -176,7 +176,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       requestBody:
         content:
           multipart/form-data:
@@ -215,7 +215,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       responses:
         "200":
           description: SAML certificate delete successful
@@ -240,7 +240,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_authentication` permission.
       responses:
         "200":
           description: SAML certificate status retrieval successful
