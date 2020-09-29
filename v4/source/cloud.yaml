@@ -95,3 +95,32 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  /cloud/customer:
+    get:
+      tags:
+        - cloud
+      summary: Get cloud customer
+      description: >
+        Retrieves the customer information for the Mattermost Cloud customer bound to this installation.
+
+        ##### Permissions 
+        
+        Must have `manage_system` permission and be licensed for Cloud. 
+        
+        __Minimum server version__: 5.28
+        __Note:__ This is intended for internal use and is subject to change.
+      responses:
+        "200":
+          description: Cloud customer returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudCustomer"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
