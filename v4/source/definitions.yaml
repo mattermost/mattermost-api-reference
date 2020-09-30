@@ -2615,6 +2615,32 @@ components:
           $ref: "#/components/schemas/Address"
         payment_method:
           $ref: "#/components/schemas/PaymentMethod"
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        customer_id:
+          type: string
+        product_id:
+          type: string
+        add_ons:
+          type: array
+          items:
+            type: string
+        start_at:
+          type: integer
+          format: int64
+        end_at:
+          type: integer
+          format: int64
+        create_at:
+          type: integer
+          format: int64
+        seats:
+          type: integer
+        dns:
+          type: string
     Group:
       type: object
       properties:
