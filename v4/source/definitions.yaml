@@ -2559,6 +2559,62 @@ components:
           type: string
         client_secret:
           type: string
+    PaymentMethod:
+      type: object
+      properties:
+        type:
+          type: string
+        last_four:
+          type: integer
+        exp_month:
+          type: integer
+        exp_year:
+          type: integer
+        card_brand:
+          type: string
+        name:
+          type: string
+    Address:
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        line1:
+          type: string
+        line2:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+    CloudCustomer:
+      type: object
+      properties:
+        id:
+          type: string
+        creator_id:
+          type: string
+        create_at:
+          type: integer
+          format: int64
+        email:
+          type: string
+        name:
+          type: string
+        num_employees:
+          type: string
+        contact_first_name:
+          type: string
+        contact_last_name:
+          type: string
+        billing_address:
+          $ref: "#/components/schemas/Address"
+        company_address:
+          $ref: "#/components/schemas/Address"
+        payment_method:
+          $ref: "#/components/schemas/PaymentMethod"
     Group:
       type: object
       properties:
