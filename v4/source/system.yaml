@@ -38,13 +38,20 @@
         ##### Permissions
 
         Must be logged in.
+      parameters:
+        - name: get_server_status
+          in: query
+          description: Check the status of the database and file storage as well
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           description: Status of the system
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StatusOK"
+                $ref: "#/components/schemas/SystemStatusResponse"
         "500":
           $ref: "#/components/responses/InternalServerError"
       x-code-samples:
@@ -57,6 +64,9 @@
 
             // GetPing
             status, resp := Client.GetPing()
+
+            // Get server status with database and storage checks
+            status, resp = Client.GetPingWithServerStatus()
   "/system/notices/{teamId}":
     get:
       tags:
