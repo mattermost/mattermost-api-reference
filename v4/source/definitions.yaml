@@ -3038,6 +3038,36 @@ components:
         title:
           description: "Notice title. Use {{Mattermost}} instead of plain text to support white-labeling. Text supports Markdown."
           type: string
+    SystemStatusResponse:
+      type: object
+      properties:
+        AndroidLatestVersion:
+          description: Latest Android version supported
+          type: string
+        AndroidMinVersion:
+          description: Minimum Android version supported
+          type: string
+        DesktopLatestVersion:
+          description: Latest desktop version supported
+          type: string
+        DesktopMinVersion:
+          description: Minimum desktop version supported
+          type: string
+        IosLatestVersion:
+          description: Latest iOS version supported
+          type: string
+        IosMinVersion:
+          description: Minimum iOS version supported
+          type: string
+        database_status:
+          description: Status of database ("OK" or "UNHEALTHY"). Included when get_server_status parameter set.
+          type: string
+        filestore_status:
+          description: Status of filestore ("OK" or "UNHEALTHY"). Included when get_server_status parameter set.
+          type: string
+        status:
+          description: Status of server ("OK" or "UNHEALTHY"). Included when get_server_status parameter set.
+          type: string
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
