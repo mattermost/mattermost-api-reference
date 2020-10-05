@@ -2396,7 +2396,7 @@
 
         The number of emails that can be sent is rate limited to 20 per hour with a burst of 20 emails. If the rate limit exceeds, the error message contains details on when to retry and when the timer will be reset.
         ##### Permissions
-        Must have `invite_to_team` permission for the team.
+        Must have `invite_user` and `add_user_to_team` permissions for the team.
       parameters:
         - name: team_id
           in: path
