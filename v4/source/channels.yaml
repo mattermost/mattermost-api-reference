@@ -595,6 +595,10 @@
         database. Soft deleted channels will not be accessible in the user
         interface. Direct and group message channels cannot be deleted.
 
+
+        As of server version 5.28, optionally use the `permanent=true` query parameter to permanently delete the channel for compliance reasons. To use this feature `ServiceSettings.EnableAPIChannelDeletion` must be set to `true` in the server's configuration.
+
+
         ##### Permissions
 
         `delete_public_channel` permission if the channel is public,
