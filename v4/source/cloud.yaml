@@ -241,7 +241,7 @@
         - cloud
       summary: Get cloud subscription invoices
       description: >
-        Retrieves the invoices for the subscriptio bound to this installation.
+        Retrieves the invoices for the subscription bound to this installation.
 
         ##### Permissions
 
