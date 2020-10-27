@@ -590,6 +590,7 @@ x-tagGroups:
       - teams
       - channels
       - posts
+      - threads
       - files
       - uploads
       - preferences
