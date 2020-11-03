@@ -4608,11 +4608,11 @@
         source: |
           curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/threads/read":
+  "/users/{user_id}/threads/read/{timestamp}":
     put:
       tags:
         - threads
-      summary: Mark all threads that user is following as read
+      summary: Update all threads that user is following read state to the timestamp
       description: |
         Mark all threads that user is following as read
 
@@ -4627,6 +4627,12 @@
           required: true
           schema:
             type: string
+        - name: timestamp
+          in: path
+          description: The timestamp to which the thread's "last read" state will be reset.
+          required: true
+          schema:
+            type: integer
       responses:
         "200":
           description: User's thread update successful
@@ -4651,55 +4657,11 @@
         source: |
           curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/read' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-
-    delete:
-      tags:
-        - threads
-      summary: Mark all threads that user is following is unread
-      description: |
-        Mark all threads that user is following is unread
-
-        __Minimum server version__: 5.29
-
-        ##### Permissions
-        Must be logged in as the user who created the upload sessions.
-      parameters:
-        - name: user_id
-          in: path
-          description: The ID of the user. This can also be "me" which will point to the current user.
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: User's thread update successful
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "404":
-          $ref: "#/components/responses/NotFound"
-      x-code-samples:
-        - lang: Go
-          source: >
-            import "github.com/mattermost/mattermost-server/v5/model"
-
-
-            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
-
-            Client.Login("email@domain.com", "Password1")
-
-            uss, response := Client.UpdateThreadsReadForUser("fc6suoon9pbbpmhrb9c967paxe", false)
-        - lang: Curl
-          source: |
-            curl -X DELETE 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/read' \
-            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-
-  "/users/{user_id}/threads/{thread_id}/read":
+  "/users/{user_id}/threads/{thread_id}/read/{timestamp}":
     put:
       tags:
         - threads
-      summary: Mark a thread that user is following as read
+      summary: Mark a thread that user is following read state to the timestamp
       description: |
         Mark a thread that user is following as read
 
@@ -4717,6 +4679,12 @@
         - name: thread_id
           in: path
           description: The ID of the thread to update
+          required: true
+          schema:
+            type: string
+        - name: timestamp
+          in: path
+          description: The timestamp to which the thread's "last read" state will be reset.
           required: true
           schema:
             type: string
