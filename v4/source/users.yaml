@@ -4534,7 +4534,7 @@
       __Minimum server version__: 5.29
 
       ##### Permissions
-      Must be logged in as the user who created the upload sessions.
+      Must be logged in as the user or have `edit_other_users` permission.
     parameters:
       - name: user_id
         in: path
@@ -4619,7 +4619,7 @@
         __Minimum server version__: 5.29
 
         ##### Permissions
-        Must be logged in as the user who created the upload sessions.
+        Must be logged in as the user or have `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
@@ -4668,7 +4668,7 @@
         __Minimum server version__: 5.29
 
         ##### Permissions
-        Must be logged in as the user who created the upload sessions.
+        Must be logged in as the user or have `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
@@ -4722,7 +4722,7 @@
         __Minimum server version__: 5.29
 
         ##### Permissions
-        Must be logged in as the user who created the upload sessions.
+        Must be logged in as the user or have `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
@@ -4771,7 +4771,7 @@
         __Minimum server version__: 5.29
 
         ##### Permissions
-        Must be logged in as the user who created the upload sessions.
+        Must be logged in as the user or have `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
@@ -4819,7 +4819,7 @@
         __Minimum server version__: 5.29
 
         ##### Permissions
-        Must be logged in as the user who created the upload sessions.
+        Must be logged in as the user or have `edit_other_users` permission.
       parameters:
         - name: user_id
           in: path
