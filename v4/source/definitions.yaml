@@ -2992,6 +2992,31 @@ components:
         child_id:
           type: string
           description: the id of the child relation (table) entry.
+    UserThread:
+      description: a thread that user is following
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the post that is this thread's root
+        reply_count:
+          type: integer
+          description: number of replies in this thread
+        last_reply_at:
+          type: integer
+          format: int64
+          description: timestamp of the last post to this thread
+        last_viewed_at:
+          type: integer
+          format: int64
+          description: timestamp of the last time the user viewed this thread
+        participants:
+          type: array
+          description: list of users participating in this thread. only includes IDs unless 'extended' was set to 'true'
+          items:
+            $ref: "#/components/schemas/Post"
+        post:
+          $ref: "#/components/schemas/Post"
     RelationalIntegrityCheckData:
       description: an object containing the results of a relational integrity check.
       type: object
@@ -3116,6 +3141,17 @@ components:
         status:
           description: Status of server ("OK" or "UNHEALTHY"). Included when get_server_status parameter set.
           type: string
+    UserThreads:
+      type: object
+      properties:
+        total:
+          description: Total number of threads (used for paging)
+          type: integer
+        threads:
+          description: Array of threads
+          type: array
+          items:
+            $ref: "#/components/schemas/UserThread"
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
