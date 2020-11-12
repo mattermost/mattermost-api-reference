@@ -4522,3 +4522,338 @@
               Client.Login("sysadmin@domain.com", "Password1")
     
               ok, response := Client.MigrateAuthToSaml(fromAuthService, usersMap, auto)
+
+  "/users/{user_id}/threads":
+   get:
+    tags:
+     - threads
+    summary: Get all threads that user is following
+    description: |
+      Get all threads that user is following
+
+      __Minimum server version__: 5.29
+
+      ##### Permissions
+      Must be logged in as the user or have `edit_other_users` permission.
+    parameters:
+      - name: user_id
+        in: path
+        description: The ID of the user. This can also be "me" which will point to the current user.
+        required: true
+        schema:
+         type: string
+      - name: since
+        in: query
+        description: Since filters the threads based on their LastUpdateAt timestamp.
+        required: false
+        schema:
+         type: integer
+      - name: deleted
+        in: query
+        description: Deleted will specify that even deleted threads should be returned (For mobile sync).
+        required: false
+        schema:
+         type: boolean
+         default: false
+      - name: extended
+        in: query
+        description: Extended will enrich the response with participant details.
+        required: false        
+        schema:
+          type: boolean
+          default: false
+      - name: page
+        in: query
+        description: Page specifies which part of the results to return, by PageSize.
+        required: false        
+        schema:
+          type: integer
+          default: 0
+      - name: pageSize
+        in: query
+        description: PageSize specifies the size of the returned chunk of results.
+        required: false
+        schema:
+         default: 30
+         type: integer
+    responses:
+      "200":
+        description: User's thread retrieval successful
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserThreads"
+      "400":
+        $ref: "#/components/responses/BadRequest"
+      "401":
+        $ref: "#/components/responses/Unauthorized"
+      "404":
+        $ref: "#/components/responses/NotFound"
+
+    x-code-samples:
+      - lang: Go
+        source: >
+          import "github.com/mattermost/mattermost-server/v5/model"
+
+          Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+          Client.Login("email@domain.com", "Password1")
+
+          uss, response := Client.GetUserThreads("fc6suoon9pbbpmhrb9c967paxe", model.GetUserThreadsOpts{
+                                                                                      Deleted: true,
+                                                                                      Since: 123123,
+                                                                                      Page: 0,
+                                                                                      PageSize: 40,
+                                                                                      })
+      - lang: Curl
+        source: |
+          curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads' \
+          -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+  "/users/{user_id}/threads/read/{timestamp}":
+    put:
+      tags:
+        - threads
+      summary: Update all threads that user is following read state to the timestamp
+      description: |
+        Mark all threads that user is following as read
+
+        __Minimum server version__: 5.29
+
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: timestamp
+          in: path
+          description: The timestamp to which the thread's "last read" state will be reset.
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User's thread update successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+      - lang: Go
+        source: >
+          import "github.com/mattermost/mattermost-server/v5/model"
+
+
+          Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+          Client.Login("email@domain.com", "Password1")
+
+          uss, response := Client.UpdateThreadsReadForUser("fc6suoon9pbbpmhrb9c967paxe", true)
+      - lang: Curl
+        source: |
+          curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/read' \
+          -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+  "/users/{user_id}/threads/{thread_id}/read/{timestamp}":
+    put:
+      tags:
+        - threads
+      summary: Mark a thread that user is following read state to the timestamp
+      description: |
+        Mark a thread that user is following as read
+
+        __Minimum server version__: 5.29
+
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: thread_id
+          in: path
+          description: The ID of the thread to update
+          required: true
+          schema:
+            type: string
+        - name: timestamp
+          in: path
+          description: The timestamp to which the thread's "last read" state will be reset.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User's thread update successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            uss, response := Client.UpdateThreadReadForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" true)
+        - lang: Curl
+          source: |
+            curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/read' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+    delete:
+      tags:
+        - threads
+      summary: Mark a thread that user is following as unread
+      description: |
+        Mark a thread that user is following as unread
+
+        __Minimum server version__: 5.29
+
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: thread_id
+          in: path
+          description: The ID of the thread to update
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User's thread update successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            uss, response := Client.UpdateThreadReadForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" false)
+        - lang: Curl
+          source: |
+            curl -X DELETE 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/read' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+  "/users/{user_id}/threads/{thread_id}/following":
+    put:
+      tags:
+        - threads
+      summary: Start following a thread
+      description: |
+        Start following a thread
+
+        __Minimum server version__: 5.29
+
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: thread_id
+          in: path
+          description: The ID of the thread to follow
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User's thread update successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            uss, response := Client.UpdateThreadFollowForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" true)
+        - lang: Curl
+          source: |
+            curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/followin' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+    delete:
+      tags:
+        - threads
+      summary: Stop following a thread
+      description: |
+        Stop following a thread
+
+        __Minimum server version__: 5.29
+
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: thread_id
+          in: path
+          description: The ID of the thread to update
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User's thread update successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            uss, response := Client.UpdateThreadFollowForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" false)
+        - lang: Curl
+          source: |
+            curl -X DELETE 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/following' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
