@@ -296,3 +296,26 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  /cloud/webhook:
+    post:
+      tags:
+        - cloud
+      summary: POST endpoint for CWS Webhooks
+      description: >
+        An endpoint for processing webhooks from the Customer Portal
+
+        ##### Permissions
+
+        This endpoint should only be accessed by CWS, in a Mattermost Cloud instance
+
+        __Minimum server version__: 5.30
+        __Note:__ This is intended for internal use and is subject to change.
+      responses:
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
