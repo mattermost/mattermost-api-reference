@@ -1,0 +1,54 @@
+  /remotecluster/msg:
+    post:
+      tags:
+        - remotecluster
+      summary: Accept message from remote cluster. 
+      description: >
+        This API is used only by the Remote Cluster Service.
+
+        __Minimum server version__: 5.33
+      responses:
+        "200":
+          description: Message received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /remotecluster/confirm_invite:
+    post:
+      tags:
+        - remotecluster
+      summary: Confirms a remote cluster invitation.
+      description: >
+        This API is used only by the Remote Cluster Service.
+
+        __Minimum server version__: 5.33
+      responses:
+        "200":
+          description: Invitation confirmed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /remotecluster/ping:
+    post:
+      tags:
+        - remotecluster
+      summary: Accepts a ping from a remote cluster.
+      description: >
+        This API is used only by the Remote Cluster Service.
+
+        __Minimum server version__: 5.33
+      responses:
+        "200":
+          description: Ping received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
