@@ -4614,11 +4614,11 @@
         source: |
           curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/teams/{team_id}/threads/read/{timestamp}":
+  "/users/{user_id}/teams/{team_id}/threads/read":
     put:
       tags:
         - threads
-      summary: Update all threads that user is following read state to the timestamp
+      summary: Mark all threads that user is following as read
       description: |
         Mark all threads that user is following as read
 
@@ -4639,12 +4639,6 @@
           required: true
           schema:
             type: string
-        - name: timestamp
-          in: path
-          description: The timestamp to which the thread's "last read" state will be reset.
-          required: true
-          schema:
-            type: integer
       responses:
         "200":
           description: User's thread update successful
@@ -4664,7 +4658,7 @@
 
           Client.Login("email@domain.com", "Password1")
 
-          uss, response := Client.UpdateThreadsReadForUser("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe", true)
+          uss, response := Client.UpdateThreadsReadForUser("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe")
       - lang: Curl
         source: |
           curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/read' \
