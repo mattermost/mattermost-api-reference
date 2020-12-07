@@ -4523,7 +4523,7 @@
     
               ok, response := Client.MigrateAuthToSaml(fromAuthService, usersMap, auto)
 
-  "/users/{user_id}/threads":
+  "/users/{user_id}/teams/{team_id}/threads":
    get:
     tags:
      - threads
@@ -4542,6 +4542,12 @@
         required: true
         schema:
          type: string
+      - name: team_id
+        in: path
+        description: The ID of the team in which the thread is.
+        required: true
+        schema:
+          type: string
       - name: since
         in: query
         description: Since filters the threads based on their LastUpdateAt timestamp.
@@ -4598,7 +4604,7 @@
           Client := model.NewAPIv4Client("https://your-mattermost-url.com")
           Client.Login("email@domain.com", "Password1")
 
-          uss, response := Client.GetUserThreads("fc6suoon9pbbpmhrb9c967paxe", model.GetUserThreadsOpts{
+          uss, response := Client.GetUserThreads("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe", model.GetUserThreadsOpts{
                                                                                       Deleted: true,
                                                                                       Since: 123123,
                                                                                       Page: 0,
@@ -4608,11 +4614,11 @@
         source: |
           curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/threads/read/{timestamp}":
+  "/users/{user_id}/teams/{team_id}/threads/read":
     put:
       tags:
         - threads
-      summary: Update all threads that user is following read state to the timestamp
+      summary: Mark all threads that user is following as read
       description: |
         Mark all threads that user is following as read
 
@@ -4627,12 +4633,12 @@
           required: true
           schema:
             type: string
-        - name: timestamp
+        - name: team_id
           in: path
-          description: The timestamp to which the thread's "last read" state will be reset.
+          description: The ID of the team in which the thread is.
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "200":
           description: User's thread update successful
@@ -4652,12 +4658,12 @@
 
           Client.Login("email@domain.com", "Password1")
 
-          uss, response := Client.UpdateThreadsReadForUser("fc6suoon9pbbpmhrb9c967paxe", true)
+          uss, response := Client.UpdateThreadsReadForUser("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe")
       - lang: Curl
         source: |
           curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/read' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/threads/{thread_id}/read/{timestamp}":
+  "/users/{user_id}/teams/{team_id}/threads/{thread_id}/read/{timestamp}":
     put:
       tags:
         - threads
@@ -4673,6 +4679,12 @@
         - name: user_id
           in: path
           description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: path
+          description: The ID of the team in which the thread is.
           required: true
           schema:
             type: string
@@ -4707,7 +4719,7 @@
 
             Client.Login("email@domain.com", "Password1")
 
-            uss, response := Client.UpdateThreadReadForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" true)
+            uss, response := Client.UpdateThreadReadForUser("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe", "f96cv0897624352346e" true)
         - lang: Curl
           source: |
             curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/read' \
@@ -4730,6 +4742,12 @@
           required: true
           schema:
             type: string
+        - name: team_id
+          in: path
+          description: The ID of the team in which the thread is.
+          required: true
+          schema:
+            type: string
         - name: thread_id
           in: path
           description: The ID of the thread to update
@@ -4755,12 +4773,12 @@
 
             Client.Login("email@domain.com", "Password1")
 
-            uss, response := Client.UpdateThreadReadForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" false)
+            uss, response := Client.UpdateThreadReadForUser("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe", "f96cv0897624352346e" false)
         - lang: Curl
           source: |
             curl -X DELETE 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/read' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/threads/{thread_id}/following":
+  "/users/{user_id}/teams/{team_id}/threads/{thread_id}/following":
     put:
       tags:
         - threads
@@ -4776,6 +4794,12 @@
         - name: user_id
           in: path
           description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: path
+          description: The ID of the team in which the thread is.
           required: true
           schema:
             type: string
@@ -4804,7 +4828,7 @@
 
             Client.Login("email@domain.com", "Password1")
 
-            uss, response := Client.UpdateThreadFollowForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" true)
+            uss, response := Client.UpdateThreadFollowForUser("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe", "f96cv0897624352346e" true)
         - lang: Curl
           source: |
             curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/followin' \
@@ -4824,6 +4848,12 @@
         - name: user_id
           in: path
           description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: path
+          description: The ID of the team in which the thread is.
           required: true
           schema:
             type: string
@@ -4852,7 +4882,7 @@
 
             Client.Login("email@domain.com", "Password1")
 
-            uss, response := Client.UpdateThreadFollowForUser("fc6suoon9pbbpmhrb9c967paxe", "f96cv0897624352346e" false)
+            uss, response := Client.UpdateThreadFollowForUser("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe", "f96cv0897624352346e" false)
         - lang: Curl
           source: |
             curl -X DELETE 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/following' \
