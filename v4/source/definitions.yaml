@@ -3152,6 +3152,12 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UserThread"
+    LicenseRenewalLink:
+      type: object
+      properties:
+        renewal_link:
+          description: License renewal link
+          type: string
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
