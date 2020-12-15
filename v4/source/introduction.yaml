@@ -570,6 +570,8 @@ tags:
     description: Endpoints for interactive actions for use by integrations.
   - name: terms of service
     description: Endpoints for getting and updating custom terms of service.
+  - name: imports
+    description: Endpoints related to import files.
 x-tagGroups:
   - name: Overview
     tags:
@@ -618,6 +620,7 @@ x-tagGroups:
       - schemes
       - integration_actions
       - terms of service
+      - imports
 servers:
   - url: http://your-mattermost-url.com/api/v4
   - url: https://your-mattermost-url.com/api/v4
