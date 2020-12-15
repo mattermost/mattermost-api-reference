@@ -23,7 +23,7 @@
                     the webhook payloads.
                 user_id:
                   type: string
-                  description: The ID of the owner of the webhook if different than the requester. Required in [local mode](https://docs.mattermost.com/administration/mmctl-cli-tool.html#local-mode).
+                  description: The ID of the owner of the webhook if different than the requester. Required for [local mode](https://docs.mattermost.com/administration/mmctl-cli-tool.html#local-mode).
                 display_name:
                   type: string
                   description: The display name for this incoming webhook
