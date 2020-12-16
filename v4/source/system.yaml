@@ -749,7 +749,7 @@
 
         ##### Permissions
 
-        Must have `manage_system` permission.
+        Must have `sysconsole_write_about` permission.
       responses:
         "200":
           description: License renewal link obtained
