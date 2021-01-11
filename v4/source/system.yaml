@@ -1467,3 +1467,24 @@
             Client := model.NewAPIv4SocketClient(socketPath)
 
             ok, resp := Client.CheckIntegrity()
+  /generate_support_packet:
+    get:
+      tags:
+        - system
+      summary: Download a zip file which contains helpful and useful information for troubleshooting your mattermost instance.
+      description: |
+        Download a zip file which contains helpful and useful information for troubleshooting your mattermost instance.
+        __Minimum server version: 5.32__
+        ##### Permissions
+        Must have any of the system console read permissions.
+        ##### License
+        Requires either a E10 or E20 license.
+      responses:
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
