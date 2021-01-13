@@ -1467,7 +1467,7 @@
             Client := model.NewAPIv4SocketClient(socketPath)
 
             ok, resp := Client.CheckIntegrity()
-  /system/generate_support_packet:
+  /system/support_packet:
     get:
       tags:
         - system
