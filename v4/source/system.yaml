@@ -737,6 +737,34 @@
 
             // GetOldClientLicense
             license, resp := Client.GetOldClientLicense()
+  /license/renewal:
+    get:
+      tags:
+        - system
+      summary: Request the license renewal link
+      description: >
+        Request the renewal link that would be used to start the license renewal process
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+
+        Must have `sysconsole_write_about` permission.
+      responses:
+        "200":
+          description: License renewal link obtained
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LicenseRenewalLink"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /trial-license:
     post:
       tags:
