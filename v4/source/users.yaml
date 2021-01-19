@@ -4887,7 +4887,7 @@
           source: |
             curl -X DELETE 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/following' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/teams/{team_id}/threads/{threadId}":
+  "/users/{user_id}/teams/{team_id}/threads/{thread_id}":
     get:
       tags:
         - threads
@@ -4912,7 +4912,7 @@
           required: true
           schema:
             type: string
-        - name: threadId
+        - name: thread_id
           in: path
           description: The ID of the thread to follow
           required: true
