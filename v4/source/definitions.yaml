@@ -578,9 +578,6 @@ components:
         auth_service:
           description: The authentication service such as "email", "gitlab", or "ldap"
           type: string
-        password:
-          description: The password used for email authentication
-          type: string
     UserAutocomplete:
       type: object
       properties:
