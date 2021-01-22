@@ -4103,7 +4103,6 @@
             userAuth := &model.UserAuth{}
             userAuth.AuthData = user.AuthData
             userAuth.AuthService = user.AuthService
-            userAuth.Password = user.Password
 
             user, resp := Client.UpdateUserAuth(userID, userAuth)
         - lang: PHP
@@ -4135,7 +4134,6 @@
             $userAuth = [];
             $userAuth["auth_data"] = $user->auth_data;
             $userAuth["auth_service"] = $user->auth_service;
-            $userAuth["password"] = $user->password;
 
             $resp = $driver->getUserModel()->updateUserAuthenticationMethod($userID, $userAuth);
 
@@ -4365,7 +4363,7 @@
         - users
       summary: Get uploads for a user
       description: |
-        Gets all the upload sessions belonging to a user.  
+        Gets all the upload sessions belonging to a user.
 
         __Minimum server version__: 5.28
 
@@ -4406,7 +4404,7 @@
             uss, response := Client.GetUploadsForUser("fc6suoon9pbbpmhrb9c967paxe")
         - lang: Curl
           source: |
-            curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/uploads' \ 
+            curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/uploads' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
 
   /users/migrate_auth/ldap:
@@ -4420,13 +4418,13 @@
       description: >
         Migrates accounts from one authentication provider to another.
         For example, you can upgrade your authentication provider from email to LDAP.
-  
+
         __Minimum server version__: 5.28
-  
+
         ##### Permissions
-  
+
         Must have `manage_system` permission.
-  
+
       requestBody:
           content:
             application/json:
@@ -4460,10 +4458,10 @@
         - lang: 'Go'
           source: |
             import "github.com/mattermost/mattermost-server/v5/model"
-  
+
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
             Client.Login("sysadmin@domain.com", "Password1")
-  
+
             ok, response := Client.MigrateAuthToLdap(fromAuthService, matchField, force)
 
   /users/migrate_auth/saml:
@@ -4477,13 +4475,13 @@
         description: >
           Migrates accounts from one authentication provider to another.
           For example, you can upgrade your authentication provider from email to SAML.
-    
+
           __Minimum server version__: 5.28
-    
+
           ##### Permissions
-    
+
           Must have `manage_system` permission.
-    
+
         requestBody:
             content:
               application/json:
@@ -4517,10 +4515,10 @@
           - lang: 'Go'
             source: |
               import "github.com/mattermost/mattermost-server/v5/model"
-    
+
               Client := model.NewAPIv4Client("https://your-mattermost-url.com")
               Client.Login("sysadmin@domain.com", "Password1")
-    
+
               ok, response := Client.MigrateAuthToSaml(fromAuthService, usersMap, auto)
 
   "/users/{user_id}/teams/{team_id}/threads":
@@ -4564,14 +4562,14 @@
       - name: extended
         in: query
         description: Extended will enrich the response with participant details.
-        required: false        
+        required: false
         schema:
           type: boolean
           default: false
       - name: page
         in: query
         description: Page specifies which part of the results to return, by PageSize.
-        required: false        
+        required: false
         schema:
           type: integer
           default: 0
