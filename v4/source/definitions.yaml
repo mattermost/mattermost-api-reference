@@ -2161,23 +2161,160 @@ components:
         is_active:
           type: boolean
           description: Indicates whether the token is active
-    DataRetentionPolicy:
+    GlobalDataRetentionPolicy:
       type: object
       properties:
         message_deletion_enabled:
           type: boolean
           description: Indicates whether data retention policy deletion of messages is
-            enabled.
+            enabled globally.
         file_deletion_enabled:
           type: boolean
           description: Indicates whether data retention policy deletion of file attachments
-            is enabled.
+            is enabled globally.
         message_retention_cutoff:
           type: integer
           description: The current server timestamp before which messages should be deleted.
         file_retention_cutoff:
           type: integer
           description: The current server timestamp before which files should be deleted.
+    DataRetentionPolicyWithoutId:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: The display name for this retention policy.
+        post_duration:
+          type: integer
+          description: The number of days a message will be retained before being deleted by this policy.
+    DataRetentionPolicy:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithoutId"
+        - type: object
+          properties:
+            id:
+              type: string
+              description: The unique ID for this retention policy.
+    DataRetentionPolicyWithApplied:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithoutId"
+        - type: object
+          properties:
+            team_ids:
+              type: array
+              items:
+                type: string
+              description: The IDs of the teams to which this policy should be applied.
+            channel_ids:
+              type: array
+              items:
+                type: string
+              description: The IDs of the channels to which this policy should be applied.
+    DataRetentionPolicyCreate:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithApplied"
+      required:
+        - display_name
+        - post_duration
+    DataRetentionPolicyPatch:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithApplied"
+    DataRetentionPolicyUpdate:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithApplied"
+      required:
+        - display_name
+        - post_duration
+        - team_ids
+        - channel_ids
+    DataRetentionPolicyTeamDisplayInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The team's ID.
+        display_name:
+          type: string
+          description: The team's display name.
+    DataRetentionPolicyChannelDisplayInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The channel's ID.
+        display_name:
+          type: string
+          description: The channel's display name.
+        team_display_name:
+          type: string
+          description: The display name of this channel's team.
+    DataRetentionPolicyEnriched:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicy"
+        - type: object
+          properties:
+            teams:
+              type: array
+              items:
+                $ref: "#/components/schemas/DataRetentionPolicyTeamDisplayInfo"
+              description: The teams to which this policy will be applied.
+            channels:
+              type: array
+              items:
+                $ref: "#/components/schemas/DataRetentionPolicyChannelDisplayInfo"
+              description: The channels to which this policy will be applied.
+    DataRetentionPolicyEnrichedList:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataRetentionPolicyEnriched"
+        total_count:
+          type: integer
+          description: The number of policies returned.
+    DataRetentionPolicyWithCounts:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicy"
+        - type: object
+          properties:
+            team_count:
+              type: integer
+              description: The number of teams to which this policy is applied.
+            channel_count:
+              type: integer
+              description: The number of channels to which this policy is applied.
+    DataRetentionPolicyWithCountsList:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataRetentionPolicyWithCounts"
+        total_count:
+          type: integer
+          description: The number of policies returned.
+    DataRetentionPolicyTeamIdList:
+      type: object
+      properties:
+        team_ids:
+          type: array
+          items:
+            type: string
+          description: The team IDs
+      required:
+        - team_ids
+    DataRetentionPolicyChannelIdList:
+      type: object
+      properties:
+        channel_ids:
+          type: array
+          items:
+            type: string
+          description: The channel IDs
+      required:
+        - channel_ids
     UserNotifyProps:
       type: object
       properties:

@@ -1,25 +1,406 @@
   /data_retention/policy:
     get:
       tags:
-        - dataretention
-      summary: Get the data retention policy details.
-      description: >
-        Gets the current data retention policy details from the server,
+        - data retention
+      summary: Get the global data retention policy
+      description: |
+        Gets the current global data retention policy details from the server,
         including what data should be purged and the cutoff times for each data
         type that should be purged.
-
+        
         __Minimum server version__: 4.3
-
+        
         ##### Permissions
-
         Requires an active session but no other permissions.
+
+        ##### License
+        Requires an E20 license.
       responses:
         "200":
-          description: Data retention policy details retrieved successfully.
+          description: Global data retention policy details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalDataRetentionPolicy"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  /data_retention/policies:
+    get:
+      tags:
+        - data retention
+      summary: Get the granular data retention policies
+      description: |
+        Gets details about the granular (i.e. team or channel-specific) data retention
+        policies from the server.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Requires an active session but no other permissions.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+        - name: counts_only
+          in: query
+          description: >
+            If set to true, only the number of teams/channels to which each policy is
+            applied will be returned.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Retention policies' details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/DataRetentionPolicyEnrichedList"
+                  - $ref: "#/components/schemas/DataRetentionPolicyWithCountsList"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+    post:
+      tags:
+        - data retention
+      summary: Create a new granular data retention policy
+      description: |
+        Creates a new granular data retention policy with the specified display
+        name and post duration.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionPolicyCreate"
+      responses:
+        "201":
+          description: Retention policy successfully created.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/DataRetentionPolicy"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/data_retention/policies/{policy_id}":
+    get:
+      tags:
+        - data retention
+      summary: Get a granular data retention policy
+      description: |
+        Gets details about a granular data retention policies by ID.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Requires an active session but no other permissions.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Retention policy's details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataRetentionPolicyEnriched"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+    patch:
+      tags:
+        - data retention
+      summary: Patch a granular data retention policy
+      description: |
+        Patches (i.e. replaces the fields of) a granular data retention policy.
+        If any fields are omitted, they will not be changed.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionPolicyPatch"
+      responses:
+        "200":
+          description: Retention policy successfully patched.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataRetentionPolicyEnriched"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+    post:
+      tags:
+        - data retention
+      summary: Update a granular data retention policy
+      description: |
+        Updates (i.e. replaces the fields of) a granular data retention policy.
+        All fields are required.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionPolicyUpdate"
+      responses:
+        "200":
+          description: Retention policy successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataRetentionPolicyEnriched"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"  
+    delete:
+      tags:
+        - data retention
+      summary: Delete a granular data retention policy
+      description: |
+        Deletes a granular data retention policy.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Retention policy successfully deleted.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"  
+  "/data_retention/policies/{policy_id}/teams":
+    post:
+      tags:
+        - data retention
+      summary: Add teams to a granular data retention policy
+      description: |
+        Adds teams to a granular data retention policy.
+        
+         __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionPolicyTeamIdList"
+      responses:
+        "204":
+          description: Teams successfully added to retention policy.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+    delete:
+      tags:
+        - data retention
+      summary: Delete teams from a granular data retention policy
+      description: |
+        Delete teams from a granular data retention policy.
+        
+         __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionPolicyTeamIdList"
+      responses:
+        "204":
+          description: Teams successfully deleted from retention policy.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/data_retention/policies/{policy_id}/channels":
+    post:
+      tags:
+        - data retention
+      summary: Add channels to a granular data retention policy
+      description: |
+        Adds channels to a granular data retention policy.
+        
+         __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionPolicyChannelIdList"
+      responses:
+        "204":
+          description: Channels successfully added to retention policy.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+    delete:
+      tags:
+        - data retention
+      summary: Delete channels from a granular data retention policy
+      description: |
+        Delete channels from a granular data retention policy.
+        
+         __Minimum server version__: 5.32
+
+        ##### Permissions
+        Must have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataRetentionPolicyChannelIdList"
+      responses:
+        "204":
+          description: Channels successfully deleted from retention policy.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
         "501":

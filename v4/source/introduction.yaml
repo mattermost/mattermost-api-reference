@@ -557,7 +557,7 @@ tags:
     description: Endpoints for configuring and interacting with high availability clusters.
   - name: elasticsearch
     description: Endpoints for configuring and interacting with Elasticsearch.
-  - name: dataretention
+  - name: data retention
     description: Endpoint for getting data retention policy settings.
   - name: jobs
     description:
@@ -618,7 +618,7 @@ x-tagGroups:
       - cloud
       - elasticsearch
       - bleve
-      - dataretention
+      - data retention
       - jobs
       - plugins
       - roles
