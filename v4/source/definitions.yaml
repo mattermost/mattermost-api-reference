@@ -2646,7 +2646,6 @@ components:
       properties:
         remaining_seats:
           type: integer
-          format: int
         is_paid_tier:
           type: string
     Invoice:
