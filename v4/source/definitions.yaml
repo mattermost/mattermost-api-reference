@@ -2641,6 +2641,13 @@ components:
           type: integer
         dns:
           type: string
+    SubscriptionStats:
+      type: object
+      properties:
+        remaining_seats:
+          type: int
+        is_paid_tier:
+          type: string
     Invoice:
       type: object
       properties:
