@@ -335,10 +335,10 @@
         __Note:__ This is intended for internal use and is subject to change.
       responses:
         "200":
-        description: Cloud subscription stats returned successfully
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SubscriptionStats"
+          description: Cloud subscription stats returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionStats"
         "500":
           $ref: "#/components/responses/InternalServerError"
