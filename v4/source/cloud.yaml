@@ -331,7 +331,7 @@
 
         This endpoint should only be accessed in a Mattermost Cloud instance
 
-        __Minimum server version__: 5.30
+        __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
       responses:
         "200":
