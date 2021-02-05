@@ -51,6 +51,24 @@
           required: false
           schema:
             type: boolean
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of policies per page. There is a maximum limit of 200 policies
+            per page.
+          schema:
+            type: integer
+            default: 60
+        - name: include_total_count
+          in: query
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Retention policies' details retrieved successfully.
