@@ -138,10 +138,10 @@
         description: Custom status object that is to be updated
         required: true
       responses:
-        '200':
+        "200":
           description: User custom status update successful
-        '400':
-          $ref: '#/components/responses/BadRequest'
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
 
@@ -161,10 +161,10 @@
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: User custom status delete successful
-        '400':
-          $ref: '#/components/responses/BadRequest'
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
 
@@ -202,9 +202,9 @@
         description: Custom Status object that is to be removed from the recent custom statuses.
         required: true
       responses:
-        '200':
+        "200":
           description: User recent custom status delete successful
-        '400':
-          $ref: '#/components/responses/BadRequest'
+        "400":
+          $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
