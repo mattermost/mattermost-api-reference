@@ -6,7 +6,7 @@
       description: >
         Lists all available export files.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.33
 
         ##### Permissions
 
@@ -41,7 +41,7 @@
         Downloads an export file.
 
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.33
 
         ##### Permissions
 
@@ -92,7 +92,7 @@
         Deletes an export file.
 
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.33
 
         ##### Permissions
 
