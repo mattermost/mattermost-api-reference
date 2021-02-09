@@ -4612,6 +4612,56 @@
         source: |
           curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+
+  "/users/{user_id}/teams/{team_id}/threads/mention_counts":
+    get:
+      tags:
+        - threads
+      summary: Get all unread mention counts from followed threads, per-channel
+      description: |
+        Get all unread mention counts from followed threads
+
+        __Minimum server version__: 5.29
+
+        ##### Permissions
+        Must be logged in as the user or have `edit_other_users` permission.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: path
+          description: The ID of the team in which the thread is.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Get was successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+      - lang: Go
+        source: >
+          import "github.com/mattermost/mattermost-server/v5/model"
+
+
+          Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+          Client.Login("email@domain.com", "Password1")
+
+          uss, response := Client.GetThreadMentionsForUserPerChannel("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe")
+      - lang: Curl
+        source: |
+          curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/mention_counts' \
+          -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \          
   "/users/{user_id}/teams/{team_id}/threads/read":
     put:
       tags:
