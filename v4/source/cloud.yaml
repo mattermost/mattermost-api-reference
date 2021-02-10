@@ -343,14 +343,13 @@
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /cloud/alert/admin:
+  /subscription/limitreached/invite:
     post:
       tags:
         - cloud
-      summary: POST endpoint for triggering sending of over limit alerts to system admins
+      summary: POST endpoint for triggering sending emails to admin with request to upgrade workspace
       description: >
-        An endpoint that triggers sending emails to all sys admins to alert them about the free tier limitation
-
+        An endpoint that triggers sending emails to all sys admins to request them to upgrade the workspace
         ##### Permissions
 
         This endpoint should only be accessed in a Mattermost Cloud instance
