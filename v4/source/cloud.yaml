@@ -359,8 +359,8 @@
       responses:
         "200":
           description: Atleast one sys admin received the an email
-        "413":
-          $ref: "#/components/responses/TooLarge"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
         "500":
           $ref: "#/components/responses/InternalServerError"
         "501":
