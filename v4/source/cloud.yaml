@@ -358,7 +358,7 @@
         __Note:__ This is intended for internal use and is subject to change.
       responses:
         "200":
-          description: Atleast one sys admin received the an email
+          description: Email sent to at least one of the system administrators
         "413":
           $ref: "#/components/responses/TooLarge"
         "500":
