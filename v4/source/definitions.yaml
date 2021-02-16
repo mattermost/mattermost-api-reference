@@ -2398,7 +2398,7 @@ components:
           type: string
           description: Path to the plugin on the server
         state:
-          type: number
+          type: string
           description: State of the plugin
           enum:
             - NotRunning
