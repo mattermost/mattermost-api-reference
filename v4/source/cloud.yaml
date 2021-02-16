@@ -343,7 +343,7 @@
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /subscription/limitreached/invite:
+  /cloud/subscription/limitreached/invite:
     post:
       tags:
         - cloud
