@@ -356,23 +356,9 @@
 
         __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
-      requestBody:
-          description: Contains the action that prompted the request to upgrade
-          required: true
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - action
-                properties:
-                  action:
-                    type: string
       responses:
         "200":
           description: Email sent to at least one of the system administrators
-        "400":
-          $ref: "#/components/responses/BadRequest"
         "413":
           $ref: "#/components/responses/TooLarge"
         "500":
