@@ -26,6 +26,37 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  /data_retention/policies_count:
+    get:
+      tags:
+        - data retention
+      summary: Get the number of granular data retention policies
+      description: |
+        Gets the number of granular (i.e. team or channel-specific) data retention
+        policies from the server.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Requires an active session but no other permissions.
+
+        ##### License
+        Requires an E20 license.
+      responses:
+        "200":
+          description: Number of retention policies retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                    description: The number of granularretention policies.
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /data_retention/policies:
     get:
       tags:
@@ -43,14 +74,6 @@
         ##### License
         Requires an E20 license.
       parameters:
-        - name: counts_only
-          in: query
-          description: >
-            If set to true, only the number of teams/channels to which each policy is
-            applied will be returned.
-          required: false
-          schema:
-            type: boolean
         - name: page
           in: query
           description: The page to select.
@@ -64,20 +87,15 @@
           schema:
             type: integer
             default: 60
-        - name: include_total_count
-          in: query
-          schema:
-            type: boolean
-            default: false
       responses:
         "200":
           description: Retention policies' details retrieved successfully.
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/DataRetentionPolicyEnrichedList"
-                  - $ref: "#/components/schemas/DataRetentionPolicyWithCountsList"
+                type: array
+                items:
+                  $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelCounts"
         "500":
           $ref: "#/components/responses/InternalServerError"
         "501":
@@ -109,7 +127,7 @@
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataRetentionPolicy"
+                $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelCounts"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -146,7 +164,7 @@
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataRetentionPolicyEnriched"
+                $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelCounts"
         "500":
           $ref: "#/components/responses/InternalServerError"
         "501":
@@ -185,7 +203,7 @@
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataRetentionPolicyEnriched"
+                $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelCounts"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -194,49 +212,6 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-    post:
-      tags:
-        - data retention
-      summary: Update a granular data retention policy
-      description: |
-        Updates (i.e. replaces the fields of) a granular data retention policy.
-        All fields are required.
-
-        __Minimum server version__: 5.32
-
-        ##### Permissions
-        Must have the `manage_system` permission.
-
-        ##### License
-        Requires an E20 license.
-      parameters:
-      - name: policy_id
-        in: path
-        description: The ID of the granular retention policy.
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DataRetentionPolicyUpdate"
-      responses:
-        "200":
-          description: Retention policy successfully updated.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DataRetentionPolicyEnriched"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-        "501":
-          $ref: "#/components/responses/NotImplemented"  
     delete:
       tags:
         - data retention
@@ -270,6 +245,40 @@
         "501":
           $ref: "#/components/responses/NotImplemented"  
   "/data_retention/policies/{policy_id}/teams":
+    get:
+      tags:
+        - data retention
+      summary: Get the teams for a granular data retention policy
+      description: |
+        Gets the teams to which a granular data retention policy is applied.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Requires an active session but no other permissions.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Teams for retention policy successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
     post:
       tags:
         - data retention
@@ -296,7 +305,10 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DataRetentionPolicyTeamIdList"
+              type: array
+              items:
+                type: string
+                description: The IDs of the teams to add to the policy.
       responses:
         "204":
           description: Teams successfully added to retention policy.
@@ -334,7 +346,10 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DataRetentionPolicyTeamIdList"
+              type: array
+              items:
+                type: string
+                description: The IDs of the teams to remove from the policy.
       responses:
         "204":
           description: Teams successfully deleted from retention policy.
@@ -347,6 +362,40 @@
         "501":
           $ref: "#/components/responses/NotImplemented"
   "/data_retention/policies/{policy_id}/channels":
+    get:
+      tags:
+        - data retention
+      summary: Get the channels for a granular data retention policy
+      description: |
+        Gets the channels to which a granular data retention policy is applied.
+
+        __Minimum server version__: 5.32
+
+        ##### Permissions
+        Requires an active session but no other permissions.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+      - name: policy_id
+        in: path
+        description: The ID of the granular retention policy.
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Channels for retention policy successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Channel"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
     post:
       tags:
         - data retention
@@ -373,7 +422,10 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DataRetentionPolicyChannelIdList"
+              type: array
+              items:
+                type: string
+                description: The IDs of the channels to add to the policy.
       responses:
         "204":
           description: Channels successfully added to retention policy.
@@ -411,7 +463,10 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DataRetentionPolicyChannelIdList"
+              type: array
+              items:
+                type: string
+                description: The IDs of the channels to add to the policy.
       responses:
         "204":
           description: Channels successfully deleted from retention policy.

@@ -2194,8 +2194,19 @@ components:
           properties:
             id:
               type: string
-              description: The unique ID for this retention policy.
-    DataRetentionPolicyWithApplied:
+              description: The ID of this retention policy.
+    DataRetentionPolicyWithTeamAndChannelCounts:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicy"
+        - type: object
+          properties:
+            team_count:
+              type: integer
+              description: The number of teams to which this policy is applied.
+            channel_count:
+              type: integer
+              description: The number of channels to which this policy is applied.
+    DataRetentionPolicyWithTeamAndChannelIds:
       allOf:
         - $ref: "#/components/schemas/DataRetentionPolicyWithoutId"
         - type: object
@@ -2212,109 +2223,13 @@ components:
               description: The IDs of the channels to which this policy should be applied.
     DataRetentionPolicyCreate:
       allOf:
-        - $ref: "#/components/schemas/DataRetentionPolicyWithApplied"
+        - $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelIds"
       required:
         - display_name
         - post_duration
     DataRetentionPolicyPatch:
       allOf:
-        - $ref: "#/components/schemas/DataRetentionPolicyWithApplied"
-    DataRetentionPolicyUpdate:
-      allOf:
-        - $ref: "#/components/schemas/DataRetentionPolicyWithApplied"
-      required:
-        - display_name
-        - post_duration
-        - team_ids
-        - channel_ids
-    DataRetentionPolicyTeamDisplayInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The team's ID.
-        display_name:
-          type: string
-          description: The team's display name.
-    DataRetentionPolicyChannelDisplayInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The channel's ID.
-        display_name:
-          type: string
-          description: The channel's display name.
-        team_display_name:
-          type: string
-          description: The display name of this channel's team.
-    DataRetentionPolicyEnriched:
-      allOf:
-        - $ref: "#/components/schemas/DataRetentionPolicy"
-        - type: object
-          properties:
-            teams:
-              type: array
-              items:
-                $ref: "#/components/schemas/DataRetentionPolicyTeamDisplayInfo"
-              description: The teams to which this policy will be applied.
-            channels:
-              type: array
-              items:
-                $ref: "#/components/schemas/DataRetentionPolicyChannelDisplayInfo"
-              description: The channels to which this policy will be applied.
-    DataRetentionPolicyEnrichedList:
-      type: object
-      properties:
-        policies:
-          type: array
-          items:
-            $ref: "#/components/schemas/DataRetentionPolicyEnriched"
-        total_count:
-          type: integer
-          description: The number of policies returned.
-    DataRetentionPolicyWithCounts:
-      type: object
-      allOf:
-        - $ref: "#/components/schemas/DataRetentionPolicy"
-        - type: object
-          properties:
-            team_count:
-              type: integer
-              description: The number of teams to which this policy is applied.
-            channel_count:
-              type: integer
-              description: The number of channels to which this policy is applied.
-    DataRetentionPolicyWithCountsList:
-      type: object
-      properties:
-        policies:
-          type: array
-          items:
-            $ref: "#/components/schemas/DataRetentionPolicyWithCounts"
-        total_count:
-          type: integer
-          description: The number of policies returned.
-    DataRetentionPolicyTeamIdList:
-      type: object
-      properties:
-        team_ids:
-          type: array
-          items:
-            type: string
-          description: The team IDs
-      required:
-        - team_ids
-    DataRetentionPolicyChannelIdList:
-      type: object
-      properties:
-        channel_ids:
-          type: array
-          items:
-            type: string
-          description: The channel IDs
-      required:
-        - channel_ids
+        - $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelIds"
     UserNotifyProps:
       type: object
       properties:
