@@ -82,8 +82,7 @@
             default: 0
         - name: per_page
           in: query
-          description: The number of policies per page. There is a maximum limit of 200 policies
-            per page.
+          description: The number of policies per page. There is a maximum limit of 200 per page.
           schema:
             type: integer
             default: 60
@@ -260,12 +259,24 @@
         ##### License
         Requires an E20 license.
       parameters:
-      - name: policy_id
-        in: path
-        description: The ID of the granular retention policy.
-        required: true
-        schema:
-          type: string
+        - name: policy_id
+          in: path
+          description: The ID of the granular retention policy.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of teams per page. There is a maximum limit of 200 per page.
+          schema:
+            type: integer
+            default: 60
       responses:
         "200":
           description: Teams for retention policy successfully retrieved.
@@ -377,12 +388,24 @@
         ##### License
         Requires an E20 license.
       parameters:
-      - name: policy_id
-        in: path
-        description: The ID of the granular retention policy.
-        required: true
-        schema:
-          type: string
+        - name: policy_id
+          in: path
+          description: The ID of the granular retention policy.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of channels per page. There is a maximum limit of 200 per page.
+          schema:
+            type: integer
+            default: 60
       responses:
         "200":
           description: Channels for retention policy successfully retrieved.
