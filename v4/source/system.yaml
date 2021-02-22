@@ -1492,9 +1492,9 @@
     get:
       tags:
         - system
-      summary: Retrieves the system-level status that specifies that at least an Admin has visited the in-product Plugin Marketplace.
+      summary: Retrieves the system-level status that specifies that at least one System Admin has visited the in-product Plugin Marketplace.
       description: |
-        Retrieves the status that specifies that at least an Admin has visited the in-product Plugin Marketplace.
+        Retrieves the status that specifies that at least one System Admin has visited the in-product Plugin Marketplace.
         __Minimum server version: 5.33__
         ##### Permissions
         Users must be System Admins - have `manage_system` permissions.
