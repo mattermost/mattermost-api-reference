@@ -3172,7 +3172,7 @@ components:
           type: string
         value:
           description: System property value
-          type: boolean
+          type: string
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
