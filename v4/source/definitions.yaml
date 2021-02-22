@@ -2408,7 +2408,6 @@ components:
             - FailedToStayRunning
             - Stopping
 
-
     PluginManifestWebapp:
       type: object
       properties:
@@ -3165,6 +3164,15 @@ components:
         renewal_link:
           description: License renewal link
           type: string
+    System:
+      type: object
+      properties:
+        name:
+          description: System property name
+          type: string
+        value:
+          description: System property value
+          type: boolean
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
