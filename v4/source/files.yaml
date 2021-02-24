@@ -374,6 +374,8 @@
         content (if file content extraction is enabled and supported for the
         files).
 
+        __Minimum server version__: 5.34
+
         ##### Permissions
 
         Must be authenticated and have the `view_team` permission.
