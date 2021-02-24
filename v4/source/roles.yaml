@@ -8,7 +8,7 @@
 
         `manage_system` permission is required.
 
-        __Minimum server version__: 4.9
+        __Minimum server version__: 5.33
       responses:
         "200":
           description: Role retrieval successful
