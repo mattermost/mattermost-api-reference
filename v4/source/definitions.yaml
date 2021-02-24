@@ -292,6 +292,26 @@ components:
           type: string
         metadata:
           $ref: "#/components/schemas/PostMetadata"
+    FileInfoList:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+          example:
+            - file_info_id1
+            - file_info_id2
+        file_infos:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/FileInfo"
+        next_file_id:
+          type: string
+          description: The ID of next file info. Not omitted when empty or not relevant.
+        prev_file_id:
+          type: string
+          description: The ID of previous file info. Not omitted when empty or not relevant.
     PostList:
       type: object
       properties:
