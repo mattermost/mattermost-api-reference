@@ -2408,6 +2408,7 @@ components:
             - FailedToStayRunning
             - Stopping
 
+
     PluginManifestWebapp:
       type: object
       properties:
