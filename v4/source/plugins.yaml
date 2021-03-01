@@ -556,8 +556,8 @@
   /plugins/first_admin_visit_marketplace:
     get:
       tags:
-        - system
-      summary: Retrieves the system-level status that specifies that at least one System Admin has visited the in-product Plugin Marketplace.
+        - plugins
+      summary: Get if the Plugin Marketplace has been visited.
       description: |
         Retrieves the status that specifies that at least one System Admin has visited the in-product Plugin Marketplace.
         __Minimum server version: 5.33__
@@ -582,7 +582,7 @@
         Stores the system-level status that specifies that at least an admin has visited the in-product Plugin Marketplace.
         __Minimum server version: 5.33__
         ##### Permissions
-        Users must be system admins - have `manage_system` permissions.
+        Must have `manage_system` permissions.
       requestBody:
         content:
           application/json:
