@@ -557,12 +557,12 @@
     get:
       tags:
         - plugins
-      summary: Get if the Plugin Marketplace has been visited.
+      summary: Get if the Plugin Marketplace has been visited by at least an admin.
       description: |
         Retrieves the status that specifies that at least one System Admin has visited the in-product Plugin Marketplace.
         __Minimum server version: 5.33__
         ##### Permissions
-        Users must be System Admins - have `manage_system` permissions.
+        Must have `manage_system` permissions.
       responses:
         "200":
           description: Retrieves the system-level status
@@ -577,7 +577,7 @@
     post:
       tags:
         - system
-      summary: Stores the system-level status that specifies that at least an admin has visited the in-product Plugin Marketplace.
+      summary: Stores that the Plugin Marketplace has been visited by at least an admin.
       description: |
         Stores the system-level status that specifies that at least an admin has visited the in-product Plugin Marketplace.
         __Minimum server version: 5.33__
