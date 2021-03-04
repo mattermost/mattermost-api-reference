@@ -299,6 +299,15 @@
                   description: The number of entries to return per page, if paginated. If
                     this parameter is not present with the `page` parameter then
                     the results will be returned un-paged.
+                exclude_policy_constrained:
+                  type: boolean
+                  default: false
+                  description: >
+                    If set to true, only channels which do not have a grnaular retention policy assigned to
+                    them will be returned. The `manage_system` permission is required to use this parameter.
+
+
+                    __Minimum server version__: 5.32
         description: The search terms and logic to use in the search.
         required: true
       responses:
