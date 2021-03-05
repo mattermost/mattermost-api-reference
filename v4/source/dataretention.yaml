@@ -572,7 +572,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/data_retention/policies/{policy_id}/channel/search":
+  "/data_retention/policies/{policy_id}/channels/search":
     post:
       tags:
         - data retention
