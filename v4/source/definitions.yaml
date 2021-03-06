@@ -3138,6 +3138,20 @@ components:
         title:
           description: "Notice title. Use {{Mattermost}} instead of plain text to support white-labeling. Text supports Markdown."
           type: string
+    RemoteClusterInfo:
+      type: object
+      properties:
+        display_name:
+          description: The display name for the remote cluster
+          type: string
+        create_at:
+          description: The time in milliseconds a remote cluster was created
+          type: integer
+          format: int64
+        last_ping_at:
+          description: The time in milliseconds a remote cluster was last pinged successfully
+          type: integer
+          format: int64
     SystemStatusResponse:
       type: object
       properties:
