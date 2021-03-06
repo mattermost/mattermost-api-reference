@@ -5,6 +5,9 @@
       summary: Get remote cluster info by ID for user.
       description: |
         Get remote cluster info based on remoteId.
+
+        __Minimum server version__: 5.50
+
         ##### Permissions
         Must be authenticated and user must belong to at least one channel shared with the remote cluster.
       parameters:
