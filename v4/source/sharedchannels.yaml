@@ -1,4 +1,4 @@
-  "/sharedchannels/getremoteinfo/{remote_id}":
+  "/sharedchannels/remote_info/{remote_id}":
     get:
       tags:
         - shared channels
