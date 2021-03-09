@@ -1404,7 +1404,7 @@
             type: string
         - name: include_deleted
           in: query
-          description: Defines if deleted channels should be returned or not
+          description: Defines if deleted channels should be returned or not (Mattermost Server 5.26.0+)
           schema:
             type: boolean
             default: false
@@ -1458,7 +1458,7 @@
             type: string
         - name: include_deleted
           in: query
-          description: Defines if deleted channels should be returned or not
+          description: Defines if deleted channels should be returned or not (Mattermost Server 5.26.0+)
           schema:
             type: boolean
             default: false
