@@ -169,7 +169,7 @@
           $ref: "#/components/responses/Unauthorized"
 
   /users/{user_id}/status/custom/recent:
-    delete:
+    post:
       tags:
         - custom_status
       summary: Delete user's recent custom status
