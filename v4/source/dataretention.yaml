@@ -211,7 +211,7 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DataRetentionPolicyPatch"
+              $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelIds"
       responses:
         "200":
           description: Retention policy successfully patched.

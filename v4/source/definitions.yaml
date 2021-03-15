@@ -2265,9 +2265,46 @@ components:
       required:
         - display_name
         - post_duration
-    DataRetentionPolicyPatch:
-      allOf:
-        - $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelIds"
+    DataRetentionPolicyForTeam:
+      type: object
+      properties:
+        team_id:
+          type: string
+          description: The team ID.
+        post_duration:
+          type: integer
+          description: The number of days a message will be retained before being deleted by this policy.
+    RetentionPolicyForTeamList:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataRetentionPolicyForTeam"
+          description: The list of team policies.
+        total_count:
+          type: integer
+          description: The total number of team policies.
+    DataRetentionPolicyForChannel:
+      type: object
+      properties:
+        channel_id:
+          type: string
+          description: The channel ID.
+        post_duration:
+          type: integer
+          description: The number of days a message will be retained before being deleted by this policy.
+    RetentionPolicyForChannelList:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataRetentionPolicyForChannel"
+          description: The list of channel policies.
+        total_count:
+          type: integer
+          description: The total number of channel policies.
     UserNotifyProps:
       type: object
       properties:
