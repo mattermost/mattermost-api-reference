@@ -12,6 +12,7 @@
         ##### Permissions
 
         Must have `manage_jobs` permission.
+      operationId: GetJobs
       parameters:
         - name: page
           in: query
@@ -49,6 +50,7 @@
         __Minimum server version: 4.1__
         ##### Permissions
         Must have `manage_jobs` permission.
+      operationId: CreateNewJob
       requestBody:
         content:
           application/json:
@@ -89,6 +91,7 @@
         __Minimum server version: 4.1__
         ##### Permissions
         Must have `manage_jobs` permission.
+      operationId: GetJob
       parameters:
         - name: job_id
           in: path
@@ -121,6 +124,7 @@
         __Minimum server version: 5.28__
         ##### Permissions
         Must have `manage_jobs` permission.
+      operationId: DownloadJobResults
       parameters:
         - name: job_id
           in: path
@@ -147,6 +151,7 @@
         __Minimum server version: 4.1__
         ##### Permissions
         Must have `manage_jobs` permission.
+      operationId: CancelJob
       parameters:
         - name: job_id
           in: path
@@ -183,6 +188,7 @@
         ##### Permissions
 
         Must have `manage_jobs` permission.
+      operationId: GetJobsOfGivenType
       parameters:
         - name: type
           in: path

@@ -11,6 +11,7 @@
         ##### Permissions
 
         Must have `manage_system` permissions.
+      operationId: ListExports
       responses:
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -46,6 +47,7 @@
         ##### Permissions
 
         Must have `manage_system` permissions.
+      operationId: DownloadExport
       parameters:
         - name: export_name
           in: path
@@ -97,6 +99,7 @@
         ##### Permissions
 
         Must have `manage_system` permissions.
+      operationId: DeleteExport
       parameters:
         - name: export_name
           in: path

@@ -7,6 +7,7 @@
         ##### Permissions
 
         No permission required
+      operationId: Login
       requestBody:
         content:
           application/json:
@@ -51,6 +52,7 @@
         ##### Permissions
 
         A Cloud license is required
+      operationId: LoginCwsToken
       requestBody:
         content:
           application/json:
@@ -81,6 +83,7 @@
         ##### Permissions
 
         An active session is required
+      operationId: Logout
       responses:
         "201":
           description: User logout successful
@@ -106,6 +109,7 @@
         ##### Permissions
 
         No permission required but user creation can be controlled by server configuration.
+      operationId: CreateUser
       parameters:
         - name: t
           in: query
@@ -221,6 +225,7 @@
         ##### Permissions
 
         Requires an active session and (if specified) membership to the channel or team being selected from.
+      operationId: GetUsers
       parameters:
         - name: page
           in: query
@@ -467,6 +472,7 @@
 
 
         __Local mode only__: This endpoint is only available through [local mode](https://docs.mattermost.com/administration/mmctl-cli-tool.html#local-mode).
+      operationId: PermanentDeleteAllUsers
       responses:
         "200":
           description: Delete request was successful
@@ -499,6 +505,7 @@
         Get a list of users based on a provided list of user ids.
         ##### Permissions
         Requires an active session but no other permissions.
+      operationId: GetUsersByIds
       parameters:
         - name: since
           in: query
@@ -548,6 +555,7 @@
         Requires an active session but no other permissions.
 
         __Minimum server version__: 5.14
+      operationId: GetUsersByGroupChannels
       requestBody:
         content:
           application/json:
@@ -582,6 +590,7 @@
         Get a list of users based on a provided list of usernames.
         ##### Permissions
         Requires an active session but no other permissions.
+      operationId: GetUsersByUsernames
       requestBody:
         content:
           application/json:
@@ -654,6 +663,7 @@
         ##### Permissions
 
         Requires an active session and `read_channel` and/or `view_team` permissions for any channels or teams specified in the request body.
+      operationId: SearchUsers
       requestBody:
         content:
           application/json:
@@ -794,6 +804,7 @@
         ##### Permissions
 
         Requires an active session and `view_team` and `read_channel` on any teams or channels used to filter the results further.
+      operationId: AutocompleteUsers
       parameters:
         - name: team_id
           in: query
@@ -897,6 +908,7 @@
         Must be authenticated.
 
         __Minimum server version__: 5.23
+      operationId: GetKnownUsers
       responses:
         "200":
           description: Known users' IDs retrieval successful
@@ -925,6 +937,7 @@
         Get a total count of users in the system.
         ##### Permissions
         Must be authenticated.
+      operationId: GetTotalCountOfUsersInSystem
       responses:
         "200":
           description: User stats retrieval successful
@@ -983,6 +996,7 @@
 
         ##### Permissions
         Must have `manage_system` permission.
+      operationId: GetTotalCountOfUsersInSystemMatchingFilters
       parameters:
         - name: in_team
           in: query
@@ -1055,6 +1069,7 @@
         Get a user a object. Sensitive information will be sanitized out.
         ##### Permissions
         Requires an active session but no other permissions.
+      operationId: GetUser
       parameters:
         - name: user_id
           in: path
@@ -1123,6 +1138,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
+      operationId: UpdateUser
       parameters:
         - name: user_id
           in: path
@@ -1265,6 +1281,7 @@
         ##### Permissions
 
         Must be logged in as the user being deactivated or have the `edit_other_users` permission.
+      operationId: DeactivateUserAccount
       parameters:
         - name: user_id
           in: path
@@ -1335,6 +1352,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
+      operationId: PatchUser
       parameters:
         - name: user_id
           in: path
@@ -1463,6 +1481,7 @@
         ##### Permissions
 
         Must have the `manage_roles` permission.
+      operationId: UpdateUserRoles
       parameters:
         - name: user_id
           in: path
@@ -1550,6 +1569,7 @@
         User can deactivate themselves.
 
         User with `manage_system` permission can activate or deactivate a user.
+      operationId: UpdateUserActiveStatus
       parameters:
         - name: user_id
           in: path
@@ -1628,6 +1648,7 @@
         Get a user's profile image based on user_id string parameter.
         ##### Permissions
         Must be logged in.
+      operationId: GetUserProfileImage
       parameters:
         - name: user_id
           in: path
@@ -1693,6 +1714,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
+      operationId: SetUserProfileImage
       parameters:
         - name: user_id
           in: path
@@ -1798,6 +1820,7 @@
         Must be logged in as the user being updated or have the `edit_other_users` permission.
 
         __Minimum server version__: 5.5
+      operationId: DeleteUserProfileImage
       parameters:
         - name: user_id
           in: path
@@ -1877,6 +1900,7 @@
         Must be logged in.
 
         __Minimum server version__: 5.5
+      operationId: ReturnUserDefaultProfileImage
       parameters:
         - name: user_id
           in: path
@@ -1944,6 +1968,7 @@
         ##### Permissions
 
         Requires an active session but no other permissions.
+      operationId: GetUserByUsername
       parameters:
         - name: username
           in: path
@@ -2011,6 +2036,7 @@
         ##### Permissions
 
         No permissions required.
+      operationId: ResetPassword
       requestBody:
         content:
           application/json:
@@ -2093,6 +2119,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
+      operationId: UpdateUserMfa
       parameters:
         - name: user_id
           in: path
@@ -2183,6 +2210,7 @@
         ##### Permissions
 
         Must be logged in as the user or have the `edit_other_users` permission.
+      operationId: GenerateMfaSecret
       parameters:
         - name: user_id
           in: path
@@ -2263,6 +2291,7 @@
 
         ##### Permissions
         Must be logged in as the user or have the `demote_to_guest` permission.
+      operationId: DemoteUserToGuest
       parameters:
         - name: user_id
           in: path
@@ -2336,6 +2365,7 @@
 
         ##### Permissions
         Must be logged in as the user or have the `promote_guest` permission.
+      operationId: PromoteGuestToUser
       parameters:
         - name: user_id
           in: path
@@ -2408,6 +2438,7 @@
 
         ##### Permissions
         Must have `manage_system` permission.
+      operationId: ConvertUserToBot
       parameters:
         - name: user_id
           in: path
@@ -2453,6 +2484,7 @@
         ##### Permissions
 
         No permission required.
+      operationId: CheckMfa
       requestBody:
         content:
           application/json:
@@ -2527,6 +2559,7 @@
         ##### Permissions
 
         Must be logged in as the user the password is being changed for or have `manage_system` permission.
+      operationId: UpdateUserPassword
       parameters:
         - name: user_id
           in: path
@@ -2623,6 +2656,7 @@
         ##### Permissions
 
         No permissions required.
+      operationId: SendPasswordResetEmail
       requestBody:
         content:
           application/json:
@@ -2696,6 +2730,7 @@
         ##### Permissions
 
         Requires an active session and for the current session to be able to view another user's email based on the server's privacy settings.
+      operationId: GetUserByEmail
       parameters:
         - name: email
           in: path
@@ -2765,6 +2800,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
+      operationId: GetUserSessions
       parameters:
         - name: user_id
           in: path
@@ -2833,6 +2869,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
+      operationId: RevokeUserSession
       parameters:
         - name: user_id
           in: path
@@ -2918,6 +2955,7 @@
         Must be logged in as the user being updated or have the `edit_other_users` permission.
 
         __Minimum server version__: 4.4
+      operationId: RevokeAllUserSessions
       parameters:
         - name: user_id
           in: path
@@ -2985,6 +3023,7 @@
         ##### Permissions
 
         Must be authenticated.
+      operationId: AttachMobileDevice
       requestBody:
         content:
           application/json:
@@ -3055,6 +3094,7 @@
         Get a list of audit by providing the user GUID.
         ##### Permissions
         Must be logged in as the user or have the `edit_other_users` permission.
+      operationId: GetUserAudits
       parameters:
         - name: user_id
           in: path
@@ -3125,6 +3165,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: VerifyUserEmailWithoutToken
       parameters:
         - name: user_id
           in: path
@@ -3165,6 +3206,7 @@
         Verify the email used by a user to sign-up their account with.
         ##### Permissions
         No permissions required.
+      operationId: VerifyUserEmail
       requestBody:
         content:
           application/json:
@@ -3235,6 +3277,7 @@
         ##### Permissions
 
         No permissions required.
+      operationId: SendVerificationEmail
       requestBody:
         content:
           application/json:
@@ -3322,6 +3365,7 @@
         ##### Permissions
 
         No current authentication required except when switching from OAuth2/SAML to email.
+      operationId: SwitchLoginMethod
       requestBody:
         content:
           application/json:
@@ -3448,6 +3492,7 @@
         ##### Permissions
 
         Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      operationId: CreateUserAccessToken
       parameters:
         - name: user_id
           in: path
@@ -3536,6 +3581,7 @@
         ##### Permissions
 
         Must have `read_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      operationId: GetUserAccessTokensForUser
       parameters:
         - name: user_id
           in: path
@@ -3625,6 +3671,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetUserAccessTokens
       parameters:
         - name: page
           in: query
@@ -3677,6 +3724,7 @@
         ##### Permissions
 
         Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      operationId: RevokeUserAccessToken
       requestBody:
         content:
           application/json:
@@ -3755,6 +3803,7 @@
         ##### Permissions
 
         Must have `read_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      operationId: GetUserAccessToken
       parameters:
         - name: token_id
           in: path
@@ -3828,6 +3877,7 @@
         ##### Permissions
 
         Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      operationId: DisablePersonalAccessToken
       requestBody:
         content:
           application/json:
@@ -3905,6 +3955,7 @@
         ##### Permissions
 
         Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
+      operationId: EnablePersonalAccessToken
       requestBody:
         content:
           application/json:
@@ -3983,6 +4034,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: SearchUserAccessTokens
       requestBody:
         content:
           application/json:
@@ -4062,6 +4114,7 @@
         ##### Permissions
 
         Must have the `edit_other_users` permission.
+      operationId: UpdateUserAuthenticationMethod
       parameters:
         - name: user_id
           in: path
@@ -4158,6 +4211,7 @@
         ##### Permissions
 
         Must be logged in as the user being acted on.
+      operationId: RegisterTermsOfServiceAction
       parameters:
         - name: user_id
           in: path
@@ -4230,6 +4284,7 @@
         ##### Permissions
 
         Must be logged in as the user being acted on.
+      operationId: GetUserTermsOfService
       parameters:
         - name: user_id
           in: path
@@ -4283,6 +4338,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: RevokeSessionsFromAllUsers
       responses:
         "200":
           description: Sessions successfully revoked.
@@ -4314,6 +4370,7 @@
 
         Must have `manage_system` permission to publish for any user other than oneself.
 
+      operationId: PublishUserTyping
       parameters:
         - name: user_id
           in: path
@@ -4369,6 +4426,7 @@
 
         ##### Permissions
         Must be logged in as the user who created the upload sessions.
+      operationId: GetUploadsForUser
       parameters:
         - name: user_id
           in: path
@@ -4425,6 +4483,7 @@
 
         Must have `manage_system` permission.
 
+      operationId: MigrateAuthToLdap
       requestBody:
           content:
             application/json:
@@ -4482,6 +4541,7 @@
 
           Must have `manage_system` permission.
 
+        operationId: MigrateAuthToSaml
         requestBody:
             content:
               application/json:
@@ -4533,6 +4593,7 @@
 
       ##### Permissions
       Must be logged in as the user or have `edit_other_users` permission.
+    operationId: GetUserThreads
     parameters:
       - name: user_id
         in: path
@@ -4625,6 +4686,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
+      operationId: GetThreadMentionsForUserPerChannel
       parameters:
         - name: user_id
           in: path
@@ -4674,6 +4736,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
+      operationId: MarkThreadsReadForUser
       parameters:
         - name: user_id
           in: path
@@ -4723,6 +4786,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
+      operationId: MarkThreadReadForUser
       parameters:
         - name: user_id
           in: path
@@ -4784,6 +4848,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
+      operationId: StartFollowingThread
       parameters:
         - name: user_id
           in: path
@@ -4838,6 +4903,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
+      operationId: StopFollowingThread
       parameters:
         - name: user_id
           in: path
@@ -4893,6 +4959,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
+      operationId: GetUserThread
       parameters:
         - name: user_id
           in: path

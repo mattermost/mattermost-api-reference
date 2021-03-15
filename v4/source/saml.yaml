@@ -7,6 +7,7 @@
         Get SAML metadata from the server. SAML must be configured properly.
         ##### Permissions
         No permission required.
+      operationId: GetMetadata
       responses:
         "200":
           description: SAML metadata retrieval successful
@@ -25,6 +26,7 @@
         Get SAML metadata from the Identity Provider. SAML must be configured properly.
         ##### Permissions
         No permission required.
+      operationId: GetMetadataFromIdentityProvider
       responses:
         "200":
           description: SAML metadata retrieval successful
@@ -47,6 +49,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: UploadIdpCertificate
       requestBody:
         content:
           multipart/form-data:
@@ -86,6 +89,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: RemoveIdpCertificate
       responses:
         "200":
           description: SAML certificate delete successful
@@ -112,6 +116,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: UploadSamlPublicCertificate
       requestBody:
         content:
           multipart/form-data:
@@ -151,6 +156,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: RemoveSamlPublicCertificate
       responses:
         "200":
           description: SAML certificate delete successful
@@ -177,6 +183,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: UploadSamlPrivateKey
       requestBody:
         content:
           multipart/form-data:
@@ -216,6 +223,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: RemoveSamlPrivateKey
       responses:
         "200":
           description: SAML certificate delete successful
@@ -241,6 +249,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: GetSamlCertificateStatus
       responses:
         "200":
           description: SAML certificate status retrieval successful

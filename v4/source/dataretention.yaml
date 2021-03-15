@@ -15,6 +15,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetDataRetentionPolicy
       responses:
         "200":
           description: Global data retention policy details retrieved successfully.
@@ -46,6 +47,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetDataRetentionPoliciesCount
       responses:
         "200":
           description: Number of retention policies retrieved successfully.
@@ -81,6 +83,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetDataRetentionPolicies
       parameters:
         - name: page
           in: query
@@ -126,6 +129,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: CreateDataRetentionPolicy
       requestBody:
         required: true
         content:
@@ -162,6 +166,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetDataRetentionPolicyByID
       parameters:
       - name: policy_id
         in: path
@@ -199,6 +204,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: PatchDataRetentionPolicy
       parameters:
       - name: policy_id
         in: path
@@ -241,6 +247,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: DeleteDataRetentionPolicy
       parameters:
       - name: policy_id
         in: path
@@ -278,6 +285,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetTeamsForRetentionPolicy
       parameters:
         - name: policy_id
           in: path
@@ -328,6 +336,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: AddTeamsToRetentionPolicy
       parameters:
       - name: policy_id
         in: path
@@ -373,6 +382,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: RemoveTeamsFromRetentionPolicy
       parameters:
       - name: policy_id
         in: path
@@ -419,6 +429,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: SearchTeamsForRetentionPolicy
       parameters:
         - name: policy_id
           in: path
@@ -468,6 +479,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetChannelsForRetentionPolicy
       parameters:
         - name: policy_id
           in: path
@@ -516,6 +528,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: AddChannelsToRetentionPolicy
       parameters:
       - name: policy_id
         in: path
@@ -561,6 +574,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: RemoveChannelsFromRetentionPolicy
       parameters:
       - name: policy_id
         in: path
@@ -607,6 +621,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: SearchChannelsForRetentionPolicy
       parameters:
         - name: policy_id
           in: path

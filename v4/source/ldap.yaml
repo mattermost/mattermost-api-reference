@@ -10,6 +10,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: SyncWithLdap
       responses:
         "200":
           description: LDAP sync successful
@@ -31,6 +32,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: TestLdapConfiguration
       responses:
         "200":
           description: LDAP test successful
@@ -53,6 +55,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetLdapGroups
       parameters:
         - name: q
           in: query
@@ -99,6 +102,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: LinkLdapGroup
       parameters:
         - name: remote_id
           in: path
@@ -129,6 +133,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: DeleteLinkForLdapGroup
       parameters:
         - name: remote_id
           in: path
@@ -162,6 +167,7 @@
         Must have `manage_system` permission.
   
         __Minimum server version__: 5.26
+      operationId: MigrateIdLdap
       requestBody:
         content:
           application/json:
@@ -203,6 +209,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: UploadLdapPublicCertificate
       requestBody:
         content:
           multipart/form-data:
@@ -240,6 +247,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: RemoveLdapPublicCertificate
       responses:
         "200":
           description: LDAP certificate delete successful
@@ -265,6 +273,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: UploadLdapPrivateKey
       requestBody:
         content:
           multipart/form-data:
@@ -302,6 +311,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: RemoveLdapPrivateKey
       responses:
         "200":
           description: LDAP certificate delete successful

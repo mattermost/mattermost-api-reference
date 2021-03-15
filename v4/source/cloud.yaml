@@ -12,6 +12,7 @@
 
         __Minimum server version__: 5.28
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: GetCloudProducts
       responses:
         "200":
           description: Cloud products returned successfully
@@ -44,6 +45,7 @@
         __Minimum server version__: 5.28
         __Note:__: This is intended for internal use and is subject to change.
 
+      operationId: CreateCustomerSetupPaymentIntent
       responses:
         "201":
           description: Payment setup intented created
@@ -74,6 +76,7 @@
         __Minimum server version__: 5.28
 
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: CompletePaymentSetupIntent
       requestBody:
         content:
           multipart/form-data:
@@ -109,6 +112,7 @@
 
         __Minimum server version__: 5.28
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: GetCloudCustomer
       responses:
         "200":
           description: Cloud customer returned successfully
@@ -137,6 +141,7 @@
 
         __Minimum server version__: 5.29
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: UpdateCloudCustomer
       requestBody:
         content:
           application/json:
@@ -184,6 +189,7 @@
 
         __Minimum server version__: 5.29
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: UpdateCloudCustomerAddress
       requestBody:
         content:
           application/json:
@@ -220,6 +226,7 @@
 
         __Minimum server version__: 5.28
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: GetCloudSubscription
       responses:
         "200":
           description: Cloud subscription returned successfully
@@ -249,6 +256,7 @@
 
         __Minimum server version__: 5.30
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: GetCloudSubscriptionInvoices
       responses:
         "200":
           description: Subscription invoices returned successfully
@@ -280,6 +288,7 @@
 
         __Minimum server version__: 5.30
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: GetCloudInvoicePdf
       parameters:
         - name: invoice_id
           in: path
@@ -310,6 +319,7 @@
 
         __Minimum server version__: 5.30
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: PostEndpointForCwsWebhooks
       responses:
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -333,6 +343,7 @@
 
         __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: GetEndpointForCloudSubscriptionStats
       responses:
         "200":
           description: Cloud subscription stats returned successfully
@@ -356,6 +367,7 @@
 
         __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: TriggerAdminEmailOnInvite
       responses:
         "200":
           description: Email sent to at least one of the system administrators
@@ -379,6 +391,7 @@
 
         __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
+      operationId: TriggerAdminEmailOnJoin
       responses:
         "200":
           description: Email sent to at least one of the system administrators

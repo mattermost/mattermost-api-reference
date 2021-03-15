@@ -71,6 +71,7 @@
 
         ##### Permissions
         Must be authenticated and user must belong to at least one channel shared with the remote cluster.
+      operationId: GetRemoteClusterInfo
       parameters:
         - name: remote_id
           in: path

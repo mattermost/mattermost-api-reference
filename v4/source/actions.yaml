@@ -10,6 +10,7 @@
         information on interactive dialogs.
 
         __Minimum server version: 5.6__
+      operationId: OpenDialog
       requestBody:
         content:
           application/json:
@@ -81,6 +82,7 @@
         information on interactive dialogs.
 
         __Minimum server version: 5.6__
+      operationId: SubmitDialog
       requestBody:
         content:
           application/json:

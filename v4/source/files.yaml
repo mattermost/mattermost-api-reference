@@ -22,6 +22,7 @@
         ##### Permissions
 
         Must have `upload_file` permission.
+      operationId: UploadFile
       parameters:
         - name: channel_id
           in: query
@@ -130,6 +131,7 @@
         Gets a file that has been uploaded previously.
         ##### Permissions
         Must have `read_channel` permission or be uploader of the file.
+      operationId: GetFile
       parameters:
         - name: file_id
           in: path
@@ -168,6 +170,7 @@
         Gets a file's thumbnail.
         ##### Permissions
         Must have `read_channel` permission or be uploader of the file.
+      operationId: GetFileThumbnail
       parameters:
         - name: file_id
           in: path
@@ -206,6 +209,7 @@
         Gets a file's preview.
         ##### Permissions
         Must have `read_channel` permission or be uploader of the file.
+      operationId: GetFilePreview
       parameters:
         - name: file_id
           in: path
@@ -247,6 +251,7 @@
         ##### Permissions
 
         Must have `read_channel` permission or be uploader of the file.
+      operationId: GetPublicFileLink
       parameters:
         - name: file_id
           in: path
@@ -294,6 +299,7 @@
         Gets a file's info.
         ##### Permissions
         Must have `read_channel` permission or be uploader of the file.
+      operationId: GetMetadataForFile
       parameters:
         - name: file_id
           in: path
@@ -337,6 +343,7 @@
       description: |
         ##### Permissions
         No permissions required.
+      operationId: GetPublicFile
       parameters:
         - name: file_id
           in: path
@@ -379,6 +386,7 @@
         ##### Permissions
 
         Must be authenticated and have the `view_team` permission.
+      operationId: SearchFilesInTeam
       parameters:
         - name: team_id
           in: path

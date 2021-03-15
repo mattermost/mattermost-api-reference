@@ -10,6 +10,7 @@
         ##### Permissions
 
         Must have `manage_oauth` permission.
+      operationId: RegisterOAuthApp
       requestBody:
         content:
           application/json:
@@ -68,6 +69,7 @@
         ##### Permissions
 
         With `manage_oauth` permission, the apps registered by the logged in user are returned. With `manage_system_wide_oauth` permission, all apps regardless of creator are returned.
+      operationId: GetOAuthApps
       parameters:
         - name: page
           in: query
@@ -109,6 +111,7 @@
         ##### Permissions
 
         If app creator, must have `mange_oauth` permission otherwise `manage_system_wide_oauth` permission is required.
+      operationId: GetOAuthApp
       parameters:
         - name: app_id
           in: path
@@ -143,6 +146,7 @@
         ##### Permissions
 
         If app creator, must have `mange_oauth` permission otherwise `manage_system_wide_oauth` permission is required.
+      operationId: UpdateOAuthApp
       parameters:
         - name: app_id
           in: path
@@ -235,6 +239,7 @@
         ##### Permissions
 
         If app creator, must have `mange_oauth` permission otherwise `manage_system_wide_oauth` permission is required.
+      operationId: DeleteOAuthApp
       parameters:
         - name: app_id
           in: path
@@ -271,6 +276,7 @@
         ##### Permissions
 
         If app creator, must have `mange_oauth` permission otherwise `manage_system_wide_oauth` permission is required.
+      operationId: RegenerateOAuthAppSecret
       parameters:
         - name: app_id
           in: path
@@ -307,6 +313,7 @@
         ##### Permissions
 
         Must be authenticated.
+      operationId: GetInfoOnOAuthApp
       parameters:
         - name: app_id
           in: path
@@ -341,6 +348,7 @@
         ##### Permissions
 
         Must be authenticated as the user or have `edit_other_users` permission.
+      operationId: GetAuthorizedOAuthApps
       parameters:
         - name: user_id
           in: path

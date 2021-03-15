@@ -10,6 +10,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetClusterStatus
       responses:
         "200":
           description: Cluster status retrieval successful

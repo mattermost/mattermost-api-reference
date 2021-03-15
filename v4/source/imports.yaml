@@ -12,6 +12,7 @@
         ##### Permissions
 
         Must have `manage_system` permissions.
+      operationId: ListImports
       responses:
         "400":
           $ref: "#/components/responses/BadRequest"

@@ -9,6 +9,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: GetSupportedTimezones
       responses:
         "200":
           description: List of timezones retrieval successful
@@ -38,6 +39,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: GetPingWithServerStatus
       parameters:
         - name: get_server_status
           in: query
@@ -80,6 +82,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: GetNotices
       parameters:
         - name: clientVersion
           in: query
@@ -139,6 +142,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: MarkNoticesViewed
       requestBody:
         content:
           application/json:
@@ -180,6 +184,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: DatabaseRecycle
       responses:
         "200":
           description: Database recycle successful
@@ -212,6 +217,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: TestEmail
       requestBody:
         description: Mattermost configuration
         required: true
@@ -265,6 +271,7 @@
 
 
         __Minimum server version__: 5.16
+      operationId: TestSiteUrl
       requestBody:
         content:
           application/json:
@@ -318,6 +325,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 4.8
+      operationId: TestS3Connection
       requestBody:
         description: Mattermost configuration
         required: true
@@ -365,6 +373,7 @@
         Retrieve the current server configuration
         ##### Permissions
         Must have `manage_system` permission.
+      operationId: GetConfig
       responses:
         "200":
           description: Configuration retrieval successful
@@ -398,6 +407,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: UpdateConfig
       requestBody:
         description: Mattermost configuration
         required: true
@@ -440,6 +450,7 @@
         Reload the configuration file to pick up on any changes made to it.
         ##### Permissions
         Must have `manage_system` permission.
+      operationId: ReloadConfig
       responses:
         "200":
           description: Configuration reload successful
@@ -470,6 +481,7 @@
         Get a subset of the server configuration needed by the client.
         ##### Permissions
         No permission required.
+      operationId: GetConfigClient
       parameters:
         - name: format
           in: query
@@ -514,6 +526,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetConfigEnvVariables
       responses:
         "200":
           description: Configuration retrieval successful
@@ -542,6 +555,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.20
+      operationId: PatchConfig
       requestBody:
         description: Mattermost configuration
         required: true
@@ -588,6 +602,7 @@
 
         ##### Permissions
         Must have `manage_system` permission
+      operationId: MigrateConfig
       requestBody:
         content:
           application/json:
@@ -633,6 +648,7 @@
 
         ##### Permissions
         Must have `manage_system` permission.
+      operationId: UploadLicenseFile
       requestBody:
         content:
           multipart/form-data:
@@ -695,6 +711,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: RemoveLicenseFile
       responses:
         "200":
           description: License removal successful
@@ -713,6 +730,7 @@
         ##### Permissions
 
         No permission required but having the `manage_system` permission returns more information.
+      operationId: GetClientLicense
       parameters:
         - name: format
           in: query
@@ -750,6 +768,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_about` permission.
+      operationId: RequestLicenseRenewalLink
       responses:
         "200":
           description: License renewal link obtained
@@ -778,6 +797,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: RequestTrialLicense
       requestBody:
         description: License request
         required: true
@@ -822,6 +842,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetAudits
       parameters:
         - name: page
           in: query
@@ -869,6 +890,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: InvalidateCaches
       responses:
         "200":
           description: Caches invalidate successful
@@ -900,6 +922,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetLogs
       parameters:
         - name: page
           in: query
@@ -949,6 +972,7 @@
         Logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` or just DEBUG messages when `false`.
 
         Non-logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` and cannot log when `false`.
+      operationId: AddLogMessage
       requestBody:
         content:
           application/json:
@@ -1010,6 +1034,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetAnalytics
       parameters:
         - name: name
           in: query
@@ -1050,6 +1075,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: SetServerBusyFlag
       parameters:
         - name: seconds
           in: query
@@ -1098,6 +1124,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetServerBusyExpiryTime
       responses:
         "200":
           description: Server busy expires timestamp retrieved successfully
@@ -1138,6 +1165,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: ClearServerBusyFlag
       responses:
         "200":
           description: Server busy flag cleared successfully
@@ -1172,6 +1200,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: AcknowledgeNotification
       responses:
         "200":
           description: Status of the system
@@ -1192,6 +1221,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: GetRedirectLocation
       parameters:
         - name: url
           in: query
@@ -1224,6 +1254,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: GetImageByUrl
       responses:
         "200":
           description: Image found
@@ -1250,6 +1281,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: UpgradeToEnterpriseEdition
       responses:
         "202":
           description: Upgrade started
@@ -1276,6 +1308,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetStatusForUpgradeToEnterpriseEdition
       responses:
         "200":
           description: Upgrade status
@@ -1307,6 +1340,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: RestartAfterUpgradeToEnterpriseEdition
       responses:
         "200":
           description: Restart started
@@ -1335,6 +1369,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: GetWarnMetricsStatus
       responses:
         "200":
           description: Warn metrics retrieval was successful.
@@ -1364,6 +1399,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: AcknowledgeWarningOfMetricStatus
       parameters:
         - name: warn_metric_id
           in: path
@@ -1409,6 +1445,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: RequestTrialLicenseAndAcknowledgeWarningOfMetricStatus
       parameters:
         - name: warn_metric_id
           in: path
@@ -1445,6 +1482,7 @@
 
 
         __Local mode only__: This endpoint is only available through [local mode](https://docs.mattermost.com/administration/mmctl-cli-tool.html#local-mode).
+      operationId: CheckIntegrity
       responses:
         "200":
           description: Integrity check successful
@@ -1479,6 +1517,7 @@
         Must have any of the system console read permissions.
         ##### License
         Requires either a E10 or E20 license.
+      operationId: DownloadZipFile
       responses:
         "400":
           $ref: "#/components/responses/BadRequest"

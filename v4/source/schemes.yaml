@@ -14,6 +14,7 @@
 
 
         __Minimum server version__: 5.0
+      operationId: GetSchemes
       parameters:
         - name: scope
           in: query
@@ -60,6 +61,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.0
+      operationId: CreateScheme
       requestBody:
         content:
           application/json:
@@ -107,6 +109,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.0
+      operationId: GetScheme
       parameters:
         - name: scheme_id
           in: path
@@ -146,6 +149,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.0
+      operationId: DeleteScheme
       parameters:
         - name: scheme_id
           in: path
@@ -186,6 +190,7 @@
 
 
         __Minimum server version__: 5.0
+      operationId: PatchScheme
       parameters:
         - name: scheme_id
           in: path
@@ -242,6 +247,7 @@
 
 
         __Minimum server version__: 5.0
+      operationId: GetTeamsUsingScheme
       parameters:
         - name: scheme_id
           in: path
@@ -296,6 +302,7 @@
 
 
         __Minimum server version__: 5.0
+      operationId: GetChannelsUsingScheme
       parameters:
         - name: scheme_id
           in: path

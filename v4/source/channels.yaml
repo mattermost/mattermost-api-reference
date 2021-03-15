@@ -6,6 +6,7 @@
       description: |
         ##### Permissions
         `manage_system`
+      operationId: GetChannels
       parameters:
       - name: not_associated_to_group
         in: query
@@ -61,6 +62,7 @@
         ##### Permissions
 
         If creating a public channel, `create_public_channel` permission is required. If creating a private channel, `create_private_channel` permission is required.
+      operationId: CreateChannel
       requestBody:
         content:
           application/json:
@@ -134,6 +136,7 @@
         ##### Permissions
 
         Must be one of the two users and have `create_direct_channel` permission. Having the `manage_system` permission voids the previous requirements.
+      operationId: CreateDirectMessageChannel
       requestBody:
         content:
           application/json:
@@ -179,6 +182,7 @@
         ##### Permissions
 
         Must have `create_group_channel` permission.
+      operationId: CreateGroupMessageChannel
       requestBody:
         content:
           application/json:
@@ -232,6 +236,7 @@
         Channels that are associated (via GroupChannel records) to a given group can be excluded from the results
 
         with the `not_associated_to_group` parameter and a group id string.
+      operationId: SearchChannelsAcrossTeams
       requestBody:
         content:
           application/json:
@@ -352,6 +357,7 @@
 
 
         __Minimum server version__: 5.14
+      operationId: SearchGroupChannels
       requestBody:
         content:
           application/json:
@@ -399,6 +405,7 @@
         Get a list of public channels on a team by id.
         ##### Permissions
         `view_team` for the team the channels are on.
+      operationId: GetChannelsByIds
       parameters:
         - name: team_id
           in: path
@@ -458,6 +465,7 @@
 
         ##### Permissions
         Must have the `read_channel` permission.
+      operationId: GetChannelTimezones
       parameters:
         - name: channel_id
           in: path
@@ -498,6 +506,7 @@
         Get channel from the provided channel id string.
         ##### Permissions
         `read_channel` permission for the channel.
+      operationId: GetChannel
       parameters:
         - name: channel_id
           in: path
@@ -538,6 +547,7 @@
         ##### Permissions
 
         If updating a public channel, `manage_public_channel_members` permission is required. If updating a private channel, `manage_private_channel_members` permission is required.
+      operationId: UpdateChannel
       parameters:
         - name: channel_id
           in: path
@@ -623,6 +633,7 @@
         `delete_private_channel` permission if the channel is private,
 
         or have `manage_system` permission.
+      operationId: DeleteChannel
       parameters:
         - name: channel_id
           in: path
@@ -666,6 +677,7 @@
         ##### Permissions
 
         If updating a public channel, `manage_public_channel_members` permission is required. If updating a private channel, `manage_private_channel_members` permission is required.
+      operationId: PatchChannel
       parameters:
         - name: channel_id
           in: path
@@ -748,6 +760,7 @@
         `manage_team` permission for the channels team on version < 5.28.
         `convert_public_channel_to_private` permission for the channel if updating privacy to 'P' on version >= 5.28.
         `convert_private_channel_to_public` permission for the channel if updating privacy to 'O' on version >= 5.28.
+      operationId: UpdateChannelPrivacy
       parameters:
         - name: channel_id
           in: path
@@ -816,6 +829,7 @@
         ##### Permissions
         `manage_team` permission for the channels team on version < 5.28.
         `convert_public_channel_to_private` permission for the channel on version >= 5.28.
+      operationId: ConvertChannelToPrivate
       parameters:
         - name: channel_id
           in: path
@@ -863,6 +877,7 @@
 
         ##### Permissions
         `manage_team` permission for the team of the channel.
+      operationId: RestoreChannel
       parameters:
         - name: channel_id
           in: path
@@ -896,6 +911,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: MoveChannel
       parameters:
         - name: channel_id
           in: path
@@ -941,6 +957,7 @@
         Get statistics for a channel.
         ##### Permissions
         Must have the `read_channel` permission.
+      operationId: GetChannelStatistics
       parameters:
         - name: channel_id
           in: path
@@ -976,6 +993,7 @@
         - channels
       summary: Get a channel's pinned posts
       description: Get a list of pinned posts for channel.
+      operationId: GetChannelPinnedPosts
       parameters:
         - name: channel_id
           in: path
@@ -1017,6 +1035,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: GetPublicChannels
       parameters:
         - name: team_id
           in: path
@@ -1078,6 +1097,7 @@
 
         ##### Permissions
         Must have `manage_system` permission.
+      operationId: GetPrivateChannels
       parameters:
         - name: team_id
           in: path
@@ -1137,6 +1157,7 @@
 
 
         __Minimum server version__: 3.10
+      operationId: GetDeletedChannels
       parameters:
         - name: team_id
           in: path
@@ -1189,6 +1210,7 @@
         ##### Permissions
 
         Must have the `list_team_channels` permission.
+      operationId: AutocompleteChannels
       parameters:
         - name: team_id
           in: path
@@ -1235,6 +1257,7 @@
         ##### Permissions
 
         Must have the `list_team_channels` permission.
+      operationId: AutocompleteChannelsForSearch
       parameters:
         - name: team_id
           in: path
@@ -1280,6 +1303,7 @@
 
 
         In server version 5.16 and later, a user without the `list_team_channels` permission will be able to use this endpoint, with the search results limited to the channels that the user is a member of.
+      operationId: SearchChannels
       parameters:
         - name: team_id
           in: path
@@ -1348,6 +1372,7 @@
 
 
         In server version 5.18 and later, a user without the `list_team_channels` permission will be able to use this endpoint, with the search results limited to the channels that the user is a member of.
+      operationId: SearchArchivedChannels
       parameters:
         - name: team_id
           in: path
@@ -1406,6 +1431,7 @@
         Gets channel from the provided team id and channel name strings.
         ##### Permissions
         `read_channel` permission for the channel.
+      operationId: GetChannelByName
       parameters:
         - name: team_id
           in: path
@@ -1460,6 +1486,7 @@
         Gets a channel from the provided team name and channel name strings.
         ##### Permissions
         `read_channel` permission for the channel.
+      operationId: GetChannelByNameForTeamName
       parameters:
         - name: team_name
           in: path
@@ -1514,6 +1541,7 @@
         Get a page of members for a channel.
         ##### Permissions
         `read_channel` permission for the channel.
+      operationId: GetChannelMembers
       parameters:
         - name: channel_id
           in: path
@@ -1566,6 +1594,7 @@
         - channels
       summary: Add user to channel
       description: Add a user to a channel by creating a channel member object.
+      operationId: AddChannelMember
       parameters:
         - name: channel_id
           in: path
@@ -1629,6 +1658,7 @@
         Get a list of channel members based on the provided user ids.
         ##### Permissions
         Must have the `read_channel` permission.
+      operationId: GetChannelMembersByIds
       parameters:
         - name: channel_id
           in: path
@@ -1682,6 +1712,7 @@
         Get a channel member.
         ##### Permissions
         `read_channel` permission for the channel.
+      operationId: GetChannelMember
       parameters:
         - name: channel_id
           in: path
@@ -1732,6 +1763,7 @@
         `manage_public_channel_members` permission if the channel is public.
 
         `manage_private_channel_members` permission if the channel is private.
+      operationId: RemoveUserFromChannel
       parameters:
         - name: channel_id
           in: path
@@ -1776,6 +1808,7 @@
         Update a user's roles for a channel.
         ##### Permissions
         Must have `manage_channel_roles` permission for the channel.
+      operationId: UpdateChannelRoles
       parameters:
         - name: channel_id
           in: path
@@ -1843,6 +1876,7 @@
         ##### Permissions
 
         Must be authenticated and have the `manage_channel_roles` permission.
+      operationId: UpdateSchemeDerivedRolesOfChannelMember
       parameters:
         - name: channel_id
           in: path
@@ -1898,6 +1932,7 @@
         ##### Permissions
 
         Must be logged in as the user or have `edit_other_users` permission.
+      operationId: UpdateChannelNotifications
       parameters:
         - name: channel_id
           in: path
@@ -1968,6 +2003,7 @@
 
 
         __Response only includes `last_viewed_at_times` in Mattermost server 4.3 and newer.__
+      operationId: ViewChannel
       parameters:
         - in: path
           name: user_id
@@ -2038,6 +2074,7 @@
         ##### Permissions
 
         Logged in as the user and `view_team` permission for the team. Having `manage_system` permission voids the previous requirements.
+      operationId: GetChannelMembershipsForUser
       parameters:
         - name: user_id
           in: path
@@ -2090,6 +2127,7 @@
         ##### Permissions
 
         Logged in as the user, or have `edit_other_users` permission, and `view_team` permission for the team.
+      operationId: GetChannelsForTeamForUser
       parameters:
         - name: user_id
           in: path
@@ -2156,6 +2194,7 @@
         ##### Permissions
 
         Must be logged in as user and have the `read_channel` permission, or have `edit_other_usrs` permission.
+      operationId: GetChannelUnread
       parameters:
         - name: user_id
           in: path
@@ -2213,6 +2252,7 @@
 
 
         __Minimum server version__: 4.10
+      operationId: UpdateChannelScheme
       parameters:
         - name: channel_id
           in: path
@@ -2285,6 +2325,7 @@
 
 
         __Minimum server version__: 5.14
+      operationId: ChannelMembersMinusGroupMembers
       parameters:
         - name: channel_id
           in: path
@@ -2342,6 +2383,7 @@
         Must have `read_channel` permission for the given channel.
 
         __Minimum server version__: 5.24
+      operationId: ChannelMembersCountsByGroup
       parameters:
         - name: channel_id
           in: path
@@ -2384,6 +2426,7 @@
 
 
         __Minimum server version__: 5.22
+      operationId: GetChannelModerationInformation
       parameters:
         - name: channel_id
           in: path
@@ -2418,6 +2461,7 @@
 
 
         __Minimum server version__: 5.22
+      operationId: UpdateChannelModerationSettings
       requestBody:
         required: true
         content:
@@ -2462,6 +2506,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: GetUserSidebarCategories
       parameters:
         - name: team_id
           in: path
@@ -2504,6 +2549,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: CreateUserSidebarCategory
       parameters:
         - name: team_id
           in: path
@@ -2551,6 +2597,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: UpdateUserSidebarCategories
       parameters:
         - name: team_id
           in: path
@@ -2601,6 +2648,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: GetUserSidebarCategoryOrder
       parameters:
         - name: team_id
           in: path
@@ -2644,6 +2692,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: UpdateUserSidebarCategoryOrder
       parameters:
         - name: team_id
           in: path
@@ -2695,6 +2744,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: GetSidebarCategory
       parameters:
         - name: team_id
           in: path
@@ -2741,6 +2791,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: UpdateSidebarCategory
       parameters:
         - name: team_id
           in: path
@@ -2794,6 +2845,7 @@
         ##### Permissions
 
         Must be authenticated and have the `list_team_channels` permission.
+      operationId: DeleteSidebarCategory
       parameters:
         - name: team_id
           in: path
