@@ -33,7 +33,9 @@
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SharedChannel"
+                type: array
+                items:
+                  $ref: "#/components/schemas/SharedChannel"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
