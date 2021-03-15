@@ -3138,6 +3138,42 @@ components:
         title:
           description: "Notice title. Use {{Mattermost}} instead of plain text to support white-labeling. Text supports Markdown."
           type: string
+    SharedChannel:
+      type: object
+      properties:
+        channel_id:
+          description: Channel id of the shared channel
+          type: string
+        team_id:
+          type: string
+        home:
+          description: Is this the home cluster for the shared channel
+          type: boolean
+        readonly:
+          description: Is this shared channel shared as read only
+          type: boolean
+        share_name:
+          description: Channel name as it is shared (may be different than original channel name)
+          type: string
+        share_displayname:
+          description: Channel display name as it appears locally
+          type: string
+        share_purpose:
+          type: string
+        share_header:
+          type: string
+        creator_id:
+          description: Id of the user that shared the channel
+          type: string
+        create_at:
+          description: Time in milliseconds that the channel was shared
+          type: integer
+        update_at:
+          description: Time in milliseconds that the shared channel record was last updated
+          type: integer
+        remote_id:
+          description: Id of the remote cluster where the shared channel is homed
+          type: string
     RemoteClusterInfo:
       type: object
       properties:
