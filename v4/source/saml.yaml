@@ -252,7 +252,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /saml/resetid:
+  /saml/reset_auth_data:
     post:
       tags:
         - SAML
