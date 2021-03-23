@@ -149,6 +149,11 @@ components:
           type: string
         allow_open_invite:
           type: boolean
+        policy_id:
+          type: string
+          description: >-
+            The data retention policy to which this team has been assigned. If no such policy exists,
+            or the caller does not have the `read_compliance` permission, this field will be omitted.
     TeamStats:
       type: object
       properties:
@@ -254,6 +259,11 @@ components:
             team_update_at:
               type: integer
               description: The time at which the team to which this channel belongs was last updated.
+            policy_id:
+              type: string
+              description: >-
+                The data retention policy to which this team has been assigned. If no such policy exists,
+                or the caller does not have the `read_compliance` permission, this field will be omitted.
     ChannelListWithTeamData:
       type: array
       items:
