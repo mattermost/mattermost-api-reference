@@ -153,7 +153,7 @@ components:
           type: string
           description: >-
             The data retention policy to which this team has been assigned. If no such policy exists,
-            or the caller does not have the `read_compliance` permission, this field will be omitted.
+            or the caller does not have the `sysconsole_read_compliance` permission, this field will be omitted.
     TeamStats:
       type: object
       properties:

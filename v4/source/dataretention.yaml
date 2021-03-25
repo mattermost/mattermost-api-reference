@@ -39,10 +39,10 @@
         Gets the number of granular (i.e. team or channel-specific) data retention
         policies from the server.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `read_compliance` permission.
+        Must have the `sysconsole_read_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -56,7 +56,7 @@
                 properties:
                   total_count:
                     type: integer
-                    description: The number of granularretention policies.
+                    description: The number of granular retention policies.
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -74,10 +74,10 @@
         Gets details about the granular (i.e. team or channel-specific) data retention
         policies from the server.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `read_compliance` permission.
+        Must have the `sysconsole_read_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -119,10 +119,10 @@
         Creates a new granular data retention policy with the specified display
         name and post duration.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `write_compliance` permission.
+        Must have the `sysconsole_write_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -155,10 +155,10 @@
       description: |
         Gets details about a granular data retention policies by ID.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `read_compliance` permission.
+        Must have the `sysconsole_read_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -192,10 +192,10 @@
         Patches (i.e. replaces the fields of) a granular data retention policy.
         If any fields are omitted, they will not be changed.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `write_compliance` permission.
+        Must have the `sysconsole_write_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -234,10 +234,10 @@
       description: |
         Deletes a granular data retention policy.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `write_compliance` permission.
+        Must have the `sysconsole_write_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -267,10 +267,10 @@
       description: |
         Gets the teams to which a granular data retention policy is applied.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `read_compliance` permission.
+        Must have the `sysconsole_read_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -317,10 +317,10 @@
       description: |
         Adds teams to a granular data retention policy.
         
-         __Minimum server version__: 5.32
+         __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `write_compliance` permission.
+        Must have the `sysconsole_write_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -358,10 +358,10 @@
       description: |
         Delete teams from a granular data retention policy.
         
-         __Minimum server version__: 5.32
+         __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `write_compliance` permission.
+        Must have the `sysconsole_write_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -400,10 +400,10 @@
       description: |
         Searches for the teams to which a granular data retention policy is applied.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `read_compliance` permission.
+        Must have the `sysconsole_read_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -449,10 +449,10 @@
       description: |
         Gets the channels to which a granular data retention policy is applied.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `read_compliance` permission.
+        Must have the `sysconsole_read_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -497,10 +497,10 @@
       description: |
         Adds channels to a granular data retention policy.
         
-         __Minimum server version__: 5.32
+         __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `write_compliance` permission.
+        Must have the `sysconsole_write_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -538,10 +538,10 @@
       description: |
         Delete channels from a granular data retention policy.
         
-         __Minimum server version__: 5.32
+         __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `write_compliance` permission.
+        Must have the `sysconsole_write_compliance` permission.
 
         ##### License
         Requires an E20 license.
@@ -580,10 +580,10 @@
       description: |
         Searches for the channels to which a granular data retention policy is applied.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
-        Must have the `read_compliance` permission.
+        Must have the `sysconsole_read_compliance` permission.
 
         ##### License
         Requires an E20 license.

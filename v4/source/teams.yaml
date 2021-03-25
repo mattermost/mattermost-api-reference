@@ -117,7 +117,7 @@
             default: false
           description: >-
             If set to true, teams which are part of a data retention policy will be excluded.
-            The `manage_system` permission is required to use this parameter.
+            The `sysconsole_read_compliance` permission is required to use this parameter.
       responses:
         "200":
           description: Team list retrieval successful
