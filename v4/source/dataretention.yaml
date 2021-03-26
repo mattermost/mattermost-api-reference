@@ -249,8 +249,12 @@
         schema:
           type: string
       responses:
-        "204":
+        "200":
           description: Retention policy successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -341,8 +345,12 @@
                 type: string
                 description: The IDs of the teams to add to the policy.
       responses:
-        "204":
+        "200":
           description: Teams successfully added to retention policy.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -382,8 +390,12 @@
                 type: string
                 description: The IDs of the teams to remove from the policy.
       responses:
-        "204":
+        "200":
           description: Teams successfully deleted from retention policy.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -521,8 +533,12 @@
                 type: string
                 description: The IDs of the channels to add to the policy.
       responses:
-        "204":
+        "200":
           description: Channels successfully added to retention policy.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
@@ -562,8 +578,12 @@
                 type: string
                 description: The IDs of the channels to add to the policy.
       responses:
-        "204":
+        "200":
           description: Channels successfully deleted from retention policy.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
         "401":
           $ref: "#/components/responses/Unauthorized"
         "403":
