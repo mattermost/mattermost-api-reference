@@ -284,7 +284,7 @@
                   items:
                     type: string
                   default: null
-                  description: If set to an array, then users whose IDs are not in the array will be excluded.
+                  description: If set to a non-empty array, then users whose IDs are not in the array will be excluded.
       responses:
         "200":
           description: AuthData successfully reset
