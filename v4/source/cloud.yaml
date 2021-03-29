@@ -349,7 +349,30 @@
         - cloud
       summary: POST endpoint for triggering sending emails to admin with request to upgrade workspace
       description: >
-        An endpoint that triggers sending emails to all sys admins to request them to upgrade the workspace
+        An endpoint that triggers sending emails to all sys admins to request them to upgrade the workspace when a user tries to invite more users
+        ##### Permissions
+
+        This endpoint should only be accessed in a Mattermost Cloud instance
+
+        __Minimum server version__: 5.34
+        __Note:__ This is intended for internal use and is subject to change.
+      responses:
+        "200":
+          description: Email sent to at least one of the system administrators
+        "413":
+          $ref: "#/components/responses/TooLarge"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+
+  /cloud/subscription/limitreached/join:
+    post:
+      tags:
+        - cloud
+      summary: POST endpoint for triggering sending emails to admin with request to upgrade workspace
+      description: >
+        An endpoint that triggers sending emails to all sys admins to request them to upgrade the workspace when a user tries to join the workspace
         ##### Permissions
 
         This endpoint should only be accessed in a Mattermost Cloud instance
