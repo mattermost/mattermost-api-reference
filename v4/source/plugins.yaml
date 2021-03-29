@@ -553,7 +553,7 @@
             }
 
             ok, resp = Client.GetMarketplacePlugins(filter)
-  /plugins/first_admin_visit_marketplace:
+  /plugins/marketplace/first_admin_visit:
     get:
       tags:
         - plugins
