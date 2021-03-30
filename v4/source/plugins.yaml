@@ -553,3 +553,50 @@
             }
 
             ok, resp = Client.GetMarketplacePlugins(filter)
+  /plugins/marketplace/first_admin_visit:
+    get:
+      tags:
+        - plugins
+      summary: Get if the Plugin Marketplace has been visited by at least an admin.
+      description: |
+        Retrieves the status that specifies that at least one System Admin has visited the in-product Plugin Marketplace.
+        __Minimum server version: 5.33__
+        ##### Permissions
+        Must have `manage_system` permissions.
+      responses:
+        "200":
+          description: Retrieves the system-level status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/System"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - system
+      summary: Stores that the Plugin Marketplace has been visited by at least an admin.
+      description: |
+        Stores the system-level status that specifies that at least an admin has visited the in-product Plugin Marketplace.
+        __Minimum server version: 5.33__
+        ##### Permissions
+        Must have `manage_system` permissions.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/System"
+        required: true
+      responses:
+        "200":
+          description: setting has been successfully set
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
