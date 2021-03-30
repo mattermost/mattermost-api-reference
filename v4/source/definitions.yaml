@@ -3235,6 +3235,15 @@ components:
         renewal_link:
           description: License renewal link
           type: string
+    System:
+      type: object
+      properties:
+        name:
+          description: System property name
+          type: string
+        value:
+          description: System property value
+          type: string
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
