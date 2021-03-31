@@ -1322,7 +1322,7 @@
       tags:
         - system
       summary: Get the warn metrics status (enabled or disabled)
-      description: >
+      description: |
         Get the status of a set of metrics (enabled or disabled) from the Systems table.
 
         The returned JSON contains the metrics that we need to warn the admin on with regard
@@ -1434,7 +1434,7 @@
       tags:
         - system
       summary: Perform a database integrity check
-      description: >
+      description: |
         Performs a database integrity check.
 
 
