@@ -262,6 +262,8 @@
         used when the "id" attribute is set to an empty value ("") from a previously
         non-empty value.
 
+        __Minimum server version__: 5.35
+
         ##### Permissions
 
         Must have `manage_system` permission.
