@@ -4944,7 +4944,7 @@
       description: |
         Gets the policies which are applied to the all of the teams to which a user belongs.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
         Must be logged in as the user or have the `manage_system` permission.
@@ -4993,7 +4993,7 @@
       description: |
         Gets the policies which are applied to the all of the channels to which a user belongs.
 
-        __Minimum server version__: 5.32
+        __Minimum server version__: 5.35
 
         ##### Permissions
         Must be logged in as the user or have the `manage_system` permission.

@@ -36,6 +36,8 @@
         description: >-
           If set to true, channels which are part of a data retention policy will be excluded.
           The `sysconsole_read_compliance` permission is required to use this parameter.
+
+          __Minimum server version__: 5.35
       responses:
         "200":
           description: Channel list retrieval successful
@@ -309,9 +311,8 @@
                   type: boolean
                   default: false
                   description: >
-                    If set to true, only channels which do not have a grnaular retention policy assigned to
+                    If set to true, only channels which do not have a granular retention policy assigned to
                     them will be returned. The `read_compliance` permission is required to use this parameter.
-
 
                     __Minimum server version__: 5.35
         description: The search terms and logic to use in the search.
