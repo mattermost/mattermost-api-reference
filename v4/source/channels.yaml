@@ -312,7 +312,8 @@
                   default: false
                   description: >
                     If set to true, only channels which do not have a granular retention policy assigned to
-                    them will be returned. The `read_compliance` permission is required to use this parameter.
+                    them will be returned. The `sysconsole_read_compliance_data_retention` permission is
+                    required to use this parameter.
 
                     __Minimum server version__: 5.35
         description: The search terms and logic to use in the search.

@@ -153,7 +153,8 @@ components:
           type: string
           description: >-
             The data retention policy to which this team has been assigned. If no such policy exists,
-            or the caller does not have the `sysconsole_read_compliance` permission, this field will be null.
+            or the caller does not have the `sysconsole_read_compliance_data_retention` permission,
+            this field will be null.
     TeamStats:
       type: object
       properties:
@@ -263,7 +264,8 @@ components:
               type: string
               description: >-
                 The data retention policy to which this team has been assigned. If no such policy exists,
-                or the caller does not have the `read_compliance` permission, this field will be null.
+                or the caller does not have the `sysconsole_read_compliance_data_retention` permission, this field
+                will be null.
     ChannelListWithTeamData:
       type: array
       items:
