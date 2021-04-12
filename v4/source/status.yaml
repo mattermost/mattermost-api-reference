@@ -59,6 +59,9 @@
                 status:
                   type: string
                   description: User status, can be `online`, `away`, `offline` and `dnd`
+                dnd_end_time:
+                  type: integer
+                  description: Time on which dnd would be unset
         description: Status object that is to be updated
         required: true
       responses:
