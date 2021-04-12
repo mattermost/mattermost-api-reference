@@ -623,7 +623,25 @@
               properties:
                 term:
                   type: string
-                  description: The search term to match against the name or display name of channels
+                  description: The string to search in the channel name, display name, and purpose.
+                team_ids:
+                  type: array
+                  description: >
+                    Filters results to channels belonging to the given team ids
+                public:
+                  type: boolean
+                  description: >
+                    Filters results to only return Public / Open channels, can be used in conjunction
+                    with `private` to return both `public` and `private` channels
+                private:
+                  type: boolean
+                  description: >
+                    Filters results to only return Private channels, can be used in conjunction
+                    with `public` to return both `private` and `public` channels
+                deleted:
+                  type: boolean
+                  description: >
+                    Filters results to only return deleted / archived channels
       responses:
         "200":
           description: Channels for retention policy successfully retrieved.
