@@ -2236,7 +2236,10 @@ components:
           description: The display name for this retention policy.
         post_duration:
           type: integer
-          description: The number of days a message will be retained before being deleted by this policy.
+          description: >
+            The number of days a message will be retained before being deleted by this policy.
+            If this value is less than 0, the policy has infinite retention (i.e. messages
+            are never deleted).
     DataRetentionPolicy:
       allOf:
         - $ref: "#/components/schemas/DataRetentionPolicyWithoutId"
