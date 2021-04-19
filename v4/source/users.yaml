@@ -4936,3 +4936,101 @@
           source: |
             curl -X GET 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+  "/users/{user_id}/data_retention/team_policies":
+    get:
+      tags:
+        - data retention
+      summary: Get the policies which are applied to a user's teams
+      description: |
+        Gets the policies which are applied to the all of the teams to which a user belongs.
+
+        __Minimum server version__: 5.35
+
+        ##### Permissions
+        Must be logged in as the user or have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of policies per page. There is a maximum limit of 200 per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Teams for retention policy successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetentionPolicyForTeamList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
+  "/users/{user_id}/data_retention/channel_policies":
+    get:
+      tags:
+        - data retention
+      summary: Get the policies which are applied to a user's channels
+      description: |
+        Gets the policies which are applied to the all of the channels to which a user belongs.
+
+        __Minimum server version__: 5.35
+
+        ##### Permissions
+        Must be logged in as the user or have the `manage_system` permission.
+
+        ##### License
+        Requires an E20 license.
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of policies per page. There is a maximum limit of 200 per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Channels for retention policy successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetentionPolicyForChannelList"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"

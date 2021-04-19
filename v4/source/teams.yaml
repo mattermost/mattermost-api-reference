@@ -110,6 +110,16 @@
           schema:
             type: boolean
             default: false
+        - name: exclude_policy_constrained
+          in: query
+          schema:
+            type: boolean
+            default: false
+          description: >-
+            If set to true, teams which are part of a data retention policy will be excluded.
+            The `sysconsole_read_compliance` permission is required to use this parameter.
+
+            __Minimum server version__: 5.35
       responses:
         "200":
           description: Team list retrieval successful
@@ -805,6 +815,15 @@
                     If the filter option is not passed then the query will remain unchanged.
 
                     __Minimum server version__: 5.28
+                exclude_policy_constrained:
+                  type: boolean
+                  default: false
+                  description: >
+                    If set to true, only teams which do not have a granular retention policy assigned to
+                    them will be returned. The `sysconsole_read_compliance_data_retention` permission is
+                    required to use this parameter.
+
+                    __Minimum server version__: 5.35
         description: Search criteria
         required: true
       responses:
