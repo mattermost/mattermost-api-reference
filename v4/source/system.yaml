@@ -810,6 +810,28 @@
 
             // RequestTrialLicense
             resp := Client.RequestTrialLicense()
+  /trial-license/prev:
+    get:
+      tags:
+        - system
+      summary: Get last trial license used
+      description: >
+        Get the last trial license used on the sevrer
+
+        __Minimum server version__: 5.35
+
+        ##### Permissions
+
+        Must have `manage_systems` permissions.
+      responses:
+        "200":
+          description: Licnse fetched successfully.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
   /audits:
     get:
       tags:
