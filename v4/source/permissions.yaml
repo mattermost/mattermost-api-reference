@@ -7,6 +7,7 @@
         Returns all the ancillary permissions for the corresponding system console
         subsection permissions.
 
+
         __Minimum server version__: 5.35
       parameters:
         - name: subsection_permissions
@@ -14,6 +15,7 @@
           description: >
             The subsection permissions you want the ancillary permissions off.
             These values are comma seperated.
+            Ex. subsection_permissions=sysconsole_read_reporting_site_statistics,sysconsole_write_reporting_site_statistics,sysconsole_write_user_management_channels
           schema:
             type: string
       responses:
