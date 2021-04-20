@@ -37,6 +37,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/roles.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/schemes.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/service_terms.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/sharedchannels.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/opengraph.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/reactions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/actions.yaml >> $(V4_YAML)
@@ -44,6 +45,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/cloud.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/permissions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/imports.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/exports.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
 	@node_modules/.bin/swagger-cli validate $(V4_YAML)

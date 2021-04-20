@@ -557,7 +557,7 @@ tags:
     description: Endpoints for configuring and interacting with high availability clusters.
   - name: elasticsearch
     description: Endpoints for configuring and interacting with Elasticsearch.
-  - name: dataretention
+  - name: data retention
     description: Endpoint for getting data retention policy settings.
   - name: jobs
     description:
@@ -571,10 +571,14 @@ tags:
     description: Endpoints for creating, getting and updating and deleting schemes.
   - name: integration_actions
     description: Endpoints for interactive actions for use by integrations.
+  - name: shared channels
+    description: Endpoints for getting information about shared channels.
   - name: terms of service
     description: Endpoints for getting and updating custom terms of service.
   - name: imports
     description: Endpoints related to import files.
+  - name: exports
+    description: Endpoints related to export files.
 x-tagGroups:
   - name: Overview
     tags:
@@ -616,15 +620,17 @@ x-tagGroups:
       - cloud
       - elasticsearch
       - bleve
-      - dataretention
+      - data retention
       - jobs
       - plugins
       - roles
       - schemes
       - integration_actions
+      - shared channels
       - terms of service
       - imports
       - permissions
+      - exports
 servers:
   - url: http://your-mattermost-url.com/api/v4
   - url: https://your-mattermost-url.com/api/v4
