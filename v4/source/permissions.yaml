@@ -20,7 +20,7 @@
             type: string
       responses:
         "200":
-          description: Successfully returned all ancillary permissions
+          description: Successfully returned all ancillary and requested permissions
           content:
             application/json:
               schema:
