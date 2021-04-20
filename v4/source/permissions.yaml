@@ -1,4 +1,4 @@
-  /permissions/ancillary_permissions:
+  /permissions/ancillary:
     get:
       tags:
         - permissions
