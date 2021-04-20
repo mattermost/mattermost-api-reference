@@ -1,0 +1,29 @@
+  /permissions/ancillary_permissions:
+    get:
+      tags:
+        - permissions
+      summary: Return all system console subsection ancillary permissions
+      description: >
+        Returns all the ancillary permissions for the corresponding system console
+        subsection permissions.
+
+        __Minimum server version__: 5.35
+      parameters:
+        - name: subsection_permissions
+          in: query
+          description: >
+            The subsection permissions you want the ancillary permissions off.
+            These values are comma seperated.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully returned all ancillary permissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          $ref: '#/components/responses/BadRequest'
