@@ -28,15 +28,23 @@
         schema:
           type: boolean
           default: false
+      - name: exclude_policy_constrained
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: >-
+          If set to true, channels which are part of a data retention policy will be excluded.
+          The `sysconsole_read_compliance` permission is required to use this parameter.
+
+          __Minimum server version__: 5.35
       responses:
         "200":
           description: Channel list retrieval successful
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Channel"
+                $ref: "#/components/schemas/ChannelListWithTeamData"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -299,6 +307,15 @@
                   description: The number of entries to return per page, if paginated. If
                     this parameter is not present with the `page` parameter then
                     the results will be returned un-paged.
+                exclude_policy_constrained:
+                  type: boolean
+                  default: false
+                  description: >
+                    If set to true, only channels which do not have a granular retention policy assigned to
+                    them will be returned. The `sysconsole_read_compliance_data_retention` permission is
+                    required to use this parameter.
+
+                    __Minimum server version__: 5.35
         description: The search terms and logic to use in the search.
         required: true
       responses:
@@ -1404,7 +1421,7 @@
             type: string
         - name: include_deleted
           in: query
-          description: Defines if deleted channels should be returned or not
+          description: Defines if deleted channels should be returned or not (Mattermost Server 5.26.0+)
           schema:
             type: boolean
             default: false
@@ -1458,7 +1475,7 @@
             type: string
         - name: include_deleted
           in: query
-          description: Defines if deleted channels should be returned or not
+          description: Defines if deleted channels should be returned or not (Mattermost Server 5.26.0+)
           schema:
             type: boolean
             default: false
@@ -1512,7 +1529,7 @@
             default: 0
         - name: per_page
           in: query
-          description: The number of members per page.
+          description: The number of members per page. There is a maximum limit of 200 members.
           schema:
             type: integer
             default: 60

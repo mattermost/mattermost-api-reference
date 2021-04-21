@@ -149,6 +149,12 @@ components:
           type: string
         allow_open_invite:
           type: boolean
+        policy_id:
+          type: string
+          description: >-
+            The data retention policy to which this team has been assigned. If no such policy exists,
+            or the caller does not have the `sysconsole_read_compliance_data_retention` permission,
+            this field will be null.
     TeamStats:
       type: object
       properties:
@@ -240,6 +246,30 @@ components:
           $ref: "#/components/schemas/Channel"
         member:
           $ref: "#/components/schemas/ChannelMember"
+    ChannelWithTeamData:
+      allOf:
+        - $ref: "#/components/schemas/Channel"
+        - type: object
+          properties:
+            team_display_name:
+              type: string
+              description: The display name of the team to which this channel belongs.
+            team_name:
+              type: string
+              description: The name of the team to which this channel belongs.
+            team_update_at:
+              type: integer
+              description: The time at which the team to which this channel belongs was last updated.
+            policy_id:
+              type: string
+              description: >-
+                The data retention policy to which this team has been assigned. If no such policy exists,
+                or the caller does not have the `sysconsole_read_compliance_data_retention` permission, this field
+                will be null.
+    ChannelListWithTeamData:
+      type: array
+      items:
+        $ref: "#/components/schemas/ChannelWithTeamData"
     Post:
       type: object
       properties:
@@ -2181,23 +2211,115 @@ components:
         is_active:
           type: boolean
           description: Indicates whether the token is active
-    DataRetentionPolicy:
+    GlobalDataRetentionPolicy:
       type: object
       properties:
         message_deletion_enabled:
           type: boolean
           description: Indicates whether data retention policy deletion of messages is
-            enabled.
+            enabled globally.
         file_deletion_enabled:
           type: boolean
           description: Indicates whether data retention policy deletion of file attachments
-            is enabled.
+            is enabled globally.
         message_retention_cutoff:
           type: integer
           description: The current server timestamp before which messages should be deleted.
         file_retention_cutoff:
           type: integer
           description: The current server timestamp before which files should be deleted.
+    DataRetentionPolicyWithoutId:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: The display name for this retention policy.
+        post_duration:
+          type: integer
+          description: >
+            The number of days a message will be retained before being deleted by this policy.
+            If this value is less than 0, the policy has infinite retention (i.e. messages
+            are never deleted).
+    DataRetentionPolicy:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithoutId"
+        - type: object
+          properties:
+            id:
+              type: string
+              description: The ID of this retention policy.
+    DataRetentionPolicyWithTeamAndChannelCounts:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicy"
+        - type: object
+          properties:
+            team_count:
+              type: integer
+              description: The number of teams to which this policy is applied.
+            channel_count:
+              type: integer
+              description: The number of channels to which this policy is applied.
+    DataRetentionPolicyWithTeamAndChannelIds:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithoutId"
+        - type: object
+          properties:
+            team_ids:
+              type: array
+              items:
+                type: string
+              description: The IDs of the teams to which this policy should be applied.
+            channel_ids:
+              type: array
+              items:
+                type: string
+              description: The IDs of the channels to which this policy should be applied.
+    DataRetentionPolicyCreate:
+      allOf:
+        - $ref: "#/components/schemas/DataRetentionPolicyWithTeamAndChannelIds"
+      required:
+        - display_name
+        - post_duration
+    DataRetentionPolicyForTeam:
+      type: object
+      properties:
+        team_id:
+          type: string
+          description: The team ID.
+        post_duration:
+          type: integer
+          description: The number of days a message will be retained before being deleted by this policy.
+    RetentionPolicyForTeamList:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataRetentionPolicyForTeam"
+          description: The list of team policies.
+        total_count:
+          type: integer
+          description: The total number of team policies.
+    DataRetentionPolicyForChannel:
+      type: object
+      properties:
+        channel_id:
+          type: string
+          description: The channel ID.
+        post_duration:
+          type: integer
+          description: The number of days a message will be retained before being deleted by this policy.
+    RetentionPolicyForChannelList:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: "#/components/schemas/DataRetentionPolicyForChannel"
+          description: The list of channel policies.
+        total_count:
+          type: integer
+          description: The total number of channel policies.
     UserNotifyProps:
       type: object
       properties:
@@ -3138,6 +3260,42 @@ components:
         title:
           description: "Notice title. Use {{Mattermost}} instead of plain text to support white-labeling. Text supports Markdown."
           type: string
+    SharedChannel:
+      type: object
+      properties:
+        channel_id:
+          description: Channel id of the shared channel
+          type: string
+        team_id:
+          type: string
+        home:
+          description: Is this the home cluster for the shared channel
+          type: boolean
+        readonly:
+          description: Is this shared channel shared as read only
+          type: boolean
+        share_name:
+          description: Channel name as it is shared (may be different than original channel name)
+          type: string
+        share_displayname:
+          description: Channel display name as it appears locally
+          type: string
+        share_purpose:
+          type: string
+        share_header:
+          type: string
+        creator_id:
+          description: Id of the user that shared the channel
+          type: string
+        create_at:
+          description: Time in milliseconds that the channel was shared
+          type: integer
+        update_at:
+          description: Time in milliseconds that the shared channel record was last updated
+          type: integer
+        remote_id:
+          description: Id of the remote cluster where the shared channel is homed
+          type: string
     RemoteClusterInfo:
       type: object
       properties:
@@ -3198,6 +3356,15 @@ components:
       properties:
         renewal_link:
           description: License renewal link
+          type: string
+    System:
+      type: object
+      properties:
+        name:
+          description: System property name
+          type: string
+        value:
+          description: System property value
           type: string
 externalDocs:
   description: Find out more about Mattermost
