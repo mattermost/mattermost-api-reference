@@ -208,3 +208,44 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
+
+  /users/{user_id}/status/custom/recent/delete:
+    post:
+      tags:
+        - custom_status
+      summary: Delete user's recent custom status
+      description: |
+        Deletes a user's recent custom status by removing the specific status from the recentCustomStatuses in the user's props and updates the user.
+        ##### Permissions
+        Must be logged in as the user whose recent custom status is being deleted.
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - emoji
+                - text
+              properties:
+                emoji:
+                  type: string
+                  description: Any emoji
+                text:
+                  type: string
+                  description: Any custom status text
+        description: Custom Status object that is to be removed from the recent custom statuses.
+        required: true
+      responses:
+        "200":
+          description: User recent custom status delete successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"  
