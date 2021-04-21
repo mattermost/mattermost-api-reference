@@ -818,14 +818,14 @@
       description: >
         Get the last trial license used on the sevrer
 
-        __Minimum server version__: 5.35
+        __Minimum server version__: 5.36
 
         ##### Permissions
 
         Must have `manage_systems` permissions.
       responses:
         "200":
-          description: Licnse fetched successfully.
+          description: License fetched successfully.
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
