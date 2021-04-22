@@ -400,6 +400,12 @@ tags:
 
       - dialog_opened
 
+      - thread_updated
+
+      - thread_follow_changed
+
+      - thread_read_changed
+
 
       #### WebSocket API
 
@@ -629,6 +635,7 @@ x-tagGroups:
       - shared channels
       - terms of service
       - imports
+      - permissions
       - exports
 servers:
   - url: http://your-mattermost-url.com/api/v4
