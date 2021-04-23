@@ -7,7 +7,7 @@
         Get SAML metadata from the server. SAML must be configured properly.
         ##### Permissions
         No permission required.
-      operationId: GetMetadata
+      operationId: GetSamlMetadata
       responses:
         "200":
           description: SAML metadata retrieval successful
@@ -26,7 +26,7 @@
         Get SAML metadata from the Identity Provider. SAML must be configured properly.
         ##### Permissions
         No permission required.
-      operationId: GetMetadataFromIdentityProvider
+      operationId: GetSamlMetadataFromIdp
       responses:
         "200":
           description: SAML metadata retrieval successful
@@ -49,7 +49,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
-      operationId: UploadIdpCertificate
+      operationId: UploadSamlIdpCertificate
       requestBody:
         content:
           multipart/form-data:
@@ -89,7 +89,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
-      operationId: RemoveIdpCertificate
+      operationId: DeleteSamlIdpCertificate
       responses:
         "200":
           description: SAML certificate delete successful
@@ -156,7 +156,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
-      operationId: RemoveSamlPublicCertificate
+      operationId: DeleteSamlPublicCertificate
       responses:
         "200":
           description: SAML certificate delete successful
@@ -183,7 +183,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
-      operationId: UploadSamlPrivateKey
+      operationId: UploadSamlPrivateCertificate
       requestBody:
         content:
           multipart/form-data:
@@ -223,7 +223,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
-      operationId: RemoveSamlPrivateKey
+      operationId: DeleteSamlPrivateCertificate
       responses:
         "200":
           description: SAML certificate delete successful
@@ -276,6 +276,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: ResetSamlAuthDataToEmail
       requestBody:
         content:
           application/json:

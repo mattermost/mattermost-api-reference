@@ -9,7 +9,7 @@
         ##### Permissions
 
         Must be logged in.
-      operationId: GetSupportedTimezones
+      operationId: GetSupportedTimezone
       responses:
         "200":
           description: List of timezones retrieval successful
@@ -39,7 +39,7 @@
         ##### Permissions
 
         Must be logged in.
-      operationId: GetPingWithServerStatus
+      operationId: GetPing
       parameters:
         - name: get_server_status
           in: query
@@ -271,7 +271,7 @@
 
 
         __Minimum server version__: 5.16
-      operationId: TestSiteUrl
+      operationId: TestSiteURL
       requestBody:
         content:
           application/json:
@@ -481,7 +481,7 @@
         Get a subset of the server configuration needed by the client.
         ##### Permissions
         No permission required.
-      operationId: GetConfigClient
+      operationId: GetClientConfig
       parameters:
         - name: format
           in: query
@@ -526,7 +526,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: GetConfigEnvVariables
+      operationId: GetEnvironmentConfig
       responses:
         "200":
           description: Configuration retrieval successful
@@ -972,7 +972,7 @@
         Logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` or just DEBUG messages when `false`.
 
         Non-logged in users can log ERROR or DEBUG messages when `ServiceSettings.EnableDeveloper` is `true` and cannot log when `false`.
-      operationId: AddLogMessage
+      operationId: PostLog
       requestBody:
         content:
           application/json:
@@ -1034,7 +1034,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: GetAnalytics
+      operationId: GetAnalyticsOld
       parameters:
         - name: name
           in: query
@@ -1075,7 +1075,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: SetServerBusyFlag
+      operationId: SetServerBusy
       parameters:
         - name: seconds
           in: query
@@ -1124,7 +1124,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: GetServerBusyExpiryTime
+      operationId: GetServerBusyExpires
       responses:
         "200":
           description: Server busy expires timestamp retrieved successfully
@@ -1165,7 +1165,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: ClearServerBusyFlag
+      operationId: ClearServerBusy
       responses:
         "200":
           description: Server busy flag cleared successfully
@@ -1281,7 +1281,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: UpgradeToEnterpriseEdition
+      operationId: UpgradeToEnterprise
       responses:
         "202":
           description: Upgrade started
@@ -1308,7 +1308,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: GetStatusForUpgradeToEnterpriseEdition
+      operationId: UpgradeToEnterpriseStatus
       responses:
         "200":
           description: Upgrade status
@@ -1340,7 +1340,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: RestartAfterUpgradeToEnterpriseEdition
+      operationId: RestartServer
       responses:
         "200":
           description: Restart started
@@ -1399,7 +1399,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: AcknowledgeWarningOfMetricStatus
+      operationId: SendWarnMetricAck
       parameters:
         - name: warn_metric_id
           in: path
@@ -1445,7 +1445,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: RequestTrialLicenseAndAcknowledgeWarningOfMetricStatus
+      operationId: SendTrialLicenseWarnMetricAck
       parameters:
         - name: warn_metric_id
           in: path
@@ -1517,7 +1517,7 @@
         Must have any of the system console read permissions.
         ##### License
         Requires either a E10 or E20 license.
-      operationId: DownloadZipFile
+      operationId: GenerateSupportPacket
       responses:
         "400":
           $ref: "#/components/responses/BadRequest"

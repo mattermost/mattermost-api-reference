@@ -7,7 +7,7 @@
         Create and save a compliance report.
         ##### Permissions
         Must have `manage_system` permission.
-      operationId: CreateReport
+      operationId: CreateComplianceReport
       responses:
         "201":
           description: Compliance report creation successful
@@ -34,7 +34,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: GetReports
+      operationId: GetComplianceReports
       parameters:
         - name: page
           in: query
@@ -74,7 +74,7 @@
         Get a compliance reports previously created.
         ##### Permissions
         Must have `manage_system` permission.
-      operationId: GetReport
+      operationId: GetComplianceReport
       parameters:
         - name: report_id
           in: path
@@ -106,7 +106,7 @@
         Download the full contents of a report as a file.
         ##### Permissions
         Must have `manage_system` permission.
-      operationId: DownloadReport
+      operationId: DownloadComplianceReport
       parameters:
         - name: report_id
           in: path

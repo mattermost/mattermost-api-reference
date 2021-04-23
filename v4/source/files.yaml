@@ -251,7 +251,7 @@
         ##### Permissions
 
         Must have `read_channel` permission or be uploader of the file.
-      operationId: GetPublicFileLink
+      operationId: GetFileLink
       parameters:
         - name: file_id
           in: path
@@ -299,7 +299,7 @@
         Gets a file's info.
         ##### Permissions
         Must have `read_channel` permission or be uploader of the file.
-      operationId: GetMetadataForFile
+      operationId: GetFileInfo
       parameters:
         - name: file_id
           in: path
@@ -343,7 +343,7 @@
       description: |
         ##### Permissions
         No permissions required.
-      operationId: GetPublicFile
+      operationId: GetFilePublic
       parameters:
         - name: file_id
           in: path
@@ -386,7 +386,7 @@
         ##### Permissions
 
         Must be authenticated and have the `view_team` permission.
-      operationId: SearchFilesInTeam
+      operationId: SearchFiles
       parameters:
         - name: team_id
           in: path

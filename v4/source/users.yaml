@@ -52,7 +52,7 @@
         ##### Permissions
 
         A Cloud license is required
-      operationId: LoginCwsToken
+      operationId: LoginByCwsToken
       requestBody:
         content:
           application/json:
@@ -555,7 +555,7 @@
         Requires an active session but no other permissions.
 
         __Minimum server version__: 5.14
-      operationId: GetUsersByGroupChannels
+      operationId: GetUsersByGroupChannelIds
       requestBody:
         content:
           application/json:
@@ -937,7 +937,7 @@
         Get a total count of users in the system.
         ##### Permissions
         Must be authenticated.
-      operationId: GetTotalCountOfUsersInSystem
+      operationId: GetTotalUsersStats
       responses:
         "200":
           description: User stats retrieval successful
@@ -996,7 +996,7 @@
 
         ##### Permissions
         Must have `manage_system` permission.
-      operationId: GetTotalCountOfUsersInSystemMatchingFilters
+      operationId: GetTotalUsersStatsFiltered
       parameters:
         - name: in_team
           in: query
@@ -1281,7 +1281,7 @@
         ##### Permissions
 
         Must be logged in as the user being deactivated or have the `edit_other_users` permission.
-      operationId: DeactivateUserAccount
+      operationId: DeleteUser
       parameters:
         - name: user_id
           in: path
@@ -1569,7 +1569,7 @@
         User can deactivate themselves.
 
         User with `manage_system` permission can activate or deactivate a user.
-      operationId: UpdateUserActiveStatus
+      operationId: UpdateUserActive
       parameters:
         - name: user_id
           in: path
@@ -1648,7 +1648,7 @@
         Get a user's profile image based on user_id string parameter.
         ##### Permissions
         Must be logged in.
-      operationId: GetUserProfileImage
+      operationId: GetProfileImage
       parameters:
         - name: user_id
           in: path
@@ -1714,7 +1714,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: SetUserProfileImage
+      operationId: SetProfileImage
       parameters:
         - name: user_id
           in: path
@@ -1820,7 +1820,7 @@
         Must be logged in as the user being updated or have the `edit_other_users` permission.
 
         __Minimum server version__: 5.5
-      operationId: DeleteUserProfileImage
+      operationId: SetDefaultProfileImage
       parameters:
         - name: user_id
           in: path
@@ -1900,7 +1900,7 @@
         Must be logged in.
 
         __Minimum server version__: 5.5
-      operationId: ReturnUserDefaultProfileImage
+      operationId: GetDefaultProfileImage
       parameters:
         - name: user_id
           in: path
@@ -2484,7 +2484,7 @@
         ##### Permissions
 
         No permission required.
-      operationId: CheckMfa
+      operationId: CheckUserMfa
       requestBody:
         content:
           application/json:
@@ -2800,7 +2800,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: GetUserSessions
+      operationId: GetSessions
       parameters:
         - name: user_id
           in: path
@@ -2869,7 +2869,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: RevokeUserSession
+      operationId: RevokeSession
       parameters:
         - name: user_id
           in: path
@@ -2955,7 +2955,7 @@
         Must be logged in as the user being updated or have the `edit_other_users` permission.
 
         __Minimum server version__: 4.4
-      operationId: RevokeAllUserSessions
+      operationId: RevokeAllSessions
       parameters:
         - name: user_id
           in: path
@@ -3023,7 +3023,7 @@
         ##### Permissions
 
         Must be authenticated.
-      operationId: AttachMobileDevice
+      operationId: AttachDeviceId
       requestBody:
         content:
           application/json:
@@ -3365,7 +3365,7 @@
         ##### Permissions
 
         No current authentication required except when switching from OAuth2/SAML to email.
-      operationId: SwitchLoginMethod
+      operationId: SwitchAccountType
       requestBody:
         content:
           application/json:
@@ -3877,7 +3877,7 @@
         ##### Permissions
 
         Must have `revoke_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
-      operationId: DisablePersonalAccessToken
+      operationId: DisableUserAccessToken
       requestBody:
         content:
           application/json:
@@ -3955,7 +3955,7 @@
         ##### Permissions
 
         Must have `create_user_access_token` permission. For non-self requests, must also have the `edit_other_users` permission.
-      operationId: EnablePersonalAccessToken
+      operationId: EnableUserAccessToken
       requestBody:
         content:
           application/json:
@@ -4114,7 +4114,7 @@
         ##### Permissions
 
         Must have the `edit_other_users` permission.
-      operationId: UpdateUserAuthenticationMethod
+      operationId: UpdateUserAuth
       parameters:
         - name: user_id
           in: path
@@ -4686,7 +4686,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
-      operationId: GetThreadMentionsForUserPerChannel
+      operationId: GetThreadMentionCountsByChannel
       parameters:
         - name: user_id
           in: path
@@ -4736,7 +4736,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
-      operationId: MarkThreadsReadForUser
+      operationId: UpdateThreadsReadForUser
       parameters:
         - name: user_id
           in: path
@@ -4786,7 +4786,7 @@
 
         ##### Permissions
         Must be logged in as the user or have `edit_other_users` permission.
-      operationId: MarkThreadReadForUser
+      operationId: UpdateThreadReadForUser
       parameters:
         - name: user_id
           in: path
@@ -5018,6 +5018,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetTeamPoliciesForUser
       parameters:
         - name: user_id
           in: path
@@ -5067,6 +5068,7 @@
 
         ##### License
         Requires an E20 license.
+      operationId: GetChannelPoliciesForUser
       parameters:
         - name: user_id
           in: path

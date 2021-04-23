@@ -179,7 +179,7 @@
         ##### Permissions
         `view_team` for the team.
         __Minimum server version__: 5.24
-      operationId: ListCommandsAutocompleteSuggestions
+      operationId: ListCommandAutocompleteSuggestions
       parameters:
         - name: team_id
           in: path
@@ -234,7 +234,7 @@
 
 
         __Minimum server version__: 5.22
-      operationId: GetCommand
+      operationId: GetCommandById
       parameters:
         - in: path
           name: command_id

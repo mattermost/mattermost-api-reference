@@ -14,7 +14,7 @@
         ##### Permissions
 
         No permission required but must be logged in.
-      operationId: GetOpenGraphMetadataForUrl
+      operationId: OpenGraph
       requestBody:
         content:
           application/json:

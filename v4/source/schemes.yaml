@@ -247,7 +247,7 @@
 
 
         __Minimum server version__: 5.0
-      operationId: GetTeamsUsingScheme
+      operationId: GetTeamsForScheme
       parameters:
         - name: scheme_id
           in: path
@@ -302,7 +302,7 @@
 
 
         __Minimum server version__: 5.0
-      operationId: GetChannelsUsingScheme
+      operationId: GetChannelsForScheme
       parameters:
         - name: scheme_id
           in: path

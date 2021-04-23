@@ -7,7 +7,7 @@
         Create a reaction.
         ##### Permissions
         Must have `read_channel` permission for the channel the post is in.
-      operationId: CreateReaction
+      operationId: SaveReaction
       requestBody:
         content:
           application/json:
@@ -36,7 +36,7 @@
         Get a list of reactions made by all users to a given post.
         ##### Permissions
         Must have `read_channel` permission for the channel the post is in.
-      operationId: GetReactionsToPost
+      operationId: GetReactions
       parameters:
         - name: post_id
           in: path
@@ -68,7 +68,7 @@
         Deletes a reaction made by a user from the given post.
         ##### Permissions
         Must be user or have `manage_system` permission.
-      operationId: RemoveReactionFromPost
+      operationId: DeleteReaction
       parameters:
         - name: user_id
           in: path
@@ -112,7 +112,7 @@
         Must have `read_channel` permission for the channel the post is in.
 
         __Minimum server version__: 5.8
-      operationId: GetReactionsForPosts
+      operationId: GetBulkReactions
       requestBody:
         content:
           application/json:

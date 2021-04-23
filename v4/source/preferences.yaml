@@ -9,7 +9,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: GetUserPreferences
+      operationId: GetPreferences
       parameters:
         - name: user_id
           in: path
@@ -42,7 +42,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: SaveUserPreferences
+      operationId: UpdatePreferences
       parameters:
         - name: user_id
           in: path
@@ -85,7 +85,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: DeleteUserPreferences
+      operationId: DeletePreferences
       parameters:
         - name: user_id
           in: path
@@ -126,7 +126,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: GetUserPreferencesByCategory
+      operationId: GetPreferencesByCategory
       parameters:
         - name: user_id
           in: path
@@ -167,7 +167,7 @@
         ##### Permissions
 
         Must be logged in as the user being updated or have the `edit_other_users` permission.
-      operationId: GetSpecificUserPreference
+      operationId: GetPreferencesByCategoryByName
       parameters:
         - name: user_id
           in: path

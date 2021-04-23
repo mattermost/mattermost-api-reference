@@ -10,7 +10,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: SyncWithLdap
+      operationId: SyncLdap
       responses:
         "200":
           description: LDAP sync successful
@@ -32,7 +32,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: TestLdapConfiguration
+      operationId: TestLdap
       responses:
         "200":
           description: LDAP test successful
@@ -133,7 +133,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
-      operationId: DeleteLinkForLdapGroup
+      operationId: UnlinkLdapGroup
       parameters:
         - name: remote_id
           in: path
@@ -247,7 +247,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: RemoveLdapPublicCertificate
+      operationId: DeleteLdapPublicCertificate
       responses:
         "200":
           description: LDAP certificate delete successful
@@ -273,7 +273,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: UploadLdapPrivateKey
+      operationId: UploadLdapPrivateCertificate
       requestBody:
         content:
           multipart/form-data:
@@ -311,7 +311,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
-      operationId: RemoveLdapPrivateKey
+      operationId: DeleteLdapPrivateCertificate
       responses:
         "200":
           description: LDAP certificate delete successful

@@ -83,7 +83,7 @@
         Get a list of user statuses by id from the server.
         ##### Permissions
         Must be authenticated.
-      operationId: GetUserStatusesById
+      operationId: GetUsersStatusesByIds
       requestBody:
         content:
           application/json:
@@ -157,7 +157,7 @@
         Unsets a user's custom status by updating the user's props and updates the user
         ##### Permissions
         Must be logged in as the user whose custom status is being removed.
-      operationId: DeleteUserCustomStatus
+      operationId: UnsetUserCustomStatus
       parameters:
         - name: user_id
           in: path
@@ -182,7 +182,7 @@
         Deletes a user's recent custom status by removing the specific status from the recentCustomStatuses in the user's props and updates the user.
         ##### Permissions
         Must be logged in as the user whose recent custom status is being deleted.
-      operationId: DeleteUserRecentCustomStatus
+      operationId: RemoveRecentCustomStatus
       parameters:
         - name: user_id
           in: path
@@ -224,6 +224,7 @@
         Deletes a user's recent custom status by removing the specific status from the recentCustomStatuses in the user's props and updates the user.
         ##### Permissions
         Must be logged in as the user whose recent custom status is being deleted.
+      operationId: PostUserRecentCustomStatusDelete
       parameters:
         - name: user_id
           in: path

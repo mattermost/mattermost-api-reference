@@ -414,7 +414,7 @@
         ##### Permissions
         Must have `manage_bots` permission. 
         __Minimum server version__: 5.10
-      operationId: AssignBotToUser
+      operationId: AssignBot
       parameters:
         - name: bot_user_id
           in: path
@@ -477,7 +477,7 @@
         ##### Permissions
         Must be logged in.
         __Minimum server version__: 5.14
-      operationId: GetBotIcon
+      operationId: GetBotIconImage
       parameters:
         - name: bot_user_id
           in: path
@@ -548,7 +548,7 @@
         Must have `manage_bots` permission.
 
         __Minimum server version__: 5.14
-      operationId: SetBotIcon
+      operationId: SetBotIconImage
       parameters:
         - name: bot_user_id
           in: path
@@ -652,7 +652,7 @@
         ##### Permissions
         Must have `manage_bots` permission.
         __Minimum server version__: 5.14
-      operationId: DeleteBotIcon
+      operationId: DeleteBotIconImage
       parameters:
         - name: bot_user_id
           in: path

@@ -85,7 +85,7 @@
 
         ##### Permissions
         Must be logged in as the user who created the upload session.
-      operationId: GetUploadSession
+      operationId: GetUpload
       parameters:
         - name: upload_id
           in: path
@@ -133,7 +133,7 @@
 
         ##### Permissions
         Must be logged in as the user who created the upload session.
-      operationId: PerformFileUpload
+      operationId: UploadData
       parameters:
         - name: upload_id
           in: path

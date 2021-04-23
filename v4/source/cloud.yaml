@@ -45,7 +45,7 @@
         __Minimum server version__: 5.28
         __Note:__: This is intended for internal use and is subject to change.
 
-      operationId: CreateCustomerSetupPaymentIntent
+      operationId: CreateCustomerPayment
       responses:
         "201":
           description: Payment setup intented created
@@ -76,7 +76,7 @@
         __Minimum server version__: 5.28
 
         __Note:__ This is intended for internal use and is subject to change.
-      operationId: CompletePaymentSetupIntent
+      operationId: ConfirmCustomerPayment
       requestBody:
         content:
           multipart/form-data:
@@ -226,7 +226,7 @@
 
         __Minimum server version__: 5.28
         __Note:__ This is intended for internal use and is subject to change.
-      operationId: GetCloudSubscription
+      operationId: GetSubscription
       responses:
         "200":
           description: Cloud subscription returned successfully
@@ -256,7 +256,7 @@
 
         __Minimum server version__: 5.30
         __Note:__ This is intended for internal use and is subject to change.
-      operationId: GetCloudSubscriptionInvoices
+      operationId: GetInvoicesForSubscription
       responses:
         "200":
           description: Subscription invoices returned successfully
@@ -288,7 +288,7 @@
 
         __Minimum server version__: 5.30
         __Note:__ This is intended for internal use and is subject to change.
-      operationId: GetCloudInvoicePdf
+      operationId: GetInvoiceForSubscriptionAsPdf
       parameters:
         - name: invoice_id
           in: path
@@ -343,7 +343,7 @@
 
         __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
-      operationId: GetEndpointForCloudSubscriptionStats
+      operationId: GetSubscriptionStats
       responses:
         "200":
           description: Cloud subscription stats returned successfully
@@ -367,7 +367,7 @@
 
         __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
-      operationId: TriggerAdminEmailOnInvite
+      operationId: SendAdminUpgradeRequestEmail
       responses:
         "200":
           description: Email sent to at least one of the system administrators
@@ -391,7 +391,7 @@
 
         __Minimum server version__: 5.34
         __Note:__ This is intended for internal use and is subject to change.
-      operationId: TriggerAdminEmailOnJoin
+      operationId: SendAdminUpgradeRequestEmailOnJoin
       responses:
         "200":
           description: Email sent to at least one of the system administrators

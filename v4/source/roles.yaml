@@ -141,7 +141,7 @@
         Requires an active session but no other permissions.
 
         __Minimum server version__: 4.9
-      operationId: GetRolesByName
+      operationId: GetRolesByNames
       requestBody:
         content:
           application/json:

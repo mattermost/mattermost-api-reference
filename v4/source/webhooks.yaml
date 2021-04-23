@@ -496,7 +496,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
-      operationId: RegenerateTokenForOutgoingWebhook
+      operationId: RegenOutgoingHookToken
       parameters:
         - name: hook_id
           in: path

@@ -9,7 +9,7 @@
         __Minimum server version__: 5.4
         ##### Permissions
         Must be authenticated.
-      operationId: GetLatestTermsOfService
+      operationId: GetTermsOfService
       responses:
         "200":
           description: Terms of service fetched successfully
@@ -31,7 +31,7 @@
         __Minimum server version__: 5.4
         ##### Permissions
         Must have `manage_system` permission.
-      operationId: CreateNewTermsOfService
+      operationId: CreateTermsOfService
       responses:
         "200":
           description: terms of service fetched successfully

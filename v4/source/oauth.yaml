@@ -10,7 +10,7 @@
         ##### Permissions
 
         Must have `manage_oauth` permission.
-      operationId: RegisterOAuthApp
+      operationId: CreateOAuthApp
       requestBody:
         content:
           application/json:
@@ -313,7 +313,7 @@
         ##### Permissions
 
         Must be authenticated.
-      operationId: GetInfoOnOAuthApp
+      operationId: GetOAuthAppInfo
       parameters:
         - name: app_id
           in: path
@@ -348,7 +348,7 @@
         ##### Permissions
 
         Must be authenticated as the user or have `edit_other_users` permission.
-      operationId: GetAuthorizedOAuthApps
+      operationId: GetAuthorizedOAuthAppsForUser
       parameters:
         - name: user_id
           in: path
