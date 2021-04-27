@@ -400,6 +400,12 @@ tags:
 
       - dialog_opened
 
+      - thread_updated
+
+      - thread_follow_changed
+
+      - thread_read_changed
+
 
       #### WebSocket API
 
@@ -557,7 +563,7 @@ tags:
     description: Endpoints for configuring and interacting with high availability clusters.
   - name: elasticsearch
     description: Endpoints for configuring and interacting with Elasticsearch.
-  - name: dataretention
+  - name: data retention
     description: Endpoint for getting data retention policy settings.
   - name: jobs
     description:
@@ -620,7 +626,7 @@ x-tagGroups:
       - cloud
       - elasticsearch
       - bleve
-      - dataretention
+      - data retention
       - jobs
       - plugins
       - roles
@@ -629,6 +635,7 @@ x-tagGroups:
       - shared channels
       - terms of service
       - imports
+      - permissions
       - exports
 servers:
   - url: http://your-mattermost-url.com/api/v4
