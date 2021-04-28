@@ -61,7 +61,7 @@
                   description: User status, can be `online`, `away`, `offline` and `dnd`
                 dnd_end_time:
                   type: integer
-                  description: Time on which dnd would be unset
+                  description: Time in epoch seconds at which a dnd status would be unset.
         description: Status object that is to be updated
         required: true
       responses:
