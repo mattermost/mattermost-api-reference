@@ -9,6 +9,7 @@
         `manage_webhooks` for the team the webhook is in.
 
         `manage_others_incoming_webhooks` for the team the webhook is in if the user is different than the requester.
+      operationId: CreateIncomingWebhook
       requestBody:
         content:
           application/json:
@@ -63,6 +64,7 @@
         ##### Permissions
 
         `manage_webhooks` for the system or `manage_webhooks` for the specific team.
+      operationId: GetIncomingWebhooks
       parameters:
         - name: page
           in: query
@@ -107,6 +109,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      operationId: GetIncomingWebhook
       parameters:
         - name: hook_id
           in: path
@@ -139,6 +142,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      operationId: DeleteIncomingWebhook
       parameters:
         - name: hook_id
           in: path
@@ -171,6 +175,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      operationId: UpdateIncomingWebhook
       parameters:
         - name: hook_id
           in: path
@@ -237,6 +242,7 @@
         `manage_webhooks` for the team the webhook is in.
 
         `manage_others_outgoing_webhooks` for the team the webhook is in if the user is different than the requester.
+      operationId: CreateOutgoingWebhook
       requestBody:
         content:
           application/json:
@@ -312,6 +318,7 @@
         ##### Permissions
 
         `manage_webhooks` for the system or `manage_webhooks` for the specific team/channel.
+      operationId: GetOutgoingWebhooks
       parameters:
         - name: page
           in: query
@@ -363,6 +370,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      operationId: GetOutgoingWebhook
       parameters:
         - name: hook_id
           in: path
@@ -395,6 +403,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      operationId: DeleteOutgoingWebhook
       parameters:
         - name: hook_id
           in: path
@@ -427,6 +436,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      operationId: UpdateOutgoingWebhook
       parameters:
         - name: hook_id
           in: path
@@ -486,6 +496,7 @@
         ##### Permissions
 
         `manage_webhooks` for system or `manage_webhooks` for the specific team or `manage_webhooks` for the channel.
+      operationId: RegenOutgoingHookToken
       parameters:
         - name: hook_id
           in: path

@@ -10,6 +10,7 @@
         Requires an active session but no other permissions.
 
         __Minimum server version__: 4.9
+      operationId: GetRole
       parameters:
         - name: role_id
           in: path
@@ -48,6 +49,7 @@
         Requires an active session but no other permissions.
 
         __Minimum server version__: 4.9
+      operationId: GetRoleByName
       parameters:
         - name: role_name
           in: path
@@ -91,6 +93,7 @@
 
 
         __Minimum server version__: 4.9
+      operationId: PatchRole
       parameters:
         - name: role_id
           in: path
@@ -138,6 +141,7 @@
         Requires an active session but no other permissions.
 
         __Minimum server version__: 4.9
+      operationId: GetRolesByNames
       requestBody:
         content:
           application/json:

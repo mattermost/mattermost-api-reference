@@ -10,6 +10,7 @@
         ##### Permissions
 
         Must have `create_post` permission for the channel the post is being created in.
+      operationId: CreatePost
       parameters:
         - name: set_online
           in: query
@@ -71,6 +72,7 @@
         ##### Permissions
 
         Must have `create_post_ephemeral` permission (currently only given to system admin)
+      operationId: CreatePostEphemeral
       requestBody:
         content:
           application/json:
@@ -137,6 +139,7 @@
         ##### Permissions
 
         Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
+      operationId: GetPost
       parameters:
         - name: post_id
           in: path
@@ -168,6 +171,7 @@
         ##### Permissions
 
         Must be logged in as the user or have `delete_others_posts` permission.
+      operationId: DeletePost
       parameters:
         - name: post_id
           in: path
@@ -199,6 +203,7 @@
         ##### Permissions
 
         Must have `edit_post` permission for the channel the post is in.
+      operationId: UpdatePost
       parameters:
         - name: post_id
           in: path
@@ -260,6 +265,7 @@
 
 
         __Minimum server version__: 5.18
+      operationId: SetPostUnread
       parameters:
         - name: user_id
           in: path
@@ -301,6 +307,7 @@
         ##### Permissions
 
         Must have the `edit_post` permission.
+      operationId: PatchPost
       parameters:
         - name: post_id
           in: path
@@ -357,6 +364,7 @@
         ##### Permissions
 
         Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
+      operationId: GetPostThread
       parameters:
         - name: post_id
           in: path
@@ -389,6 +397,7 @@
         ##### Permissions
 
         Must be user or have `manage_system` permission.
+      operationId: GetFlaggedPostsForUser
       parameters:
         - name: user_id
           in: path
@@ -445,6 +454,7 @@
         ##### Permissions
 
         Must have `read_channel` permission for the channel the post is in.
+      operationId: GetFileInfosForPost
       parameters:
         - name: post_id
           in: path
@@ -485,6 +495,7 @@
         ##### Permissions
 
         Must have `read_channel` permission for the channel.
+      operationId: GetPostsForChannel
       parameters:
         - name: channel_id
           in: path
@@ -548,6 +559,7 @@
         Must be logged in as the user or have `edit_other_users` permission, and must have `read_channel` permission for the channel.
 
         __Minimum server version__: 5.14
+      operationId: GetPostsAroundLastUnread
       parameters:
         - name: user_id
           in: path
@@ -601,6 +613,7 @@
         Search posts in the team and from the provided terms string.
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
+      operationId: SearchPosts
       parameters:
         - name: team_id
           in: path
@@ -670,6 +683,7 @@
         ##### Permissions
 
         Must be authenticated and have the `read_channel` permission to the channel the post is in.
+      operationId: PinPost
       parameters:
         - name: post_id
           in: path
@@ -702,6 +716,7 @@
         ##### Permissions
 
         Must be authenticated and have the `read_channel` permission to the channel the post is in.
+      operationId: UnpinPost
       parameters:
         - name: post_id
           in: path
@@ -734,6 +749,7 @@
         ##### Permissions
 
         Must be authenticated and have the `read_channel` permission to the channel the post is in.
+      operationId: DoPostAction
       parameters:
         - name: post_id
           in: path

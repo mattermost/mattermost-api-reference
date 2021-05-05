@@ -7,6 +7,7 @@
         Create a custom emoji for the team.
         ##### Permissions
         Must be authenticated.
+      operationId: CreateEmoji
       requestBody:
         content:
           multipart/form-data:
@@ -53,6 +54,7 @@
         ##### Permissions
 
         Must be authenticated.
+      operationId: GetEmojiList
       parameters:
         - name: page
           in: query
@@ -97,6 +99,7 @@
         Get some metadata for a custom emoji.
         ##### Permissions
         Must be authenticated.
+      operationId: GetEmoji
       parameters:
         - name: emoji_id
           in: path
@@ -129,6 +132,7 @@
         ##### Permissions
 
         Must have the `manage_team` or `manage_system` permissions or be the user who created the emoji.
+      operationId: DeleteEmoji
       parameters:
         - name: emoji_id
           in: path
@@ -162,6 +166,7 @@
         Must be authenticated.
 
         __Minimum server version__: 4.7
+      operationId: GetEmojiByName
       parameters:
         - name: emoji_name
           in: path
@@ -193,6 +198,7 @@
         Get the image for a custom emoji.
         ##### Permissions
         Must be authenticated.
+      operationId: GetEmojiImage
       parameters:
         - name: emoji_id
           in: path
@@ -228,6 +234,7 @@
 
 
         __Minimum server version__: 4.7
+      operationId: SearchEmoji
       requestBody:
         content:
           application/json:
@@ -276,6 +283,7 @@
 
 
         __Minimum server version__: 4.7
+      operationId: AutocompleteEmoji
       parameters:
         - name: name
           in: query
