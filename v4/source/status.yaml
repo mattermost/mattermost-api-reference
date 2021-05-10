@@ -128,8 +128,6 @@
               required:
                 - emoji
                 - text
-                - duration
-                - expires_at
               properties:
                 emoji:
                   type: string
