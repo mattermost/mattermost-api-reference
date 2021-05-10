@@ -7,6 +7,7 @@
         Create a command for a team.
         ##### Permissions
         `manage_slash_commands` for the team the command is in.
+      operationId: CreateCommand
       requestBody:
         content:
           application/json:
@@ -77,6 +78,7 @@
         List commands for a team.
         ##### Permissions
         `manage_slash_commands` if need list custom commands.
+      operationId: ListCommands
       parameters:
         - name: team_id
           in: query
@@ -134,6 +136,7 @@
         List autocomplete commands in the team.
         ##### Permissions
         `view_team` for the team.
+      operationId: ListAutocompleteCommands
       parameters:
         - name: team_id
           in: path
@@ -176,6 +179,7 @@
         ##### Permissions
         `view_team` for the team.
         __Minimum server version__: 5.24
+      operationId: ListCommandAutocompleteSuggestions
       parameters:
         - name: team_id
           in: path
@@ -230,6 +234,7 @@
 
 
         __Minimum server version__: 5.22
+      operationId: GetCommandById
       parameters:
         - in: path
           name: command_id
@@ -270,6 +275,7 @@
         ##### Permissions
 
         Must have `manage_slash_commands` permission for the team the command is in.
+      operationId: UpdateCommand
       parameters:
         - in: path
           name: command_id
@@ -324,6 +330,7 @@
         ##### Permissions
 
         Must have `manage_slash_commands` permission for the team the command is in.
+      operationId: DeleteCommand
       parameters:
         - in: path
           name: command_id
@@ -370,6 +377,7 @@
 
 
         __Minimum server version__: 5.22
+      operationId: MoveCommand
       parameters:
         - in: path
           name: command_id
@@ -423,6 +431,7 @@
         ##### Permissions
 
         Must have `manage_slash_commands` permission for the team the command is in.
+      operationId: RegenCommandToken
       parameters:
         - in: path
           name: command_id
@@ -468,6 +477,7 @@
         ##### Permissions
 
         Must have `use_slash_commands` permission for the team the command is in.
+      operationId: ExecuteCommand
       requestBody:
         content:
           application/json:

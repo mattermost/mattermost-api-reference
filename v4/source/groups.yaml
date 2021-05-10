@@ -18,6 +18,7 @@
 
 
         __Minimum server version__: 5.11
+      operationId: GetGroups
       parameters:
         - name: page
           in: query
@@ -97,6 +98,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetGroup
       parameters:
         - name: group_id
           in: path
@@ -137,6 +139,7 @@
 
 
         __Minimum server version__: 5.11
+      operationId: PatchGroup
       parameters:
         - name: group_id
           in: path
@@ -184,6 +187,7 @@
         Must have `manage_team` permission.
 
         __Minimum server version__: 5.11
+      operationId: LinkGroupSyncableForTeam
       parameters:
         - name: group_id
           in: path
@@ -222,6 +226,7 @@
         Must have `manage_team` permission.
 
         __Minimum server version__: 5.11
+      operationId: UnlinkGroupSyncableForTeam
       parameters:
         - name: group_id
           in: path
@@ -266,6 +271,7 @@
 
 
         __Minimum server version__: 5.11
+      operationId: LinkGroupSyncableForChannel
       parameters:
         - name: group_id
           in: path
@@ -309,6 +315,7 @@
 
 
         __Minimum server version__: 5.11
+      operationId: UnlinkGroupSyncableForChannel
       parameters:
         - name: group_id
           in: path
@@ -348,6 +355,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetGroupSyncableForTeamId
       parameters:
         - name: group_id
           in: path
@@ -389,6 +397,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetGroupSyncableForChannelId
       parameters:
         - name: group_id
           in: path
@@ -430,6 +439,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetGroupSyncablesTeams
       parameters:
         - name: group_id
           in: path
@@ -467,6 +477,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetGroupSyncablesChannels
       parameters:
         - name: group_id
           in: path
@@ -511,6 +522,7 @@
 
 
         __Minimum server version__: 5.11
+      operationId: PatchGroupSyncableForTeam
       parameters:
         - name: group_id
           in: path
@@ -568,6 +580,7 @@
 
 
         __Minimum server version__: 5.11
+      operationId: PatchGroupSyncableForChannel
       parameters:
         - name: group_id
           in: path
@@ -618,6 +631,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetGroupUsers
       parameters:
         - name: group_id
           in: path
@@ -673,6 +687,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.26
+      operationId: GetGroupStats
       parameters:
         - name: group_id
           in: path
@@ -714,6 +729,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.11
+      operationId: GetGroupsByChannel
       parameters:
         - name: channel_id
           in: path
@@ -767,6 +783,7 @@
         Retrieve the list of groups associated with a given team.
 
         __Minimum server version__: 5.11
+      operationId: GetGroupsByTeam
       parameters:
         - name: team_id
           in: path
@@ -823,6 +840,7 @@
           Must have `manage_system` permission or can access only for current user
 
           __Minimum server version__: 5.11
+        operationId: GetGroupsAssociatedToChannelsByTeam
         parameters:
           - name: team_id
             in: path
@@ -876,6 +894,7 @@
         Retrieve the list of groups associated to the user
 
         __Minimum server version__: 5.24
+      operationId: GetGroupsByUserId
       parameters:
         - name: user_id
           in: path

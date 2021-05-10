@@ -7,6 +7,7 @@
         Create a new team on the system.
         ##### Permissions
         Must be authenticated and have the `create_team` permission.
+      operationId: CreateTeam
       requestBody:
         content:
           application/json:
@@ -92,6 +93,7 @@
         ##### Permissions
 
         Must be authenticated. "manage_system" permission is required to show all teams.
+      operationId: GetAllTeams
       parameters:
         - name: page
           in: query
@@ -177,6 +179,7 @@
         Get a team on the system.
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
+      operationId: GetTeam
       parameters:
         - name: team_id
           in: path
@@ -246,6 +249,7 @@
         ##### Permissions
 
         Must have the `manage_team` permission.
+      operationId: UpdateTeam
       parameters:
         - name: team_id
           in: path
@@ -365,6 +369,7 @@
         ##### Permissions
 
         Must have the `manage_team` permission.
+      operationId: SoftDeleteTeam
       parameters:
         - name: team_id
           in: path
@@ -456,6 +461,7 @@
         ##### Permissions
 
         Must have the `manage_team` permission.
+      operationId: PatchTeam
       parameters:
         - name: team_id
           in: path
@@ -556,6 +562,7 @@
         ##### Permissions
 
         `manage_team` permission for the team of the team.
+      operationId: UpdateTeamPrivacy
       parameters:
         - name: team_id
           in: path
@@ -651,6 +658,7 @@
 
         ##### Permissions
         Must have the `manage_team` permission.
+      operationId: RestoreTeam
       parameters:
         - name: team_id
           in: path
@@ -714,6 +722,7 @@
         ##### Permissions
 
         Must be authenticated, team type is open and have the `view_team` permission.
+      operationId: GetTeamByName
       parameters:
         - name: name
           in: path
@@ -778,6 +787,7 @@
         ##### Permissions
         Logged in user only shows open teams
         Logged in user with "manage_system" permission shows all teams
+      operationId: SearchTeams
       requestBody:
         content:
           application/json:
@@ -898,6 +908,7 @@
         Check if the team exists based on a team name.
         ##### Permissions
         Must be authenticated.
+      operationId: TeamExists
       parameters:
         - name: name
           in: path
@@ -960,6 +971,7 @@
         ##### Permissions
 
         Must be authenticated as the user or have the `manage_system` permission.
+      operationId: GetTeamsForUser
       parameters:
         - name: user_id
           in: path
@@ -1029,6 +1041,7 @@
         ##### Permissions
 
         Must be authenticated and have the `view_team` permission.
+      operationId: GetTeamMembers
       parameters:
         - name: team_id
           in: path
@@ -1113,6 +1126,7 @@
         ##### Permissions
 
         Must be authenticated and team be open to add self. For adding another user, authenticated user must have the `add_user_to_team` permission.
+      operationId: AddTeamMember
       parameters:
         - name: team_id
           in: path
@@ -1198,6 +1212,7 @@
         ##### Permissions
 
         Must be authenticated.
+      operationId: AddTeamMemberFromInvite
       parameters:
         - name: token
           in: query
@@ -1268,6 +1283,7 @@
         ##### Permissions
 
         Must be authenticated. Authenticated user must have the `add_user_to_team` permission.
+      operationId: AddTeamMembers
       parameters:
         - name: team_id
           in: path
@@ -1369,6 +1385,7 @@
         ##### Permissions
 
         Must be logged in as the user or have the `edit_other_users` permission.
+      operationId: GetTeamMembersForUser
       parameters:
         - name: user_id
           in: path
@@ -1437,6 +1454,7 @@
         Get a team member on the system.
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
+      operationId: GetTeamMember
       parameters:
         - name: team_id
           in: path
@@ -1513,6 +1531,7 @@
         ##### Permissions
 
         Must be logged in as the user or have the `remove_user_from_team` permission.
+      operationId: RemoveTeamMember
       parameters:
         - name: team_id
           in: path
@@ -1587,6 +1606,7 @@
         Get a list of team members based on a provided array of user ids.
         ##### Permissions
         Must have `view_team` permission for the team.
+      operationId: GetTeamMembersByIds
       parameters:
         - name: team_id
           in: path
@@ -1677,6 +1697,7 @@
         Get a team stats on the system.
         ##### Permissions
         Must be authenticated and have the `view_team` permission.
+      operationId: GetTeamStats
       parameters:
         - name: team_id
           in: path
@@ -1743,6 +1764,7 @@
         Regenerates the invite ID used in invite links of a team
         ##### Permissions
         Must be authenticated and have the `manage_team` permission.
+      operationId: RegenerateTeamInviteId
       parameters:
         - name: team_id
           in: path
@@ -1815,6 +1837,7 @@
         ##### Permissions
 
         User must be authenticated. In addition, team must be open or the user must have the `view_team` permission.
+      operationId: GetTeamIcon
       parameters:
         - name: team_id
           in: path
@@ -1881,6 +1904,7 @@
 
         ##### Permissions
         Must be authenticated and have the `manage_team` permission.
+      operationId: SetTeamIcon
       parameters:
         - name: team_id
           in: path
@@ -1984,6 +2008,7 @@
 
         ##### Permissions
         Must be authenticated and have the `manage_team` permission.
+      operationId: RemoveTeamIcon
       parameters:
         - name: team_id
           in: path
@@ -2056,6 +2081,7 @@
         ##### Permissions
 
         Must be authenticated and have the `manage_team_roles` permission.
+      operationId: UpdateTeamMemberRoles
       parameters:
         - name: team_id
           in: path
@@ -2158,6 +2184,7 @@
         ##### Permissions
 
         Must be authenticated and have the `manage_team_roles` permission.
+      operationId: UpdateTeamMemberSchemeRoles
       parameters:
         - name: team_id
           in: path
@@ -2261,6 +2288,7 @@
         ##### Permissions
 
         Must be logged in.
+      operationId: GetTeamsUnreadForUser
       parameters:
         - name: user_id
           in: path
@@ -2340,6 +2368,7 @@
         ##### Permissions
 
         Must be the user or have `edit_other_users` permission and have `view_team` permission for the team.
+      operationId: GetTeamUnread
       parameters:
         - name: user_id
           in: path
@@ -2416,6 +2445,7 @@
         The number of emails that can be sent is rate limited to 20 per hour with a burst of 20 emails. If the rate limit exceeds, the error message contains details on when to retry and when the timer will be reset.
         ##### Permissions
         Must have `invite_user` and `add_user_to_team` permissions for the team.
+      operationId: InviteUsersToTeam
       parameters:
         - name: team_id
           in: path
@@ -2503,6 +2533,7 @@
 
         ##### Permissions
         Must have `invite_guest` permission for the team.
+      operationId: InviteGuestsToTeam
       parameters:
         - name: team_id
           in: path
@@ -2611,6 +2642,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_authentication` permission.
+      operationId: InvalidateEmailInvites
       responses:
         "200":
           description: Email invites successfully revoked
@@ -2667,6 +2699,7 @@
         ##### Permissions
 
         Must have `permission_import_team` permission.
+      operationId: ImportTeam
       parameters:
         - name: team_id
           in: path
@@ -2791,6 +2824,7 @@
         ##### Permissions
 
         No authentication required.
+      operationId: GetTeamInviteInfo
       parameters:
         - name: invite_id
           in: path
@@ -2866,6 +2900,7 @@
 
 
         __Minimum server version__: 5.0
+      operationId: UpdateTeamScheme
       parameters:
         - name: team_id
           in: path
@@ -2967,6 +3002,7 @@
 
 
         __Minimum server version__: 5.14
+      operationId: TeamMembersMinusGroupMembers
       parameters:
         - name: team_id
           in: path

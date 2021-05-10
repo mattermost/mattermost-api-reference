@@ -14,6 +14,7 @@
         ##### Permissions
 
         Must have `sysconsole_write_experimental` permission.
+      operationId: PurgeBleveIndexes
       responses:
         "200":
           description: Indexes purged successfully.

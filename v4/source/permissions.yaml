@@ -9,6 +9,7 @@
 
 
         __Minimum server version__: 5.35
+      operationId: GetAncillaryPermissions
       parameters:
         - name: subsection_permissions
           in: query

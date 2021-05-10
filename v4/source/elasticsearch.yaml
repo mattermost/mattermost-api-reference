@@ -17,6 +17,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: TestElasticsearch
       responses:
         "200":
           description: Elasticsearch test successful
@@ -46,6 +47,7 @@
         ##### Permissions
 
         Must have `manage_system` permission.
+      operationId: PurgeElasticsearchIndexes
       responses:
         "200":
           description: Indexes purged successfully.
