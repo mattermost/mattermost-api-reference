@@ -15,6 +15,7 @@
 
 
         __Minimum server version__: 4.4
+      operationId: UploadPlugin
       requestBody:
         content:
           multipart/form-data:
@@ -95,6 +96,7 @@
 
 
         __Minimum server version__: 4.4
+      operationId: GetPlugins
       responses:
         "200":
           description: Plugins retrieval successful
@@ -144,6 +146,7 @@
 
 
         __Minimum server version__: 5.14
+      operationId: InstallPluginFromUrl
       parameters:
         - name: plugin_download_url
           in: query
@@ -204,6 +207,7 @@
 
 
         __Minimum server version__: 4.4
+      operationId: RemovePlugin
       parameters:
         - name: plugin_id
           in: path
@@ -254,6 +258,7 @@
 
 
         __Minimum server version__: 4.4
+      operationId: EnablePlugin
       parameters:
         - name: plugin_id
           in: path
@@ -304,6 +309,7 @@
 
 
         __Minimum server version__: 4.4
+      operationId: DisablePlugin
       parameters:
         - name: plugin_id
           in: path
@@ -350,6 +356,7 @@
         No permissions required.
 
         __Minimum server version__: 4.4
+      operationId: GetWebappPlugins
       responses:
         "200":
           description: Plugin deactivated successfully
@@ -387,6 +394,7 @@
         No permissions required.
 
         __Minimum server version__: 4.4
+      operationId: GetPluginStatuses
       responses:
         "200":
           description: Plugin status retreived successfully
@@ -424,6 +432,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.16
+      operationId: InstallMarketplacePlugin
       requestBody:
         content:
           application/json:
@@ -488,6 +497,7 @@
 
 
         __Minimum server version__: 5.16
+      operationId: GetMarketplacePlugins
       parameters:
         - name: page
           in: query
@@ -563,6 +573,7 @@
         __Minimum server version: 5.33__
         ##### Permissions
         Must have `manage_system` permissions.
+      operationId: GetMarketplaceVisitedByAdmin
       responses:
         "200":
           description: Retrieves the system-level status
@@ -583,6 +594,7 @@
         __Minimum server version: 5.33__
         ##### Permissions
         Must have `manage_system` permissions.
+      operationId: UpdateMarketplaceVisitedByAdmin
       requestBody:
         content:
           application/json:

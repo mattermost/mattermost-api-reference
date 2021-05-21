@@ -3263,7 +3263,7 @@ components:
     SharedChannel:
       type: object
       properties:
-        channel_id:
+        id:
           description: Channel id of the shared channel
           type: string
         team_id:
@@ -3274,15 +3274,15 @@ components:
         readonly:
           description: Is this shared channel shared as read only
           type: boolean
-        share_name:
+        name:
           description: Channel name as it is shared (may be different than original channel name)
           type: string
-        share_displayname:
+        display_name:
           description: Channel display name as it appears locally
           type: string
-        share_purpose:
+        purpose:
           type: string
-        share_header:
+        header:
           type: string
         creator_id:
           description: Id of the user that shared the channel

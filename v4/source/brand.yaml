@@ -10,6 +10,7 @@
         ##### Permissions
 
         No permission required.
+      operationId: GetBrandImage
       responses:
         "200":
           description: Brand image retrieval successful
@@ -39,6 +40,7 @@
         Uploads a brand image.
         ##### Permissions
         Must have `manage_system` permission.
+      operationId: UploadBrandImage
       requestBody:
         content:
           multipart/form-data:
@@ -101,6 +103,7 @@
         Must have `manage_system` permission.
 
         __Minimum server version: 5.6__
+      operationId: DeleteBrandImage
       responses:
         "200":
           description: Brand image succesfully deleted
