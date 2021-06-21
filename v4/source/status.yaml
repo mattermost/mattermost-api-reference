@@ -142,6 +142,12 @@
                 text:
                   type: string
                   description: Any custom status text
+                duration:
+                  type: string
+                  description: Duration of custom status, can be `thirty_minutes`, `one_hour`, `four_hours`, `today`, `this_week` or `date_and_time`
+                expires_at:
+                  type: string
+                  description: The time at which custom status should be expired. It should be in ISO format.
         description: Custom status object that is to be updated
         required: true
       responses:
@@ -201,6 +207,8 @@
               required:
                 - emoji
                 - text
+                - duration
+                - expires_at
               properties:
                 emoji:
                   type: string
@@ -208,6 +216,12 @@
                 text:
                   type: string
                   description: Any custom status text
+                duration:
+                  type: string
+                  description: Duration of custom status, can be `thirty_minutes`, `one_hour`, `four_hours`, `today`, `this_week` or `date_and_time`
+                expires_at:
+                  type: string
+                  description: The time at which custom status should be expired. It should be in ISO format.
         description: Custom Status object that is to be removed from the recent custom statuses.
         required: true
       responses:
@@ -243,6 +257,8 @@
               required:
                 - emoji
                 - text
+                - duration
+                - expires_at
               properties:
                 emoji:
                   type: string
@@ -250,6 +266,12 @@
                 text:
                   type: string
                   description: Any custom status text
+                duration:
+                  type: string
+                  description: Duration of custom status, can be `thirty_minutes`, `one_hour`, `four_hours`, `today`, `this_week` or `date_and_time`
+                expires_at:
+                  type: string
+                  description: The time at which custom status should be expired. It should be in ISO format.
         description: Custom Status object that is to be removed from the recent custom statuses.
         required: true
       responses:
