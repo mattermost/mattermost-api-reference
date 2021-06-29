@@ -1,3 +1,38 @@
+  "/roles":
+    get:
+      tags:
+        - roles
+      summary: Get a list of all the roles
+      description: |
+        ##### Permissions
+
+        `manage_system` permission is required.
+
+        __Minimum server version__: 5.33
+      responses:
+        "200":
+          description: Roles retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Role"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+      x-code-samples:
+        - lang: Go
+          source: |
+            import "github.com/mattermost/mattermost-server/v5/model"
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+            Client.Login("email@domain.com", "Password1")
+
+            roles, resp := Client.GetAllRoles()
+
   "/roles/{role_id}":
     get:
       tags:
