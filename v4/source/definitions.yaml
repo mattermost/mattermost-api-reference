@@ -296,8 +296,6 @@ components:
           type: string
         root_id:
           type: string
-        parent_id:
-          type: string
         original_id:
           type: string
         message:
