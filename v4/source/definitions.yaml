@@ -1123,8 +1123,6 @@ components:
               type: boolean
             EnableCommands:
               type: boolean
-            EnableOnlyAdminIntegrations:
-              type: boolean
             EnablePostUsernameOverride:
               type: boolean
             EnablePostIconOverride:
@@ -1159,8 +1157,6 @@ components:
               type: string
             EnableCustomEmoji:
               type: boolean
-            RestrictCustomEmojiCreation:
-              type: string
         TeamSettings:
           type: object
           properties:
@@ -1168,8 +1164,6 @@ components:
               type: string
             MaxUsersPerTeam:
               type: integer
-            EnableTeamCreation:
-              type: boolean
             EnableUserCreation:
               type: boolean
             EnableOpenServer:
@@ -1183,20 +1177,6 @@ components:
             CustomDescriptionText:
               type: string
             RestrictDirectMessage:
-              type: string
-            RestrictTeamInvite:
-              type: string
-            RestrictPublicChannelManagement:
-              type: string
-            RestrictPrivateChannelManagement:
-              type: string
-            RestrictPublicChannelCreation:
-              type: string
-            RestrictPrivateChannelCreation:
-              type: string
-            RestrictPublicChannelDeletion:
-              type: string
-            RestrictPrivateChannelDeletion:
               type: string
             UserStatusAwayTimeout:
               type: integer
@@ -1597,8 +1577,6 @@ components:
               type: boolean
             EnableCommands:
               type: boolean
-            EnableOnlyAdminIntegrations:
-              type: boolean
             EnablePostUsernameOverride:
               type: boolean
             EnablePostIconOverride:
@@ -1633,16 +1611,12 @@ components:
               type: boolean
             EnableCustomEmoji:
               type: boolean
-            RestrictCustomEmojiCreation:
-              type: boolean
         TeamSettings:
           type: object
           properties:
             SiteName:
               type: boolean
             MaxUsersPerTeam:
-              type: boolean
-            EnableTeamCreation:
               type: boolean
             EnableUserCreation:
               type: boolean
@@ -1657,20 +1631,6 @@ components:
             CustomDescriptionText:
               type: boolean
             RestrictDirectMessage:
-              type: boolean
-            RestrictTeamInvite:
-              type: boolean
-            RestrictPublicChannelManagement:
-              type: boolean
-            RestrictPrivateChannelManagement:
-              type: boolean
-            RestrictPublicChannelCreation:
-              type: boolean
-            RestrictPrivateChannelCreation:
-              type: boolean
-            RestrictPublicChannelDeletion:
-              type: boolean
-            RestrictPrivateChannelDeletion:
               type: boolean
             UserStatusAwayTimeout:
               type: boolean
