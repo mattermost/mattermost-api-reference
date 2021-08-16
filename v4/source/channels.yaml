@@ -814,57 +814,6 @@
             // Update channel's privacy to Private
 
             updatedChannel, resp := Client.UpdateChannelPrivacy(<CHANNELID>, model.CHANNEL_PRIVATE)
-  "/channels/{channel_id}/convert":
-    post:
-      tags:
-        - channels
-      summary: Convert a channel from public to private
-      description: |
-        Will be deprecated in 6.0
-
-        Convert into private channel from the provided channel id string.
-
-        __Minimum server version__: 4.10
-
-        ##### Permissions
-        `manage_team` permission for the channels team on version < 5.28.
-        `convert_public_channel_to_private` permission for the channel on version >= 5.28.
-      operationId: ConvertChannelToPrivate
-      parameters:
-        - name: channel_id
-          in: path
-          description: Channel GUID
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Channel conversion successful
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Channel"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "404":
-          $ref: "#/components/responses/NotFound"
-      x-code-samples:
-        - lang: Go
-          source: >
-            import "github.com/mattermost/mattermost-server/v5/model"
-
-            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
-
-            Client.Login("email@domain.com", "Password1")
-
-
-            // ConvertChannelToPrivate
-
-            convertedChannel, resp := Client.ConvertChannelToPrivate(<CHANNELID>)
   "/channels/{channel_id}/restore":
     post:
       tags:
