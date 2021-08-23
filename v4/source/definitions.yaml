@@ -306,12 +306,6 @@ components:
           type: object
         hashtag:
           type: string
-        filenames:
-          description: This field will only appear on some posts created before Mattermost
-            3.5 and has since been deprecated.
-          type: array
-          items:
-            type: string
         file_ids:
           type: array
           items:
