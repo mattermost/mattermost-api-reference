@@ -404,6 +404,12 @@
         4.8, the `PluginSettings.EnableUploads` setting cannot be modified by
         this endpoint.
 
+        Note that the parameters that aren't set in the configuration that you
+        provide will be reset to default values. Therefore, if you want to
+        change a configuration parameter and leave the other ones unchanged,
+        you need to get the existing configuration first, change the field that
+        you want, then put that new configuration.
+
         ##### Permissions
 
         Must have `manage_system` permission.
