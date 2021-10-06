@@ -2194,14 +2194,14 @@
       x-code-samples:
         - lang: Go
           source: >
-            import "github.com/mattermost/mattermost-server/v5/model"
+            import "github.com/mattermost/mattermost-server/v6/model"
 
 
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
             Client.Login("email@domain.com", "Password1")
 
-            uss, response := Client.GetChannelsForUserWithLastDeleteAt("fc6suoon9pbbpmhrb9c967paxe", 0)
+            channels, response, err := Client.GetChannelsForUserWithLastDeleteAt("fc6suoon9pbbpmhrb9c967paxe", 0)
         - lang: Curl
           source: |
             curl -X GET 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/channels' \
