@@ -245,7 +245,8 @@
             by the logged in user.
           required: false
           schema:
-            type: string
+            type: boolean
+            default: true
       requestBody:
         content:
           application/json:
