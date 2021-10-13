@@ -393,7 +393,7 @@
       description: >
         Get a page of flagged posts of a user provided user id string. Selects
         from a channel, team, or all flagged posts by a user. Will only return
-        posts from channels where the user is member for.
+        posts from channels in which the user is member.
 
         ##### Permissions
 
