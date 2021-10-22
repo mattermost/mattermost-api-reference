@@ -239,6 +239,20 @@ components:
           description: The time in milliseconds the channel member was last updated
           type: integer
           format: int64
+    ChannelMemberWithTeamData:
+      allOf:
+        - $ref: "#/components/schemas/ChannelMember"
+        - type: object
+          properties:
+            team_display_name:
+              type: string
+              description: The display name of the team to which this channel belongs.
+            team_name:
+              type: string
+              description: The name of the team to which this channel belongs.
+            team_update_at:
+              type: integer
+              description: The time at which the team to which this channel belongs was last updated.
     ChannelData:
       type: object
       properties:
