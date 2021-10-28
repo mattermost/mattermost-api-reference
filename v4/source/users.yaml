@@ -4704,6 +4704,13 @@
         schema:
          default: 30
          type: integer
+      - name: totalsOnly
+        in: query
+        description: Setting this to true will only return the total counts.
+        required: false
+        schema:
+          type: boolean
+          default: false
     responses:
       "200":
         description: User's thread retrieval successful
