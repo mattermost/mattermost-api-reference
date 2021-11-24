@@ -135,7 +135,10 @@
         required: true
       responses:
         "501":
-          $ref: "#/components/responses/NotImplemented"
+          description: |
+            Group has an invalid `source`, or
+            `allow_reference` is not `true`, or
+            group has a `remote_id`.
         "400":
           $ref: "#/components/responses/BadRequest"
         "201":
@@ -200,13 +203,11 @@
         "403":
           $ref: "#/components/responses/Forbidden"
         "501":
-          description: If the group does not have a `source` value of `custom`.
-          $ref: "#/components/responses/NotImplemented"
+          description: The group doesn't have a `source` value of `custom`.
         "404":
-          description: Can't find the group.
-          $ref: "#/components/responses/NotFound"
+          description: Group is already deleted or doesn't exist.
         "200":
-          description: Successfully deleted the group members.
+          description: Successfully deleted the group.
           content:
             application/json:
               schema:
@@ -799,12 +800,10 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           description: If the group does not have a `source` value of `custom`.
-          $ref: "#/components/responses/NotImplemented"
         "404":
           description: Can't find the group.
-          $ref: "#/components/responses/NotFound"
         "200":
-          description: Successfully deleted the group.
+          description: Successfully deleted the group members.
           content:
             application/json:
               schema:
@@ -812,7 +811,7 @@
     post:
       tags:
         - groups
-      summary: Adds members to a custom group.
+      summary: Adds members to a custom group
       description: |
         Adds members to a custom group.
 
@@ -843,10 +842,8 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           description: If the group does not have a `source` value of `custom`.
-          $ref: "#/components/responses/NotImplemented"
         "404":
           description: Can't find the group.
-          $ref: "#/components/responses/NotFound"
         "200":
           description: Successfully added the group members.
           content:
