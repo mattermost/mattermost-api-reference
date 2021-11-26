@@ -777,3 +777,39 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+  "/posts/ids":
+    post:
+      tags:
+        - posts
+      summary: Get posts by a list of ids
+      description: >
+        Fetch a list of posts based on the provided postIDs
+
+        ##### Permissions
+
+        Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
+      operationId: getPostsByIds
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        description: List of post ids
+        required: true
+      responses:
+        "200":
+          description: Post list retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Post"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
