@@ -109,11 +109,10 @@
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
-  
-  /users/{user_id}/status/custom:
+  "/users/{user_id}/status/custom":
     put:
       tags:
-        - custom_status
+        - status
       summary: Update user custom status
       description: |
         Updates a user's custom status by setting the value in the user's props and updates the user. Also save the given custom status to the recent custom statuses in the user's props
@@ -160,7 +159,7 @@
 
     delete:
       tags:
-        - custom_status
+        - status
       summary: Unsets user custom status
       description: |
         Unsets a user's custom status by updating the user's props and updates the user
@@ -181,11 +180,10 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-
-  /users/{user_id}/status/custom/recent:
+  "/users/{user_id}/status/custom/recent":
     delete:
       tags:
-        - custom_status
+        - status
       summary: Delete user's recent custom status
       description: |
         Deletes a user's recent custom status by removing the specific status from the recentCustomStatuses in the user's props and updates the user.
@@ -231,11 +229,10 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-
-  /users/{user_id}/status/custom/recent/delete:
+  "/users/{user_id}/status/custom/recent/delete":
     post:
       tags:
-        - custom_status
+        - status
       summary: Delete user's recent custom status
       description: |
         Deletes a user's recent custom status by removing the specific status from the recentCustomStatuses in the user's props and updates the user.
@@ -280,4 +277,4 @@
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
-          $ref: "#/components/responses/Unauthorized"  
+          $ref: "#/components/responses/Unauthorized"
