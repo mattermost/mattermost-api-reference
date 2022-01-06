@@ -108,7 +108,7 @@
 
         ##### Permissions
 
-        No permission required but user creation can be controlled by server configuration.
+        No permission required for creating email/username accounts on an open server. Auth Token is required for other authenticate types such as LDAP or SAML.
       operationId: CreateUser
       parameters:
         - name: t
