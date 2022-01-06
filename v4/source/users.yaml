@@ -1153,9 +1153,14 @@
               type: object
               required:
                 - id
+                - create_at
+                - email
+                - username
               properties:
                 id:
                   type: string
+                create_at:
+                  type: integer
                 email:
                   type: string
                 username:
@@ -1170,6 +1175,8 @@
                   type: string
                 position:
                   type: string
+                timezone:
+                  $ref: "#/components/schemas/Timezone"
                 props:
                   type: object
                 notify_props:
