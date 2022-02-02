@@ -4711,6 +4711,13 @@
         schema:
           type: boolean
           default: false
+      - name: threadsOnly
+        in: query
+        description: Setting this to true will only return threads.
+        required: false
+        schema:
+          type: boolean
+          default: false
     responses:
       "200":
         description: User's thread retrieval successful
