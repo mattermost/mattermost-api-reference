@@ -589,53 +589,6 @@
 
             // UpdateConfig
             updatedConfig, resp := Client.PatchConfig(config)
-  /config/migrate:
-    post:
-      tags:
-        - system
-      summary: Migrate configuration
-      description: |
-        Migrate a file-based configuration to (or from) a database-based configuration.
-        Point the Mattermost server at the target configuration to start using it.
-
-        __Minimum server version__: 5.26
-
-        ##### Permissions
-        Must have `manage_system` permission
-      operationId: MigrateConfig
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                from:
-                  type: string
-                to:
-                  type: string
-        description: Data to be used in the migration
-        required: true
-      responses:
-        "200":
-          description: Configuration migrated successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StatusOK"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-      x-code-samples:
-        - lang: Go
-          source: |
-            import "github.com/mattermost/mattermost-server/v5/model"
-
-            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
-            Client.Login("email@domain.com", "Password1")
-
-            // Migrate Config
-            ok, resp := Client.MigrateConfig("path/to/config.json", "postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable&connect_timeout=10")
   /license:
     post:
       tags:
