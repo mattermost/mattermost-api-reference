@@ -427,7 +427,7 @@ tags:
       ```
 
 
-      This is an example of making a `user_typing` request, with the purpose of alerting the server that the connected client has begun typing in a channel or thread. The `action` field indicates what is being requested, and performs a similar duty as the route in a HTTP API.
+      This is an example of making a `user_typing` request, with the purpose of alerting the server that the connected client has begun typing in a channel or thread. The `action` field indicates what is being requested, and performs a similar duty as the route in a HTTP API. The `data` field is used to add any additional data along with the request. The server supports binary websocket messages as well in case the client has such a requirement.
 
 
       The `seq` or sequence number is set by the client and should be incremented with every use. It is used to distinguish responses to requests that come down the WebSocket. For example, a standard response to the above request would be:
