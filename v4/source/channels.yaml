@@ -628,12 +628,12 @@
         - channels
       summary: Delete a channel
       description: >
-        Soft deletes a channel, by marking the channel as deleted in the
-        database. Soft deleted channels will not be accessible in the user
-        interface. Direct and group message channels cannot be deleted.
+        Archives a channel. This will set the `deleteAt` to the current timestamp in the database. Soft deleted channels may not be accessible in the user
+        interface. They can be viewed and unarchived in the system console > channel based on your license. Direct and group message channels cannot be deleted.
 
 
-        As of server version 5.28, optionally use the `permanent=true` query parameter to permanently delete the channel for compliance reasons. To use this feature `ServiceSettings.EnableAPIChannelDeletion` must be set to `true` in the server's configuration.
+        As of server version 5.28, optionally use the `permanent=true` query parameter to permanently delete the channel for compliance reasons. To use this feature `ServiceSettings.EnableAPIChannelDeletion` must be set to `true` in the server's configuration. 
+        If you permanently delete a channel this action is not recoverable outside of a database backup.
 
 
         ##### Permissions
