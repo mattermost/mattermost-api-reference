@@ -874,7 +874,7 @@
               default: false
           - name: paginate
             in: query
-            description: Boolean do determine whether the pagination should be applied or not
+            description: Boolean to determine whether the pagination should be applied or not
             schema:
               type: boolean
               default: false              
