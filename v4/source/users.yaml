@@ -1153,14 +1153,11 @@
               type: object
               required:
                 - id
-                - create_at
                 - email
                 - username
               properties:
                 id:
                   type: string
-                create_at:
-                  type: integer
                 email:
                   type: string
                 username:
