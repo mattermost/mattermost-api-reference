@@ -10,7 +10,7 @@
       parameters:
       - name: not_associated_to_group
         in: query
-        description: Group GUID
+        description: A group id to exclude channels that are associated with that group via GroupChannel records. This can also be left blank with `not_associated_to_group=`.
         schema:
           type: string
       - name: page
@@ -26,6 +26,19 @@
       - name: exclude_default_channels
         in: query
         description: Whether to exclude default channels (ex Town Square, Off-Topic) from the results.
+        schema:
+          type: boolean
+          default: false
+      - name: include_deleted
+        in: query
+        description: Include channels that have been archived. This correlates to the `DeleteAt` flag being set in the database.
+        schema:
+          type: boolean
+          default: false
+      - name: include_total_count
+        in: query
+        description: >-
+          Appends a total count of returned channels inside the response object - ex: `{ "channels": [], "total_count" : 0 }`.      
         schema:
           type: boolean
           default: false
