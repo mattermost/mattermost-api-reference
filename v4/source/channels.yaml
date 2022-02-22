@@ -31,7 +31,7 @@
           default: false
       - name: include_deleted
         in: query
-        description: Include channels that have been archived. This correlates to the DeleteAt flag being set in the database.
+        description: Include channels that have been archived. This correlates to the `DeleteAt` flag being set in the database.
         schema:
           type: boolean
           default: false
