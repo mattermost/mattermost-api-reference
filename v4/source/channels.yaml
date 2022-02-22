@@ -10,7 +10,7 @@
       parameters:
       - name: not_associated_to_group
         in: query
-        description: A group id to exclude channels that are associated to that group via GroupChannel records. This can also be left blank with `not_associated_to_group=`.
+        description: A group id to exclude channels that are associated with that group via GroupChannel records. This can also be left blank with `not_associated_to_group=`.
         schema:
           type: string
       - name: page
