@@ -629,7 +629,7 @@
       summary: Delete a channel
       description: >
         Archives a channel. This will set the `deleteAt` to the current timestamp in the database. Soft deleted channels may not be accessible in the user
-        interface. They can be viewed and unarchived in the system console > channel based on your license. Direct and group message channels cannot be deleted.
+        interface. They can be viewed and unarchived in the **System Console > User Management > Channels** based on your license. Direct and group message channels cannot be deleted.
 
 
         As of server version 5.28, optionally use the `permanent=true` query parameter to permanently delete the channel for compliance reasons. To use this feature `ServiceSettings.EnableAPIChannelDeletion` must be set to `true` in the server's configuration. 
