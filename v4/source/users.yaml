@@ -1658,7 +1658,7 @@
             type: string
         - name: _
           in: query
-          description: unknown
+          description: Not used by the server. Clients can pass in the last picture update time of the user to potentially take advantage of caching
           required: false
           schema:
             type: number
