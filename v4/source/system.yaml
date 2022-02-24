@@ -36,9 +36,20 @@
 
         __Minimum server version__: 3.10
 
+        If a "device_id" is passed in the query, it will test the Push Notification
+        Proxy in order to discover whether the device is able to receive notifications.
+        The response will have a "CanReceiveNotifications" property with one of the
+        following values:
+        - true: It can receive notifications
+        - false: It cannot receive notifications
+        - unknown: There has been an unknown error, and it is not certain whether it can
+          receive notifications.
+
+        __Minimum server version__: 6.5
+
         ##### Permissions
 
-        Must be logged in.
+        None.
       operationId: GetPing
       parameters:
         - name: get_server_status
@@ -47,6 +58,12 @@
           required: false
           schema:
             type: boolean
+        - name: device_id
+          in: query
+          description: Check whether this device id can receive push notifications
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           description: Status of the system
