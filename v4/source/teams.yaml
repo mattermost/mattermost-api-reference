@@ -2302,6 +2302,13 @@
           required: true
           schema:
             type: string
+        - name: include_collapsed_threads
+          in: query
+          description: Boolean to determine whether the collapsed threads should be included or not
+          required: false
+          schema:
+            type: boolean
+            default: false          
       responses:
         "200":
           description: Team unreads retrieval successful
