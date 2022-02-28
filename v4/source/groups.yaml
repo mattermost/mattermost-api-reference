@@ -69,6 +69,12 @@
             __Minimum server version__: 5.24
           schema:
             type: integer
+        - name: filter_allow_reference
+          in: query
+          description: Boolean which filters the group entries with the `allow_reference` attribute set.
+          schema:
+            type: boolean
+            default: false            
       responses:
         "200":
           description: Group list retrieval successful
@@ -1041,6 +1047,12 @@
             schema:
               type: boolean
               default: false
+          - name: paginate
+            in: query
+            description: Boolean to determine whether the pagination should be applied or not
+            schema:
+              type: boolean
+              default: false              
         responses:
           "200":
             description: Group list retrieval successful
