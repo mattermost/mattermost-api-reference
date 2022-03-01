@@ -641,6 +641,8 @@
                   description: The string to search in the channel name, display name, and purpose.
                 team_ids:
                   type: array
+                  items:
+                    type: string
                   description: >
                     Filters results to channels belonging to the given team ids
                 public:

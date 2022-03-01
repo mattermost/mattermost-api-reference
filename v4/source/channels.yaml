@@ -282,6 +282,8 @@
                     parameter to true.
                 team_ids:
                   type: array
+                  items:
+                    type: string
                   description: >
                     Filters results to channels belonging to the given team ids
 
