@@ -3346,6 +3346,9 @@ components:
         status:
           description: Status of server ("OK" or "UNHEALTHY"). Included when get_server_status parameter set.
           type: string
+        CanReceiveNotifications:
+          description: Whether the device id provided can receive notifications ("true", "false" or "unknown"). Included when device_id parameter set.
+          type: string
     UserThreads:
       type: object
       properties:
