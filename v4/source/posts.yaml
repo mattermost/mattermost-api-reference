@@ -592,6 +592,24 @@
             default: 60
             maximum: 200
             minimum: 1
+        - name: skipFetchThreads
+          in: query
+          description: Whether to skip fetching threads or not
+          schema:
+            type: boolean
+            default: false
+        - name: collapsedThreads
+          in: query
+          description: Whether the client uses CRT or not
+          schema:
+            type: boolean
+            default: false
+        - name: collapsedThreadsExtended
+          in: query
+          description: Whether to return the associated users as part of the response or not
+          schema:
+            type: boolean
+            default: false                    
       responses:
         "200":
           description: Post list retrieval successful
