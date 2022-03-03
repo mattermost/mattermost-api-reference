@@ -445,9 +445,6 @@
                 id:
                   type: string
                   description: The ID of the plugin to install.
-                version:
-                  type: string
-                  description: The version of the plugin to install.
         description: The metadata identifying the plugin to install.
         required: true
       responses:
@@ -477,7 +474,6 @@
 
             plugin := &model.InstallMarketplacePluginRequest{
               Id: "antivirus",
-              Version: "0.1.2",
             }
 
             ok, resp = Client.InstallMarketplacePlugin(plugin)
