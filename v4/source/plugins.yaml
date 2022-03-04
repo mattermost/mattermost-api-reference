@@ -210,6 +210,7 @@
       operationId: RemovePlugin
       parameters:
         - name: plugin_id
+          description: Id of the plugin to be removed
           in: path
           required: true
           schema:
@@ -261,6 +262,7 @@
       operationId: EnablePlugin
       parameters:
         - name: plugin_id
+          description: Id of the plugin to be enabled
           in: path
           required: true
           schema:
@@ -312,6 +314,7 @@
       operationId: DisablePlugin
       parameters:
         - name: plugin_id
+          description: Id of the plugin to be disabled
           in: path
           required: true
           schema:
@@ -440,11 +443,13 @@
               type: object
               required:
                 - id
-                - version
               properties:
                 id:
                   type: string
                   description: The ID of the plugin to install.
+                version:
+                  type: string
+                  description: The version of the plugin to install.
         description: The metadata identifying the plugin to install.
         required: true
       responses:

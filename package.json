@@ -4,10 +4,10 @@
   "description": "This respository holds the API reference available at [https://api.mattermost.com](https://api.mattermost.com).",
   "main": "index.js",
   "dependencies": {
+    "ibm-openapi-validator": "^0.57.4",
     "redoc-cli": "^0.9.7",
     "swagger-cli": "^4.0.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
