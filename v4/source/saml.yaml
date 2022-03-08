@@ -27,6 +27,15 @@
         ##### Permissions
         No permission required.
       operationId: GetSamlMetadataFromIdp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                saml_metadata_url:
+                  type: string
+                  description: The URL from which to retrieve the SAML IDP data.
       responses:
         "200":
           description: SAML metadata retrieval successful
