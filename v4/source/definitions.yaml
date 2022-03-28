@@ -368,6 +368,9 @@ components:
         prev_post_id:
           type: string
           description: The ID of previous post. Not omitted when empty or not relevant.
+        has_next:
+          type: boolean
+          description: Whether there are more items after this page.
     PostListWithSearchMatches:
       type: object
       properties:

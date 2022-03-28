@@ -372,6 +372,48 @@
           required: true
           schema:
             type: string
+        - name: perPage
+          in: query
+          description: The number of posts per page
+          schema:
+            type: integer
+            default: 0
+        - name: fromPost
+          in: query
+          description: The post_id to return the next page of posts from
+          schema:
+            type: string
+            default: ""
+        - name: fromCreateAt
+          in: query
+          description: The create_at timestamp to return the next page of posts from
+          schema:
+            type: integer
+            default: 0
+        - name: direction
+          in: query
+          description: The direction to return the posts. Either up or down.
+          schema:
+            type: string
+            default: ""
+        - name: skipFetchThreads
+          in: query
+          description: Whether to skip fetching threads or not
+          schema:
+            type: boolean
+            default: false
+        - name: collapsedThreads
+          in: query
+          description: Whether the client uses CRT or not
+          schema:
+            type: boolean
+            default: false
+        - name: collapsedThreadsExtended
+          in: query
+          description: Whether to return the associated users as part of the response or not
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Post list retrieval successful
