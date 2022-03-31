@@ -64,7 +64,7 @@
             default: 0
         - name: per_page
           in: query
-          description: The number of users per page.
+          description: The number of emojis per page.
           schema:
             type: integer
             default: 60
