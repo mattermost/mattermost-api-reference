@@ -771,6 +771,16 @@ components:
           description: The time in milliseconds this reaction was made
           type: integer
           format: int64
+    TopReaction:
+      type: object
+      properties:
+        emoji_name:
+          description: The name of the emoji that was used for this reaction
+          type: string
+        count:
+          description: The number of the times this emoji was used
+          type: integer
+          format: int64
     Emoji:
       type: object
       properties:

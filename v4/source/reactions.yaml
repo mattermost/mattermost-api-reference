@@ -27,6 +27,126 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
+  "/reactions/top/team/{team_id}":
+    get:
+      tags:
+        - reactions
+      summary: Get a list of the top reactions for a team
+      description: |
+        Get a list of the top reactions across all public channels, and private channels (that the user is a member of) for a given team.
+        ##### Permissions
+        Must have `view_team` permission for the team.
+      operationId: GetTopReactionsForTeam
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: time_range
+          in: query
+          description: >
+            Time Range can be "1_day", "7_day" or "30_day".
+
+            - `1_day`: reactions posted in the last 24 hours
+            
+            - `7_day`: reactions posted in the last 7 days
+            
+            - `30_day`: reactions posted in the last 30 days
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of reactions per page. There is a maximum limit of 200 reactions per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Top reactions retrieve successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TopReaction"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  "/reactions/top/team/{user_id}":
+    get:
+      tags:
+        - reactions
+      summary: Get a list of the top reactions for a user
+      description: |
+        Get a list of the top reactions for a user.
+        ##### Permissions
+        Must be logged in as the user or have the `view_members` permission to view the given user.
+      operationId: GetTopReactionsForUser
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: time_range
+          in: query
+          description: >
+            Time Range can be "1_day", "7_day" or "30_day".
+
+            - `1_day`: reactions posted in the last 24 hours
+            
+            - `7_day`: reactions posted in the last 7 days
+            
+            - `30_day`: reactions posted in the last 30 days
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of reactions per page. There is a maximum limit of 200 reactions per page.
+          schema:
+            type: integer
+            default: 60
+        - name: team_id
+          in: query
+          description: >
+            Team ID will scope the response to a given team.
+
+            ##### Permissions
+
+            Must have `view_team` permission for the team.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Top reactions retrieve successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TopReaction"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
   "/posts/{post_id}/reactions":
     get:
       tags:
