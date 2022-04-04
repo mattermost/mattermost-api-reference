@@ -47,13 +47,13 @@
         - name: time_range
           in: query
           description: >
-            Time Range can be "1_day", "7_day" or "30_day".
+            Time Range can be "1_day", "7_day" or "28_day".
 
             - `1_day`: reactions posted in the last 24 hours
             
             - `7_day`: reactions posted in the last 7 days
             
-            - `30_day`: reactions posted in the last 30 days
+            - `28_day`: reactions posted in the last 28 days
           required: true
           schema:
             type: string
@@ -102,13 +102,13 @@
         - name: time_range
           in: query
           description: >
-            Time Range can be "1_day", "7_day" or "30_day".
+            Time Range can be "1_day", "7_day" or "28_day".
 
             - `1_day`: reactions posted in the last 24 hours
             
             - `7_day`: reactions posted in the last 7 days
             
-            - `30_day`: reactions posted in the last 30 days
+            - `28_day`: reactions posted in the last 30 days
           required: true
           schema:
             type: string
