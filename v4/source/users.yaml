@@ -4924,7 +4924,7 @@
       description: |
         Mark a thread that user is following as unread
 
-        __Minimum server version__: 6.6
+        __Minimum server version__: 6.7
 
         ##### Permissions
         Must have `read_channel` permission for the channel the thread is in or if the channel is public, have the `read_public_channels` permission for the team.
