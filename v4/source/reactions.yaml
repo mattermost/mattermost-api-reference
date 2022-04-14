@@ -35,6 +35,8 @@
       description: |
         Get a list of the top reactions across all public channels, and private channels (that the user is a member of) for a given team.
         ##### Permissions
+        Must have insights enabled.
+
         Must have `view_team` permission for the team.
       operationId: GetTopReactionsForTeam
       parameters:
@@ -90,6 +92,8 @@
       description: |
         Get a list of the top reactions for a user.
         ##### Permissions
+        Must have insights enabled.
+
         Must be logged in as the user or have the `view_members` permission to view the given user.
       operationId: GetTopReactionsForUser
       parameters:
