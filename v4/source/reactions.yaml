@@ -77,9 +77,8 @@
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/TopReaction"
+                type: object
+                $ref: "#/components/schemas/TopReactionList"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -144,9 +143,8 @@
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/TopReaction"
+                type: object
+                $ref: "#/components/schemas/TopReactionList"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
