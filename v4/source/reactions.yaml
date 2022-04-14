@@ -27,7 +27,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/reactions/top/team/{team_id}":
+  "/teams/{team_id}/top/reactions":
     get:
       tags:
         - reactions
@@ -47,9 +47,9 @@
         - name: time_range
           in: query
           description: >
-            Time Range can be "1_day", "7_day" or "28_day".
+            Time Range can be "today", "7_day" or "28_day".
 
-            - `1_day`: reactions posted in the last 24 hours
+            - `today`: reactions posted on the current day
             
             - `7_day`: reactions posted in the last 7 days
             
@@ -82,7 +82,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/reactions/top/team/{user_id}":
+  "/users/me/top/reactions":
     get:
       tags:
         - reactions
@@ -102,9 +102,9 @@
         - name: time_range
           in: query
           description: >
-            Time Range can be "1_day", "7_day" or "28_day".
+            Time Range can be "today", "7_day" or "28_day".
 
-            - `1_day`: reactions posted in the last 24 hours
+            - `today`: reactions posted on the current day
             
             - `7_day`: reactions posted in the last 7 days
             
