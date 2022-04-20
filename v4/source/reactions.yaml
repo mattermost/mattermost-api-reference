@@ -85,7 +85,7 @@
     get:
       tags:
         - reactions
-      summary: Get a list of the top reactions for a user
+      summary: Get a list of the top reactions across all public and private channels (the user is a member of) for a given user.
       description: |
         Get a list of the top reactions for a user.
         ##### Permissions
