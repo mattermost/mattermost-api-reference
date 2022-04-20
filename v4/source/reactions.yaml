@@ -51,7 +51,7 @@
 
             - `today`: reactions posted on the current day.
             
-            - `7_day`: reactions posted in the last 7 days
+            - `7_day`: reactions posted in the last 7 days.
             
             - `28_day`: reactions posted in the last 28 days
           required: true
