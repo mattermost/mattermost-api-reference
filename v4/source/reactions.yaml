@@ -47,7 +47,7 @@
         - name: time_range
           in: query
           description: >
-            Time Range can be "today", "7_day" or "28_day".
+            Time range can be "today", "7_day", or "28_day".
 
             - `today`: reactions posted on the current day
             
