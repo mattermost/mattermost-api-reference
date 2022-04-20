@@ -107,7 +107,7 @@
             
             - `7_day`: reactions posted in the last 7 days.
             
-            - `28_day`: reactions posted in the last 28 days
+            - `28_day`: reactions posted in the last 28 days.
           required: true
           schema:
             type: string
