@@ -71,7 +71,7 @@
             default: 60
       responses:
         "200":
-          description: Top reactions retrieve successful
+          description: Top reactions retrieved successfully.
           content:
             application/json:
               schema:
@@ -135,7 +135,7 @@
             type: string
       responses:
         "200":
-          description: Top reactions retrieve successful
+          description: Top reactions retrieved successfully.
           content:
             application/json:
               schema:
