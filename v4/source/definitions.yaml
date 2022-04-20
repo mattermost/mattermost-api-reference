@@ -778,7 +778,7 @@ components:
           description: The name of the emoji that was used for this reaction
           type: string
         count:
-          description: The number of the times this emoji was used
+          description: The number of the times this emoji has been used.
           type: integer
           format: int64
     TopReactionList:
