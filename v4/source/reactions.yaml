@@ -31,7 +31,7 @@
     get:
       tags:
         - reactions
-      summary: Get a list of the top reactions for a team
+      summary: Get a list of the top reactions for a team.
       description: |
         Get a list of the top reactions across all public channels, and private channels (that the user is a member of) for a given team.
         ##### Permissions
