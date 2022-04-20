@@ -49,7 +49,7 @@
           description: >
             Time range can be "today", "7_day", or "28_day".
 
-            - `today`: reactions posted on the current day
+            - `today`: reactions posted on the current day.
             
             - `7_day`: reactions posted in the last 7 days
             
