@@ -10,6 +10,7 @@ build-v4: .npminstall
 	@echo Building mattermost openapi yaml for v4
 
 	@cat $(V4_SRC)/introduction.yaml > $(V4_YAML)
+	@cat $(V4_SRC)/insights.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/users.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/status.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/teams.yaml >> $(V4_YAML)
