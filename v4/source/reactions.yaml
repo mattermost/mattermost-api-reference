@@ -119,7 +119,7 @@
             default: 0
         - name: per_page
           in: query
-          description: The number of reactions per page. There is a maximum limit of 200 reactions per page.
+          description: The number of reactions per page, up to a maximum of 200.
           schema:
             type: integer
             default: 60
