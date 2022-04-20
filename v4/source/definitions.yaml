@@ -775,7 +775,7 @@ components:
       type: object
       properties:
         emoji_name:
-          description: The name of the emoji that was used for this reaction
+          description: The name of the emoji used for this reaction.
           type: string
         count:
           description: The number of the times this emoji has been used.
