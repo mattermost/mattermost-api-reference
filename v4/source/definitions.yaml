@@ -2724,6 +2724,58 @@ components:
           type: string
         price_per_seat:
           type: string
+    ProductLimits:
+      type: object
+      properties:
+        boards:
+          $ref: "#/components/schemas/BoardsLimits"
+          nullable: true
+        files:
+          $ref: "#/components/schemas/FilesLimits"
+          nullable: true
+        integrations:
+          $ref: "#/components/schemas/IntegrationsLimits"
+          nullable: true
+        messages:
+          $ref: "#/components/schemas/MessagesLimits"
+          nullable: true
+        teams:
+          $ref: "#/components/schemas/TeamsLimits"
+          nullable: true
+    BoardsLimits:
+      type: object
+      properties:
+        cards:
+          type: integer
+          nullable: true
+        views:
+          type: integer
+          nullable: true
+    FilesLimits:
+      type: object
+      properties:
+        total_storage:
+          type: integer
+          format: int64
+          nullable: true
+    IntegrationsLimits:
+      type: object
+      properties:
+        enabled:
+          type: integer
+          nullable: true
+    MessagesLimits:
+      type: object
+      properties:
+        history:
+          type: integer
+          nullable: true
+    TeamsLimits:
+      type: object
+      properties:
+        active:
+          type: integer
+          nullable: true
     PaymentSetupIntent:
       type: object
       properties:
