@@ -9,6 +9,7 @@
         `manage_system` permission is required.
 
         __Minimum server version__: 5.33
+      operationId: GetAllRoles
       responses:
         "200":
           description: Roles retrieval successful
