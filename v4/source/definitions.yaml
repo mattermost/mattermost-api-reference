@@ -792,6 +792,33 @@ components:
           type: array 
           items:
             $ref: "#/components/schemas/TopReaction"
+    TopChannel:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        display_name:
+          type: string
+        name:
+          type: string
+        team_id:
+          type: string
+        message_count:
+          description: The number of messages posted in the channel by users over the given time period (not including messages posted by bots).
+          type: string
+    TopChannelList:
+      type: object
+      properties:
+        has_next: 
+          description: Indicates if there is another page of channels that can be fetched.
+          type: boolean
+        items:
+          description: List of channels.
+          type: array 
+          items:
+            $ref: "#/components/schemas/TopChannel"
     Emoji:
       type: object
       properties:
