@@ -771,6 +771,54 @@ components:
           description: The time in milliseconds this reaction was made
           type: integer
           format: int64
+    TopReaction:
+      type: object
+      properties:
+        emoji_name:
+          description: The name of the emoji used for this reaction.
+          type: string
+        count:
+          description: The number of the times this emoji has been used.
+          type: integer
+          format: int64
+    TopReactionList:
+      type: object
+      properties:
+        has_next: 
+          description: Indicates if there is another page of reactions that can be fetched.
+          type: boolean
+        items:
+          description: List of reactions.
+          type: array 
+          items:
+            $ref: "#/components/schemas/TopReaction"
+    TopChannel:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        display_name:
+          type: string
+        name:
+          type: string
+        team_id:
+          type: string
+        message_count:
+          description: The number of messages posted in the channel by users over the given time period (not including messages posted by bots).
+          type: string
+    TopChannelList:
+      type: object
+      properties:
+        has_next: 
+          description: Indicates if there is another page of channels that can be fetched.
+          type: boolean
+        items:
+          description: List of channels.
+          type: array 
+          items:
+            $ref: "#/components/schemas/TopChannel"
     Emoji:
       type: object
       properties:
@@ -2703,6 +2751,58 @@ components:
           type: string
         price_per_seat:
           type: string
+    ProductLimits:
+      type: object
+      properties:
+        boards:
+          $ref: "#/components/schemas/BoardsLimits"
+          nullable: true
+        files:
+          $ref: "#/components/schemas/FilesLimits"
+          nullable: true
+        integrations:
+          $ref: "#/components/schemas/IntegrationsLimits"
+          nullable: true
+        messages:
+          $ref: "#/components/schemas/MessagesLimits"
+          nullable: true
+        teams:
+          $ref: "#/components/schemas/TeamsLimits"
+          nullable: true
+    BoardsLimits:
+      type: object
+      properties:
+        cards:
+          type: integer
+          nullable: true
+        views:
+          type: integer
+          nullable: true
+    FilesLimits:
+      type: object
+      properties:
+        total_storage:
+          type: integer
+          format: int64
+          nullable: true
+    IntegrationsLimits:
+      type: object
+      properties:
+        enabled:
+          type: integer
+          nullable: true
+    MessagesLimits:
+      type: object
+      properties:
+        history:
+          type: integer
+          nullable: true
+    TeamsLimits:
+      type: object
+      properties:
+        active:
+          type: integer
+          nullable: true
     PaymentSetupIntent:
       type: object
       properties:

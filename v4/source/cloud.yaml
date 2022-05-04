@@ -1,3 +1,31 @@
+  /cloud/limits:
+    get:
+      tags:
+        - cloud
+      summary: Get cloud workspace limits
+      description: >
+        Retrieve any cloud workspace limits applicable to this instance.
+
+        ##### Permissions
+
+        Must be authenticated and be licensed for Cloud.
+
+        __Minimum server version__: 7.0
+        __Note:__ This is intended for internal use and is subject to change.
+      operationId: GetCloudLimits
+      responses:
+        "200":
+          description: Cloud workspace limits returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductLimits"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /cloud/products:
     get:
       tags:
@@ -74,7 +102,6 @@
         Must have `manage_system` permission and be licensed for Cloud.
 
         __Minimum server version__: 5.28
-
         __Note:__ This is intended for internal use and is subject to change.
       operationId: ConfirmCustomerPayment
       requestBody:
