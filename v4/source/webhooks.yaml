@@ -194,7 +194,7 @@
                 - display_name
                 - description
               properties:
-                hook_id:
+                id:
                   type: string
                   description: Incoming webhook GUID
                 channel_id:
