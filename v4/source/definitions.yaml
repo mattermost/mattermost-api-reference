@@ -2751,6 +2751,15 @@ components:
           type: string
         price_per_seat:
           type: string
+    MessagesUsage:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: true, if the cloud limit affects the instance
+        status:
+          type: number
+          description: Usage percentage(0-100) in multiples of 10
     ProductLimits:
       type: object
       properties:

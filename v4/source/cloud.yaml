@@ -26,6 +26,33 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
+  /cloud/usage/messages:
+    get:
+      tags:
+        - cloud
+      summary: Get cloud workspace usage for messages
+      description: >
+        Retrieve any cloud workspace messages usage percentage for this instance.
+
+        ##### Permissions
+
+        Must be authenticated and be licensed for Cloud.
+
+        __Minimum server version__: 7.0
+      operationId: GetCloudUsageForMessages
+      responses:
+        "200":
+          description: Cloud workspace messages usage returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessagesUsage"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "501":
+          $ref: "#/components/responses/NotImplemented"
   /cloud/products:
     get:
       tags:
