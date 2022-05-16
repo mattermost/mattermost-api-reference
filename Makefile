@@ -48,6 +48,7 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/imports.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/exports.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/usage.yaml >> $(V4_YAML)
 
 	@node_modules/.bin/swagger-cli validate $(V4_YAML)
 	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs bundle ./v4/html/static/mattermost-openapi-v4.yaml -o ./v4/html/index.html --options.noAutoAuth  --options.suppressWarnings  --cdn

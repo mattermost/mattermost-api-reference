@@ -640,6 +640,7 @@ x-tagGroups:
       - imports
       - permissions
       - exports
+      - usage
 servers:
   - url: http://your-mattermost-url.com/api/v4
   - url: https://your-mattermost-url.com/api/v4
