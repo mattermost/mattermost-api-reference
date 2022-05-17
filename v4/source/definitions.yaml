@@ -3478,6 +3478,12 @@ components:
         value:
           description: System property value
           type: string
+    PostsUsage:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Total no. of posts
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
