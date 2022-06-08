@@ -512,6 +512,13 @@
           required: true
           schema:
             type: string
+        - name: include_deleted
+          in: query
+          description: Defines if result should include deleted posts, must have 'manage_system' (admin) permission.
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: File info retrieval successful
