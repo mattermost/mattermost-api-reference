@@ -2381,7 +2381,7 @@ components:
       type: object
       properties:
         email:
-          type: boolean
+          type: string
           description: Set to "true" to enable email notifications, "false" to disable.
             Defaults to "true".
         push:
@@ -2395,7 +2395,7 @@ components:
             "mention" for mentions and direct messages only, and "none" to
             disable. Defaults to "all".
         desktop_sound:
-          type: boolean
+          type: string
           description: Set to "true" to enable sound on desktop notifications, "false" to
             disable. Defaults to "true".
         mention_keys:
@@ -2403,11 +2403,11 @@ components:
           description: A comma-separated list of words to count as mentions. Defaults to
             username and @username.
         channel:
-          type: boolean
+          type: string
           description: Set to "true" to enable channel-wide notifications (@channel, @all,
             etc.), "false" to disable. Defaults to "true".
         first_name:
-          type: boolean
+          type: string
           description: Set to "true" to enable mentions for first name. Defaults to "true"
             if a first name is set, "false" otherwise.
     Timezone:
