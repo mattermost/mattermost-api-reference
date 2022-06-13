@@ -250,7 +250,7 @@ tags:
       #### Authentication
 
 
-      The Mattermost WebSocket can be authenticated by cookie or through an authentication challenge. If you're authenticating from a browser and have logged in with the Mattermost API, your authentication cookie should already be set, this is how the Mattermost webapp authenticates with the WebSocket.
+      The Mattermost WebSocket can be authenticated using [the standard API authentification methods](/#tag/authentication) (by a cookie or with an explicit Authorization header) or through an authentication challenge. If you're authenticating from a browser and have logged in with the Mattermost API, your authentication cookie should already be set. This is how the Mattermost webapp authenticates with the WebSocket.
 
 
       To authenticate with an authentication challenge, first connect the WebSocket and then send the following JSON over the connection:
