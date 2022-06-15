@@ -574,7 +574,7 @@
           description: A post id to select the posts that came after this one
           schema:
             type: string
-        - name: includeDeleted
+        - name: include_deleted
           in: query
           description: Whether to include deleted posts or not. Must have system admin permissions.
           schema:
