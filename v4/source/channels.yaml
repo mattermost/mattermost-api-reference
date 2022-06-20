@@ -346,6 +346,14 @@
                     required to use this parameter.
 
                     __Minimum server version__: 5.35
+                
+                include_search_by_id:
+                  type: boolean
+                  default: false
+                  description: >
+                    If set to true, returns channels where given search 'term' matches channel ID.
+
+                    __Minimum server version__: 5.35
         description: The search terms and logic to use in the search.
         required: true
       responses:
