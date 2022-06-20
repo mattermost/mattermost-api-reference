@@ -189,12 +189,12 @@
             schema:
               type: object
               required:
-                - hook_id
+                - id
                 - channel_id
                 - display_name
                 - description
               properties:
-                hook_id:
+                id:
                   type: string
                   description: Incoming webhook GUID
                 channel_id:
@@ -450,12 +450,12 @@
             schema:
               type: object
               required:
-                - hook_id
+                - id
                 - channel_id
                 - display_name
                 - description
               properties:
-                hook_id:
+                id:
                   type: string
                   description: Outgoing webhook GUID
                 channel_id:
