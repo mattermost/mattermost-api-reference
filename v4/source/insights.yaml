@@ -64,12 +64,6 @@
         Must be logged in as the user.
       operationId: GetTopReactionsForUser
       parameters:
-        - name: user_id
-          in: path
-          description: User GUID
-          required: true
-          schema:
-            type: string
         - name: time_range
           in: query
           description: >
@@ -182,12 +176,6 @@
         Must be logged in as the user.
       operationId: GetTopChannelsForUser
       parameters:
-        - name: user_id
-          in: path
-          description: User GUID
-          required: true
-          schema:
-            type: string
         - name: time_range
           in: query
           description: >
