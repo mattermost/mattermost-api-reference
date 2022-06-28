@@ -154,13 +154,22 @@
           schema:
             type: boolean
             default: false
+        - name: use_new
+          in: query
+          description: Use new response type(PostWrapper), which tells if the post is inaccessible due to cloud's plan limit.
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Post retrieval successful
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Post"
+                oneOf:
+                  - $ref: "#/components/schemas/Post"
+                  - $ref: "#/components/schemas/PostWrapper"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -863,6 +872,14 @@
 
         Must have `read_channel` permission for the channel the post is in or if the channel is public, have the `read_public_channels` permission for the team.
       operationId: getPostsByIds
+      parameters:
+        - name: use_new
+          in: query
+          description: Use new response type(PostList), which tells if the post is inaccessible due to cloud's plan limit.
+          required: false
+          schema:
+            type: boolean
+            default: false
       requestBody:
         content:
           application/json:
@@ -878,9 +895,11 @@
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Post"
+                oneOf:
+                  - $ref: "#/components/schemas/PostList"
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/Post"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":

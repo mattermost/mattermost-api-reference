@@ -371,6 +371,17 @@ components:
         has_next:
           type: boolean
           description: Whether there are more items after this page.
+        has_inaccessible_posts:
+          type: boolean
+          description: Whether there are inaccessible posts, past the cloud's plan limit.
+    PostWrapper:
+      type: object
+      properties:
+        post:
+          $ref: "#/components/schemas/Post"
+        is_inaccessible:
+          type: boolean
+          description: Whether the post is past the cloud plan's limit.
     PostListWithSearchMatches:
       type: object
       properties:
