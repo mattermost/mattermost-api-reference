@@ -15,7 +15,7 @@
               type: object
               properties:
                 image:
-                  description: A file to be uploaded. Supported file types are .gif, .png, .webp or .jpg.
+                  description: A file to be uploaded
                   type: string
                   format: binary
                 emoji:
