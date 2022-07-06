@@ -157,6 +157,11 @@
       responses:
         "200":
           description: Post retrieval successful
+          headers:
+            Has-Inaccessible-Posts:
+              schema:
+                type: boolean
+              description: This header is included with the value "true" if the post is past the cloud's plan limit.
           content:
             application/json:
               schema:
@@ -875,6 +880,11 @@
       responses:
         "200":
           description: Post list retrieval successful
+          headers:
+            Has-Inaccessible-Posts:
+              schema:
+                type: boolean
+              description: Indicates whether the posts have been truncated as per the cloud's plan limit.
           content:
             application/json:
               schema:
