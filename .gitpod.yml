@@ -7,4 +7,4 @@ tasks:
     init: |
       make build
     command: |
-     make run
+      make run
