@@ -24,3 +24,29 @@
           $ref: "#/components/responses/Unauthorized"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /usage/storage:
+    get:
+      tags:
+        - usage
+      summary: Get the total file storage usage for the instance in bytes.
+      description: >
+        Get the total file storage usage for the instance in bytes rounded down to the most significant digit.
+        Example: returns 4000 instead of 4321
+
+        ##### Permissions
+
+        Must be authenticated.
+
+        __Minimum server version__: 7.1
+      operationId: GetStorageUsage
+      responses:
+        "200":
+          description: The total file storage usage for the instance in bytes rounded down to the most significant digit.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StorageUsage"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"

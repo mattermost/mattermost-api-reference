@@ -3484,6 +3484,12 @@ components:
         count:
           type: number
           description: Total no. of posts
+    StorageUsage:
+      type: object
+      properties:
+        bytes:
+          type: number
+          description: Total file storage usage for the instance in bytes rounded down to the most significant digit
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
