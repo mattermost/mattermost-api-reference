@@ -897,3 +897,59 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+  "/users/{user_id}/posts/{post_id}/reminder":
+    post:
+      tags:
+        - posts
+      summary: Set a post reminder
+      description: >
+        Set a reminder for the user for the post.
+
+        ##### Permissions
+
+        Must have `read_channel` permission for the channel the post is in.
+
+
+        __Minimum server version__: 7.2
+      operationId: SetPostReminder
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - target_time
+              properties:
+                target_time:
+                  type: integer
+                  description: Target time for the reminder
+        description: Target time for the reminder
+        required: true
+      responses:
+        "200":
+          description: Reminder set successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
