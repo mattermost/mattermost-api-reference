@@ -235,3 +235,57 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
+  /teams/{team_id}/top/team_members:
+    get:
+      tags:
+        - insights
+      summary: Get a list of new team members.
+      description: |
+        Get a list of all of the new team members that have joined the given team during the given time period.
+        ##### Permissions
+        Must have `view_team` permission for the team.
+      operationId: GetNewTeamMembers
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: time_range
+          in: query
+          description: >
+            Time range can be "today", "7_day", or "28_day".
+
+            - `today`: team members who joined during the current day.
+
+            - `7_day`: team members who joined in the last 7 days.
+
+            - `28_day`: team members who joined in the last 28 days.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of items per page.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: New team members retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/TopReactionList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
