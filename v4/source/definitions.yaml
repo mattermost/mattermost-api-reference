@@ -781,6 +781,26 @@ components:
           description: The number of the times this emoji has been used.
           type: integer
           format: int64
+    NewTeamMember:
+      type: object
+      properties:
+        id:
+          description: The user's ID.
+          type: string
+        username:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nickname:
+          type: string
+        position:
+          description: The user's position field value.
+          type: string
+        create_at:
+          description: The creation timestamp of the team member record.
+          type: integer
     TopReactionList:
       type: object
       properties:
@@ -792,6 +812,20 @@ components:
           type: array 
           items:
             $ref: "#/components/schemas/TopReaction"
+    NewTeamMembersList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of new team members that can be fetched.
+          type: boolean
+        items:
+          description: List of new team members.
+          type: array
+          items:
+            $ref: "#/components/schemas/NewTeamMember"
+        total_count:
+          description: The total count of new team members for the given time range.
+          type: integer
     TopChannel:
       type: object
       properties:
