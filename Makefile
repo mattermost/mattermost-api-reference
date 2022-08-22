@@ -55,7 +55,7 @@ build-v4: .npminstall
 	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs bundle ./v4/html/static/mattermost-openapi-v4.yaml -o ./v4/html/index.html --options.noAutoAuth  --options.suppressWarnings  --cdn
 	@echo Complete
 
-.npminstall:
+.npminstall: package.json package-lock.json
 	@echo Getting dependencies using npm
 
 	npm install
