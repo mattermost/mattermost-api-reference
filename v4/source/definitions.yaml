@@ -2462,7 +2462,7 @@ components:
       type: object
       properties:
         email:
-          type: boolean
+          type: string
           description: Set to "true" to enable email notifications, "false" to disable, or
             "default" to use the global user notification setting.
         push:
