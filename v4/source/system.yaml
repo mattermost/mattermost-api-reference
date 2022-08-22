@@ -819,6 +819,7 @@
         ##### Permissions
 
         Must have `manage_systems` permissions.
+      operationId: GetLastTrialLicense
       responses:
         "200":
           description: License fetched successfully.
