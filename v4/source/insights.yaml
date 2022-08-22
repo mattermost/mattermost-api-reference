@@ -230,7 +230,7 @@
             application/json:
               schema:
                 type: object
-                $ref: "#/components/schemas/TopReactionList"
+                $ref: "#/components/schemas/TopChannelList"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -285,6 +285,178 @@
               schema:
                 type: object
                 $ref: "#/components/schemas/NewTeamMembersList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /teams/{team_id}/top/threads:
+    get:
+      tags:
+        - insights
+      summary: Get a list of the top threads for a team.
+      description: |
+        Get a list of the top threads from public and private channels (the user is a member of) for a given team.
+        ##### Permissions
+        Must have `view_team` permission for the team.
+      operationId: GetTopThreadsForTeam
+      parameters:
+        - name: team_id
+          in: path
+          description: Team GUID
+          required: true
+          schema:
+            type: string
+        - name: time_range
+          in: query
+          description: >
+            Time range can be "today", "7_day", or "28_day".
+
+            - `today`: threads with activity on the current day.
+            
+            - `7_day`: threads with activity in the last 7 days.
+            
+            - `28_day`: threads with activity in the last 28 days.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of items per page, up to a maximum of 200.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Top threads retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/TopThreadList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /users/me/top/threads:
+    get:
+      tags:
+        - insights
+      summary: Get a list of the top threads for a user.
+      description: |
+        Get a list of the top threads from public and private channels (the user is a member of and participating in the thread) for a given user.
+        ##### Permissions
+        Must be logged in as the user.
+      operationId: GetTopThreadsForUser
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: time_range
+          in: query
+          description: >
+            Time range can be "today", "7_day", or "28_day".
+
+            - `today`: threads with activity on the current day.
+            
+            - `7_day`: threads with activity in the last 7 days.
+            
+            - `28_day`: threads with activity in the last 28 days.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of items per page, up to a maximum of 200.
+          schema:
+            type: integer
+            default: 60
+        - name: team_id
+          in: query
+          description: >
+            Team ID will scope the response to a given team.
+
+            ##### Permissions
+           
+            Must have `view_team` permission for the team.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Top threads retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/TopThreadList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+  /users/me/top/dms:
+    get:
+      tags:
+        - insights
+      summary: Get a list of the top dms for a user.
+      description: |
+        Get a list of the top dms for a given user.
+        ##### Permissions
+        Must be logged in as the user.
+      operationId: GetTopDMsForUser
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: time_range
+          in: query
+          description: >
+            Time range can be "today", "7_day", or "28_day".
+
+            - `today`: threads with activity on the current day.
+            
+            - `7_day`: threads with activity in the last 7 days.
+            
+            - `28_day`: threads with activity in the last 28 days.
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page to select.
+          schema:
+            type: integer
+            default: 0
+        - name: per_page
+          in: query
+          description: The number of items per page, up to a maximum of 200.
+          schema:
+            type: integer
+            default: 60
+      responses:
+        "200":
+          description: Top dms retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/TopDMList"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":

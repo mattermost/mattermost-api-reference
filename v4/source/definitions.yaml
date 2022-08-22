@@ -853,6 +853,91 @@ components:
           type: array 
           items:
             $ref: "#/components/schemas/TopChannel"
+    InsightUserInformation:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nick_name:
+          type: string
+        username:
+          type: string
+        create_at:
+          type: integer
+          format: int64
+    TopThread:
+      type: object
+      properties:
+        post:
+          $ref: "#/components/schemas/Post"
+        channel_id:
+          type: string
+        display_name:
+          type: string
+        name:
+          type: string
+        Participants:
+          type: array
+          items:
+            type: string
+        user_information:
+          description: User who created the post
+          $ref: "#/components/schemas/InsightUserInformation"
+    TopThreadList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of top threads that can be fetched.
+          type: boolean
+        items:
+          description: List of top threads.
+          type: array
+          items:
+            $ref: "#/components/schemas/TopThread"
+    TopDMInsightUserInformation:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nick_name:
+          type: string
+        username:
+          type: string
+        create_at:
+          type: integer
+          format: int64
+        position:
+          type: string
+    TopDM:
+      type: object
+      properties:
+        message_count:
+          type: integer
+          format: int64
+        outgoing_message_count:
+          type: integer
+          format: int64
+        second_participant:
+          $ref: "#/components/schemas/TopDMInsightUserInformation"
+    TopDMList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of top DMs that can be fetched.
+          type: boolean
+        items:
+          description: List of top DMs.
+          type: array
+          items:
+            $ref: "#/components/schemas/TopDM"
     Emoji:
       type: object
       properties:
