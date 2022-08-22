@@ -137,6 +137,8 @@
                 user_ids:
                   type: array
                   description: The user ids of the group members to add.
+                  items:
+                    type: string
         description: Group object and initial members.
         required: true
       responses:
@@ -801,6 +803,8 @@
               properties:
                 user_ids:
                   type: array
+                  items:
+                    type: string
       responses:
         "403":
           $ref: "#/components/responses/Forbidden"
@@ -843,6 +847,8 @@
               properties:
                 user_ids:
                   type: array
+                  items:
+                    type: string
       responses:
         "403":
           $ref: "#/components/responses/Forbidden"

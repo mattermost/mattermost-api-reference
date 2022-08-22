@@ -112,8 +112,6 @@
               properties:
                 stripe_setup_intent_id:
                   type: string
-              required:
-                - certificate
       responses:
         "200":
           description: Payment setup intent confirmed successfully

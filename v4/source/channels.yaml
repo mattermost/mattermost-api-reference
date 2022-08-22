@@ -15,11 +15,13 @@
           type: string
       - name: page
         in: query
+        description: The page to select.
         schema:
           type: integer
           default: 0
       - name: per_page
         in: query
+        description: The number of channels per page.
         schema:
           type: integer
           default: 0
