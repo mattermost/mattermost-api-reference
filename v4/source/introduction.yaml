@@ -25,7 +25,7 @@ tags:
       Mattermost core committers work with the community to keep the API documentation up-to-date.
 
 
-      If you have questions on API routes not listed in this reference, please [join the Mattermost community server](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) to ask questions in the Developers channel, [or post questions to our Developer Discussion forum](https://forum.mattermost.org/c/dev).
+      If you have questions on API routes not listed in this reference, please [join the Mattermost community server](https://community.mattermost.com) to ask questions in the Developers channel, [or post questions to our Developer Discussion forum](https://forum.mattermost.org/c/dev).
 
 
       [Bug reports](https://github.com/mattermost/mattermost-api-reference/issues) in the documentation or the API are also welcome, as are pull requests to fix the issues.
@@ -507,7 +507,7 @@ tags:
       3. User ID is now included in most user endpoints. This allows admins to modify other users through v4 endpoints.
 
 
-      If you have any questions about the API v3 deprecation, or about migrating from v3 to v4, [join our daily build server at pre-release.mattermost.com](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and ask questions in the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).
+      If you have any questions about the API v3 deprecation, or about migrating from v3 to v4, [join our daily build server at community.mattermost.com](https://community.mattermost.com) and ask questions in the [APIv4 channel](https://community.mattermost.com/core/channels/apiv4).
   - name: users
     description: >
       Endpoints for creating, getting and interacting with users.

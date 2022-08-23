@@ -455,7 +455,7 @@
                 - display_name
                 - description
               properties:
-                hook_id:
+                id:
                   type: string
                   description: Outgoing webhook GUID
                 channel_id:
