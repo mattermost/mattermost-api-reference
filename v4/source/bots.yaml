@@ -764,7 +764,7 @@
                 position:
                   type: string
                 props:
-                  type: object
+                  $ref: "#/components/schemas/UserProps"
                 notify_props:
                   $ref: "#/components/schemas/UserNotifyProps"
         description: Data to be used in the user creation

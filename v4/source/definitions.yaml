@@ -92,7 +92,7 @@ components:
         notify_props:
           $ref: "#/components/schemas/UserNotifyProps"
         props:
-          type: object
+          $ref: "#/components/schemas/UserProps"
         last_password_update:
           type: integer
         last_picture_update:
@@ -2444,6 +2444,16 @@ components:
           type: string
           description: Set to "true" to enable mentions for first name. Defaults to "true"
             if a first name is set, "false" otherwise.
+    UserProps:
+      type: object
+      properties:
+        customStatus:
+          type: string
+          description: User's custom status properties
+          example: "\"customStatus\": \"{\"emoji\":\"house\",\"text\":\"Working From Home\",\"duration\":\"\",\"expires_at\":\"0001-01-01T00:00:00Z\"}\""
+        last_search_pointer:
+          type: string
+          description: Recent log search pointer
     Timezone:
       type: object
       properties:
