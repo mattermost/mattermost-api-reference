@@ -862,9 +862,11 @@ components:
           type: string
         last_name:
           type: string
-        nick_name:
+        nickname:
           type: string
         username:
+          type: string
+        last_picture_update:
           type: string
         create_at:
           type: integer
@@ -876,9 +878,9 @@ components:
           $ref: "#/components/schemas/Post"
         channel_id:
           type: string
-        display_name:
+        channel_display_name:
           type: string
-        name:
+        channel_name:
           type: string
         Participants:
           type: array
@@ -907,9 +909,11 @@ components:
           type: string
         last_name:
           type: string
-        nick_name:
+        nickname:
           type: string
         username:
+          type: string
+        last_picture_update:
           type: string
         create_at:
           type: integer
@@ -919,7 +923,7 @@ components:
     TopDM:
       type: object
       properties:
-        message_count:
+        post_count:
           type: integer
           format: int64
         outgoing_message_count:

@@ -354,12 +354,6 @@
         Must be logged in as the user.
       operationId: GetTopThreadsForUser
       parameters:
-        - name: user_id
-          in: path
-          description: User GUID
-          required: true
-          schema:
-            type: string
         - name: time_range
           in: query
           description: >
@@ -418,12 +412,6 @@
         Must be logged in as the user.
       operationId: GetTopDMsForUser
       parameters:
-        - name: user_id
-          in: path
-          description: User GUID
-          required: true
-          schema:
-            type: string
         - name: time_range
           in: query
           description: >
