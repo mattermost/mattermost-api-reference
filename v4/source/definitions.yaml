@@ -901,25 +901,12 @@ components:
           items:
             $ref: "#/components/schemas/TopThread"
     TopDMInsightUserInformation:
-      type: object
-      properties:
-        id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        nickname:
-          type: string
-        username:
-          type: string
-        last_picture_update:
-          type: string
-        create_at:
-          type: integer
-          format: int64
-        position:
-          type: string
+      allOf:
+      - $ref: "#/components/schemas/InsightUserInformation"
+      - type: object
+        properties:
+          position:
+            type: string
     TopDM:
       type: object
       properties:
