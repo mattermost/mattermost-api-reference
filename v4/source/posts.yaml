@@ -147,9 +147,21 @@
           required: true
           schema:
             type: string
+        - name: include_deleted
+          in: query
+          description: Defines if result should include deleted posts, must have 'manage_system' (admin) permission.
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Post retrieval successful
+          headers:
+            Has-Inaccessible-Posts:
+              schema:
+                type: boolean
+              description: This header is included with the value "true" if the post is past the cloud's plan limit.
           content:
             application/json:
               schema:
@@ -505,6 +517,13 @@
           required: true
           schema:
             type: string
+        - name: include_deleted
+          in: query
+          description: Defines if result should include deleted posts, must have 'manage_system' (admin) permission.
+          required: false
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: File info retrieval successful
@@ -574,6 +593,12 @@
           description: A post id to select the posts that came after this one
           schema:
             type: string
+        - name: include_deleted
+          in: query
+          description: Whether to include deleted posts or not. Must have system admin permissions.
+          schema:
+            type: boolean
+            default: false
       responses:
         "200":
           description: Post list retrieval successful
@@ -861,6 +886,11 @@
       responses:
         "200":
           description: Post list retrieval successful
+          headers:
+            Has-Inaccessible-Posts:
+              schema:
+                type: boolean
+              description: Indicates whether the posts have been truncated as per the cloud's plan limit.
           content:
             application/json:
               schema:
@@ -873,3 +903,59 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
+  "/users/{user_id}/posts/{post_id}/reminder":
+    post:
+      tags:
+        - posts
+      summary: Set a post reminder
+      description: >
+        Set a reminder for the user for the post.
+
+        ##### Permissions
+
+        Must have `read_channel` permission for the channel the post is in.
+
+
+        __Minimum server version__: 7.2
+      operationId: SetPostReminder
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - target_time
+              properties:
+                target_time:
+                  type: integer
+                  description: Target time for the reminder
+        description: Target time for the reminder
+        required: true
+      responses:
+        "200":
+          description: Reminder set successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"

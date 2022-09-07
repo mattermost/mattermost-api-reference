@@ -22,6 +22,8 @@ To build the full YAML, run `make build` and it will be output to `html/static/m
 
 To test locally, run `make build`, `make run` and navigate to `http://127.0.0.1:8080`. For any updates to the source files, re-run the same commands.
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mattermost/mattermost-api-reference)
+
 ## Deployment
 
 Deployment is handled automatically by our Jenkins CLI machine. When a pull request is merged it will automatically be deployed to [https://api.mattermost.com](https://api.mattermost.com).

@@ -811,6 +811,7 @@
       tags:
         - system
       summary: Get last trial license used
+      operationId: GetPrevTrialLicense
       description: >
         Get the last trial license used on the sevrer
 

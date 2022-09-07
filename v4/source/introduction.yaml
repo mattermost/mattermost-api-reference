@@ -25,7 +25,7 @@ tags:
       Mattermost core committers work with the community to keep the API documentation up-to-date.
 
 
-      If you have questions on API routes not listed in this reference, please [join the Mattermost community server](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) to ask questions in the Developers channel, [or post questions to our Developer Discussion forum](https://forum.mattermost.org/c/dev).
+      If you have questions on API routes not listed in this reference, please [join the Mattermost community server](https://community.mattermost.com) to ask questions in the Developers channel, [or post questions to our Developer Discussion forum](https://forum.mattermost.org/c/dev).
 
 
       [Bug reports](https://github.com/mattermost/mattermost-api-reference/issues) in the documentation or the API are also welcome, as are pull requests to fix the issues.
@@ -69,7 +69,7 @@ tags:
       * [Python Driver](https://github.com/Vaelor/python-mattermost-driver) - built by [@Vaelor](https://github.com/Vaelor)
 
 
-      For other community-built drivers and API wrappers, see [our app directory](https://about.mattermost.com/community-applications/#privateApps).
+      For other community-built drivers and API wrappers, see [our app directory](https://mattermost.com/marketplace/).
   - name: authentication
     description: >
       There are multiple ways to authenticate against the Mattermost API.
@@ -250,7 +250,7 @@ tags:
       #### Authentication
 
 
-      The Mattermost WebSocket can be authenticated by cookie or through an authentication challenge. If you're authenticating from a browser and have logged in with the Mattermost API, your authentication cookie should already be set, this is how the Mattermost webapp authenticates with the WebSocket.
+      The Mattermost WebSocket can be authenticated using [the standard API authentification methods](/#tag/authentication) (by a cookie or with an explicit Authorization header) or through an authentication challenge. If you're authenticating from a browser and have logged in with the Mattermost API, your authentication cookie should already be set. This is how the Mattermost webapp authenticates with the WebSocket.
 
 
       To authenticate with an authentication challenge, first connect the WebSocket and then send the following JSON over the connection:
@@ -507,7 +507,7 @@ tags:
       3. User ID is now included in most user endpoints. This allows admins to modify other users through v4 endpoints.
 
 
-      If you have any questions about the API v3 deprecation, or about migrating from v3 to v4, [join our daily build server at pre-release.mattermost.com](https://pre-release.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676) and ask questions in the [APIv4 channel](https://pre-release.mattermost.com/core/channels/apiv4).
+      If you have any questions about the API v3 deprecation, or about migrating from v3 to v4, [join our daily build server at community.mattermost.com](https://community.mattermost.com) and ask questions in the [APIv4 channel](https://community.mattermost.com/core/channels/apiv4).
   - name: users
     description: >
       Endpoints for creating, getting and interacting with users.
@@ -579,6 +579,8 @@ tags:
     description: Endpoints for interactive actions for use by integrations.
   - name: shared channels
     description: Endpoints for getting information about shared channels.
+  - name: insights
+    description: Endpoints for getting insights into teams and users.
   - name: terms of service
     description: Endpoints for getting and updating custom terms of service.
   - name: imports
@@ -633,10 +635,12 @@ x-tagGroups:
       - schemes
       - integration_actions
       - shared channels
+      - insights
       - terms of service
       - imports
       - permissions
       - exports
+      - usage
 servers:
   - url: http://your-mattermost-url.com/api/v4
   - url: https://your-mattermost-url.com/api/v4
