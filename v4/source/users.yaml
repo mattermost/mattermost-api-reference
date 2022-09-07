@@ -4721,6 +4721,13 @@
         schema:
           type: boolean
           default: false
+      - name: threadsOnly
+        in: query
+        description: Setting this to true will only return threads.
+        required: false
+        schema:
+          type: boolean
+          default: false
     responses:
       "200":
         description: User's thread retrieval successful
@@ -4915,6 +4922,70 @@
         - lang: Curl
           source: |
             curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/read' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' 
+  "/users/{user_id}/teams/{team_id}/threads/{thread_id}/set_unread/{post_id}":
+    put:
+      tags:
+        - threads
+      summary: Mark a thread that user is following as unread based on a post id
+      description: |
+        Mark a thread that user is following as unread
+
+        __Minimum server version__: 6.7
+
+        ##### Permissions
+        Must have `read_channel` permission for the channel the thread is in or if the channel is public, have the `read_public_channels` permission for the team.
+
+        Must have `edit_other_users` permission if the user is not the one marking the thread for himself.
+      operationId: SetThreadUnreadByPostId
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: path
+          description: The ID of the team in which the thread is.
+          required: true
+          schema:
+            type: string
+        - name: thread_id
+          in: path
+          description: The ID of the thread to update
+          required: true
+          schema:
+            type: string
+        - name: post_id
+          in: path
+          description: The ID of a post belonging to the thread to mark as unread.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User's thread update successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-code-samples:
+        - lang: Go
+          source: >
+            import "github.com/mattermost/mattermost-server/v5/model"
+
+
+            Client := model.NewAPIv4Client("https://your-mattermost-url.com")
+
+            Client.Login("email@domain.com", "Password1")
+
+            uss, response := Client.SetThreadUnreadByPostId("fc6suoon9pbbpmhrb9c967paxe", "fc6su111111pmhrb9c967paxe", "f96cv0897624352346e", "f96cv0897624352346e")
+        - lang: Curl
+          source: |
+            curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/teams/fc6su111111pmhrb9c967paxe/threads/f96cv0897624352346e/set_unread' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' 
   "/users/{user_id}/teams/{team_id}/threads/{thread_id}/following":
     put:
