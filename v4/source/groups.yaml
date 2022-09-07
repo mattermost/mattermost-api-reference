@@ -69,6 +69,12 @@
             __Minimum server version__: 5.24
           schema:
             type: integer
+        - name: filter_allow_reference
+          in: query
+          description: Boolean which filters the group entries with the `allow_reference` attribute set.
+          schema:
+            type: boolean
+            default: false            
       responses:
         "200":
           description: Group list retrieval successful
@@ -86,6 +92,67 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
+    post:
+      tags:
+        - groups
+      summary: Create a custom group
+      description: |
+        Create a `custom` type group.
+
+        #### Permission
+        Must have `create_custom_group` permission.
+
+        __Minimum server version__: 6.3
+      operationId: CreateGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - group
+                - user_ids
+              properties:
+                group:
+                  type: object
+                  required:
+                    - name
+                    - display_name
+                    - source
+                    - allow_reference
+                  description: Group object to create.
+                  properties:
+                    name: 
+                      type: string
+                      description: The unique group name used for at-mentioning.
+                    display_name: 
+                      type: string
+                      description: The display name of the group which can include spaces.
+                    source:
+                      type: string
+                      description: Must be `custom`
+                    allow_reference:
+                      type: boolean
+                      description: Must be true
+                user_ids:
+                  type: array
+                  description: The user ids of the group members to add.
+                  items:
+                    type: string
+        description: Group object and initial members.
+        required: true
+      responses:
+        "501":
+          description: |
+            Group has an invalid `source`, or
+            `allow_reference` is not `true`, or
+            group has a `remote_id`.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "201":
+          description: Group creation and memberships successful.
+        "403":
+          $ref: "#/components/responses/Forbidden"
   "/groups/{group_id}":
     get:
       tags:
@@ -121,6 +188,38 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
+    delete:
+      tags:
+        - groups
+      summary: Deletes a custom group
+      description: |
+        Soft deletes a custom group.
+
+        ##### Permissions
+        Must have `custom_group_delete` permission for the given group.
+
+        __Minimum server version__: 6.3
+      operationId: DeleteGroup
+      parameters:
+        - name: group_id
+          in: path
+          description: The ID of the group.
+          required: true
+          schema:
+            type: string
+      responses:
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          description: The group doesn't have a `source` value of `custom`.
+        "404":
+          description: Group is already deleted or doesn't exist.
+        "200":
+          description: Successfully deleted the group.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
   "/groups/{group_id}/patch":
     put:
       tags:
@@ -675,6 +774,94 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
+    delete:
+      tags:
+        - groups
+      summary: Removes members from a custom group
+      description: |
+        Soft deletes a custom group members.
+
+        ##### Permissions
+        Must have `custom_group_manage_members` permission for the given group.
+
+        __Minimum server version__: 6.3
+      operationId: DeleteGroupMembers
+      parameters:
+        - name: group_id
+          in: path
+          description: The ID of the group to delete.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: An object containing the user ids of the members to remove.
+              properties:
+                user_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          description: If the group does not have a `source` value of `custom`.
+        "404":
+          description: Can't find the group.
+        "200":
+          description: Successfully deleted the group members.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+    post:
+      tags:
+        - groups
+      summary: Adds members to a custom group
+      description: |
+        Adds members to a custom group.
+
+        ##### Permissions
+        Must have `custom_group_manage_members` permission for the given group.
+
+        __Minimum server version__: 6.3
+      operationId: AddGroupMembers
+      parameters:
+        - name: group_id
+          in: path
+          description: The ID of the group.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: An object containing the user ids of the members to add.
+              properties:
+                user_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "501":
+          description: If the group does not have a `source` value of `custom`.
+        "404":
+          description: Can't find the group.
+        "200":
+          description: Successfully added the group members.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
   "/groups/{group_id}/stats":
     get:
       tags:
@@ -866,6 +1053,12 @@
             schema:
               type: boolean
               default: false
+          - name: paginate
+            in: query
+            description: Boolean to determine whether the pagination should be applied or not
+            schema:
+              type: boolean
+              default: false              
         responses:
           "200":
             description: Group list retrieval successful

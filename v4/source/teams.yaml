@@ -108,6 +108,8 @@
             type: integer
             default: 60
         - name: include_total_count
+          description: >-
+            Appends a total count of returned teams inside the response object - ex: `{ "teams": [], "total_count" : 0 }`.      
           in: query
           schema:
             type: boolean
@@ -2302,6 +2304,13 @@
           required: true
           schema:
             type: string
+        - name: include_collapsed_threads
+          in: query
+          description: Boolean to determine whether the collapsed threads should be included or not
+          required: false
+          schema:
+            type: boolean
+            default: false          
       responses:
         "200":
           description: Team unreads retrieval successful

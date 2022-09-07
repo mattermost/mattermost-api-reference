@@ -10,6 +10,7 @@ build-v4: .npminstall
 	@echo Building mattermost openapi yaml for v4
 
 	@cat $(V4_SRC)/introduction.yaml > $(V4_YAML)
+	@cat $(V4_SRC)/insights.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/users.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/status.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/teams.yaml >> $(V4_YAML)
@@ -43,16 +44,18 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/actions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/bots.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/cloud.yaml >> $(V4_YAML)
+	@cat $(V4_SRC)/usage.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/permissions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/imports.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/exports.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
 
+	@node_modules/.bin/lint-openapi v4/html/static/mattermost-openapi-v4.yaml -e -v
 	@node_modules/.bin/swagger-cli validate $(V4_YAML)
-	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs bundle ./v4/html/static/mattermost-openapi-v4.yaml -o ./v4/html/index.html --options.noAutoAuth  --options.suppressWarnings  --cdn
+	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs bundle ./v4/html/static/mattermost-openapi-v4.yaml -o ./v4/html/index.html --options.noAutoAuth  --options.suppressWarnings
 	@echo Complete
 
-.npminstall:
+.npminstall: package.json package-lock.json
 	@echo Getting dependencies using npm
 
 	npm install

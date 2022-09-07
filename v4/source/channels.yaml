@@ -10,22 +10,37 @@
       parameters:
       - name: not_associated_to_group
         in: query
-        description: Group GUID
+        description: A group id to exclude channels that are associated with that group via GroupChannel records. This can also be left blank with `not_associated_to_group=`.
         schema:
           type: string
       - name: page
         in: query
+        description: The page to select.
         schema:
           type: integer
           default: 0
       - name: per_page
         in: query
+        description: The number of channels per page.
         schema:
           type: integer
           default: 0
       - name: exclude_default_channels
         in: query
         description: Whether to exclude default channels (ex Town Square, Off-Topic) from the results.
+        schema:
+          type: boolean
+          default: false
+      - name: include_deleted
+        in: query
+        description: Include channels that have been archived. This correlates to the `DeleteAt` flag being set in the database.
+        schema:
+          type: boolean
+          default: false
+      - name: include_total_count
+        in: query
+        description: >-
+          Appends a total count of returned channels inside the response object - ex: `{ "channels": [], "total_count" : 0 }`.      
         schema:
           type: boolean
           default: false
@@ -269,6 +284,8 @@
                     parameter to true.
                 team_ids:
                   type: array
+                  items:
+                    type: string
                   description: >
                     Filters results to channels belonging to the given team ids
 
@@ -329,6 +346,14 @@
                     If set to true, only channels which do not have a granular retention policy assigned to
                     them will be returned. The `sysconsole_read_compliance_data_retention` permission is
                     required to use this parameter.
+
+                    __Minimum server version__: 5.35
+                
+                include_search_by_id:
+                  type: boolean
+                  default: false
+                  description: >
+                    If set to true, returns channels where given search 'term' matches channel ID.
 
                     __Minimum server version__: 5.35
         description: The search terms and logic to use in the search.
@@ -628,12 +653,12 @@
         - channels
       summary: Delete a channel
       description: >
-        Soft deletes a channel, by marking the channel as deleted in the
-        database. Soft deleted channels will not be accessible in the user
-        interface. Direct and group message channels cannot be deleted.
+        Archives a channel. This will set the `deleteAt` to the current timestamp in the database. Soft deleted channels may not be accessible in the user
+        interface. They can be viewed and unarchived in the **System Console > User Management > Channels** based on your license. Direct and group message channels cannot be deleted.
 
 
-        As of server version 5.28, optionally use the `permanent=true` query parameter to permanently delete the channel for compliance reasons. To use this feature `ServiceSettings.EnableAPIChannelDeletion` must be set to `true` in the server's configuration.
+        As of server version 5.28, optionally use the `permanent=true` query parameter to permanently delete the channel for compliance reasons. To use this feature `ServiceSettings.EnableAPIChannelDeletion` must be set to `true` in the server's configuration. 
+        If you permanently delete a channel this action is not recoverable outside of a database backup.
 
 
         ##### Permissions

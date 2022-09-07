@@ -1,10 +1,10 @@
 # Mattermost API Documentation
 
-This respository holds the API reference available at [https://api.mattermost.com](https://api.mattermost.com).
+This repository holds the API reference available at [https://api.mattermost.com](https://api.mattermost.com).
 
 The Mattermost API reference uses the [OpenAPI standard](https://openapis.org/) and the [ReDoc document generator](https://github.com/Rebilly/ReDoc).
 
-All documentation is available under the terms of a [Creative Commons License](http://creativecommons.org/licenses/by-nc-sa/3.0/).
+All documentation is available under the terms of a [Creative Commons License](https://creativecommons.org/licenses/by-nc-sa/3.0/).
 
 ## Contributing
 
@@ -21,6 +21,8 @@ There is no strict style guide but please try to follow the example of the exist
 To build the full YAML, run `make build` and it will be output to `html/static/mattermost-openapi.yaml`. This will also check syntax using [swagger-cli](https://github.com/BigstickCarpet/swagger-cli).
 
 To test locally, run `make build`, `make run` and navigate to `http://127.0.0.1:8080`. For any updates to the source files, re-run the same commands.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/mattermost/mattermost-api-reference)
 
 ## Deployment
 

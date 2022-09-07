@@ -368,6 +368,9 @@ components:
         prev_post_id:
           type: string
           description: The ID of previous post. Not omitted when empty or not relevant.
+        has_next:
+          type: boolean
+          description: Whether there are more items after this page.
     PostListWithSearchMatches:
       type: object
       properties:
@@ -768,6 +771,164 @@ components:
           description: The time in milliseconds this reaction was made
           type: integer
           format: int64
+    TopReaction:
+      type: object
+      properties:
+        emoji_name:
+          description: The name of the emoji used for this reaction.
+          type: string
+        count:
+          description: The number of the times this emoji has been used.
+          type: integer
+          format: int64
+    NewTeamMember:
+      type: object
+      properties:
+        id:
+          description: The user's ID.
+          type: string
+        username:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nickname:
+          type: string
+        position:
+          description: The user's position field value.
+          type: string
+        create_at:
+          description: The creation timestamp of the team member record.
+          type: integer
+    TopReactionList:
+      type: object
+      properties:
+        has_next: 
+          description: Indicates if there is another page of reactions that can be fetched.
+          type: boolean
+        items:
+          description: List of reactions.
+          type: array 
+          items:
+            $ref: "#/components/schemas/TopReaction"
+    NewTeamMembersList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of new team members that can be fetched.
+          type: boolean
+        items:
+          description: List of new team members.
+          type: array
+          items:
+            $ref: "#/components/schemas/NewTeamMember"
+        total_count:
+          description: The total count of new team members for the given time range.
+          type: integer
+    TopChannel:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        display_name:
+          type: string
+        name:
+          type: string
+        team_id:
+          type: string
+        message_count:
+          description: The number of messages posted in the channel by users over the given time period (not including messages posted by bots).
+          type: string
+    TopChannelList:
+      type: object
+      properties:
+        has_next: 
+          description: Indicates if there is another page of channels that can be fetched.
+          type: boolean
+        items:
+          description: List of channels.
+          type: array 
+          items:
+            $ref: "#/components/schemas/TopChannel"
+    InsightUserInformation:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nickname:
+          type: string
+        username:
+          type: string
+        last_picture_update:
+          type: string
+        create_at:
+          type: integer
+          format: int64
+    TopThread:
+      type: object
+      properties:
+        post:
+          $ref: "#/components/schemas/Post"
+        channel_id:
+          type: string
+        channel_display_name:
+          type: string
+        channel_name:
+          type: string
+        Participants:
+          type: array
+          items:
+            type: string
+        user_information:
+          description: User who created the post
+          $ref: "#/components/schemas/InsightUserInformation"
+    TopThreadList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of top threads that can be fetched.
+          type: boolean
+        items:
+          description: List of top threads.
+          type: array
+          items:
+            $ref: "#/components/schemas/TopThread"
+    TopDMInsightUserInformation:
+      allOf:
+      - $ref: "#/components/schemas/InsightUserInformation"
+      - type: object
+        properties:
+          position:
+            type: string
+    TopDM:
+      type: object
+      properties:
+        post_count:
+          type: integer
+          format: int64
+        outgoing_message_count:
+          type: integer
+          format: int64
+        second_participant:
+          $ref: "#/components/schemas/TopDMInsightUserInformation"
+    TopDMList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of top DMs that can be fetched.
+          type: boolean
+        items:
+          description: List of top DMs.
+          type: array
+          items:
+            $ref: "#/components/schemas/TopDM"
     Emoji:
       type: object
       properties:
@@ -2330,7 +2491,7 @@ components:
       type: object
       properties:
         email:
-          type: boolean
+          type: string
           description: Set to "true" to enable email notifications, "false" to disable.
             Defaults to "true".
         push:
@@ -2344,7 +2505,7 @@ components:
             "mention" for mentions and direct messages only, and "none" to
             disable. Defaults to "all".
         desktop_sound:
-          type: boolean
+          type: string
           description: Set to "true" to enable sound on desktop notifications, "false" to
             disable. Defaults to "true".
         mention_keys:
@@ -2352,11 +2513,11 @@ components:
           description: A comma-separated list of words to count as mentions. Defaults to
             username and @username.
         channel:
-          type: boolean
+          type: string
           description: Set to "true" to enable channel-wide notifications (@channel, @all,
             etc.), "false" to disable. Defaults to "true".
         first_name:
-          type: boolean
+          type: string
           description: Set to "true" to enable mentions for first name. Defaults to "true"
             if a first name is set, "false" otherwise.
     Timezone:
@@ -2377,7 +2538,7 @@ components:
       type: object
       properties:
         email:
-          type: boolean
+          type: string
           description: Set to "true" to enable email notifications, "false" to disable, or
             "default" to use the global user notification setting.
         push:
@@ -2700,6 +2861,58 @@ components:
           type: string
         price_per_seat:
           type: string
+    ProductLimits:
+      type: object
+      properties:
+        boards:
+          $ref: "#/components/schemas/BoardsLimits"
+          nullable: true
+        files:
+          $ref: "#/components/schemas/FilesLimits"
+          nullable: true
+        integrations:
+          $ref: "#/components/schemas/IntegrationsLimits"
+          nullable: true
+        messages:
+          $ref: "#/components/schemas/MessagesLimits"
+          nullable: true
+        teams:
+          $ref: "#/components/schemas/TeamsLimits"
+          nullable: true
+    BoardsLimits:
+      type: object
+      properties:
+        cards:
+          type: integer
+          nullable: true
+        views:
+          type: integer
+          nullable: true
+    FilesLimits:
+      type: object
+      properties:
+        total_storage:
+          type: integer
+          format: int64
+          nullable: true
+    IntegrationsLimits:
+      type: object
+      properties:
+        enabled:
+          type: integer
+          nullable: true
+    MessagesLimits:
+      type: object
+      properties:
+        history:
+          type: integer
+          nullable: true
+    TeamsLimits:
+      type: object
+      properties:
+        active:
+          type: integer
+          nullable: true
     PaymentSetupIntent:
       type: object
       properties:
@@ -3346,6 +3559,9 @@ components:
         status:
           description: Status of server ("OK" or "UNHEALTHY"). Included when get_server_status parameter set.
           type: string
+        CanReceiveNotifications:
+          description: Whether the device id provided can receive notifications ("true", "false" or "unknown"). Included when device_id parameter set.
+          type: string
     UserThreads:
       type: object
       properties:
@@ -3372,6 +3588,18 @@ components:
         value:
           description: System property value
           type: string
+    PostsUsage:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Total no. of posts
+    StorageUsage:
+      type: object
+      properties:
+        bytes:
+          type: number
+          description: Total file storage usage for the instance in bytes rounded down to the most significant digit
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
