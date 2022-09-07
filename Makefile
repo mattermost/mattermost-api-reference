@@ -1,15 +1,16 @@
-.PHONY: build build-v4 clean
+.PHONY: build build-v4 clean playbooks
 
 V4_YAML = v4/html/static/mattermost-openapi-v4.yaml
 
 V4_SRC = v4/source
+PLAYBOOKS_SRC = playbooks
 
 build: build-v4
 
-build-v4: .npminstall
+build-v4: .npminstall playbooks
 	@echo Building mattermost openapi yaml for v4
 
-	@cat $(V4_SRC)/introduction.yaml > $(V4_YAML)
+	@if [ -r $(PLAYBOOKS_SRC)/merged-tags.yaml ]; then cat $(PLAYBOOKS_SRC)/merged-tags.yaml > $(V4_YAML); else cat $(V4_SRC)/introduction.yaml > $(V4_YAML); fi
 	@cat $(V4_SRC)/insights.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/users.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/status.yaml >> $(V4_YAML)
@@ -48,14 +49,14 @@ build-v4: .npminstall
 	@cat $(V4_SRC)/permissions.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/imports.yaml >> $(V4_YAML)
 	@cat $(V4_SRC)/exports.yaml >> $(V4_YAML)
-	@cat $(V4_SRC)/definitions.yaml >> $(V4_YAML)
+	@if [ -r $(PLAYBOOKS_SRC)/paths.yaml ]; then cat $(PLAYBOOKS_SRC)/paths.yaml >> $(V4_YAML); fi
+	@if [ -r $(PLAYBOOKS_SRC)/merged-definitions.yaml ]; then cat $(PLAYBOOKS_SRC)/merged-definitions.yaml >> $(V4_YAML); else cat $(V4_SRC)/definitions.yaml >> $(V4_YAML); fi
 
-	@node_modules/.bin/lint-openapi v4/html/static/mattermost-openapi-v4.yaml -e -v
 	@node_modules/.bin/swagger-cli validate $(V4_YAML)
-	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs bundle ./v4/html/static/mattermost-openapi-v4.yaml -o ./v4/html/index.html --options.noAutoAuth  --options.suppressWarnings
+	@node_modules/.bin/redoc-cli -t ./v4/html/ssr_template.hbs build ./v4/html/static/mattermost-openapi-v4.yaml -o ./v4/html/index.html --options.noAutoAuth  --options.suppressWarnings
 	@echo Complete
 
-.npminstall: package.json package-lock.json
+.npminstall:
 	@echo Getting dependencies using npm
 
 	npm install
@@ -71,3 +72,9 @@ clean:
 
 	rm -f .npminstall
 	rm -rf node_modules
+
+playbooks:
+	@echo Fetching Playbooks OpenAPI spec
+	cd playbooks && node extract.js
+	cd playbooks && node merge-definitions.js ../$(V4_SRC)/definitions.yaml
+	cd playbooks && node merge-tags.js ../$(V4_SRC)/introduction.yaml
