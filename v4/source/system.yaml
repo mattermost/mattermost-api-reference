@@ -583,9 +583,8 @@
 
         The Plugins are stored as a map, and since a map may recursively go 
         down to any depth, individual fields of a map are not changed. 
-        Avoid adding more complexity by attempting to support 
-        patch on a map by using the `update config` 
-        (PUT api/v4/config) endpoint as a workaround.
+        Consider using the `update config` (PUT api/v4/config) endpoint
+        to update a plugins configurations.
       operationId: PatchConfig
       requestBody:
         description: Mattermost configuration
