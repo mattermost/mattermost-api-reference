@@ -781,6 +781,26 @@ components:
           description: The number of the times this emoji has been used.
           type: integer
           format: int64
+    NewTeamMember:
+      type: object
+      properties:
+        id:
+          description: The user's ID.
+          type: string
+        username:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nickname:
+          type: string
+        position:
+          description: The user's position field value.
+          type: string
+        create_at:
+          description: The creation timestamp of the team member record.
+          type: integer
     TopReactionList:
       type: object
       properties:
@@ -792,6 +812,20 @@ components:
           type: array 
           items:
             $ref: "#/components/schemas/TopReaction"
+    NewTeamMembersList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of new team members that can be fetched.
+          type: boolean
+        items:
+          description: List of new team members.
+          type: array
+          items:
+            $ref: "#/components/schemas/NewTeamMember"
+        total_count:
+          description: The total count of new team members for the given time range.
+          type: integer
     TopChannel:
       type: object
       properties:
@@ -819,6 +853,82 @@ components:
           type: array 
           items:
             $ref: "#/components/schemas/TopChannel"
+    InsightUserInformation:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        nickname:
+          type: string
+        username:
+          type: string
+        last_picture_update:
+          type: string
+        create_at:
+          type: integer
+          format: int64
+    TopThread:
+      type: object
+      properties:
+        post:
+          $ref: "#/components/schemas/Post"
+        channel_id:
+          type: string
+        channel_display_name:
+          type: string
+        channel_name:
+          type: string
+        Participants:
+          type: array
+          items:
+            type: string
+        user_information:
+          description: User who created the post
+          $ref: "#/components/schemas/InsightUserInformation"
+    TopThreadList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of top threads that can be fetched.
+          type: boolean
+        items:
+          description: List of top threads.
+          type: array
+          items:
+            $ref: "#/components/schemas/TopThread"
+    TopDMInsightUserInformation:
+      allOf:
+      - $ref: "#/components/schemas/InsightUserInformation"
+      - type: object
+        properties:
+          position:
+            type: string
+    TopDM:
+      type: object
+      properties:
+        post_count:
+          type: integer
+          format: int64
+        outgoing_message_count:
+          type: integer
+          format: int64
+        second_participant:
+          $ref: "#/components/schemas/TopDMInsightUserInformation"
+    TopDMList:
+      type: object
+      properties:
+        has_next:
+          description: Indicates if there is another page of top DMs that can be fetched.
+          type: boolean
+        items:
+          description: List of top DMs.
+          type: array
+          items:
+            $ref: "#/components/schemas/TopDM"
     Emoji:
       type: object
       properties:
@@ -2381,7 +2491,7 @@ components:
       type: object
       properties:
         email:
-          type: boolean
+          type: string
           description: Set to "true" to enable email notifications, "false" to disable.
             Defaults to "true".
         push:
@@ -2395,7 +2505,7 @@ components:
             "mention" for mentions and direct messages only, and "none" to
             disable. Defaults to "all".
         desktop_sound:
-          type: boolean
+          type: string
           description: Set to "true" to enable sound on desktop notifications, "false" to
             disable. Defaults to "true".
         mention_keys:
@@ -2403,11 +2513,11 @@ components:
           description: A comma-separated list of words to count as mentions. Defaults to
             username and @username.
         channel:
-          type: boolean
+          type: string
           description: Set to "true" to enable channel-wide notifications (@channel, @all,
             etc.), "false" to disable. Defaults to "true".
         first_name:
-          type: boolean
+          type: string
           description: Set to "true" to enable mentions for first name. Defaults to "true"
             if a first name is set, "false" otherwise.
     Timezone:
@@ -2428,7 +2538,7 @@ components:
       type: object
       properties:
         email:
-          type: boolean
+          type: string
           description: Set to "true" to enable email notifications, "false" to disable, or
             "default" to use the global user notification setting.
         push:
@@ -3478,6 +3588,18 @@ components:
         value:
           description: System property value
           type: string
+    PostsUsage:
+      type: object
+      properties:
+        count:
+          type: number
+          description: Total no. of posts
+    StorageUsage:
+      type: object
+      properties:
+        bytes:
+          type: number
+          description: Total file storage usage for the instance in bytes rounded down to the most significant digit
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'

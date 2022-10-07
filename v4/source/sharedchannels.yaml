@@ -19,11 +19,13 @@
           schema:
             type: string
         - name: page
+          description: The page to select.
           in: query
           schema:
             type: integer
             default: 0
         - name: per_page
+          description: The number of sharedchannels per page.
           in: query
           schema:
             type: integer

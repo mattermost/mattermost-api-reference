@@ -15,11 +15,13 @@
           type: string
       - name: page
         in: query
+        description: The page to select.
         schema:
           type: integer
           default: 0
       - name: per_page
         in: query
+        description: The number of channels per page.
         schema:
           type: integer
           default: 0
@@ -344,6 +346,14 @@
                     If set to true, only channels which do not have a granular retention policy assigned to
                     them will be returned. The `sysconsole_read_compliance_data_retention` permission is
                     required to use this parameter.
+
+                    __Minimum server version__: 5.35
+                
+                include_search_by_id:
+                  type: boolean
+                  default: false
+                  description: >
+                    If set to true, returns channels where given search 'term' matches channel ID.
 
                     __Minimum server version__: 5.35
         description: The search terms and logic to use in the search.

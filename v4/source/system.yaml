@@ -578,6 +578,13 @@
         Must have `manage_system` permission.
 
         __Minimum server version__: 5.20
+
+        ##### Note
+
+        The Plugins are stored as a map, and since a map may recursively go 
+        down to any depth, individual fields of a map are not changed. 
+        Consider using the `update config` (PUT api/v4/config) endpoint
+        to update a plugins configurations.
       operationId: PatchConfig
       requestBody:
         description: Mattermost configuration
@@ -811,6 +818,7 @@
       tags:
         - system
       summary: Get last trial license used
+      operationId: GetPrevTrialLicense
       description: >
         Get the last trial license used on the sevrer
 
