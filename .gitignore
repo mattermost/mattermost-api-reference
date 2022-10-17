@@ -10,6 +10,8 @@ v4/html/index.html
 *mattermost-openapi-v4.yaml
 .npminstall
 node_modules
+playbooks/*.yaml
+!playbooks/tags.yaml
 
 # IDEs
 .idea/
