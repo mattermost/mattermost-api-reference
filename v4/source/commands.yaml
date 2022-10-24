@@ -492,7 +492,8 @@
                   description: Channel Id where the command will execute
                 command:
                   type: string
-                  description: The slash command to execute
+                  ##description: The slash command to execute
+                  description: "The slash command to execute, including parameters. Eg, `'/echo bounces around the room'`"
         description: command to be executed
         required: true
       responses:
