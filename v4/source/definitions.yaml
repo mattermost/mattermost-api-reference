@@ -117,9 +117,10 @@ components:
         total_users_count:
           type: integer
     KnownUsers:
-        type: array
-          items:
-            type: string
+      type: array
+      properties:
+        items:
+          type: string
     Team:
       type: object
       properties:
