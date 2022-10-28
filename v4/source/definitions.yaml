@@ -116,6 +116,11 @@ components:
       properties:
         total_users_count:
           type: integer
+    KnownUsers:
+      type: array
+      properties:
+        items:
+          type: string
     Team:
       type: object
       properties:

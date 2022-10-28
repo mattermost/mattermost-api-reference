@@ -915,7 +915,8 @@
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UsersStats"
+                type: array
+                $ref: "#/components/schemas/KnownUsers"
         "401":
           $ref: "#/components/responses/Unauthorized"
       x-code-samples:
