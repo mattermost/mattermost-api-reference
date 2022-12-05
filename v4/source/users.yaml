@@ -4538,7 +4538,86 @@
           source: |
             curl 'http://localhost:8065/api/v4/users/me/channel_members?page=0&per_page=2' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
+  "/users/{user_id}/recent_searches":
+    get:
+      tags:
+        - users
+      summary: Get recent searches from all teams for a user
+      description: |
+        Get the 5 most recent searches that the user performed.
 
+        __Minimum server version__: 7.0.0
+
+        ##### Permissions
+        Must be logged in.
+      operationId: getRecentSearches
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User's recent searches retrieval successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SearchParams"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-codeSamples:
+        - lang: Curl
+          source: |
+            curl 'http://localhost:8065/api/v4/users/me/recent_searches' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw'
+    delete:
+      tags:
+        - users
+      summary: Remove recent searches from all teams for a user
+      description: |
+        Remove all the recent searches duplicates that match a given search parameter.
+
+        __Minimum server version__: 7.6.0
+
+        ##### Permissions
+        Must be logged in.
+      operationId: deleteRecentSearch
+      parameters:
+        - name: user_id
+          in: path
+          description: The ID of the user. This can also be "me" which will point to the current user.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The search parameter to delete
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchParams'
+      responses:
+        "200":
+          description: User's recent searches removal successful
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      x-codeSamples:
+        - lang: Curl
+          source: |
+            curl -X DELETE 'http://localhost:8065/api/v4/users/me/recent_searches' \
+            -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw'
   /users/migrate_auth/ldap:
     post:
       tags:

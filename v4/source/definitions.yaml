@@ -258,6 +258,81 @@ components:
             team_update_at:
               type: integer
               description: The time at which the team to which this channel belongs was last updated.
+    SearchParams:
+      type: object
+      properties:
+        excluded_date:
+          type: string
+          nullable: true
+        excluded_channels:
+          type: array
+          items:
+            type: string
+          nullable: true
+        after_date:
+          type: string
+          nullable: true
+        before_date:
+          type: string
+          nullable: true
+        on_date:
+          type: string
+          nullable: true
+        timezone_offset:
+          type: integer
+          nullable: true
+        from_users:
+          type: array
+          items:
+            type: string
+          nullable: true
+        excluded_before_date:
+          type: string
+          nullable: true
+        excluded_extensions:
+          type: array
+          items:
+            type: string
+          nullable: true
+        excluded_after_date:
+          type: string
+          nullable: true
+        extensions:
+          type: array
+          items:
+            type: string
+          nullable: true
+        or_terms:
+          type: boolean
+          nullable: true
+        search_without_userid:
+          type: boolean
+          nullable: true
+        modifier:
+          type: string
+          nullable: true
+        excluded_terms:
+          type: string
+          nullable: true
+        in_channels:
+          type: array
+          items:
+            type: string
+          nullable: true
+        excluded_users:
+          type: array
+          items:
+            type: string
+          nullable: true
+        terms:
+          type: string
+          nullable: true
+        ishashtag:
+          type: boolean
+          nullable: true
+        include_deleted_channels:
+          type: boolean
+          nullable: true
     ChannelData:
       type: object
       properties:
