@@ -4542,7 +4542,7 @@
     get:
       tags:
         - users
-      summary: Get recent searches from all teams for a user
+      summary: Get the user's recent search queries
       description: |
         Get the 5 most recent searches that the user performed.
 
@@ -4581,9 +4581,9 @@
     delete:
       tags:
         - users
-      summary: Remove recent searches from all teams for a user
+      summary: Remove a user's recent search query
       description: |
-        Remove all the recent searches duplicates that match a given search parameter.
+        Removes a recent search query made by the given user,
 
         __Minimum server version__: 7.6.0
 
