@@ -325,7 +325,7 @@
 
             Can be "", "display_name".
 
-            When left blank, sorting is done by username. `display_name` will sort alphabetically by users' display name.
+            When left blank, sorting is done by username. `display_name` will sort alphabetically by user's display name.
 
             __Minimum server version__: 7.7
           schema:
