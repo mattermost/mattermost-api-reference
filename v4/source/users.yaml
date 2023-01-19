@@ -327,7 +327,7 @@
 
             When left blank, sorting is done by username. `display_name` will sort alphabetically by users' display name.
 
-            __Minimum server version__: 4.7
+            __Minimum server version__: 7.7
           schema:
             type: string
         - name: roles
