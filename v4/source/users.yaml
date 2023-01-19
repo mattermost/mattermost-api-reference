@@ -320,6 +320,14 @@
             When left blank, sorting is done by username. `status` will sort by User's current status (Online, Away, DND, Offline), then by Username.
 
             __Minimum server version__: 4.7
+
+            ##### `in_group`
+
+            Can be "", "display_name".
+
+            When left blank, sorting is done by username. `display_name` will sort alphabetically by users' display name.
+
+            __Minimum server version__: 4.7
           schema:
             type: string
         - name: roles
