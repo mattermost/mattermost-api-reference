@@ -206,6 +206,7 @@ components:
         last_post_at:
           description: The time in milliseconds of the last post of a channel
           type: integer
+          format: int64
         total_msg_count:
           type: integer
         extra_update_at:
