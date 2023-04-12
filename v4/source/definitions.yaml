@@ -3630,7 +3630,7 @@ components:
           description: The ID of the user that made this acknowledgement.
           type: string
         post_id:
-          description: The ID of the post to which this acknowledgement was made
+          description: The ID of the post to which this acknowledgement was made.
           type: string
         acknowledged_at:
           description: The time in milliseconds this acknowledgement was made
