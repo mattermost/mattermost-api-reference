@@ -3627,7 +3627,7 @@ components:
       type: object
       properties:
         user_id:
-          description: The ID of the user that made this acknowledgement
+          description: The ID of the user that made this acknowledgement.
           type: string
         post_id:
           description: The ID of the post to which this acknowledgement was made
