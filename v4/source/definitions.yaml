@@ -468,6 +468,24 @@ components:
             reactions have been made to this post.
           items:
             $ref: "#/components/schemas/Reaction"
+        priority:
+          type: object
+          description: >
+            Post priority set for this post. This field will be null if no
+            priority metadata has been set.
+          properties:
+            priority:
+              type: string
+              description: The priority label of a post, could be either empty, important, or urgent.
+            requested_ack:
+              type: boolean
+              description: Whether the post author has requested for acknowledgements or not.
+        acknowledgements:
+          type: array
+          description: >
+            Any acknowledgements made to this point.
+          items:
+            $ref: "#/components/schemas/PostAcknowledgement"
     TeamMap:
       type: object
       description: A mapping of teamIds to teams.
@@ -3605,6 +3623,19 @@ components:
         bytes:
           type: number
           description: Total file storage usage for the instance in bytes rounded down to the most significant digit
+    PostAcknowledgement:
+      type: object
+      properties:
+        user_id:
+          description: The ID of the user that made this acknowledgement
+          type: string
+        post_id:
+          description: The ID of the post to which this acknowledgement was made
+          type: string
+        acknowledged_at:
+          description: The time in milliseconds this acknowledgement was made
+          type: integer
+          format: int64
 externalDocs:
   description: Find out more about Mattermost
   url: 'https://about.mattermost.com'
