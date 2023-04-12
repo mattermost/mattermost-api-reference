@@ -46,6 +46,20 @@
                 props:
                   description: A general JSON property bag to attach to the post
                   type: object
+                metadata:
+                  description: A JSON object to add post metadata, e.g the post's priority
+                  type: object
+                  properties:
+                    priority:
+                      type: object
+                      description: An object containing the post's priority properties
+                      properties:
+                        priority:
+                          type: string
+                          description: The priority label of the post, could empty, important, or urgent
+                        requested_ack:
+                          type: boolean
+                          description: Set to true to request for acknowledgements
         description: Post object to create
         required: true
       responses:
@@ -947,6 +961,94 @@
       responses:
         "200":
           description: Reminder set successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOK"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  "/users/{user_id}/posts/{post_id}/ack":
+    post:
+      tags:
+        - posts
+      summary: Acknowledge a post
+      description: >
+        Acknowledge a post that has a request for acknowledgements.
+
+        ##### Permissions
+ 
+        Must have `read_channel` permission for the channel the post is in.<br/>
+        Must be logged in as the user or have `edit_other_users` permission.
+
+
+        __Minimum server version__: 7.7
+      operationId: SaveAcknowledgementForPost
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Acknowledgement saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostAcknowledgement"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - posts
+      summary: Delete a post acknowledgement
+      description: >
+        Delete an acknowledgement form a post that you had previously acknowledged.
+
+        ##### Permissions
+
+        Must have `read_channel` permission for the channel the post is in.<br/>
+        Must be logged in as the user or have `edit_other_users` permission.<br/>
+        The post must have been acknowledged in the previous 5 minutes.
+
+
+        __Minimum server version__: 7.7
+      operationId: SaveAcknowledgementForPost
+      parameters:
+        - name: user_id
+          in: path
+          description: User GUID
+          required: true
+          schema:
+            type: string
+        - name: post_id
+          in: path
+          description: Post GUID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Acknowledgement deleted successfully
           content:
             application/json:
               schema:
