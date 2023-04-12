@@ -982,9 +982,10 @@
         Acknowledge a post that has a request for acknowledgements.
 
         ##### Permissions
-
-        Must have `read_channel` permission for the channel the post is in.
+ 
+        Must have `read_channel` permission for the channel the post is in.<br/>
         Must be logged in as the user or have `edit_other_users` permission.
+
 
         __Minimum server version__: 7.7
       operationId: SaveAcknowledgementForPost
@@ -1025,11 +1026,10 @@
 
         ##### Permissions
 
-        Must have `read_channel` permission for the channel the post is in.
-
-        Must be logged in as the user or have `edit_other_users` permission.
-
+        Must have `read_channel` permission for the channel the post is in.<br/>
+        Must be logged in as the user or have `edit_other_users` permission.<br/>
         The post must have been acknowledged in the previous 5 minutes.
+
 
         __Minimum server version__: 7.7
       operationId: SaveAcknowledgementForPost
