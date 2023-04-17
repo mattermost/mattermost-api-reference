@@ -27,7 +27,7 @@ class Extractor {
      */
     run(args) {
         // Fetch the OpenAPI spec
-        const rawSpec = fetch('https://raw.githubusercontent.com/mattermost/mattermost-plugin-playbooks/master/server/api/api.yaml').text();
+        const rawSpec = fetch('https://raw.githubusercontent.com/mattermost/mattermost-server/master/server/playbooks/server/api/api.yaml').text();
         console.log("fetched Playbooks OpenAPI spec");
         // Parse the OpenAPI spec
         const parsed = YAML.parse(rawSpec);
