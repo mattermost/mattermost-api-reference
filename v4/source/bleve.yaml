@@ -1,4 +1,4 @@
-  /bleve/purge_indexes:
+  /api/v4/bleve/purge_indexes:
     post:
       tags:
         - bleve

@@ -1,4 +1,4 @@
-  /elasticsearch/test:
+  /api/v4/elasticsearch/test:
     post:
       tags:
         - elasticsearch
@@ -31,7 +31,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /elasticsearch/purge_indexes:
+  /api/v4/elasticsearch/purge_indexes:
     post:
       tags:
         - elasticsearch

@@ -1,4 +1,4 @@
-  "/imports":
+  "/api/v4/imports":
     get:
       tags:
         - imports

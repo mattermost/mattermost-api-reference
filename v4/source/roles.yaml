@@ -1,4 +1,4 @@
-  "/roles":
+  "/api/v4/roles":
     get:
       tags:
         - roles
@@ -34,7 +34,7 @@
 
             roles, resp := Client.GetAllRoles()
 
-  "/roles/{role_id}":
+  "/api/v4/roles/{role_id}":
     get:
       tags:
         - roles
@@ -73,7 +73,7 @@
             Client.Login("email@domain.com", "Password1")
 
             role, resp := Client.GetRole(<ROLEID>, "")
-  "/roles/name/{role_name}":
+  "/api/v4/roles/name/{role_name}":
     get:
       tags:
         - roles
@@ -112,7 +112,7 @@
             Client.Login("email@domain.com", "Password1")
 
             role, resp := Client.GetRoleByName(<ROLENAME>, "")
-  "/roles/{role_id}/patch":
+  "/api/v4/roles/{role_id}/patch":
     put:
       tags:
         - roles
@@ -165,7 +165,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  /roles/names:
+  /api/v4/roles/names:
     post:
       tags:
         - roles

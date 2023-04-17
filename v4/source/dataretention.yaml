@@ -1,4 +1,4 @@
-  /data_retention/policy:
+  /api/v4/data_retention/policy:
     get:
       tags:
         - data retention
@@ -31,7 +31,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /data_retention/policies_count:
+  /api/v4/data_retention/policies_count:
     get:
       tags:
         - data retention
@@ -67,7 +67,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /data_retention/policies:
+  /api/v4/data_retention/policies:
     get:
       tags:
         - data retention
@@ -151,7 +151,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/data_retention/policies/{policy_id}":
+  "/api/v4/data_retention/policies/{policy_id}":
     get:
       tags:
         - data retention
@@ -270,7 +270,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"  
-  "/data_retention/policies/{policy_id}/teams":
+  "/api/v4/data_retention/policies/{policy_id}/teams":
     get:
       tags:
         - data retention
@@ -414,7 +414,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/data_retention/policies/{policy_id}/teams/search":
+  "/api/v4/data_retention/policies/{policy_id}/teams/search":
     post:
       tags:
         - data retention
@@ -464,7 +464,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/data_retention/policies/{policy_id}/channels":
+  "/api/v4/data_retention/policies/{policy_id}/channels":
     get:
       tags:
         - data retention
@@ -606,7 +606,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/data_retention/policies/{policy_id}/channels/search":
+  "/api/v4/data_retention/policies/{policy_id}/channels/search":
     post:
       tags:
         - data retention

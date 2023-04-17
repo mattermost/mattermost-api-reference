@@ -1,4 +1,4 @@
-  "/users/{user_id}/status":
+  "/api/v4/users/{user_id}/status":
     get:
       tags:
         - status
@@ -77,7 +77,7 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-  /users/status/ids:
+  /api/v4/users/status/ids:
     post:
       tags:
         - status
@@ -109,7 +109,7 @@
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
-  "/users/{user_id}/status/custom":
+  "/api/v4/users/{user_id}/status/custom":
     put:
       tags:
         - status
@@ -180,7 +180,7 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-  "/users/{user_id}/status/custom/recent":
+  "/api/v4/users/{user_id}/status/custom/recent":
     delete:
       tags:
         - status
@@ -229,7 +229,7 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-  "/users/{user_id}/status/custom/recent/delete":
+  "/api/v4/users/{user_id}/status/custom/recent/delete":
     post:
       tags:
         - status

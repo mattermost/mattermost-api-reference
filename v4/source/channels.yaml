@@ -1,4 +1,4 @@
-  /channels:
+  /api/v4/channels:
     get:
       tags:
         - channels
@@ -140,7 +140,7 @@
             // CreateChannel
 
             rchannel, resp := Client.CreateChannel(channel)
-  /channels/direct:
+  /api/v4/channels/direct:
     post:
       tags:
         - channels
@@ -185,7 +185,7 @@
 
             // CreateDirectChannel
             dm, resp := Client.CreateDirectChannel(<ID OF User1>, <ID OF User2>)
-  /channels/group:
+  /api/v4/channels/group:
     post:
       tags:
         - channels
@@ -231,7 +231,7 @@
 
             // CreateGroupChannel
             rgc, resp := Client.CreateGroupChannel(userIds)
-  /channels/search:
+  /api/v4/channels/search:
     post:
       tags:
         - channels
@@ -381,7 +381,7 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-  /channels/group/search:
+  /api/v4/channels/group/search:
     post:
       tags:
         - channels
@@ -431,7 +431,7 @@
 
             // SearchGroupChannels
             channels, resp := Client.SearchGroupChannels(search)
-  "/teams/{team_id}/channels/ids":
+  "/api/v4/teams/{team_id}/channels/ids":
     post:
       tags:
         - channels
@@ -488,7 +488,7 @@
             // GetPublicChannelsByIdsForTeam
 
             channels, resp := Client.GetPublicChannelsByIdsForTeam(<TEAMID>, channelIds)
-  "/channels/{channel_id}/timezones":
+  "/api/v4/channels/{channel_id}/timezones":
     get:
       tags:
         - channels
@@ -532,7 +532,7 @@
 
             // GetChannelStats
             stats, resp := Client.GetChannelTimezones(<CHANNELID>)
-  "/channels/{channel_id}":
+  "/api/v4/channels/{channel_id}":
     get:
       tags:
         - channels
@@ -698,7 +698,7 @@
 
             // DeleteChannel
             pass, resp := Client.DeleteChannel(<CHANNELID>)
-  "/channels/{channel_id}/patch":
+  "/api/v4/channels/{channel_id}/patch":
     put:
       tags:
         - channels
@@ -777,7 +777,7 @@
 
             // PatchChannel
             channel, resp := Client.PatchChannel(<CHANNELID>, patch)
-  "/channels/{channel_id}/privacy":
+  "/api/v4/channels/{channel_id}/privacy":
     put:
       tags:
         - channels
@@ -849,7 +849,7 @@
             // Update channel's privacy to Private
 
             updatedChannel, resp := Client.UpdateChannelPrivacy(<CHANNELID>, model.CHANNEL_PRIVATE)
-  "/channels/{channel_id}/restore":
+  "/api/v4/channels/{channel_id}/restore":
     post:
       tags:
         - channels
@@ -882,7 +882,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/channels/{channel_id}/move":
+  "/api/v4/channels/{channel_id}/move":
     post:
       tags:
         - channels
@@ -932,7 +932,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/channels/{channel_id}/stats":
+  "/api/v4/channels/{channel_id}/stats":
     get:
       tags:
         - channels
@@ -971,7 +971,7 @@
 
             // GetChannelStats
             stats, resp := Client.GetChannelStats(<CHANNELID>)
-  "/channels/{channel_id}/pinned":
+  "/api/v4/channels/{channel_id}/pinned":
     get:
       tags:
         - channels
@@ -1007,7 +1007,7 @@
 
             // GetPinnedPosts
             posts, resp := Client.GetPinnedPosts(<CHANNELID>, "")
-  "/teams/{team_id}/channels":
+  "/api/v4/teams/{team_id}/channels":
     get:
       tags:
         - channels
@@ -1068,7 +1068,7 @@
             // GetPublicChannelsForTeam
 
             channels, resp := Client.GetPublicChannelsForTeam(<TEAMID>, 0, 100, "")
-  "/teams/{team_id}/channels/private":
+  "/api/v4/teams/{team_id}/channels/private":
     get:
       tags:
         - channels
@@ -1130,7 +1130,7 @@
             // GetPrivateChannelsForTeam
 
             channels, resp := Client.GetPrivateChannelsForTeam(<TEAMID>, 0, 100, "")
-  "/teams/{team_id}/channels/deleted":
+  "/api/v4/teams/{team_id}/channels/deleted":
     get:
       tags:
         - channels
@@ -1178,7 +1178,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/teams/{team_id}/channels/autocomplete":
+  "/api/v4/teams/{team_id}/channels/autocomplete":
     get:
       tags:
         - channels
@@ -1225,7 +1225,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/teams/{team_id}/channels/search_autocomplete":
+  "/api/v4/teams/{team_id}/channels/search_autocomplete":
     get:
       tags:
         - channels
@@ -1272,7 +1272,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/teams/{team_id}/channels/search":
+  "/api/v4/teams/{team_id}/channels/search":
     post:
       tags:
         - channels
@@ -1337,7 +1337,7 @@
 
             // SearchChannels
             channels, resp := Client.SearchChannels(<TEAMID>, search)
-  "/teams/{team_id}/channels/search_archived":
+  "/api/v4/teams/{team_id}/channels/search_archived":
     post:
       tags:
         - channels
@@ -1406,7 +1406,7 @@
 
             // SearchChannels
             channels, resp := Client.SearchArchivedChannels(<TEAMID>, search)
-  "/teams/{team_id}/channels/name/{channel_name}":
+  "/api/v4/teams/{team_id}/channels/name/{channel_name}":
     get:
       tags:
         - channels
@@ -1461,7 +1461,7 @@
             // GetChannelByName
 
             channel, resp := Client.GetChannelByName(<CHANNEL NAME>, <TEAMID>, "")
-  "/teams/name/{team_name}/channels/name/{channel_name}":
+  "/api/v4/teams/name/{team_name}/channels/name/{channel_name}":
     get:
       tags:
         - channels
@@ -1516,7 +1516,7 @@
             // GetChannelByNameForTeamName
 
             channel, resp = Client.GetChannelByNameForTeamName(<CHANNEL NAME>, <TEAM NAME>, "")
-  "/channels/{channel_id}/members":
+  "/api/v4/channels/{channel_id}/members":
     get:
       tags:
         - channels
@@ -1633,7 +1633,7 @@
             // AddChannelMemberWithRootId
 
             cm, resp := Client.AddChannelMemberWithRootId(<CHANNEL ID>, <ID OF USER TO ADD>, <POST ROOT ID>)
-  "/channels/{channel_id}/members/ids":
+  "/api/v4/channels/{channel_id}/members/ids":
     post:
       tags:
         - channels
@@ -1687,7 +1687,7 @@
 
             // GetChannelMembersByIds
             cm, resp := Client.GetChannelMembersByIds(<CHANNELID>, usersIds)
-  "/channels/{channel_id}/members/{user_id}":
+  "/api/v4/channels/{channel_id}/members/{user_id}":
     get:
       tags:
         - channels
@@ -1783,7 +1783,7 @@
 
             // RemoveUserFromChannel
             pass, resp := Client.RemoveUserFromChannel(<CHANNELID>, <USERID>)
-  "/channels/{channel_id}/members/{user_id}/roles":
+  "/api/v4/channels/{channel_id}/members/{user_id}/roles":
     put:
       tags:
         - channels
@@ -1844,7 +1844,7 @@
             // UpdateChannelRoles
 
             pass, resp := Client.UpdateChannelRoles(<CHANNELID>, <USERIDTOPROMOTE>, "channel_admin channel_user")
-  "/channels/{channel_id}/members/{user_id}/schemeRoles":
+  "/api/v4/channels/{channel_id}/members/{user_id}/schemeRoles":
     put:
       tags:
         - channels
@@ -1904,7 +1904,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/channels/{channel_id}/members/{user_id}/notify_props":
+  "/api/v4/channels/{channel_id}/members/{user_id}/notify_props":
     put:
       tags:
         - channels
@@ -1971,7 +1971,7 @@
             // UpdateChannelNotifyProps
 
             pass, resp := Client.UpdateChannelNotifyProps(<CHANNELID>, <USERID>, props)
-  "/channels/members/{user_id}/view":
+  "/api/v4/channels/members/{user_id}/view":
     post:
       tags:
         - channels
@@ -2046,7 +2046,7 @@
             }
             // ViewChannel
             pass, resp := Client.ViewChannel(<USERID>, view)
-  "/users/{user_id}/teams/{team_id}/channels/members":
+  "/api/v4/users/{user_id}/teams/{team_id}/channels/members":
     get:
       tags:
         - channels
@@ -2100,7 +2100,7 @@
             // GetChannelMembersForUser
 
             members, resp := Client.GetChannelMembersForUser(<USERID>, <TEAMID>, "")
-  "/users/{user_id}/teams/{team_id}/channels":
+  "/api/v4/users/{user_id}/teams/{team_id}/channels":
     get:
       tags:
         - channels
@@ -2167,7 +2167,7 @@
             // GetChannelsForTeamForUser
 
             channels, resp := Client.GetChannelsForTeamForUser(<TEAMID>, <USERID>, "")
-  "/users/{user_id}/channels":
+  "/api/v4/users/{user_id}/channels":
     get:
       tags:
         - channels
@@ -2232,7 +2232,7 @@
           source: |
             curl -X GET 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/channels' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw'
-  "/users/{user_id}/channels/{channel_id}/unread":
+  "/api/v4/users/{user_id}/channels/{channel_id}/unread":
     get:
       tags:
         - channels
@@ -2285,7 +2285,7 @@
             // GetChannelUnread
 
             channelUnread, resp := Client.GetChannelUnread(<CHANNELID>, <USERID>)
-  "/channels/{channel_id}/scheme":
+  "/api/v4/channels/{channel_id}/scheme":
     put:
       tags:
         - channels
@@ -2354,7 +2354,7 @@
               -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
               -H 'Content-Type: application/json' \
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
-  "/channels/{channel_id}/members_minus_group_members":
+  "/api/v4/channels/{channel_id}/members_minus_group_members":
     get:
       tags:
         - channels
@@ -2419,7 +2419,7 @@
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
               -H 'Content-Type: application/json' \
               -H 'X-Requested-With: XMLHttpRequest'
-  "/channels/{channel_id}/member_counts_by_group":
+  "/api/v4/channels/{channel_id}/member_counts_by_group":
     get:
       tags:
         - channels
@@ -2463,7 +2463,7 @@
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy' \
               -H 'Content-Type: application/json' \
               -H 'X-Requested-With: XMLHttpRequest'
-  "/channels/{channel_id}/moderations":
+  "/api/v4/channels/{channel_id}/moderations":
     get:
       tags:
         - channels
@@ -2498,7 +2498,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/channels/{channel_id}/moderations/patch":
+  "/api/v4/channels/{channel_id}/moderations/patch":
     put:
       tags:
         - channels
@@ -2541,7 +2541,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/users/{user_id}/teams/{team_id}/channels/categories":
+  "/api/v4/users/{user_id}/teams/{team_id}/channels/categories":
     get:
       tags:
         - channels
@@ -2683,7 +2683,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/users/{user_id}/teams/{team_id}/channels/categories/order":
+  "/api/v4/users/{user_id}/teams/{team_id}/channels/categories/order":
     get:
       tags:
         - channels
@@ -2780,7 +2780,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/users/{user_id}/teams/{team_id}/channels/categories/{category_id}":
+  "/api/v4/users/{user_id}/teams/{team_id}/channels/categories/{category_id}":
     get:
       tags:
         - channels

@@ -1,4 +1,4 @@
-  /usage/posts:
+  /api/v4/usage/posts:
     get:
       tags:
         - usage
@@ -24,7 +24,7 @@
           $ref: "#/components/responses/Unauthorized"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /usage/storage:
+  /api/v4/usage/storage:
     get:
       tags:
         - usage

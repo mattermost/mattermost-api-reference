@@ -1,4 +1,4 @@
-  "/uploads":
+  "/api/v4/uploads":
     post:
       tags:
         - uploads
@@ -75,7 +75,7 @@
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
             -H 'Content-Type: application/json' \
             --data-binary '{"channel_id": "4i6jn8r483nnuqnibnmgz8jo4o", "filename": "test.png", "file_size": 512000}'
-  "/uploads/{upload_id}":
+  "/api/v4/uploads/{upload_id}":
     get:
       tags:
         - uploads

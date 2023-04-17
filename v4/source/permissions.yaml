@@ -1,4 +1,4 @@
-  /permissions/ancillary:
+  /api/v4/permissions/ancillary:
     get:
       tags:
         - permissions

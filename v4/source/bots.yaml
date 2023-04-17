@@ -1,4 +1,4 @@
-  /bots:
+  /api/v4/bots:
     post:
       tags:
         - bots
@@ -146,7 +146,7 @@
             if ($resp->getStatusCode() == 200) {
                 $bots = json_decode($resp->getBody());
             }
-  "/bots/{bot_user_id}":
+  "/api/v4/bots/{bot_user_id}":
     put:
       tags:
         - bots
@@ -292,7 +292,7 @@
             if ($resp->getStatusCode() == 200) {
                 $bot = json_decode($resp->getBody());
             }
-  "/bots/{bot_user_id}/disable":
+  "/api/v4/bots/{bot_user_id}/disable":
     post:
       tags:
         - bots
@@ -348,7 +348,7 @@
             if ($resp->getStatusCode() == 200) {
                 $disabledBot = json_decode($resp->getBody());
             }
-  "/bots/{bot_user_id}/enable":
+  "/api/v4/bots/{bot_user_id}/enable":
     post:
       tags:
         - bots
@@ -404,7 +404,7 @@
             if ($resp->getStatusCode() == 200) {
                 $enabledBot = json_decode($resp->getBody());
             }
-  "/bots/{bot_user_id}/assign/{user_id}":
+  "/api/v4/bots/{bot_user_id}/assign/{user_id}":
     post:
       tags:
         - bots
@@ -467,7 +467,7 @@
             if ($resp->getStatusCode() == 200) {
                 $assignedBot = json_decode($resp->getBody());
             }
-  "/bots/{bot_user_id}/icon":
+  "/api/v4/bots/{bot_user_id}/icon":
     get:
       tags:
         - bots
@@ -714,7 +714,7 @@
               if ($resp->getStatusCode() == 200) {
                   $ok = json_decode($resp->getBody())->status;
               }
-  "/bots/{bot_user_id}/convert_to_user":
+  "/api/v4/bots/{bot_user_id}/convert_to_user":
     post:
       tags:
         - bots

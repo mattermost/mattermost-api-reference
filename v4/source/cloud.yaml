@@ -1,4 +1,4 @@
-  /cloud/limits:
+  /api/v4/cloud/limits:
     get:
       tags:
         - cloud
@@ -26,7 +26,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/products:
+  /api/v4/cloud/products:
     get:
       tags:
         - cloud
@@ -58,7 +58,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/payment:
+  /api/v4/cloud/payment:
     post:
       tags:
         - cloud
@@ -89,7 +89,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/payment/confirm:
+  /api/v4/cloud/payment/confirm:
     post:
       tags:
         - cloud
@@ -123,7 +123,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/customer:
+  /api/v4/cloud/customer:
     get:
       tags:
         - cloud
@@ -200,7 +200,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/customer/address:
+  /api/v4/cloud/customer/address:
     put:
       tags:
         - cloud
@@ -237,7 +237,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/subscription:
+  /api/v4/cloud/subscription:
     get:
       tags:
         - cloud
@@ -267,7 +267,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/subscription/invoices:
+  /api/v4/cloud/subscription/invoices:
     get:
       tags:
         - cloud
@@ -299,7 +299,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/subscription/invoices/{invoice_id}/pdf:
+  /api/v4/cloud/subscription/invoices/{invoice_id}/pdf:
     get:
       tags:
         - cloud
@@ -330,7 +330,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /cloud/webhook:
+  /api/v4/cloud/webhook:
     post:
       tags:
         - cloud

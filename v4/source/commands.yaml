@@ -1,4 +1,4 @@
-  /commands:
+  /api/v4/commands:
     post:
       tags:
         - commands
@@ -127,7 +127,7 @@
             // The second parameter is to set if you want only custom commands (true) or defaults commands (false)
 
             listCommands, resp := Client.ListCommands(<TEAMID>, true)
-  "/teams/{team_id}/commands/autocomplete":
+  "/api/v4/teams/{team_id}/commands/autocomplete":
     get:
       tags:
         - commands
@@ -220,7 +220,7 @@
             teamID := "4xp9fdt77pncbef59f4k1qe83o"
             userInput := "/jira"
             listCommands, resp := Client.ListCommandAutocompleteSuggestions(userInput, teamID)
-  "/commands/{command_id}":
+  "/api/v4/commands/{command_id}":
     get:
       tags:
         - commands
@@ -363,7 +363,7 @@
 
             // DeleteCommand
             ok, resp := Client.DeleteCommand(<COMMANDID>)
-  "/commands/{command_id}/move":
+  "/api/v4/commands/{command_id}/move":
     put:
       tags:
         - commands
@@ -420,7 +420,7 @@
 
             // MoveCommand
             ok, resp := Client.MoveCommand(<TEAMID>,<COMMANDID>)
-  "/commands/{command_id}/regen_token":
+  "/api/v4/commands/{command_id}/regen_token":
     put:
       tags:
         - commands
@@ -466,7 +466,7 @@
 
             // RegenCommandToken
             newToken, resp := Client.RegenCommandToken(<COMMANDID>)
-  /commands/execute:
+  /api/v4/commands/execute:
     post:
       tags:
         - commands

@@ -1,4 +1,4 @@
-  /users/login:
+  /api/v4/users/login:
     post:
       tags:
         - users
@@ -40,7 +40,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /users/login/cws:
+  /api/v4/users/login/cws:
     post:
       tags:
         - users
@@ -74,7 +74,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /users/logout:
+  /api/v4/users/logout:
     post:
       tags:
         - users
@@ -96,7 +96,7 @@
         "403":
           $ref: "#/components/responses/Forbidden"
 
-  /users:
+  /api/v4/users:
     post:
       tags:
         - users
@@ -504,7 +504,7 @@
             Client.HttpClient = &http.Client{Transport: tr}
 
             ok, resp := Client.PermanentDeleteAllUsers()
-  /users/ids:
+  /api/v4/users/ids:
     post:
       tags:
         - users
@@ -547,7 +547,7 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-  /users/group_channels:
+  /api/v4/users/group_channels:
     post:
       tags:
         - users
@@ -589,7 +589,7 @@
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-  /users/usernames:
+  /api/v4/users/usernames:
     post:
       tags:
         - users
@@ -658,7 +658,7 @@
             if ($resp->getStatusCode() == 200) {
                 $users = json_decode($resp->getBody());
             }
-  /users/search:
+  /api/v4/users/search:
     post:
       tags:
         - users
@@ -799,7 +799,7 @@
             if ($resp->getStatusCode() == 200) {
                 $users = json_decode($resp->getBody());
             }
-  /users/autocomplete:
+  /api/v4/users/autocomplete:
     get:
       tags:
         - users
@@ -903,7 +903,7 @@
             if ($resp->getStatusCode() == 200) {
                 $users = json_decode($resp->getBody());
             }
-  /users/known:
+  /api/v4/users/known:
     get:
       tags:
         - users
@@ -937,7 +937,7 @@
 
             userIds, resp := Client.GetKnownUsers()
 
-  /users/stats:
+  /api/v4/users/stats:
     get:
       tags:
         - users
@@ -993,7 +993,7 @@
             if ($resp->getStatusCode() == 200) {
                 $stats = json_decode($resp->getBody())->total_users_count;
             }
-  /users/stats/filtered:
+  /api/v4/users/stats/filtered:
     get:
       tags:
         - users
@@ -1069,7 +1069,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/users/{user_id}":
+  "/api/v4/users/{user_id}":
     get:
       tags:
         - users
@@ -1352,7 +1352,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  "/users/{user_id}/patch":
+  "/api/v4/users/{user_id}/patch":
     put:
       tags:
         - users
@@ -1481,7 +1481,7 @@
             if ($resp->getStatusCode() == 200) {
                $user = json_decode($resp->getBody());
             }
-  "/users/{user_id}/roles":
+  "/api/v4/users/{user_id}/roles":
     put:
       tags:
         - users
@@ -1566,7 +1566,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  "/users/{user_id}/active":
+  "/api/v4/users/{user_id}/active":
     put:
       tags:
         - users
@@ -1652,7 +1652,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  "/users/{user_id}/image":
+  "/api/v4/users/{user_id}/image":
     get:
       tags:
         - users
@@ -1905,7 +1905,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
             }
-  "/users/{user_id}/image/default":
+  "/api/v4/users/{user_id}/image/default":
     get:
       tags:
         - users
@@ -1975,7 +1975,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody();
             }
-  "/users/username/{username}":
+  "/api/v4/users/username/{username}":
     get:
       tags:
         - users
@@ -2043,7 +2043,7 @@
             if ($resp->getStatusCode() == 200) {
                $user = json_decode($resp->getBody());
             }
-  /users/password/reset:
+  /api/v4/users/password/reset:
     post:
       tags:
         - users
@@ -2125,7 +2125,7 @@
             if ($resp->getStatusCode() == 200) {
                $success = json_decode($resp->getBody())->status;
             }
-  "/users/{user_id}/mfa":
+  "/api/v4/users/{user_id}/mfa":
     put:
       tags:
         - users
@@ -2217,7 +2217,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
             }
-  "/users/{user_id}/mfa/generate":
+  "/api/v4/users/{user_id}/mfa/generate":
     post:
       tags:
         - users
@@ -2296,7 +2296,7 @@
             if ($resp->getStatusCode() == 200) {
                $mfaSecret = json_decode($resp->getBody());
             }
-  "/users/{user_id}/demote":
+  "/api/v4/users/{user_id}/demote":
     post:
       tags:
         - users
@@ -2370,7 +2370,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
             }
-  "/users/{user_id}/promote":
+  "/api/v4/users/{user_id}/promote":
     post:
       tags:
         - users
@@ -2444,7 +2444,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody()->status;
             }
-  "/users/{user_id}/convert_to_bot":
+  "/api/v4/users/{user_id}/convert_to_bot":
     post:
       tags:
         - bots
@@ -2490,7 +2490,7 @@
             userId := "BbaYBYDV5IDOZFiJGBSzkw1k5u"
 
             bot, resp := Client.ConvertUserToBot(userId)
-  /users/mfa:
+  /api/v4/users/mfa:
     post:
       tags:
         - users
@@ -2565,7 +2565,7 @@
             if ($resp->getStatusCode() == 200) {
                $required = json_decode($resp->getBody())->mfa_required;
             }
-  "/users/{user_id}/password":
+  "/api/v4/users/{user_id}/password":
     put:
       tags:
         - users
@@ -2662,7 +2662,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  /users/password/reset/send:
+  /api/v4/users/password/reset/send:
     post:
       tags:
         - users
@@ -2737,7 +2737,7 @@
             if ($resp->getStatusCode() == 200) {
                $pass = json_decode($resp->getBody())->status;
             }
-  "/users/email/{email}":
+  "/api/v4/users/email/{email}":
     get:
       tags:
         - users
@@ -2807,7 +2807,7 @@
             if ($resp->getStatusCode() == 200) {
                $user = json_decode($resp->getBody());
             }
-  "/users/{user_id}/sessions":
+  "/api/v4/users/{user_id}/sessions":
     get:
       tags:
         - users
@@ -2877,7 +2877,7 @@
             if ($resp->getStatusCode() == 200) {
                $sessions = json_decode($resp->getBody());
             }
-  "/users/{user_id}/sessions/revoke":
+  "/api/v4/users/{user_id}/sessions/revoke":
     post:
       tags:
         - users
@@ -2960,7 +2960,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  "/users/{user_id}/sessions/revoke/all":
+  "/api/v4/users/{user_id}/sessions/revoke/all":
     post:
       tags:
         - users
@@ -3030,7 +3030,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  /users/sessions/device:
+  /api/v4/users/sessions/device:
     put:
       tags:
         - users
@@ -3104,7 +3104,7 @@
             if ($resp->getStatusCode() == 200) {
                $pass = json_decode($resp->getBody())->status;
             }
-  "/users/{user_id}/audits":
+  "/api/v4/users/{user_id}/audits":
     get:
       tags:
         - users
@@ -3171,7 +3171,7 @@
             if ($resp->getStatusCode() == 200) {
                $audits = json_decode($resp->getBody());
             }
-  "/users/{user_id}/email/verify/member":
+  "/api/v4/users/{user_id}/email/verify/member":
     post:
       tags:
         - users
@@ -3216,7 +3216,7 @@
             userID := "BbaYBYDV5IDOZFiJGBSzkw1k5u
 
             user, resp := Client.VerifyUserEmailWithoutToken(userID)
-  /users/email/verify:
+  /api/v4/users/email/verify:
     post:
       tags:
         - users
@@ -3283,7 +3283,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  /users/email/verify/send:
+  /api/v4/users/email/verify/send:
     post:
       tags:
         - users
@@ -3354,7 +3354,7 @@
             if ($resp->getStatusCode() == 200) {
                $pass = json_decode($resp->getBody())->status;
             }
-  /users/login/switch:
+  /api/v4/users/login/switch:
     post:
       tags:
         - users
@@ -3495,7 +3495,7 @@
             if ($resp->getStatusCode() == 200) {
                $link = json_decode($resp->getBody())->follow_link;
             }
-  "/users/{user_id}/tokens":
+  "/api/v4/users/{user_id}/tokens":
     post:
       tags:
         - users
@@ -3673,7 +3673,7 @@
             if ($resp->getStatusCode() == 200) {
                $tokens = json_decode($resp->getBody());
             }
-  /users/tokens:
+  /api/v4/users/tokens:
     get:
       tags:
         - users
@@ -3728,7 +3728,7 @@
             Client.Login("email@domain.com", "Password1")
 
             tokens, resp := Client.GetUserAccessTokens(0, 100)
-  /users/tokens/revoke:
+  /api/v4/users/tokens/revoke:
     post:
       tags:
         - users
@@ -3806,7 +3806,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  "/users/tokens/{token_id}":
+  "/api/v4/users/tokens/{token_id}":
     get:
       tags:
         - users
@@ -3880,7 +3880,7 @@
             if ($resp->getStatusCode() == 200) {
                $token = json_decode($resp->getBody());
             }
-  /users/tokens/disable:
+  /api/v4/users/tokens/disable:
     post:
       tags:
         - users
@@ -3959,7 +3959,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  /users/tokens/enable:
+  /api/v4/users/tokens/enable:
     post:
       tags:
         - users
@@ -4037,7 +4037,7 @@
             if ($resp->getStatusCode() == 200) {
                $ok = json_decode($resp->getBody())->status;
             }
-  /users/tokens/search:
+  /api/v4/users/tokens/search:
     post:
       tags:
         - users
@@ -4118,7 +4118,7 @@
             if ($resp->getStatusCode() == 200) {
                $userAccessTokens = json_decode($resp->getBody());
             }
-  "/users/{user_id}/auth":
+  "/api/v4/users/{user_id}/auth":
     put:
       tags:
         - users
@@ -4212,7 +4212,7 @@
             if ($resp->getStatusCode() == 200) {
                $user = json_decode($resp->getBody());
             }
-  "/users/{user_id}/terms_of_service":
+  "/api/v4/users/{user_id}/terms_of_service":
     post:
       tags:
         - users
@@ -4339,7 +4339,7 @@
             userID := "adWv1qPZmHdtxk7Lmqh6RtxWxS"
 
             userTermsOfService, resp := Client.GetUserTermsOfService(userID, "")
-  /users/sessions/revoke/all:
+  /api/v4/users/sessions/revoke/all:
     post:
       tags:
         - users
@@ -4375,7 +4375,7 @@
 
             response, err := Client.RevokeSessionsFromAllUsers()
 
-  "/users/{user_id}/typing":
+  "/api/v4/users/{user_id}/typing":
     post:
       tags:
         - users
@@ -4433,7 +4433,7 @@
                 ParentId: "post_id",
             })
 
-  "/users/{user_id}/uploads":
+  "/api/v4/users/{user_id}/uploads":
     get:
       tags:
         - users
@@ -4484,7 +4484,7 @@
             curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/uploads' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
 
-  "/users/{user_id}/channel_members":
+  "/api/v4/users/{user_id}/channel_members":
     get:
       tags:
         - users
@@ -4547,7 +4547,7 @@
             curl 'http://localhost:8065/api/v4/users/me/channel_members?page=0&per_page=2' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
 
-  /users/migrate_auth/ldap:
+  /api/v4/users/migrate_auth/ldap:
     post:
       tags:
         - users
@@ -4605,7 +4605,7 @@
 
             ok, response := Client.MigrateAuthToLdap(fromAuthService, matchField, force)
 
-  /users/migrate_auth/saml:
+  /api/v4/users/migrate_auth/saml:
       post:
         tags:
           - users
@@ -4663,7 +4663,7 @@
 
               ok, response := Client.MigrateAuthToSaml(fromAuthService, usersMap, auto)
 
-  "/users/{user_id}/teams/{team_id}/threads":
+  "/api/v4/users/{user_id}/teams/{team_id}/threads":
    get:
     tags:
      - threads
@@ -4770,7 +4770,7 @@
           curl 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
 
-  "/users/{user_id}/teams/{team_id}/threads/mention_counts":
+  "/api/v4/users/{user_id}/teams/{team_id}/threads/mention_counts":
     get:
       tags:
         - threads
@@ -4820,7 +4820,7 @@
         source: |
           curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/mention_counts' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \          
-  "/users/{user_id}/teams/{team_id}/threads/read":
+  "/api/v4/users/{user_id}/teams/{team_id}/threads/read":
     put:
       tags:
         - threads
@@ -4870,7 +4870,7 @@
         source: |
           curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/read' \
           -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/teams/{team_id}/threads/{thread_id}/read/{timestamp}":
+  "/api/v4/users/{user_id}/teams/{team_id}/threads/{thread_id}/read/{timestamp}":
     put:
       tags:
         - threads
@@ -4932,7 +4932,7 @@
           source: |
             curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/read' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' 
-  "/users/{user_id}/teams/{team_id}/threads/{thread_id}/set_unread/{post_id}":
+  "/api/v4/users/{user_id}/teams/{team_id}/threads/{thread_id}/set_unread/{post_id}":
     put:
       tags:
         - threads
@@ -4996,7 +4996,7 @@
           source: |
             curl -X PUT 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/teams/fc6su111111pmhrb9c967paxe/threads/f96cv0897624352346e/set_unread' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' 
-  "/users/{user_id}/teams/{team_id}/threads/{thread_id}/following":
+  "/api/v4/users/{user_id}/teams/{team_id}/threads/{thread_id}/following":
     put:
       tags:
         - threads
@@ -5107,7 +5107,7 @@
           source: |
             curl -X DELETE 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624/following' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/teams/{team_id}/threads/{thread_id}":
+  "/api/v4/users/{user_id}/teams/{team_id}/threads/{thread_id}":
     get:
       tags:
         - threads
@@ -5163,7 +5163,7 @@
           source: |
             curl -X GET 'http://localhost:8065/api/v4/users/fc6suoon9pbbpmhrb9c967paxe/threads/f96345234975624' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw' \
-  "/users/{user_id}/data_retention/team_policies":
+  "/api/v4/users/{user_id}/data_retention/team_policies":
     get:
       tags:
         - data retention
@@ -5213,7 +5213,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/users/{user_id}/data_retention/channel_policies":
+  "/api/v4/users/{user_id}/data_retention/channel_policies":
     get:
       tags:
         - data retention

@@ -1,4 +1,4 @@
-  /plugins:
+  /api/v4/plugins:
     post:
       tags:
         - plugins
@@ -130,7 +130,7 @@
             Client.Login("email@domain.com", "Password1")
 
             pluginsResp, resp := Client.GetPlugins()
-  /plugins/install_from_url:
+  /api/v4/plugins/install_from_url:
     post:
       tags:
         - plugins
@@ -191,7 +191,7 @@
 
             // Forced
             manifest, resp := Client.InstallPluginFromUrl(url, true)
-  "/plugins/{plugin_id}":
+  "/api/v4/plugins/{plugin_id}":
     delete:
       tags:
         - plugins
@@ -243,7 +243,7 @@
             pluginID := "com.mattermost.demo-plugin"
 
             ok, resp = Client.RemovePlugin(pluginID)
-  "/plugins/{plugin_id}/enable":
+  "/api/v4/plugins/{plugin_id}/enable":
     post:
       tags:
         - plugins
@@ -295,7 +295,7 @@
             pluginID := "com.mattermost.demo-plugin"
 
             ok, resp = Client.EnablePlugin(pluginID)
-  "/plugins/{plugin_id}/disable":
+  "/api/v4/plugins/{plugin_id}/disable":
     post:
       tags:
         - plugins
@@ -347,7 +347,7 @@
             pluginID := "com.mattermost.demo-plugin"
 
             ok, resp = Client.DisablePlugin(pluginID)
-  /plugins/webapp:
+  /api/v4/plugins/webapp:
     get:
       tags:
         - plugins
@@ -385,7 +385,7 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
             manifests, resp := Client.GetWebappPlugins()
-  /plugins/statuses:
+  /api/v4/plugins/statuses:
     get:
       tags:
         - plugins
@@ -423,7 +423,7 @@
             Client := model.NewAPIv4Client("https://your-mattermost-url.com")
 
             manifests, resp := Client.GetPluginStatuses()
-  /plugins/marketplace:
+  /api/v4/plugins/marketplace:
     post:
       tags:
         - plugins
@@ -565,7 +565,7 @@
             }
 
             ok, resp = Client.GetMarketplacePlugins(filter)
-  /plugins/marketplace/first_admin_visit:
+  /api/v4/plugins/marketplace/first_admin_visit:
     get:
       tags:
         - plugins

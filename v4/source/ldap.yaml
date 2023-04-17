@@ -1,4 +1,4 @@
-  /ldap/sync:
+  /api/v4/ldap/sync:
     post:
       tags:
         - LDAP
@@ -20,7 +20,7 @@
                 $ref: "#/components/schemas/StatusOK"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /ldap/test:
+  /api/v4/ldap/test:
     post:
       tags:
         - LDAP
@@ -44,7 +44,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /ldap/groups:
+  /api/v4/ldap/groups:
     get:
       tags:
         - ldap
@@ -91,7 +91,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /ldap/groups/{remote_id}/link:
+  /api/v4/ldap/groups/{remote_id}/link:
     post:
       tags:
         - ldap
@@ -154,7 +154,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /ldap/migrateid:
+  /api/v4/ldap/migrateid:
     post:
       tags:
         - LDAP
@@ -197,7 +197,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /ldap/certificate/public:
+  /api/v4/ldap/certificate/public:
     post:
       tags:
         - LDAP
@@ -261,7 +261,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  /ldap/certificate/private:
+  /api/v4/ldap/certificate/private:
     post:
       tags:
         - LDAP
