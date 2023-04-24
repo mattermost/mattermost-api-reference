@@ -1,4 +1,4 @@
-  /groups:
+  /api/v4/groups:
     get:
       tags:
         - groups
@@ -153,7 +153,7 @@
           description: Group creation and memberships successful.
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/groups/{group_id}":
+  "/api/v4/groups/{group_id}":
     get:
       tags:
         - groups
@@ -220,7 +220,7 @@
             application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
-  "/groups/{group_id}/patch":
+  "/api/v4/groups/{group_id}/patch":
     put:
       tags:
         - groups
@@ -275,7 +275,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/teams/{team_id}/link":
+  "/api/v4/groups/{group_id}/teams/{team_id}/link":
     post:
       tags:
         - groups
@@ -354,7 +354,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/channels/{channel_id}/link":
+  "/api/v4/groups/{group_id}/channels/{channel_id}/link":
     post:
       tags:
         - groups
@@ -443,7 +443,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/teams/{team_id}":
+  "/api/v4/groups/{group_id}/teams/{team_id}":
     get:
       tags:
         - groups
@@ -485,7 +485,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/channels/{channel_id}":
+  "/api/v4/groups/{group_id}/channels/{channel_id}":
     get:
       tags:
         - groups
@@ -527,7 +527,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/teams":
+  "/api/v4/groups/{group_id}/teams":
     get:
       tags:
         - groups
@@ -565,7 +565,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/channels":
+  "/api/v4/groups/{group_id}/channels":
     get:
       tags:
         - groups
@@ -603,7 +603,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/teams/{team_id}/patch":
+  "/api/v4/groups/{group_id}/teams/{team_id}/patch":
     put:
       tags:
         - groups
@@ -661,7 +661,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/channels/{channel_id}/patch":
+  "/api/v4/groups/{group_id}/channels/{channel_id}/patch":
     put:
       tags:
         - groups
@@ -718,7 +718,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/groups/{group_id}/members":
+  "/api/v4/groups/{group_id}/members":
     get:
       tags:
         - groups
@@ -862,7 +862,7 @@
             application/json:
               schema:
                 $ref: "#/components/schemas/StatusOK"
-  "/groups/{group_id}/stats":
+  "/api/v4/groups/{group_id}/stats":
     get:
       tags:
         - groups
@@ -904,7 +904,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/channels/{channel_id}/groups":
+  "/api/v4/channels/{channel_id}/groups":
     get:
       tags:
         - groups
@@ -961,7 +961,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/teams/{team_id}/groups":
+  "/api/v4/teams/{team_id}/groups":
     get:
       tags:
         - groups
@@ -1015,7 +1015,7 @@
           $ref: "#/components/responses/InternalServerError"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/teams/{team_id}/groups_by_channels":
+  "/api/v4/teams/{team_id}/groups_by_channels":
       get:
         tags:
           - groups
@@ -1078,7 +1078,7 @@
             $ref: "#/components/responses/InternalServerError"
           "501":
             $ref: "#/components/responses/NotImplemented"
-  "/users/{user_id}/groups":
+  "/api/v4/users/{user_id}/groups":
     get:
       tags:
         - groups

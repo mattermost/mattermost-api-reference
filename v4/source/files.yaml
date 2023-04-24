@@ -1,4 +1,4 @@
-  /files:
+  /api/v4/files:
     post:
       tags:
         - files
@@ -122,7 +122,7 @@
             -F 'channel_id=CHANNEL_ID' \
             --header 'authorization: Bearer c49adc55z3f53ck7xtp8ebq1ir'
             https://your-mattermost-url.com/api/v4/files
-  "/files/{file_id}":
+  "/api/v4/files/{file_id}":
     get:
       tags:
         - files
@@ -170,7 +170,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFile(fileID)
-  "/files/{file_id}/thumbnail":
+  "/api/v4/files/{file_id}/thumbnail":
     get:
       tags:
         - files
@@ -218,7 +218,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFileThumbnail(fileID)
-  "/files/{file_id}/preview":
+  "/api/v4/files/{file_id}/preview":
     get:
       tags:
         - files
@@ -266,7 +266,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFilePreview(fileID)
-  "/files/{file_id}/link":
+  "/api/v4/files/{file_id}/link":
     get:
       tags:
         - files
@@ -326,7 +326,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             data, resp := Client.GetFileLink(fileID)
-  "/files/{file_id}/info":
+  "/api/v4/files/{file_id}/info":
     get:
       tags:
         - files
@@ -380,7 +380,7 @@
             fileID := "4xp9fdt77pncbef59f4k1qe83o"
 
             info, resp := Client.GetFileInfo(fileID)
-  "/files/{file_id}/public":
+  "/api/v4/files/{file_id}/public":
     get:
       tags:
         - files
@@ -423,7 +423,7 @@
         "501":
           $ref: "#/components/responses/NotImplemented"
 
-  "/teams/{team_id}/files/search":
+  "/api/v4/teams/{team_id}/files/search":
     post:
       tags:
         - teams

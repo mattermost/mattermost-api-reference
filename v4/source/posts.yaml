@@ -1,4 +1,4 @@
-  /posts:
+  /api/v4/posts:
     post:
       tags:
         - posts
@@ -75,7 +75,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /posts/ephemeral:
+  /api/v4/posts/ephemeral:
     post:
       tags:
         - posts
@@ -142,7 +142,7 @@
             }
 
             createdPost, response := client.CreatePostEphemeral(ephemeralPost)
-  "/posts/{post_id}":
+  "/api/v4/posts/{post_id}":
     get:
       tags:
         - posts
@@ -275,7 +275,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/users/{user_id}/posts/{post_id}/set_unread":
+  "/api/v4/users/{user_id}/posts/{post_id}/set_unread":
     post:
       tags:
         - posts
@@ -320,7 +320,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/posts/{post_id}/patch":
+  "/api/v4/posts/{post_id}/patch":
     put:
       tags:
         - posts
@@ -379,7 +379,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/posts/{post_id}/thread":
+  "/api/v4/posts/{post_id}/thread":
     get:
       tags:
         - posts
@@ -453,7 +453,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/users/{user_id}/posts/flagged":
+  "/api/v4/users/{user_id}/posts/flagged":
     get:
       tags:
         - posts
@@ -511,7 +511,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/posts/{post_id}/files/info":
+  "/api/v4/posts/{post_id}/files/info":
     get:
       tags:
         - posts
@@ -553,7 +553,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/channels/{channel_id}/posts":
+  "/api/v4/channels/{channel_id}/posts":
     get:
       tags:
         - posts
@@ -626,7 +626,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/users/{user_id}/channels/{channel_id}/posts/unread":
+  "/api/v4/users/{user_id}/channels/{channel_id}/posts/unread":
     get:
       tags:
         - posts
@@ -704,7 +704,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/teams/{team_id}/posts/search":
+  "/api/v4/teams/{team_id}/posts/search":
     post:
       tags:
         - posts
@@ -772,7 +772,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/posts/{post_id}/pin":
+  "/api/v4/posts/{post_id}/pin":
     post:
       tags:
         - posts
@@ -804,7 +804,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/posts/{post_id}/unpin":
+  "/api/v4/posts/{post_id}/unpin":
     post:
       tags:
         - posts
@@ -837,7 +837,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/posts/{post_id}/actions/{action_id}":
+  "/api/v4/posts/{post_id}/actions/{action_id}":
     post:
       tags:
         - posts
@@ -876,7 +876,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/posts/ids":
+  "/api/v4/posts/ids":
     post:
       tags:
         - posts
@@ -917,7 +917,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/users/{user_id}/posts/{post_id}/reminder":
+  "/api/v4/users/{user_id}/posts/{post_id}/reminder":
     post:
       tags:
         - posts
@@ -973,7 +973,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/users/{user_id}/posts/{post_id}/ack":
+  "/api/v4/users/{user_id}/posts/{post_id}/ack":
     post:
       tags:
         - posts

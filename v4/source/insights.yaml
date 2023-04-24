@@ -1,4 +1,4 @@
-  /teams/{team_id}/top/reactions:
+  /api/v4/teams/{team_id}/top/reactions:
     get:
       tags:
         - insights
@@ -52,7 +52,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /users/me/top/reactions:
+  /api/v4/users/me/top/reactions:
     get:
       tags:
         - insights
@@ -111,7 +111,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /teams/{team_id}/top/channels:
+  /api/v4/teams/{team_id}/top/channels:
     get:
       tags:
         - insights
@@ -165,7 +165,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /users/me/top/channels:
+  /api/v4/users/me/top/channels:
     get:
       tags:
         - insights
@@ -223,7 +223,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /teams/{team_id}/top/team_members:
+  /api/v4/teams/{team_id}/top/team_members:
     get:
       tags:
         - insights
@@ -277,7 +277,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /teams/{team_id}/top/threads:
+  /api/v4/teams/{team_id}/top/threads:
     get:
       tags:
         - insights
@@ -331,7 +331,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /users/me/top/threads:
+  /api/v4/users/me/top/threads:
     get:
       tags:
         - insights
@@ -389,7 +389,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /users/me/top/dms:
+  /api/v4/users/me/top/dms:
     get:
       tags:
         - insights

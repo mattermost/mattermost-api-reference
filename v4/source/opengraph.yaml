@@ -1,4 +1,4 @@
-  /opengraph:
+  /api/v4/opengraph:
     post:
       tags:
         - OpenGraph

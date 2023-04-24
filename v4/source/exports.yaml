@@ -1,4 +1,4 @@
-  "/exports":
+  "/api/v4/exports":
     get:
       tags:
         - exports
@@ -33,7 +33,7 @@
           source: |
             curl 'http://localhost:8065/api/v4/exports' \
             -H 'Authorization: Bearer 9kg8nqrnxprd9jbykqeg4r51hw'
-  "/exports/{export_name}":
+  "/api/v4/exports/{export_name}":
     get:
       tags:
         - exports

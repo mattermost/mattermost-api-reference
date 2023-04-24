@@ -1,4 +1,4 @@
-  /reactions:
+  /api/v4/reactions:
     post:
       tags:
         - reactions
@@ -27,7 +27,7 @@
           $ref: "#/components/responses/BadRequest"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/posts/{post_id}/reactions":
+  "/api/v4/posts/{post_id}/reactions":
     get:
       tags:
         - reactions
@@ -59,7 +59,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/users/{user_id}/posts/{post_id}/reactions/{emoji_name}":
+  "/api/v4/users/{user_id}/posts/{post_id}/reactions/{emoji_name}":
     delete:
       tags:
         - reactions
@@ -101,7 +101,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /posts/ids/reactions:
+  /api/v4/posts/ids/reactions:
     post:
       tags:
         - reactions

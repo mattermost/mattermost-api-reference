@@ -1,4 +1,4 @@
-  /system/timezones:
+  /api/v4/system/timezones:
     get:
       tags:
         - system
@@ -21,7 +21,7 @@
                   type: string
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /system/ping:
+  /api/v4/system/ping:
     get:
       tags:
         - system
@@ -86,7 +86,7 @@
 
             // Get server status with database and storage checks
             status, resp = Client.GetPingWithServerStatus()
-  "/system/notices/{teamId}":
+  "/api/v4/system/notices/{teamId}":
     get:
       tags:
         - system
@@ -146,7 +146,7 @@
             Client.Login("email@domain.com", "Password1")
 
             notices, resp := Client.GetNotices(0, teamId, "mobile-android", "1.2.3", "enUS")
-  /system/notices/view:
+  /api/v4/system/notices/view:
     put:
       tags:
         - system
@@ -189,7 +189,7 @@
             notices := []string{"id1","id2"}
             resp := Client.MarkNoticesViewed(notices)
 
-  /database/recycle:
+  /api/v4/database/recycle:
     post:
       tags:
         - system
@@ -220,7 +220,7 @@
             Client.Login("email@domain.com", "Password1")
 
             ok, resp := Client.DatabaseRecycle()
-  /email/test:
+  /api/v4/email/test:
     post:
       tags:
         - system
@@ -272,7 +272,7 @@
 
             // TestEmail
             ok, resp := Client.TestEmail(&config)
-  /site_url/test:
+  /api/v4/site_url/test:
     post:
       tags:
         - system
@@ -326,7 +326,7 @@
 
             // TestSiteURL
             ok, resp := Client.TestSiteURL(siteUrl)
-  /file/s3_test:
+  /api/v4/file/s3_test:
     post:
       tags:
         - system
@@ -381,7 +381,7 @@
 
             // TestS3Connection
             ok, resp := Client.TestS3Connection(&config)
-  /config:
+  /api/v4/config:
     get:
       tags:
         - system
@@ -464,7 +464,7 @@
 
             // UpdateConfig
             updatedConfig, resp := Client.UpdateConfig(config)
-  /config/reload:
+  /api/v4/config/reload:
     post:
       tags:
         - system
@@ -495,7 +495,7 @@
 
             // ReloadConfig
             ok, resp := Client.ReloadConfig()
-  /config/client:
+  /api/v4/config/client:
     get:
       tags:
         - system
@@ -529,7 +529,7 @@
 
             // GetOldClientConfig
             ok, resp := Client.GetOldClientConfig()
-  /config/environment:
+  /api/v4/config/environment:
     get:
       tags:
         - system
@@ -563,7 +563,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /config/patch:
+  /api/v4/config/patch:
     put:
       tags:
         - system
@@ -619,7 +619,7 @@
 
             // UpdateConfig
             updatedConfig, resp := Client.PatchConfig(config)
-  /license:
+  /api/v4/license:
     post:
       tags:
         - system
@@ -702,7 +702,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /license/client:
+  /api/v4/license/client:
     get:
       tags:
         - system
@@ -738,7 +738,7 @@
 
             // GetOldClientLicense
             license, resp := Client.GetOldClientLicense()
-  /license/renewal:
+  /api/v4/license/renewal:
     get:
       tags:
         - system
@@ -767,7 +767,7 @@
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /trial-license:
+  /api/v4/trial-license:
     post:
       tags:
         - system
@@ -813,7 +813,7 @@
 
             // RequestTrialLicense
             resp := Client.RequestTrialLicense()
-  /trial-license/prev:
+  /api/v4/trial-license/prev:
     get:
       tags:
         - system
@@ -836,7 +836,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /audits:
+  /api/v4/audits:
     get:
       tags:
         - system
@@ -883,7 +883,7 @@
 
             // GetAudits
             audits, resp := Client.GetAudits(0, 100, "")
-  /caches/invalidate:
+  /api/v4/caches/invalidate:
     post:
       tags:
         - system
@@ -916,7 +916,7 @@
 
             // InvalidateCaches
             ok, resp := Client.InvalidateCaches()
-  /logs:
+  /api/v4/logs:
     get:
       tags:
         - system
@@ -1020,7 +1020,7 @@
 
             // PostLog
             _, resp := Client.PostLog(message)
-  /analytics/old:
+  /api/v4/analytics/old:
     get:
       tags:
         - system
@@ -1065,7 +1065,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /server_busy:
+  /api/v4/server_busy:
     post:
       tags:
         - system
@@ -1195,7 +1195,7 @@
             curl -X DELETE \
               'http://your-mattermost-url.com/api/v4/server_busy' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
-  /notifications/ack:
+  /api/v4/notifications/ack:
     post:
       tags:
         - root
@@ -1216,7 +1216,7 @@
                 $ref: "#/components/schemas/PushNotification"
         "404":
           $ref: "#/components/responses/NotFound"
-  /redirect_location:
+  /api/v4/redirect_location:
     get:
       tags:
         - system
@@ -1247,7 +1247,7 @@
                     type: string
         "404":
           $ref: "#/components/responses/NotFound"
-  /image:
+  /api/v4/image:
     get:
       tags:
         - system
@@ -1272,7 +1272,7 @@
         "404":
           $ref: "#/components/responses/NotFound"
 
-  /upgrade_to_enterprise:
+  /api/v4/upgrade_to_enterprise:
     post:
       tags:
         - system
@@ -1300,7 +1300,7 @@
         "429":
           $ref: "#/components/responses/TooManyRequests"
 
-  /upgrade_to_enterprise/status:
+  /api/v4/upgrade_to_enterprise/status:
     get:
       tags:
         - system
@@ -1332,7 +1332,7 @@
         "403":
           $ref: "#/components/responses/Forbidden"
 
-  /restart:
+  /api/v4/restart:
     post:
       tags:
         - system
@@ -1357,7 +1357,7 @@
         "403":
           $ref: "#/components/responses/Forbidden"
 
-  /warn_metrics/status:
+  /api/v4/warn_metrics/status:
     get:
       tags:
         - system
@@ -1390,7 +1390,7 @@
         "403":
           $ref: "#/components/responses/Forbidden"
 
-  /warn_metrics/ack/{warn_metric_id}:
+  /api/v4/warn_metrics/ack/{warn_metric_id}:
     post:
       tags:
         - system
@@ -1437,7 +1437,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /warn_metrics/trial-license-ack/{warn_metric_id}:
+  /api/v4/warn_metrics/trial-license-ack/{warn_metric_id}:
     post:
       tags:
         - system
@@ -1472,7 +1472,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  /integrity:
+  /api/v4/integrity:
     post:
       tags:
         - system
@@ -1511,7 +1511,7 @@
             Client := model.NewAPIv4SocketClient(socketPath)
 
             ok, resp := Client.CheckIntegrity()
-  /system/support_packet:
+  /api/v4/system/support_packet:
     get:
       tags:
         - system

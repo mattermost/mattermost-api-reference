@@ -1,4 +1,4 @@
-  /jobs:
+  /api/v4/jobs:
     get:
       tags:
         - jobs
@@ -81,7 +81,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/jobs/{job_id}":
+  "/api/v4/jobs/{job_id}":
     get:
       tags:
         - jobs
@@ -114,7 +114,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/jobs/{job_id}/download":
+  "/api/v4/jobs/{job_id}/download":
     get:
       tags:
         - jobs
@@ -141,7 +141,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/jobs/{job_id}/cancel":
+  "/api/v4/jobs/{job_id}/cancel":
     post:
       tags:
         - jobs
@@ -174,7 +174,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/jobs/type/{type}":
+  "/api/v4/jobs/type/{type}":
     get:
       tags:
         - jobs

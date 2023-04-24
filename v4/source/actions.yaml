@@ -1,4 +1,4 @@
-  /actions/dialogs/open:
+  /api/v4/actions/dialogs/open:
     post:
       tags:
         - integration_actions
@@ -71,7 +71,7 @@
                 $ref: "#/components/schemas/StatusOK"
         "400":
           $ref: "#/components/responses/BadRequest"
-  /actions/dialogs/submit:
+  /api/v4/actions/dialogs/submit:
     post:
       tags:
         - integration_actions

@@ -1,4 +1,4 @@
-  /oauth/apps:
+  /api/v4/oauth/apps:
     post:
       tags:
         - OAuth
@@ -100,7 +100,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/oauth/apps/{app_id}":
+  "/api/v4/oauth/apps/{app_id}":
     get:
       tags:
         - OAuth
@@ -264,7 +264,7 @@
           $ref: "#/components/responses/NotFound"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/oauth/apps/{app_id}/regen_secret":
+  "/api/v4/oauth/apps/{app_id}/regen_secret":
     post:
       tags:
         - OAuth
@@ -301,7 +301,7 @@
           $ref: "#/components/responses/NotFound"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/oauth/apps/{app_id}/info":
+  "/api/v4/oauth/apps/{app_id}/info":
     get:
       tags:
         - OAuth
@@ -336,7 +336,7 @@
           $ref: "#/components/responses/NotFound"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/users/{user_id}/oauth/apps/authorized":
+  "/api/v4/users/{user_id}/oauth/apps/authorized":
     get:
       tags:
         - OAuth

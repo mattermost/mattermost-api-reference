@@ -1,4 +1,4 @@
-  /compliance/reports:
+  /api/v4/compliance/reports:
     post:
       tags:
         - compliance
@@ -65,7 +65,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/compliance/reports/{report_id}":
+  "/api/v4/compliance/reports/{report_id}":
     get:
       tags:
         - compliance
@@ -97,7 +97,7 @@
           $ref: "#/components/responses/Forbidden"
         "501":
           $ref: "#/components/responses/NotImplemented"
-  "/compliance/reports/{report_id}/download":
+  "/api/v4/compliance/reports/{report_id}/download":
     get:
       tags:
         - compliance

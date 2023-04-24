@@ -1,4 +1,4 @@
-  /teams:
+  /api/v4/teams:
     post:
       tags:
         - teams
@@ -172,7 +172,7 @@
               if ($resp->getStatusCode() == 200) {
                   $teams = json_decode($resp->getBody());
               }
-  "/teams/{team_id}":
+  "/api/v4/teams/{team_id}":
     get:
       tags:
         - teams
@@ -450,7 +450,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  "/teams/{team_id}/patch":
+  "/api/v4/teams/{team_id}/patch":
     put:
       tags:
         - teams
@@ -548,7 +548,7 @@
             if ($resp->getStatusCode() == 200) {
                 $team = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/privacy":
+  "/api/v4/teams/{team_id}/privacy":
     put:
       tags:
         - teams
@@ -648,7 +648,7 @@
             if ($resp->getStatusCode() == 200) {
                 $updatedTeam = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/restore":
+  "/api/v4/teams/{team_id}/restore":
     post:
       tags:
         - teams
@@ -713,7 +713,7 @@
             if ($resp->getStatusCode() == 200) {
                 $team = json_decode($resp->getBody());
             }
-  "/teams/name/{name}":
+  "/api/v4/teams/name/{name}":
     get:
       tags:
         - teams
@@ -778,7 +778,7 @@
             if ($resp->getStatusCode() == 200) {
                 $team = json_decode($resp->getBody());
             }
-  /teams/search:
+  /api/v4/teams/search:
     post:
       tags:
         - teams
@@ -901,7 +901,7 @@
             if ($resp->getStatusCode() == 200) {
                 $teams = json_decode($resp->getBody())->teams;
             }
-  "/teams/name/{name}/exists":
+  "/api/v4/teams/name/{name}/exists":
     get:
       tags:
         - teams
@@ -962,7 +962,7 @@
             if ($resp->getStatusCode() == 200) {
                 $exists = json_decode($resp->getBody())->exists;
             }
-  "/users/{user_id}/teams":
+  "/api/v4/users/{user_id}/teams":
     get:
       tags:
         - teams
@@ -1031,7 +1031,7 @@
             if ($resp->getStatusCode() == 200) {
                 $teams = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/members":
+  "/api/v4/teams/{team_id}/members":
     get:
       tags:
         - teams
@@ -1202,7 +1202,7 @@
             if ($resp->getStatusCode() == 200) {
                 $teamMember = json_decode($resp->getBody());
             }
-  /teams/members/invite:
+  /api/v4/teams/members/invite:
     post:
       tags:
         - teams
@@ -1274,7 +1274,7 @@
             if ($resp->getStatusCode() == 200) {
                 $tm = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/members/batch":
+  "/api/v4/teams/{team_id}/members/batch":
     post:
       tags:
         - teams
@@ -1375,7 +1375,7 @@
             if ($resp->getStatusCode() == 200) {
                 $tm = json_decode($resp->getBody());
             }
-  "/users/{user_id}/teams/members":
+  "/api/v4/users/{user_id}/teams/members":
     get:
       tags:
         - teams
@@ -1447,7 +1447,7 @@
             if ($resp->getStatusCode() == 200) {
                 $teamMembers = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/members/{user_id}":
+  "/api/v4/teams/{team_id}/members/{user_id}":
     get:
       tags:
         - teams
@@ -1599,7 +1599,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  "/teams/{team_id}/members/ids":
+  "/api/v4/teams/{team_id}/members/ids":
     post:
       tags:
         - teams
@@ -1690,7 +1690,7 @@
             if ($resp->getStatusCode() == 200) {
                 $tm = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/stats":
+  "/api/v4/teams/{team_id}/stats":
     get:
       tags:
         - teams
@@ -1757,7 +1757,7 @@
             if ($resp->getStatusCode() == 200) {
                 $stats = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/regenerate_invite_id":
+  "/api/v4/teams/{team_id}/regenerate_invite_id":
     post:
       tags:
         - teams
@@ -1824,7 +1824,7 @@
             if ($resp->getStatusCode() == 200) {
                 $team = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/image":
+  "/api/v4/teams/{team_id}/image":
     get:
       tags:
         - teams
@@ -2070,7 +2070,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  "/teams/{team_id}/members/{user_id}/roles":
+  "/api/v4/teams/{team_id}/members/{user_id}/roles":
     put:
       tags:
         - teams
@@ -2168,7 +2168,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  "/teams/{team_id}/members/{user_id}/schemeRoles":
+  "/api/v4/teams/{team_id}/members/{user_id}/schemeRoles":
     put:
       tags:
         - teams
@@ -2278,7 +2278,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  "/users/{user_id}/teams/unread":
+  "/api/v4/users/{user_id}/teams/unread":
     get:
       tags:
         - teams
@@ -2365,7 +2365,7 @@
             if ($resp->getStatusCode() == 200) {
                 $teams = json_decode($resp->getBody());
             }
-  "/users/{user_id}/teams/{team_id}/unread":
+  "/api/v4/users/{user_id}/teams/{team_id}/unread":
     get:
       tags:
         - teams
@@ -2443,7 +2443,7 @@
             if ($resp->getStatusCode() == 200) {
                 $teamUnread = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/invite/email":
+  "/api/v4/teams/{team_id}/invite/email":
     post:
       tags:
         - teams
@@ -2528,7 +2528,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  "/teams/{team_id}/invite-guests/email":
+  "/api/v4/teams/{team_id}/invite-guests/email":
     post:
       tags:
         - teams
@@ -2639,7 +2639,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  /teams/invites/email:
+  /api/v4/teams/invites/email:
     delete:
       tags:
         - teams
@@ -2696,7 +2696,7 @@
             if ($resp->getStatusCode() == 200) {
                 $ok = json_decode($resp->getBody())->status;
             }
-  "/teams/{team_id}/import":
+  "/api/v4/teams/{team_id}/import":
     post:
       tags:
         - teams
@@ -2817,7 +2817,7 @@
             if ($resp->getStatusCode() == 200) {
                 $fileResp = json_decode($resp->getBody())->results;
             }
-  "/teams/invite/{invite_id}":
+  "/api/v4/teams/invite/{invite_id}":
     get:
       tags:
         - teams
@@ -2893,7 +2893,7 @@
             if ($resp->getStatusCode() == 200) {
                 $team = json_decode($resp->getBody());
             }
-  "/teams/{team_id}/scheme":
+  "/api/v4/teams/{team_id}/scheme":
     put:
       tags:
         - teams
@@ -2991,7 +2991,7 @@
               -H 'Authorization: Bearer frn8fu5rtpyc5m4xy6q3oj4yur' \
               -H 'Content-Type: application/json' \
               -d '{"scheme_id": "qjda3stwafbgpqjaxej3k76sga"}'
-  "/teams/{team_id}/members_minus_group_members":
+  "/api/v4/teams/{team_id}/members_minus_group_members":
     get:
       tags:
         - teams

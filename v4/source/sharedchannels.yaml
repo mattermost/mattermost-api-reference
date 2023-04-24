@@ -1,4 +1,4 @@
-  "/sharedchannels/{team_id}":
+  "/api/v4/sharedchannels/{team_id}":
     get:
       tags:
         - shared channels
@@ -62,7 +62,7 @@
               'http://your-mattermost-url.com/api/v4/sharedchannels/4xp9fdt77pncbef59f4k1qe83o' \
               -H 'Authorization: Bearer kno8tcdotpbx3dj1gzcbx9jrqy'
 
-  "/sharedchannels/remote_info/{remote_id}":
+  "/api/v4/sharedchannels/remote_info/{remote_id}":
     get:
       tags:
         - shared channels

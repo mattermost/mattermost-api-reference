@@ -1,4 +1,4 @@
-  /hooks/incoming:
+  /api/v4/hooks/incoming:
     post:
       tags:
         - webhooks
@@ -98,7 +98,7 @@
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Forbidden"
-  "/hooks/incoming/{hook_id}":
+  "/api/v4/hooks/incoming/{hook_id}":
     get:
       tags:
         - webhooks
@@ -231,7 +231,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  /hooks/outgoing:
+  /api/v4/hooks/outgoing:
     post:
       tags:
         - webhooks
@@ -359,7 +359,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/hooks/outgoing/{hook_id}":
+  "/api/v4/hooks/outgoing/{hook_id}":
     get:
       tags:
         - webhooks
@@ -485,7 +485,7 @@
           $ref: "#/components/responses/Forbidden"
         "404":
           $ref: "#/components/responses/NotFound"
-  "/hooks/outgoing/{hook_id}/regen_token":
+  "/api/v4/hooks/outgoing/{hook_id}/regen_token":
     post:
       tags:
         - webhooks
