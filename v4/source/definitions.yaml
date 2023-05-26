@@ -94,9 +94,11 @@ components:
         props:
           type: object
         last_password_update:
-          type: int64
+          type: integer
+          format: int64
         last_picture_update:
-          type: int64
+          type: integer
+          format: int64
         failed_attempts:
           type: integer
         mfa_active:
