@@ -95,8 +95,10 @@ components:
           type: object
         last_password_update:
           type: integer
+          format: int64
         last_picture_update:
           type: integer
+          format: int64
         failed_attempts:
           type: integer
         mfa_active:
@@ -206,6 +208,7 @@ components:
         last_post_at:
           description: The time in milliseconds of the last post of a channel
           type: integer
+          format: int64
         total_msg_count:
           type: integer
         extra_update_at:
