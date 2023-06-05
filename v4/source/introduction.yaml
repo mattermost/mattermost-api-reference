@@ -59,7 +59,7 @@ tags:
 
       * [Mattermost JavaScript Driver](https://github.com/mattermost/mattermost-redux/blob/master/src/client/client4.ts)
 
-      * [Mattermost Golang Driver](https://github.com/mattermost/mattermost-server/blob/master/model/client4.go)
+      * [Mattermost Golang Driver](https://github.com/mattermost/mattermost/blob/master/server/public/model/client4.go)
 
 
       #### Community-built Drivers
